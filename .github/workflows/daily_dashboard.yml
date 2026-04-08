@@ -1,0 +1,82 @@
+name: Daily Dashboard Update
+
+on:
+  schedule:
+    # 8:05 AM Eastern (12:05 UTC summer / 13:05 UTC winter)
+    # Adjust hour if needed: 12 = 8 AM EDT, 13 = 8 AM EST
+    - cron: "5 12 * * *"
+  workflow_dispatch:  # allow manual trigger from GitHub Actions tab
+
+permissions:
+  contents: write  # needed to commit dashboard.html back to main
+
+jobs:
+  update-dashboard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # ── 1. Checkout main branch ────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 2. Set up Python ───────────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      # ── 3. Install dependencies ────────────────────────────────────────────
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      # ── 4. Install Playwright browsers (cache Chromium) ───────────────────
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: playwright-chromium-${{ runner.os }}-
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install chromium --with-deps
+
+      # ── 5. Run scraper ─────────────────────────────────────────────────────
+      - name: Scrape CrunchTime Net Chef & generate dashboard
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: python scraper/main.py
+
+      # ── 6. Upload debug screenshots (always, even on failure) ─────────────
+      - name: Upload debug screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-screenshots-${{ github.run_id }}
+          path: data/*.png
+          if-no-files-found: ignore
+          retention-days: 7
+
+      # ── 7. Commit & push updated dashboard to main ─────────────────────────
+      - name: Commit and push dashboard
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stage the generated files
+          git add dashboard.html data/latest.json
+
+          # Only commit if there are actual changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit — dashboard is already up to date."
+          else
+            DATE=$(date -u +"%Y-%m-%d")
+            git commit -m "chore: auto-update dashboard for ${DATE}"
+            git push origin main
+            echo "Dashboard pushed to main — Netlify will auto-deploy."
+          fi
