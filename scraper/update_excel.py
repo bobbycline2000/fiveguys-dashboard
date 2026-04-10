@@ -16,9 +16,9 @@ Spreadsheet layout (confirmed from screenshot):
   E   Budget            ← Forecasted Sales
   F   +/-               ← FORMULA =B-E  (do NOT overwrite)
   G   Labor %           ← Labor % of Net Sales  (written as decimal, e.g. 0.2383)
-  H   Scheduled Hours   ← not on CrunchTime dashboard — left blank
-  I   Actual Hours      ← not on CrunchTime dashboard — left blank
-  J   Variance          ← Actual-to-Earned Hours (from CrunchTime)
+  H   Scheduled Hours   ← CrunchTime "Scheduled Hours" row
+  I   Actual Hours      ← CrunchTime "Actual Hours" row
+  J   Variance          ← FORMULA =I-H in Excel — do NOT overwrite
   K   Total Discounts   ← Comps & Discounts total
   L   Cash +/-          ← Cash Over/Short
   M   Deposit taken/uploaded  ← not yet available — left blank
@@ -246,9 +246,9 @@ def build_values(ct: dict, store_id: str) -> dict[str, object]:
         "E": s.get("forecast"),             # Budget / Forecasted Sales
         # F = formula =B-E  ← SKIP
         "G": labor_pct_decimal,             # Labor % (decimal so Excel formats as %)
-        # H = Scheduled Hours  ← not on dashboard, skip
-        # I = Actual Hours     ← not on dashboard, skip
-        "J": lab.get("hours_var"),          # Actual-to-Earned Hours variance
+        "H": lab.get("sched_hours"),        # Scheduled Hours (from CrunchTime)
+        "I": lab.get("actual_hours"),       # Actual Hours (from CrunchTime)
+        # J = formula =I-H in Excel (Actual minus Scheduled) — do NOT overwrite
         "K": total_discounts or None,       # Total Discounts / Comps
         "L": cash.get("over_short"),        # Cash Over/Short
         # M = Deposit taken/uploaded  ← not yet available, skip

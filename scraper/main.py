@@ -178,21 +178,93 @@ async def do_login(page) -> bool:
     return True
 
 
+async def select_location(page):
+    """
+    CrunchTime asks you to pick a store after login.
+    Always choose location 2065.
+    """
+    log.info("Checking for location selector…")
+
+    # Give the page a moment to show the location picker
+    await page.wait_for_timeout(2_000)
+
+    location_id = "2065"
+
+    # Try dropdown/select element first
+    for sel in [
+        f'option[value="{location_id}"]',
+        f'option:has-text("{location_id}")',
+        f'li:has-text("{location_id}")',
+        f'a:has-text("{location_id}")',
+        f'[data-id="{location_id}"]',
+    ]:
+        loc = page.locator(sel)
+        if await loc.count():
+            # If it's an <option>, select its parent <select>
+            tag = await loc.first.evaluate("el => el.tagName.toLowerCase()")
+            if tag == "option":
+                parent = loc.first.locator("xpath=..")
+                await parent.select_option(value=location_id)
+            else:
+                await loc.first.click()
+            log.info(f"Selected location {location_id} via {sel}")
+            try:
+                await page.wait_for_load_state("networkidle", timeout=10_000)
+            except PlaywrightTimeout:
+                pass
+            await page.screenshot(path=str(DATA_DIR / "03_location_selected.png"))
+            return
+
+    # Try typing into a search/filter box
+    for sel in ['input[placeholder*="store" i]', 'input[placeholder*="location" i]',
+                'input[placeholder*="search" i]']:
+        if await page.locator(sel).count():
+            await page.fill(sel, location_id)
+            await page.wait_for_timeout(500)
+            # Click the matching result
+            result = page.locator(f'li:has-text("{location_id}"), td:has-text("{location_id}")')
+            if await result.count():
+                await result.first.click()
+                log.info(f"Typed and selected location {location_id}")
+                try:
+                    await page.wait_for_load_state("networkidle", timeout=10_000)
+                except PlaywrightTimeout:
+                    pass
+                return
+
+    log.info("No location picker found — already on correct location or auto-selected")
+
+
 async def extract_performance_metrics(page) -> dict:
     """
     Parse the Performance Metrics table.
-    Columns: Metric | Mon date | Tue date | ... | Week-to-date | Period-to-date
-    We grab yesterday's date column and the week-to-date column.
+    The table is long — scroll down in steps to ensure all rows are rendered
+    before extracting.  Screenshots are saved at each scroll position.
     """
     log.info("Waiting for Performance Metrics table…")
 
-    # Wait for the table to appear (up to 15s)
     try:
         await page.wait_for_selector("table", timeout=15_000)
     except PlaywrightTimeout:
         log.warning("No table found within 15s")
 
-    await page.screenshot(path=str(DATA_DIR / "03_dashboard.png"))
+    # ── Scroll down in steps to trigger any lazy-loaded rows ──────────────
+    await page.screenshot(path=str(DATA_DIR / "04_dashboard_top.png"))
+    log.info("Screenshot: top of dashboard")
+
+    await page.evaluate("window.scrollBy(0, 800)")
+    await page.wait_for_timeout(1_000)
+    await page.screenshot(path=str(DATA_DIR / "05_dashboard_mid.png"))
+    log.info("Screenshot: middle of dashboard (scroll 1)")
+
+    await page.evaluate("window.scrollBy(0, 800)")
+    await page.wait_for_timeout(1_000)
+    await page.screenshot(path=str(DATA_DIR / "06_dashboard_bottom.png"))
+    log.info("Screenshot: bottom of dashboard (scroll 2)")
+
+    # Scroll back to top so the full DOM is stable
+    await page.evaluate("window.scrollTo(0, 0)")
+    await page.wait_for_timeout(500)
 
     tables = await page.locator("table").all()
     log.info(f"Found {len(tables)} table(s) on page")
@@ -258,12 +330,19 @@ def parse_metrics(raw: dict[str, dict]) -> dict:
     forecast_w    = get(["Forecasted Sales"], "week")
     vs_ly_d       = get(["Net Sales to Last Ye"])
     vs_ly_w       = get(["Net Sales to Last Ye"], "week")
-    labor_cost_d  = get(["Actual Labor"])
-    labor_cost_w  = get(["Actual Labor"], "week")
-    labor_hrs_d   = get(["Actual to Earned Ho"])
-    labor_pct_d   = get(["Labor % of Net Sales"])
-    labor_pct_w   = get(["Labor % of Net Sales"], "week")
-    cash_os_d     = get(["Total Cash Over/Sh"])
+    labor_cost_d       = get(["Actual Labor"])
+    labor_cost_w       = get(["Actual Labor"], "week")
+    labor_hrs_d        = get(["Actual to Earned Ho"])
+    labor_pct_d        = get(["Labor % of Net Sales"])
+    labor_pct_w        = get(["Labor % of Net Sales"], "week")
+    actual_hours_d     = get(["Actual Hours"])
+    actual_hours_w     = get(["Actual Hours"], "week")
+    scheduled_hours_d  = get(["Scheduled Hours"])
+    scheduled_hours_w  = get(["Scheduled Hours"], "week")
+    hours_variance_d   = get(["Hours Variance"])
+    labor_productivity_d = get(["Labor Productivity"])
+    labor_productivity_w = get(["Labor Productivity"], "week")
+    cash_os_d          = get(["Total Cash Over/Sh"])
     # Comps rows — there are multiple; collect all
     comps_rows = {
         label: vals for label, vals in raw.items()
@@ -317,11 +396,18 @@ def parse_metrics(raw: dict[str, dict]) -> dict:
             "per_guest_week": parse_dollar(sales_per_guest_w),
         },
         "labor": {
-            "cost":      labor_cost,
-            "cost_week": parse_dollar(labor_cost_w),
-            "pct":       labor_pct,
-            "pct_week":  parse_pct(labor_pct_w),
-            "hours_var": labor_hrs,   # actual-to-earned hours variance
+            "cost":              labor_cost,
+            "cost_week":         parse_dollar(labor_cost_w),
+            "pct":               labor_pct,
+            "pct_week":          parse_pct(labor_pct_w),
+            "actual_hours":      parse_number(actual_hours_d),
+            "actual_hours_week": parse_number(actual_hours_w),
+            "sched_hours":       parse_number(scheduled_hours_d),
+            "sched_hours_week":  parse_number(scheduled_hours_w),
+            "hours_variance":    parse_number(hours_variance_d),
+            "productivity":      parse_dollar(labor_productivity_d),
+            "productivity_week": parse_dollar(labor_productivity_w),
+            "hours_var":         parse_number(labor_hrs_d),  # Actual-to-Earned (kept for compat)
         },
         "cash": {
             "over_short":   cash_os,
@@ -350,7 +436,10 @@ async def scrape() -> dict:
             await browser.close()
             raise RuntimeError("Login failed — check credentials and screenshots in data/")
 
-        # All data is on the first page — no navigation needed
+        # Select store 2065 if a location picker appears after login
+        await select_location(page)
+
+        # All data is on the first page — scroll to load all rows then extract
         raw = await extract_performance_metrics(page)
         await browser.close()
 
@@ -539,7 +628,7 @@ def generate_html(d: dict) -> str:
   <!-- SECTION 3: Labor -->
   <div class="section">
     <div class="section-title">&#128104;&#8205;&#127859; Labor Summary</div>
-    <div class="card-grid grid-3">
+    <div class="card-grid grid-4">
 
       <div class="card highlight">
         <div class="label">Actual Labor $</div>
@@ -556,10 +645,31 @@ def generate_html(d: dict) -> str:
       </div>
 
       <div class="card blue">
-        <div class="label">Actual to Earned Hours</div>
-        <div class="value {'neg' if lab.get('hours_var') and lab.get('hours_var') < 0 else ''}">{fmt_num(lab.get('hours_var'))}</div>
-        <div class="sub">Variance from earned hours</div>
+        <div class="label">Scheduled Hours</div>
+        <div class="value">{fmt_num(lab.get('sched_hours'))}</div>
+        <div class="sub">Hours on schedule</div>
+        <div class="week-val">WTD: {fmt_num(lab.get('sched_hours_week'))}</div>
+      </div>
+
+      <div class="card blue">
+        <div class="label">Actual Hours</div>
+        <div class="value">{fmt_num(lab.get('actual_hours'))}</div>
+        <div class="sub">Hours actually worked</div>
+        <div class="week-val">WTD: {fmt_num(lab.get('actual_hours_week'))}</div>
+      </div>
+
+      <div class="card {'green' if (lab.get('hours_variance') or 0) >= 0 else 'orange'}">
+        <div class="label">Hours Variance</div>
+        <div class="value">{fmt_num(lab.get('hours_variance'))}</div>
+        <div class="sub">Scheduled minus Actual</div>
         <div class="week-val">&nbsp;</div>
+      </div>
+
+      <div class="card green">
+        <div class="label">Labor Productivity</div>
+        <div class="value">{fmt_dollar(lab.get('productivity'))}</div>
+        <div class="sub">Sales per labor hour</div>
+        <div class="week-val">WTD: {fmt_dollar(lab.get('productivity_week'))}</div>
       </div>
 
     </div>
