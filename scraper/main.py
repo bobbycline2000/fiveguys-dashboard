@@ -150,17 +150,27 @@ async def do_login(page) -> bool:
         log.error("Password field not found")
         return False
 
-    # Submit
+    # Submit — only click elements that are actually visible
+    # (CrunchTime has a hidden input[type="submit"] with class x-hidden-submit
+    # that must be skipped; the real trigger is Enter or a visible button)
+    submitted = False
     for sel in [
-        'button[type="submit"]', 'input[type="submit"]',
-        'button:has-text("Log")', 'button:has-text("Sign")',
-        '#btnLogin', '.btn-login',
+        'button[type="submit"]',
+        'button:has-text("Log")', 'button:has-text("Sign")', 'button:has-text("Login")',
+        '#btnLogin', '.btn-login', '.login-button',
+        'a:has-text("Log In")', 'a:has-text("Login")',
     ]:
-        if await page.locator(sel).count():
-            await page.locator(sel).first.click()
+        loc = page.locator(sel)
+        if await loc.count() and await loc.first.is_visible():
+            await loc.first.click()
+            log.info(f"Submitted via visible button: {sel}")
+            submitted = True
             break
-    else:
+
+    if not submitted:
+        # Fall back to Enter key — works on any standard login form
         await page.keyboard.press("Enter")
+        log.info("Submitted via Enter key")
 
     try:
         await page.wait_for_load_state("networkidle", timeout=20_000)
