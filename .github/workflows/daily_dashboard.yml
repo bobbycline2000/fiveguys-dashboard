@@ -55,6 +55,7 @@ jobs:
 
       # ── 6. Update SharePoint Excel report (store 2065) ────────────────────
       - name: Update Excel daily report (store 2065)
+        continue-on-error: true   # won't block dashboard if Azure isn't configured yet
         env:
           MS_TENANT_ID:     ${{ secrets.MS_TENANT_ID }}
           MS_CLIENT_ID:     ${{ secrets.MS_CLIENT_ID }}
