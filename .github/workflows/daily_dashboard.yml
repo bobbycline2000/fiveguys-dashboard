@@ -3,7 +3,6 @@ name: Daily Dashboard Update
 on:
   schedule:
     # 8:05 AM Eastern (12:05 UTC summer / 13:05 UTC winter)
-    # Adjust hour if needed: 12 = 8 AM EDT, 13 = 8 AM EST
     - cron: "5 12 * * *"
   workflow_dispatch:  # allow manual trigger from GitHub Actions tab
 
@@ -13,7 +12,7 @@ permissions:
 jobs:
   update-dashboard:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       # ── 1. Checkout main branch ────────────────────────────────────────────
@@ -45,14 +44,28 @@ jobs:
       - name: Install Playwright Chromium
         run: python -m playwright install chromium --with-deps
 
-      # ── 5. Run scraper ─────────────────────────────────────────────────────
-      - name: Scrape CrunchTime Net Chef & generate dashboard
+      # ── 5. Scrape CrunchTime & generate Netlify dashboard ─────────────────
+      - name: Scrape CrunchTime Net Chef (store 2065) & generate dashboard.html
         env:
           CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
           CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
         run: python scraper/main.py
+        # NOTE: When scaling to all 11 stores, add additional steps here
+        # with the store-specific env vars and a STORE_ID env variable.
 
-      # ── 6. Upload debug screenshots (always, even on failure) ─────────────
+      # ── 6. Update SharePoint Excel report (store 2065) ────────────────────
+      - name: Update Excel daily report (store 2065)
+        env:
+          MS_TENANT_ID:     ${{ secrets.MS_TENANT_ID }}
+          MS_CLIENT_ID:     ${{ secrets.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+          STORE_ID:         "2065"
+        run: python scraper/update_excel.py
+        # NOTE: When scaling to all 11 stores, duplicate this step with
+        # each store's STORE_ID. The STORE_CONFIG dict in update_excel.py
+        # maps each store ID to its Excel sheet tab name.
+
+      # ── 7. Upload debug screenshots (always, even on failure) ─────────────
       - name: Upload debug screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -62,21 +75,19 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-      # ── 7. Commit & push updated dashboard to main ─────────────────────────
+      # ── 8. Commit & push updated dashboard to main (→ Netlify auto-deploys)
       - name: Commit and push dashboard
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Stage the generated files
           git add dashboard.html data/latest.json
 
-          # Only commit if there are actual changes
           if git diff --cached --quiet; then
-            echo "No changes to commit — dashboard is already up to date."
+            echo "No changes to commit."
           else
             DATE=$(date -u +"%Y-%m-%d")
             git commit -m "chore: auto-update dashboard for ${DATE}"
             git push origin main
-            echo "Dashboard pushed to main — Netlify will auto-deploy."
+            echo "Dashboard pushed — Netlify will auto-deploy."
           fi
