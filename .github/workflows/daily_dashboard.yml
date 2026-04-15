@@ -66,13 +66,18 @@ jobs:
         # each store's STORE_ID. The STORE_CONFIG dict in update_excel.py
         # maps each store ID to its Excel sheet tab name.
 
-      # ── 7. Upload debug screenshots (always, even on failure) ─────────────
-      - name: Upload debug screenshots
+      # ── 7. Upload debug artifacts (always, even on failure) ──────────────
+      - name: Upload debug artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: debug-screenshots-${{ github.run_id }}
-          path: data/*.png
+          name: debug-artifacts-${{ github.run_id }}
+          path: |
+            data/*.png
+            data/page_source.html
+            data/page_text.txt
+            data/02b_page_source.html
+            data/02b_page_text.txt
           if-no-files-found: ignore
           retention-days: 7
 

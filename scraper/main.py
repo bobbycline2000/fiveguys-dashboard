@@ -192,131 +192,389 @@ async def select_location(page):
     """
     CrunchTime asks you to pick a store after login.
     Always choose location 2065.
+
+    CrunchTime Net Chef is an ExtJS application. The location picker renders
+    as a div-based list (not a standard <select>). We try many selectors and
+    fall back to a JavaScript text search to find and click the right item.
     """
     log.info("Checking for location selector…")
+    await page.wait_for_timeout(3_000)
 
-    # Give the page a moment to show the location picker
-    await page.wait_for_timeout(2_000)
+    current_url = page.url
+    log.info(f"URL before location selection: {current_url}")
+
+    # ── Save debug snapshot ────────────────────────────────────────────────
+    try:
+        (DATA_DIR / "02b_page_source.html").write_text(
+            await page.content(), encoding="utf-8"
+        )
+        (DATA_DIR / "02b_page_text.txt").write_text(
+            await page.inner_text("body"), encoding="utf-8"
+        )
+        log.info("Saved 02b debug snapshots")
+    except Exception as exc:
+        log.warning(f"Could not save debug snapshots: {exc}")
 
     location_id = "2065"
 
-    # Try dropdown/select element first
-    for sel in [
+    # ── Try every plausible CSS selector ──────────────────────────────────
+    selectors = [
+        # Standard HTML
         f'option[value="{location_id}"]',
         f'option:has-text("{location_id}")',
-        f'li:has-text("{location_id}")',
+        # ExtJS classic table-based grid
+        f'tr:has-text("{location_id}")',
+        f'td:has-text("{location_id}")',
+        # ExtJS div-based list / grid
+        f'.x-list-item:has-text("{location_id}")',
+        f'.x-boundlist-item:has-text("{location_id}")',
+        f'.x-grid-row:has-text("{location_id}")',
+        f'.x-grid-cell-inner:has-text("{location_id}")',
+        f'.x-tree-node-text:has-text("{location_id}")',
+        # Generic
         f'a:has-text("{location_id}")',
+        f'li:has-text("{location_id}")',
         f'[data-id="{location_id}"]',
-    ]:
-        loc = page.locator(sel)
-        if await loc.count():
-            # If it's an <option>, select its parent <select>
-            tag = await loc.first.evaluate("el => el.tagName.toLowerCase()")
+        f'[data-value="{location_id}"]',
+    ]
+
+    for sel in selectors:
+        try:
+            loc = page.locator(sel)
+            count = await loc.count()
+            if not count:
+                continue
+
+            log.info(f"Found {count} element(s) for: {sel}")
+            first = loc.first
+            tag = await first.evaluate("el => el.tagName.toLowerCase()")
+
             if tag == "option":
-                parent = loc.first.locator("xpath=..")
-                await parent.select_option(value=location_id)
+                parent_sel = first.locator("xpath=..")
+                await parent_sel.select_option(value=location_id)
+                log.info(f"Selected via <select>: {location_id}")
             else:
-                await loc.first.click()
-            log.info(f"Selected location {location_id} via {sel}")
+                await first.click()
+                log.info(f"Clicked {location_id} via {sel}")
+
+            # Wait for the hash to leave #ChooseLocation
+            try:
+                await page.wait_for_function(
+                    "() => !window.location.href.includes('ChooseLocation')",
+                    timeout=15_000,
+                )
+            except PlaywrightTimeout:
+                log.warning("URL still contains ChooseLocation after click")
+
+            try:
+                await page.wait_for_load_state("networkidle", timeout=10_000)
+            except PlaywrightTimeout:
+                pass
+
+            await page.screenshot(path=str(DATA_DIR / "03_location_selected.png"))
+            log.info(f"Post-selection URL: {page.url}")
+            return
+
+        except Exception as exc:
+            log.debug(f"Selector '{sel}' raised: {exc}")
+            continue
+
+    # ── Last resort: JavaScript text-search click ──────────────────────────
+    log.info("CSS selectors failed — trying JavaScript element search")
+    try:
+        clicked = await page.evaluate(f"""
+            (() => {{
+                // Walk every leaf text node; click the smallest element whose
+                // trimmed text is exactly '{location_id}'
+                for (const el of document.querySelectorAll('*')) {{
+                    if (el.children.length === 0 &&
+                        el.textContent.trim() === '{location_id}') {{
+                        el.click();
+                        return true;
+                    }}
+                }}
+                // Fallback: any element containing '2065' as the only text
+                for (const el of document.querySelectorAll(
+                    'td, li, div, span, a')) {{
+                    if (el.textContent.trim().startsWith('{location_id}')) {{
+                        el.click();
+                        return true;
+                    }}
+                }}
+                return false;
+            }})()
+        """)
+        if clicked:
+            log.info(f"Clicked {location_id} via JavaScript")
+            await page.wait_for_timeout(3_000)
             try:
                 await page.wait_for_load_state("networkidle", timeout=10_000)
             except PlaywrightTimeout:
                 pass
             await page.screenshot(path=str(DATA_DIR / "03_location_selected.png"))
+            log.info(f"Post-JS-selection URL: {page.url}")
             return
+        else:
+            log.warning(f"JavaScript could not find any element with text '{location_id}'")
+    except Exception as exc:
+        log.warning(f"JavaScript click failed: {exc}")
 
-    # Try typing into a search/filter box
-    for sel in ['input[placeholder*="store" i]', 'input[placeholder*="location" i]',
-                'input[placeholder*="search" i]']:
-        if await page.locator(sel).count():
-            await page.fill(sel, location_id)
-            await page.wait_for_timeout(500)
-            # Click the matching result
-            result = page.locator(f'li:has-text("{location_id}"), td:has-text("{location_id}")')
-            if await result.count():
-                await result.first.click()
-                log.info(f"Typed and selected location {location_id}")
-                try:
-                    await page.wait_for_load_state("networkidle", timeout=10_000)
-                except PlaywrightTimeout:
-                    pass
-                return
-
-    log.info("No location picker found — already on correct location or auto-selected")
+    log.info("Location picker not found — assuming already on correct store")
+    await page.screenshot(path=str(DATA_DIR / "03_no_picker.png"))
 
 
 async def extract_performance_metrics(page) -> dict:
     """
-    Parse the Performance Metrics table.
-    The table is long — scroll down in steps to ensure all rows are rendered
-    before extracting.  Screenshots are saved at each scroll position.
+    Extract Performance Metrics from CrunchTime Net Chef.
+
+    CrunchTime is an ExtJS application. Depending on the version it may render
+    its data grid as real <table>/<tr>/<td> elements (ExtJS classic) or as
+    div-based rows (ExtJS modern). We try three strategies in order:
+
+      1. HTML <table> rows  — fastest when available
+      2. ExtJS div-based grid rows (.x-grid-row / .x-grid-cell-inner)
+      3. Full page text parsing — slow but works regardless of DOM structure
+
+    Screenshots are taken at three scroll positions so the action log always
+    shows what the browser actually saw, even on failure.
     """
-    log.info("Waiting for Performance Metrics table…")
+    log.info("Extracting Performance Metrics…")
+    log.info(f"Current URL: {page.url}")
 
-    try:
-        await page.wait_for_selector("table", timeout=15_000)
-    except PlaywrightTimeout:
-        log.warning("No table found within 15s")
+    # ── If still on location picker, try once more ─────────────────────────
+    if "ChooseLocation" in page.url:
+        log.warning("Still on ChooseLocation — retrying select_location()")
+        await select_location(page)
+        await page.wait_for_timeout(3_000)
 
-    # ── Scroll down in steps to trigger any lazy-loaded rows ──────────────
+    # ── Wait for dashboard content to appear ──────────────────────────────
+    for keyword in ["Actual Net Sales", "Net Sales", "Performance"]:
+        try:
+            await page.wait_for_selector(f"text={keyword}", timeout=12_000)
+            log.info(f"Dashboard content detected: '{keyword}'")
+            break
+        except PlaywrightTimeout:
+            log.info(f"Keyword '{keyword}' not found within 12 s, continuing…")
+
+    # ── Scroll to load all lazy-rendered rows ──────────────────────────────
     await page.screenshot(path=str(DATA_DIR / "04_dashboard_top.png"))
-    log.info("Screenshot: top of dashboard")
 
     await page.evaluate("window.scrollBy(0, 800)")
-    await page.wait_for_timeout(1_000)
+    await page.wait_for_timeout(1_500)
     await page.screenshot(path=str(DATA_DIR / "05_dashboard_mid.png"))
-    log.info("Screenshot: middle of dashboard (scroll 1)")
 
     await page.evaluate("window.scrollBy(0, 800)")
-    await page.wait_for_timeout(1_000)
+    await page.wait_for_timeout(1_500)
     await page.screenshot(path=str(DATA_DIR / "06_dashboard_bottom.png"))
-    log.info("Screenshot: bottom of dashboard (scroll 2)")
 
-    # Scroll back to top so the full DOM is stable
     await page.evaluate("window.scrollTo(0, 0)")
     await page.wait_for_timeout(500)
 
-    tables = await page.locator("table").all()
-    log.info(f"Found {len(tables)} table(s) on page")
+    # ── Save full page source for debugging ────────────────────────────────
+    try:
+        html_content = await page.content()
+        (DATA_DIR / "page_source.html").write_text(html_content, encoding="utf-8")
+        log.info(f"Saved page_source.html ({len(html_content):,} bytes)")
+    except Exception as exc:
+        log.warning(f"Could not save page source: {exc}")
 
-    metrics: dict[str, dict] = {}   # label → {day, week, period}
+    # ──────────────────────────────────────────────────────────────────────
+    # STRATEGY 1: Real HTML <table> rows
+    # ──────────────────────────────────────────────────────────────────────
+    metrics = await _extract_from_tables(page)
+    if metrics:
+        log.info(f"Strategy 1 (tables) succeeded: {len(metrics)} metrics")
+        return metrics
+
+    # ──────────────────────────────────────────────────────────────────────
+    # STRATEGY 2: ExtJS div-based grid
+    # ──────────────────────────────────────────────────────────────────────
+    log.info("Strategy 1 (tables) found nothing — trying ExtJS div grid…")
+    metrics = await _extract_from_extjs_divs(page)
+    if metrics:
+        log.info(f"Strategy 2 (ExtJS divs) succeeded: {len(metrics)} metrics")
+        return metrics
+
+    # ──────────────────────────────────────────────────────────────────────
+    # STRATEGY 3: Page text parsing
+    # ──────────────────────────────────────────────────────────────────────
+    log.info("Strategy 2 (ExtJS divs) found nothing — trying text extraction…")
+    metrics = await _extract_from_page_text(page)
+    if metrics:
+        log.info(f"Strategy 3 (text) succeeded: {len(metrics)} metrics")
+    else:
+        log.warning("All three extraction strategies returned no data")
+    return metrics
+
+
+# ── Extraction helpers ────────────────────────────────────────────────────────
+
+async def _extract_from_tables(page) -> dict:
+    """Strategy 1: classic <table>/<tr>/<td> extraction."""
+    tables = await page.locator("table").all()
+    log.info(f"Found {len(tables)} <table> element(s)")
+
+    metrics: dict[str, dict] = {}
 
     for tbl_idx, tbl in enumerate(tables):
         rows = await tbl.locator("tr").all()
         if not rows:
             continue
 
-        # ── Find header row and locate yesterday's column ──────────────────
         header_cells = await rows[0].locator("td, th").all()
         headers = [(await c.inner_text()).strip() for c in header_cells]
-        log.info(f"Table {tbl_idx} headers: {headers}")
+        log.info(f"  Table {tbl_idx} headers: {headers}")
 
-        day_col  = None
-        week_col = None
+        day_col = week_col = None
         for i, h in enumerate(headers):
             if RPT_MMDDYYYY in h:
                 day_col = i
-            # Week-to-date is usually the second-to-last or contains "Week"
             if "week" in h.lower() or "wtd" in h.lower():
                 week_col = i
 
+        # If exact date not found, default to column 1 (first data column)
+        if day_col is None and len(headers) >= 2:
+            log.info(f"  Table {tbl_idx}: date '{RPT_MMDDYYYY}' not in headers; using col 1")
+            day_col = 1
         if day_col is None:
-            log.info(f"Table {tbl_idx}: no column for {RPT_MMDDYYYY}, skipping")
             continue
 
-        log.info(f"Table {tbl_idx}: day_col={day_col}, week_col={week_col}")
-
-        # ── Extract each metric row ────────────────────────────────────────
         for row in rows[1:]:
             cells = await row.locator("td, th").all()
             if len(cells) <= day_col:
                 continue
-            label = (await cells[0].inner_text()).strip()
-            day_val  = (await cells[day_col].inner_text()).strip() if day_col < len(cells) else ""
+            label    = (await cells[0].inner_text()).strip()
+            day_val  = (await cells[day_col].inner_text()).strip()
             week_val = (await cells[week_col].inner_text()).strip() if week_col and week_col < len(cells) else ""
-            if label:
+            if label and any(c.isalpha() for c in label):
                 metrics[label] = {"day": day_val, "week": week_val}
-                log.info(f"  {label!r:40s} day={day_val!r:15s} week={week_val!r}")
+                log.info(f"    {label!r:45s} day={day_val!r:15s} week={week_val!r}")
+
+    return metrics
+
+
+async def _extract_from_extjs_divs(page) -> dict:
+    """Strategy 2: ExtJS modern toolkit uses div-based grid rows."""
+    # Try to find any kind of row container
+    row_sel = None
+    for sel in [".x-grid-row", ".x-grid-item", "[class*='x-grid-row']"]:
+        if await page.locator(sel).count():
+            row_sel = sel
+            break
+
+    if not row_sel:
+        log.info("No ExtJS div rows found")
+        return {}
+
+    rows = await page.locator(row_sel).all()
+    log.info(f"Found {len(rows)} ExtJS div row(s) via '{row_sel}'")
+
+    # Determine column structure from header
+    day_col_idx  = 1    # default: col 0 = label, col 1 = day value
+    week_col_idx = 2
+
+    hdr_texts = []
+    for hsel in [".x-column-header-text", ".x-column-header"]:
+        hdrs = await page.locator(hsel).all()
+        if hdrs:
+            hdr_texts = [(await h.inner_text()).strip() for h in hdrs]
+            log.info(f"Column headers: {hdr_texts}")
+            for i, h in enumerate(hdr_texts):
+                if RPT_MMDDYYYY in h:
+                    day_col_idx = i
+                if "week" in h.lower() or "wtd" in h.lower():
+                    week_col_idx = i
+            break
+
+    metrics: dict[str, dict] = {}
+
+    for row in rows:
+        # ExtJS stores cell text in .x-grid-cell-inner; fall back to td
+        for csel in [".x-grid-cell-inner", ".x-grid-cell", "td"]:
+            cells = await row.locator(csel).all()
+            if cells:
+                break
+        else:
+            continue
+
+        texts = [(await c.inner_text()).strip() for c in cells]
+        if not texts or not texts[0]:
+            continue
+
+        label    = texts[0]
+        day_val  = texts[day_col_idx]  if day_col_idx  < len(texts) else ""
+        week_val = texts[week_col_idx] if week_col_idx < len(texts) else ""
+
+        if label and any(c.isalpha() for c in label):
+            metrics[label] = {"day": day_val, "week": week_val}
+            log.info(f"  {label!r:45s} day={day_val!r:15s} week={week_val!r}")
+
+    return metrics
+
+
+async def _extract_from_page_text(page) -> dict:
+    """
+    Strategy 3: grab all visible text, then match known metric labels.
+
+    CrunchTime's grid puts each row on a line:
+      'Actual Net Sales   $3,801.80   $18,500.00   ...'
+    We find lines containing a known label and parse the first two
+    dollar/percent values as day and week figures.
+    """
+    try:
+        full_text = await page.inner_text("body")
+    except Exception as exc:
+        log.error(f"inner_text() failed: {exc}")
+        return {}
+
+    (DATA_DIR / "page_text.txt").write_text(full_text, encoding="utf-8")
+    log.info(f"Page text: {len(full_text)} chars, saved to page_text.txt")
+
+    lines = [ln.strip() for ln in full_text.splitlines() if ln.strip()]
+    log.info(f"Non-empty lines: {len(lines)}")
+
+    if len(lines) < 5:
+        log.warning("Very few lines — dashboard may not have loaded")
+        return {}
+
+    KNOWN_LABELS = [
+        "Actual Net Sales", "Last Year Same Day", "Forecasted Sales",
+        "Net Sales to Last Year", "Actual Labor", "Labor % of Net Sales",
+        "Actual Hours", "Scheduled Hours", "Hours Variance",
+        "Labor Productivity", "Total Cash Over/Short",
+        "Comps and Discounts", "Sales / Guest", "Guest Count",
+    ]
+
+    VALUE_RE = re.compile(r'[\(\$]?[\d,]+\.?\d*\s*%?')
+
+    metrics: dict[str, dict] = {}
+
+    for i, line in enumerate(lines):
+        matched_label = None
+        for lbl in KNOWN_LABELS:
+            if lbl.lower() in line.lower():
+                matched_label = lbl
+                break
+        if not matched_label:
+            continue
+
+        # Collect values from this line and the next few (until next label)
+        candidate_lines = [line]
+        for j in range(i + 1, min(i + 5, len(lines))):
+            if any(lbl.lower() in lines[j].lower() for lbl in KNOWN_LABELS):
+                break
+            candidate_lines.append(lines[j])
+
+        combined = " ".join(candidate_lines)
+        values   = VALUE_RE.findall(combined)
+        # Strip bare numbers that are just "2065" or years — keep $-prefixed or %
+        values   = [v.strip() for v in values if v.strip() and len(v.strip()) > 1]
+
+        day_val  = values[0] if len(values) > 0 else ""
+        week_val = values[1] if len(values) > 1 else ""
+
+        metrics[matched_label] = {"day": day_val, "week": week_val}
+        log.info(f"  Text-parsed {matched_label!r}: day={day_val!r} week={week_val!r}")
 
     return metrics
 
