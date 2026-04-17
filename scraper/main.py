@@ -217,31 +217,27 @@ async def do_login(page) -> bool:
 
 async def select_location(page):
     """
-    CrunchTime asks you to pick a store after login.
-    Always choose location 2065.
+    Select store KY-2065-Dixie Highway from the 'Choose Location / Customer' combo box.
 
-    CrunchTime Net Chef is an ExtJS application. The location picker renders
-    as a div-based list (not a standard <select>). We try many selectors and
-    fall back to a JavaScript text search to find and click the right item.
+    The picker is an ExtJS combo box: a text input with a dropdown arrow (▼).
+    The dropdown list items are formatted as 'KY-XXXX-Location Name'.
+    We must: (1) click the input to open the dropdown, (2) optionally type to
+    filter, (3) click 'KY-2065-Dixie Highway'.
     """
-    log.info("Checking for location selector…")
+    LOCATION_FULL  = "KY-2065-Dixie Highway"
+    LOCATION_SHORT = "KY-2065"
 
-    current_url = page.url
-    log.info(f"URL before location selection: {current_url}")
+    log.info("Selecting location KY-2065-Dixie Highway…")
+    log.info(f"Current URL: {page.url}")
 
-    # ── Wait for all in-flight requests to settle ──────────────────────────
-    log.info("Waiting for network idle before location picker (up to 60 s)…")
+    # ── Wait for the location picker form to appear ────────────────────────
+    log.info("Waiting for location picker to render (up to 60 s)…")
     try:
         await page.wait_for_load_state("networkidle", timeout=60_000)
-        log.info("Network idle — ExtJS should be initializing")
+        log.info("Network idle")
     except PlaywrightTimeout:
-        log.warning("Network not idle after 60 s — continuing anyway")
+        log.warning("Network not idle after 60 s — continuing")
 
-    # ── Wait for ExtJS to finish initializing ─────────────────────────────
-    # An uninitialized ExtJS app has 27KB of HTML but only ~172 chars of
-    # visible text (loading shell). We must wait until the app actually
-    # renders its components before any selector will match.
-    log.info("Waiting for ExtJS app to render (up to 60 s)…")
     try:
         await page.wait_for_function(
             "() => document.body.innerText.trim().length > 200",
@@ -249,138 +245,136 @@ async def select_location(page):
             polling=1_000,
         )
         body_len = await page.evaluate("() => document.body.innerText.trim().length")
-        log.info(f"ExtJS rendered — page text is now {body_len} chars")
+        log.info(f"Page rendered — {body_len} chars visible")
     except PlaywrightTimeout:
         body_len = await page.evaluate("() => document.body.innerText.trim().length")
-        log.warning(f"ExtJS still not rendered after 60 s (text={body_len} chars) — proceeding anyway")
+        log.warning(f"Page still minimal after 60 s ({body_len} chars) — proceeding anyway")
 
-    # ── Print page text so it appears in the Actions log ──────────────────
+    # Log and screenshot so we can see what rendered
     try:
-        page_text_preview = await page.inner_text("body")
-        log.info(f"PAGE TEXT AFTER WAIT ({len(page_text_preview)} chars):\n---\n{page_text_preview[:800]}\n---")
+        pg_text = await page.inner_text("body")
+        log.info(f"PAGE TEXT ({len(pg_text)} chars):\n---\n{pg_text[:800]}\n---")
         await page.screenshot(path=str(DATA_DIR / "02c_before_location_click.png"))
-    except Exception as exc:
-        log.warning(f"Could not read page text: {exc}")
-
-    # ── Save debug snapshot ────────────────────────────────────────────────
-    try:
-        (DATA_DIR / "02b_page_source.html").write_text(
-            await page.content(), encoding="utf-8"
-        )
-        (DATA_DIR / "02b_page_text.txt").write_text(
-            await page.inner_text("body"), encoding="utf-8"
-        )
+        (DATA_DIR / "02b_page_source.html").write_text(await page.content(), encoding="utf-8")
+        (DATA_DIR / "02b_page_text.txt").write_text(pg_text, encoding="utf-8")
         log.info("Saved 02b debug snapshots")
     except Exception as exc:
-        log.warning(f"Could not save debug snapshots: {exc}")
+        log.warning(f"Debug snapshot failed: {exc}")
 
-    location_id = "2065"
-
-    # ── Try every plausible CSS selector ──────────────────────────────────
-    selectors = [
-        # Standard HTML
-        f'option[value="{location_id}"]',
-        f'option:has-text("{location_id}")',
-        # ExtJS classic table-based grid
-        f'tr:has-text("{location_id}")',
-        f'td:has-text("{location_id}")',
-        # ExtJS div-based list / grid
-        f'.x-list-item:has-text("{location_id}")',
-        f'.x-boundlist-item:has-text("{location_id}")',
-        f'.x-grid-row:has-text("{location_id}")',
-        f'.x-grid-cell-inner:has-text("{location_id}")',
-        f'.x-tree-node-text:has-text("{location_id}")',
-        # Generic
-        f'a:has-text("{location_id}")',
-        f'li:has-text("{location_id}")',
-        f'[data-id="{location_id}"]',
-        f'[data-value="{location_id}"]',
-    ]
-
-    for sel in selectors:
+    # ── Step 1: open the combo box ─────────────────────────────────────────
+    # The picker is an ExtJS combo — must click the input/trigger to open it.
+    combo_opened = False
+    for sel in [
+        ".x-form-trigger",           # ExtJS combo dropdown arrow (▼)
+        ".x-form-trigger-wrap",      # wrapper around the trigger
+        "input.x-form-field",        # ExtJS text field
+        'input[type="text"]',        # generic text input
+    ]:
         try:
             loc = page.locator(sel)
-            count = await loc.count()
-            if not count:
-                continue
-
-            log.info(f"Found {count} element(s) for: {sel}")
-            first = loc.first
-            tag = await first.evaluate("el => el.tagName.toLowerCase()")
-
-            if tag == "option":
-                parent_sel = first.locator("xpath=..")
-                await parent_sel.select_option(value=location_id)
-                log.info(f"Selected via <select>: {location_id}")
-            else:
-                await first.click()
-                log.info(f"Clicked {location_id} via {sel}")
-
-            # Wait for the hash to leave #ChooseLocation
-            try:
-                await page.wait_for_function(
-                    "() => !window.location.href.includes('ChooseLocation')",
-                    timeout=15_000,
-                )
-            except PlaywrightTimeout:
-                log.warning("URL still contains ChooseLocation after click")
-
-            try:
-                await page.wait_for_load_state("networkidle", timeout=10_000)
-            except PlaywrightTimeout:
-                pass
-
-            await page.screenshot(path=str(DATA_DIR / "03_location_selected.png"))
-            log.info(f"Post-selection URL: {page.url}")
-            return
-
-        except Exception as exc:
-            log.debug(f"Selector '{sel}' raised: {exc}")
+            if await loc.count():
+                await loc.first.click()
+                log.info(f"Clicked combo box via: {sel}")
+                combo_opened = True
+                await page.wait_for_timeout(1_500)
+                break
+        except Exception:
             continue
 
-    # ── Last resort: JavaScript text-search click ──────────────────────────
-    log.info("CSS selectors failed — trying JavaScript element search")
+    if not combo_opened:
+        log.warning("Could not find combo box input to open")
+
+    # ── Step 2: type to filter the list ───────────────────────────────────
+    try:
+        await page.keyboard.type("2065", delay=80)
+        log.info("Typed '2065' to filter dropdown")
+        await page.wait_for_timeout(1_500)
+        await page.screenshot(path=str(DATA_DIR / "02d_after_typing.png"))
+    except Exception as exc:
+        log.warning(f"Could not type in combo: {exc}")
+
+    # ── Step 3: click the matching list item ──────────────────────────────
+    # After typing, only KY-2065-Dixie Highway should remain visible.
+    item_selectors = [
+        f'.x-boundlist-item:has-text("{LOCATION_SHORT}")',
+        f'.x-list-item:has-text("{LOCATION_SHORT}")',
+        f'li:has-text("{LOCATION_FULL}")',
+        f'li:has-text("{LOCATION_SHORT}")',
+        f'div.x-boundlist-item:has-text("{LOCATION_SHORT}")',
+        f'[role="option"]:has-text("{LOCATION_SHORT}")',
+        f'option:has-text("{LOCATION_SHORT}")',
+        f'option[value*="2065"]',
+        f'tr:has-text("{LOCATION_SHORT}")',
+        f'td:has-text("{LOCATION_FULL}")',
+    ]
+
+    for sel in item_selectors:
+        try:
+            loc = page.locator(sel)
+            cnt = await loc.count()
+            if not cnt:
+                continue
+            log.info(f"Found {cnt} item(s) via: {sel}")
+            tag = await loc.first.evaluate("el => el.tagName.toLowerCase()")
+            if tag == "option":
+                await loc.first.locator("xpath=..").select_option(label=LOCATION_FULL)
+                log.info(f"Selected via <select>")
+            else:
+                await loc.first.click()
+                log.info(f"Clicked '{LOCATION_FULL}'")
+            await _after_location_click(page)
+            return
+        except Exception as exc:
+            log.debug(f"Item selector '{sel}' raised: {exc}")
+            continue
+
+    # ── Step 4: JavaScript fallback (search full page for KY-2065) ────────
+    log.info("CSS selectors failed — trying JavaScript text search")
     try:
         clicked = await page.evaluate(f"""
             (() => {{
-                // Walk every leaf text node; click the smallest element whose
-                // trimmed text is exactly '{location_id}'
-                for (const el of document.querySelectorAll('*')) {{
-                    if (el.children.length === 0 &&
-                        el.textContent.trim() === '{location_id}') {{
-                        el.click();
-                        return true;
+                const targets = ['{LOCATION_FULL}', '{LOCATION_SHORT}'];
+                for (const target of targets) {{
+                    for (const el of document.querySelectorAll(
+                            'li, div, span, td, option, [role="option"]')) {{
+                        const t = el.textContent.trim();
+                        if (t.includes(target) && t.length < 80) {{
+                            el.click();
+                            return t;
+                        }}
                     }}
                 }}
-                // Fallback: any clickable element whose text contains '2065'
-                for (const el of document.querySelectorAll(
-                    'td, li, div, span, a, button')) {{
-                    const t = el.textContent.trim();
-                    if (t.includes('{location_id}') && t.length < 60) {{
-                        el.click();
-                        return true;
-                    }}
-                }}
-                return false;
+                return null;
             }})()
         """)
         if clicked:
-            log.info(f"Clicked {location_id} via JavaScript")
-            await page.wait_for_timeout(3_000)
-            try:
-                await page.wait_for_load_state("networkidle", timeout=10_000)
-            except PlaywrightTimeout:
-                pass
-            await page.screenshot(path=str(DATA_DIR / "03_location_selected.png"))
-            log.info(f"Post-JS-selection URL: {page.url}")
+            log.info(f"JS clicked: '{clicked}'")
+            await _after_location_click(page)
             return
-        else:
-            log.warning(f"JavaScript could not find any element with text '{location_id}'")
+        log.warning("JavaScript could not find location element")
     except Exception as exc:
         log.warning(f"JavaScript click failed: {exc}")
 
     log.info("Location picker not found — assuming already on correct store")
     await page.screenshot(path=str(DATA_DIR / "03_no_picker.png"))
+
+
+async def _after_location_click(page):
+    """Wait for the dashboard to load after clicking a location."""
+    try:
+        await page.wait_for_function(
+            "() => !window.location.href.includes('ChooseLocation')",
+            timeout=15_000,
+        )
+        log.info("URL left ChooseLocation — navigating to dashboard")
+    except PlaywrightTimeout:
+        log.warning("URL still contains ChooseLocation after 15 s")
+    try:
+        await page.wait_for_load_state("networkidle", timeout=15_000)
+    except PlaywrightTimeout:
+        pass
+    await page.screenshot(path=str(DATA_DIR / "03_location_selected.png"))
+    log.info(f"Post-selection URL: {page.url}")
 
 
 async def extract_performance_metrics(page) -> dict:
