@@ -238,6 +238,14 @@ async def select_location(page):
         body_len = await page.evaluate("() => document.body.innerText.trim().length")
         log.warning(f"ExtJS still not rendered after 45 s (text={body_len} chars) — proceeding anyway")
 
+    # ── Print page text so it appears in the Actions log ──────────────────
+    try:
+        page_text_preview = await page.inner_text("body")
+        log.info(f"PAGE TEXT AFTER WAIT ({len(page_text_preview)} chars):\n---\n{page_text_preview[:800]}\n---")
+        await page.screenshot(path=str(DATA_DIR / "02c_before_location_click.png"))
+    except Exception as exc:
+        log.warning(f"Could not read page text: {exc}")
+
     # ── Save debug snapshot ────────────────────────────────────────────────
     try:
         (DATA_DIR / "02b_page_source.html").write_text(
@@ -376,6 +384,13 @@ async def extract_performance_metrics(page) -> dict:
     """
     log.info("Extracting Performance Metrics…")
     log.info(f"Current URL: {page.url}")
+
+    # Print what's visible on screen right now
+    try:
+        current_text = await page.inner_text("body")
+        log.info(f"PAGE TEXT AT EXTRACTION START ({len(current_text)} chars):\n---\n{current_text[:800]}\n---")
+    except Exception:
+        pass
 
     # ── If still on location picker, try once more ─────────────────────────
     if "ChooseLocation" in page.url:
