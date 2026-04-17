@@ -217,12 +217,11 @@ async def do_login(page) -> bool:
 
 async def select_location(page):
     """
-    Select store KY-2065-Dixie Highway from the 'Choose Location / Customer' combo box.
-
-    The picker is an ExtJS combo box: a text input with a dropdown arrow (▼).
-    The dropdown list items are formatted as 'KY-XXXX-Location Name'.
-    We must: (1) click the input to open the dropdown, (2) optionally type to
-    filter, (3) click 'KY-2065-Dixie Highway'.
+    Select KY-2065-Dixie Highway from the Choose Location combo box.
+    Tries three methods in order:
+      1. ExtJS programmatic — directly tells the ExtJS app to select the store
+      2. Click + type "2065" to filter the list, then click the item
+      3. Open dropdown, scroll to bottom, JS text search and click
     """
     LOCATION_FULL  = "KY-2065-Dixie Highway"
     LOCATION_SHORT = "KY-2065"
@@ -230,8 +229,8 @@ async def select_location(page):
     log.info("Selecting location KY-2065-Dixie Highway…")
     log.info(f"Current URL: {page.url}")
 
-    # ── Wait for the location picker form to appear ────────────────────────
-    log.info("Waiting for location picker to render (up to 60 s)…")
+    # ── Wait for ExtJS to render ───────────────────────────────────────────
+    log.info("Waiting for location picker to render (up to 90 s)…")
     try:
         await page.wait_for_load_state("networkidle", timeout=60_000)
         log.info("Network idle")
@@ -248,9 +247,9 @@ async def select_location(page):
         log.info(f"Page rendered — {body_len} chars visible")
     except PlaywrightTimeout:
         body_len = await page.evaluate("() => document.body.innerText.trim().length")
-        log.warning(f"Page still minimal after 60 s ({body_len} chars) — proceeding anyway")
+        log.warning(f"Page still minimal after 60 s ({body_len} chars) — proceeding")
 
-    # Log and screenshot so we can see what rendered
+    # Debug snapshots
     try:
         pg_text = await page.inner_text("body")
         log.info(f"PAGE TEXT ({len(pg_text)} chars):\n---\n{pg_text[:800]}\n---")
@@ -261,75 +260,137 @@ async def select_location(page):
     except Exception as exc:
         log.warning(f"Debug snapshot failed: {exc}")
 
-    # ── Step 1: open the combo box ─────────────────────────────────────────
-    # The picker is an ExtJS combo — must click the input/trigger to open it.
-    combo_opened = False
-    for sel in [
-        ".x-form-trigger",           # ExtJS combo dropdown arrow (▼)
-        ".x-form-trigger-wrap",      # wrapper around the trigger
-        "input.x-form-field",        # ExtJS text field
-        'input[type="text"]',        # generic text input
-    ]:
+    # ── METHOD 1: ExtJS programmatic ──────────────────────────────────────
+    # Talk directly to the ExtJS framework — find the combo component and
+    # select the store by value. This bypasses the UI entirely so scrolling
+    # and visibility don't matter.
+    log.info("Method 1: ExtJS programmatic selection…")
+    try:
+        result = await page.evaluate("""
+            (() => {
+                try {
+                    if (typeof Ext === 'undefined') return 'Ext not loaded';
+                    var combos = Ext.ComponentQuery.query('combo, combobox');
+                    for (var i = 0; i < combos.length; i++) {
+                        var combo = combos[i];
+                        var store = combo.getStore ? combo.getStore() : null;
+                        if (!store) continue;
+                        var found = null;
+                        store.each(function(rec) {
+                            var vals = [
+                                rec.get(combo.displayField),
+                                rec.get(combo.valueField),
+                                rec.get('name'), rec.get('text'),
+                                rec.get('description')
+                            ];
+                            for (var v of vals) {
+                                if (v && String(v).includes('2065')) {
+                                    found = rec; return false;
+                                }
+                            }
+                        });
+                        if (found) {
+                            combo.setValue(found);
+                            combo.fireEvent('select', combo, [found]);
+                            return 'selected: ' + found.get(combo.displayField);
+                        }
+                    }
+                    return 'combo count=' + combos.length + ' no match';
+                } catch(e) { return 'error: ' + e.message; }
+            })()
+        """)
+        log.info(f"ExtJS method 1 result: {result}")
+        if result and result.startswith("selected:"):
+            await page.wait_for_timeout(2_000)
+            await _after_location_click(page)
+            return
+    except Exception as exc:
+        log.warning(f"ExtJS method failed: {exc}")
+
+    # ── METHOD 2: Click input → type "2065" → click filtered item ─────────
+    log.info("Method 2: click + type to filter…")
+    input_clicked = False
+    for sel in ["input.x-form-field", "input.x-form-text", 'input[type="text"]',
+                ".x-form-trigger", ".x-form-trigger-wrap"]:
         try:
             loc = page.locator(sel)
             if await loc.count():
                 await loc.first.click()
-                log.info(f"Clicked combo box via: {sel}")
-                combo_opened = True
-                await page.wait_for_timeout(1_500)
+                log.info(f"Opened combo via: {sel}")
+                input_clicked = True
+                await page.wait_for_timeout(1_000)
                 break
         except Exception:
             continue
 
-    if not combo_opened:
-        log.warning("Could not find combo box input to open")
+    if input_clicked:
+        try:
+            await page.keyboard.press("Control+a")
+            await page.keyboard.press("Delete")
+            await page.keyboard.type("2065", delay=100)
+            log.info("Typed '2065' to filter list")
+            await page.wait_for_timeout(2_000)
+            await page.screenshot(path=str(DATA_DIR / "02d_after_typing.png"))
+        except Exception as exc:
+            log.warning(f"Typing failed: {exc}")
 
-    # ── Step 2: type to filter the list ───────────────────────────────────
-    try:
-        await page.keyboard.type("2065", delay=80)
-        log.info("Typed '2065' to filter dropdown")
-        await page.wait_for_timeout(1_500)
-        await page.screenshot(path=str(DATA_DIR / "02d_after_typing.png"))
-    except Exception as exc:
-        log.warning(f"Could not type in combo: {exc}")
-
-    # ── Step 3: click the matching list item ──────────────────────────────
-    # After typing, only KY-2065-Dixie Highway should remain visible.
-    item_selectors = [
+    for sel in [
         f'.x-boundlist-item:has-text("{LOCATION_SHORT}")',
         f'.x-list-item:has-text("{LOCATION_SHORT}")',
-        f'li:has-text("{LOCATION_FULL}")',
-        f'li:has-text("{LOCATION_SHORT}")',
-        f'div.x-boundlist-item:has-text("{LOCATION_SHORT}")',
         f'[role="option"]:has-text("{LOCATION_SHORT}")',
-        f'option:has-text("{LOCATION_SHORT}")',
-        f'option[value*="2065"]',
-        f'tr:has-text("{LOCATION_SHORT}")',
-        f'td:has-text("{LOCATION_FULL}")',
-    ]
-
-    for sel in item_selectors:
+        f'li:has-text("{LOCATION_SHORT}")',
+        f'div.x-boundlist-item',
+    ]:
         try:
             loc = page.locator(sel)
             cnt = await loc.count()
             if not cnt:
                 continue
-            log.info(f"Found {cnt} item(s) via: {sel}")
-            tag = await loc.first.evaluate("el => el.tagName.toLowerCase()")
-            if tag == "option":
-                await loc.first.locator("xpath=..").select_option(label=LOCATION_FULL)
-                log.info(f"Selected via <select>")
-            else:
-                await loc.first.click()
-                log.info(f"Clicked '{LOCATION_FULL}'")
+            log.info(f"Found {cnt} list item(s) via: {sel}")
+            await loc.first.click()
+            log.info(f"Clicked list item")
             await _after_location_click(page)
             return
-        except Exception as exc:
-            log.debug(f"Item selector '{sel}' raised: {exc}")
+        except Exception:
             continue
 
-    # ── Step 4: JavaScript fallback (search full page for KY-2065) ────────
-    log.info("CSS selectors failed — trying JavaScript text search")
+    # ── METHOD 3: Open dropdown → scroll to bottom → JS click ─────────────
+    log.info("Method 3: open dropdown, scroll, JS text search…")
+
+    # Open via trigger button
+    for sel in [".x-form-trigger", "button", ".x-form-arrow-trigger"]:
+        try:
+            loc = page.locator(sel)
+            if await loc.count():
+                await loc.first.click()
+                await page.wait_for_timeout(1_500)
+                log.info(f"Opened dropdown via: {sel}")
+                break
+        except Exception:
+            continue
+
+    # Scroll the dropdown list to the bottom
+    try:
+        scroll_result = await page.evaluate("""
+            (() => {
+                var selectors = [
+                    '.x-boundlist-list-ct', '.x-list-plain',
+                    '.x-boundlist ul', '.x-boundlist'
+                ];
+                for (var s of selectors) {
+                    var el = document.querySelector(s);
+                    if (el) { el.scrollTop = 9999; return 'scrolled ' + s; }
+                }
+                return 'no dropdown list found';
+            })()
+        """)
+        log.info(f"Scroll result: {scroll_result}")
+        await page.wait_for_timeout(800)
+        await page.screenshot(path=str(DATA_DIR / "02e_after_scroll.png"))
+    except Exception as exc:
+        log.warning(f"Scroll failed: {exc}")
+
+    # JS text search across everything visible
     try:
         clicked = await page.evaluate(f"""
             (() => {{
@@ -351,11 +412,11 @@ async def select_location(page):
             log.info(f"JS clicked: '{clicked}'")
             await _after_location_click(page)
             return
-        log.warning("JavaScript could not find location element")
+        log.warning("All methods failed to find KY-2065 element")
     except Exception as exc:
-        log.warning(f"JavaScript click failed: {exc}")
+        log.warning(f"JS click failed: {exc}")
 
-    log.info("Location picker not found — assuming already on correct store")
+    log.info("Location picker not found — proceeding anyway")
     await page.screenshot(path=str(DATA_DIR / "03_no_picker.png"))
 
 
