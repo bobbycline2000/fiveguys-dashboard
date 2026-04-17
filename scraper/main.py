@@ -192,9 +192,10 @@ async def do_login(page) -> bool:
         log.info("Submitted via Enter key")
 
     try:
-        await page.wait_for_load_state("networkidle", timeout=20_000)
+        await page.wait_for_load_state("networkidle", timeout=45_000)
+        log.info("Network idle after login")
     except PlaywrightTimeout:
-        pass
+        log.warning("Network not idle after 45 s — continuing")
 
     await page.screenshot(path=str(DATA_DIR / "02_after_login.png"))
     log.info(f"Post-login URL: {page.url}")
@@ -202,6 +203,13 @@ async def do_login(page) -> bool:
     if any(kw in page.url.lower() for kw in ["login", "signin", "logon"]):
         log.error("Still on login page — check credentials (see 02_after_login.png)")
         return False
+
+    # Log what the post-login page actually shows
+    try:
+        post_text = await page.inner_text("body")
+        log.info(f"Post-login page text ({len(post_text)} chars):\n---\n{post_text[:600]}\n---")
+    except Exception:
+        pass
 
     log.info("Login successful")
     return True
@@ -221,22 +229,30 @@ async def select_location(page):
     current_url = page.url
     log.info(f"URL before location selection: {current_url}")
 
+    # ── Wait for all in-flight requests to settle ──────────────────────────
+    log.info("Waiting for network idle before location picker (up to 60 s)…")
+    try:
+        await page.wait_for_load_state("networkidle", timeout=60_000)
+        log.info("Network idle — ExtJS should be initializing")
+    except PlaywrightTimeout:
+        log.warning("Network not idle after 60 s — continuing anyway")
+
     # ── Wait for ExtJS to finish initializing ─────────────────────────────
     # An uninitialized ExtJS app has 27KB of HTML but only ~172 chars of
     # visible text (loading shell). We must wait until the app actually
     # renders its components before any selector will match.
-    log.info("Waiting for ExtJS app to render (up to 45 s)…")
+    log.info("Waiting for ExtJS app to render (up to 60 s)…")
     try:
         await page.wait_for_function(
             "() => document.body.innerText.trim().length > 200",
-            timeout=45_000,
+            timeout=60_000,
             polling=1_000,
         )
         body_len = await page.evaluate("() => document.body.innerText.trim().length")
         log.info(f"ExtJS rendered — page text is now {body_len} chars")
     except PlaywrightTimeout:
         body_len = await page.evaluate("() => document.body.innerText.trim().length")
-        log.warning(f"ExtJS still not rendered after 45 s (text={body_len} chars) — proceeding anyway")
+        log.warning(f"ExtJS still not rendered after 60 s (text={body_len} chars) — proceeding anyway")
 
     # ── Print page text so it appears in the Actions log ──────────────────
     try:
@@ -741,7 +757,12 @@ async def scrape() -> dict:
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(
             headless=True,
-            args=["--no-sandbox", "--disable-dev-shm-usage"],
+            args=[
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-blink-features=AutomationControlled",
+                "--window-size=1440,900",
+            ],
         )
         ctx = await browser.new_context(
             viewport={"width": 1440, "height": 900},
@@ -750,7 +771,20 @@ async def scrape() -> dict:
                 "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
             ),
         )
+        # Hide the webdriver flag so ExtJS doesn't detect headless mode
+        await ctx.add_init_script(
+            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined});"
+        )
         page = await ctx.new_page()
+
+        # Log any JavaScript errors/warnings from the browser
+        def _on_console(msg):
+            if msg.type in ("error", "warning"):
+                log.warning(f"BROWSER CONSOLE {msg.type.upper()}: {msg.text}")
+        def _on_pageerror(exc):
+            log.error(f"BROWSER JS ERROR: {exc}")
+        page.on("console", _on_console)
+        page.on("pageerror", _on_pageerror)
 
         if not await do_login(page):
             await browser.close()
