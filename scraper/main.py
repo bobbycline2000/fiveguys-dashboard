@@ -198,10 +198,26 @@ async def select_location(page):
     fall back to a JavaScript text search to find and click the right item.
     """
     log.info("Checking for location selector…")
-    await page.wait_for_timeout(3_000)
 
     current_url = page.url
     log.info(f"URL before location selection: {current_url}")
+
+    # ── Wait for ExtJS to finish initializing ─────────────────────────────
+    # An uninitialized ExtJS app has 27KB of HTML but only ~172 chars of
+    # visible text (loading shell). We must wait until the app actually
+    # renders its components before any selector will match.
+    log.info("Waiting for ExtJS app to render (up to 45 s)…")
+    try:
+        await page.wait_for_function(
+            "() => document.body.innerText.trim().length > 200",
+            timeout=45_000,
+            polling=1_000,
+        )
+        body_len = await page.evaluate("() => document.body.innerText.trim().length")
+        log.info(f"ExtJS rendered — page text is now {body_len} chars")
+    except PlaywrightTimeout:
+        body_len = await page.evaluate("() => document.body.innerText.trim().length")
+        log.warning(f"ExtJS still not rendered after 45 s (text={body_len} chars) — proceeding anyway")
 
     # ── Save debug snapshot ────────────────────────────────────────────────
     try:
@@ -293,10 +309,11 @@ async def select_location(page):
                         return true;
                     }}
                 }}
-                // Fallback: any element containing '2065' as the only text
+                // Fallback: any clickable element whose text contains '2065'
                 for (const el of document.querySelectorAll(
-                    'td, li, div, span, a')) {{
-                    if (el.textContent.trim().startsWith('{location_id}')) {{
+                    'td, li, div, span, a, button')) {{
+                    const t = el.textContent.trim();
+                    if (t.includes('{location_id}') && t.length < 60) {{
                         el.click();
                         return true;
                     }}
@@ -348,13 +365,14 @@ async def extract_performance_metrics(page) -> dict:
         await page.wait_for_timeout(3_000)
 
     # ── Wait for dashboard content to appear ──────────────────────────────
+    # Give ExtJS up to 30 s per keyword to render the dashboard grid.
     for keyword in ["Actual Net Sales", "Net Sales", "Performance"]:
         try:
-            await page.wait_for_selector(f"text={keyword}", timeout=12_000)
+            await page.wait_for_selector(f"text={keyword}", timeout=30_000)
             log.info(f"Dashboard content detected: '{keyword}'")
             break
         except PlaywrightTimeout:
-            log.info(f"Keyword '{keyword}' not found within 12 s, continuing…")
+            log.info(f"Keyword '{keyword}' not found within 30 s, continuing…")
 
     # ── Scroll to load all lazy-rendered rows ──────────────────────────────
     await page.screenshot(path=str(DATA_DIR / "04_dashboard_top.png"))
