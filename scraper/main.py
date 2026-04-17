@@ -126,12 +126,31 @@ async def do_login(page) -> bool:
 
     await page.screenshot(path=str(DATA_DIR / "01_login.png"))
 
-    # Find username field
-    for sel in [
+    # Wait for the login form to render — CrunchTime's login page is also
+    # ExtJS-driven; the input fields are injected by JavaScript after load.
+    USERNAME_SELS = [
         'input[name*="user" i]', 'input[id*="user" i]',
         'input[name*="login" i]', 'input[id*="login" i]',
         'input[type="text"]',
-    ]:
+    ]
+    log.info("Waiting for login form to render (up to 30 s)…")
+    username_sel_found = None
+    for sel in USERNAME_SELS:
+        try:
+            await page.wait_for_selector(sel, timeout=30_000)
+            username_sel_found = sel
+            log.info(f"Login form ready — found: {sel}")
+            break
+        except PlaywrightTimeout:
+            continue
+
+    if not username_sel_found:
+        await page.screenshot(path=str(DATA_DIR / "01_login_failed.png"))
+        log.error("Username field not found after 30 s — see 01_login_failed.png")
+        return False
+
+    # Find username field
+    for sel in USERNAME_SELS:
         if await page.locator(sel).count():
             await page.fill(sel, USERNAME)
             log.info(f"Username filled ({sel})")
