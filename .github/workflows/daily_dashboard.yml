@@ -44,12 +44,16 @@ jobs:
       - name: Install Playwright Chromium
         run: python -m playwright install chromium --with-deps
 
+      # ── 4b. Install Xvfb (virtual display for headed Chromium) ───────────
+      - name: Install Xvfb
+        run: sudo apt-get install -y xvfb
+
       # ── 5. Scrape CrunchTime & generate Netlify dashboard ─────────────────
       - name: Scrape CrunchTime Net Chef (store 2065) & generate dashboard.html
         env:
           CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
           CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
-        run: python scraper/main.py
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/main.py
         # NOTE: When scaling to all 11 stores, add additional steps here
         # with the store-specific env vars and a STORE_ID env variable.
 

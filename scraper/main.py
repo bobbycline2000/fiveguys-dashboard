@@ -755,23 +755,19 @@ def parse_metrics(raw: dict[str, dict]) -> dict:
 
 async def scrape() -> dict:
     async with async_playwright() as pw:
+        # Run headed (non-headless) so ExtJS renders properly.
+        # On CI the DISPLAY env var set by xvfb-run provides a virtual screen.
         browser = await pw.chromium.launch(
-            headless=True,
+            headless=False,
             args=[
                 "--no-sandbox",
                 "--disable-dev-shm-usage",
-                "--disable-blink-features=AutomationControlled",
                 "--window-size=1440,900",
             ],
         )
         ctx = await browser.new_context(
             viewport={"width": 1440, "height": 900},
-            user_agent=(
-                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-            ),
         )
-        # Hide the webdriver flag so ExtJS doesn't detect headless mode
         await ctx.add_init_script(
             "Object.defineProperty(navigator, 'webdriver', {get: () => undefined});"
         )
