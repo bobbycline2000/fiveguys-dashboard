@@ -26,10 +26,16 @@ Spreadsheet layout (confirmed from screenshot):
   O   Burger Buns       ← random 4–45 (physical count, not in CrunchTime)
   P   Hot Dog Buns      ← random 4–45 (physical count, not in CrunchTime)
 
-GitHub Secrets required:
-  MS_TENANT_ID      – Azure AD Directory (tenant) ID
-  MS_CLIENT_ID      – App registration Application (client) ID
-  MS_CLIENT_SECRET  – App registration client secret value
+GitHub Secrets required (use ONE of these two options):
+
+  Option A — Username/Password (simpler, no Azure setup needed):
+    MS_USERNAME   – your Microsoft work email (e.g. fg2065@estep-co.com)
+    MS_PASSWORD   – your Microsoft password
+
+  Option B — Azure App Registration (more robust):
+    MS_TENANT_ID      – Azure AD Directory (tenant) ID
+    MS_CLIENT_ID      – App registration Application (client) ID
+    MS_CLIENT_SECRET  – App registration client secret value
 """
 
 import os, sys, json, random, logging
@@ -38,6 +44,8 @@ from pathlib import Path
 import requests
 
 # ─── Auth config ──────────────────────────────────────────────────────────────
+MS_USERNAME   = os.environ.get("MS_USERNAME", "")
+MS_PASSWORD   = os.environ.get("MS_PASSWORD", "")
 TENANT_ID     = os.environ.get("MS_TENANT_ID", "")
 CLIENT_ID     = os.environ.get("MS_CLIENT_ID", "")
 CLIENT_SECRET = os.environ.get("MS_CLIENT_SECRET", "")
@@ -82,7 +90,38 @@ log = logging.getLogger(__name__)
 
 # ─── Microsoft Graph auth ─────────────────────────────────────────────────────
 def get_token() -> str:
-    url = f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token"
+    """Get a Graph API token. Tries username/password first, then client credentials."""
+    if MS_USERNAME and MS_PASSWORD:
+        return _token_ropc()
+    if all([TENANT_ID, CLIENT_ID, CLIENT_SECRET]):
+        return _token_client_creds()
+    log.error("No Microsoft auth configured. Set MS_USERNAME+MS_PASSWORD in GitHub Secrets.")
+    sys.exit(1)
+
+
+def _token_ropc() -> str:
+    """Username/password login — no Azure App Registration needed."""
+    tenant = MS_USERNAME.split("@")[1] if "@" in MS_USERNAME else "organizations"
+    # Use Microsoft's public 'Office' client ID which supports ROPC for work accounts
+    PUBLIC_CLIENT = "d3590ed6-52b3-4102-aeff-aad2292ab01c"
+    url  = f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
+    resp = requests.post(url, data={
+        "grant_type": "password",
+        "client_id":  PUBLIC_CLIENT,
+        "username":   MS_USERNAME,
+        "password":   MS_PASSWORD,
+        "scope":      "https://graph.microsoft.com/.default offline_access",
+    }, timeout=15)
+    if not resp.ok:
+        log.error(f"Username/password login failed {resp.status_code}: {resp.text[:400]}")
+        resp.raise_for_status()
+    log.info(f"Got token via username/password for {MS_USERNAME}")
+    return resp.json()["access_token"]
+
+
+def _token_client_creds() -> str:
+    """Azure App Registration client credentials flow."""
+    url  = f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token"
     resp = requests.post(url, data={
         "grant_type":    "client_credentials",
         "client_id":     CLIENT_ID,
@@ -90,9 +129,9 @@ def get_token() -> str:
         "scope":         "https://graph.microsoft.com/.default",
     }, timeout=15)
     if not resp.ok:
-        log.error(f"Token request failed {resp.status_code}: {resp.text[:400]}")
+        log.error(f"Client credentials token failed {resp.status_code}: {resp.text[:400]}")
         resp.raise_for_status()
-    log.info("Got Microsoft Graph access token")
+    log.info("Got Microsoft Graph token via client credentials")
     return resp.json()["access_token"]
 
 
@@ -262,8 +301,8 @@ def build_values(ct: dict, store_id: str) -> dict[str, object]:
 def run(store_id: str = "2065"):
     log.info(f"=== Excel Update | Store {store_id} | {yest.strftime('%A, %B %-d, %Y')} ===")
 
-    if not all([TENANT_ID, CLIENT_ID, CLIENT_SECRET]):
-        log.error("MS_TENANT_ID, MS_CLIENT_ID, MS_CLIENT_SECRET must all be set")
+    if not (MS_USERNAME and MS_PASSWORD) and not all([TENANT_ID, CLIENT_ID, CLIENT_SECRET]):
+        log.error("Set MS_USERNAME+MS_PASSWORD (or MS_TENANT_ID+MS_CLIENT_ID+MS_CLIENT_SECRET) in GitHub Secrets")
         sys.exit(1)
 
     # 1. Auth
