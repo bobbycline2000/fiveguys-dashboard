@@ -215,13 +215,39 @@ async def do_login(page) -> bool:
     return True
 
 
+async def _click_sign_in(page) -> bool:
+    """Click the Sign In / confirm button on the location picker. Returns True on success."""
+    for sel in [
+        'button:has-text("Sign In")',
+        'a:has-text("Sign In")',
+        '.x-btn:has-text("Sign In")',
+        '.x-btn-inner:has-text("Sign In")',
+        'input[value="Sign In"]',
+        'button:has-text("Go")',
+        'button:has-text("Select")',
+        'button:has-text("OK")',
+        'button:has-text("Continue")',
+    ]:
+        try:
+            loc = page.locator(sel)
+            if await loc.count():
+                await loc.first.click()
+                log.info(f"Clicked Sign In via: {sel}")
+                await _after_location_click(page)
+                return True
+        except Exception:
+            continue
+    log.warning("Sign In button not found")
+    return False
+
+
 async def select_location(page):
     """
-    Select KY-2065-Dixie Highway from the Choose Location combo box.
-    Tries three methods in order:
-      1. ExtJS programmatic — directly tells the ExtJS app to select the store
-      2. Click + type "2065" to filter the list, then click the item
-      3. Open dropdown, scroll to bottom, JS text search and click
+    Select KY-2065-Dixie Highway and click Sign In to confirm.
+
+    Version 20.26.04.02 of CrunchTime shows the location pre-filled in the
+    combo box. The flow is: location is already shown → click "Sign In".
+    Falls back to typing '2065' to filter, then clicking Sign In.
     """
     LOCATION_FULL  = "KY-2065-Dixie Highway"
     LOCATION_SHORT = "KY-2065"
@@ -230,7 +256,7 @@ async def select_location(page):
     log.info(f"Current URL: {page.url}")
 
     # ── Wait for ExtJS to render ───────────────────────────────────────────
-    log.info("Waiting for location picker to render (up to 90 s)…")
+    log.info("Waiting for location picker to render (up to 60 s)…")
     try:
         await page.wait_for_load_state("networkidle", timeout=60_000)
         log.info("Network idle")
@@ -239,7 +265,7 @@ async def select_location(page):
 
     try:
         await page.wait_for_function(
-            "() => document.body.innerText.trim().length > 200",
+            "() => document.body.innerText.trim().length > 100",
             timeout=60_000,
             polling=1_000,
         )
@@ -260,10 +286,18 @@ async def select_location(page):
     except Exception as exc:
         log.warning(f"Debug snapshot failed: {exc}")
 
+    # ── FAST PATH: location already visible → just click Sign In ─────────
+    # v20.26.04.02 pre-fills the combo with the user's only location.
+    try:
+        pg_text = await page.inner_text("body")
+        if LOCATION_SHORT in pg_text or LOCATION_FULL in pg_text:
+            log.info(f"Location '{LOCATION_SHORT}' already visible — clicking Sign In")
+            if await _click_sign_in(page):
+                return
+    except Exception as exc:
+        log.warning(f"Fast path check failed: {exc}")
+
     # ── METHOD 1: ExtJS programmatic ──────────────────────────────────────
-    # Talk directly to the ExtJS framework — find the combo component and
-    # select the store by value. This bypasses the UI entirely so scrolling
-    # and visibility don't matter.
     log.info("Method 1: ExtJS programmatic selection…")
     try:
         result = await page.evaluate("""
@@ -277,22 +311,20 @@ async def select_location(page):
                         if (!store) continue;
                         var found = null;
                         store.each(function(rec) {
-                            var vals = [
-                                rec.get(combo.displayField),
-                                rec.get(combo.valueField),
-                                rec.get('name'), rec.get('text'),
-                                rec.get('description')
-                            ];
-                            for (var v of vals) {
-                                if (v && String(v).includes('2065')) {
+                            var allFields = Object.keys(rec.getData());
+                            for (var f of allFields) {
+                                if (String(rec.get(f)).includes('2065')) {
                                     found = rec; return false;
                                 }
                             }
                         });
+                        if (!found && store.getCount() === 1) {
+                            found = store.getAt(0);
+                        }
                         if (found) {
                             combo.setValue(found);
                             combo.fireEvent('select', combo, [found]);
-                            return 'selected: ' + found.get(combo.displayField);
+                            return 'selected: ' + JSON.stringify(found.getData()).substring(0, 100);
                         }
                     }
                     return 'combo count=' + combos.length + ' no match';
@@ -301,13 +333,15 @@ async def select_location(page):
         """)
         log.info(f"ExtJS method 1 result: {result}")
         if result and result.startswith("selected:"):
-            await page.wait_for_timeout(2_000)
+            await page.wait_for_timeout(1_000)
+            if await _click_sign_in(page):
+                return
             await _after_location_click(page)
             return
     except Exception as exc:
         log.warning(f"ExtJS method failed: {exc}")
 
-    # ── METHOD 2: Click input → type "2065" → click filtered item ─────────
+    # ── METHOD 2: Click input → type "2065" → Sign In ─────────────────────
     log.info("Method 2: click + type to filter…")
     input_clicked = False
     for sel in ["input.x-form-field", "input.x-form-text", 'input[type="text"]',
@@ -348,16 +382,23 @@ async def select_location(page):
                 continue
             log.info(f"Found {cnt} list item(s) via: {sel}")
             await loc.first.click()
-            log.info(f"Clicked list item")
+            log.info("Clicked list item")
+            await page.wait_for_timeout(1_000)
+            if await _click_sign_in(page):
+                return
             await _after_location_click(page)
             return
         except Exception:
             continue
 
-    # ── METHOD 3: Open dropdown → scroll to bottom → JS click ─────────────
+    # After typing, try Sign In (combo may have auto-selected the filtered result)
+    log.info("Trying Sign In after typing filter…")
+    if await _click_sign_in(page):
+        return
+
+    # ── METHOD 3: JS text search click → Sign In ──────────────────────────
     log.info("Method 3: open dropdown, scroll, JS text search…")
 
-    # Open via trigger button
     for sel in [".x-form-trigger", "button", ".x-form-arrow-trigger"]:
         try:
             loc = page.locator(sel)
@@ -369,7 +410,6 @@ async def select_location(page):
         except Exception:
             continue
 
-    # Scroll the dropdown list to the bottom
     try:
         scroll_result = await page.evaluate("""
             (() => {
@@ -390,7 +430,6 @@ async def select_location(page):
     except Exception as exc:
         log.warning(f"Scroll failed: {exc}")
 
-    # JS text search across everything visible
     try:
         clicked = await page.evaluate(f"""
             (() => {{
@@ -400,6 +439,9 @@ async def select_location(page):
                             'li, div, span, td, option, [role="option"]')) {{
                         const t = el.textContent.trim();
                         if (t.includes(target) && t.length < 80) {{
+                            el.dispatchEvent(new MouseEvent('mousedown', {{bubbles: true}}));
+                            el.dispatchEvent(new MouseEvent('mouseup', {{bubbles: true}}));
+                            el.dispatchEvent(new MouseEvent('click', {{bubbles: true}}));
                             el.click();
                             return t;
                         }}
@@ -410,11 +452,19 @@ async def select_location(page):
         """)
         if clicked:
             log.info(f"JS clicked: '{clicked}'")
+            await page.wait_for_timeout(1_000)
+            if await _click_sign_in(page):
+                return
             await _after_location_click(page)
             return
         log.warning("All methods failed to find KY-2065 element")
     except Exception as exc:
         log.warning(f"JS click failed: {exc}")
+
+    # Last resort: Sign In without any selection (location may already be set)
+    log.info("Last resort: clicking Sign In without explicit selection")
+    if await _click_sign_in(page):
+        return
 
     log.info("Location picker not found — proceeding anyway")
     await page.screenshot(path=str(DATA_DIR / "03_no_picker.png"))
@@ -430,6 +480,13 @@ async def _after_location_click(page):
         log.info("URL left ChooseLocation — navigating to dashboard")
     except PlaywrightTimeout:
         log.warning("URL still contains ChooseLocation after 15 s")
+        try:
+            await page.keyboard.press("Enter")
+            await page.wait_for_timeout(2_000)
+            if "ChooseLocation" not in page.url:
+                log.info("Enter key navigated away from ChooseLocation")
+        except Exception:
+            pass
     try:
         await page.wait_for_load_state("networkidle", timeout=15_000)
     except PlaywrightTimeout:
