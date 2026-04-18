@@ -54,7 +54,7 @@ ITEM_ID = "B759AD2C-2B91-43AC-AC30-6993207012E7"
 # Maps location ID → Excel sheet tab name (as it appears at the bottom of the workbook).
 # Add all 11 stores here when ready to scale up.
 STORE_CONFIG = {
-    "2065": "2065",          # Dixie Highway  ← active now
+    "2065": "2065 Dixie",    # Dixie Highway  ← active now
     # "2066": "2066",        # Store name
     # "2067": "2067",        # Store name
     # … add remaining stores when scaling up
