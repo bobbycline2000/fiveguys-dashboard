@@ -1,9 +1,17 @@
 """
-ComplianceMate scraper — extracts temperature readings and checklist
-completion for Five Guys location 2065.
+ComplianceMate scraper — extracts checklist completion percentages for
+Five Guys location 2065.
+
+Navigation path:
+  Login → Statistics → List Completion ALL → Date Range: Yesterday → Apply
+  → scroll down → extract list names + completion %
+
+Target lists:
+  - Named checklists (AM Opening, PM Closing, Shift Change, etc.)
+  - Time-based checks: 11am, 1pm, 3pm, 5pm, 7pm, 9pm
 
 Saves results to data/compliancemate.json.
-Debug artifacts: data/cm_*.png, data/cm_page_source.html
+Debug artifacts: data/cm_*.png, data/cm_page_source.html, data/cm_page_text.txt
 """
 
 import asyncio
@@ -11,7 +19,6 @@ import json
 import logging
 import os
 import re
-import sys
 from datetime import datetime, date
 from pathlib import Path
 
@@ -24,28 +31,33 @@ USERNAME = os.getenv("COMPLIANCEMATE_USERNAME", "")
 PASSWORD = os.getenv("COMPLIANCEMATE_PASSWORD", "")
 BASE_URL  = "https://fg-beta.compliancemate.com"
 DATA_DIR  = Path(__file__).parent.parent / "data"
-TODAY     = date.today()
-TODAY_STR = TODAY.strftime("%Y-%m-%d")
+TODAY_STR = date.today().strftime("%Y-%m-%d")
+
+# Lists we specifically care about — names as they appear on the page
+# (case-insensitive partial match)
+TARGET_CHECKLISTS = [
+    "am opening", "opening", "am checklist",
+    "pm closing", "closing", "pm checklist",
+    "shift change", "shift",
+    "11am", "11 am", "1pm", "1 pm",
+    "3pm", "3 pm", "5pm", "5 pm",
+    "7pm", "7 pm", "9pm", "9 pm",
+]
 
 EMPTY_DATA = {
     "meta": {
-        "date": TODAY_STR,
+        "date":      TODAY_STR,
         "generated": datetime.now().strftime("%-m/%-d/%Y at %-I:%M %p"),
-        "location": "2065",
-        "status": "no_data",
+        "location":  "2065",
+        "status":    "no_data",
     },
-    "temperatures": [],
-    "checklists": {
-        "am":           {"name": "AM Opening",   "completed": 0, "total": 0, "pct": 0, "status": "pending"},
-        "pm":           {"name": "PM Closing",   "completed": 0, "total": 0, "pct": 0, "status": "pending"},
-        "shift_change": {"name": "Shift Change", "completed": 0, "total": 0, "pct": 0, "status": "pending"},
-    },
+    "lists": [],   # [{name, pct, completed, total}]
 }
 
 
 # ── helpers ────────────────────────────────────────────────────────────────────
 
-async def try_fill(page, selectors: list[str], value: str) -> bool:
+async def try_fill(page, selectors: list, value: str) -> bool:
     for sel in selectors:
         try:
             await page.fill(sel, value, timeout=3000)
@@ -56,10 +68,10 @@ async def try_fill(page, selectors: list[str], value: str) -> bool:
     return False
 
 
-async def try_click(page, selectors: list[str]) -> bool:
+async def try_click(page, selectors: list) -> bool:
     for sel in selectors:
         try:
-            await page.click(sel, timeout=3000)
+            await page.click(sel, timeout=4000)
             log.info(f"  clicked {sel!r}")
             return True
         except Exception:
@@ -71,28 +83,19 @@ def pct(completed, total):
     return round(completed / total * 100) if total else 0
 
 
-def checklist_status(p):
-    if p == 0:
-        return "pending"
-    if p >= 100:
-        return "complete"
-    return "incomplete"
-
-
 # ── login ──────────────────────────────────────────────────────────────────────
 
 async def do_login(page) -> bool:
     log.info("=== Login ===")
     await page.goto(BASE_URL, timeout=30000, wait_until="domcontentloaded")
     await page.wait_for_timeout(2000)
-    await page.screenshot(path=str(DATA_DIR / "cm_01_login_page.png"))
+    await page.screenshot(path=str(DATA_DIR / "cm_01_login.png"))
 
     filled = await try_fill(page, [
         'input[type="email"]',
         'input[name="email"]',
         'input[id="email"]',
         'input[name="username"]',
-        'input[id="username"]',
         'input[placeholder*="email" i]',
         'input[name="user[email]"]',
     ], USERNAME)
@@ -109,14 +112,12 @@ async def do_login(page) -> bool:
         'input[name="user[password]"]',
     ], PASSWORD)
 
-    # submit
     submitted = await try_click(page, [
         'button[type="submit"]',
         'input[type="submit"]',
         'button:has-text("Sign in")',
         'button:has-text("Log in")',
         'button:has-text("Login")',
-        'a:has-text("Sign in")',
     ])
     if not submitted:
         await page.keyboard.press("Enter")
@@ -124,144 +125,217 @@ async def do_login(page) -> bool:
     await page.wait_for_load_state("networkidle", timeout=15000)
     await page.screenshot(path=str(DATA_DIR / "cm_02_after_login.png"))
     log.info(f"Post-login URL: {page.url}")
-
-    # save source for debugging
     (DATA_DIR / "cm_page_source.html").write_text(await page.content(), encoding="utf-8")
+
+    # Check we're not still on the login page
+    if "login" in page.url.lower() or "sign_in" in page.url.lower():
+        log.error("Still on login page — credentials may be wrong")
+        return False
+
     return True
 
 
-# ── temperature extraction ─────────────────────────────────────────────────────
+# ── navigate to Statistics → List Completion ALL ───────────────────────────────
 
-async def extract_temperatures(page) -> list[dict]:
-    """Try multiple strategies to pull today's temperature readings."""
-    temps = []
+async def navigate_to_list_completion(page) -> bool:
+    log.info("=== Clicking Statistics ===")
 
-    # Strategy 1: look for a <table> with temperature data
+    clicked = await try_click(page, [
+        'a:has-text("Statistics")',
+        'button:has-text("Statistics")',
+        'nav a:has-text("Statistics")',
+        'li:has-text("Statistics") a',
+        '[href*="statistics" i]',
+        '[href*="stat" i]',
+    ])
+
+    if not clicked:
+        log.error("Could not find Statistics link")
+        await page.screenshot(path=str(DATA_DIR / "cm_03_stats_fail.png"))
+        (DATA_DIR / "cm_page_source.html").write_text(await page.content(), encoding="utf-8")
+        return False
+
+    await page.wait_for_load_state("networkidle", timeout=10000)
+    await page.wait_for_timeout(1500)
+    await page.screenshot(path=str(DATA_DIR / "cm_03_statistics.png"))
+    log.info(f"Statistics URL: {page.url}")
+
+    log.info("=== Clicking List Completion ALL ===")
+    clicked = await try_click(page, [
+        'a:has-text("List Completion ALL")',
+        'a:has-text("List Completion")',
+        'button:has-text("List Completion ALL")',
+        'button:has-text("List Completion")',
+        '[href*="list_completion" i]',
+        '[href*="list-completion" i]',
+        'li:has-text("List Completion") a',
+    ])
+
+    if not clicked:
+        log.warning("Could not find 'List Completion ALL' — trying to find it in page text")
+        # save source to debug
+        (DATA_DIR / "cm_stats_source.html").write_text(await page.content(), encoding="utf-8")
+        await page.screenshot(path=str(DATA_DIR / "cm_04_list_completion_fail.png"))
+        return False
+
+    await page.wait_for_load_state("networkidle", timeout=10000)
+    await page.wait_for_timeout(1500)
+    await page.screenshot(path=str(DATA_DIR / "cm_04_list_completion.png"))
+    log.info(f"List Completion URL: {page.url}")
+    return True
+
+
+# ── set date range to Yesterday and apply ─────────────────────────────────────
+
+async def set_yesterday_and_apply(page) -> bool:
+    log.info("=== Setting Date Range to Yesterday ===")
+
+    # Click the Date Range dropdown
+    clicked = await try_click(page, [
+        'select[name*="date" i]',
+        'select[id*="date" i]',
+        'div:has-text("Today") >> nth=0',
+        '[class*="date-range" i]',
+        '[class*="daterange" i]',
+        'button:has-text("Today")',
+        'div[class*="dropdown"]:has-text("Today")',
+    ])
+
+    if not clicked:
+        # try clicking any element containing "Today" that looks like a dropdown
+        try:
+            els = await page.query_selector_all('*:has-text("Today")')
+            for el in els:
+                tag = await el.evaluate("el => el.tagName.toLowerCase()")
+                if tag in ("select", "button", "div", "span"):
+                    await el.click()
+                    log.info(f"  clicked <{tag}> with text 'Today'")
+                    break
+        except Exception as e:
+            log.warning(f"Date range click failed: {e}")
+
+    await page.wait_for_timeout(800)
+    await page.screenshot(path=str(DATA_DIR / "cm_05_date_dropdown.png"))
+
+    # Select "Yesterday"
+    clicked = await try_click(page, [
+        'option:has-text("Yesterday")',
+        'li:has-text("Yesterday")',
+        'div:has-text("Yesterday")',
+        'span:has-text("Yesterday")',
+        'a:has-text("Yesterday")',
+    ])
+
+    if not clicked:
+        # try select element
+        try:
+            await page.select_option('select', label="Yesterday")
+            log.info("  selected Yesterday via select_option")
+        except Exception:
+            log.warning("Could not select Yesterday")
+
+    await page.wait_for_timeout(500)
+
+    # Click Apply / Filter
+    log.info("=== Clicking Apply ===")
+    applied = await try_click(page, [
+        'button:has-text("Apply")',
+        'button:has-text("Filter")',
+        'button:has-text("Search")',
+        'input[value="Apply"]',
+        'input[value="Filter"]',
+        'a:has-text("Apply")',
+        '[class*="apply" i]',
+        '[class*="filter-btn" i]',
+    ])
+
+    if not applied:
+        log.warning("Could not find Apply button")
+
+    await page.wait_for_load_state("networkidle", timeout=12000)
+    await page.wait_for_timeout(2000)
+    await page.screenshot(path=str(DATA_DIR / "cm_06_after_apply.png"))
+    return True
+
+
+# ── scroll and extract list completions ───────────────────────────────────────
+
+async def extract_list_completions(page) -> list:
+    log.info("=== Extracting list completions ===")
+
+    # Scroll down to load all rows
+    for _ in range(5):
+        await page.evaluate("window.scrollBy(0, 600)")
+        await page.wait_for_timeout(500)
+
+    await page.screenshot(path=str(DATA_DIR / "cm_07_scrolled.png"))
+
+    # Save full page text for debugging
+    page_text = await page.inner_text("body")
+    (DATA_DIR / "cm_page_text.txt").write_text(page_text, encoding="utf-8")
+    (DATA_DIR / "cm_results_source.html").write_text(await page.content(), encoding="utf-8")
+
+    results = []
+
+    # Strategy 1: table rows
     try:
         rows = await page.query_selector_all("table tr")
         for row in rows:
-            cells = await row.query_selector_all("td")
+            cells = await row.query_selector_all("td, th")
             if len(cells) >= 2:
                 texts = [await c.inner_text() for c in cells]
-                joined = " ".join(texts)
-                if re.search(r"\d+(\.\d+)?°?[FC]", joined, re.I) or re.search(r"\d+(\.\d+)?\s*(deg|°)", joined, re.I):
-                    entry = {
-                        "item":   texts[0].strip() if len(texts) > 0 else "—",
-                        "reading": texts[1].strip() if len(texts) > 1 else "—",
-                        "time":   texts[2].strip() if len(texts) > 2 else "—",
-                        "status": "pass",
-                    }
-                    # check for fail indicators
-                    full = joined.lower()
-                    if any(w in full for w in ["fail", "out of range", "exceeded", "high", "low alert"]):
-                        entry["status"] = "fail"
-                    temps.append(entry)
-        if temps:
-            log.info(f"Strategy 1 found {len(temps)} temperature rows")
-            return temps
-    except Exception as e:
-        log.warning(f"Temperature strategy 1 failed: {e}")
-
-    # Strategy 2: scan page text for temperature patterns
-    try:
-        body_text = await page.inner_text("body")
-        lines = body_text.splitlines()
-        for line in lines:
-            if re.search(r"\d+(\.\d+)?°?[FC]", line) and len(line.strip()) > 3:
-                temps.append({"item": line.strip(), "reading": "—", "time": "—", "status": "unknown"})
-        if temps:
-            log.info(f"Strategy 2 found {len(temps)} temperature lines")
-            return temps[:20]
-    except Exception as e:
-        log.warning(f"Temperature strategy 2 failed: {e}")
-
-    log.warning("No temperature data found")
-    return []
-
-
-# ── checklist extraction ───────────────────────────────────────────────────────
-
-async def extract_checklists(page) -> dict:
-    checklists = {
-        "am":           {"name": "AM Opening",   "completed": 0, "total": 0, "pct": 0, "status": "pending"},
-        "pm":           {"name": "PM Closing",   "completed": 0, "total": 0, "pct": 0, "status": "pending"},
-        "shift_change": {"name": "Shift Change", "completed": 0, "total": 0, "pct": 0, "status": "pending"},
-    }
-
-    try:
-        body_text = (await page.inner_text("body")).lower()
-
-        # look for percentage patterns near AM/PM/shift keywords
-        patterns = [
-            (r"am\s+opening[^\n]*?(\d+)\s*/\s*(\d+)", "am"),
-            (r"opening[^\n]*?(\d+)\s*/\s*(\d+)",       "am"),
-            (r"am[^\n]*?(\d{1,3})%",                   "am"),
-            (r"pm\s+closing[^\n]*?(\d+)\s*/\s*(\d+)",  "pm"),
-            (r"closing[^\n]*?(\d+)\s*/\s*(\d+)",       "pm"),
-            (r"pm[^\n]*?(\d{1,3})%",                   "pm"),
-            (r"shift\s+change[^\n]*?(\d+)\s*/\s*(\d+)", "shift_change"),
-            (r"shift[^\n]*?(\d+)\s*/\s*(\d+)",          "shift_change"),
-        ]
-
-        for pattern, key in patterns:
-            m = re.search(pattern, body_text)
-            if m:
-                groups = m.groups()
-                if len(groups) == 2:
-                    completed, total = int(groups[0]), int(groups[1])
-                    p = pct(completed, total)
-                elif len(groups) == 1:
-                    p, completed, total = int(groups[0]), 0, 0
-                else:
+                name = texts[0].strip()
+                if not name or name.lower() in ("list", "name", "checklist"):
                     continue
-                if checklists[key]["pct"] == 0:
-                    checklists[key].update({
-                        "completed": completed,
-                        "total": total,
-                        "pct": p,
-                        "status": checklist_status(p),
+                # look for a percentage in the row
+                row_text = " ".join(texts)
+                m = re.search(r"(\d{1,3})\s*%", row_text)
+                if m:
+                    results.append({
+                        "name": name,
+                        "pct":  int(m.group(1)),
+                        "raw":  row_text.strip(),
                     })
-                    log.info(f"  {key}: {completed}/{total} ({p}%)")
-
+                else:
+                    # look for X/Y completion
+                    m2 = re.search(r"(\d+)\s*/\s*(\d+)", row_text)
+                    if m2:
+                        c, t = int(m2.group(1)), int(m2.group(2))
+                        results.append({
+                            "name": name,
+                            "pct":  pct(c, t),
+                            "completed": c,
+                            "total": t,
+                            "raw":  row_text.strip(),
+                        })
+        if results:
+            log.info(f"Strategy 1 found {len(results)} rows")
     except Exception as e:
-        log.warning(f"Checklist extraction failed: {e}")
+        log.warning(f"Table strategy failed: {e}")
 
-    return checklists
-
-
-# ── navigate to today's report ─────────────────────────────────────────────────
-
-async def navigate_to_today(page) -> bool:
-    """Try to navigate to location 2065's daily report for today."""
-    log.info("=== Navigating to today's data ===")
-
-    # try common URL patterns for ComplianceMate
-    candidate_paths = [
-        "/dashboard",
-        "/reports",
-        "/daily",
-        "/logs",
-        f"/locations/2065",
-        f"/reports?location=2065",
-        f"/daily_report?date={TODAY_STR}",
-    ]
-
-    for path in candidate_paths:
+    # Strategy 2: scan page text for name + percentage patterns
+    if not results:
         try:
-            url = BASE_URL + path
-            resp = await page.goto(url, timeout=10000, wait_until="domcontentloaded")
-            if resp and resp.status < 400:
-                log.info(f"Reached {url}")
-                await page.wait_for_timeout(2000)
-                await page.screenshot(path=str(DATA_DIR / "cm_03_data_page.png"))
-                return True
-        except Exception:
-            continue
+            lines = page_text.splitlines()
+            for i, line in enumerate(lines):
+                line = line.strip()
+                if not line:
+                    continue
+                m = re.search(r"(\d{1,3})\s*%", line)
+                if m and len(line) > 3:
+                    name = re.sub(r"\d{1,3}\s*%.*", "", line).strip(" :-|")
+                    if name:
+                        results.append({"name": name, "pct": int(m.group(1)), "raw": line})
+            if results:
+                log.info(f"Strategy 2 found {len(results)} lines")
+        except Exception as e:
+            log.warning(f"Text strategy failed: {e}")
 
-    # fall back — just use whatever page we're on after login
-    log.warning("Could not navigate to specific report; using post-login page")
-    await page.screenshot(path=str(DATA_DIR / "cm_03_data_page.png"))
-    return False
+    log.info(f"Total extracted: {len(results)} list entries")
+    for r in results:
+        log.info(f"  {r['name']}: {r['pct']}%")
+
+    return results
 
 
 # ── main scrape ────────────────────────────────────────────────────────────────
@@ -277,21 +351,18 @@ async def scrape() -> dict:
         page = await ctx.new_page()
 
         try:
-            ok = await do_login(page)
-            if not ok:
+            if not await do_login(page):
                 return EMPTY_DATA
 
-            await navigate_to_today(page)
+            if not await navigate_to_list_completion(page):
+                data = dict(EMPTY_DATA)
+                data["meta"]["status"] = "nav_failed"
+                return data
 
-            # save full page text for debugging
-            page_text = await page.inner_text("body")
-            (DATA_DIR / "cm_page_text.txt").write_text(page_text, encoding="utf-8")
+            await set_yesterday_and_apply(page)
+            lists = await extract_list_completions(page)
 
-            temps      = await extract_temperatures(page)
-            checklists = await extract_checklists(page)
-
-            status = "ok" if (temps or any(v["pct"] > 0 for v in checklists.values())) else "login_ok_no_data"
-
+            status = "ok" if lists else "login_ok_no_data"
             return {
                 "meta": {
                     "date":      TODAY_STR,
@@ -299,24 +370,23 @@ async def scrape() -> dict:
                     "location":  "2065",
                     "status":    status,
                 },
-                "temperatures": temps,
-                "checklists":   checklists,
+                "lists": lists,
             }
 
         except Exception as e:
             log.error(f"Scrape failed: {e}")
             await page.screenshot(path=str(DATA_DIR / "cm_error.png"))
-            return EMPTY_DATA
+            data = dict(EMPTY_DATA)
+            data["meta"]["status"] = f"error: {e}"
+            return data
         finally:
             await browser.close()
 
 
 if __name__ == "__main__":
     DATA_DIR.mkdir(exist_ok=True)
+    import sys
     data = asyncio.run(scrape())
     out = Path(__file__).parent.parent / "data" / "compliancemate.json"
     out.write_text(json.dumps(data, indent=2))
-    log.info(f"Saved {out}")
-    log.info(f"Status: {data['meta']['status']}")
-    log.info(f"Temperatures: {len(data['temperatures'])}")
-    log.info(f"Checklists: AM={data['checklists']['am']['pct']}%  PM={data['checklists']['pm']['pct']}%  Shift={data['checklists']['shift_change']['pct']}%")
+    log.info(f"Saved {out}  |  status={data['meta']['status']}  |  {len(data['lists'])} lists found")

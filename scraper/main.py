@@ -961,7 +961,7 @@ def trend_arrow(v: float | None) -> str:
     return " &#9650;" if v >= 0 else " &#9660;"
 
 
-def generate_html(d: dict) -> str:
+def generate_html(d: dict, cm: dict = None) -> str:
     meta  = d.get("meta", {})
     s     = d.get("sales", {})
     lab   = d.get("labor", {})
@@ -976,6 +976,59 @@ def generate_html(d: dict) -> str:
     vs_fc   = s.get("vs_forecast") or 0.0
     cos     = cash.get("over_short", 0.0) or 0.0
     lp      = lab.get("pct") or 0.0
+
+    # ── ComplianceMate data prep ───────────────────────────────────────────────
+    cm = cm or {}
+    cm_lists   = cm.get("lists", [])
+    cm_status  = cm.get("meta", {}).get("status", "no_data")
+    cm_ok      = cm_status == "ok" and cm_lists
+
+    def cm_pct_color(p):
+        if p >= 90: return "c-green"
+        if p >= 70: return "c-amber"
+        return "c-rose"
+
+    def cm_pct_val_cls(p):
+        if p >= 90: return "pos"
+        if p >= 70: return ""
+        return "neg"
+
+    # Build food safety section HTML
+    if cm_ok:
+        cm_cards_html = ""
+        for item in cm_lists:
+            name = item.get("name", "—")
+            p    = item.get("pct", 0)
+            cm_cards_html += f"""
+        <div class="card {cm_pct_color(p)}">
+          <div class="lbl">{name}</div>
+          <div class="val {cm_pct_val_cls(p)}">{p}%</div>
+          <div class="hint">{'Complete' if p >= 100 else ('In Progress' if p > 0 else 'Pending')}</div>
+        </div>"""
+        n = len(cm_lists)
+        grid_cls = "g4" if n >= 4 else ("g3" if n == 3 else "g2")
+        food_safety_section = f"""
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-temperature-half"></i></div>
+        <div class="sec-title">Food Safety — ComplianceMate</div>
+      </div>
+      <div class="grid {grid_cls}">{cm_cards_html}
+      </div>
+    </div>"""
+    else:
+        food_safety_section = f"""
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-temperature-half"></i></div>
+        <div class="sec-title">Food Safety — ComplianceMate</div>
+      </div>
+      <div class="card c-sky" style="opacity:0.5;">
+        <div class="lbl">Checklist Data</div>
+        <div class="val" style="font-size:0.7em;">Awaiting data</div>
+        <div class="hint">Runs after 8 AM daily</div>
+      </div>
+    </div>"""
 
     def pn(v):
         return "pos" if (v or 0) >= 0 else "neg"
@@ -1198,6 +1251,7 @@ def generate_html(d: dict) -> str:
 
 <div class="page active" id="tab-dashboard">
   <div class="inner">
+{food_safety_section}
 
     <div class="section">
       <div class="sec-hdr">
@@ -1401,8 +1455,18 @@ async def main():
     (DATA_DIR / "latest.json").write_text(json.dumps(data, indent=2, default=str))
     log.info("Saved data/latest.json")
 
+    # Load ComplianceMate data if available
+    cm_file = DATA_DIR / "compliancemate.json"
+    cm_data = {}
+    if cm_file.exists():
+        try:
+            cm_data = json.loads(cm_file.read_text())
+            log.info(f"Loaded ComplianceMate data: {len(cm_data.get('lists', []))} lists")
+        except Exception as e:
+            log.warning(f"Could not load compliancemate.json: {e}")
+
     # Generate dashboard
-    html = generate_html(data)
+    html = generate_html(data, cm_data)
     out  = ROOT / "dashboard.html"
     out.write_text(html, encoding="utf-8")
     log.info(f"Wrote {out} ({len(html):,} bytes)")

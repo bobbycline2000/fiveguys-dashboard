@@ -57,6 +57,14 @@ jobs:
         # NOTE: When scaling to all 11 stores, add additional steps here
         # with the store-specific env vars and a STORE_ID env variable.
 
+      # ── 5b. Scrape ComplianceMate checklist completions ───────────────────
+      - name: Scrape ComplianceMate (store 2065)
+        continue-on-error: true
+        env:
+          COMPLIANCEMATE_USERNAME: ${{ secrets.COMPLIANCEMATE_USERNAME }}
+          COMPLIANCEMATE_PASSWORD: ${{ secrets.COMPLIANCEMATE_PASSWORD }}
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_compliancemate.py
+
       # ── 6. Update SharePoint Excel report (store 2065) ────────────────────
       - name: Update Excel daily report (store 2065)
         continue-on-error: true   # won't block dashboard if Azure isn't configured yet
@@ -84,6 +92,10 @@ jobs:
             data/page_text.txt
             data/02b_page_source.html
             data/02b_page_text.txt
+            data/cm_page_source.html
+            data/cm_page_text.txt
+            data/cm_stats_source.html
+            data/cm_results_source.html
           if-no-files-found: ignore
           retention-days: 7
 
