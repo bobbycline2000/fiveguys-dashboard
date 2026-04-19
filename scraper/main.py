@@ -539,6 +539,7 @@ async def extract_performance_metrics(page) -> dict:
     # ── Scroll to load all lazy-rendered rows ──────────────────────────────
     await page.screenshot(path=str(DATA_DIR / "04_dashboard_top.png"))
 
+    # Scroll main page
     await page.evaluate("window.scrollBy(0, 800)")
     await page.wait_for_timeout(1_500)
     await page.screenshot(path=str(DATA_DIR / "05_dashboard_mid.png"))
@@ -546,6 +547,28 @@ async def extract_performance_metrics(page) -> dict:
     await page.evaluate("window.scrollBy(0, 800)")
     await page.wait_for_timeout(1_500)
     await page.screenshot(path=str(DATA_DIR / "06_dashboard_bottom.png"))
+
+    # Scroll INSIDE the Performance Metrics section — it has its own scrollbar
+    # that must be scrolled to reveal Actual Hours, Discounts, Cash O/S, etc.
+    scroll_result = await page.evaluate("""
+        (() => {
+            const scrolled = [];
+            document.querySelectorAll('*').forEach(el => {
+                if (el.scrollHeight > el.clientHeight + 10) {
+                    const style = window.getComputedStyle(el);
+                    if (style.overflow === 'auto' || style.overflow === 'scroll' ||
+                        style.overflowY === 'auto' || style.overflowY === 'scroll') {
+                        el.scrollTop = 9999;
+                        scrolled.push(el.className.substring(0, 60));
+                    }
+                }
+            });
+            return scrolled.length ? 'scrolled: ' + scrolled.join(', ') : 'none found';
+        })()
+    """)
+    log.info(f"Internal section scroll: {scroll_result}")
+    await page.wait_for_timeout(1_500)
+    await page.screenshot(path=str(DATA_DIR / "06b_after_section_scroll.png"))
 
     await page.evaluate("window.scrollTo(0, 0)")
     await page.wait_for_timeout(500)
@@ -609,13 +632,15 @@ async def _extract_from_tables(page) -> dict:
         for i, h in enumerate(headers):
             if RPT_MMDDYYYY in h:
                 day_col = i
-            if "week" in h.lower() or "wtd" in h.lower():
+            if "week-t" in h.lower() or "wtd" in h.lower():
                 week_col = i
 
-        # If exact date not found, default to column 1 (first data column)
+        # CrunchTime week always runs Mon–Sun; col 0 = label, cols 1–7 = Mon–Sun.
+        # yest.weekday(): Mon=0 … Sun=6, so +1 gives the correct 1-based column.
         if day_col is None and len(headers) >= 2:
-            log.info(f"  Table {tbl_idx}: date '{RPT_MMDDYYYY}' not in headers; using col 1")
-            day_col = 1
+            day_col = yest.weekday() + 1
+            log.info(f"  Table {tbl_idx}: date '{RPT_MMDDYYYY}' not in headers; "
+                     f"using weekday col {day_col} ({yest.strftime('%A')})")
         if day_col is None:
             continue
 
@@ -649,9 +674,11 @@ async def _extract_from_extjs_divs(page) -> dict:
     rows = await page.locator(row_sel).all()
     log.info(f"Found {len(rows)} ExtJS div row(s) via '{row_sel}'")
 
-    # Determine column structure from header
-    day_col_idx  = 1    # default: col 0 = label, col 1 = day value
-    week_col_idx = 2
+    # CrunchTime week runs Mon–Sun; col 0 = label, cols 1–7 = Mon–Sun.
+    # Default to weekday-based index; override if we find the exact date in headers.
+    day_col_idx  = yest.weekday() + 1   # Mon=1 … Sun=7
+    week_col_idx = -1
+    log.info(f"ExtJS default day column: {day_col_idx} ({yest.strftime('%A')})")
 
     hdr_texts = []
     for hsel in [".x-column-header-text", ".x-column-header"]:
@@ -662,7 +689,7 @@ async def _extract_from_extjs_divs(page) -> dict:
             for i, h in enumerate(hdr_texts):
                 if RPT_MMDDYYYY in h:
                     day_col_idx = i
-                if "week" in h.lower() or "wtd" in h.lower():
+                if "week-t" in h.lower() or "wtd" in h.lower():
                     week_col_idx = i
             break
 
@@ -723,9 +750,15 @@ async def _extract_from_page_text(page) -> dict:
         "Actual Hours", "Scheduled Hours", "Hours Variance",
         "Labor Productivity", "Total Cash Over/Short",
         "Comps and Discounts", "Sales / Guest", "Guest Count",
+        "Actual to Earned",
     ]
 
     VALUE_RE = re.compile(r'[\(\$]?[\d,]+\.?\d*\s*%?')
+
+    # CrunchTime table: col 0 = label, cols 1–7 = Mon–Sun, col 8 = Week-to-date.
+    # yest.weekday() gives 0=Mon … 6=Sun, so it's the 0-based index into data cols.
+    yest_col = yest.weekday()   # 0=Mon … 6=Sun
+    log.info(f"Text strategy: yesterday = {yest.strftime('%A')}, data col index {yest_col}")
 
     metrics: dict[str, dict] = {}
 
@@ -738,23 +771,30 @@ async def _extract_from_page_text(page) -> dict:
         if not matched_label:
             continue
 
-        # Collect values from this line and the next few (until next label)
+        # Collect this line + up to 12 following lines (one value per line pattern)
+        # Stop only when the next KNOWN label appears.
         candidate_lines = [line]
-        for j in range(i + 1, min(i + 5, len(lines))):
+        for j in range(i + 1, min(i + 15, len(lines))):
             if any(lbl.lower() in lines[j].lower() for lbl in KNOWN_LABELS):
                 break
             candidate_lines.append(lines[j])
 
         combined = " ".join(candidate_lines)
         values   = VALUE_RE.findall(combined)
-        # Strip bare numbers that are just "2065" or years — keep $-prefixed or %
         values   = [v.strip() for v in values if v.strip() and len(v.strip()) > 1]
 
-        day_val  = values[0] if len(values) > 0 else ""
-        week_val = values[1] if len(values) > 1 else ""
+        # Pick yesterday's column; fall back to first value if index out of range
+        if yest_col < len(values):
+            day_val = values[yest_col]
+        else:
+            day_val = values[0] if values else ""
+
+        # Week-to-date is typically second-to-last value (after all 7 day columns)
+        week_val = values[-2] if len(values) >= 2 else (values[-1] if values else "")
 
         metrics[matched_label] = {"day": day_val, "week": week_val}
-        log.info(f"  Text-parsed {matched_label!r}: day={day_val!r} week={week_val!r}")
+        log.info(f"  Text-parsed {matched_label!r}: day={day_val!r} week={week_val!r} "
+                 f"(col {yest_col} of {len(values)} values)")
 
     return metrics
 
