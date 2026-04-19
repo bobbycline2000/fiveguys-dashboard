@@ -33,16 +33,25 @@ BASE_URL  = "https://fg-beta.compliancemate.com"
 DATA_DIR  = Path(__file__).parent.parent / "data"
 TODAY_STR = date.today().strftime("%Y-%m-%d")
 
-# Lists we specifically care about — names as they appear on the page
-# (case-insensitive partial match)
+# Exact list names as they appear on ComplianceMate for location 2065
 TARGET_CHECKLISTS = [
-    "am opening", "opening", "am checklist",
-    "pm closing", "closing", "pm checklist",
-    "shift change", "shift",
-    "11am", "11 am", "1pm", "1 pm",
-    "3pm", "3 pm", "5pm", "5 pm",
-    "7pm", "7 pm", "9pm", "9 pm",
+    "11am: time and temp",
+    "1pm: time and temp",
+    "3pm: time and temp",
+    "5pm: time and temp",
+    "7pm: time and temp",
+    "9pm: time and temp",
+    "am pre-shift check",
+    "pm pre-shift check",
+    "shift change",
+    "closing checklist",
+    "pre open",
+    "closing",
 ]
+
+# Hardcoded IDs for location 2065
+GROUP_ID    = "21792"
+LOCATION_ID = "18170"
 
 EMPTY_DATA = {
     "meta": {
@@ -150,53 +159,39 @@ async def do_login(page) -> bool:
 # ── navigate to Statistics → List Completion ALL ───────────────────────────────
 
 async def navigate_to_list_completion(page) -> tuple[bool, str]:
-    """Navigate directly to List Completion report with Yesterday filter.
+    """Submit the report form via direct GET URL with all required parameters.
     Returns (success, group_id).
     """
-    log.info("=== Navigating to List Completion report ===")
+    log.info("=== Navigating to List Completion report (form submission) ===")
 
-    # Extract group ID from post-login URL
+    # Extract group ID from post-login URL if possible, otherwise use hardcoded value
     m = re.search(r'/groups/(\d+)/', page.url)
-    group_id = m.group(1) if m else "21792"
+    group_id = m.group(1) if m else GROUP_ID
     log.info(f"  Group ID: {group_id}")
 
-    # Navigate directly with date filter in URL — more reliable than the form
+    # Submit the report form as a GET request with all required parameters.
+    # This mimics clicking Apply with: Report=list_completions, Date=yesterday,
+    # Location=18170 (2065 - Louisville, KY), Timezone=America/New_York
     url = (
-        f"{BASE_URL}/groups/{group_id}/report/list_completions"
-        f"?report_filters_presenter%5Bdate_range%5D=yesterday"
+        f"{BASE_URL}/groups/{group_id}/report/select"
+        f"?requested_timezone=America%2FNew_York"
+        f"&report_form_submit=true"
+        f"&report_filters_presenter%5Breport_type%5D=list_completions"
+        f"&report_filters_presenter%5Bdate_range%5D=yesterday"
+        f"&report_filters_presenter%5Blocations%5D%5B%5D={LOCATION_ID}"
+        f"&commit=Apply"
     )
     log.info(f"  Navigating to: {url}")
-    resp = await page.goto(url, timeout=20000, wait_until="networkidle")
-    await page.wait_for_timeout(2000)
+    resp = await page.goto(url, timeout=30000, wait_until="networkidle")
+    await page.wait_for_timeout(3000)
     await page.screenshot(path=str(DATA_DIR / "cm_03_list_completions.png"))
     log.info(f"  List Completion URL: {page.url}")
 
     if resp and resp.status >= 400:
-        log.error(f"  HTTP {resp.status} — trying fallback form navigation")
-        return await _navigate_via_form(page), group_id
+        log.error(f"  HTTP {resp.status} on report URL")
+        return False, group_id
 
     return True, group_id
-
-
-async def _navigate_via_form(page) -> bool:
-    """Fallback: use the Statistics nav link and form."""
-    clicked = await try_click(page, [
-        'a:has-text("Statistics")',
-        '[href*="list_completion" i]',
-    ])
-    if not clicked:
-        return False
-    await page.wait_for_load_state("networkidle", timeout=10000)
-    await page.wait_for_timeout(1500)
-    return True
-
-
-# ── set date range to Yesterday and apply ─────────────────────────────────────
-
-async def set_yesterday_and_apply(page) -> bool:
-    # Date range already set via URL parameter — nothing to do
-    log.info("=== Date range set via URL — skipping form interaction ===")
-    return True
 
 
 # ── scroll and extract list completions ───────────────────────────────────────
@@ -308,7 +303,6 @@ async def scrape() -> dict:
                 data["meta"]["status"] = "nav_failed"
                 return data
 
-            await set_yesterday_and_apply(page)
             lists = await extract_list_completions(page)
 
             status = "ok" if lists else "login_ok_no_data"
