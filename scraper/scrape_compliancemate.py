@@ -132,6 +132,18 @@ async def do_login(page) -> bool:
         log.error("Still on login page — credentials may be wrong")
         return False
 
+    # Log all visible links so we can see the nav structure
+    links = await page.query_selector_all("a, button")
+    log.info(f"=== Found {len(links)} clickable elements after login ===")
+    for el in links[:40]:
+        try:
+            txt = (await el.inner_text()).strip()
+            href = await el.get_attribute("href") or ""
+            if txt:
+                log.info(f"  [{await el.evaluate('el => el.tagName')}] {txt!r} href={href!r}")
+        except Exception:
+            continue
+
     return True
 
 
