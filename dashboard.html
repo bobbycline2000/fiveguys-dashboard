@@ -3,206 +3,390 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Five Guys KY-2065 Dixie Highway | Daily Dashboard</title>
+<title>Five Guys KY-2065 | Operations Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #222; }
-  header { background: #d52b1e; color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
-  header h1 { font-size: 1.6em; font-weight: 700; }
-  header .date-info { text-align: right; font-size: 0.95em; opacity: 0.9; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
-  .section-title { font-size: 1.1em; font-weight: 700; color: #d52b1e; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid #d52b1e; }
-  .section { margin-bottom: 28px; }
-  .card-grid { display: grid; gap: 14px; }
-  .grid-4 { grid-template-columns: repeat(4, 1fr); }
-  .grid-3 { grid-template-columns: repeat(3, 1fr); }
-  .grid-2 { grid-template-columns: repeat(2, 1fr); }
-  .card { background: white; border-radius: 10px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
-  .card .label { font-size: 0.78em; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-  .card .value { font-size: 1.7em; font-weight: 700; color: #222; }
-  .card .sub { font-size: 0.82em; color: #aaa; margin-top: 4px; }
-  .card .week-val { font-size: 0.88em; color: #555; margin-top: 6px; border-top: 1px solid #f0f2f5; padding-top: 6px; }
-  .card.highlight { border-left: 4px solid #d52b1e; }
-  .card.green { border-left: 4px solid #27ae60; }
-  .card.orange { border-left: 4px solid #e67e22; }
-  .card.blue { border-left: 4px solid #2980b9; }
-  .neg { color: #d52b1e; }
-  .pos { color: #27ae60; }
-  .data-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
-  .data-table th { background: #d52b1e; color: white; padding: 12px 16px; text-align: left; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.5px; }
-  .data-table th:not(:first-child) { text-align: right; }
-  .data-table td { padding: 11px 16px; border-bottom: 1px solid #f0f2f5; font-size: 0.95em; }
-  .data-table td:not(:first-child) { text-align: right; }
-  .data-table tr:last-child td { border-bottom: none; }
-  .data-table tr:hover td { background: #fdf5f5; }
-  footer { text-align: center; padding: 20px; color: #aaa; font-size: 0.8em; margin-top: 10px; }
-  @media (max-width: 900px) {
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #d52b1e; min-height: 100vh; color: white; }
+  .topbar { background: #0c0c0c; padding: 0 32px; display: flex; justify-content: space-between; align-items: stretch; border-bottom: 1px solid #1c1c1c; position: sticky; top: 0; z-index: 50; }
+  .topbar-brand { display: flex; align-items: center; gap: 10px; padding: 11px 0; flex-shrink: 0; margin-right: 28px; }
+  .brand-pip { width: 3px; height: 28px; background: #d52b1e; border-radius: 2px; }
+  .brand-name { font-size: 0.82em; font-weight: 700; color: #efefef; }
+  .brand-sub { font-size: 0.58em; color: #3a3a3a; margin-top: 1px; text-transform: uppercase; letter-spacing: 0.8px; }
+  .topbar-nav { display: flex; align-items: stretch; flex: 1; }
+  .nav-tab { padding: 0 16px; display: flex; align-items: center; gap: 6px; font-size: 0.7em; font-weight: 500; color: #454545; cursor: pointer; border: none; border-bottom: 2px solid transparent; background: none; font-family: inherit; letter-spacing: 0.2px; transition: color 0.12s; white-space: nowrap; }
+  .nav-tab:hover { color: #888; }
+  .nav-tab.active { color: #fff; border-bottom-color: #d52b1e; }
+  .nav-dropdown { position: relative; display: flex; align-items: stretch; }
+  .dropdown-menu { display: none; position: absolute; top: calc(100% + 1px); left: 0; background: #111; border: 1px solid #222; border-radius: 7px; min-width: 170px; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.5); overflow: hidden; }
+  .nav-dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-item { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; font-size: 0.7em; color: #3a3a3a; border-bottom: 1px solid #1a1a1a; cursor: default; }
+  .dropdown-item:last-child { border-bottom: none; }
+  .dropdown-item .soon { font-size: 0.85em; color: #262626; }
+  .topbar-right { display: flex; align-items: center; padding-left: 20px; border-left: 1px solid #1c1c1c; margin-left: 8px; text-align: right; }
+  .date-main { font-size: 0.72em; font-weight: 600; color: #777; }
+  .date-gen  { font-size: 0.58em; color: #2e2e2e; margin-top: 1px; }
+  .sites-bar { background: #0c0c0c; border-bottom: 1px solid #1a1a1a; padding: 7px 32px; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+  .site-btn { display: flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 5px; border: 1px solid #2a2a2a; background: #141414; color: #555; font-size: 0.65em; font-weight: 500; font-family: inherit; white-space: nowrap; cursor: pointer; transition: border-color 0.12s, color 0.12s, background 0.12s; }
+  .site-btn:hover { border-color: #3a3a3a; color: #999; background: #1a1a1a; }
+  .site-btn.active { border-color: #d52b1e; color: #fff; background: #1a0a09; }
+  .site-btn i { font-size: 0.9em; }
+  #site-viewer { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 40; background: #000; flex-direction: column; }
+  #site-viewer.open { display: flex; }
+  .site-viewer-bar { background: #0c0c0c; border-bottom: 1px solid #1a1a1a; padding: 8px 16px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .site-viewer-bar .site-title { font-size: 0.72em; font-weight: 600; color: #777; }
+  .site-viewer-bar .site-url { font-size: 0.6em; color: #333; margin-left: 4px; }
+  #site-frame { flex: 1; border: none; width: 100%; background: #fff; }
+  .back-btn-viewer { display: flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 5px; border: 1px solid #2a2a2a; background: #141414; color: #d52b1e; font-size: 0.65em; font-weight: 600; font-family: inherit; cursor: pointer; margin-right: 8px; }
+  .back-btn-viewer:hover { background: #1e0808; border-color: #d52b1e; }
+  .kpi-bar { background: rgba(0,0,0,0.22); border-bottom: 1px solid rgba(0,0,0,0.18); padding: 0 32px; display: flex; overflow-x: auto; }
+  .kpi-item { padding: 8px 22px 8px 0; margin-right: 22px; border-right: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
+  .kpi-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .kpi-lbl { font-size: 0.5em; letter-spacing: 0.9px; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 2px; font-weight: 500; }
+  .kpi-val { font-size: 0.86em; font-weight: 700; color: rgba(255,255,255,0.88); letter-spacing: -0.3px; }
+  .kpi-val.pos { color: #4ade80; }
+  .kpi-val.neg { color: #fca5a5; }
+  .page { display: none; }
+  .page.active { display: block; }
+  .inner { max-width: 980px; margin: 0 auto; padding: 20px 32px 32px; }
+  .section { margin-bottom: 16px; }
+  .sec-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; padding-bottom: 9px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .sec-icon { width: 28px; height: 28px; background: rgba(0,0,0,0.25); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.72em; color: rgba(255,255,255,0.75); flex-shrink: 0; }
+  .sec-title { font-size: 0.92em; font-weight: 700; color: #ffffff; }
+  .grid { display: grid; gap: 5px; }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  .card { background: #090909; border-radius: 6px; padding: 9px 12px 10px; border: 1px solid rgba(255,255,255,0.03); position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+  .c-amber::before { background: #d97706; }
+  .c-teal::before  { background: #0891b2; }
+  .c-indigo::before { background: #4338ca; }
+  .c-green::before { background: #15803d; }
+  .c-rose::before  { background: #be123c; }
+  .c-sky::before   { background: #0369a1; }
+  .lbl { font-size: 0.52em; font-weight: 500; letter-spacing: 0.7px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 5px; }
+  .val { font-size: 1.08em; font-weight: 700; color: #fff; letter-spacing: -0.5px; line-height: 1; }
+  .val.pos { color: #4ade80; }
+  .val.neg { color: #fca5a5; }
+  .hint { font-size: 0.52em; color: rgba(255,255,255,0.15); margin-top: 2px; }
+  .wtd { font-size: 0.55em; margin-top: 7px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; }
+  .wk { color: rgba(255,255,255,0.16); font-weight: 600; }
+  .wv { color: rgba(255,255,255,0.42); }
+  .wv.pos { color: #4ade80; }
+  .wv.neg { color: #fca5a5; }
+  .tbl { width: 100%; border-collapse: collapse; background: #090909; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.03); }
+  .tbl th { padding: 7px 13px; font-size: 0.52em; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.22); text-align: left; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.015); }
+  .tbl th:not(:first-child) { text-align: right; }
+  .tbl td { padding: 8px 13px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.75em; color: rgba(255,255,255,0.38); }
+  .tbl td:not(:first-child) { text-align: right; color: rgba(255,255,255,0.68); font-weight: 500; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(255,255,255,0.015); }
+  .links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .link-card { background: #090909; border-radius: 6px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 11px; text-decoration: none; transition: background 0.12s; }
+  .link-card:hover { background: #111; }
+  .link-icon { width: 30px; height: 30px; border-radius: 6px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; font-size: 0.8em; color: rgba(255,255,255,0.5); flex-shrink: 0; }
+  .link-name { font-size: 0.76em; font-weight: 600; color: rgba(255,255,255,0.8); margin-bottom: 2px; }
+  .link-desc { font-size: 0.6em; color: rgba(255,255,255,0.22); }
+  footer { text-align: center; padding: 12px; color: rgba(255,255,255,0.15); font-size: 0.56em; letter-spacing: 0.3px; }
+  @media (max-width: 860px) {
+    .g4 { grid-template-columns: repeat(2, 1fr); }
+    .g3 { grid-template-columns: repeat(2, 1fr); }
+    .links-grid { grid-template-columns: repeat(2, 1fr); }
+    .inner { padding: 14px 16px 24px; }
+    .topbar, .kpi-bar, .sites-bar { padding-left: 16px; padding-right: 16px; }
   }
-  @media (max-width: 600px) {
-    .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr 1fr; }
-    header { flex-direction: column; gap: 8px; }
+  @media (max-width: 540px) {
+    .g4, .g3 { grid-template-columns: 1fr 1fr; }
+    .links-grid { grid-template-columns: 1fr 1fr; }
+    .brand-sub { display: none; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div>
-    <h1>&#127354; Five Guys | KY-2065 Dixie Highway</h1>
-    <div style="font-size:0.85em;opacity:0.8;margin-top:4px;">Daily Operations Dashboard</div>
-  </div>
-  <div class="date-info">
-    <div style="font-size:1.1em;font-weight:700;">Saturday, April 18, 2026</div>
-    <div>Generated 4/19/2026 at 10:26 AM</div>
-  </div>
-</header>
-
-<div class="container">
-
-  <!-- SECTION 1: Sales -->
-  <div class="section">
-    <div class="section-title">&#128200; Sales Overview</div>
-    <div class="card-grid grid-4">
-
-      <div class="card highlight">
-        <div class="label">Actual Net Sales</div>
-        <div class="value">$4,334.00</div>
-        <div class="sub">Yesterday</div>
-        <div class="week-val">WTD: $24,867.00</div>
-      </div>
-
-      <div class="card blue">
-        <div class="label">Last Year Same Day</div>
-        <div class="value">$4,353.00</div>
-        <div class="sub">Prior year comparison</div>
-        <div class="week-val">WTD LY: $26,178.00</div>
-      </div>
-
-      <div class="card blue">
-        <div class="label">Forecasted Sales</div>
-        <div class="value">$5,511.00</div>
-        <div class="sub">Projected for the day</div>
-        <div class="week-val">WTD Forecast: $30,931.00</div>
-      </div>
-
-      <div class="card green">
-        <div class="label">Sales / Guest</div>
-        <div class="value">$5.49</div>
-        <div class="sub">Average per guest</div>
-        <div class="week-val">WTD Avg: $5.41</div>
-      </div>
-
+<nav class="topbar">
+  <div class="topbar-brand">
+    <div class="brand-pip"></div>
+    <div>
+      <div class="brand-name">Five Guys &mdash; KY-2065 Dixie Highway</div>
+      <div class="brand-sub">Operations Dashboard</div>
     </div>
   </div>
-
-  <!-- SECTION 2: vs Targets -->
-  <div class="section">
-    <div class="section-title">&#127919; Performance vs Targets</div>
-    <div class="card-grid grid-3">
-
-      <div class="card green">
-        <div class="label">vs Last Year (Day)</div>
-        <div class="value pos">$19.00 &#9650;</div>
-        <div class="sub">Net Sales vs Same Day LY</div>
-        <div class="week-val">WTD vs LY: <span class="pos">$1,311.00</span></div>
+  <div class="topbar-nav">
+    <button class="nav-tab active" onclick="showTab('dashboard',this)">
+      <i class="fa-solid fa-chart-simple"></i> Dashboard
+    </button>
+    <button class="nav-tab" onclick="showTab('links',this)">
+      <i class="fa-solid fa-link"></i> Quick Links
+    </button>
+    <div class="nav-dropdown">
+      <button class="nav-tab">More <i class="fa-solid fa-chevron-down" style="font-size:0.75em"></i></button>
+      <div class="dropdown-menu">
+        <div class="dropdown-item">Weekly Summary <span class="soon">coming soon</span></div>
+        <div class="dropdown-item">Labor Schedule <span class="soon">coming soon</span></div>
+        <div class="dropdown-item">Food Cost <span class="soon">coming soon</span></div>
+        <div class="dropdown-item">Inventory <span class="soon">coming soon</span></div>
       </div>
-
-      <div class="card highlight">
-        <div class="label">vs Forecast (Day)</div>
-        <div class="value neg">($1,177.00) &#9660;</div>
-        <div class="sub">Actual vs Projected</div>
-        <div class="week-val">&nbsp;</div>
-      </div>
-
-      <div class="card green">
-        <div class="label">Cash Over / Short</div>
-        <div class="value ">$0.00</div>
-        <div class="sub">On target</div>
-        <div class="week-val">&nbsp;</div>
-      </div>
-
     </div>
   </div>
-
-  <!-- SECTION 3: Labor -->
-  <div class="section">
-    <div class="section-title">&#128104;&#8205;&#127859; Labor Summary</div>
-    <div class="card-grid grid-4">
-
-      <div class="card highlight">
-        <div class="label">Actual Labor $</div>
-        <div class="value">$26.00</div>
-        <div class="sub">Total wages</div>
-        <div class="week-val">WTD: $26.00</div>
-      </div>
-
-      <div class="card green">
-        <div class="label">Labor % of Net Sales</div>
-        <div class="value">17.93%</div>
-        <div class="sub">On target</div>
-        <div class="week-val">WTD: 23.14%</div>
-      </div>
-
-      <div class="card blue">
-        <div class="label">Scheduled Hours</div>
-        <div class="value">86.50</div>
-        <div class="sub">Hours on schedule</div>
-        <div class="week-val">WTD: 500.50</div>
-      </div>
-
-      <div class="card blue">
-        <div class="label">Actual Hours</div>
-        <div class="value">20.82</div>
-        <div class="sub">Hours actually worked</div>
-        <div class="week-val">WTD: 0.00</div>
-      </div>
-
-      <div class="card green">
-        <div class="label">Hours Variance</div>
-        <div class="value">—</div>
-        <div class="sub">Scheduled minus Actual</div>
-        <div class="week-val">&nbsp;</div>
-      </div>
-
-      <div class="card green">
-        <div class="label">Labor Productivity</div>
-        <div class="value">$64.00</div>
-        <div class="sub">Sales per labor hour</div>
-        <div class="week-val">WTD: $62.00</div>
-      </div>
-
+  <div class="topbar-right">
+    <div>
+      <div class="date-main">Saturday, April 18, 2026</div>
+      <div class="date-gen">Generated 4/19/2026 at 4:45 PM</div>
     </div>
   </div>
+</nav>
 
-  <!-- SECTION 4: Comps & Discounts -->
-  <div class="section">
-    <div class="section-title">&#127991; Comps &amp; Discounts</div>
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Yesterday</th>
-          <th>Week-to-Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Comps and Discounts</td>
-          <td style="text-align:right;">$15.88</td>
-          <td style="text-align:right;">$50.60</td>
-        </tr>
-      </tbody>
-    </table>
+<div class="sites-bar">
+  <button class="site-btn" onclick="openSite('https://fiveguysfr77.net-chef.com','Net Chef','fiveguysfr77.net-chef.com',this)">
+    <i class="fa-solid fa-chart-bar"></i> Net Chef
+  </button>
+  <button class="site-btn" onclick="openSite('https://fiveguysfr113-em.net-chef.com','Schedules','fiveguysfr113-em.net-chef.com',this)">
+    <i class="fa-solid fa-calendar-days"></i> Schedules
+  </button>
+  <button class="site-btn" onclick="openSite('https://fiveguysfr77.ct-teamworx.com','TeamWorx','fiveguysfr77.ct-teamworx.com',this)">
+    <i class="fa-solid fa-users-clock"></i> TeamWorx
+  </button>
+  <button class="site-btn" onclick="openSite('https://admin5.parpos.com','Brinks','admin5.parpos.com',this)">
+    <i class="fa-solid fa-vault"></i> Brinks
+  </button>
+  <button class="site-btn" onclick="openSite('https://bread2.fiveguys.com','Bread Ordering','bread2.fiveguys.com',this)">
+    <i class="fa-solid fa-bread-slice"></i> Bread Order
+  </button>
+  <button class="site-btn" onclick="openSite('https://knowledgeforce.com','Secret Shops','knowledgeforce.com',this)">
+    <i class="fa-solid fa-user-secret"></i> Secret Shops
+  </button>
+  <button class="site-btn" onclick="openSite('https://fg-beta.compliancemate.com','Temps &amp; Times','fg-beta.compliancemate.com',this)">
+    <i class="fa-solid fa-temperature-half"></i> Temps &amp; Times
+  </button>
+</div>
+
+<div id="site-viewer">
+  <div class="site-viewer-bar">
+    <button class="back-btn-viewer" onclick="closeSite()">
+      <i class="fa-solid fa-arrow-left"></i> Dashboard
+    </button>
+    <span class="site-title" id="viewer-title"></span>
+    <span class="site-url" id="viewer-url"></span>
   </div>
+  <iframe id="site-frame" src=""></iframe>
+</div>
 
+<div class="kpi-bar">
+  <div class="kpi-item">
+    <div class="kpi-lbl">Net Sales</div>
+    <div class="kpi-val">$4,334.00</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-lbl">vs Last Year</div>
+    <div class="kpi-val pos">$19.00</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-lbl">vs Forecast</div>
+    <div class="kpi-val neg">($1,177.00)</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-lbl">Labor %</div>
+    <div class="kpi-val">17.93%</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-lbl">Cash Over/Short</div>
+    <div class="kpi-val pos">$0.00</div>
+  </div>
+</div>
+
+<div class="page active" id="tab-dashboard">
+  <div class="inner">
+
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-temperature-half"></i></div>
+        <div class="sec-title">Food Safety — ComplianceMate</div>
+      </div>
+      <div class="card c-sky" style="opacity:0.5;">
+        <div class="lbl">Checklist Data</div>
+        <div class="val" style="font-size:0.7em;">Awaiting data</div>
+        <div class="hint">Runs after 8 AM daily</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="sec-title">Sales Overview</div>
+      </div>
+      <div class="grid g3">
+        <div class="card c-amber">
+          <div class="lbl">Actual Net Sales</div>
+          <div class="val">$4,334.00</div>
+          <div class="hint">Yesterday</div>
+          <div class="wtd"><span class="wk">WTD</span><span class="wv">$24,867.00</span></div>
+        </div>
+        <div class="card c-teal">
+          <div class="lbl">Last Year Same Day</div>
+          <div class="val">$4,353.00</div>
+          <div class="hint">Prior year</div>
+          <div class="wtd"><span class="wk">WTD LY</span><span class="wv">$26,178.00</span></div>
+        </div>
+        <div class="card c-indigo">
+          <div class="lbl">Forecasted Sales</div>
+          <div class="val">$5,511.00</div>
+          <div class="hint">Projected</div>
+          <div class="wtd"><span class="wk">WTD</span><span class="wv">$30,931.00</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-bullseye"></i></div>
+        <div class="sec-title">Performance Metrics</div>
+      </div>
+      <div class="grid g3">
+        <div class="card c-green">
+          <div class="lbl">vs Last Year</div>
+          <div class="val pos">$19.00 &#9650;</div>
+          <div class="hint">Net Sales vs Same Day LY</div>
+          <div class="wtd"><span class="wk">WTD vs LY</span><span class="wv pos">$1,311.00</span></div>
+        </div>
+        <div class="card c-rose">
+          <div class="lbl">vs Forecast</div>
+          <div class="val neg">($1,177.00) &#9660;</div>
+          <div class="hint">Actual vs Projected</div>
+          <div class="wtd">&nbsp;</div>
+        </div>
+        <div class="card c-green">
+          <div class="lbl">Cash Over / Short</div>
+          <div class="val pos">$0.00</div>
+          <div class="hint">Balanced</div>
+          <div class="wtd">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-users-clock"></i></div>
+        <div class="sec-title">Labor Summary</div>
+      </div>
+      <div class="grid g4">
+        <div class="card c-rose">
+          <div class="lbl">Labor Cost</div>
+          <div class="val">$121.00</div>
+          <div class="hint">Total wages</div>
+          <div class="wtd"><span class="wk">WTD</span><span class="wv">$48.00</span></div>
+        </div>
+        <div class="card c-green">
+          <div class="lbl">Labor %</div>
+          <div class="val pos">17.93%</div>
+          <div class="hint">On target</div>
+          <div class="wtd"><span class="wk">WTD</span><span class="wv">23.14%</span></div>
+        </div>
+        <div class="card c-sky">
+          <div class="lbl">Scheduled Hours</div>
+          <div class="val">86.50</div>
+          <div class="hint">On schedule</div>
+          <div class="wtd"><span class="wk">WTD</span><span class="wv">500.50</span></div>
+        </div>
+        <div class="card c-sky">
+          <div class="lbl">Actual Hours</div>
+          <div class="val">14.00</div>
+          <div class="hint">Worked</div>
+          <div class="wtd"><span class="wk">WTD</span><span class="wv">0.00</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-tag"></i></div>
+        <div class="sec-title">Comps &amp; Discounts</div>
+      </div>
+      <table class="tbl">
+        <thead>
+          <tr><th>Type</th><th>Yesterday</th><th>Week-to-Date</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Comps and Discounts</td>
+            <td>$15.88</td>
+            <td>$50.60</td>
+          </tr></tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div class="page" id="tab-links">
+  <div class="inner">
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-link"></i></div>
+        <div class="sec-title">Quick Links</div>
+      </div>
+      <div class="links-grid">
+        <a class="link-card" href="https://fiveguysfr77.net-chef.com" target="_blank" rel="noopener">
+          <div class="link-icon"><i class="fa-solid fa-chart-bar"></i></div>
+          <div><div class="link-name">CrunchTime Net Chef</div><div class="link-desc">fiveguysfr77.net-chef.com</div></div>
+        </a>
+        <a class="link-card" href="https://fiveguysfr113-em.net-chef.com" target="_blank" rel="noopener">
+          <div class="link-icon"><i class="fa-solid fa-calendar-days"></i></div>
+          <div><div class="link-name">Schedules</div><div class="link-desc">fiveguysfr113-em.net-chef.com</div></div>
+        </a>
+        <a class="link-card" href="https://fiveguysfr77.ct-teamworx.com" target="_blank" rel="noopener">
+          <div class="link-icon"><i class="fa-solid fa-users-clock"></i></div>
+          <div><div class="link-name">TeamWorx</div><div class="link-desc">fiveguysfr77.ct-teamworx.com</div></div>
+        </a>
+        <a class="link-card" href="https://admin5.parpos.com" target="_blank" rel="noopener">
+          <div class="link-icon"><i class="fa-solid fa-vault"></i></div>
+          <div><div class="link-name">Brinks</div><div class="link-desc">admin5.parpos.com</div></div>
+        </a>
+        <a class="link-card" href="https://bread2.fiveguys.com" target="_blank" rel="noopener">
+          <div class="link-icon"><i class="fa-solid fa-bread-slice"></i></div>
+          <div><div class="link-name">Bread Ordering</div><div class="link-desc">bread2.fiveguys.com</div></div>
+        </a>
+        <a class="link-card" href="https://knowledgeforce.com" target="_blank" rel="noopener">
+          <div class="link-icon"><i class="fa-solid fa-user-secret"></i></div>
+          <div><div class="link-name">Secret Shops</div><div class="link-desc">knowledgeforce.com</div></div>
+        </a>
+        <a class="link-card" href="https://fg-beta.compliancemate.com" target="_blank" rel="noopener">
+          <div class="link-icon"><i class="fa-solid fa-temperature-half"></i></div>
+          <div><div class="link-name">Temps &amp; Times</div><div class="link-desc">fg-beta.compliancemate.com</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer>
-  Five Guys KY-2065 Dixie Highway &bull; Source: CrunchTime Net Chef &bull;
-  Business Date: Saturday, April 18, 2026 &bull; Generated: 4/19/2026 at 10:26 AM
+  Five Guys KY-2065 Dixie Highway &bull; CrunchTime Net Chef &bull;
+  Business Date: Saturday, April 18, 2026 &bull; Generated: 4/19/2026 at 4:45 PM
 </footer>
+
+<script>
+  function showTab(name, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+  function openSite(url, title, label, btn) {
+    document.querySelectorAll('.site-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('viewer-title').textContent = title;
+    document.getElementById('viewer-url').textContent = label;
+    document.getElementById('site-frame').src = url;
+    document.getElementById('site-viewer').classList.add('open');
+  }
+  function closeSite() {
+    document.getElementById('site-viewer').classList.remove('open');
+    document.getElementById('site-frame').src = '';
+    document.querySelectorAll('.site-btn').forEach(b => b.classList.remove('active'));
+  }
+</script>
 
 </body>
 </html>
