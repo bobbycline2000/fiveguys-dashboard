@@ -1,0 +1,37 @@
+{
+  "store_id": "2065",
+  "store_name": "KY-2065 Dixie Highway",
+  "brand": "Five Guys",
+
+  "crunchtime": {
+    "base_url": "https://fiveguysfr77.net-chef.com",
+    "location_id": "2065"
+  },
+
+  "compliancemate": {
+    "base_url": "https://fg-beta.compliancemate.com",
+    "location_id": "2065",
+    "report": "List Completion ALL",
+    "date_range": "Yesterday"
+  },
+
+  "excel": {
+    "file_name": "April 2026 FG Daily Report.xlsx",
+    "item_id": "B759AD2C-2B91-43AC-AC30-6993207012E7",
+    "sheet_tab": "2065"
+  },
+
+  "netlify": {
+    "site_url": ""
+  },
+
+  "links": [
+    { "name": "Net Chef",     "url": "https://fiveguysfr77.net-chef.com",        "icon": "fa-chart-bar" },
+    { "name": "Schedules",    "url": "https://fiveguysfr113-em.net-chef.com",     "icon": "fa-calendar-days" },
+    { "name": "TeamWorx",     "url": "https://fiveguysfr77.ct-teamworx.com",      "icon": "fa-users-clock" },
+    { "name": "Brinks",       "url": "https://admin5.parpos.com",                 "icon": "fa-vault" },
+    { "name": "Bread Order",  "url": "https://bread2.fiveguys.com",               "icon": "fa-bread-slice" },
+    { "name": "Secret Shops", "url": "https://knowledgeforce.com",                "icon": "fa-user-secret" },
+    { "name": "Temps & Times","url": "https://fg-beta.compliancemate.com",        "icon": "fa-temperature-half" }
+  ]
+}

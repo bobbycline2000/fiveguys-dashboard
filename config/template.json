@@ -1,0 +1,39 @@
+{
+  "_instructions": "Copy this file, rename it to YOUR_STORE_ID.json, and fill in every field. Delete this _instructions key when done.",
+
+  "store_id": "XXXX",
+  "store_name": "STATE-XXXX Location Name",
+  "brand": "Five Guys",
+
+  "crunchtime": {
+    "base_url": "https://fiveguysfrXXX.net-chef.com",
+    "location_id": "XXXX"
+  },
+
+  "compliancemate": {
+    "base_url": "https://fg-beta.compliancemate.com",
+    "location_id": "XXXX",
+    "report": "List Completion ALL",
+    "date_range": "Yesterday"
+  },
+
+  "excel": {
+    "file_name": "Month YYYY FG Daily Report.xlsx",
+    "item_id": "PASTE-SHAREPOINT-ITEM-ID-HERE",
+    "sheet_tab": "XXXX"
+  },
+
+  "netlify": {
+    "site_url": ""
+  },
+
+  "links": [
+    { "name": "Net Chef",     "url": "https://fiveguysfrXXX.net-chef.com",   "icon": "fa-chart-bar" },
+    { "name": "Schedules",    "url": "https://fiveguysfrXXX-em.net-chef.com","icon": "fa-calendar-days" },
+    { "name": "TeamWorx",     "url": "https://fiveguysfrXXX.ct-teamworx.com","icon": "fa-users-clock" },
+    { "name": "Brinks",       "url": "https://admin5.parpos.com",             "icon": "fa-vault" },
+    { "name": "Bread Order",  "url": "https://bread2.fiveguys.com",           "icon": "fa-bread-slice" },
+    { "name": "Secret Shops", "url": "https://knowledgeforce.com",            "icon": "fa-user-secret" },
+    { "name": "Temps & Times","url": "https://fg-beta.compliancemate.com",    "icon": "fa-temperature-half" }
+  ]
+}
