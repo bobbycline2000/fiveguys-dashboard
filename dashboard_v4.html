@@ -132,36 +132,107 @@
   .date-main { font-size: 0.72em; font-weight: 600; color: #777; }
   .date-gen  { font-size: 0.58em; color: #2e2e2e; margin-top: 1px; }
 
-  /* ── Topbar Link Buttons ─────────────────────────────────── */
-  .topbar-links {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 20px;
-    border-left: 1px solid #1c1c1c;
-    margin-left: 8px;
-  }
-
-  .tb-link {
+  /* ── Sites Bar ───────────────────────────────────────────── */
+  .sites-bar {
+    background: #0c0c0c;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 7px 32px;
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 4px 10px;
-    border-radius: 4px;
+    flex-wrap: wrap;
+  }
+
+  .site-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 5px;
     border: 1px solid #2a2a2a;
-    background: #111;
+    background: #141414;
     color: #555;
-    font-size: 0.62em;
+    font-size: 0.65em;
     font-weight: 500;
-    text-decoration: none;
     font-family: inherit;
     letter-spacing: 0.2px;
     white-space: nowrap;
-    transition: border-color 0.12s, color 0.12s;
+    cursor: pointer;
+    transition: border-color 0.12s, color 0.12s, background 0.12s;
   }
 
-  .tb-link:hover { border-color: #444; color: #aaa; }
-  .tb-link i { font-size: 0.9em; }
+  .site-btn:hover { border-color: #3a3a3a; color: #999; background: #1a1a1a; }
+  .site-btn.active { border-color: #d52b1e; color: #fff; background: #1a0a09; }
+  .site-btn i { font-size: 0.9em; }
+
+  .site-btn.back-btn {
+    margin-left: auto;
+    color: #d52b1e;
+    border-color: #3a1010;
+    background: #110505;
+  }
+  .site-btn.back-btn:hover { background: #1e0808; border-color: #d52b1e; color: #ff6b6b; }
+
+  /* ── Site Viewer ─────────────────────────────────────────── */
+  #site-viewer {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 40;
+    background: #000;
+    flex-direction: column;
+  }
+
+  #site-viewer.open { display: flex; }
+
+  .site-viewer-bar {
+    background: #0c0c0c;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    z-index: 41;
+  }
+
+  .site-viewer-bar .site-title {
+    font-size: 0.72em;
+    font-weight: 600;
+    color: #777;
+  }
+
+  .site-viewer-bar .site-url {
+    font-size: 0.6em;
+    color: #333;
+    margin-left: 4px;
+  }
+
+  #site-frame {
+    flex: 1;
+    border: none;
+    width: 100%;
+    background: #fff;
+  }
+
+  .back-btn-viewer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 5px;
+    border: 1px solid #2a2a2a;
+    background: #141414;
+    color: #d52b1e;
+    font-size: 0.65em;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.12s;
+    margin-right: 8px;
+  }
+
+  .back-btn-viewer:hover { background: #1e0808; border-color: #d52b1e; }
 
   /* ── KPI Bar ─────────────────────────────────────────────── */
   .kpi-bar {
@@ -417,10 +488,6 @@
     .kpi-bar { padding: 0 16px; }
   }
 
-  @media (max-width: 860px) {
-    .topbar-links { display: none; }
-  }
-
   @media (max-width: 540px) {
     .g4, .g3 { grid-template-columns: 1fr 1fr; }
     .links-grid { grid-template-columns: 1fr 1fr; }
@@ -459,30 +526,6 @@
     </div>
   </div>
 
-  <div class="topbar-links">
-    <a class="tb-link" href="https://fiveguysfr77.net-chef.com" target="_blank" rel="noopener">
-      <i class="fa-solid fa-chart-bar"></i> Net Chef
-    </a>
-    <a class="tb-link" href="https://fiveguysfr113-em.net-chef.com" target="_blank" rel="noopener">
-      <i class="fa-solid fa-calendar-days"></i> Schedules
-    </a>
-    <a class="tb-link" href="https://fiveguysfr77.ct-teamworx.com" target="_blank" rel="noopener">
-      <i class="fa-solid fa-users-clock"></i> TeamWorx
-    </a>
-    <a class="tb-link" href="https://admin5.parpos.com" target="_blank" rel="noopener">
-      <i class="fa-solid fa-vault"></i> Brinks
-    </a>
-    <a class="tb-link" href="https://bread2.fiveguys.com" target="_blank" rel="noopener">
-      <i class="fa-solid fa-bread-slice"></i> Bread Order
-    </a>
-    <a class="tb-link" href="https://outlook.com" target="_blank" rel="noopener">
-      <i class="fa-solid fa-envelope"></i> Email
-    </a>
-    <a class="tb-link" href="https://knowledgeforce.com" target="_blank" rel="noopener">
-      <i class="fa-solid fa-user-secret"></i> Secret Shops
-    </a>
-  </div>
-
   <div class="topbar-right">
     <div>
       <div class="date-main">Friday, April 17, 2026</div>
@@ -490,6 +533,43 @@
     </div>
   </div>
 </nav>
+
+<!-- ── Sites Bar ────────────────────────────────────────────────── -->
+<div class="sites-bar">
+  <button class="site-btn" onclick="openSite('https://fiveguysfr77.net-chef.com','Net Chef','fiveguysfr77.net-chef.com',this)">
+    <i class="fa-solid fa-chart-bar"></i> Net Chef
+  </button>
+  <button class="site-btn" onclick="openSite('https://fiveguysfr113-em.net-chef.com','Schedules','fiveguysfr113-em.net-chef.com',this)">
+    <i class="fa-solid fa-calendar-days"></i> Schedules
+  </button>
+  <button class="site-btn" onclick="openSite('https://fiveguysfr77.ct-teamworx.com','TeamWorx','fiveguysfr77.ct-teamworx.com',this)">
+    <i class="fa-solid fa-users-clock"></i> TeamWorx
+  </button>
+  <button class="site-btn" onclick="openSite('https://admin5.parpos.com','Brinks','admin5.parpos.com',this)">
+    <i class="fa-solid fa-vault"></i> Brinks
+  </button>
+  <button class="site-btn" onclick="openSite('https://bread2.fiveguys.com','Bread Ordering','bread2.fiveguys.com',this)">
+    <i class="fa-solid fa-bread-slice"></i> Bread Order
+  </button>
+  <button class="site-btn" onclick="openSite('https://outlook.com','Email','outlook.com',this)">
+    <i class="fa-solid fa-envelope"></i> Email
+  </button>
+  <button class="site-btn" onclick="openSite('https://knowledgeforce.com','Secret Shops','knowledgeforce.com',this)">
+    <i class="fa-solid fa-user-secret"></i> Secret Shops
+  </button>
+</div>
+
+<!-- ── Site Viewer ───────────────────────────────────────────────── -->
+<div id="site-viewer">
+  <div class="site-viewer-bar">
+    <button class="back-btn-viewer" onclick="closeSite()">
+      <i class="fa-solid fa-arrow-left"></i> Dashboard
+    </button>
+    <span class="site-title" id="viewer-title"></span>
+    <span class="site-url" id="viewer-url"></span>
+  </div>
+  <iframe id="site-frame" src=""></iframe>
+</div>
 
 <!-- ── KPI Bar ──────────────────────────────────────────────────── -->
 <div class="kpi-bar">
@@ -736,6 +816,21 @@
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('tab-' + name).classList.add('active');
     btn.classList.add('active');
+  }
+
+  function openSite(url, title, label, btn) {
+    document.querySelectorAll('.site-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('viewer-title').textContent = title;
+    document.getElementById('viewer-url').textContent = label;
+    document.getElementById('site-frame').src = url;
+    document.getElementById('site-viewer').classList.add('open');
+  }
+
+  function closeSite() {
+    document.getElementById('site-viewer').classList.remove('open');
+    document.getElementById('site-frame').src = '';
+    document.querySelectorAll('.site-btn').forEach(b => b.classList.remove('active'));
   }
 </script>
 
