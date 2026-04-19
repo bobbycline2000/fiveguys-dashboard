@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Five Guys KY-2065 | Daily Dashboard — V2 Clean Professional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background: #f0f3f8;
+    color: #1e2535;
+    min-height: 100vh;
+  }
+
+  /* ── Header ─────────────────────────────────────────────────────── */
+  .header {
+    background: #ffffff;
+    border-bottom: 3px solid #d52b1e;
+    padding: 14px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-bar {
+    width: 4px;
+    height: 36px;
+    background: #d52b1e;
+    border-radius: 2px;
+  }
+
+  .brand-name {
+    font-size: 1em;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.2px;
+  }
+
+  .brand-sub {
+    font-size: 0.67em;
+    color: #9ca3af;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .date-main {
+    font-size: 0.88em;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .date-gen {
+    font-size: 0.67em;
+    color: #9ca3af;
+    margin-top: 2px;
+  }
+
+  /* ── KPI Strip ───────────────────────────────────────────────────── */
+  .kpi-strip {
+    background: #ffffff;
+    border-bottom: 1px solid #e8ecf2;
+    padding: 0 36px;
+    display: flex;
+    overflow-x: auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .kpi-item {
+    padding: 10px 28px 10px 0;
+    margin-right: 28px;
+    border-right: 1px solid #eef0f5;
+    flex-shrink: 0;
+  }
+
+  .kpi-item:last-child { border-right: none; margin-right: 0; }
+
+  .kpi-label {
+    font-size: 0.58em;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+
+  .kpi-value {
+    font-size: 1em;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.3px;
+  }
+
+  .kpi-value.pos { color: #059669; }
+  .kpi-value.neg { color: #dc2626; }
+
+  /* ── Layout ──────────────────────────────────────────────────────── */
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 22px 36px;
+  }
+
+  /* ── Section ─────────────────────────────────────────────────────── */
+  .section {
+    margin-bottom: 22px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e4e8f0;
+  }
+
+  .section-title {
+    font-size: 0.67em;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #6b7280;
+  }
+
+  /* ── Card Grid ───────────────────────────────────────────────────── */
+  .card-grid {
+    display: grid;
+    gap: 8px;
+  }
+
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-6 { grid-template-columns: repeat(6, 1fr); }
+
+  /* ── Cards ───────────────────────────────────────────────────────── */
+  .card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 13px 15px 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    position: relative;
+    overflow: hidden;
+    border-top: 3px solid #e5e7eb;
+  }
+
+  .card.red    { border-top-color: #d52b1e; }
+  .card.green  { border-top-color: #059669; }
+  .card.blue   { border-top-color: #2563eb; }
+  .card.amber  { border-top-color: #d97706; }
+  .card.purple { border-top-color: #7c3aed; }
+  .card.slate  { border-top-color: #475569; }
+  .card.teal   { border-top-color: #0891b2; }
+
+  .card .lbl {
+    font-size: 0.59em;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 6px;
+  }
+
+  .card .val {
+    font-size: 1.38em;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .card .val.pos { color: #059669; }
+  .card .val.neg { color: #dc2626; }
+
+  .card .sub {
+    font-size: 0.62em;
+    color: #d1d5db;
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  .card .wtd {
+    font-size: 0.65em;
+    margin-top: 9px;
+    padding-top: 8px;
+    border-top: 1px solid #f3f4f6;
+    color: #9ca3af;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card .wtd-key {
+    font-weight: 600;
+    color: #d1d5db;
+    letter-spacing: 0.4px;
+    font-size: 0.95em;
+  }
+
+  .card .wtd-val {
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  /* ── Table ───────────────────────────────────────────────────────── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid #e8ecf2;
+  }
+
+  .data-table th {
+    padding: 9px 15px;
+    font-size: 0.59em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9ca3af;
+    text-align: left;
+    background: #f9fafc;
+    border-bottom: 1px solid #e8ecf2;
+  }
+
+  .data-table th:not(:first-child) { text-align: right; }
+
+  .data-table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 0.82em;
+    color: #374151;
+  }
+
+  .data-table td:not(:first-child) { text-align: right; font-weight: 500; }
+
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: #fafbfd; }
+
+  /* ── Footer ──────────────────────────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 14px;
+    color: #d1d5db;
+    font-size: 0.64em;
+    letter-spacing: 0.3px;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 960px) {
+    .grid-4, .grid-6 { grid-template-columns: repeat(3, 1fr); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .container { padding: 16px; }
+    .header { padding: 12px 16px; }
+    .kpi-strip { padding: 0 16px; }
+  }
+
+  @media (max-width: 600px) {
+    .grid-4, .grid-3, .grid-6 { grid-template-columns: 1fr 1fr; }
+    .header { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="brand-bar"></div>
+    <div>
+      <div class="brand-name">Five Guys &mdash; KY-2065 Dixie Highway</div>
+      <div class="brand-sub">Daily Operations Dashboard</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="date-main">Friday, April 17, 2026</div>
+    <div class="date-gen">Generated 4/18/2026 at 9:06 PM</div>
+  </div>
+</div>
+
+<div class="kpi-strip">
+  <div class="kpi-item">
+    <div class="kpi-label">Net Sales</div>
+    <div class="kpi-value">$5,537.00</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-label">vs Last Year</div>
+    <div class="kpi-value pos">+$8.00</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-label">vs Forecast</div>
+    <div class="kpi-value neg">&minus;$338.00</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-label">Labor %</div>
+    <div class="kpi-value">21.80%</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-label">Cash Over/Short</div>
+    <div class="kpi-value pos">$0.00</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-label">Sales / Guest</div>
+    <div class="kpi-value">$5.35</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Sales -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">&#128200; Sales Overview</div>
+    </div>
+    <div class="card-grid grid-4">
+
+      <div class="card amber">
+        <div class="lbl">Actual Net Sales</div>
+        <div class="val">$5,537.00</div>
+        <div class="sub">Yesterday</div>
+        <div class="wtd"><span class="wtd-key">WTD</span><span class="wtd-val">$20,533.00</span></div>
+      </div>
+
+      <div class="card teal">
+        <div class="lbl">Last Year Same Day</div>
+        <div class="val">$5,545.00</div>
+        <div class="sub">Prior year</div>
+        <div class="wtd"><span class="wtd-key">WTD LY</span><span class="wtd-val">$21,826.00</span></div>
+      </div>
+
+      <div class="card slate">
+        <div class="lbl">Forecasted Sales</div>
+        <div class="val">$5,875.00</div>
+        <div class="sub">Projected</div>
+        <div class="wtd"><span class="wtd-key">WTD</span><span class="wtd-val">$25,420.00</span></div>
+      </div>
+
+      <div class="card purple">
+        <div class="lbl">Sales / Guest</div>
+        <div class="val">$5.35</div>
+        <div class="sub">Average ticket</div>
+        <div class="wtd"><span class="wtd-key">WTD</span><span class="wtd-val">$5.39</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Performance -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">&#127919; Performance vs Targets</div>
+    </div>
+    <div class="card-grid grid-3">
+
+      <div class="card green">
+        <div class="lbl">vs Last Year (Day)</div>
+        <div class="val pos">+$8.00 &#9650;</div>
+        <div class="sub">Net Sales vs Same Day LY</div>
+        <div class="wtd"><span class="wtd-key">WTD vs LY</span><span class="wtd-val" style="color:#059669">+$1,293.00</span></div>
+      </div>
+
+      <div class="card red">
+        <div class="lbl">vs Forecast (Day)</div>
+        <div class="val neg">&minus;$338.00 &#9660;</div>
+        <div class="sub">Actual vs Projected</div>
+        <div class="wtd">&nbsp;</div>
+      </div>
+
+      <div class="card green">
+        <div class="lbl">Cash Over / Short</div>
+        <div class="val pos">$0.00</div>
+        <div class="sub">Balanced</div>
+        <div class="wtd">&nbsp;</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Labor -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">&#128104;&#8205;&#127859; Labor Summary</div>
+    </div>
+    <div class="card-grid grid-6">
+
+      <div class="card red">
+        <div class="lbl">Labor Cost</div>
+        <div class="val">$14.00</div>
+        <div class="sub">Total wages</div>
+        <div class="wtd"><span class="wtd-key">WTD</span><span class="wtd-val">$44.00</span></div>
+      </div>
+
+      <div class="card green">
+        <div class="lbl">Labor %</div>
+        <div class="val pos">21.80%</div>
+        <div class="sub">On target</div>
+        <div class="wtd"><span class="wtd-key">WTD</span><span class="wtd-val">23.95%</span></div>
+      </div>
+
+      <div class="card blue">
+        <div class="lbl">Sched. Hours</div>
+        <div class="val">93.50</div>
+        <div class="sub">Scheduled</div>
+        <div class="wtd"><span class="wtd-key">WTD</span><span class="wtd-val">414.00</span></div>
+      </div>
+
+      <div class="card blue">
+        <div class="lbl">Actual Hours</div>
+        <div class="val">12.62</div>
+        <div class="sub">Worked</div>
+        <div class="wtd"><span class="wtd-key">WTD</span><span class="wtd-val">0.00</span></div>
+      </div>
+
+      <div class="card slate">
+        <div class="lbl">Hours Variance</div>
+        <div class="val">&mdash;</div>
+        <div class="sub">Sched minus Actual</div>
+        <div class="wtd">&nbsp;</div>
+      </div>
+
+      <div class="card amber">
+        <div class="lbl">Productivity</div>
+        <div class="val">$63.00</div>
+        <div class="sub">Sales per labor hr</div>
+        <div class="wtd"><span class="wtd-key">WTD</span><span class="wtd-val">$61.00</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Comps -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">&#127991; Comps &amp; Discounts</div>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Yesterday</th>
+          <th>Week-to-Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Comps and Discounts</td>
+          <td>$206.54</td>
+          <td>$33.24</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  Five Guys KY-2065 Dixie Highway &bull; Source: CrunchTime Net Chef &bull;
+  Business Date: Friday, April 17, 2026 &bull; Generated: 4/18/2026 at 9:06 PM
+</footer>
+
+</body>
+</html>
