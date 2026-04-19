@@ -1,0 +1,43 @@
+Five Guys Burgers and Fries
+Corporate 
+North America 
+VP - Jim Meeks 
+Director - Paul Barnedo 
+Indianapolis 
+FBM - Kevin Goyke 
+Estep & Affiliates 
+737 Ventures 
+2065 - Louisville, KY
+Dashboard
+Organization
+Statistics
+Reports
+Notifications
+Tasks
+Messages
+Configurations
+Support
+Lists
+Sensors
+Timed Logs
+Report Type
+List Completion - Req
+List Completion - All
+List Completion - Duration
+Incomplete Lists
+Reusable Lists
+Anomalies
+Date Range
+Today
+Yesterday
+Trailing 7 Days
+Trailing 30 Days
+Trailing 90 Days
+Custom
+Groups 0
+Locations 1
+2065 - Louisville, KY
+Filter Actions
+Reset Display
+
+ver: 59a5edc40

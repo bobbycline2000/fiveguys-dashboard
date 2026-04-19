@@ -1,0 +1,678 @@
+<!DOCTYPE html><html lang="en"><!--
+
+  git commit hash: 59a5edc40 
+  committer:  Meng Fung 
+  date:  Thu Apr 16 12:14:48 2026 -0700  ( 2 hours ago )
+  commit message:  Regenerate location.key on tablet_user_sensor_pause change (CW-6148) (#3901) 
+
+  ---
+
+  want to see this faster next time?
+
+  mac: cmd + opt + U (chrome or firefox)
+  win: cmd + U
+  android: prefix the URL in the address bar with "view-source:"
+           example... "view-source:http://foo.com"
+
+--><head><style type="text/css" data-tag-name="trix-editor">trix-editor {
+    display: block;
+}
+
+trix-editor:empty::before {
+    content: attr(placeholder);
+    color: graytext;
+    cursor: text;
+    pointer-events: none;
+    white-space: pre-line;
+}
+
+trix-editor a[contenteditable=false] {
+    cursor: text;
+}
+
+trix-editor img {
+    max-width: 100%;
+    height: auto;
+}
+
+trix-editor [data-trix-attachment] figcaption textarea {
+    resize: none;
+}
+
+trix-editor [data-trix-attachment] figcaption textarea.trix-autoresize-clone {
+    position: absolute;
+    left: -9999px;
+    max-height: 0px;
+}
+
+trix-editor [data-trix-attachment] figcaption[data-trix-placeholder]:empty::before {
+    content: attr(data-trix-placeholder);
+    color: graytext;
+}
+
+trix-editor [data-trix-cursor-target] {
+    display: inline-block !important;
+    width: 1px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+trix-editor [data-trix-cursor-target=left] {
+    vertical-align: top !important;
+    margin-left: -1px !important;
+}
+
+trix-editor [data-trix-cursor-target=right] {
+    vertical-align: bottom !important;
+    margin-right: -1px !important;
+}</style><style type="text/css" data-tag-name="trix-toolbar">trix-toolbar {
+  display: block;
+}
+
+trix-toolbar {
+  white-space: nowrap;
+}
+
+trix-toolbar [data-trix-dialog] {
+  display: none;
+}
+
+trix-toolbar [data-trix-dialog][data-trix-active] {
+  display: block;
+}
+
+trix-toolbar [data-trix-dialog] [data-trix-validate]:invalid {
+  background-color: #ffdddd;
+}</style>
+  <meta charset="utf-8">
+  <meta name="ROBOTS" content="NOODP">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>List Completion - Statistics</title>
+  <link rel="stylesheet" media="all" href="https://fg-beta.compliancemate.com/assets/application-a61d14dc8d182b65547bfb63c96ffaae662409330ed43990c7a93e8f7d7c2cf1.css">
+  
+  <style>
+    :root {
+      --brand-color: #159600 !important;
+      --dark-brand-color: #006300 !important;
+      --light-brand-color: #48C933 !important;
+      --secondary-brand-color: #2a7a23 !important;
+    }
+
+    .current-organization-name {
+      display: inline-block !important;
+      left: px !important;
+      padding-left: px !important;
+      padding-right: px !important;
+      position: relative;
+    }
+
+    .brand-logo {
+      background: url() no-repeat 0 0 !important;
+      background-size: px auto !important;
+      content: "" !important;
+      display: inline-block !important;
+      height: px !important;
+      left: px !important;
+      position: absolute !important;
+      top: px !important;
+      width: px !important;
+    }
+  </style>
+
+                  <script async="" src="https://cdn.pendo.io/agent/static/eedd22db-42d7-4bb0-7399-80f1f0793837/pendo.js"></script><script type="text/javascript">
+        (function() {
+
+          window.addEventListener('load', function() {
+                    Highcharts.setOptions({ "global": { "useUTC": false },"chart": { "plotBorderWidth": 1,"spacing": [ 20,20,15,15 ],"style": { "fontFamily": "sans-serif","fontWeight": "600" } },"yAxis": { "labels": { "style": { "color": "#0c414e" } } },"xAxis": { "labels": { "style": { "color": "#0c414e" } } },"lang": { "thousandsSep": "," },"colors": [ "#0c414e" ],"plotOptions": { "series": { "marker": { "enabled": true,"radius": 2 } } } });
+
+          });
+                })()
+        </script>
+
+
+  <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="PJRC5qzPnXH7t6-ZspEc4IrMPGSR0hVcjNFKUbz0URwxlV12Pm3Gyo2mc94rqlLHk1cYbXEvYTRqD3rQbcOYyQ">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" media="screen" href="https://fg-beta.compliancemate.com/assets/application-a61d14dc8d182b65547bfb63c96ffaae662409330ed43990c7a93e8f7d7c2cf1.css">
+  <script>
+    (function(apiKey){
+        (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+        v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
+            o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+            y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
+            z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+
+        pendo.initialize({
+            visitor: {
+                id: 'fg2065@estep-co.com',
+                email: 'fg2065@estep-co.com',
+                role: 'store',
+                userPermissions: 'limited_control',
+                department: '2065 - Louisville, KY',
+            },
+            account: {
+                id: 'five_guys_burgers_and_fries',
+                accountName: 'Five Guys Burgers and Fries',
+            }
+        });
+    })('eedd22db-42d7-4bb0-7399-80f1f0793837');
+</script>
+<link rel="icon" type="image/x-icon" href="/favicon-white.ico" media="(prefers-color-scheme: dark)">
+</head>
+
+<body class="report-list_completions report-list_completions-index" data-current-group="21792">
+  <div class="navigation-wrapper">
+      <div class="navigation">
+      <section class="context-navigation__container">
+  <div class="group-context__root-group">
+      <span class="current-organization-name">
+        Five Guys Burgers and Fries
+        <div class="brand-logo"></div>
+      </span>
+  </div>
+  <nav class="group-context">
+    <header class="group-context__header">
+        <ul class="breadcrumbs__list">
+            <li class="breadcrumbs__list-item">
+                <a class="breadcrumbs__link" href="#">Corporate</a>
+            </li>
+            <li class="breadcrumbs__list-item">
+                <a class="breadcrumbs__link" href="#">North America</a>
+            </li>
+            <li class="breadcrumbs__list-item">
+                <a class="breadcrumbs__link" href="#">VP - Jim Meeks</a>
+            </li>
+            <li class="breadcrumbs__list-item">
+                <a class="breadcrumbs__link" href="#">Director - Paul Barnedo</a>
+            </li>
+            <li class="breadcrumbs__list-item">
+                <a class="breadcrumbs__link" href="#">Indianapolis</a>
+            </li>
+            <li class="breadcrumbs__list-item">
+                <a class="breadcrumbs__link" href="#">FBM - Kevin Goyke</a>
+            </li>
+            <li class="breadcrumbs__list-item">
+                <a class="breadcrumbs__link" href="#">Estep &amp; Affiliates</a>
+            </li>
+            <li class="breadcrumbs__list-item">
+                <a class="breadcrumbs__link" href="#">737 Ventures</a>
+            </li>
+        </ul>
+      <h2 class="group-context__current-group">
+        2065 - Louisville, KY
+      </h2>
+    </header>
+    <div class="main-navigation__actions">
+        <div class="ladle-branding bootstrap-styles">
+  <div class="mr-4">
+    <div class="dropdown" style="cursor: pointer;">
+      <a href="#" class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img alt="Ladle Logo" width="25" src="https://fg-beta.compliancemate.com/assets/ladle-icon-2bfa7b5562d27c4a5c3762e4ed3f4f40b5ed5675fd95fc26fedee9be17128698.png">
+      </a>
+      <div class="dropdown-menu dropdown-menu-right mt-2">
+        <a class="dropdown-item" href="https://auth.meazureup.com/login/" target="_blank" rel="noopener noreferrer">AuditApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="account-session__container">
+  <a href="#" class="un-button account-session__actions">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#06313D">
+  <path d="M12 12.818a4.09 4.09 0 1 1 0-8.182 4.09 4.09 0 0 1 0 8.182zm0-1.636a2.455 2.455 0 1 0 0-4.91 2.455 2.455 0 0 0 0 4.91z"></path>
+  <path d="M6.284 20.67l-.005-.11c-.016-.404-.006-.918.049-1.5.078-.843.239-1.67.497-2.435.817-2.419 2.42-3.807 5.154-3.807 2.735 0 4.347 1.39 5.177 3.81.265.774.43 1.609.513 2.46a11.564 11.564 0 0 1 .05 1.585.818.818 0 1 0 1.632.107l.007-.144c.016-.465.003-1.048-.06-1.706a12.448 12.448 0 0 0-.594-2.832c-1.04-3.034-3.223-4.916-6.725-4.916-3.504 0-5.68 1.884-6.704 4.92-.531 1.574-.682 3.187-.631 4.52.003.076.005.127.008.163a.818.818 0 1 0 1.632-.116z"></path>
+  <path d="M12 23.727C5.523 23.727.273 18.477.273 12S5.523.273 12 .273 23.727 5.523 23.727 12 18.477 23.727 12 23.727zm0-1.636c5.573 0 10.09-4.518 10.09-10.091 0-5.573-4.517-10.09-10.09-10.09C6.427 1.91 1.91 6.426 1.91 12c0 5.573 4.517 10.09 10.09 10.09z"></path>
+</svg>
+
+  </a>
+  <ul class="account-session__dropdown dropdown__secondary">
+      <li>Signed in as:</li>
+      <li>fg2065@estep-co.com</li>
+      <li><a class="edit-profile" href="/groups/21792/users?search_result_user_id=22879">Edit Profile</a></li>
+      <li><form class="button_to" method="post" action="/sign_out"><input type="hidden" name="_method" value="delete" autocomplete="off" style=""><input class="un-button" type="submit" value="Sign out" style=""><input type="hidden" name="authenticity_token" value="PJRC5qzPnXH7t6-ZspEc4IrMPGSR0hVcjNFKUbz0URwxlV12Pm3Gyo2mc94rqlLHk1cYbXEvYTRqD3rQbcOYyQ" autocomplete="off" style=""></form></li>
+  </ul>
+</div>
+
+
+    </div>
+    <a href="" class="responsive-menu__icon" data-action-toggle="main-navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14">
+  <path d="M0 0h20v2.222H0zM0 5.556h20v2.222H0zM0 11.111h20v2.222H0z"></path>
+</svg>
+
+    </a>
+  </nav>
+</section>
+
+    <nav id="main-navigation" class="main-navigation" data-toggle-id="main-navigation">
+    <script>
+//<![CDATA[
+
+      window.organizationId = '16';
+
+//]]>
+</script>    <div class="select2-custom-div select2-custom-div__responsive-menu">
+      <select class="search select2-hidden-accessible" data-select2-id="7" tabindex="-1" aria-hidden="true"></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-6ycm-container"><span class="select2-selection__rendered" id="select2-6ycm-container" role="textbox" aria-readonly="true"></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+    </div>
+  <ul class="main-navigation__links">
+    <li>
+      <a href="/groups/21792/location_dashboard">
+        Dashboard
+</a>    </li>
+      <li>
+        <a href="/groups/21792">
+          Organization
+</a>      </li>
+      <li>
+          <a class="active" aria-current="page" href="/groups/21792/report/list_completions">Statistics</a>
+      </li>
+      <li>
+          <a href="/groups/21792/report_service/single_location_report_results">Reports</a>
+      </li>
+      <li>
+        <a href="/groups/21792/triggered_alerts">
+            Notifications
+</a>      </li>
+        <li>
+          <a href="/groups/21792/tasks">
+            Tasks
+</a>        </li>
+        <li>
+          <a href="/groups/21792/messages">
+            Messages
+</a>        </li>
+      
+<li>
+  <a href="/groups/21792/tablets">
+    Configurations
+</a></li>
+
+      <li>
+        <a href="/groups/21792/tickets/new">
+          Support
+</a>      </li>
+  </ul>
+    <div class="menu-divider"></div>
+    <ul class="main-navigation__links main-navigation__session">
+        <li>Signed in as:</li>
+        <li>fg2065@estep-co.com</li>
+        <li><a class="edit-profile" href="/groups/21792/users?search_result_user_id=22879">Edit Profile</a></li>
+        <li><form class="button_to" method="post" action="/sign_out"><input type="hidden" name="_method" value="delete" autocomplete="off" style=""><input class="un-button" type="submit" value="Sign out" style=""><input type="hidden" name="authenticity_token" value="PJRC5qzPnXH7t6-ZspEc4IrMPGSR0hVcjNFKUbz0URwxlV12Pm3Gyo2mc94rqlLHk1cYbXEvYTRqD3rQbcOYyQ" autocomplete="off" style=""></form></li>
+    </ul>
+    <script>
+//<![CDATA[
+
+      window.organizationId = '16';
+
+//]]>
+</script>    <div class="select2-custom-div">
+      <select class="search select2-hidden-accessible" data-select2-id="9" tabindex="-1" aria-hidden="true"></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="10" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-qneb-container"><span class="select2-selection__rendered" id="select2-qneb-container" role="textbox" aria-readonly="true"></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+    </div>
+</nav>
+
+</div>
+
+
+    
+    <main class="main-content">
+      <div class="reports-wrapper">
+  <script src="https://fg-beta.compliancemate.com/assets/filters-72ce1b1031769dfb190ed6fc63ebef1d7ac537db28d01df3c8325243a925ce98.js"></script>
+  <header class="page-navigation__container">
+  <ul class="page-navigation__list">
+      <li class="page-navigation__item">
+        <a class="active" aria-current="page" href="/groups/21792/report/list_completions">
+          Lists
+</a>      </li>
+      <li class="page-navigation__item">
+        <a href="/groups/21792/report/sensor_readings">
+          Sensors
+</a>    </li>
+      <li class="page-navigation__item">
+          <a href="/groups/21792/timed_temperature_log_dashboard">
+            Timed Logs
+</a>    </li>
+  </ul>
+</header>
+<div class="menu-divider"></div>
+
+
+<div class="bootstrap-styles report-filters-styles">
+  <div id="filters-container" class="filters-container relative collapse show">
+    <a data-toggle="collapse" href="#filters-container" class="close-filters-x md-hide lg-hide" id="close-filters">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13">
+  <path d="M6.5 4.836L2.616.952a1.002 1.002 0 0 0-1.42-.005 1.001 1.001 0 0 0 .006 1.42L5.086 6.25l-3.884 3.884a1.002 1.002 0 0 0-.005 1.42 1.001 1.001 0 0 0 1.42-.006L6.5 7.664l3.884 3.884a1.002 1.002 0 0 0 1.42.005 1.001 1.001 0 0 0-.006-1.42L7.914 6.25l3.884-3.884a1.002 1.002 0 0 0 .005-1.42 1.001 1.001 0 0 0-1.42.006L6.5 4.836z"></path>
+</svg>
+
+    </a>
+    <form id="reports_form" action="/groups/21792/report/select" accept-charset="UTF-8" method="get">
+      <input value="America/New_York" autocomplete="off" type="hidden" name="requested_timezone" id="requested_timezone" style="">
+      <input value="true" autocomplete="off" type="hidden" name="report_form_submit" id="report_form_submit" style="">
+      <div class="filter-options">
+        <div class="filter-section">
+            <div class="mr2">
+              <label>Report Type</label>
+              <select name="report_filters_presenter[report_type]" id="report_filters_presenter_report_type" class="report-type__select"><option selected="selected" value="list_completions">List Completion - Req</option>
+<option value="all_list_completions">List Completion - All</option>
+<option value="duration_list_completions">List Completion - Duration</option>
+<option value="incomplete_lists">Incomplete Lists</option>
+<option value="reusable_lists">Reusable Lists</option>
+<option value="anomalies">Anomalies</option></select>
+            </div>
+
+          <div class="mr2" style="display: none" id="filter-start-date-picker" data-date-pickers="">
+            <label>Start Date</label>
+            <input type="hidden" id="filter-start-date" name="report_filters_presenter[start_date]" class="mb0 flatpickr-input" value="2026-04-18" style=""><input class="mb0 form-control input" placeholder="" tabindex="0" type="text" readonly="readonly" style="">
+          </div>
+
+          <div class="mr2" style="display: none" data-date-pickers="">
+            <label>End Date</label>
+            <input type="hidden" id="filter-end-date" name="report_filters_presenter[end_date]" class="mb0 filter-input-width flatpickr-input" value="2026-04-18" style=""><input class="mb0 filter-input-width form-control input" placeholder="" tabindex="0" type="text" readonly="readonly" style="">
+          </div>
+
+
+          <div id="date-range-filter" class="mr2" style="">
+            <script>
+//<![CDATA[
+
+              var today = "2026-04-19";
+              var dateRangeData =
+              {"last_24_hours":{"start_datetime":"2026-04-18T00:00:00Z","end_datetime":"2026-04-19","start_date":"","end_date":"","text":"Last 24 Hours"},"today":{"start_datetime":"2026-04-19T00:00:00Z","end_datetime":"2026-04-19","start_date":"2026-04-19","end_date":"2026-04-19","text":"Today"},"yesterday":{"start_datetime":"2026-04-18T00:00:00Z","end_datetime":"2026-04-18T23:59:59Z","start_date":"2026-04-18","end_date":"2026-04-18","text":"Yesterday"},"trailing_7_days":{"start_datetime":"2026-04-12T00:00:00Z","end_datetime":"2026-04-19","start_date":"2026-04-12","end_date":"2026-04-19","text":"Trailing 7 Days"},"trailing_30_days":{"start_datetime":"2026-03-20T00:00:00Z","end_datetime":"2026-04-19","start_date":"2026-03-20","end_date":"2026-04-19","text":"Trailing 30 Days"},"trailing_90_days":{"start_datetime":"2026-01-19T00:00:00Z","end_datetime":"2026-04-19","start_date":"2026-01-19","end_date":"2026-04-19","text":"Trailing 90 Days"},"custom":{"start_date":"2026-04-19","end_date":"2026-04-19","text":"Custom"}};
+
+//]]>
+</script>            <label>Date Range</label>
+            <select name="report_filters_presenter[date_range]" id="report_filters_presenter_date_range" class="date_range_select"><option value="today">Today</option>
+<option value="yesterday">Yesterday</option>
+<option value="trailing_7_days">Trailing 7 Days</option>
+<option value="trailing_30_days">Trailing 30 Days</option>
+<option value="trailing_90_days">Trailing 90 Days</option>
+<option value="custom">Custom</option></select>
+          </div>
+
+            <script>
+//<![CDATA[
+
+              var startDate = "2026-04-19";
+              var endDate = "2026-04-19";
+
+//]]>
+</script>
+
+        </div>
+
+        <hr class="section-divider mb0">
+
+        <div class="flex flex-wrap">
+          <div class="filter-section">
+
+                <div class="mr2 report-filter" style="">
+                  
+<div id="groups-filter">
+  <div class="">
+    <label style="min-width: 200px">
+      Groups
+        <span class="count-separation__indicator"></span>
+        <span class="filter-section__count" id="groups-filter-count" data-list-items-initial-value="0">0</span>
+    </label>
+  </div>
+
+  <div id="select2-container-for-groups">
+
+    <select name="report_filters_presenter[groups][]" id="report_filters_presenter_groups" multiple="" class="select2-filter select2-hidden-accessible" data-select2-id="report_filters_presenter_groups" tabindex="-1" aria-hidden="true"></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: 200px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+  </div>
+</div>
+
+                </div>
+
+                <div class="mr2 report-filter" style="">
+                  
+<div id="locations-filter">
+  <div class="">
+    <label style="min-width: 200px">
+      Locations
+        <span class="count-separation__indicator"></span>
+        <span class="filter-section__count" id="locations-filter-count" data-list-items-initial-value="1">1</span>
+    </label>
+  </div>
+
+  <div id="select2-container-for-locations">
+
+    <select name="report_filters_presenter[locations][]" id="report_filters_presenter_locations" multiple="" class="select2-filter select2-hidden-accessible" data-select2-id="report_filters_presenter_locations" tabindex="-1" aria-hidden="true"><option value="18170">2065 - Louisville, KY</option></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 200px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+  </div>
+</div>
+
+                </div>
+
+                <div class="mr2 report-filter" style="display: none;">
+                  
+<div id="lists-filter">
+  <div class="">
+    <label style="min-width: 200px">
+      Lists
+        <span class="count-separation__indicator"></span>
+        <span class="filter-section__count" id="lists-filter-count" data-list-items-initial-value="45">22</span>
+    </label>
+  </div>
+
+  <div id="select2-container-for-lists">
+
+    <select name="report_filters_presenter[lists][]" id="report_filters_presenter_lists" multiple="" class="select2-filter select2-hidden-accessible" tabindex="-1" aria-hidden="true" data-select2-id="report_filters_presenter_lists"><option value="11AM: Time and Temp">11AM: Time and Temp</option><option value="1PM: Time and Temp">1PM: Time and Temp</option><option value="3PM: Time and Temp">3PM: Time and Temp</option><option value="5PM: Time and Temp">5PM: Time and Temp</option><option value="7PM: Time and Temp">7PM: Time and Temp</option><option value="9PM: Time and Temp">9PM: Time and Temp</option><option value="AM Pre-Shift Check">AM Pre-Shift Check</option><option value="PM Pre-Shift Check">PM Pre-Shift Check</option><option value="Milkshake Pump Cleaning Check">Milkshake Pump Cleaning Check</option><option value="Tuesday Milkshake Cleaning Check">Tuesday Milkshake Cleaning Check</option><option value="Friday Milkshake Cleaning Check">Friday Milkshake Cleaning Check</option><option value="Closing Checklist">Closing Checklist</option><option value="Pre Open">Pre Open</option><option value="Shift Change">Shift Change</option><option value="Closing">Closing</option><option value="Weekly Store Inspection">Weekly Store Inspection</option><option value="Delivery Check">Delivery Check</option><option value="Temperature Sample">Temperature Sample</option><option value="Calibration Test">Calibration Test</option><option value="Operational Spot Check">Operational Spot Check</option><option value="Battery Swap Checklist">Battery Swap Checklist</option><option value="MMCCA">MMCCA</option></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="57" style="width: 200px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+  </div>
+</div>
+
+                </div>
+
+                <div class="mr2 report-filter" style="display: none;">
+                  
+<div id="device-templates-filter">
+  <div class="">
+    <label style="min-width: 200px">
+      Device Templates
+        <span class="count-separation__indicator"></span>
+        <span class="filter-section__count" id="device-templates-filter-count" data-list-items-initial-value="6">6</span>
+    </label>
+  </div>
+
+  <div id="select2-container-for-device_templates">
+
+    <select name="report_filters_presenter[device_templates][]" id="report_filters_presenter_device_templates" multiple="" class="select2-filter select2-hidden-accessible" data-select2-id="report_filters_presenter_device_templates" tabindex="-1" aria-hidden="true"><option value="314">Meat Drawer</option>
+<option value="315">Milkshake Cooler</option>
+<option value="316">Milkshake Hopper</option>
+<option value="317">Prep Area</option>
+<option value="318">Salad Station</option>
+<option value="319">Walk In</option></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="4" style="width: 200px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+  </div>
+</div>
+
+                </div>
+
+                <div class="mr2 report-filter" style="display: none;">
+                  
+<div id="list-items-filter">
+  <div class="">
+    <label style="min-width: 200px">
+      List Items
+        <span class="count-separation__indicator"></span>
+        <span class="filter-section__count" id="list-items-filter-count" data-list-items-initial-value="25257">25257</span>
+    </label>
+  </div>
+
+  <div id="select2-container-for-list_items">
+
+    <select name="report_filters_presenter[list_items][]" id="report_filters_presenter_list_items" multiple="" class="select2-filter select2-hidden-accessible" data-select2-id="report_filters_presenter_list_items" tabindex="-1" aria-hidden="true"></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: 200px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+  </div>
+</div>
+
+                </div>
+
+                <div class="mr2 report-filter" style="display: none;">
+                  
+<div id="list-item-types-filter">
+  <div class="">
+    <label style="min-width: 200px">
+      List Item Types
+        <span class="count-separation__indicator"></span>
+        <span class="filter-section__count" id="list-item-types-filter-count" data-list-items-initial-value="8">8</span>
+    </label>
+  </div>
+
+  <div id="select2-container-for-list_item_types">
+
+    <select name="report_filters_presenter[list_item_types][]" id="report_filters_presenter_list_item_types" multiple="" class="select2-filter select2-hidden-accessible" data-select2-id="report_filters_presenter_list_item_types" tabindex="-1" aria-hidden="true"><option value="0">Numeric</option>
+<option value="1">Temperature</option>
+<option value="2">Manual temp</option>
+<option value="6">Text entry</option>
+<option value="9">Boolean</option>
+<option value="10">Multiple choice</option>
+<option value="11">Media</option>
+<option value="12">Signature</option></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="6" style="width: 200px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+  </div>
+</div>
+
+                </div>
+
+          </div>
+
+          <div class="pl0 pt4-2">
+                <a data-action-open-modal="save_filters" class="button-transparent block left-align pl0 pb0 pb2 pt0" id="report_filters_presenter_actions" href="#">Filter Actions</a>
+                <a class="button-transparent block left-align pl0 pb0 pt0" href="/groups/21792/report/list_completions">Reset Display</a>
+          </div>
+        </div>
+
+        <hr class="section-divider mb0">
+
+        <div class="filter-section">
+          <div class="mr2">
+            <input type="submit" name="commit" value="Apply" style="display: block;" class="filter__apply-button filter__button--responsive" data-disable-with="Apply">
+          </div>
+        </div>
+      </div>
+</form>  </div>
+</div>
+
+<div class="modal" data-modal-id="save_filters">
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" data-action="modal-close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13">
+  <path d="M6.5 4.836L2.616.952a1.002 1.002 0 0 0-1.42-.005 1.001 1.001 0 0 0 .006 1.42L5.086 6.25l-3.884 3.884a1.002 1.002 0 0 0-.005 1.42 1.001 1.001 0 0 0 1.42-.006L6.5 7.664l3.884 3.884a1.002 1.002 0 0 0 1.42.005 1.001 1.001 0 0 0-.006-1.42L7.914 6.25l3.884-3.884a1.002 1.002 0 0 0 .005-1.42 1.001 1.001 0 0 0-1.42.006L6.5 4.836z"></path>
+</svg>
+
+      </div>
+      <h1>Save filters in current level: 2065 - Louisville, KY</h1>
+      <hr class="section-divider-bold">
+      <div class="flex">
+        <div>
+          <label>Name</label>
+          <input type="text" id="save-filter-name" name="report_filters_presenter[name]" class="filter-input-width" form="reports_form" style="">
+        </div>
+        
+        <div id="filter__name-already-exists" class="error mt4 ml3" style="//margin-bottom: 10px">
+          <span> Name already exists! </span>
+          <div>
+            <span> Overwrite? </span>
+            <input type="checkbox" id="save-filter-overwrite" name="report_filters_presenter[overwrite]" class="filter-input-width" form="reports_form" style="width: 25px;">          
+          </div>
+        </div>
+
+      </div>
+      
+      
+      <input type="hidden" id="filter-for" name="report_filters_presenter[filter_for]" form="reports_form" value="reports_form" style="">
+      <input type="hidden" id="filter-for" name="report_filters_presenter[filter_type]" form="reports_form" value="lists" style="">
+      <input type="hidden" id="authenticity_token" name="authenticity_token" form="reports_form" value="0N2wILrTkjxSA8wOIKaZ5f6t_fhry-0UOLhkr2GXouDd3K-wKHHJhyQSEEm5ndfC5zbZ8Ys2mXzeZlQusKBrNQ" style="">
+      <div class="form-actions__container--submit">
+        <input type="submit" name="commit" value="Save" class="filter__apply-button filter__button--responsive save-filter__submit-button" data-group-id="21792" form="reports_form" formaction="/groups/21792/search_filters" formmethod="post" disabled="" data-disable-with="Save" style="">
+        <span class="display-none bold ml3 primary-red" id="custom-date-range-message"> **Filters with 'Custom' date ranges can not be saved</span>
+      </div>
+
+
+      <hr class="section-divider-bold">
+      <h1> <strong>Load or Subscribe</strong> </h1>
+      <div class="bootstrap-styles">
+        <ul class="list-group">
+          
+        </ul>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" data-modal-id="load_filters">
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" data-action="modal-close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13">
+  <path d="M6.5 4.836L2.616.952a1.002 1.002 0 0 0-1.42-.005 1.001 1.001 0 0 0 .006 1.42L5.086 6.25l-3.884 3.884a1.002 1.002 0 0 0-.005 1.42 1.001 1.001 0 0 0 1.42-.006L6.5 7.664l3.884 3.884a1.002 1.002 0 0 0 1.42.005 1.001 1.001 0 0 0-.006-1.42L7.914 6.25l3.884-3.884a1.002 1.002 0 0 0 .005-1.42 1.001 1.001 0 0 0-1.42.006L6.5 4.836z"></path>
+</svg>
+
+      </div>
+      <h1>Load filter from current level: 2065 - Louisville, KY</h1>
+      <hr class="section-divider">
+      <div class="bootstrap-styles">
+        <ul class="list-group">
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" data-modal-id="interval_filters">
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" data-action="modal-close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13">
+  <path d="M6.5 4.836L2.616.952a1.002 1.002 0 0 0-1.42-.005 1.001 1.001 0 0 0 .006 1.42L5.086 6.25l-3.884 3.884a1.002 1.002 0 0 0-.005 1.42 1.001 1.001 0 0 0 1.42-.006L6.5 7.664l3.884 3.884a1.002 1.002 0 0 0 1.42.005 1.001 1.001 0 0 0-.006-1.42L7.914 6.25l3.884-3.884a1.002 1.002 0 0 0 .005-1.42 1.001 1.001 0 0 0-1.42.006L6.5 4.836z"></path>
+</svg>
+
+      </div>
+      <h1>Subscriptions from current level: 2065 - Louisville, KY</h1>
+      <hr class="section-divider">
+      <div class="bootstrap-styles">
+        <ul class="list-group">
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</div>
+    </main>
+
+    
+    
+
+    <p style="opacity: 0.2; text-align: right; width:90%">
+      ver: 59a5edc40 
+    </p>
+  </div>
+
+  <script src="https://fg-beta.compliancemate.com/assets/application-4a63a4ee69ee3bfbbeb7fba0d86de481b15de7a69ed735413bb0620066639018.js"></script><div class="flatpickr-calendar animate" tabindex="-1"><div class="flatpickr-months"><span class="flatpickr-prev-month"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17 17"><g></g><path d="M5.207 8.471l7.146 7.147-0.707 0.707-7.853-7.854 7.854-7.853 0.707 0.707-7.147 7.146z"></path></svg></span><div class="flatpickr-month"><div class="flatpickr-current-month"><select class="flatpickr-monthDropdown-months" aria-label="Month" tabindex="-1"><option class="flatpickr-monthDropdown-month" value="0" tabindex="-1">January</option><option class="flatpickr-monthDropdown-month" value="1" tabindex="-1">February</option><option class="flatpickr-monthDropdown-month" value="2" tabindex="-1">March</option><option class="flatpickr-monthDropdown-month" value="3" tabindex="-1">April</option></select><div class="numInputWrapper"><input class="numInput cur-year" type="number" tabindex="-1" aria-label="Year" max="2026" style=""><span class="arrowUp"></span><span class="arrowDown"></span></div></div></div><span class="flatpickr-next-month flatpickr-disabled"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17 17"><g></g><path d="M13.207 8.472l-7.854 7.854-0.707-0.707 7.146-7.146-7.146-7.148 0.707-0.707 7.854 7.854z"></path></svg></span></div><div class="flatpickr-innerContainer"><div class="flatpickr-rContainer"><div class="flatpickr-weekdays"><div class="flatpickr-weekdaycontainer">
+      <span class="flatpickr-weekday">
+        Sun</span><span class="flatpickr-weekday">Mon</span><span class="flatpickr-weekday">Tue</span><span class="flatpickr-weekday">Wed</span><span class="flatpickr-weekday">Thu</span><span class="flatpickr-weekday">Fri</span><span class="flatpickr-weekday">Sat
+      </span>
+      </div></div><div class="flatpickr-days" tabindex="-1"><div class="dayContainer"><span class="flatpickr-day prevMonthDay" aria-label="March 29, 2026" tabindex="-1">29</span><span class="flatpickr-day prevMonthDay" aria-label="March 30, 2026" tabindex="-1">30</span><span class="flatpickr-day prevMonthDay" aria-label="March 31, 2026" tabindex="-1">31</span><span class="flatpickr-day" aria-label="April 1, 2026" tabindex="-1">1</span><span class="flatpickr-day" aria-label="April 2, 2026" tabindex="-1">2</span><span class="flatpickr-day" aria-label="April 3, 2026" tabindex="-1">3</span><span class="flatpickr-day" aria-label="April 4, 2026" tabindex="-1">4</span><span class="flatpickr-day" aria-label="April 5, 2026" tabindex="-1">5</span><span class="flatpickr-day" aria-label="April 6, 2026" tabindex="-1">6</span><span class="flatpickr-day" aria-label="April 7, 2026" tabindex="-1">7</span><span class="flatpickr-day" aria-label="April 8, 2026" tabindex="-1">8</span><span class="flatpickr-day" aria-label="April 9, 2026" tabindex="-1">9</span><span class="flatpickr-day" aria-label="April 10, 2026" tabindex="-1">10</span><span class="flatpickr-day" aria-label="April 11, 2026" tabindex="-1">11</span><span class="flatpickr-day" aria-label="April 12, 2026" tabindex="-1">12</span><span class="flatpickr-day" aria-label="April 13, 2026" tabindex="-1">13</span><span class="flatpickr-day" aria-label="April 14, 2026" tabindex="-1">14</span><span class="flatpickr-day" aria-label="April 15, 2026" tabindex="-1">15</span><span class="flatpickr-day" aria-label="April 16, 2026" tabindex="-1">16</span><span class="flatpickr-day" aria-label="April 17, 2026" tabindex="-1">17</span><span class="flatpickr-day selected" aria-label="April 18, 2026" tabindex="-1">18</span><span class="flatpickr-day today" aria-label="April 19, 2026" aria-current="date" tabindex="-1">19</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 20, 2026">20</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 21, 2026">21</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 22, 2026">22</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 23, 2026">23</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 24, 2026">24</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 25, 2026">25</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 26, 2026">26</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 27, 2026">27</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 28, 2026">28</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 29, 2026">29</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 30, 2026">30</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 1, 2026">1</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 2, 2026">2</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 3, 2026">3</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 4, 2026">4</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 5, 2026">5</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 6, 2026">6</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 7, 2026">7</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 8, 2026">8</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 9, 2026">9</span></div></div></div></div></div><div class="flatpickr-calendar animate" tabindex="-1"><div class="flatpickr-months"><span class="flatpickr-prev-month"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17 17"><g></g><path d="M5.207 8.471l7.146 7.147-0.707 0.707-7.853-7.854 7.854-7.853 0.707 0.707-7.147 7.146z"></path></svg></span><div class="flatpickr-month"><div class="flatpickr-current-month"><select class="flatpickr-monthDropdown-months" aria-label="Month" tabindex="-1"><option class="flatpickr-monthDropdown-month" value="0" tabindex="-1">January</option><option class="flatpickr-monthDropdown-month" value="1" tabindex="-1">February</option><option class="flatpickr-monthDropdown-month" value="2" tabindex="-1">March</option><option class="flatpickr-monthDropdown-month" value="3" tabindex="-1">April</option></select><div class="numInputWrapper"><input class="numInput cur-year" type="number" tabindex="-1" aria-label="Year" max="2026" style=""><span class="arrowUp"></span><span class="arrowDown"></span></div></div></div><span class="flatpickr-next-month flatpickr-disabled"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17 17"><g></g><path d="M13.207 8.472l-7.854 7.854-0.707-0.707 7.146-7.146-7.146-7.148 0.707-0.707 7.854 7.854z"></path></svg></span></div><div class="flatpickr-innerContainer"><div class="flatpickr-rContainer"><div class="flatpickr-weekdays"><div class="flatpickr-weekdaycontainer">
+      <span class="flatpickr-weekday">
+        Sun</span><span class="flatpickr-weekday">Mon</span><span class="flatpickr-weekday">Tue</span><span class="flatpickr-weekday">Wed</span><span class="flatpickr-weekday">Thu</span><span class="flatpickr-weekday">Fri</span><span class="flatpickr-weekday">Sat
+      </span>
+      </div></div><div class="flatpickr-days" tabindex="-1"><div class="dayContainer"><span class="flatpickr-day prevMonthDay" aria-label="March 29, 2026" tabindex="-1">29</span><span class="flatpickr-day prevMonthDay" aria-label="March 30, 2026" tabindex="-1">30</span><span class="flatpickr-day prevMonthDay" aria-label="March 31, 2026" tabindex="-1">31</span><span class="flatpickr-day" aria-label="April 1, 2026" tabindex="-1">1</span><span class="flatpickr-day" aria-label="April 2, 2026" tabindex="-1">2</span><span class="flatpickr-day" aria-label="April 3, 2026" tabindex="-1">3</span><span class="flatpickr-day" aria-label="April 4, 2026" tabindex="-1">4</span><span class="flatpickr-day" aria-label="April 5, 2026" tabindex="-1">5</span><span class="flatpickr-day" aria-label="April 6, 2026" tabindex="-1">6</span><span class="flatpickr-day" aria-label="April 7, 2026" tabindex="-1">7</span><span class="flatpickr-day" aria-label="April 8, 2026" tabindex="-1">8</span><span class="flatpickr-day" aria-label="April 9, 2026" tabindex="-1">9</span><span class="flatpickr-day" aria-label="April 10, 2026" tabindex="-1">10</span><span class="flatpickr-day" aria-label="April 11, 2026" tabindex="-1">11</span><span class="flatpickr-day" aria-label="April 12, 2026" tabindex="-1">12</span><span class="flatpickr-day" aria-label="April 13, 2026" tabindex="-1">13</span><span class="flatpickr-day" aria-label="April 14, 2026" tabindex="-1">14</span><span class="flatpickr-day" aria-label="April 15, 2026" tabindex="-1">15</span><span class="flatpickr-day" aria-label="April 16, 2026" tabindex="-1">16</span><span class="flatpickr-day" aria-label="April 17, 2026" tabindex="-1">17</span><span class="flatpickr-day selected" aria-label="April 18, 2026" tabindex="-1">18</span><span class="flatpickr-day today" aria-label="April 19, 2026" aria-current="date" tabindex="-1">19</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 20, 2026">20</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 21, 2026">21</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 22, 2026">22</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 23, 2026">23</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 24, 2026">24</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 25, 2026">25</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 26, 2026">26</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 27, 2026">27</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 28, 2026">28</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 29, 2026">29</span><span class="flatpickr-day flatpickr-disabled" aria-label="April 30, 2026">30</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 1, 2026">1</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 2, 2026">2</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 3, 2026">3</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 4, 2026">4</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 5, 2026">5</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 6, 2026">6</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 7, 2026">7</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 8, 2026">8</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="May 9, 2026">9</span></div></div></div></div></div>
+<script type="text/javascript" src="/javascripts/jstree/jstree.min.js"></script>
+
+
+
+
+
+
+  
+
+
+
+</body></html>
