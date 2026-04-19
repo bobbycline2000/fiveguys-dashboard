@@ -149,124 +149,53 @@ async def do_login(page) -> bool:
 
 # ── navigate to Statistics → List Completion ALL ───────────────────────────────
 
-async def navigate_to_list_completion(page) -> bool:
-    log.info("=== Clicking Statistics ===")
+async def navigate_to_list_completion(page) -> tuple[bool, str]:
+    """Navigate directly to List Completion report with Yesterday filter.
+    Returns (success, group_id).
+    """
+    log.info("=== Navigating to List Completion report ===")
 
+    # Extract group ID from post-login URL
+    m = re.search(r'/groups/(\d+)/', page.url)
+    group_id = m.group(1) if m else "21792"
+    log.info(f"  Group ID: {group_id}")
+
+    # Navigate directly with date filter in URL — more reliable than the form
+    url = (
+        f"{BASE_URL}/groups/{group_id}/report/list_completions"
+        f"?report_filters_presenter%5Bdate_range%5D=yesterday"
+    )
+    log.info(f"  Navigating to: {url}")
+    resp = await page.goto(url, timeout=20000, wait_until="networkidle")
+    await page.wait_for_timeout(2000)
+    await page.screenshot(path=str(DATA_DIR / "cm_03_list_completions.png"))
+    log.info(f"  List Completion URL: {page.url}")
+
+    if resp and resp.status >= 400:
+        log.error(f"  HTTP {resp.status} — trying fallback form navigation")
+        return await _navigate_via_form(page), group_id
+
+    return True, group_id
+
+
+async def _navigate_via_form(page) -> bool:
+    """Fallback: use the Statistics nav link and form."""
     clicked = await try_click(page, [
         'a:has-text("Statistics")',
-        'button:has-text("Statistics")',
-        'nav a:has-text("Statistics")',
-        'li:has-text("Statistics") a',
-        '[href*="statistics" i]',
-        '[href*="stat" i]',
-    ])
-
-    if not clicked:
-        log.error("Could not find Statistics link")
-        await page.screenshot(path=str(DATA_DIR / "cm_03_stats_fail.png"))
-        (DATA_DIR / "cm_page_source.html").write_text(await page.content(), encoding="utf-8")
-        return False
-
-    await page.wait_for_load_state("networkidle", timeout=10000)
-    await page.wait_for_timeout(1500)
-    await page.screenshot(path=str(DATA_DIR / "cm_03_statistics.png"))
-    log.info(f"Statistics URL: {page.url}")
-
-    log.info("=== Clicking List Completion ALL ===")
-    clicked = await try_click(page, [
-        'a:has-text("List Completion ALL")',
-        'a:has-text("List Completion")',
-        'button:has-text("List Completion ALL")',
-        'button:has-text("List Completion")',
         '[href*="list_completion" i]',
-        '[href*="list-completion" i]',
-        'li:has-text("List Completion") a',
     ])
-
     if not clicked:
-        log.warning("Could not find 'List Completion ALL' — trying to find it in page text")
-        # save source to debug
-        (DATA_DIR / "cm_stats_source.html").write_text(await page.content(), encoding="utf-8")
-        await page.screenshot(path=str(DATA_DIR / "cm_04_list_completion_fail.png"))
         return False
-
     await page.wait_for_load_state("networkidle", timeout=10000)
     await page.wait_for_timeout(1500)
-    await page.screenshot(path=str(DATA_DIR / "cm_04_list_completion.png"))
-    log.info(f"List Completion URL: {page.url}")
     return True
 
 
 # ── set date range to Yesterday and apply ─────────────────────────────────────
 
 async def set_yesterday_and_apply(page) -> bool:
-    log.info("=== Setting Date Range to Yesterday ===")
-
-    # Click the Date Range dropdown
-    clicked = await try_click(page, [
-        'select[name*="date" i]',
-        'select[id*="date" i]',
-        'div:has-text("Today") >> nth=0',
-        '[class*="date-range" i]',
-        '[class*="daterange" i]',
-        'button:has-text("Today")',
-        'div[class*="dropdown"]:has-text("Today")',
-    ])
-
-    if not clicked:
-        # try clicking any element containing "Today" that looks like a dropdown
-        try:
-            els = await page.query_selector_all('*:has-text("Today")')
-            for el in els:
-                tag = await el.evaluate("el => el.tagName.toLowerCase()")
-                if tag in ("select", "button", "div", "span"):
-                    await el.click()
-                    log.info(f"  clicked <{tag}> with text 'Today'")
-                    break
-        except Exception as e:
-            log.warning(f"Date range click failed: {e}")
-
-    await page.wait_for_timeout(800)
-    await page.screenshot(path=str(DATA_DIR / "cm_05_date_dropdown.png"))
-
-    # Select "Yesterday"
-    clicked = await try_click(page, [
-        'option:has-text("Yesterday")',
-        'li:has-text("Yesterday")',
-        'div:has-text("Yesterday")',
-        'span:has-text("Yesterday")',
-        'a:has-text("Yesterday")',
-    ])
-
-    if not clicked:
-        # try select element
-        try:
-            await page.select_option('select', label="Yesterday")
-            log.info("  selected Yesterday via select_option")
-        except Exception:
-            log.warning("Could not select Yesterday")
-
-    await page.wait_for_timeout(500)
-
-    # Click Apply / Filter
-    log.info("=== Clicking Apply ===")
-    applied = await try_click(page, [
-        'button:has-text("Apply")',
-        'button:has-text("Filter")',
-        'button:has-text("Search")',
-        'input[value="Apply"]',
-        'input[value="Filter"]',
-        'a:has-text("Apply")',
-        '[class*="apply" i]',
-        '[class*="filter-btn" i]',
-    ])
-
-    if not applied:
-        log.warning("Could not find Apply button")
-
-    await page.wait_for_load_state("networkidle", timeout=12000)
-    await page.wait_for_timeout(2000)
-    await page.screenshot(path=str(DATA_DIR / "cm_06_after_apply.png"))
+    # Date range already set via URL parameter — nothing to do
+    log.info("=== Date range set via URL — skipping form interaction ===")
     return True
 
 
@@ -282,10 +211,17 @@ async def extract_list_completions(page) -> list:
 
     await page.screenshot(path=str(DATA_DIR / "cm_07_scrolled.png"))
 
-    # Save full page text for debugging
+    # Save full page text and source for debugging
     page_text = await page.inner_text("body")
     (DATA_DIR / "cm_page_text.txt").write_text(page_text, encoding="utf-8")
-    (DATA_DIR / "cm_results_source.html").write_text(await page.content(), encoding="utf-8")
+    html_content = await page.content()
+    (DATA_DIR / "cm_results_source.html").write_text(html_content, encoding="utf-8")
+
+    # Log first 60 lines of page text so we can see the structure in CI logs
+    log.info("=== Page text (first 60 lines) ===")
+    for i, line in enumerate(page_text.splitlines()[:60]):
+        if line.strip():
+            log.info(f"  {i:02d}: {line.strip()[:120]}")
 
     results = []
 
@@ -366,7 +302,8 @@ async def scrape() -> dict:
             if not await do_login(page):
                 return EMPTY_DATA
 
-            if not await navigate_to_list_completion(page):
+            nav_ok, group_id = await navigate_to_list_completion(page)
+            if not nav_ok:
                 data = dict(EMPTY_DATA)
                 data["meta"]["status"] = "nav_failed"
                 return data
