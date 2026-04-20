@@ -37,7 +37,21 @@ Custom
 Groups 0
 Locations 1
 2065 - Louisville, KY
+×2065 - Louisville, KY
 Filter Actions
 Reset Display
+Filters
+Create Document
+List Completion Percentages for 2026-04-20
+Location/List - 
+List Item
+
+Required %
+  |  
+List Item
+
+Overall %
+2026-04-20
+Req | All
 
 ver: 59a5edc40
