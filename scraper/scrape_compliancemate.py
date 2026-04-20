@@ -183,7 +183,14 @@ async def navigate_to_list_completion(page) -> tuple[bool, str]:
     )
     log.info(f"  Navigating to: {url}")
     resp = await page.goto(url, timeout=30000, wait_until="networkidle")
-    await page.wait_for_timeout(3000)
+    # Wait for AJAX data rows to load — table headers appear immediately but
+    # rows are fetched separately; wait up to 15s for first <tr> inside <tbody>
+    try:
+        await page.wait_for_selector("table tbody tr", timeout=15000)
+        log.info("  Data rows detected in table")
+    except Exception:
+        log.warning("  No table rows appeared after 15s — data may be empty or still loading")
+    await page.wait_for_timeout(2000)
     await page.screenshot(path=str(DATA_DIR / "cm_03_list_completions.png"))
     log.info(f"  List Completion URL: {page.url}")
 
