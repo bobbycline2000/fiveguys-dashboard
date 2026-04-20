@@ -177,7 +177,7 @@ async def navigate_to_list_completion(page) -> tuple[bool, str]:
         f"?requested_timezone=America%2FNew_York"
         f"&report_form_submit=true"
         f"&report_filters_presenter%5Breport_type%5D=list_completions"
-        f"&report_filters_presenter%5Bdate_range%5D=yesterday"
+        f"&report_filters_presenter%5Bdate_range%5D=trailing_7_days"
         f"&report_filters_presenter%5Blocations%5D%5B%5D={LOCATION_ID}"
         f"&commit=Apply"
     )
