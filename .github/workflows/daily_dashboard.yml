@@ -48,7 +48,15 @@ jobs:
       - name: Install Xvfb
         run: sudo apt-get install -y xvfb
 
-      # ── 5. Scrape CrunchTime & generate Netlify dashboard ─────────────────
+      # ── 5. Scrape ComplianceMate first so dashboard.html includes fresh data ─
+      - name: Scrape ComplianceMate (store 2065)
+        continue-on-error: true
+        env:
+          COMPLIANCEMATE_USERNAME: ${{ secrets.COMPLIANCEMATE_USERNAME }}
+          COMPLIANCEMATE_PASSWORD: ${{ secrets.COMPLIANCEMATE_PASSWORD }}
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_compliancemate.py
+
+      # ── 5b. Scrape CrunchTime & generate dashboard (reads fresh CM data) ────
       - name: Scrape CrunchTime Net Chef (store 2065) & generate dashboard.html
         env:
           CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
@@ -56,14 +64,6 @@ jobs:
         run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/main.py
         # NOTE: When scaling to all 11 stores, add additional steps here
         # with the store-specific env vars and a STORE_ID env variable.
-
-      # ── 5b. Scrape ComplianceMate checklist completions ───────────────────
-      - name: Scrape ComplianceMate (store 2065)
-        continue-on-error: true
-        env:
-          COMPLIANCEMATE_USERNAME: ${{ secrets.COMPLIANCEMATE_USERNAME }}
-          COMPLIANCEMATE_PASSWORD: ${{ secrets.COMPLIANCEMATE_PASSWORD }}
-        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_compliancemate.py
 
       # ── 6. Update SharePoint Excel report (store 2065) ────────────────────
       - name: Update Excel daily report (store 2065)
