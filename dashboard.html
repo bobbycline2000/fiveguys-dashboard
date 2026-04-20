@@ -390,5 +390,129 @@
   }
 </script>
 
+<!-- ── Debug Panel ─────────────────────────────────────────────────────── -->
+<style>
+  #debug-btn {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9000;
+    background: rgba(0,0,0,0.75); color: #fff; border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 50px; padding: 10px 18px; font-size: 0.8em; font-weight: 600;
+    cursor: pointer; backdrop-filter: blur(6px); letter-spacing: 0.03em;
+    transition: background 0.2s;
+  }
+  #debug-btn:hover { background: rgba(0,0,0,0.92); }
+  #debug-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+    z-index: 9100; align-items: center; justify-content: center;
+  }
+  #debug-overlay.open { display: flex; }
+  #debug-modal {
+    background: #1a1a1a; border-radius: 14px; padding: 28px 28px 22px;
+    width: min(520px, 94vw); max-height: 88vh; overflow-y: auto;
+    border: 1px solid rgba(255,255,255,0.1); color: #fff;
+  }
+  #debug-modal h2 { margin: 0 0 4px; font-size: 1.05em; }
+  #debug-modal p.sub { margin: 0 0 16px; font-size: 0.78em; color: #aaa; }
+  #debug-issue-text {
+    width: 100%; box-sizing: border-box; background: #111; color: #fff;
+    border: 1px solid #444; border-radius: 8px; padding: 10px 12px;
+    font-size: 0.85em; resize: vertical; min-height: 90px; font-family: inherit;
+  }
+  #debug-issue-text:focus { outline: none; border-color: #d52b1e; }
+  .debug-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .debug-actions button {
+    padding: 8px 16px; border-radius: 7px; border: none; cursor: pointer;
+    font-size: 0.82em; font-weight: 600;
+  }
+  #debug-save-btn { background: #d52b1e; color: #fff; }
+  #debug-save-btn:hover { background: #b82419; }
+  #debug-export-btn { background: #333; color: #fff; }
+  #debug-export-btn:hover { background: #444; }
+  #debug-close-btn { background: transparent; color: #aaa; margin-left: auto; }
+  #debug-close-btn:hover { color: #fff; }
+  #debug-log-list { margin-top: 18px; }
+  #debug-log-list h3 { font-size: 0.8em; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 10px; }
+  .debug-entry {
+    background: #111; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;
+    font-size: 0.8em; border-left: 3px solid #d52b1e;
+  }
+  .debug-entry .de-time { color: #888; font-size: 0.85em; margin-bottom: 4px; }
+  .debug-entry .de-msg { color: #eee; white-space: pre-wrap; }
+  .debug-empty { color: #555; font-size: 0.82em; font-style: italic; }
+</style>
+
+<button id="debug-btn" onclick="debugOpen()">🐛 Report Issue</button>
+
+<div id="debug-overlay" onclick="if(event.target===this)debugClose()">
+  <div id="debug-modal">
+    <h2>Report a Dashboard Issue</h2>
+    <p class="sub">Describe what looks wrong — Bobby types here, Claude reads the log and fixes it.</p>
+    <textarea id="debug-issue-text" placeholder="e.g. Labor % shows 0% but it should be 24%..."></textarea>
+    <div class="debug-actions">
+      <button id="debug-save-btn" onclick="debugSave()">Save Entry</button>
+      <button id="debug-export-btn" onclick="debugExport()">Export Log File</button>
+      <button id="debug-close-btn" onclick="debugClose()">Close</button>
+    </div>
+    <div id="debug-log-list">
+      <h3>Saved Issues</h3>
+      <div id="debug-entries"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const DEBUG_KEY = 'fg_debug_log';
+
+  function debugGetLog() {
+    try { return JSON.parse(localStorage.getItem(DEBUG_KEY) || '[]'); }
+    catch { return []; }
+  }
+
+  function debugRender() {
+    const entries = debugGetLog();
+    const el = document.getElementById('debug-entries');
+    if (!entries.length) {
+      el.innerHTML = '<div class="debug-empty">No issues logged yet.</div>';
+      return;
+    }
+    el.innerHTML = entries.slice().reverse().map(e => `
+      <div class="debug-entry">
+        <div class="de-time">${e.time}</div>
+        <div class="de-msg">${e.msg.replace(/</g,'&lt;')}</div>
+      </div>`).join('');
+  }
+
+  function debugOpen() {
+    document.getElementById('debug-overlay').classList.add('open');
+    debugRender();
+    document.getElementById('debug-issue-text').focus();
+  }
+
+  function debugClose() {
+    document.getElementById('debug-overlay').classList.remove('open');
+    document.getElementById('debug-issue-text').value = '';
+  }
+
+  function debugSave() {
+    const msg = document.getElementById('debug-issue-text').value.trim();
+    if (!msg) return;
+    const log = debugGetLog();
+    log.push({ time: new Date().toLocaleString(), msg });
+    localStorage.setItem(DEBUG_KEY, JSON.stringify(log));
+    document.getElementById('debug-issue-text').value = '';
+    debugRender();
+  }
+
+  function debugExport() {
+    const log = debugGetLog();
+    if (!log.length) { alert('No issues logged yet.'); return; }
+    const lines = log.map(e => `[${e.time}]\n${e.msg}`).join('\n\n---\n\n');
+    const blob = new Blob([lines], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'debug-log.txt';
+    a.click();
+  }
+</script>
+
 </body>
 </html>
