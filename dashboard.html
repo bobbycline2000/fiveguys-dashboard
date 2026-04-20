@@ -445,13 +445,14 @@
 <div id="debug-overlay" onclick="if(event.target===this)debugClose()">
   <div id="debug-modal">
     <h2>Report a Dashboard Issue</h2>
-    <p class="sub">Describe what looks wrong — Bobby types here, Claude reads the log and fixes it.</p>
+    <p class="sub">Type what looks wrong — saves directly to <code>data/debug-log.txt</code> so Claude can read it.</p>
+    <div id="debug-folder-status" style="font-size:0.75em;color:#f90;margin-bottom:10px;display:none;"></div>
     <textarea id="debug-issue-text" placeholder="e.g. Labor % shows 0% but it should be 24%..."></textarea>
     <div class="debug-actions">
       <button id="debug-save-btn" onclick="debugSave()">Save Entry</button>
-      <button id="debug-export-btn" onclick="debugExport()">Export Log File</button>
       <button id="debug-close-btn" onclick="debugClose()">Close</button>
     </div>
+    <div id="debug-save-status" style="font-size:0.75em;margin-top:8px;color:#4c4;display:none;"></div>
     <div id="debug-log-list">
       <h3>Saved Issues</h3>
       <div id="debug-entries"></div>
@@ -461,7 +462,83 @@
 
 <script>
   const DEBUG_KEY = 'fg_debug_log';
+  const DB_NAME   = 'fg_debug_db';
+  const DB_STORE  = 'handles';
+  let   _dirHandle = null;
 
+  // ── IndexedDB helpers to persist the folder handle across sessions ─────────
+  function idbOpen() {
+    return new Promise((res, rej) => {
+      const req = indexedDB.open(DB_NAME, 1);
+      req.onupgradeneeded = e => e.target.result.createObjectStore(DB_STORE);
+      req.onsuccess = e => res(e.target.result);
+      req.onerror   = e => rej(e);
+    });
+  }
+  async function idbGet(key) {
+    const db = await idbOpen();
+    return new Promise((res, rej) => {
+      const tx  = db.transaction(DB_STORE, 'readonly');
+      const req = tx.objectStore(DB_STORE).get(key);
+      req.onsuccess = e => res(e.target.result);
+      req.onerror   = e => rej(e);
+    });
+  }
+  async function idbSet(key, val) {
+    const db = await idbOpen();
+    return new Promise((res, rej) => {
+      const tx  = db.transaction(DB_STORE, 'readwrite');
+      const req = tx.objectStore(DB_STORE).put(val, key);
+      req.onsuccess = e => res(e.target.result);
+      req.onerror   = e => rej(e);
+    });
+  }
+
+  // ── Get or request folder handle ────────────────────────────────────────────
+  async function getDir() {
+    if (_dirHandle) return _dirHandle;
+    try {
+      const stored = await idbGet('dataDir');
+      if (stored) {
+        const perm = await stored.queryPermission({ mode: 'readwrite' });
+        if (perm === 'granted') { _dirHandle = stored; return _dirHandle; }
+        const req = await stored.requestPermission({ mode: 'readwrite' });
+        if (req === 'granted') { _dirHandle = stored; return _dirHandle; }
+      }
+    } catch {}
+    // First time — ask Bobby to pick the data/ folder
+    showFolderStatus('📁 One-time setup: select the "data" folder inside fiveguys-dashboard when prompted.');
+    const handle = await window.showDirectoryPicker({ mode: 'readwrite' });
+    await idbSet('dataDir', handle);
+    _dirHandle = handle;
+    showFolderStatus('');
+    return _dirHandle;
+  }
+
+  async function writeLogFile(entries) {
+    const dir  = await getDir();
+    const file = await dir.getFileHandle('debug-log.txt', { create: true });
+    const writable = await file.createWritable();
+    const lines = entries.map(e => `[${e.time}]\n${e.msg}`).join('\n\n---\n\n');
+    await writable.write(lines);
+    await writable.close();
+  }
+
+  function showFolderStatus(msg) {
+    const el = document.getElementById('debug-folder-status');
+    el.textContent = msg;
+    el.style.display = msg ? 'block' : 'none';
+  }
+
+  function showSaveStatus(msg, color) {
+    const el = document.getElementById('debug-save-status');
+    el.textContent = msg;
+    el.style.color = color || '#4c4';
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3000);
+  }
+
+  // ── Log helpers ─────────────────────────────────────────────────────────────
   function debugGetLog() {
     try { return JSON.parse(localStorage.getItem(DEBUG_KEY) || '[]'); }
     catch { return []; }
@@ -492,7 +569,7 @@
     document.getElementById('debug-issue-text').value = '';
   }
 
-  function debugSave() {
+  async function debugSave() {
     const msg = document.getElementById('debug-issue-text').value.trim();
     if (!msg) return;
     const log = debugGetLog();
@@ -500,17 +577,13 @@
     localStorage.setItem(DEBUG_KEY, JSON.stringify(log));
     document.getElementById('debug-issue-text').value = '';
     debugRender();
-  }
-
-  function debugExport() {
-    const log = debugGetLog();
-    if (!log.length) { alert('No issues logged yet.'); return; }
-    const lines = log.map(e => `[${e.time}]\n${e.msg}`).join('\n\n---\n\n');
-    const blob = new Blob([lines], { type: 'text/plain' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'debug-log.txt';
-    a.click();
+    try {
+      await writeLogFile(debugGetLog());
+      showSaveStatus('✅ Saved to data/debug-log.txt — Claude can read it now.');
+    } catch (err) {
+      showSaveStatus('⚠️ Saved in browser only. To enable file saving, click Save Entry again and select the data/ folder.', '#f90');
+    }
+    document.getElementById('debug-issue-text').value = '';
   }
 </script>
 
