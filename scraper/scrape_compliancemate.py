@@ -159,49 +159,72 @@ async def do_login(page) -> bool:
 # ── navigate to Statistics → List Completion ALL ───────────────────────────────
 
 async def navigate_to_list_completion(page) -> tuple[bool, str]:
-    """Submit the report form via direct GET URL with all required parameters.
+    """Navigate to List Completion report by interacting with the UI directly.
+    URL-based form submission doesn't apply filters — must click through the form.
     Returns (success, group_id).
     """
-    log.info("=== Navigating to List Completion report (form submission) ===")
+    log.info("=== Navigating to List Completion report (UI interaction) ===")
 
-    # Extract group ID from post-login URL if possible, otherwise use hardcoded value
     m = re.search(r'/groups/(\d+)/', page.url)
     group_id = m.group(1) if m else GROUP_ID
     log.info(f"  Group ID: {group_id}")
 
-    # Submit the report form as a GET request with all required parameters.
-    # This mimics clicking Apply with: Report=list_completions, Date=yesterday,
-    # Location=18170 (2065 - Louisville, KY), Timezone=America/New_York
-    url = (
-        f"{BASE_URL}/groups/{group_id}/report/select"
-        f"?requested_timezone=America%2FNew_York"
-        f"&report_form_submit=true"
-        f"&report_filters_presenter%5Breport_type%5D=list_completions"
-        f"&report_filters_presenter%5Bdate_range%5D=trailing_7_days"
-        f"&report_filters_presenter%5Blocations%5D%5B%5D={LOCATION_ID}"
-        f"&commit=Apply"
-    )
-    log.info(f"  Navigating to: {url}")
-    resp = await page.goto(url, timeout=30000, wait_until="networkidle")
-    # Page uses Bootstrap accordion divs, not a table. Wait for a data card
-    # to appear inside #accordion (the column-headers card is always present;
-    # we need a second card to confirm data loaded via AJAX).
+    # Step 1: Navigate to the list completions report page
+    report_url = f"{BASE_URL}/groups/{group_id}/report/list_completions"
+    log.info(f"  Going to: {report_url}")
+    await page.goto(report_url, timeout=30000, wait_until="networkidle")
+    await page.wait_for_timeout(2000)
+    await page.screenshot(path=str(DATA_DIR / "cm_03_report_page.png"))
+
+    # Step 2: Select "List Completion - All" report type
+    try:
+        await page.select_option(
+            "select#report_filters_presenter_report_type",
+            value="all_list_completions",
+            timeout=5000
+        )
+        log.info("  Selected report type: all_list_completions")
+    except Exception as e:
+        log.warning(f"  Could not set report type: {e}")
+
+    # Step 3: Select "Yesterday" date range
+    try:
+        await page.select_option(
+            "select[name='report_filters_presenter[date_range]']",
+            value="yesterday",
+            timeout=5000
+        )
+        log.info("  Selected date range: yesterday")
+    except Exception as e:
+        log.warning(f"  Could not set date range: {e}")
+
+    await page.screenshot(path=str(DATA_DIR / "cm_04_filters_set.png"))
+
+    # Step 4: Click Apply
+    applied = await try_click(page, [
+        "input[name='commit'][value='Apply']",
+        "button[name='commit']",
+        "input[type='submit'][value='Apply']",
+        "button:has-text('Apply')",
+        ".filter-actions input[type='submit']",
+    ])
+    if not applied:
+        log.warning("  Could not click Apply — trying Enter key")
+        await page.keyboard.press("Enter")
+
+    # Step 5: Wait for accordion data cards to appear
     try:
         await page.wait_for_function(
             "document.querySelectorAll('#accordion .card').length > 1",
-            timeout=15000
+            timeout=20000
         )
         log.info("  Data cards detected in accordion")
     except Exception:
-        log.warning("  No data cards appeared after 15s — data may be empty or still loading")
+        log.warning("  No data cards appeared after 20s — may be no data for yesterday")
+
     await page.wait_for_timeout(2000)
-    await page.screenshot(path=str(DATA_DIR / "cm_03_list_completions.png"))
-    log.info(f"  List Completion URL: {page.url}")
-
-    if resp and resp.status >= 400:
-        log.error(f"  HTTP {resp.status} on report URL")
-        return False, group_id
-
+    await page.screenshot(path=str(DATA_DIR / "cm_05_results.png"))
+    log.info(f"  Final URL: {page.url}")
     return True, group_id
 
 
