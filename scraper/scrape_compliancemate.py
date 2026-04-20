@@ -183,13 +183,17 @@ async def navigate_to_list_completion(page) -> tuple[bool, str]:
     )
     log.info(f"  Navigating to: {url}")
     resp = await page.goto(url, timeout=30000, wait_until="networkidle")
-    # Wait for AJAX data rows to load — table headers appear immediately but
-    # rows are fetched separately; wait up to 15s for first <tr> inside <tbody>
+    # Page uses Bootstrap accordion divs, not a table. Wait for a data card
+    # to appear inside #accordion (the column-headers card is always present;
+    # we need a second card to confirm data loaded via AJAX).
     try:
-        await page.wait_for_selector("table tbody tr", timeout=15000)
-        log.info("  Data rows detected in table")
+        await page.wait_for_function(
+            "document.querySelectorAll('#accordion .card').length > 1",
+            timeout=15000
+        )
+        log.info("  Data cards detected in accordion")
     except Exception:
-        log.warning("  No table rows appeared after 15s — data may be empty or still loading")
+        log.warning("  No data cards appeared after 15s — data may be empty or still loading")
     await page.wait_for_timeout(2000)
     await page.screenshot(path=str(DATA_DIR / "cm_03_list_completions.png"))
     log.info(f"  List Completion URL: {page.url}")
@@ -227,41 +231,44 @@ async def extract_list_completions(page) -> list:
 
     results = []
 
-    # Strategy 1: table rows
+    # Strategy 1: Bootstrap accordion cards (actual page structure)
+    # Each location/list is a .card div inside #accordion (skip the column-headers card)
     try:
-        rows = await page.query_selector_all("table tr")
-        for row in rows:
-            cells = await row.query_selector_all("td, th")
-            if len(cells) >= 2:
-                texts = [await c.inner_text() for c in cells]
-                name = texts[0].strip()
-                if not name or name.lower() in ("list", "name", "checklist"):
-                    continue
-                # look for a percentage in the row
-                row_text = " ".join(texts)
-                m = re.search(r"(\d{1,3})\s*%", row_text)
-                if m:
+        cards = await page.query_selector_all("#accordion .card:not(.column-headers)")
+        log.info(f"  Found {len(cards)} accordion data cards")
+        for card in cards:
+            card_text = (await card.inner_text()).strip()
+            if not card_text:
+                continue
+            lines = [l.strip() for l in card_text.splitlines() if l.strip()]
+            log.info(f"  Card text: {lines[:5]}")
+            # First non-empty line is the location/list name
+            name = lines[0] if lines else ""
+            if not name or name.lower() in ("list", "name", "location/list"):
+                continue
+            # Find percentage values in card text
+            pcts = re.findall(r"(\d{1,3})\s*%", card_text)
+            if pcts:
+                results.append({
+                    "name": name,
+                    "pct":  int(pcts[0]),
+                    "raw":  card_text[:200],
+                })
+            else:
+                m2 = re.search(r"(\d+)\s*/\s*(\d+)", card_text)
+                if m2:
+                    c, t = int(m2.group(1)), int(m2.group(2))
                     results.append({
                         "name": name,
-                        "pct":  int(m.group(1)),
-                        "raw":  row_text.strip(),
+                        "pct":  pct(c, t),
+                        "completed": c,
+                        "total": t,
+                        "raw":  card_text[:200],
                     })
-                else:
-                    # look for X/Y completion
-                    m2 = re.search(r"(\d+)\s*/\s*(\d+)", row_text)
-                    if m2:
-                        c, t = int(m2.group(1)), int(m2.group(2))
-                        results.append({
-                            "name": name,
-                            "pct":  pct(c, t),
-                            "completed": c,
-                            "total": t,
-                            "raw":  row_text.strip(),
-                        })
         if results:
-            log.info(f"Strategy 1 found {len(results)} rows")
+            log.info(f"Strategy 1 (accordion) found {len(results)} entries")
     except Exception as e:
-        log.warning(f"Table strategy failed: {e}")
+        log.warning(f"Accordion strategy failed: {e}")
 
     # Strategy 2: scan page text for name + percentage patterns
     if not results:
