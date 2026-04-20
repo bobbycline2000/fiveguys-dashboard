@@ -1,9 +1,15 @@
 {
   "meta": {
     "date": "2026-04-20",
-    "generated": "4/20/2026 at 3:35 AM",
+    "generated": "4/20/2026 at 3:38 AM",
     "location": "2065",
-    "status": "login_ok_no_data"
+    "status": "ok"
   },
-  "lists": []
+  "lists": [
+    {
+      "name": "2065 - Louisville, KY",
+      "pct": 58,
+      "raw": "2065 - Louisville, KY\n19\n58% | 58%"
+    }
+  ]
 }

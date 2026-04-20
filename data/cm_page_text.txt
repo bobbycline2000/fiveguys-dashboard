@@ -37,12 +37,34 @@ Custom
 Groups 0
 Locations 1
 2065 - Louisville, KY
-×2065 - Louisville, KY
+Lists 22
+11AM: Time and Temp
+1PM: Time and Temp
+3PM: Time and Temp
+5PM: Time and Temp
+7PM: Time and Temp
+9PM: Time and Temp
+AM Pre-Shift Check
+PM Pre-Shift Check
+Milkshake Pump Cleaning Check
+Tuesday Milkshake Cleaning Check
+Friday Milkshake Cleaning Check
+Closing Checklist
+Pre Open
+Shift Change
+Closing
+Weekly Store Inspection
+Delivery Check
+Temperature Sample
+Calibration Test
+Operational Spot Check
+Battery Swap Checklist
+MMCCA
 Filter Actions
 Reset Display
 Filters
 Create Document
-List Completion Percentages for 2026-04-20
+List Completion Percentages for 2026-04-19
 Location/List - 
 List Item
 
@@ -51,7 +73,10 @@ Required %
 List Item
 
 Overall %
-2026-04-20
+2026-04-19
 Req | All
+2065 - Louisville, KY
+19
+58% | 58%
 
 ver: 59a5edc40
