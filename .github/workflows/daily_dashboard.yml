@@ -99,7 +99,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-      # ── 8. Commit & push updated dashboard to main (→ Netlify auto-deploys)
+      # ── 8. Commit & push updated dashboard to main (local use — no Netlify)
       - name: Commit and push dashboard
         run: |
           git config user.name  "github-actions[bot]"
@@ -113,5 +113,5 @@ jobs:
             DATE=$(date -u +"%Y-%m-%d")
             git commit -m "chore: auto-update dashboard for ${DATE}"
             git push origin main
-            echo "Dashboard pushed — Netlify will auto-deploy."
+            echo "Dashboard committed — open locally via view-dashboard.bat"
           fi

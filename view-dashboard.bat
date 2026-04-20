@@ -1,0 +1,6 @@
+@echo off
+echo Pulling latest dashboard...
+cd /d "%~dp0"
+git pull origin main
+echo Opening dashboard...
+start "" "dashboard.html"
