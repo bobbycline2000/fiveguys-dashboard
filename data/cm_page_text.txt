@@ -64,7 +64,7 @@ Filter Actions
 Reset Display
 Filters
 Create Document
-List Completion Percentages for 2026-04-19
+List Completion Percentages for 2026-04-20
 Location/List - 
 List Item
 
@@ -73,10 +73,10 @@ Required %
 List Item
 
 Overall %
-2026-04-19
+2026-04-20
 Req | All
 2065 - Louisville, KY
 19
-58% | 58%
+34% | 34%
 
 ver: 59a5edc40
