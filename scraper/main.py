@@ -33,10 +33,15 @@ ET     = timezone(timedelta(hours=-4))
 now_et = datetime.now(tz=ET)
 yest   = now_et - timedelta(days=1)
 
-RPT_DATE     = yest.strftime("%Y-%m-%d")           # 2026-04-09
-RPT_MMDDYYYY = yest.strftime("%m/%d/%Y")           # 04/09/2026
-RPT_DISPLAY  = yest.strftime("%A, %B %-d, %Y")     # Thursday, April 9, 2026
-GEN_DISPLAY  = now_et.strftime("%-m/%-d/%Y at %-I:%M %p")
+def _fmt(dt, fmt):
+    """strftime without leading zeros — works on Windows and Linux."""
+    s = dt.strftime(fmt.replace("%-", "%#") if __import__("sys").platform == "win32" else fmt)
+    return s
+
+RPT_DATE     = yest.strftime("%Y-%m-%d")
+RPT_MMDDYYYY = yest.strftime("%m/%d/%Y")
+RPT_DISPLAY  = _fmt(yest,   "%A, %B %-d, %Y")
+GEN_DISPLAY  = _fmt(now_et, "%-m/%-d/%Y at %-I:%M %p")
 
 # ─── Logging ──────────────────────────────────────────────────────────────────
 logging.basicConfig(
@@ -979,9 +984,11 @@ def generate_html(d: dict, cm: dict = None) -> str:
 
     # ── ComplianceMate data prep ───────────────────────────────────────────────
     cm = cm or {}
-    cm_lists   = cm.get("lists", [])
-    cm_status  = cm.get("meta", {}).get("status", "no_data")
-    cm_ok      = cm_status == "ok" and cm_lists
+    cm_lists       = cm.get("lists", [])
+    cm_overall_pct = cm.get("overall_pct", 0)
+    cm_status      = cm.get("meta", {}).get("status", "no_data")
+    cm_has_lists   = cm_status in ("ok",) and cm_lists
+    cm_has_overall = cm_status in ("ok", "overall_only") and cm_overall_pct
 
     def cm_pct_color(p):
         if p >= 90: return "c-green"
@@ -994,8 +1001,17 @@ def generate_html(d: dict, cm: dict = None) -> str:
         return "neg"
 
     # Build food safety section HTML
-    if cm_ok:
-        cm_cards_html = ""
+    if cm_has_lists:
+        # Show individual checklist cards
+        overall_card = ""
+        if cm_overall_pct:
+            overall_card = f"""
+        <div class="card {cm_pct_color(cm_overall_pct)}" style="grid-column: 1 / -1;">
+          <div class="lbl">Overall Completion</div>
+          <div class="val {cm_pct_val_cls(cm_overall_pct)}">{cm_overall_pct}%</div>
+          <div class="hint">{len(cm_lists)} checklists</div>
+        </div>"""
+        cm_cards_html = overall_card
         for item in cm_lists:
             name = item.get("name", "—")
             p    = item.get("pct", 0)
@@ -1014,6 +1030,22 @@ def generate_html(d: dict, cm: dict = None) -> str:
         <div class="sec-title">Food Safety — ComplianceMate</div>
       </div>
       <div class="grid {grid_cls}">{cm_cards_html}
+      </div>
+    </div>"""
+    elif cm_has_overall:
+        # Individual checklists not yet extracted — show overall only
+        food_safety_section = f"""
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-temperature-half"></i></div>
+        <div class="sec-title">Food Safety — ComplianceMate</div>
+      </div>
+      <div class="grid g2">
+        <div class="card {cm_pct_color(cm_overall_pct)}">
+          <div class="lbl">Overall Completion</div>
+          <div class="val {cm_pct_val_cls(cm_overall_pct)}">{cm_overall_pct}%</div>
+          <div class="hint">Individual checklists loading</div>
+        </div>
       </div>
     </div>"""
     else:

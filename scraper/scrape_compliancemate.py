@@ -22,6 +22,7 @@ import re
 from datetime import datetime, date
 from pathlib import Path
 
+import sys
 from playwright.async_api import async_playwright, TimeoutError as PWTimeout
 
 log = logging.getLogger(__name__)
@@ -53,13 +54,18 @@ TARGET_CHECKLISTS = [
 GROUP_ID    = "21792"
 LOCATION_ID = "18170"
 
+def _fmt(dt, fmt):
+    """strftime without leading zeros — works on Windows and Linux."""
+    return dt.strftime(fmt.replace("%-", "%#") if sys.platform == "win32" else fmt)
+
 EMPTY_DATA = {
     "meta": {
         "date":      TODAY_STR,
-        "generated": datetime.now().strftime("%-m/%-d/%Y at %-I:%M %p"),
+        "generated": _fmt(datetime.now(), "%-m/%-d/%Y at %-I:%M %p"),
         "location":  "2065",
         "status":    "no_data",
     },
+    "overall_pct": 0,
     "lists": [],   # [{name, pct, completed, total}]
 }
 
@@ -228,94 +234,177 @@ async def navigate_to_list_completion(page) -> tuple[bool, str]:
     return True, group_id
 
 
-# ── scroll and extract list completions ───────────────────────────────────────
+# ── scroll and extract overall location % ─────────────────────────────────────
 
-async def extract_list_completions(page) -> list:
-    log.info("=== Extracting list completions ===")
+async def extract_overall_pct(page) -> tuple[int, str]:
+    """Returns (overall_pct, collapse_target_selector) from the top-level accordion card."""
+    log.info("=== Extracting overall location % ===")
 
-    # Scroll down to load all rows
-    for _ in range(5):
+    for _ in range(3):
         await page.evaluate("window.scrollBy(0, 600)")
-        await page.wait_for_timeout(500)
+        await page.wait_for_timeout(400)
 
     await page.screenshot(path=str(DATA_DIR / "cm_07_scrolled.png"))
 
-    # Save full page text and source for debugging
-    page_text = await page.inner_text("body")
-    (DATA_DIR / "cm_page_text.txt").write_text(page_text, encoding="utf-8")
+    # Save full page source for debugging
     html_content = await page.content()
     (DATA_DIR / "cm_results_source.html").write_text(html_content, encoding="utf-8")
 
-    # Log first 60 lines of page text so we can see the structure in CI logs
-    log.info("=== Page text (first 60 lines) ===")
-    for i, line in enumerate(page_text.splitlines()[:60]):
-        if line.strip():
-            log.info(f"  {i:02d}: {line.strip()[:120]}")
+    overall_pct = 0
+    collapse_target = ""
 
-    results = []
-
-    # Strategy 1: Bootstrap accordion cards (actual page structure)
-    # Each location/list is a .card div inside #accordion (skip the column-headers card)
     try:
         cards = await page.query_selector_all("#accordion .card:not(.column-headers)")
-        log.info(f"  Found {len(cards)} accordion data cards")
+        log.info(f"  Found {len(cards)} location cards")
         for card in cards:
             card_text = (await card.inner_text()).strip()
             if not card_text:
                 continue
             lines = [l.strip() for l in card_text.splitlines() if l.strip()]
-            log.info(f"  Card text: {lines[:5]}")
-            # First non-empty line is the location/list name
-            name = lines[0] if lines else ""
-            if not name or name.lower() in ("list", "name", "location/list"):
-                continue
-            # Find percentage values in card text
+            log.info(f"  Card: {lines[:4]}")
+
             pcts = re.findall(r"(\d{1,3})\s*%", card_text)
             if pcts:
-                results.append({
-                    "name": name,
-                    "pct":  int(pcts[0]),
-                    "raw":  card_text[:200],
-                })
+                overall_pct = int(pcts[0])
+
+            # Grab data-target from expand link
+            link = await card.query_selector("a[data-remote='true'][data-toggle='collapse']")
+            if link:
+                collapse_target = await link.get_attribute("data-target") or ""
+    except Exception as e:
+        log.warning(f"Overall extraction failed: {e}")
+
+    log.info(f"  Overall: {overall_pct}%  collapse_target={collapse_target!r}")
+    return overall_pct, collapse_target
+
+
+# ── expand accordion and extract individual checklists ─────────────────────────
+
+async def expand_and_extract_lists(page, collapse_target: str) -> list:
+    """
+    Clicks the AJAX expand link for the location row, waits for Rails UJS to inject
+    the individual checklist rows, then extracts them.
+    """
+    if not collapse_target:
+        log.warning("No collapse target — cannot expand accordion")
+        return []
+
+    log.info(f"=== Expanding accordion: {collapse_target} ===")
+
+    # Click the expand link to fire the AJAX request
+    link = await page.query_selector(
+        f"a[data-remote='true'][data-target='{collapse_target}']"
+    )
+    if not link:
+        log.warning(f"  Expand link not found for {collapse_target}")
+        return []
+
+    await link.click()
+    log.info("  Clicked expand link — waiting for AJAX content")
+
+    # Wait for Rails UJS to inject .card rows directly into the collapse div
+    try:
+        await page.wait_for_function(
+            f"document.querySelectorAll('{collapse_target} .card').length > 0",
+            timeout=20000,
+        )
+        log.info("  Accordion content loaded")
+    except Exception as e:
+        log.warning(f"  Accordion AJAX timed out: {e}")
+        # Content may still have loaded — try to parse anyway before giving up
+        log.info("  Attempting to parse whatever loaded despite timeout")
+        collapse_el = await page.query_selector(collapse_target)
+        if collapse_el:
+            debug_html = await collapse_el.inner_html()
+            (DATA_DIR / "cm_expanded_debug.html").write_text(debug_html, encoding="utf-8")
+            log.info(f"  Saved {len(debug_html)} bytes of partial HTML")
+            if len(debug_html.strip()) < 20:
+                return []
+            # fall through to extraction below
+
+    await page.wait_for_timeout(800)
+    await page.screenshot(path=str(DATA_DIR / "cm_08_expanded.png"))
+
+    # Save expanded HTML for debugging
+    collapse_el = await page.query_selector(collapse_target)
+    if collapse_el:
+        expanded_html = await collapse_el.inner_html()
+        (DATA_DIR / "cm_expanded_source.html").write_text(expanded_html, encoding="utf-8")
+        log.info(f"  Saved expanded HTML ({len(expanded_html)} bytes)")
+
+    # Log expanded text
+    expanded_text = await page.inner_text(collapse_target)
+    (DATA_DIR / "cm_page_text.txt").write_text(expanded_text, encoding="utf-8")
+    log.info("=== Expanded checklist rows (first 50 lines) ===")
+    for i, line in enumerate(expanded_text.splitlines()[:50]):
+        if line.strip():
+            log.info(f"  {i:02d}: {line.strip()[:120]}")
+
+    rows = []
+
+    # Strategy A: .card rows inside expanded area
+    try:
+        list_cards = await page.query_selector_all(f"{collapse_target} .card")
+        log.info(f"  Found {len(list_cards)} .card elements in expanded area")
+        for card in list_cards:
+            card_text = (await card.inner_text()).strip()
+            if not card_text:
+                continue
+            lines = [l.strip() for l in card_text.splitlines() if l.strip()]
+            name = lines[0] if lines else ""
+            if not name or len(name) < 2:
+                continue
+            pcts = re.findall(r"(\d{1,3})\s*%", card_text)
+            if pcts:
+                rows.append({"name": name, "pct": int(pcts[0]), "raw": card_text[:200]})
             else:
                 m2 = re.search(r"(\d+)\s*/\s*(\d+)", card_text)
                 if m2:
                     c, t = int(m2.group(1)), int(m2.group(2))
-                    results.append({
-                        "name": name,
-                        "pct":  pct(c, t),
-                        "completed": c,
-                        "total": t,
-                        "raw":  card_text[:200],
-                    })
-        if results:
-            log.info(f"Strategy 1 (accordion) found {len(results)} entries")
+                    rows.append({"name": name, "pct": pct(c, t), "completed": c, "total": t, "raw": card_text[:200]})
+        if rows:
+            log.info(f"Strategy A (.card) found {len(rows)} rows")
     except Exception as e:
-        log.warning(f"Accordion strategy failed: {e}")
+        log.warning(f"Strategy A failed: {e}")
 
-    # Strategy 2: scan page text for name + percentage patterns
-    if not results:
+    # Strategy B: table rows inside expanded area
+    if not rows:
         try:
-            lines = page_text.splitlines()
-            for i, line in enumerate(lines):
-                line = line.strip()
-                if not line:
+            trs = await page.query_selector_all(f"{collapse_target} tr")
+            log.info(f"  Found {len(trs)} <tr> elements")
+            for tr in trs:
+                tr_text = (await tr.inner_text()).strip()
+                if not tr_text:
                     continue
-                m = re.search(r"(\d{1,3})\s*%", line)
-                if m and len(line) > 3:
-                    name = re.sub(r"\d{1,3}\s*%.*", "", line).strip(" :-|")
-                    if name:
-                        results.append({"name": name, "pct": int(m.group(1)), "raw": line})
-            if results:
-                log.info(f"Strategy 2 found {len(results)} lines")
+                pcts = re.findall(r"(\d{1,3})\s*%", tr_text)
+                if pcts:
+                    name = re.sub(r"\d{1,3}\s*%.*", "", tr_text).strip(" :-|\t")
+                    if name and len(name) > 2:
+                        rows.append({"name": name, "pct": int(pcts[0]), "raw": tr_text[:200]})
+            if rows:
+                log.info(f"Strategy B (table rows) found {len(rows)} rows")
         except Exception as e:
-            log.warning(f"Text strategy failed: {e}")
+            log.warning(f"Strategy B failed: {e}")
 
-    log.info(f"Total extracted: {len(results)} list entries")
-    for r in results:
+    # Strategy C: text scan of expanded area
+    if not rows:
+        for line in expanded_text.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            m = re.search(r"(\d{1,3})\s*%", line)
+            if m and len(line) > 5:
+                name = re.sub(r"\d{1,3}\s*%.*", "", line).strip(" :-|")
+                if name and len(name) > 2:
+                    rows.append({"name": name, "pct": int(m.group(1)), "raw": line})
+        if rows:
+            log.info(f"Strategy C (text scan) found {len(rows)} rows")
+
+    log.info(f"Total individual checklists: {len(rows)}")
+    for r in rows:
         log.info(f"  {r['name']}: {r['pct']}%")
 
-    return results
+    return rows
 
 
 # ── main scrape ────────────────────────────────────────────────────────────────
@@ -340,16 +429,18 @@ async def scrape() -> dict:
                 data["meta"]["status"] = "nav_failed"
                 return data
 
-            lists = await extract_list_completions(page)
+            overall_pct, collapse_target = await extract_overall_pct(page)
+            lists = await expand_and_extract_lists(page, collapse_target)
 
-            status = "ok" if lists else "login_ok_no_data"
+            status = "ok" if lists else ("overall_only" if overall_pct else "login_ok_no_data")
             return {
                 "meta": {
                     "date":      TODAY_STR,
-                    "generated": datetime.now().strftime("%-m/%-d/%Y at %-I:%M %p"),
+                    "generated": _fmt(datetime.now(), "%-m/%-d/%Y at %-I:%M %p"),
                     "location":  "2065",
                     "status":    status,
                 },
+                "overall_pct": overall_pct,
                 "lists": lists,
             }
 
@@ -369,4 +460,4 @@ if __name__ == "__main__":
     data = asyncio.run(scrape())
     out = Path(__file__).parent.parent / "data" / "compliancemate.json"
     out.write_text(json.dumps(data, indent=2))
-    log.info(f"Saved {out}  |  status={data['meta']['status']}  |  {len(data['lists'])} lists found")
+    log.info(f"Saved {out}  |  status={data['meta']['status']}  |  overall={data['overall_pct']}%  |  {len(data['lists'])} individual checklists")

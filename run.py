@@ -55,15 +55,7 @@ async def run_store(store_id: str):
     # Pass config to scrapers via env vars so existing scripts work unchanged
     os.environ["STORE_ID"] = store_id
 
-    # ── CrunchTime scrape ──────────────────────────────────────────────────────
-    log.info("\n--- CrunchTime Net Chef ---")
-    try:
-        from scraper.main import main as ct_main
-        await ct_main()
-    except Exception as e:
-        log.error(f"CrunchTime scrape failed: {e}")
-
-    # ── ComplianceMate scrape ──────────────────────────────────────────────────
+    # ── ComplianceMate scrape FIRST (dashboard.html will include fresh CM data) ─
     log.info("\n--- ComplianceMate ---")
     try:
         from scraper.scrape_compliancemate import scrape as cm_scrape
@@ -74,13 +66,29 @@ async def run_store(store_id: str):
     except Exception as e:
         log.error(f"ComplianceMate scrape failed: {e}")
 
+    # ── CrunchTime scrape + generate dashboard.html (reads fresh CM data) ──────
+    log.info("\n--- CrunchTime Net Chef ---")
+    try:
+        from scraper.main import main as ct_main
+        await ct_main()
+    except Exception as e:
+        log.error(f"CrunchTime scrape failed: {e}")
+
     # ── Excel update ───────────────────────────────────────────────────────────
     log.info("\n--- SharePoint Excel ---")
     try:
-        from scraper.update_excel import main as xl_main
-        xl_main()
+        from scraper.update_excel import run as xl_run
+        xl_run(os.getenv("STORE_ID", "2065"))
+    except (Exception, SystemExit) as e:
+        log.error(f"Excel update failed (no Azure credentials configured — skipping): {e}")
+
+    # ── Discord daily brief post ───────────────────────────────────────────────
+    log.info("\n--- Discord Daily Brief ---")
+    try:
+        from post_daily_brief import post as post_brief
+        post_brief()
     except Exception as e:
-        log.error(f"Excel update failed: {e}")
+        log.error(f"Discord brief post failed: {e}")
 
     log.info(f"\nDone — store {store_id} complete.")
     log.info(f"Dashboard: {ROOT / 'dashboard.html'}")

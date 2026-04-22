@@ -299,7 +299,9 @@ def build_values(ct: dict, store_id: str) -> dict[str, object]:
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 def run(store_id: str = "2065"):
-    log.info(f"=== Excel Update | Store {store_id} | {yest.strftime('%A, %B %-d, %Y')} ===")
+    import sys as _sys
+    _fmt = lambda dt, f: dt.strftime(f.replace("%-", "%#") if _sys.platform == "win32" else f)
+    log.info(f"=== Excel Update | Store {store_id} | {_fmt(yest, '%A, %B %-d, %Y')} ===")
 
     if not (MS_USERNAME and MS_PASSWORD) and not all([TENANT_ID, CLIENT_ID, CLIENT_SECRET]):
         log.error("Set MS_USERNAME+MS_PASSWORD (or MS_TENANT_ID+MS_CLIENT_ID+MS_CLIENT_SECRET) in GitHub Secrets")
