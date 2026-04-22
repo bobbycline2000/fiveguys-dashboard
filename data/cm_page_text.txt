@@ -1,82 +1,40 @@
-Five Guys Burgers and Fries
-Corporate 
-North America 
-VP - Jim Meeks 
-Director - Paul Barnedo 
-Indianapolis 
-FBM - Kevin Goyke 
-Estep & Affiliates 
-737 Ventures 
-2065 - Louisville, KY
-Dashboard
-Organization
-Statistics
-Reports
-Notifications
-Tasks
-Messages
-Configurations
-Support
-Lists
-Sensors
-Timed Logs
-Report Type
-List Completion - Req
-List Completion - All
-List Completion - Duration
-Incomplete Lists
-Reusable Lists
-Anomalies
-Date Range
-Today
-Yesterday
-Trailing 7 Days
-Trailing 30 Days
-Trailing 90 Days
-Custom
-Groups 0
-Locations 1
-2065 - Louisville, KY
-Lists 22
 11AM: Time and Temp
+100% | 100%
 1PM: Time and Temp
+100% | 100%
 3PM: Time and Temp
+100% | 100%
 5PM: Time and Temp
+100% | 100%
 7PM: Time and Temp
+100% | 100%
 9PM: Time and Temp
+100% | 100%
 AM Pre-Shift Check
+100% | 100%
 PM Pre-Shift Check
-Milkshake Pump Cleaning Check
+0% | 0%
 Tuesday Milkshake Cleaning Check
-Friday Milkshake Cleaning Check
+100% | 100%
 Closing Checklist
+100% | 100%
 Pre Open
+100% | 100%
 Shift Change
+100% | 100%
 Closing
+100% | 100%
 Weekly Store Inspection
+0% | 0%
 Delivery Check
+0% | 0%
 Temperature Sample
+0% | 0%
 Calibration Test
+0% | 0%
 Operational Spot Check
+0% | 0%
 Battery Swap Checklist
+0% | 0%
 MMCCA
-Filter Actions
-Reset Display
-Filters
-Create Document
-List Completion Percentages for 2026-04-20
-Location/List - 
-List Item
-
-Required %
-  |  
-List Item
-
-Overall %
-2026-04-20
-Req | All
-2065 - Louisville, KY
-19
-34% | 34%
-
-ver: 59a5edc40
+0% | 0%
