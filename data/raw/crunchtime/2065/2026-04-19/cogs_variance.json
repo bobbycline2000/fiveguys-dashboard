@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef — Top 10 Actual vs. Theoretical Cost Items widget",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-04-13",
+    "week_end": "2026-04-19",
+    "pulled": "2026-04-23 10:58 ET",
+    "method": "manual (screenshot) — Playwright scraper pending"
+  },
+  "items": [
+    {"rank": 1, "name": "Ground Beef",                                          "actual": 2812, "theoretical": 2702, "over_dollars": 110, "variance_pct": -4},
+    {"rank": 2, "name": "Hot Dog",                                              "actual": 146,  "theoretical": 62,   "over_dollars": 84,  "variance_pct": -137},
+    {"rank": 3, "name": "Bun, Burger",                                          "actual": 928,  "theoretical": 881,  "over_dollars": 47,  "variance_pct": -5},
+    {"rank": 4, "name": "Potato, Idaho",                                        "actual": 929,  "theoretical": 892,  "over_dollars": 37,  "variance_pct": -4},
+    {"rank": 5, "name": "Lettuce",                                              "actual": 88,   "theoretical": 59,   "over_dollars": 29,  "variance_pct": -50},
+    {"rank": 6, "name": "A1 Steak Sauce",                                       "actual": 34,   "theoretical": 14,   "over_dollars": 20,  "variance_pct": -150},
+    {"rank": 7, "name": "Topping, Fudge Bittersweet / NEW Chocolate Fudge",     "actual": 43,   "theoretical": 24,   "over_dollars": 19,  "variance_pct": -84},
+    {"rank": 8, "name": "Banana Marinade",                                      "actual": 31,   "theoretical": 13,   "over_dollars": 18,  "variance_pct": -143}
+  ],
+  "ranking": "over_dollars_desc"
+}

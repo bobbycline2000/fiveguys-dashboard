@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "source": "Par Brink admin portal — Weekly Labor Schedule",
+    "store": "KY-2065 Dixie Highway",
+    "week_start": "2026-04-20",
+    "week_end": "2026-04-26",
+    "generated": "2026-04-23 10:12:15 ET",
+    "pulled": "2026-04-23 10:15 ET",
+    "pdf": "data/parbrink/2026-04-23/Weekly_Labor_Schedule_2065.pdf"
+  },
+  "totals_by_day": {
+    "2026-04-20": 63.00,
+    "2026-04-21": 81.75,
+    "2026-04-22": 80.50,
+    "2026-04-23": 73.75,
+    "2026-04-24": 82.00,
+    "2026-04-25": 90.50,
+    "2026-04-26": 82.00,
+    "week_total": 553.50
+  },
+  "display_format": "first_name_last_initial",
+  "employees": [
+    {"name": "Noel B.",      "full_name": "Belisle, Noel",               "role": "Crew",                      "total_hours": 23.00},
+    {"name": "Kaisha B.",    "full_name": "Brewer, Kaisha",              "role": "Crew",                      "total_hours": 36.00},
+    {"name": "Robert C.",    "full_name": "Cline, Robert",               "role": "General Manager - Salary",  "total_hours": 51.00},
+    {"name": "Jada C.",      "full_name": "Cox, Jada",                   "role": "Crew",                      "total_hours": 23.50},
+    {"name": "Brianna G.",   "full_name": "Gatewood, Brianna",           "role": "Crew",                      "total_hours": 25.50},
+    {"name": "Richard G.",   "full_name": "Gibbs, Richard",              "role": "Crew",                      "total_hours": 38.50},
+    {"name": "Ailen G.",     "full_name": "Gonzalez Cardero, Ailen",     "role": "Crew",                      "total_hours": 21.75},
+    {"name": "Autumn H.",    "full_name": "Hearn, Autumn",               "role": "Crew",                      "total_hours": 28.50},
+    {"name": "Lidy H.",      "full_name": "Henry, Lidy",                 "role": "Crew",                      "total_hours": 40.50},
+    {"name": "Maylin H.",    "full_name": "Hernandez Rodriguez, Maylin", "role": "Crew",                      "total_hours": 36.75},
+    {"name": "DJuan J.",     "full_name": "Johnson, DJuan",              "role": "Crew",                      "total_hours": 9.50},
+    {"name": "Emanuela K.",  "full_name": "Kamara, Emanuela",            "role": "Crew",                      "total_hours": 18.50},
+    {"name": "Francisco L.", "full_name": "Llorente Mejias, Francisco",  "role": "Crew",                      "total_hours": 40.50},
+    {"name": "Vicki L.",     "full_name": "Lucey, Vicki",                "role": "Shift Lead - Hourly",       "total_hours": 25.50},
+    {"name": "Jeremiah M.",  "full_name": "Matthews, Jeremiah",          "role": "Crew",                      "total_hours": 23.00},
+    {"name": "Mykenize M.",  "full_name": "Milledge, Mykenize",          "role": "Crew",                      "total_hours": 13.00},
+    {"name": "Robert M.",    "full_name": "Muncy Jr, Robert",            "role": "Crew",                      "total_hours": 18.00},
+    {"name": "Nathan R.",    "full_name": "Roberts, Nathan",             "role": "Shift Lead - Hourly",       "total_hours": 41.00},
+    {"name": "Kasey W.",     "full_name": "Wilson, Kasey",               "role": "Shift Lead - Hourly",       "total_hours": 39.50}
+  ],
+  "today": {
+    "date": "2026-04-23",
+    "day_of_week": "Thursday",
+    "scheduled_hours": 73.75,
+    "shifts": [
+      {"name": "Brianna G.",   "role": "Crew",                "start": "04:00 PM", "end": "09:00 PM"},
+      {"name": "Richard G.",   "role": "Crew",                "start": "03:00 PM", "end": "11:00 PM"},
+      {"name": "Ailen G.",     "role": "Crew",                "start": "05:45 PM", "end": "11:00 PM"},
+      {"name": "Autumn H.",    "role": "Crew",                "start": "05:30 PM", "end": "11:30 PM"},
+      {"name": "Lidy H.",      "role": "Crew",                "start": "08:00 AM", "end": "04:00 PM"},
+      {"name": "Maylin H.",    "role": "Crew",                "start": "03:00 PM", "end": "11:00 PM"},
+      {"name": "DJuan J.",     "role": "Crew",                "start": "05:00 PM", "end": "10:30 PM"},
+      {"name": "Francisco L.", "role": "Crew",                "start": "08:00 AM", "end": "02:00 PM"},
+      {"name": "Vicki L.",     "role": "Shift Lead - Hourly", "start": "07:30 AM", "end": "04:00 PM"},
+      {"name": "Nathan R.",    "role": "Shift Lead - Hourly", "start": "10:00 AM", "end": "05:00 PM"},
+      {"name": "Kasey W.",     "role": "Shift Lead - Hourly", "start": "05:00 PM", "end": "11:30 PM"}
+    ]
+  }
+}

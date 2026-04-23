@@ -3,392 +3,1305 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Five Guys KY-2065 | Operations Dashboard</title>
+<title>Five Guys — Store 2065 Operations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: #d52b1e; min-height: 100vh; color: white; }
-  .topbar { background: #0c0c0c; padding: 0 32px; display: flex; justify-content: space-between; align-items: stretch; border-bottom: 1px solid #1c1c1c; position: sticky; top: 0; z-index: 50; }
-  .topbar-brand { display: flex; align-items: center; gap: 10px; padding: 11px 0; flex-shrink: 0; margin-right: 28px; }
-  .brand-pip { width: 3px; height: 28px; background: #d52b1e; border-radius: 2px; }
-  .brand-name { font-size: 0.82em; font-weight: 700; color: #efefef; }
-  .brand-sub { font-size: 0.58em; color: #3a3a3a; margin-top: 1px; text-transform: uppercase; letter-spacing: 0.8px; }
-  .topbar-nav { display: flex; align-items: stretch; flex: 1; }
-  .nav-tab { padding: 0 16px; display: flex; align-items: center; gap: 6px; font-size: 0.7em; font-weight: 500; color: #454545; cursor: pointer; border: none; border-bottom: 2px solid transparent; background: none; font-family: inherit; letter-spacing: 0.2px; transition: color 0.12s; white-space: nowrap; }
-  .nav-tab:hover { color: #888; }
-  .nav-tab.active { color: #fff; border-bottom-color: #d52b1e; }
-  .nav-dropdown { position: relative; display: flex; align-items: stretch; }
-  .dropdown-menu { display: none; position: absolute; top: calc(100% + 1px); left: 0; background: #111; border: 1px solid #222; border-radius: 7px; min-width: 170px; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.5); overflow: hidden; }
-  .nav-dropdown:hover .dropdown-menu { display: block; }
-  .dropdown-item { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; font-size: 0.7em; color: #3a3a3a; border-bottom: 1px solid #1a1a1a; cursor: default; }
-  .dropdown-item:last-child { border-bottom: none; }
-  .dropdown-item .soon { font-size: 0.85em; color: #262626; }
-  .topbar-right { display: flex; align-items: center; padding-left: 20px; border-left: 1px solid #1c1c1c; margin-left: 8px; text-align: right; }
-  .date-main { font-size: 0.72em; font-weight: 600; color: #777; }
-  .date-gen  { font-size: 0.58em; color: #2e2e2e; margin-top: 1px; }
-  .sites-bar { background: #0c0c0c; border-bottom: 1px solid #1a1a1a; padding: 7px 32px; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
-  .site-btn { display: flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 5px; border: 1px solid #2a2a2a; background: #141414; color: #555; font-size: 0.65em; font-weight: 500; font-family: inherit; white-space: nowrap; cursor: pointer; transition: border-color 0.12s, color 0.12s, background 0.12s; }
-  .site-btn:hover { border-color: #3a3a3a; color: #999; background: #1a1a1a; }
-  .site-btn.active { border-color: #d52b1e; color: #fff; background: #1a0a09; }
-  .site-btn i { font-size: 0.9em; }
-  #site-viewer { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 40; background: #000; flex-direction: column; }
-  #site-viewer.open { display: flex; }
-  .site-viewer-bar { background: #0c0c0c; border-bottom: 1px solid #1a1a1a; padding: 8px 16px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .site-viewer-bar .site-title { font-size: 0.72em; font-weight: 600; color: #777; }
-  .site-viewer-bar .site-url { font-size: 0.6em; color: #333; margin-left: 4px; }
-  #site-frame { flex: 1; border: none; width: 100%; background: #fff; }
-  .back-btn-viewer { display: flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 5px; border: 1px solid #2a2a2a; background: #141414; color: #d52b1e; font-size: 0.65em; font-weight: 600; font-family: inherit; cursor: pointer; margin-right: 8px; }
-  .back-btn-viewer:hover { background: #1e0808; border-color: #d52b1e; }
-  .kpi-bar { background: rgba(0,0,0,0.22); border-bottom: 1px solid rgba(0,0,0,0.18); padding: 0 32px; display: flex; overflow-x: auto; }
-  .kpi-item { padding: 8px 22px 8px 0; margin-right: 22px; border-right: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
-  .kpi-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
-  .kpi-lbl { font-size: 0.5em; letter-spacing: 0.9px; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 2px; font-weight: 500; }
-  .kpi-val { font-size: 0.86em; font-weight: 700; color: rgba(255,255,255,0.88); letter-spacing: -0.3px; }
-  .kpi-val.pos { color: #4ade80; }
-  .kpi-val.neg { color: #fca5a5; }
-  .page { display: none; }
-  .page.active { display: block; }
-  .inner { max-width: 980px; margin: 0 auto; padding: 20px 32px 32px; }
-  .section { margin-bottom: 16px; }
-  .sec-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; padding-bottom: 9px; border-bottom: 1px solid rgba(255,255,255,0.12); }
-  .sec-icon { width: 28px; height: 28px; background: rgba(0,0,0,0.25); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.72em; color: rgba(255,255,255,0.75); flex-shrink: 0; }
-  .sec-title { font-size: 0.92em; font-weight: 700; color: #ffffff; }
-  .grid { display: grid; gap: 5px; }
-  .g3 { grid-template-columns: repeat(3, 1fr); }
-  .g4 { grid-template-columns: repeat(4, 1fr); }
-  .card { background: #090909; border-radius: 6px; padding: 9px 12px 10px; border: 1px solid rgba(255,255,255,0.03); position: relative; overflow: hidden; }
-  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
-  .c-amber::before { background: #d97706; }
-  .c-teal::before  { background: #0891b2; }
-  .c-indigo::before { background: #4338ca; }
-  .c-green::before { background: #15803d; }
-  .c-rose::before  { background: #be123c; }
-  .c-sky::before   { background: #0369a1; }
-  .lbl { font-size: 0.52em; font-weight: 500; letter-spacing: 0.7px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 5px; }
-  .val { font-size: 1.08em; font-weight: 700; color: #fff; letter-spacing: -0.5px; line-height: 1; }
-  .val.pos { color: #4ade80; }
-  .val.neg { color: #fca5a5; }
-  .hint { font-size: 0.52em; color: rgba(255,255,255,0.15); margin-top: 2px; }
-  .wtd { font-size: 0.55em; margin-top: 7px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; }
-  .wk { color: rgba(255,255,255,0.16); font-weight: 600; }
-  .wv { color: rgba(255,255,255,0.42); }
-  .wv.pos { color: #4ade80; }
-  .wv.neg { color: #fca5a5; }
-  .tbl { width: 100%; border-collapse: collapse; background: #090909; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.03); }
-  .tbl th { padding: 7px 13px; font-size: 0.52em; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.22); text-align: left; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.015); }
-  .tbl th:not(:first-child) { text-align: right; }
-  .tbl td { padding: 8px 13px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.75em; color: rgba(255,255,255,0.38); }
-  .tbl td:not(:first-child) { text-align: right; color: rgba(255,255,255,0.68); font-weight: 500; }
-  .tbl tr:last-child td { border-bottom: none; }
-  .tbl tr:hover td { background: rgba(255,255,255,0.015); }
-  .links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
-  .link-card { background: #090909; border-radius: 6px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 11px; text-decoration: none; transition: background 0.12s; }
-  .link-card:hover { background: #111; }
-  .link-icon { width: 30px; height: 30px; border-radius: 6px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; font-size: 0.8em; color: rgba(255,255,255,0.5); flex-shrink: 0; }
-  .link-name { font-size: 0.76em; font-weight: 600; color: rgba(255,255,255,0.8); margin-bottom: 2px; }
-  .link-desc { font-size: 0.6em; color: rgba(255,255,255,0.22); }
-  footer { text-align: center; padding: 12px; color: rgba(255,255,255,0.15); font-size: 0.56em; letter-spacing: 0.3px; }
-  @media (max-width: 860px) {
-    .g4 { grid-template-columns: repeat(2, 1fr); }
-    .g3 { grid-template-columns: repeat(2, 1fr); }
-    .links-grid { grid-template-columns: repeat(2, 1fr); }
-    .inner { padding: 14px 16px 24px; }
-    .topbar, .kpi-bar, .sites-bar { padding-left: 16px; padding-right: 16px; }
-  }
-  @media (max-width: 540px) {
-    .g4, .g3 { grid-template-columns: 1fr 1fr; }
-    .links-grid { grid-template-columns: 1fr 1fr; }
-    .brand-sub { display: none; }
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red:        #CE1726;
+  --red-deep:   #a81120;
+  --red-bright: #e8394a;
+  --black:      #0d0d0d;
+  --black-2:    #1a1a1a;
+  --black-3:    #222222;
+  --white:      #ffffff;
+  --white-90:   rgba(255,255,255,0.90);
+  --white-60:   rgba(255,255,255,0.60);
+  --white-30:   rgba(255,255,255,0.30);
+  --white-12:   rgba(255,255,255,0.12);
+  --white-06:   rgba(255,255,255,0.06);
+  --card:       rgba(0,0,0,0.28);
+  --card-hover: rgba(0,0,0,0.38);
+  --green:      #22c55e;
+  --green-dim:  rgba(34,197,94,0.15);
+  --yellow:     #F5A800;
+  --yellow-dim: rgba(245,168,0,0.15);
+  --alert-red:  #ff4d4d;
+  --alert-dim:  rgba(255,77,77,0.15);
+  --sidebar-w:  220px;
+  --radius:     10px;
+}
+
+html, body { height: 100%; overflow-x: hidden; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--red);
+  color: var(--white);
+  display: flex;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  max-width: 100vw;
+}
+.main, .content, .ops-row, .controllables-row, .kpi-row, .bottom-row, .col-stack, .ss-row { min-width: 0; }
+.card, .ctrl-card { min-width: 0; max-width: 100%; overflow: hidden; }
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 60;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.sidebar-logo {
+  padding: 20px 16px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.logo-row { display: flex; align-items: center; gap: 10px; }
+.logo-box {
+  width: 36px; height: 36px;
+  background: var(--red);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem; font-weight: 900;
+  color: white; flex-shrink: 0;
+}
+.logo-name { color: white; font-size: 0.85rem; font-weight: 700; line-height: 1.15; }
+.logo-sub  { color: rgba(255,255,255,0.28); font-size: 0.6rem; letter-spacing: 1.8px; text-transform: uppercase; }
+
+.nav-section { padding: 14px 8px 4px; }
+.nav-label {
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.22);
+  padding: 0 8px; margin-bottom: 3px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 9px;
+  width: 100%; padding: 8px 10px; margin-bottom: 1px;
+  border-radius: 7px; border: none; background: transparent;
+  cursor: pointer; color: rgba(255,255,255,0.42);
+  font-family: 'Inter', sans-serif; font-size: 0.79rem; font-weight: 500;
+  text-align: left; transition: all 0.15s;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); }
+.nav-item.active {
+  background: var(--red);
+  color: white;
+  font-weight: 600;
+}
+.nav-ico { width: 15px; display: flex; align-items: center; flex-shrink: 0; }
+.nav-ico svg { width: 14px; height: 14px; stroke-width: 1.8; }
+.nav-badge {
+  margin-left: auto; font-size: 0.56rem; font-weight: 700;
+  padding: 1px 6px; border-radius: 20px; line-height: 1.5;
+}
+.badge-yellow { background: var(--yellow); color: var(--black); }
+.badge-red    { background: var(--alert-red); color: white; }
+
+.sidebar-footer {
+  margin-top: auto; padding: 12px 8px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.store-chip {
+  display: flex; align-items: center; gap: 9px; padding: 10px 10px;
+  background: rgba(255,255,255,0.05); border-radius: 8px;
+}
+.store-ava {
+  width: 30px; height: 30px; border-radius: 7px; flex-shrink: 0;
+  background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.66rem; font-weight: 700; color: white;
+}
+.store-name { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.85); }
+.store-loc  { font-size: 0.61rem; color: rgba(255,255,255,0.28); margin-top: 1px; }
+.live-dot   { width: 7px; height: 7px; background: var(--green); border-radius: 50%; margin-left: auto; flex-shrink: 0; box-shadow: 0 0 6px var(--green); }
+
+/* ══════════════════════════════════════════
+   MAIN
+══════════════════════════════════════════ */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1; display: flex; flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Topbar */
+.topbar {
+  background: rgba(0,0,0,0.25);
+  border-bottom: 1px solid var(--white-12);
+  min-height: 54px; padding: 8px 18px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; flex-wrap: wrap;
+  position: sticky; top: 0; z-index: 40;
+  backdrop-filter: blur(6px);
+}
+.crumb { font-size: 0.75rem; color: var(--white-60); flex-shrink: 0; }
+.crumb b { color: white; font-weight: 600; }
+.topbar-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.date-chip {
+  background: rgba(0,0,0,0.3); border: 1px solid var(--white-12);
+  padding: 5px 12px; border-radius: 6px;
+  font-size: 0.71rem; color: var(--white-90); font-weight: 500;
+}
+.sync-info { display: flex; align-items: center; gap: 5px; font-size: 0.68rem; color: var(--white-60); }
+.sync-info .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; box-shadow: 0 0 5px var(--green); }
+.btn-black {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--black); color: white; border: none;
+  padding: 7px 16px; border-radius: 7px;
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+  cursor: pointer; transition: background 0.15s; letter-spacing: 0.2px;
+}
+.btn-black svg { width: 12px; height: 12px; stroke-width: 2.2; }
+.btn-black:hover { background: var(--black-3); }
+
+/* Period toggle (Today / Week / Month / Quarter) */
+.period-toggle {
+  display: inline-flex; background: var(--black); border: 1px solid var(--white-12);
+  border-radius: 7px; padding: 3px; gap: 2px;
+}
+.period-btn {
+  background: transparent; border: none;
+  color: var(--white-60); font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3px;
+  padding: 5px 12px; border-radius: 5px; cursor: pointer;
+  transition: all 0.15s;
+}
+.period-btn:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+.period-btn.active { background: var(--red); color: var(--white); }
+.user-ava {
+  width: 32px; height: 32px; background: var(--black);
+  border: 2px solid var(--white-30);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.67rem; font-weight: 700; color: white; cursor: pointer;
+}
+
+/* Content */
+.content { padding: 18px 20px; flex: 1; min-width: 0; max-width: 100%; }
+
+/* Page header */
+.page-hdr { margin-bottom: 20px; display: flex; align-items: flex-end; justify-content: space-between; }
+.page-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.7rem; font-weight: 800; color: white; letter-spacing: 0.5px; line-height: 1; }
+.page-sub   { font-size: 0.73rem; color: var(--white-60); margin-top: 4px; }
+.last-updated { font-size: 0.68rem; color: var(--white-60); text-align: right; }
+.last-updated b { color: white; }
+
+/* ── CARD base ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--white-12);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  transition: background 0.15s;
+}
+.card:hover { background: var(--card-hover); }
+.card-hdr { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
+.card-title { font-size: 0.8rem; font-weight: 700; color: var(--white-90); letter-spacing: 0.3px; text-transform: uppercase; }
+.card-sub   { font-size: 0.67rem; color: var(--white-60); margin-top: 2px; font-weight: 400; text-transform: none; }
+.pill {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px;
+  padding: 3px 9px; border-radius: 20px;
+}
+.pill-white  { background: rgba(255,255,255,0.15); color: white; }
+.pill-green  { background: var(--green-dim); color: var(--green); }
+.pill-yellow { background: var(--yellow-dim); color: var(--yellow); }
+.pill-red    { background: var(--alert-dim); color: var(--alert-red); }
+
+/* ══════════════════════════════════════════
+   THE CONTROLLABLES (hero section)
+══════════════════════════════════════════ */
+.controllables-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-bottom: 14px;
+}
+.ctrl-card {
+  background: var(--black);
+  border: 1px solid var(--white-12);
+  border-radius: var(--radius);
+  padding: 14px 16px 12px;
+  position: relative; overflow: hidden;
+}
+
+.ctrl-eyebrow {
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--white-60); margin-bottom: 6px;
+}
+.ctrl-main { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 4px; }
+.ctrl-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3.1rem; font-weight: 900; line-height: 1;
+  color: white; letter-spacing: -1.5px;
+}
+
+.ctrl-meta { padding-bottom: 4px; }
+.ctrl-goal { font-size: 0.7rem; color: var(--white-60); }
+.ctrl-goal b { color: white; }
+
+/* Inline flag under the % value — only shown when over goal */
+.ctrl-flag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.56rem; font-weight: 700;
+  padding: 2px 7px; border-radius: 20px;
+  background: var(--alert-dim); color: var(--alert-red);
+  border: 1px solid rgba(255,77,77,0.35);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-top: 4px;
+}
+.ctrl-flag svg { width: 9px; height: 9px; stroke-width: 2.5; }
+
+.ctrl-divider { height: 1px; background: var(--white-12); margin: 10px 0; }
+
+.ctrl-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ctrl-stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; color: white; }
+.ctrl-stat-lbl { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--white-60); margin-top: 1px; }
+
+/* Hourly bar mini-chart */
+.ctrl-section-lbl { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white-60); margin-bottom: 6px; display: flex; justify-content: space-between; }
+.ctrl-hours-lbl { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white-60); margin-bottom: 6px; display: flex; justify-content: space-between; }
+
+/* Top variance items */
+.var-list { display: flex; flex-direction: column; gap: 4px; }
+.var-item {
+  display: grid; grid-template-columns: 14px 1fr auto;
+  align-items: center; gap: 8px;
+  padding: 5px 8px; border-radius: 5px;
+  background: rgba(255,255,255,0.05);
+  font-size: 0.72rem;
+}
+.var-rank { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: var(--white-60); font-size: 0.85rem; }
+.var-name { color: var(--white); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.var-pct  { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--white); font-size: 0.85rem; }
+
+/* Period variance grid (week / month / QTD) */
+.period-var { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.period-box {
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px; padding: 8px 10px;
+  text-align: center;
+}
+.period-val { font-family: 'Barlow Condensed', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--white); line-height: 1; }
+.period-lbl { font-size: 0.52rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--white-60); margin-top: 3px; }
+.ctrl-hours-lbl .goal-tag { color: var(--white-90); font-weight: 700; }
+.ctrl-bar-row { display: flex; gap: 3px; align-items: flex-end; height: 40px; position: relative; padding-top: 2px; }
+.ctrl-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ctrl-bar {
+  width: 100%; border-radius: 2px 2px 0 0;
+  background: var(--white);
+  transition: height 0.4s;
+}
+.ctrl-bar.under { background: var(--white-30); }
+.ctrl-goal-line {
+  position: absolute; left: 0; right: 0;
+  border-top: 1px dashed var(--white-60);
+  pointer-events: none;
+}
+.ctrl-bar-hr { font-size: 0.46rem; color: var(--white-30); }
+
+/* ══════════════════════════════════════════
+   SECONDARY KPIs
+══════════════════════════════════════════ */
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+.kpi-card {
+  background: var(--card);
+  border: 1px solid var(--white-12);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.kpi-top  { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.kpi-ico  { width: 32px; height: 32px; border-radius: 8px; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
+.kpi-ico svg { width: 15px; height: 15px; stroke-width: 1.8; color: white; }
+.kpi-delta { display: flex; align-items: center; gap: 3px; font-size: 0.66rem; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+.kpi-delta svg { width: 9px; height: 9px; stroke-width: 2.5; }
+.d-up   { background: var(--green-dim);  color: var(--green); }
+.d-down { background: var(--alert-dim);  color: var(--alert-red); }
+.d-flat { background: rgba(255,255,255,0.1); color: var(--white-60); }
+.kpi-val { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 800; color: white; letter-spacing: -0.5px; line-height: 1; }
+.kpi-lbl { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--white-60); margin-top: 3px; }
+.kpi-sub { font-size: 0.67rem; color: var(--white-60); margin-top: 5px; }
+
+/* ══════════════════════════════════════════
+   SCHEDULING + HOURLY LABOR + COMPLIANCE
+══════════════════════════════════════════ */
+.ops-row { display: grid; grid-template-columns: 1.35fr 1fr; gap: 14px; margin-bottom: 14px; align-items: start; }
+.col-stack { display: flex; flex-direction: column; gap: 14px; }
+
+/* Secret Shop / Steritech / Notes 3-column row */
+.ss-row { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 14px; margin-bottom: 14px; align-items: stretch; }
+.ss-row > .card { padding: 14px 16px; background: var(--black); border: 1px solid var(--white-12); }
+.ss-row > .card:hover { background: var(--black-2); }
+
+/* Steritech card */
+.st-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--white-12); margin-bottom: 10px; }
+.st-score { font-family: 'Barlow Condensed', sans-serif; font-size: 2.4rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -1px; }
+.st-goal  { font-size: 0.66rem; color: var(--white-60); margin-top: 2px; }
+.st-goal b { color: white; }
+.st-meta  { font-size: 0.58rem; color: var(--white-60); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; text-align: right; }
+.st-meta b { color: white; display: block; font-size: 0.75rem; letter-spacing: 0; text-transform: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; margin-top: 2px; }
+
+.st-metric { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; font-size: 0.72rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.st-metric:last-child { border-bottom: none; }
+.st-metric-label { color: var(--white-90); }
+.st-metric-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--white); font-size: 0.88rem; }
+.st-status { display: inline-flex; align-items: center; gap: 5px; font-size: 0.62rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.8px; }
+.st-status.pass { background: var(--green-dim); color: var(--green); }
+.st-status.warn { background: var(--yellow-dim); color: var(--yellow); }
+.st-status.fail { background: var(--alert-dim); color: var(--alert-red); }
+
+/* Team Notes card */
+.notes-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--white-12); }
+.notes-list { display: flex; flex-direction: column; gap: 8px; max-height: 260px; overflow-y: auto; padding-right: 4px; }
+.note-item {
+  background: rgba(255,255,255,0.05);
+  border-left: 3px solid var(--white-30);
+  border-radius: 6px; padding: 10px 12px;
+}
+.note-item.from-dm       { border-left-color: var(--yellow); }
+.note-item.from-director { border-left-color: var(--alert-red); }
+.note-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.note-from {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.88rem; font-weight: 800; color: var(--white);
+  letter-spacing: 0.3px; text-transform: uppercase;
+}
+.note-role {
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 2px 7px; border-radius: 20px;
+  background: rgba(255,255,255,0.1); color: var(--white-60);
+  margin-left: 4px;
+}
+.note-role.dm       { background: var(--yellow-dim); color: var(--yellow); }
+.note-role.director { background: var(--alert-dim); color: var(--alert-red); }
+.note-time { font-size: 0.6rem; color: var(--white-60); margin-left: auto; }
+.note-body { font-size: 0.74rem; color: var(--white-90); line-height: 1.45; }
+.note-input-row { margin-top: 10px; display: flex; gap: 6px; }
+.note-input {
+  flex: 1; background: rgba(0,0,0,0.35); border: 1px solid var(--white-12);
+  border-radius: 6px; padding: 7px 10px; color: var(--white);
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+}
+.note-input::placeholder { color: var(--white-30); }
+.note-post {
+  background: var(--red); color: var(--white); border: none;
+  padding: 7px 14px; border-radius: 6px; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.7rem;
+  letter-spacing: 0.3px;
+}
+.note-post:hover { background: var(--red-bright); }
+
+/* Secret Shop card */
+.ss-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--white-12); margin-bottom: 10px; }
+.ss-score-wrap { display: flex; align-items: flex-end; gap: 8px; }
+.ss-score { font-family: 'Barlow Condensed', sans-serif; font-size: 2.1rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -1px; }
+.ss-goal  { font-size: 0.64rem; color: var(--white-60); padding-bottom: 3px; }
+.ss-goal b { color: white; }
+.ss-meta  { font-size: 0.55rem; color: var(--white-60); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; text-align: right; }
+.ss-meta b { color: white; display: block; font-size: 0.7rem; letter-spacing: 0; text-transform: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; margin-top: 2px; }
+
+.ss-kpi-list { display: flex; flex-direction: column; gap: 4px; }
+.ss-kpi {
+  display: grid; grid-template-columns: 1fr 40px auto;
+  align-items: center; gap: 8px;
+  padding: 5px 8px; border-radius: 5px;
+  background: rgba(255,255,255,0.05);
+  font-size: 0.68rem;
+}
+.ss-kpi-name { color: var(--white); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ss-kpi-bar-bg { height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; }
+.ss-kpi-bar-fill { height: 100%; background: var(--white); border-radius: 2px; }
+.ss-kpi-bar-fill.under { background: var(--white-30); }
+.ss-kpi-pct { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--white); font-size: 0.85rem; min-width: 36px; text-align: right; }
+
+/* Compliance checklist card */
+.cm-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--white-12); }
+.cm-overall-val { font-family: 'Barlow Condensed', sans-serif; font-size: 2.4rem; font-weight: 900; line-height: 1; color: var(--green); letter-spacing: -1px; }
+.cm-overall-lbl { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white-60); margin-top: 3px; }
+.cm-badge { font-size: 0.62rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+
+.cm-list { display: flex; flex-direction: column; gap: 6px; }
+.cm-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 10px; border-radius: 6px;
+  background: rgba(0,0,0,0.2); border: 1px solid transparent;
+}
+.cm-item:hover { background: rgba(0,0,0,0.3); }
+.cm-label { font-size: 0.72rem; font-weight: 500; color: var(--white-90); }
+.cm-pct   { font-size: 0.76rem; font-weight: 700; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.3px; }
+.cm-pct.good { color: var(--green); }
+.cm-pct.warn { color: var(--yellow); }
+.cm-pct.over { color: var(--alert-red); }
+.cm-pct.tbd  { color: var(--white-30); font-style: italic; font-size: 0.66rem; }
+.cm-item.shift-change { background: rgba(0,0,0,0.35); border-color: var(--white-12); }
+.cm-item.shift-change .cm-label { font-weight: 700; text-transform: uppercase; font-size: 0.65rem; letter-spacing: 1px; color: var(--white-60); }
+
+/* Schedule */
+.schedule-tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+.sched-tab {
+  padding: 5px 14px; border-radius: 6px; border: 1px solid var(--white-12);
+  background: transparent; color: var(--white-60);
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; letter-spacing: 0.3px;
+}
+.sched-tab.active { background: var(--black); color: white; border-color: var(--white-30); }
+
+.sched-table { width: 100%; border-collapse: collapse; }
+.sched-table thead th {
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--white-30); padding: 0 0 8px; text-align: left; border-bottom: 1px solid var(--white-12);
+}
+.sched-table thead th:not(:first-child) { text-align: right; }
+.sched-table tbody tr:hover td { background: rgba(255,255,255,0.04); }
+.sched-table tbody td {
+  padding: 8px 0; font-size: 0.76rem; color: var(--white-90);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.sched-table tbody td:not(:first-child) { text-align: right; }
+.sched-table tbody tr:last-child td { border-bottom: none; }
+.sched-table .total-row td { color: white; font-weight: 700; border-top: 1px solid var(--white-12); padding-top: 10px; }
+
+.emp-name  { font-weight: 600; }
+.emp-role  { font-size: 0.62rem; color: var(--white-30); margin-top: 1px; }
+.var-over  { color: var(--alert-red); font-weight: 700; }
+.var-under { color: var(--green); font-weight: 700; }
+.var-ok    { color: var(--white-60); }
+.pending   { color: var(--white-30); font-style: italic; font-size: 0.7rem; }
+
+/* Hourly labor alerts */
+.hourly-grid { display: flex; flex-direction: column; gap: 5px; }
+.hour-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 10px; border-radius: 7px;
+  border: 1px solid transparent;
+}
+.hour-row.hr-green  { background: var(--green-dim);  border-color: rgba(34,197,94,0.2); }
+.hour-row.hr-yellow { background: var(--yellow-dim); border-color: rgba(245,168,0,0.2); }
+.hour-row.hr-red    { background: var(--alert-dim);  border-color: rgba(255,77,77,0.2); }
+.hour-row.hr-future { background: rgba(255,255,255,0.04); border-color: transparent; }
+
+.hr-time { font-size: 0.7rem; font-weight: 600; color: var(--white-60); width: 42px; flex-shrink: 0; }
+.hr-bar-bg { flex: 1; height: 6px; background: rgba(0,0,0,0.3); border-radius: 99px; overflow: hidden; }
+.hr-bar-fill { height: 100%; border-radius: 99px; }
+.hr-bar-fill.green  { background: var(--green); }
+.hr-bar-fill.yellow { background: var(--yellow); }
+.hr-bar-fill.red    { background: var(--alert-red); }
+.hr-bar-fill.future { background: rgba(255,255,255,0.15); }
+.hr-pct { font-size: 0.73rem; font-weight: 700; width: 40px; text-align: right; flex-shrink: 0; }
+.hr-pct.green  { color: var(--green); }
+.hr-pct.yellow { color: var(--yellow); }
+.hr-pct.red    { color: var(--alert-red); }
+.hr-pct.future { color: var(--white-30); }
+.hr-flag { font-size: 0.6rem; font-weight: 700; padding: 1px 6px; border-radius: 4px; flex-shrink: 0; width: 48px; text-align: center; }
+.flag-good { background: var(--green-dim); color: var(--green); }
+.flag-warn { background: var(--yellow-dim); color: var(--yellow); }
+.flag-over { background: var(--alert-dim); color: var(--alert-red); }
+.flag-tbd  { background: rgba(255,255,255,0.06); color: var(--white-30); }
+
+/* ══════════════════════════════════════════
+   BOTTOM ROW (trend chart + activity)
+══════════════════════════════════════════ */
+.bottom-row { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+/* Discounts & Refunds card */
+.dr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 14px; }
+.dr-box {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px; padding: 12px 14px;
+  border: 1px solid var(--white-12);
+}
+.dr-lbl { font-size: 0.56rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white-60); margin-bottom: 6px; }
+.dr-val { font-family: 'Barlow Condensed', sans-serif; font-size: 1.7rem; font-weight: 800; color: var(--white); line-height: 1; letter-spacing: -0.5px; }
+.dr-sub { font-size: 0.64rem; color: var(--white-60); margin-top: 4px; }
+.dr-sub b { color: var(--white); font-weight: 700; }
+
+.dr-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
+.dr-table th {
+  text-align: left; padding: 8px 10px;
+  font-size: 0.56rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--white-60); border-bottom: 1px solid var(--white-12);
+}
+.dr-table th.num { text-align: right; }
+.dr-table td {
+  padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: var(--white-90);
+}
+.dr-table td.num { text-align: right; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--white); }
+.dr-table tbody tr:hover { background: rgba(255,255,255,0.04); }
+
+/* Slim horizontal alert strip */
+.alerts-strip {
+  display: flex; align-items: center; gap: 10px;
+  flex-wrap: wrap;
+  background: var(--card); border: 1px solid var(--white-12);
+  border-radius: var(--radius); padding: 10px 14px;
+  margin-top: 14px; max-width: 100%;
+}
+.alerts-strip-lbl {
+  flex-shrink: 0; font-size: 0.58rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px; color: var(--white-60);
+  padding-right: 12px; border-right: 1px solid var(--white-12);
+  display: flex; align-items: center; gap: 6px;
+}
+.alerts-strip-lbl svg { width: 12px; height: 12px; stroke-width: 2.4; }
+.alerts-strip-items { display: flex; gap: 6px; flex: 1 1 auto; flex-wrap: wrap; min-width: 0; }
+.alert-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 9px; border-radius: 20px;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--white-12);
+  font-size: 0.68rem; color: var(--white-90);
+}
+.alert-chip .alert-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+.alert-chip .alert-dot.red    { background: var(--alert-red); box-shadow: 0 0 5px var(--alert-red); }
+.alert-chip .alert-dot.yellow { background: var(--yellow); }
+.alert-chip .alert-dot.green  { background: var(--green); }
+.alert-chip .alert-time { color: var(--white-60); font-size: 0.62rem; }
+
+/* Activity */
+.activity-list { display: flex; flex-direction: column; }
+.act-item {
+  display: flex; gap: 10px; padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  align-items: flex-start;
+}
+.act-item:last-child { border-bottom: none; }
+.act-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.act-dot.red    { background: var(--alert-red); box-shadow: 0 0 5px var(--alert-red); }
+.act-dot.green  { background: var(--green); box-shadow: 0 0 5px var(--green); }
+.act-dot.yellow { background: var(--yellow); box-shadow: 0 0 5px var(--yellow); }
+.act-dot.gray   { background: var(--white-30); }
+.act-text { font-size: 0.74rem; color: var(--white-90); font-weight: 500; line-height: 1.4; }
+.act-time { font-size: 0.64rem; color: var(--white-30); margin-top: 2px; }
+
+/* Footer */
+.footer-bar {
+  background: var(--black); padding: 10px 26px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.67rem; color: rgba(255,255,255,0.25); letter-spacing: 0.3px;
+  border-top: 1px solid rgba(255,255,255,0.06); flex-shrink: 0;
+}
+.footer-bar span { color: rgba(255,255,255,0.45); }
 </style>
 </head>
 <body>
 
-<nav class="topbar">
-  <div class="topbar-brand">
-    <div class="brand-pip"></div>
-    <div>
-      <div class="brand-name">Five Guys &mdash; KY-2065 Dixie Highway</div>
-      <div class="brand-sub">Operations Dashboard</div>
-    </div>
-  </div>
-  <div class="topbar-nav">
-    <button class="nav-tab active" onclick="showTab('dashboard',this)">
-      <i class="fa-solid fa-chart-simple"></i> Dashboard
-    </button>
-    <button class="nav-tab" onclick="showTab('links',this)">
-      <i class="fa-solid fa-link"></i> Quick Links
-    </button>
-    <div class="nav-dropdown">
-      <button class="nav-tab">More <i class="fa-solid fa-chevron-down" style="font-size:0.75em"></i></button>
-      <div class="dropdown-menu">
-        <div class="dropdown-item">Weekly Summary <span class="soon">coming soon</span></div>
-        <div class="dropdown-item">Labor Schedule <span class="soon">coming soon</span></div>
-        <div class="dropdown-item">Food Cost <span class="soon">coming soon</span></div>
-        <div class="dropdown-item">Inventory <span class="soon">coming soon</span></div>
+<!-- ══════════ SIDEBAR ══════════ -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-row">
+      <div class="logo-box">FG</div>
+      <div>
+        <div class="logo-name">Five Guys Ops</div>
+        <div class="logo-sub">Operations Hub</div>
       </div>
     </div>
   </div>
-  <div class="topbar-right">
-    <div>
-      <div class="date-main">Monday, April 20, 2026</div>
-      <div class="date-gen">Generated 4/21/2026 at 12:21 PM</div>
+
+  <div class="nav-section">
+    <div class="nav-label">Main</div>
+    <button class="nav-item active">
+      <span class="nav-ico"><i data-lucide="layout-dashboard"></i></span>Overview
+    </button>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Operations Hub</div>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="croissant"></i></span>Bread Ordering
+    </button>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="clipboard-check"></i></span>ComplianceMate
+    </button>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="calendar-clock"></i></span>Teamworx
+    </button>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="handshake"></i></span>Alliance
+    </button>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="users"></i></span>Employee Contacts
+    </button>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="trending-up"></i></span>Sales
+    </button>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="eye"></i></span>Secret Shops
+    </button>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="package"></i></span>Inventory
+    </button>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="shield-check"></i></span>Steritech
+    </button>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="map-pin"></i></span>Locations
+    </button>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">System</div>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="settings"></i></span>Settings
+    </button>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="store-chip">
+      <div class="store-ava">BC</div>
+      <div>
+        <div class="store-name">Store 2065</div>
+        <div class="store-loc">Louisville, KY</div>
+      </div>
+      <div class="live-dot"></div>
     </div>
   </div>
 </nav>
 
-<div class="sites-bar">
-  <button class="site-btn" onclick="openSite('https://fiveguysfr77.net-chef.com','Net Chef','fiveguysfr77.net-chef.com',this)">
-    <i class="fa-solid fa-chart-bar"></i> Net Chef
-  </button>
-  <button class="site-btn" onclick="openSite('https://fiveguysfr113-em.net-chef.com','Schedules','fiveguysfr113-em.net-chef.com',this)">
-    <i class="fa-solid fa-calendar-days"></i> Schedules
-  </button>
-  <button class="site-btn" onclick="openSite('https://fiveguysfr77.ct-teamworx.com','TeamWorx','fiveguysfr77.ct-teamworx.com',this)">
-    <i class="fa-solid fa-users-clock"></i> TeamWorx
-  </button>
-  <button class="site-btn" onclick="openSite('https://admin5.parpos.com','Brinks','admin5.parpos.com',this)">
-    <i class="fa-solid fa-vault"></i> Brinks
-  </button>
-  <button class="site-btn" onclick="openSite('https://bread2.fiveguys.com','Bread Ordering','bread2.fiveguys.com',this)">
-    <i class="fa-solid fa-bread-slice"></i> Bread Order
-  </button>
-  <button class="site-btn" onclick="openSite('https://knowledgeforce.com','Secret Shops','knowledgeforce.com',this)">
-    <i class="fa-solid fa-user-secret"></i> Secret Shops
-  </button>
-  <button class="site-btn" onclick="openSite('https://fg-beta.compliancemate.com','Temps &amp; Times','fg-beta.compliancemate.com',this)">
-    <i class="fa-solid fa-temperature-half"></i> Temps &amp; Times
-  </button>
-</div>
+<!-- ══════════ MAIN ══════════ -->
+<div class="main">
 
-<div id="site-viewer">
-  <div class="site-viewer-bar">
-    <button class="back-btn-viewer" onclick="closeSite()">
-      <i class="fa-solid fa-arrow-left"></i> Dashboard
-    </button>
-    <span class="site-title" id="viewer-title"></span>
-    <span class="site-url" id="viewer-url"></span>
-  </div>
-  <iframe id="site-frame" src=""></iframe>
-</div>
-
-<div class="kpi-bar">
-  <div class="kpi-item">
-    <div class="kpi-lbl">Net Sales</div>
-    <div class="kpi-val">$3,436.00</div>
-  </div>
-  <div class="kpi-item">
-    <div class="kpi-lbl">vs Last Year</div>
-    <div class="kpi-val pos">$521.00</div>
-  </div>
-  <div class="kpi-item">
-    <div class="kpi-lbl">vs Forecast</div>
-    <div class="kpi-val neg">($657.00)</div>
-  </div>
-  <div class="kpi-item">
-    <div class="kpi-lbl">Labor %</div>
-    <div class="kpi-val">24.62%</div>
-  </div>
-  <div class="kpi-item">
-    <div class="kpi-lbl">Cash Over/Short</div>
-    <div class="kpi-val pos">$0.00</div>
-  </div>
-</div>
-
-<div class="page active" id="tab-dashboard">
-  <div class="inner">
-
-    <div class="section">
-      <div class="sec-hdr">
-        <div class="sec-icon"><i class="fa-solid fa-temperature-half"></i></div>
-        <div class="sec-title">Food Safety — ComplianceMate</div>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="crumb">Operations &nbsp;&rsaquo;&nbsp; <b>Overview</b></div>
+    <div class="topbar-right">
+      <div class="period-toggle" id="periodToggle">
+        <button class="period-btn active" data-period="today">Today</button>
+        <button class="period-btn" data-period="week">Week</button>
+        <button class="period-btn" data-period="month">Month</button>
+        <button class="period-btn" data-period="quarter">Quarter</button>
       </div>
-      <div class="grid g2">
-        <div class="card c-rose">
-          <div class="lbl">2065 - Louisville, KY</div>
-          <div class="val neg">34%</div>
-          <div class="hint">In Progress</div>
+      <div class="sync-info"><div class="dot"></div>Live data</div>
+      <div class="date-chip">Monday, April 21 &nbsp;2026</div>
+      <button class="btn-black"><i data-lucide="refresh-cw"></i> Refresh</button>
+      <div class="user-ava">BC</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Page header -->
+    <div class="page-hdr">
+      <div>
+        <div class="page-title">Good morning, Bobby.</div>
+        <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
+      </div>
+      <div class="last-updated">Last updated <b>10:59 AM</b><br>Source: CrunchTime Net Chef</div>
+    </div>
+
+    <!-- ══ THE CONTROLLABLES ══ -->
+    <div class="controllables-row">
+
+      <!-- Food Cost -->
+      <div class="ctrl-card food-cost">
+        <div class="ctrl-eyebrow">The Controllables &nbsp;&mdash;&nbsp; Food Cost</div>
+        <div class="ctrl-main">
+          <div>
+            <div class="ctrl-value">31.2%</div>
+            <div class="ctrl-flag"><i data-lucide="flag"></i> Over Goal</div>
+          </div>
+          <div class="ctrl-meta">
+            <div class="ctrl-goal">Goal: <b>27.5%</b></div>
+          </div>
         </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-section-lbl"><span>Top 3 Variance Items</span><span class="goal-tag">04/13–04/19</span></div>
+        <div class="var-list">
+          <div class="var-item">
+            <span class="var-rank">1</span>
+            <span class="var-name">Ground Beef</span>
+            <span class="var-pct">+$110</span>
+          </div>
+          <div class="var-item">
+            <span class="var-rank">2</span>
+            <span class="var-name">Hot Dog</span>
+            <span class="var-pct">+$84</span>
+          </div>
+          <div class="var-item">
+            <span class="var-rank">3</span>
+            <span class="var-name">Bun, Burger</span>
+            <span class="var-pct">+$47</span>
+          </div>
+        </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-section-lbl"><span>Variance % to Goal</span></div>
+        <div class="period-var">
+          <div class="period-box">
+            <div class="period-val">+0.7%</div>
+            <div class="period-lbl">Week</div>
+          </div>
+          <div class="period-box">
+            <div class="period-val">+1.2%</div>
+            <div class="period-lbl">Month</div>
+          </div>
+          <div class="period-box">
+            <div class="period-val">+0.9%</div>
+            <div class="period-lbl">QTD</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Labor -->
+      <div class="ctrl-card labor">
+        <div class="ctrl-eyebrow">The Controllables &nbsp;&mdash;&nbsp; Labor</div>
+        <div class="ctrl-main">
+          <div>
+            <div class="ctrl-value">24.9%</div>
+            <div class="ctrl-flag"><i data-lucide="flag"></i> Over Goal</div>
+          </div>
+          <div class="ctrl-meta">
+            <div class="ctrl-goal">Goal: <b>18.5%</b></div>
+          </div>
+        </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-stats" style="grid-template-columns: repeat(4, 1fr);">
+          <div>
+            <div class="ctrl-stat-val">$2,392</div>
+            <div class="ctrl-stat-lbl">Labor $ Today</div>
+          </div>
+          <div>
+            <div class="ctrl-stat-val">47.5</div>
+            <div class="ctrl-stat-lbl">Actual Hrs</div>
+          </div>
+          <div>
+            <div class="ctrl-stat-val">73.8</div>
+            <div class="ctrl-stat-lbl">Sched Hrs</div>
+          </div>
+          <div>
+            <div class="ctrl-stat-val">$13.45</div>
+            <div class="ctrl-stat-lbl">Avg Hrly Wage</div>
+          </div>
+        </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-section-lbl"><span>Week-to-Date Running Labor</span><span class="goal-tag">Goal 18.5%</span></div>
+        <div class="period-var">
+          <div class="period-box">
+            <div class="period-val">19.2%</div>
+            <div class="period-lbl">WTD %</div>
+          </div>
+          <div class="period-box">
+            <div class="period-val">$14,820</div>
+            <div class="period-lbl">WTD Labor $</div>
+          </div>
+          <div class="period-box">
+            <div class="period-val">278.5</div>
+            <div class="period-lbl">WTD Hours</div>
+          </div>
+        </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-hours-lbl">
+          <span>Labor % by Hour &middot; 11A&ndash;10P</span>
+          <span class="goal-tag">Goal 18.5%</span>
+        </div>
+        <div class="ctrl-bar-row" id="laborBars"></div>
+      </div>
+
+    </div><!-- /controllables-row -->
+
+    <!-- ══ SECONDARY KPIs ══ -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-ico"><i data-lucide="dollar-sign"></i></div>
+          <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;4.2%</div>
+        </div>
+        <div class="kpi-val">$3,566</div>
+        <div class="kpi-lbl">Daily Sales</div>
+        <div class="kpi-sub">LY $4,569 &nbsp;&middot;&nbsp; Fcst $4,573</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-ico"><i data-lucide="receipt"></i></div>
+          <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;+12</div>
+        </div>
+        <div class="kpi-val">312</div>
+        <div class="kpi-lbl">Transactions</div>
+        <div class="kpi-sub">+12 vs last Monday</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-ico"><i data-lucide="tag"></i></div>
+          <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;$0.60</div>
+        </div>
+        <div class="kpi-val">$5.34</div>
+        <div class="kpi-lbl">Sales / Guest</div>
+        <div class="kpi-sub">Week avg $5.41</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-ico"><i data-lucide="shield-check"></i></div>
+          <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;+2pts</div>
+        </div>
+        <div class="kpi-val">70%</div>
+        <div class="kpi-lbl">Compliance</div>
+        <div class="kpi-sub">13/20 lists at 100%</div>
       </div>
     </div>
 
-    <div class="section">
-      <div class="sec-hdr">
-        <div class="sec-icon"><i class="fa-solid fa-chart-line"></i></div>
-        <div class="sec-title">Sales Overview</div>
-      </div>
-      <div class="grid g3">
-        <div class="card c-amber">
-          <div class="lbl">Actual Net Sales</div>
-          <div class="val">$3,436.00</div>
-          <div class="hint">Yesterday</div>
-          <div class="wtd"><span class="wk">WTD</span><span class="wv">$3,436.00</span></div>
-        </div>
-        <div class="card c-teal">
-          <div class="lbl">Last Year Same Day</div>
-          <div class="val">$3,957.00</div>
-          <div class="hint">Prior year</div>
-          <div class="wtd"><span class="wk">WTD LY</span><span class="wv">$3,957.00</span></div>
-        </div>
-        <div class="card c-indigo">
-          <div class="lbl">Forecasted Sales</div>
-          <div class="val">$4,093.00</div>
-          <div class="hint">Projected</div>
-          <div class="wtd"><span class="wk">WTD</span><span class="wv">$4,093.00</span></div>
-        </div>
-      </div>
-    </div>
+    <!-- ══ SCHEDULE + HOURLY LABOR ══ -->
+    <div class="ops-row">
 
-    <div class="section">
-      <div class="sec-hdr">
-        <div class="sec-icon"><i class="fa-solid fa-bullseye"></i></div>
-        <div class="sec-title">Performance Metrics</div>
-      </div>
-      <div class="grid g3">
-        <div class="card c-green">
-          <div class="lbl">vs Last Year</div>
-          <div class="val pos">$521.00 &#9650;</div>
-          <div class="hint">Net Sales vs Same Day LY</div>
-          <div class="wtd"><span class="wk">WTD vs LY</span><span class="wv pos">$521.00</span></div>
+      <!-- Schedule card -->
+      <div class="card">
+        <div class="card-hdr">
+          <div>
+            <div class="card-title">Today's Schedule</div>
+            <div class="card-sub">Scheduled vs actual hours by employee</div>
+          </div>
+          <div class="pill pill-white">April 23</div>
         </div>
-        <div class="card c-rose">
-          <div class="lbl">vs Forecast</div>
-          <div class="val neg">($657.00) &#9660;</div>
-          <div class="hint">Actual vs Projected</div>
-          <div class="wtd">&nbsp;</div>
+        <div class="schedule-tabs">
+          <button class="sched-tab active" onclick="showShift('am', this)">AM Shift &nbsp;8AM&ndash;4PM</button>
+          <button class="sched-tab" onclick="showShift('pm', this)">PM Shift &nbsp;4PM&ndash;Close</button>
         </div>
-        <div class="card c-green">
-          <div class="lbl">Cash Over / Short</div>
-          <div class="val pos">$0.00</div>
-          <div class="hint">Balanced</div>
-          <div class="wtd">&nbsp;</div>
-        </div>
-      </div>
-    </div>
 
-    <div class="section">
-      <div class="sec-hdr">
-        <div class="sec-icon"><i class="fa-solid fa-users-clock"></i></div>
-        <div class="sec-title">Labor Summary</div>
-      </div>
-      <div class="grid g4">
-        <div class="card c-rose">
-          <div class="lbl">Labor Cost</div>
-          <div class="val">$38.00</div>
-          <div class="hint">Total wages</div>
-          <div class="wtd"><span class="wk">WTD</span><span class="wv">$44.00</span></div>
+        <!-- AM Shift -->
+        <div id="shift-am">
+          <table class="sched-table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Sched Hrs</th>
+                <th>Actual Hrs</th>
+                <th>Variance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="emp-name">Lidy H.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Francisco L.</div><div class="emp-role">Crew</div></td>
+                <td>6.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Vicki L.</div><div class="emp-role">Shift Lead</div></td>
+                <td>8.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Nathan R.</div><div class="emp-role">Shift Lead</div></td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td>AM Total</td>
+                <td>29.5 hrs</td>
+                <td class="pending">Pending</td>
+                <td class="pending">—</td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
-        <div class="card c-green">
-          <div class="lbl">Labor %</div>
-          <div class="val pos">24.62%</div>
-          <div class="hint">On target</div>
-          <div class="wtd"><span class="wk">WTD</span><span class="wv">21.45%</span></div>
-        </div>
-        <div class="card c-sky">
-          <div class="lbl">Scheduled Hours</div>
-          <div class="val">63.00</div>
-          <div class="hint">On schedule</div>
-          <div class="wtd"><span class="wk">WTD</span><span class="wv">63.00</span></div>
-        </div>
-        <div class="card c-sky">
-          <div class="lbl">Actual Hours</div>
-          <div class="val">14.41</div>
-          <div class="hint">Worked</div>
-          <div class="wtd"><span class="wk">WTD</span><span class="wv">0.00</span></div>
-        </div>
-      </div>
-    </div>
 
-    <div class="section">
-      <div class="sec-hdr">
-        <div class="sec-icon"><i class="fa-solid fa-tag"></i></div>
-        <div class="sec-title">Comps &amp; Discounts</div>
+        </div>
+
+        <!-- PM Shift -->
+        <div id="shift-pm" style="display:none">
+          <table class="sched-table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Sched Hrs</th>
+                <th>Actual Hrs</th>
+                <th>Variance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="emp-name">Brianna G.</div><div class="emp-role">Crew</div></td>
+                <td>5.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Richard G.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Ailen G.</div><div class="emp-role">Crew</div></td>
+                <td>5.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Autumn H.</div><div class="emp-role">Crew</div></td>
+                <td>6.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Maylin H.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">DJuan J.</div><div class="emp-role">Crew</div></td>
+                <td>5.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Kasey W.</div><div class="emp-role">Shift Lead</div></td>
+                <td>6.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td>PM Total</td>
+                <td>44.0 hrs</td>
+                <td class="pending">Pending close</td>
+                <td class="pending">—</td>
+              </tr>
+            </tfoot>
+          </table>
       </div>
-      <table class="tbl">
+
+      <!-- Hourly labor alerts -->
+      <div class="card">
+        <div class="card-hdr">
+          <div>
+            <div class="card-title">Hourly Labor %</div>
+            <div class="card-sub">Goal: 27% &nbsp;&middot;&nbsp; Alerts above 29%</div>
+          </div>
+          <div class="pill pill-red">2 Alerts</div>
+        </div>
+        <div class="hourly-grid">
+          <div class="hour-row hr-green">
+            <span class="hr-time">10 AM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:45%"></div></div>
+            <span class="hr-pct green">24.1%</span>
+            <span class="hr-flag flag-good">Good</span>
+          </div>
+          <div class="hour-row hr-green">
+            <span class="hr-time">11 AM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:50%"></div></div>
+            <span class="hr-pct green">25.8%</span>
+            <span class="hr-flag flag-good">Good</span>
+          </div>
+          <div class="hour-row hr-yellow">
+            <span class="hr-time">12 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill yellow" style="width:55%"></div></div>
+            <span class="hr-pct yellow">27.3%</span>
+            <span class="hr-flag flag-warn">Watch</span>
+          </div>
+          <div class="hour-row hr-red">
+            <span class="hr-time">1 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill red" style="width:80%"></div></div>
+            <span class="hr-pct red">30.4%</span>
+            <span class="hr-flag flag-over">Alert</span>
+          </div>
+          <div class="hour-row hr-yellow">
+            <span class="hr-time">2 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill yellow" style="width:57%"></div></div>
+            <span class="hr-pct yellow">28.1%</span>
+            <span class="hr-flag flag-warn">Watch</span>
+          </div>
+          <div class="hour-row hr-green">
+            <span class="hr-time">3 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:48%"></div></div>
+            <span class="hr-pct green">26.4%</span>
+            <span class="hr-flag flag-good">Good</span>
+          </div>
+          <div class="hour-row hr-green">
+            <span class="hr-time">4 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:47%"></div></div>
+            <span class="hr-pct green">26.2%</span>
+            <span class="hr-flag flag-good">Good</span>
+          </div>
+          <div class="hour-row hr-red">
+            <span class="hr-time">5 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill red" style="width:75%"></div></div>
+            <span class="hr-pct red">29.8%</span>
+            <span class="hr-flag flag-over">Alert</span>
+          </div>
+          <div class="hour-row hr-future">
+            <span class="hr-time">6 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill future" style="width:20%"></div></div>
+            <span class="hr-pct future">—</span>
+            <span class="hr-flag flag-tbd">TBD</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /ops-row -->
+
+    <!-- ══ SECRET SHOP + STERITECH + NOTES ══ -->
+    <div class="ss-row">
+
+      <!-- Secret Shop (condensed) -->
+      <div class="card">
+        <div class="card-hdr">
+          <div>
+            <div class="card-title"><i data-lucide="eye"></i> Secret Shop</div>
+            <div class="card-sub">Rolling avg vs 88% goal</div>
+          </div>
+        </div>
+        <div class="ss-top">
+          <div class="ss-score-wrap">
+            <div class="ss-score">86%</div>
+            <div class="ss-goal">Latest: <b>47%</b></div>
+          </div>
+          <div class="ss-meta">Last<b>Apr 17</b></div>
+        </div>
+        <div class="ss-kpi-list">
+          <div class="ss-kpi">
+            <span class="ss-kpi-name">Service</span>
+            <span class="ss-kpi-bar-bg"><span class="ss-kpi-bar-fill under" style="width:77%"></span></span>
+            <span class="ss-kpi-pct">77%</span>
+          </div>
+          <div class="ss-kpi">
+            <span class="ss-kpi-name">Quality</span>
+            <span class="ss-kpi-bar-bg"><span class="ss-kpi-bar-fill" style="width:100%"></span></span>
+            <span class="ss-kpi-pct">100%</span>
+          </div>
+          <div class="ss-kpi">
+            <span class="ss-kpi-name">Cleanliness</span>
+            <span class="ss-kpi-bar-bg"><span class="ss-kpi-bar-fill under" style="width:80%"></span></span>
+            <span class="ss-kpi-pct">80%</span>
+          </div>
+          <div class="ss-kpi">
+            <span class="ss-kpi-name">Customer Satisfaction</span>
+            <span class="ss-kpi-bar-bg"><span class="ss-kpi-bar-fill" style="width:90%"></span></span>
+            <span class="ss-kpi-pct">90%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steritech (food safety) -->
+      <div class="card">
+        <div class="card-hdr">
+          <div>
+            <div class="card-title"><i data-lucide="shield-check"></i> Steritech</div>
+            <div class="card-sub">Food Safety &middot; Last Audit</div>
+          </div>
+        </div>
+        <div class="st-top">
+          <div>
+            <div class="st-score">96</div>
+            <div class="st-goal">Goal: <b>90+ Pass</b></div>
+          </div>
+          <div class="st-meta">Last Audit<b>Mar 28</b></div>
+        </div>
+        <div>
+          <div class="st-metric">
+            <span class="st-metric-label">Overall Status</span>
+            <span class="st-status pass">Pass</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Critical Violations</span>
+            <span class="st-metric-val">0</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Non-Critical</span>
+            <span class="st-metric-val">2</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Hand Wash Stations</span>
+            <span class="st-status pass">OK</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Cooler Temps</span>
+            <span class="st-status pass">OK</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Grill Hold Temps</span>
+            <span class="st-status warn">Watch</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Date Labels</span>
+            <span class="st-status pass">OK</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Next Audit Due</span>
+            <span class="st-metric-val">May 28</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Notes -->
+      <div class="card">
+        <div class="notes-head">
+          <div>
+            <div class="card-title"><i data-lucide="message-square"></i> Team Notes</div>
+            <div class="card-sub">Messages from GM / DM / Director</div>
+          </div>
+          <div class="pill pill-white">3 new</div>
+        </div>
+        <div class="notes-list">
+          <div class="note-item from-director">
+            <div class="note-head">
+              <span>
+                <span class="note-from">Mark Phillips</span>
+                <span class="note-role director">Director</span>
+              </span>
+              <span class="note-time">Today 7:42 AM</span>
+            </div>
+            <div class="note-body">Region call at 2 PM Wednesday — be ready to review YTD food cost trend. Store 2065 is in a good spot, keep the waste log tight through the weekend.</div>
+          </div>
+          <div class="note-item from-dm">
+            <div class="note-head">
+              <span>
+                <span class="note-from">Tasha Reed</span>
+                <span class="note-role dm">DM</span>
+              </span>
+              <span class="note-time">Today 8:15 AM</span>
+            </div>
+            <div class="note-body">Bread delivery is coming early tomorrow — make sure AM crew pulls the prior day's inventory count before 7:30.</div>
+          </div>
+          <div class="note-item">
+            <div class="note-head">
+              <span>
+                <span class="note-from">Bobby Cline</span>
+                <span class="note-role">GM</span>
+              </span>
+              <span class="note-time">Yesterday 5:02 PM</span>
+            </div>
+            <div class="note-body">Great close last night, team — dining room was spotless and cash counted perfectly. Keep that level up today.</div>
+          </div>
+        </div>
+        <div class="note-input-row">
+          <input class="note-input" placeholder="Leave a note for the team…">
+          <button class="note-post">Post</button>
+        </div>
+      </div>
+
+    </div><!-- /ss-row -->
+
+    <!-- ══ DISCOUNTS & COMPS ══ -->
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title"><i data-lucide="ticket-percent"></i> Discounts &amp; Comps</div>
+          <div class="card-sub">Today &middot; Store 2065</div>
+        </div>
+        <div class="pill pill-white" id="dc-day-pill">Today</div>
+      </div>
+
+      <div class="dr-grid" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="dr-box">
+          <div class="dr-lbl">Total Discounts</div>
+          <div class="dr-val" id="dc-discounts-val">$—</div>
+          <div class="dr-sub" id="dc-discounts-sub">Awaiting Par Brink sales export</div>
+        </div>
+        <div class="dr-box">
+          <div class="dr-lbl">Total Comps</div>
+          <div class="dr-val" id="dc-comps-val">$—</div>
+          <div class="dr-sub" id="dc-comps-sub">Awaiting Par Brink sales export</div>
+        </div>
+      </div>
+
+      <table class="dr-table">
         <thead>
-          <tr><th>Type</th><th>Yesterday</th><th>Week-to-Date</th></tr>
-        </thead>
-        <tbody>
           <tr>
-            <td>Comps and Discounts</td>
-            <td>$6.34</td>
-            <td>$6.34</td>
-          </tr></tbody>
+            <th>Reason</th>
+            <th>Type</th>
+            <th class="num">Count</th>
+            <th class="num">Amount</th>
+            <th class="num">% of Sales</th>
+          </tr>
+        </thead>
+        <tbody id="dc-tbody">
+          <tr><td colspan="5" style="color:rgba(255,255,255,0.55);padding:14px;text-align:center">Discount / comp breakdown wires in from Par Brink Sales export&hellip;</td></tr>
+        </tbody>
       </table>
     </div>
 
-  </div>
-</div>
-
-<div class="page" id="tab-links">
-  <div class="inner">
-    <div class="section">
-      <div class="sec-hdr">
-        <div class="sec-icon"><i class="fa-solid fa-link"></i></div>
-        <div class="sec-title">Quick Links</div>
-      </div>
-      <div class="links-grid">
-        <a class="link-card" href="https://fiveguysfr77.net-chef.com" target="_blank" rel="noopener">
-          <div class="link-icon"><i class="fa-solid fa-chart-bar"></i></div>
-          <div><div class="link-name">CrunchTime Net Chef</div><div class="link-desc">fiveguysfr77.net-chef.com</div></div>
-        </a>
-        <a class="link-card" href="https://fiveguysfr113-em.net-chef.com" target="_blank" rel="noopener">
-          <div class="link-icon"><i class="fa-solid fa-calendar-days"></i></div>
-          <div><div class="link-name">Schedules</div><div class="link-desc">fiveguysfr113-em.net-chef.com</div></div>
-        </a>
-        <a class="link-card" href="https://fiveguysfr77.ct-teamworx.com" target="_blank" rel="noopener">
-          <div class="link-icon"><i class="fa-solid fa-users-clock"></i></div>
-          <div><div class="link-name">TeamWorx</div><div class="link-desc">fiveguysfr77.ct-teamworx.com</div></div>
-        </a>
-        <a class="link-card" href="https://admin5.parpos.com" target="_blank" rel="noopener">
-          <div class="link-icon"><i class="fa-solid fa-vault"></i></div>
-          <div><div class="link-name">Brinks</div><div class="link-desc">admin5.parpos.com</div></div>
-        </a>
-        <a class="link-card" href="https://bread2.fiveguys.com" target="_blank" rel="noopener">
-          <div class="link-icon"><i class="fa-solid fa-bread-slice"></i></div>
-          <div><div class="link-name">Bread Ordering</div><div class="link-desc">bread2.fiveguys.com</div></div>
-        </a>
-        <a class="link-card" href="https://knowledgeforce.com" target="_blank" rel="noopener">
-          <div class="link-icon"><i class="fa-solid fa-user-secret"></i></div>
-          <div><div class="link-name">Secret Shops</div><div class="link-desc">knowledgeforce.com</div></div>
-        </a>
-        <a class="link-card" href="https://fg-beta.compliancemate.com" target="_blank" rel="noopener">
-          <div class="link-icon"><i class="fa-solid fa-temperature-half"></i></div>
-          <div><div class="link-name">Temps &amp; Times</div><div class="link-desc">fg-beta.compliancemate.com</div></div>
-        </a>
+    <!-- ══ SLIM ALERT STRIP ══ -->
+    <div class="alerts-strip">
+      <div class="alerts-strip-lbl"><i data-lucide="bell"></i> Today's Alerts</div>
+      <div class="alerts-strip-items">
+        <span class="alert-chip"><span class="alert-dot red"></span>Labor 21.4% at 1 PM <span class="alert-time">1:04p</span></span>
+        <span class="alert-chip"><span class="alert-dot red"></span>Labor 23.4% at 6 PM <span class="alert-time">6:08p</span></span>
+        <span class="alert-chip"><span class="alert-dot yellow"></span>Food cost +0.7pts over <span class="alert-time">8:12a</span></span>
+        <span class="alert-chip"><span class="alert-dot yellow"></span>AM shift +1.5 hrs over sched <span class="alert-time">4:05p</span></span>
+        <span class="alert-chip"><span class="alert-dot green"></span>Sales goal hit $8,200 <span class="alert-time">12:58p</span></span>
+        <span class="alert-chip"><span class="alert-dot green"></span>Compliance 96% <span class="alert-time">8:09a</span></span>
       </div>
     </div>
+  </div><!-- /content -->
+
+  <!-- Footer -->
+  <div class="footer-bar">
+    <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>10:59 AM</span> &nbsp;&middot;&nbsp; April 23 2026</span>
   </div>
-</div>
 
-<footer>
-  Five Guys KY-2065 Dixie Highway &bull; CrunchTime Net Chef &bull;
-  Business Date: Monday, April 20, 2026 &bull; Generated: 4/21/2026 at 12:21 PM
-</footer>
+</div><!-- /main -->
 
+<!-- ══════════ JS ══════════ -->
 <script>
-  function showTab(name, btn) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
-    btn.classList.add('active');
-  }
-  function openSite(url, title, label, btn) {
-    document.querySelectorAll('.site-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('viewer-title').textContent = title;
-    document.getElementById('viewer-url').textContent = label;
-    document.getElementById('site-frame').src = url;
-    document.getElementById('site-viewer').classList.add('open');
-  }
-  function closeSite() {
-    document.getElementById('site-viewer').classList.remove('open');
-    document.getElementById('site-frame').src = '';
-    document.querySelectorAll('.site-btn').forEach(b => b.classList.remove('active'));
-  }
-</script>
+lucide.createIcons();
 
+// ── Period toggle (Today / Week / Month / Quarter) ──
+document.querySelectorAll('#periodToggle .period-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#periodToggle .period-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // TODO: swap numbers on screen based on btn.dataset.period
+  });
+});
+
+// ── Shift tab toggle ──
+function showShift(shift, btn) {
+  document.getElementById('shift-am').style.display = shift === 'am' ? '' : 'none';
+  document.getElementById('shift-pm').style.display = shift === 'pm' ? '' : 'none';
+  document.querySelectorAll('.sched-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── Labor % mini bars (11 AM – 10 PM, goal 18.5%) ──
+const LABOR_GOAL = 18.5;
+const laborData = [
+  { hr: '11A', pct: 15.2 },
+  { hr: '12P', pct: 17.8 },
+  { hr: '1P',  pct: 21.4 },
+  { hr: '2P',  pct: 19.6 },
+  { hr: '3P',  pct: 16.3 },
+  { hr: '4P',  pct: 15.8 },
+  { hr: '5P',  pct: 22.1 },
+  { hr: '6P',  pct: 23.4 },
+  { hr: '7P',  pct: 20.7 },
+  { hr: '8P',  pct: 17.2 },
+  { hr: '9P',  pct: 18.9 },
+  { hr: '10P', pct: null },  // TBD
+];
+const realPcts = laborData.filter(d => d.pct !== null).map(d => d.pct);
+const maxPct = Math.max(...realPcts, LABOR_GOAL) * 1.1;
+const barsEl = document.getElementById('laborBars');
+laborData.forEach(d => {
+  if (d.pct === null) {
+    barsEl.innerHTML += `
+      <div class="ctrl-bar-wrap">
+        <div class="ctrl-bar under" style="height:4px;opacity:0.25"></div>
+        <div class="ctrl-bar-hr">${d.hr}</div>
+      </div>`;
+    return;
+  }
+  const over = d.pct > LABOR_GOAL;
+  const h = Math.max(2, Math.round((d.pct / maxPct) * 36));
+  barsEl.innerHTML += `
+    <div class="ctrl-bar-wrap">
+      <div class="ctrl-bar ${over ? '' : 'under'}" style="height:${h}px"></div>
+      <div class="ctrl-bar-hr">${d.hr}</div>
+    </div>`;
+});
+// Overlay the goal line
+const goalLinePct = (LABOR_GOAL / maxPct) * 36;
+const goalLine = document.createElement('div');
+goalLine.className = 'ctrl-goal-line';
+goalLine.style.bottom = `${14 + goalLinePct}px`;
+barsEl.parentElement.style.position = 'relative';
+barsEl.parentElement.appendChild(goalLine);
+
+// (sales trend line chart removed — will return in a future iteration)
+</script>
 </body>
 </html>

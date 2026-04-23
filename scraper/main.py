@@ -966,7 +966,7 @@ def trend_arrow(v: float | None) -> str:
     return " &#9650;" if v >= 0 else " &#9660;"
 
 
-def generate_html(d: dict, cm: dict = None) -> str:
+def generate_html(d: dict, cm: dict = None, ss: dict = None, sch: dict = None) -> str:
     meta  = d.get("meta", {})
     s     = d.get("sales", {})
     lab   = d.get("labor", {})
@@ -1062,6 +1062,144 @@ def generate_html(d: dict, cm: dict = None) -> str:
       </div>
     </div>"""
 
+    # ── Secret Shops section ───────────────────────────────────────────────────
+    ss = ss or {}
+    ss_status  = ss.get("meta", {}).get("status", "no_data")
+    ss_latest  = ss.get("latest") or {}
+    ss_avgs    = ss.get("averages", {}) or {}
+
+    def ss_color(p):
+        if p is None: return "c-sky"
+        if p >= 90: return "c-green"
+        if p >= 70: return "c-amber"
+        return "c-rose"
+
+    def ss_val_cls(p):
+        if p is None: return ""
+        if p >= 90: return "pos"
+        if p >= 70: return ""
+        return "neg"
+
+    def ss_num(v, suffix=""):
+        return f"{v}{suffix}" if v is not None else "—"
+
+    def ss_avg_card(label, avg_obj):
+        if not avg_obj:
+            return f"""
+        <div class="card c-sky" style="opacity:0.7;">
+          <div class="lbl">{label}</div>
+          <div class="val" style="font-size:0.9em;">—</div>
+          <div class="hint">No shops in window</div>
+        </div>"""
+        score = avg_obj.get("score")
+        n     = avg_obj.get("n", 0)
+        return f"""
+        <div class="card {ss_color(score)}">
+          <div class="lbl">{label}</div>
+          <div class="val {ss_val_cls(score)}">{score}</div>
+          <div class="hint">{n} shop{'s' if n != 1 else ''}</div>
+        </div>"""
+
+    if ss_status == "ok" and ss_latest:
+        latest_score = ss_latest.get("score")
+        latest_date  = ss_latest.get("date") or "—"
+        latest_meal  = ss_latest.get("meal_period") or "—"
+        perfect_tag  = '  <span style="background:#1f7a2e;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.7em;margin-left:6px;">100%</span>' if latest_score == 100 else ''
+        secret_shops_section = f"""
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-user-secret"></i></div>
+        <div class="sec-title">Secret Shops — {latest_date} ({latest_meal}){perfect_tag}</div>
+      </div>
+      <div class="grid g5">
+        <div class="card {ss_color(latest_score)}">
+          <div class="lbl">Overall Score</div>
+          <div class="val {ss_val_cls(latest_score)}">{ss_num(latest_score)}</div>
+          <div class="hint">Latest shop</div>
+        </div>
+        <div class="card {ss_color(ss_latest.get('service'))}">
+          <div class="lbl">Service</div>
+          <div class="val {ss_val_cls(ss_latest.get('service'))}">{ss_num(ss_latest.get('service'))}</div>
+          <div class="hint">of 100</div>
+        </div>
+        <div class="card {ss_color(ss_latest.get('quality'))}">
+          <div class="lbl">Quality</div>
+          <div class="val {ss_val_cls(ss_latest.get('quality'))}">{ss_num(ss_latest.get('quality'))}</div>
+          <div class="hint">of 100</div>
+        </div>
+        <div class="card {ss_color(ss_latest.get('cleanliness'))}">
+          <div class="lbl">Cleanliness</div>
+          <div class="val {ss_val_cls(ss_latest.get('cleanliness'))}">{ss_num(ss_latest.get('cleanliness'))}</div>
+          <div class="hint">of 100</div>
+        </div>
+        <div class="card {ss_color(ss_latest.get('customer_satisfaction'))}">
+          <div class="lbl">Cust. Satisfaction</div>
+          <div class="val {ss_val_cls(ss_latest.get('customer_satisfaction'))}">{ss_num(ss_latest.get('customer_satisfaction'))}</div>
+          <div class="hint">of 100</div>
+        </div>
+      </div>
+      <div class="grid g3" style="margin-top:12px;">{ss_avg_card("7-Day Average",  ss_avgs.get("week"))}{ss_avg_card("30-Day Average", ss_avgs.get("month"))}{ss_avg_card("90-Day Average", ss_avgs.get("quarter"))}
+      </div>
+    </div>"""
+    else:
+        secret_shops_section = f"""
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-user-secret"></i></div>
+        <div class="sec-title">Secret Shops</div>
+      </div>
+      <div class="card c-sky" style="opacity:0.5;">
+        <div class="lbl">Shop Data</div>
+        <div class="val" style="font-size:0.7em;">No shops yet</div>
+        <div class="hint">KnowledgeForce scrape pending</div>
+      </div>
+    </div>"""
+
+    # ── Schedule section (Par Brink Weekly Labor Schedule) ────────────────────
+    sch = sch or {}
+    sch_today = sch.get("today", {})
+    sch_shifts = sch_today.get("shifts", [])
+    sch_totals = sch.get("totals_by_day", {})
+    if sch_shifts:
+        rows = ""
+        for sh in sch_shifts:
+            role_badge = "lead" if "Shift Lead" in sh.get("role", "") else "crew"
+            rows += f"""
+            <tr>
+              <td><span class="role-badge {role_badge}">{sh.get('role','').replace(' - Hourly','').replace(' - Salary','')}</span></td>
+              <td>{sh.get('name','—')}</td>
+              <td>{sh.get('start','—')}</td>
+              <td>{sh.get('end','—')}</td>
+            </tr>"""
+        today_hours = sch_today.get("scheduled_hours", 0)
+        week_total = sch_totals.get("week_total", 0)
+        schedule_section = f"""
+    <div class="section">
+      <div class="sec-hdr">
+        <div class="sec-icon"><i class="fa-solid fa-calendar-days"></i></div>
+        <div class="sec-title">Today's Schedule — {sch_today.get('day_of_week','')} {sch_today.get('date','')}</div>
+      </div>
+      <div class="grid g2" style="margin-bottom:14px;">
+        <div class="card c-sky">
+          <div class="lbl">Scheduled Hours Today</div>
+          <div class="val">{today_hours:.2f}</div>
+          <div class="hint">{len(sch_shifts)} shifts</div>
+        </div>
+        <div class="card c-teal">
+          <div class="lbl">Week Total Scheduled</div>
+          <div class="val">{week_total:.2f}</div>
+          <div class="hint">Mon–Sun</div>
+        </div>
+      </div>
+      <table class="tbl schedule-tbl">
+        <thead><tr><th>Role</th><th>Name</th><th>Start</th><th>End</th></tr></thead>
+        <tbody>{rows}
+        </tbody>
+      </table>
+    </div>"""
+    else:
+        schedule_section = ""
+
     def pn(v):
         return "pos" if (v or 0) >= 0 else "neg"
 
@@ -1142,6 +1280,7 @@ def generate_html(d: dict, cm: dict = None) -> str:
   .grid {{ display: grid; gap: 5px; }}
   .g3 {{ grid-template-columns: repeat(3, 1fr); }}
   .g4 {{ grid-template-columns: repeat(4, 1fr); }}
+  .g5 {{ grid-template-columns: repeat(5, 1fr); }}
   .card {{ background: #090909; border-radius: 6px; padding: 9px 12px 10px; border: 1px solid rgba(255,255,255,0.03); position: relative; overflow: hidden; }}
   .card::before {{ content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }}
   .c-amber::before {{ background: #d97706; }}
@@ -1167,6 +1306,10 @@ def generate_html(d: dict, cm: dict = None) -> str:
   .tbl td:not(:first-child) {{ text-align: right; color: rgba(255,255,255,0.68); font-weight: 500; }}
   .tbl tr:last-child td {{ border-bottom: none; }}
   .tbl tr:hover td {{ background: rgba(255,255,255,0.015); }}
+  .schedule-tbl td {{ color: rgba(255,255,255,0.78); }}
+  .role-badge {{ display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 0.85em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }}
+  .role-badge.crew {{ background: rgba(56,152,236,0.12); color: #6ab4f0; }}
+  .role-badge.lead {{ background: rgba(236,182,56,0.14); color: #f0c86a; }}
   .links-grid {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }}
   .link-card {{ background: #090909; border-radius: 6px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 11px; text-decoration: none; transition: background 0.12s; }}
   .link-card:hover {{ background: #111; }}
@@ -1175,6 +1318,7 @@ def generate_html(d: dict, cm: dict = None) -> str:
   .link-desc {{ font-size: 0.6em; color: rgba(255,255,255,0.22); }}
   footer {{ text-align: center; padding: 12px; color: rgba(255,255,255,0.15); font-size: 0.56em; letter-spacing: 0.3px; }}
   @media (max-width: 860px) {{
+    .g5 {{ grid-template-columns: repeat(3, 1fr); }}
     .g4 {{ grid-template-columns: repeat(2, 1fr); }}
     .g3 {{ grid-template-columns: repeat(2, 1fr); }}
     .links-grid {{ grid-template-columns: repeat(2, 1fr); }}
@@ -1182,7 +1326,7 @@ def generate_html(d: dict, cm: dict = None) -> str:
     .topbar, .kpi-bar, .sites-bar {{ padding-left: 16px; padding-right: 16px; }}
   }}
   @media (max-width: 540px) {{
-    .g4, .g3 {{ grid-template-columns: 1fr 1fr; }}
+    .g5, .g4, .g3 {{ grid-template-columns: 1fr 1fr; }}
     .links-grid {{ grid-template-columns: 1fr 1fr; }}
     .brand-sub {{ display: none; }}
   }}
@@ -1283,7 +1427,9 @@ def generate_html(d: dict, cm: dict = None) -> str:
 
 <div class="page active" id="tab-dashboard">
   <div class="inner">
+{schedule_section}
 {food_safety_section}
+{secret_shops_section}
 
     <div class="section">
       <div class="sec-hdr">
@@ -1483,9 +1629,15 @@ async def main():
             log.error("No cached data — cannot generate dashboard")
             sys.exit(1)
 
-    # Save snapshot
+    # Save snapshot — new structure: data/raw/crunchtime/<store>/<report_date>/perf_metrics.json
+    # Back-compat: also write top-level data/latest.json until wire/downstream readers are fully migrated.
+    STORE_ID = os.environ.get("STORE_ID", "2065")
+    raw_dir = DATA_DIR / "raw" / "crunchtime" / STORE_ID / RPT_DATE
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    (raw_dir / "perf_metrics.json").write_text(json.dumps(data, indent=2, default=str))
+    log.info(f"Saved {raw_dir / 'perf_metrics.json'}")
     (DATA_DIR / "latest.json").write_text(json.dumps(data, indent=2, default=str))
-    log.info("Saved data/latest.json")
+    log.info("Saved data/latest.json (compat)")
 
     # Load ComplianceMate data if available
     cm_file = DATA_DIR / "compliancemate.json"
@@ -1497,11 +1649,44 @@ async def main():
         except Exception as e:
             log.warning(f"Could not load compliancemate.json: {e}")
 
-    # Generate dashboard
-    html = generate_html(data, cm_data)
-    out  = ROOT / "dashboard.html"
-    out.write_text(html, encoding="utf-8")
-    log.info(f"Wrote {out} ({len(html):,} bytes)")
+    # Load Secret Shops data if available
+    ss_file = DATA_DIR / "secret_shops.json"
+    ss_data = {}
+    if ss_file.exists():
+        try:
+            ss_data = json.loads(ss_file.read_text())
+            log.info(f"Loaded Secret Shops data: {ss_data.get('meta', {}).get('shops_total', 0)} shops")
+        except Exception as e:
+            log.warning(f"Could not load secret_shops.json: {e}")
+
+    # Load Par Brink Weekly Labor Schedule if available (today's folder)
+    sch_data = {}
+    from datetime import date as _date
+    pb_dir = DATA_DIR / "parbrink" / _date.today().isoformat()
+    sch_file = pb_dir / "weekly_schedule_2065.json"
+    if not sch_file.exists():
+        # fall back to most recent weekly_schedule_2065.json in any parbrink subfolder
+        candidates = sorted((DATA_DIR / "parbrink").glob("*/weekly_schedule_2065.json"), reverse=True)
+        if candidates:
+            sch_file = candidates[0]
+    if sch_file.exists():
+        try:
+            sch_data = json.loads(sch_file.read_text())
+            log.info(f"Loaded Par Brink schedule: {sch_file.name} — {len(sch_data.get('today',{}).get('shifts',[]))} shifts today")
+        except Exception as e:
+            log.warning(f"Could not load {sch_file}: {e}")
+
+    # HTML generation is handled by scraper/wire_dashboard.py against the
+    # canonical dashboard.html (the Ink Press design). This legacy code path
+    # used to regenerate a red-theme dashboard that overwrote the real one —
+    # disabled 2026-04-23. Kept for reference; do not re-enable without
+    # explicit approval.
+    #
+    # html = generate_html(data, cm_data, ss_data, sch_data)
+    # out  = ROOT / "dashboard.html"
+    # out.write_text(html, encoding="utf-8")
+    # log.info(f"Wrote {out} ({len(html):,} bytes)")
+    log.info("Skipping legacy HTML generation — run scraper/wire_dashboard.py to update dashboard.html")
     log.info("Done.")
 
 

@@ -1,1 +1,17 @@
 .env
+
+# Debug / screenshot artifacts — not data, not committed
+data/*.png
+data/*.html
+data/*.txt
+data/logs/
+data/_debug/
+data/raw/**/*.html
+data/raw/**/*.txt
+data/raw/**/*.png
+
+# Top-level scraper scratch files (pre-migration)
+data/ct_api_calls.json
+data/ct_captured.json
+data/pnl_api_calls*.json
+data/parbrink.json
