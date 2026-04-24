@@ -13,13 +13,11 @@
 AM Pre-Shift Check
 100% | 100%
 PM Pre-Shift Check
-100% | 100%
-Milkshake Pump Cleaning Check
-100% | 100%
+0% | 0%
 Closing Checklist
 100% | 100%
 Pre Open
-100% | 100%
+0% | 0%
 Shift Change
 100% | 100%
 Closing
@@ -33,7 +31,7 @@ Temperature Sample
 Calibration Test
 0% | 0%
 Operational Spot Check
-0% | 0%
+33% | 33%
 Battery Swap Checklist
 0% | 0%
 MMCCA
