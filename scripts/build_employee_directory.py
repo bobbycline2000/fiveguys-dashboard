@@ -3,6 +3,12 @@ from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, PatternFill, Border, Side
 from openpyxl.utils import get_column_letter
 
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import LETTER
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+
 EMPLOYEES = [
     ("Alen",      "(407) 334-3088", "Active"),
     ("Ash",       "(502) 554-4833", "Active"),
@@ -76,5 +82,68 @@ def build(path: str) -> None:
     print(f"Wrote {path} with {len(EMPLOYEES)} rows")
 
 
+def build_pdf(path: str) -> None:
+    doc = SimpleDocTemplate(
+        path,
+        pagesize=LETTER,
+        leftMargin=0.75 * inch,
+        rightMargin=0.75 * inch,
+        topMargin=0.75 * inch,
+        bottomMargin=0.75 * inch,
+        title="Employee Directory — Five Guys 2065",
+    )
+
+    styles = getSampleStyleSheet()
+    title_style = ParagraphStyle(
+        "title", parent=styles["Heading1"],
+        fontName="Helvetica-Bold", fontSize=16, textColor=colors.HexColor("#C8102E"),
+        spaceAfter=4,
+    )
+    subtitle_style = ParagraphStyle(
+        "subtitle", parent=styles["Normal"],
+        fontName="Helvetica", fontSize=10, textColor=colors.HexColor("#666666"),
+        spaceAfter=14,
+    )
+
+    story = [
+        Paragraph("Employee Directory", title_style),
+        Paragraph("Five Guys — Store 2065, Dixie Highway, Louisville KY", subtitle_style),
+    ]
+
+    data = [["Name", "Phone Number"]]
+    for name, phone, _status in EMPLOYEES:
+        data.append([name, phone])
+
+    table = Table(data, colWidths=[2.0 * inch, 2.5 * inch], repeatRows=1)
+    table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#C8102E")),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("FONTSIZE", (0, 0), (-1, 0), 11),
+        ("BOTTOMPADDING", (0, 0), (-1, 0), 8),
+        ("TOPPADDING", (0, 0), (-1, 0), 8),
+        ("FONTNAME", (0, 1), (-1, -1), "Helvetica"),
+        ("FONTSIZE", (0, 1), (-1, -1), 10),
+        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#F7F7F7")]),
+        ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#CCCCCC")),
+        ("LEFTPADDING", (0, 0), (-1, -1), 10),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 10),
+        ("TOPPADDING", (0, 1), (-1, -1), 6),
+        ("BOTTOMPADDING", (0, 1), (-1, -1), 6),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+    ]))
+    story.append(table)
+    story.append(Spacer(1, 0.25 * inch))
+    story.append(Paragraph(
+        f"{len(EMPLOYEES)} employees",
+        ParagraphStyle("footer", parent=styles["Normal"], fontSize=9,
+                       textColor=colors.HexColor("#888888"), alignment=2),
+    ))
+
+    doc.build(story)
+    print(f"Wrote {path} with {len(EMPLOYEES)} rows")
+
+
 if __name__ == "__main__":
     build("employee_directory.xlsx")
+    build_pdf("employee_directory.pdf")
