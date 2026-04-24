@@ -66,6 +66,33 @@ async def run_store(store_id: str):
     except Exception as e:
         log.error(f"ComplianceMate scrape failed: {e}")
 
+    # ── KnowledgeForce (Secret Shops) ──────────────────────────────────────────
+    log.info("\n--- KnowledgeForce (Secret Shops) ---")
+    try:
+        from scraper.scrape_knowledgeforce import scrape as ss_scrape
+        ss_data = await ss_scrape()
+        out = DATA_DIR / "secret_shops.json"
+        out.write_text(json.dumps(ss_data, indent=2))
+        log.info(f"Secret Shops: {ss_data['meta']['status']} — {ss_data['meta']['shops_total']} shops")
+    except Exception as e:
+        log.error(f"KnowledgeForce scrape failed: {e}")
+
+    # ── Par Brink emailed reports (reads Gmail inbox) ──────────────────────────
+    log.info("\n--- Par Brink (Gmail) ---")
+    try:
+        from scraper.read_parbrink_email import run as pb_run
+        pb_run()
+    except Exception as e:
+        log.error(f"Par Brink email read failed: {e}")
+
+    # ── Teamworx (scaffold — URL still TODO) ───────────────────────────────────
+    log.info("\n--- Teamworx ---")
+    try:
+        from scraper.scrape_teamworx import run as tw_run
+        tw_run()
+    except Exception as e:
+        log.error(f"Teamworx scrape failed: {e}")
+
     # ── CrunchTime scrape + generate dashboard.html (reads fresh CM data) ──────
     log.info("\n--- CrunchTime Net Chef ---")
     try:
@@ -73,6 +100,27 @@ async def run_store(store_id: str):
         await ct_main()
     except Exception as e:
         log.error(f"CrunchTime scrape failed: {e}")
+
+    # ── Wire fresh data into dashboard.html (idempotent) ───────────────────────
+    # main.py only writes data/latest.json; without this step the HTML stays
+    # stale forever. Fixed 2026-04-24 after dashboard silently froze.
+    log.info("\n--- Wire dashboard ---")
+    import subprocess
+    wire_rc = subprocess.run(
+        [sys.executable, str(ROOT / "scraper" / "wire_dashboard.py")],
+        cwd=ROOT,
+    ).returncode
+    if wire_rc != 0:
+        log.error(f"wire_dashboard.py exited {wire_rc} — check data/debug-log.txt")
+
+    # ── Verify dashboard actually reflects latest.json (backup gate) ───────────
+    log.info("\n--- Verify dashboard freshness ---")
+    verify_rc = subprocess.run(
+        [sys.executable, str(ROOT / "scraper" / "verify_dashboard.py")],
+        cwd=ROOT,
+    ).returncode
+    if verify_rc != 0:
+        log.error("verify_dashboard.py detected stale dashboard — details in data/debug-log.txt")
 
     # ── Excel update ───────────────────────────────────────────────────────────
     log.info("\n--- SharePoint Excel ---")

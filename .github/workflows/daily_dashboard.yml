@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write  # needed to commit dashboard.html back to main
+  issues: write    # verify_dashboard.py opens an issue if the HTML is stale
 
 jobs:
   update-dashboard:
@@ -65,20 +66,26 @@ jobs:
         # NOTE: When scaling to all 11 stores, add additional steps here
         # with the store-specific env vars and a STORE_ID env variable.
 
-      # ── 6. Update SharePoint Excel report (store 2065) ────────────────────
-      - name: Update Excel daily report (store 2065)
-        continue-on-error: true   # won't block dashboard if Azure isn't configured yet
+      # ── 5c. Wire fresh data into dashboard.html (idempotent) ──────────────
+      # main.py only updates data/latest.json; wire_dashboard.py is what
+      # actually reflects those numbers in the served HTML. Without this step
+      # the dashboard silently freezes (the class of bug fixed 2026-04-24).
+      - name: Wire data into dashboard.html
+        run: python scraper/wire_dashboard.py
+
+      # ── 5d. Verify dashboard actually reflects latest.json (backup gate) ──
+      # If wire_dashboard.py missed a field or a class name changed, this
+      # catches it before the stale HTML is committed. On failure it writes
+      # to data/debug-log.txt (picked up automatically by the next session)
+      # and opens a GitHub issue for visibility.
+      - name: Verify dashboard freshness
         env:
-          MS_USERNAME:      ${{ secrets.MS_USERNAME }}
-          MS_PASSWORD:      ${{ secrets.MS_PASSWORD }}
-          MS_TENANT_ID:     ${{ secrets.MS_TENANT_ID }}
-          MS_CLIENT_ID:     ${{ secrets.MS_CLIENT_ID }}
-          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
-          STORE_ID:         "2065"
-        run: python scraper/update_excel.py
-        # NOTE: When scaling to all 11 stores, duplicate this step with
-        # each store's STORE_ID. The STORE_CONFIG dict in update_excel.py
-        # maps each store ID to its Excel sheet tab name.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scraper/verify_dashboard.py
+
+      # ── 6. SharePoint update runs locally via Windows Task Scheduler ──────
+      # (scraper/update_sharepoint_playwright.py, not in CI — needs saved
+      # browser session to avoid MFA). Old Azure/Graph path removed 2026-04-22.
 
       # ── 7. Upload debug artifacts (always, even on failure) ──────────────
       - name: Upload debug artifacts
