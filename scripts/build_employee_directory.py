@@ -16,16 +16,15 @@ EMPLOYEES = [
     ("Kable",     "(502) 606-3088", "Active"),
     ("Kasey",     "(502) 884-2273", "Active"),
     ("Kayla",     "(502) 531-8704", "Active"),
-    ("Kenzie",    "(502) 650-????", "Active — number partially obscured"),
+    ("Kenzie",    "(502) 650-2273", "Active"),
+    ("Lidy",      "(502) 381-0680", "Active"),
+    ("Madison",   "(502) 438-7200", "Active"),
     ("Maylin",    "(502) 803-1973", "Active"),
     ("Mike",      "(502) 281-8177", "Active"),
-    ("Nathan",    "(502) 603-????", "Active — number partially obscured"),
+    ("Nathan",    "(502) 693-8371", "Active"),
     ("Richard",   "(270) 874-0655", "Active"),
     ("Samuel",    "(502) 724-2384", "Active"),
     ("Vicki",     "(502) 701-9597", "Active"),
-    ("Grace",     "(316) 391-8735", "Crossed out on list"),
-    ("Lidy",      "(502) 381-0180", "Crossed out on list"),
-    ("Madison",   "(502) 438-7200", "Crossed out on list"),
 ]
 
 
