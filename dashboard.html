@@ -98,6 +98,7 @@ body {
   cursor: pointer; color: rgba(255,255,255,0.42);
   font-family: 'Inter', sans-serif; font-size: 0.79rem; font-weight: 500;
   text-align: left; transition: all 0.15s;
+  text-decoration: none;
 }
 .nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); }
 .nav-item.active {
@@ -621,9 +622,9 @@ body {
 
   <div class="nav-section">
     <div class="nav-label">Operations Hub</div>
-    <button class="nav-item">
+    <a class="nav-item" href="employee_directory.xlsx" download>
       <span class="nav-ico"><i data-lucide="users"></i></span>Employee List
-    </button>
+    </a>
     <button class="nav-item">
       <span class="nav-ico"><i data-lucide="map-pin"></i></span>Locations
     </button>
