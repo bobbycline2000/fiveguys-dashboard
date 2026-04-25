@@ -1,11 +1,11 @@
 {
   "meta": {
-    "date": "2026-04-24",
-    "generated": "4/24/2026 at 3:54 PM",
+    "date": "2026-04-25",
+    "generated": "4/25/2026 at 2:31 PM",
     "location": "2065",
     "status": "ok"
   },
-  "overall_pct": 57,
+  "overall_pct": 63,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -44,8 +44,13 @@
     },
     {
       "name": "PM Pre-Shift Check",
-      "pct": 0,
-      "raw": "PM Pre-Shift Check\n0% | 0%"
+      "pct": 100,
+      "raw": "PM Pre-Shift Check\n100% | 100%"
+    },
+    {
+      "name": "Friday Milkshake Cleaning Check",
+      "pct": 100,
+      "raw": "Friday Milkshake Cleaning Check\n100% | 100%"
     },
     {
       "name": "Closing Checklist",
@@ -89,8 +94,8 @@
     },
     {
       "name": "Operational Spot Check",
-      "pct": 33,
-      "raw": "Operational Spot Check\n33% | 33%"
+      "pct": 0,
+      "raw": "Operational Spot Check\n0% | 0%"
     },
     {
       "name": "Battery Swap Checklist",

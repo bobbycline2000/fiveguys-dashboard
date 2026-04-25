@@ -13,7 +13,9 @@
 AM Pre-Shift Check
 100% | 100%
 PM Pre-Shift Check
-0% | 0%
+100% | 100%
+Friday Milkshake Cleaning Check
+100% | 100%
 Closing Checklist
 100% | 100%
 Pre Open
@@ -31,7 +33,7 @@ Temperature Sample
 Calibration Test
 0% | 0%
 Operational Spot Check
-33% | 33%
+0% | 0%
 Battery Swap Checklist
 0% | 0%
 MMCCA
