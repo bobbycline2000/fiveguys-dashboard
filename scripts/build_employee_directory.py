@@ -14,6 +14,7 @@ EMPLOYEES = [
     ("Ash",       "(502) 554-4833", "Active"),
     ("Autumn",    "(502) 656-2133", "Active"),
     ("Bri",       "(502) 202-4126", "Active"),
+    ("Dakayla",   "(502) 537-8724", "Active"),
     ("Divan",     "(502) 821-9406", "Active"),
     ("Francisco", "(407) 456-1445", "Active"),
     ("Grace",     "(502) 527-1477", "Active"),
@@ -30,6 +31,7 @@ EMPLOYEES = [
     ("Richard",   "(270) 874-0655", "Active"),
     ("Samuel",    "(502) 724-2384", "Active"),
     ("Vicki",     "(502) 701-9597", "Active"),
+    ("Zach",      "(502) 422-9066", "Active"),
 ]
 
 
