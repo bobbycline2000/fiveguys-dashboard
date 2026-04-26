@@ -96,6 +96,14 @@ jobs:
         continue-on-error: true
         run: python scraper/parbrink_parse_hourly_sales_labor.py --store 2065
 
+      # ── 4g2. Parse the Par Brink Weekly Labor Schedule PDF → JSON ────────
+      # Source for the Today's Schedule card (employee names + start/end times)
+      # and totals_by_day (Mon..Sun scheduled hours). Reads per-store
+      # weekly_schedule.pdf if Bobby exports it; multi-store split is TODO.
+      - name: Parse Par Brink Weekly Labor Schedule
+        continue-on-error: true
+        run: python scraper/parbrink_parse_weekly_schedule.py --store 2065
+
       # ── 4h. Roll up daily sales_summary.json into Week/Month/Quarter ──────
       # Reads every data/raw/parbrink/2065/<date>/sales_summary.json and writes
       # data/period_rollups.json. wire_dashboard.py uses this to populate the

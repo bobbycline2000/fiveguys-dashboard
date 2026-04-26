@@ -1,6 +1,6 @@
 # Five Guys Dashboard — Master Spec
 
-> **Last verified:** 2026-04-26 14:42 ET (Item #3 closed — `aggregate_periods.py` rolls up daily Par Brink JSONs into Week/Month/Quarter and feeds `wire_dashboard.py`. Daily Sales / Transactions / Sales-per-Guest now show real values across all four periods.)
+> **Last verified:** 2026-04-26 14:55 ET (Item #5 closed — `parbrink_parse_weekly_schedule.py` parses the per-store Weekly Labor Schedule PDF into the JSON shape `wire_dashboard.py` already consumes. Today's Schedule card + Sched Hrs cell now wire from real data when the per-store PDF is present.)
 
 This is the source-of-truth doc for what the dashboard is and what makes each piece work. If you ever want to know "is X working?" — find the row, read the status, read the closer.
 
@@ -48,7 +48,7 @@ Status legend: 🟢 = working today · 🟡 = partial / hardcoded / placeholder 
 | Goal (18.5%) | hardcoded constant | 🟢 (corrected this week from 17.5 → 18.5) | — |
 | Labor $ Today | wired from Par Brink Hourly totals (e.g. $1,073) | 🟢 | — |
 | Actual Hrs | wired from Par Brink Hourly totals (e.g. 102.6) | 🟢 | — |
-| Sched Hrs | wired from Par Brink Weekly Labor Schedule | 🟡 only when sched JSON exists; otherwise "—" | Build `parbrink_parse_weekly_schedule.py` (item #5 in queue). |
+| Sched Hrs | wired from Par Brink Weekly Labor Schedule | 🟢 (parser shipped 4/26 — `parbrink_parse_weekly_schedule.py`. Reads per-store `weekly_schedule.pdf`; multi-store split is a follow-up.) | — |
 | Avg Hrly Wage | computed labor_$ / labor_hrs (e.g. $10.46) | 🟢 | — |
 | WTD %, WTD Labor $, WTD Hours | wired from `aggregate_periods.py` (week bucket: labor_cost, labor_hours, labor_percent rolled up across last 7 days of sales_summary.json files) | 🟢 (closed 4/26 — pivoted from "weekly batch parser" to aggregator path; "Sales And Labor Summary By Location" PDF turned out to be single-day, not weekly, so the parser was redundant — rollup gives same numbers from existing daily JSONs) | — |
 | Labor % by Hour bars (11A–10P) | wired from Par Brink Hourly per-hour rows | 🟢 (parser shipped 4/26, awaiting Mon 8:05 AM CI proof) | — |
@@ -78,7 +78,7 @@ Status legend: 🟢 = working today · 🟡 = partial / hardcoded / placeholder 
 ### Today's Schedule
 | Field | Today | Status | What it needs |
 |---|---|---|---|
-| Roster of names + shift times for today | hardcoded sample | 🔴 | Par Brink "Weekly Labor Schedule" PDF (in the weekly batch, lands Tue ~2:30 AM). Parser pulls today's row from the weekly schedule. Build `parbrink_parse_weekly_schedule.py`. |
+| Roster of names + shift times for today | wired from Par Brink Weekly Labor Schedule | 🟢 (closed 4/26 — `parbrink_parse_weekly_schedule.py` parses the per-store `weekly_schedule.pdf` into 11+ shifts and Mon..Sun totals. Multi-store batch split is a follow-up.) | — |
 
 ### Hourly Labor %
 | Field | Today | Status | What it needs |
@@ -114,7 +114,7 @@ If you give me a green light, I'd build in this order — biggest visible impact
 2. **Par Brink Hourly Sales And Labor parser** — closes the Labor "today" row + drives the hourly bar chart. (~1 session.)
 3. ~~Par Brink Sales By Day weekly parser + aggregator~~ — **DONE 4/26 via `scraper/aggregate_periods.py`** (rolls up existing daily JSONs; weekly batch parser unnecessary because daily JSONs are fresher and already collected).
 4. ~~Par Brink Sales And Labor Summary By Location weekly parser~~ — **DONE 4/26 via the same `aggregate_periods.py`** (PDF turned out to be single-day; rollup's `week.labor_*` fields cover WTD stats. Wired into wire_dashboard.py `period-val` cells.)
-5. **Par Brink Weekly Labor Schedule parser** — closes Today's Schedule card. (~1 session.)
+5. ~~Par Brink Weekly Labor Schedule parser~~ — **DONE 4/26 via `scraper/parbrink_parse_weekly_schedule.py`** (parses per-store `weekly_schedule.pdf` into the JSON shape `wire_dashboard.py` already consumes; closes Today's Schedule card. Multi-store batch split is a follow-up.)
 6. **CrunchTime food-cost export step** — closes Food Cost card. (~1–2 sessions, harder because CrunchTime is a Playwright scrape.)
 7. **Marketforce Secret Shop pickup + parser** — closes Secret Shop card + KPI rollups. (~1–2 sessions; depends on you giving me access + a sample email.)
 8. **Quarter aggregator** — closes Quarter tab. (~½ session, depends on having Month working first.)
