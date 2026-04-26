@@ -69,6 +69,12 @@ discounts, _ = load_latest("parbrink", "discount_summary.json")
 sales_summary, _ = load_latest("parbrink", "sales_summary.json")
 hourly_labor, _ = load_latest("parbrink", "hourly_sales_labor.json")
 
+# ── period rollups (Week / Month / Quarter aggregates) ─────────────────
+try:
+    rollups = json.loads((ROOT / "data" / "period_rollups.json").read_text(encoding="utf-8"))
+except FileNotFoundError:
+    rollups = None
+
 sched, sched_path = load_latest("parbrink", "weekly_schedule.json")
 if sched is None:
     legacy = sorted((ROOT / "data" / "parbrink").glob("*/weekly_schedule_2065.json"))
@@ -280,27 +286,58 @@ sales_ly_week = f"${latest['sales']['ly_week']:,.0f}"
 sales_forecast_week = f"${latest['sales']['forecast_week']:,.0f}"
 per_guest_week = f"${latest['sales']['per_guest_week']:.2f}"
 
-# Daily Sales value (kpi-val preceding "Daily Sales" label) — also refresh data-today/week
-rep(rf'(<div class="kpi-val data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>\s*{KPI_LBL_OPEN}[^<]*Daily Sales)',
-    rf'\g<1>{sales_net}\g<2>{sales_net_week}\g<3>{sales_net}\g<4>',
+# Month / Quarter rollup-derived strings (data-month / data-quarter attrs)
+if rollups:
+    rw_, rm_, rq_ = rollups["week"], rollups["month"], rollups["quarter"]
+
+    def _avg_per_day(r):
+        return r["net_sales"] / r["days"] if r["days"] else 0.0
+
+    sales_net_month   = f"${rm_['net_sales']:,.0f}"            if rm_["days"] else "—"
+    sales_net_quarter = f"${rq_['net_sales']:,.0f}"            if rq_["days"] else "—"
+    sales_sub_month   = f"{rm_['days']}d &middot; ${_avg_per_day(rm_):,.0f}/day" if rm_["days"] else "—"
+    sales_sub_quarter = f"{rq_['days']}d &middot; ${_avg_per_day(rq_):,.0f}/day" if rq_["days"] else "—"
+
+    tx_week     = f"{rw_['order_count']:,}" if rw_["days"] else "—"
+    tx_month    = f"{rm_['order_count']:,}" if rm_["days"] else "—"
+    tx_quarter  = f"{rq_['order_count']:,}" if rq_["days"] else "—"
+    tx_sub_week    = f"{rw_['guest_count']:,} guests &middot; ${rw_['avg_ticket']:.2f} avg" if rw_["days"] else "—"
+    tx_sub_month   = f"{rm_['guest_count']:,} guests &middot; ${rm_['avg_ticket']:.2f} avg" if rm_["days"] else "—"
+    tx_sub_quarter = f"{rq_['guest_count']:,} guests &middot; ${rq_['avg_ticket']:.2f} avg" if rq_["days"] else "—"
+
+    spg_month       = f"${rm_['sales_per_guest']:.2f}" if rm_["days"] else "—"
+    spg_quarter     = f"${rq_['sales_per_guest']:.2f}" if rq_["days"] else "—"
+    spg_sub_month   = f"{rm_['days']}d avg"            if rm_["days"] else "—"
+    spg_sub_quarter = f"{rq_['days']}d avg"            if rq_["days"] else "—"
+else:
+    sales_net_month = sales_net_quarter = "—"
+    sales_sub_month = sales_sub_quarter = "Coming soon"
+    tx_week = tx_month = tx_quarter = "—"
+    tx_sub_week = tx_sub_month = tx_sub_quarter = "Coming soon"
+    spg_month = spg_quarter = "—"
+    spg_sub_month = spg_sub_quarter = "Coming soon"
+
+# Daily Sales value — refresh all four data-* attrs (today / week / month / quarter)
+rep(rf'(<div class="kpi-val data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month=")[^"]*(" data-quarter=")[^"]*(">)[^<]*(</div>\s*{KPI_LBL_OPEN}[^<]*Daily Sales)',
+    rf'\g<1>{sales_net}\g<2>{sales_net_week}\g<3>{sales_net_month}\g<4>{sales_net_quarter}\g<5>{sales_net}\g<6>',
     "Daily Sales value",
     flags=DOTALL)
 
-# Daily Sales sub — refresh today + week attributes too
-rep(rf'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Daily Sales[^<]*</div>\s*<div class="kpi-sub data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>)',
-    rf'\g<1>LY {sales_ly} &nbsp;&middot;&nbsp; Fcst {sales_forecast}\g<2>LY {sales_ly_week} &nbsp;&middot;&nbsp; Fcst {sales_forecast_week}\g<3>LY {sales_ly} &nbsp;&middot;&nbsp; Fcst {sales_forecast}\g<4>',
+# Daily Sales sub — refresh all four data-* attrs
+rep(rf'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Daily Sales[^<]*</div>\s*<div class="kpi-sub data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month=")[^"]*(" data-quarter=")[^"]*(">)[^<]*(</div>)',
+    rf'\g<1>LY {sales_ly} &nbsp;&middot;&nbsp; Fcst {sales_forecast}\g<2>LY {sales_ly_week} &nbsp;&middot;&nbsp; Fcst {sales_forecast_week}\g<3>{sales_sub_month}\g<4>{sales_sub_quarter}\g<5>LY {sales_ly} &nbsp;&middot;&nbsp; Fcst {sales_forecast}\g<6>',
     "Daily Sales sub",
     flags=DOTALL)
 
-# Sales / Guest value
-rep(rf'(<div class="kpi-val data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>\s*{KPI_LBL_OPEN}[^<]*Sales / Guest)',
-    rf'\g<1>{per_guest}\g<2>{per_guest_week}\g<3>{per_guest}\g<4>',
+# Sales / Guest value — refresh all four data-* attrs
+rep(rf'(<div class="kpi-val data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month=")[^"]*(" data-quarter=")[^"]*(">)[^<]*(</div>\s*{KPI_LBL_OPEN}[^<]*Sales / Guest)',
+    rf'\g<1>{per_guest}\g<2>{per_guest_week}\g<3>{spg_month}\g<4>{spg_quarter}\g<5>{per_guest}\g<6>',
     "Sales / Guest value",
     flags=DOTALL)
 
-# Sales / Guest sub
-rep(rf'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Sales / Guest[^<]*</div>\s*<div class="kpi-sub data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>)',
-    rf'\g<1>Week avg {per_guest_week}\g<2>Day avg {per_guest}\g<3>Week avg {per_guest_week}\g<4>',
+# Sales / Guest sub — refresh all four data-* attrs
+rep(rf'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Sales / Guest[^<]*</div>\s*<div class="kpi-sub data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month=")[^"]*(" data-quarter=")[^"]*(">)[^<]*(</div>)',
+    rf'\g<1>Week avg {per_guest_week}\g<2>Day avg {per_guest}\g<3>{spg_sub_month}\g<4>{spg_sub_quarter}\g<5>Week avg {per_guest_week}\g<6>',
     "Sales / Guest sub",
     flags=DOTALL)
 
@@ -529,14 +566,14 @@ if sales_summary and "order_count" in sales_summary:
         sub_parts.append(f"${avg_ticket:.2f} avg ticket")
     tx_sub_today = " &middot; ".join(sub_parts) if sub_parts else "—"
 
-    # Update the data-today on the value (preserve data-week/month/quarter)
-    rep(r'(<div class="kpi-val data-swap" data-today=")[^"]*(" data-week="[^"]*" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>\s*<div class="kpi-lbl[^"]*"[^>]*>[^<]*Transactions)',
-        rf'\g<1>{tx_today}\g<2>{tx_today}\g<3>',
+    # Refresh all four data-* attrs (today / week / month / quarter)
+    rep(r'(<div class="kpi-val data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month=")[^"]*(" data-quarter=")[^"]*(">)[^<]*(</div>\s*<div class="kpi-lbl[^"]*"[^>]*>[^<]*Transactions)',
+        rf'\g<1>{tx_today}\g<2>{tx_week}\g<3>{tx_month}\g<4>{tx_quarter}\g<5>{tx_today}\g<6>',
         "Transactions value",
         flags=DOTALL)
 
-    rep(r'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Transactions[^<]*</div>\s*<div class="kpi-sub data-swap" data-today=")[^"]*(" data-week="[^"]*" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>)',
-        rf'\g<1>{tx_sub_today}\g<2>{tx_sub_today}\g<3>',
+    rep(r'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Transactions[^<]*</div>\s*<div class="kpi-sub data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month=")[^"]*(" data-quarter=")[^"]*(">)[^<]*(</div>)',
+        rf'\g<1>{tx_sub_today}\g<2>{tx_sub_week}\g<3>{tx_sub_month}\g<4>{tx_sub_quarter}\g<5>{tx_sub_today}\g<6>',
         "Transactions sub",
         flags=DOTALL)
 

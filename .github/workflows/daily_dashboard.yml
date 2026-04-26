@@ -96,6 +96,15 @@ jobs:
         continue-on-error: true
         run: python scraper/parbrink_parse_hourly_sales_labor.py --store 2065
 
+      # ── 4h. Roll up daily sales_summary.json into Week/Month/Quarter ──────
+      # Reads every data/raw/parbrink/2065/<date>/sales_summary.json and writes
+      # data/period_rollups.json. wire_dashboard.py uses this to populate the
+      # data-month and data-quarter attributes on Daily Sales / Transactions /
+      # Sales / Guest KPI cards. Without this step those cards stay "—".
+      - name: Aggregate period rollups (Week / Month / Quarter)
+        continue-on-error: true
+        run: python scraper/aggregate_periods.py --store 2065
+
       # ── 5. Scrape ComplianceMate first so dashboard.html includes fresh data ─
       - name: Scrape ComplianceMate (store 2065)
         continue-on-error: true
@@ -159,7 +168,11 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add dashboard.html data/latest.json data/compliancemate.json data/cm_results_source.html data/cm_page_text.txt || true
+          # Stage dashboard + JSON snapshots. data/raw/parbrink/ JSONs are
+          # critical history for aggregate_periods.py — without committing them,
+          # every run starts with empty rollup history.
+          git add dashboard.html data/latest.json data/compliancemate.json data/period_rollups.json data/cm_results_source.html data/cm_page_text.txt || true
+          git add data/raw/parbrink/ || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."

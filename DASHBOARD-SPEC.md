@@ -1,6 +1,6 @@
 # Five Guys Dashboard — Master Spec
 
-> **Last verified:** 2026-04-26 13:56 ET (Bobby asked for the complete map — every section × every time period, what feeds it, current status, what's needed to close gaps.)
+> **Last verified:** 2026-04-26 14:42 ET (Item #3 closed — `aggregate_periods.py` rolls up daily Par Brink JSONs into Week/Month/Quarter and feeds `wire_dashboard.py`. Daily Sales / Transactions / Sales-per-Guest now show real values across all four periods.)
 
 This is the source-of-truth doc for what the dashboard is and what makes each piece work. If you ever want to know "is X working?" — find the row, read the status, read the closer.
 
@@ -29,7 +29,7 @@ Status legend: 🟢 = working today · 🟡 = partial / hardcoded / placeholder 
 | Item | Today | Status | What it needs |
 |---|---|---|---|
 | Date chip | "Saturday, April 25 2026" | 🟢 | Auto-set from `data/latest.json.report_date` by the wire step. |
-| Period toggle (Today / Week / Month / Quarter) | client-side JS swaps `data-today` / `data-week` / `data-month` / `data-quarter` attributes on every cell tagged `data-swap` | 🟡 Today + Week populated, Month + Quarter show `—` placeholder | **Gap 3.** Need monthly + quarterly aggregator. Sources: Par Brink "Sales By Day" (weekly batch) for last 4 weeks → roll into Month. CrunchTime weekly P&L for Quarter. Build `scraper/aggregate_periods.py` that writes `data/period_rollups.json`, wire into `wire_dashboard.py`. |
+| Period toggle (Today / Week / Month / Quarter) | client-side JS swaps `data-today` / `data-week` / `data-month` / `data-quarter` attributes on every cell tagged `data-swap` | 🟢 All four periods populated for Daily Sales / Transactions / Sales / Guest cards | Aggregator (`scraper/aggregate_periods.py`) rolls up daily Par Brink `sales_summary.json` files into Week (7d) / Month (30d) / Quarter (90d) and writes `data/period_rollups.json`; `wire_dashboard.py` injects values into `data-month` and `data-quarter` attributes. Other cards (Compliance, Labor) still need their own rollups. |
 | Refresh button | cosmetic, no behavior | 🟡 | Decision: hook to a manual workflow_dispatch button or remove. |
 | "Updated daily" pill | static text | 🟢 | — |
 
@@ -56,9 +56,9 @@ Status legend: 🟢 = working today · 🟡 = partial / hardcoded / placeholder 
 ### Secondary KPIs row (the 4 cards under Controllables)
 | Card | Today | Week | Month | Quarter | Source | Status |
 |---|---|---|---|---|---|---|
-| Daily Sales ($5,541) | 🟢 wired from Par Brink | 🟢 wired | 🟡 `—` | 🟡 `—` | Par Brink Sales Summary (daily) + Sales By Day (weekly batch) | Today/Week working. Month/Quarter is Gap 3. |
-| Transactions (207) | 🟢 wired (from `parbrink_parse_sales_summary.py`, parser added 4/26 — first CI proof Mon 4/27) | 🟡 `—` | 🟡 `—` | 🟡 `—` | Same as Daily Sales | Today: parser shipped, awaiting Mon 8:05 AM CI. Week+: Gap 3. |
-| Sales / Guest ($5.46) | 🟢 wired | 🟢 wired | 🟡 `—` | 🟡 `—` | Computed from Sales Summary (Net / Guests) | Same as Daily Sales. |
+| Daily Sales ($5,541) | 🟢 wired from Par Brink | 🟢 wired | 🟢 wired (rollup of daily JSONs) | 🟢 wired (rollup of daily JSONs) | Par Brink Sales Summary (daily) + `aggregate_periods.py` rollup | All four periods wired 4/26. Month/Quarter values converge to Week until ≥7 days of daily JSONs accumulate. |
+| Transactions (207) | 🟢 wired (from `parbrink_parse_sales_summary.py`) | 🟢 wired (rollup) | 🟢 wired (rollup) | 🟢 wired (rollup) | Same as Daily Sales | Today: parser shipped, awaiting Mon 8:05 AM CI. Week/Month/Quarter wired via aggregator 4/26. |
+| Sales / Guest ($5.46) | 🟢 wired | 🟢 wired | 🟢 wired (rollup) | 🟢 wired (rollup) | Computed from Sales Summary (Net / Guests) — rollup uses same formula on aggregated totals | Wired 4/26. Diverges from Week as days accumulate. |
 | Compliance (100%, 9/9) | 🟢 wired from ComplianceMate scraper | 🟡 today only | 🟡 today only | 🟡 today only | ComplianceMate Playwright scrape (`scraper/compliancemate_scrape.py`) | Filter to required-only checklists working. Week+/Month+/Quarter+ rolling avg not built. |
 
 ### ComplianceMate detail card
@@ -112,7 +112,7 @@ If you give me a green light, I'd build in this order — biggest visible impact
 
 1. **Verify Mon 4/27 CI run** — Sales Summary + Discount Summary parsers prove out end-to-end. (No build needed, just check.)
 2. **Par Brink Hourly Sales And Labor parser** — closes the Labor "today" row + drives the hourly bar chart. (~1 session.)
-3. **Par Brink Sales By Day weekly parser + aggregator** — closes Month tab for Sales / Transactions / Sales-per-Guest. (~1 session.)
+3. ~~Par Brink Sales By Day weekly parser + aggregator~~ — **DONE 4/26 via `scraper/aggregate_periods.py`** (rolls up existing daily JSONs; weekly batch parser unnecessary because daily JSONs are fresher and already collected).
 4. **Par Brink Sales And Labor Summary By Location weekly parser** — closes the WTD labor stats. (~½ session.)
 5. **Par Brink Weekly Labor Schedule parser** — closes Today's Schedule card. (~1 session.)
 6. **CrunchTime food-cost export step** — closes Food Cost card. (~1–2 sessions, harder because CrunchTime is a Playwright scrape.)
