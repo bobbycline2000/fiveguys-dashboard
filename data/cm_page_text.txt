@@ -14,8 +14,6 @@ AM Pre-Shift Check
 100% | 100%
 PM Pre-Shift Check
 100% | 100%
-Friday Milkshake Cleaning Check
-100% | 100%
 Closing Checklist
 100% | 100%
 Pre Open
