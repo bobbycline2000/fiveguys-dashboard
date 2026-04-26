@@ -678,7 +678,7 @@ body {
         <div class="page-title">Good afternoon, Bobby.</div>
         <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>3:54 PM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>12:28 PM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -797,216 +797,67 @@ body {
           <div class="kpi-ico"><i data-lucide="dollar-sign"></i></div>
           <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;4.2%</div>
         </div>
-        <div class="kpi-val">$5,541</div>
-        <div class="kpi-lbl">Daily Sales</div>
-        <div class="kpi-sub">LY $5,757 &nbsp;&middot;&nbsp; Fcst $4,390</div>
+        <div class="kpi-val data-swap" data-today="$5,541" data-week="$25,280" data-month="—" data-quarter="—">$5,541</div>
+        <div class="kpi-lbl data-swap" data-today="Daily Sales" data-week="Week Sales (WTD)" data-month="Month Sales (MTD)" data-quarter="Quarter Sales (QTD)">Daily Sales</div>
+        <div class="kpi-sub data-swap" data-today="LY $5,757 &nbsp;&middot;&nbsp; Fcst $4,390" data-week="LY $29,355 &nbsp;&middot;&nbsp; Fcst $25,997" data-month="Coming soon" data-quarter="Coming soon">LY $5,757 &nbsp;&middot;&nbsp; Fcst $4,390</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top">
           <div class="kpi-ico"><i data-lucide="receipt"></i></div>
-          <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;+12</div>
+          <div class="kpi-delta">&nbsp;</div>
         </div>
-        <div class="kpi-val">312</div>
-        <div class="kpi-lbl">Transactions</div>
-        <div class="kpi-sub">+12 vs last Monday</div>
+        <div class="kpi-val data-swap" data-today="207" data-week="—" data-month="—" data-quarter="—">207</div>
+        <div class="kpi-lbl data-swap" data-today="Transactions" data-week="Transactions (WTD)" data-month="Transactions (MTD)" data-quarter="Transactions (QTD)">Transactions</div>
+        <div class="kpi-sub data-swap" data-today="1,014 guests &middot; $26.77 avg ticket" data-week="Coming soon" data-month="Coming soon" data-quarter="Coming soon">1,014 guests &middot; $26.77 avg ticket</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top">
           <div class="kpi-ico"><i data-lucide="tag"></i></div>
           <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;$0.60</div>
         </div>
-        <div class="kpi-val">$5.46</div>
-        <div class="kpi-lbl">Sales / Guest</div>
-        <div class="kpi-sub">Week avg $5.42</div>
+        <div class="kpi-val data-swap" data-today="$5.46" data-week="$5.42" data-month="—" data-quarter="—">$5.46</div>
+        <div class="kpi-lbl data-swap" data-today="Sales / Guest" data-week="Sales / Guest (WTD)" data-month="Sales / Guest (MTD)" data-quarter="Sales / Guest (QTD)">Sales / Guest</div>
+        <div class="kpi-sub data-swap" data-today="Week avg $5.42" data-week="Day avg $5.46" data-month="Coming soon" data-quarter="Coming soon">Week avg $5.42</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top">
           <div class="kpi-ico"><i data-lucide="shield-check"></i></div>
-          <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;+2pts</div>
+          <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;+0pts</div>
         </div>
-        <div class="kpi-val">70%</div>
+        <div class="kpi-val">100%</div>
         <div class="kpi-lbl">Compliance</div>
-        <div class="kpi-sub">13/20 lists at 100%</div>
+        <div class="kpi-sub">9/9 required lists</div>
       </div>
     </div>
 
-    <!-- ══ SCHEDULE + HOURLY LABOR ══ -->
-    <div class="ops-row">
-
-      <!-- Schedule card -->
-      <div class="card">
-        <div class="card-hdr">
-          <div>
-            <div class="card-title">Today's Schedule</div>
-            <div class="card-sub">Scheduled vs actual hours by employee</div>
-          </div>
-          <div class="pill pill-white">April 26</div>
+    <!-- ══ COMPLIANCE CHECKLISTS ══ -->
+    <div class="card">
+      <div class="cm-header-row">
+        <div>
+          <div class="card-title"><i data-lucide="clipboard-check"></i> ComplianceMate &mdash; Required Checklists</div>
+          <div class="card-sub">Store 2065 &middot; Today</div>
         </div>
-        <div class="schedule-tabs">
-          <button class="sched-tab active" onclick="showShift('am', this)">AM Shift &nbsp;8AM&ndash;4PM</button>
-          <button class="sched-tab" onclick="showShift('pm', this)">PM Shift &nbsp;4PM&ndash;Close</button>
-        </div>
-
-        <!-- AM Shift -->
-        <div id="shift-am">
-          <table class="sched-table">
-            <thead>
-              <tr>
-                <th>Employee</th>
-                <th>Sched Hrs</th>
-                <th>Actual Hrs</th>
-                <th>Variance</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div class="emp-name">Lidy H.</div><div class="emp-role">Crew</div></td>
-                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Francisco L.</div><div class="emp-role">Crew</div></td>
-                <td>6.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Vicki L.</div><div class="emp-role">Shift Lead</div></td>
-                <td>8.5</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Nathan R.</div><div class="emp-role">Shift Lead</div></td>
-                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr class="total-row">
-                <td>AM Total</td>
-                <td>29.5 hrs</td>
-                <td class="pending">Pending</td>
-                <td class="pending">—</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-
-        <!-- PM Shift -->
-        <div id="shift-pm" style="display:none">
-          <table class="sched-table">
-            <thead>
-              <tr>
-                <th>Employee</th>
-                <th>Sched Hrs</th>
-                <th>Actual Hrs</th>
-                <th>Variance</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div class="emp-name">Brianna G.</div><div class="emp-role">Crew</div></td>
-                <td>5.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Richard G.</div><div class="emp-role">Crew</div></td>
-                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Ailen G.</div><div class="emp-role">Crew</div></td>
-                <td>5.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Autumn H.</div><div class="emp-role">Crew</div></td>
-                <td>6.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Maylin H.</div><div class="emp-role">Crew</div></td>
-                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">DJuan J.</div><div class="emp-role">Crew</div></td>
-                <td>5.5</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Kasey W.</div><div class="emp-role">Shift Lead</div></td>
-                <td>6.5</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr class="total-row">
-                <td>PM Total</td>
-                <td>44.0 hrs</td>
-                <td class="pending">Pending close</td>
-                <td class="pending">—</td>
-              </tr>
-            </tfoot>
-          </table>
-      </div>
-
-      <!-- Hourly labor alerts -->
-      <div class="card">
-        <div class="card-hdr">
-          <div>
-            <div class="card-title">Hourly Labor %</div>
-            <div class="card-sub">Goal: 27% &nbsp;&middot;&nbsp; Alerts above 29%</div>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="text-align:right;">
+            <div class="cm-overall-val">100%</div>
+            <div class="cm-overall-lbl">Overall</div>
           </div>
-          <div class="pill pill-red">2 Alerts</div>
-        </div>
-        <div class="hourly-grid">
-          <div class="hour-row hr-green">
-            <span class="hr-time">10 AM</span>
-            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:45%"></div></div>
-            <span class="hr-pct green">24.1%</span>
-            <span class="hr-flag flag-good">Good</span>
-          </div>
-          <div class="hour-row hr-green">
-            <span class="hr-time">11 AM</span>
-            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:50%"></div></div>
-            <span class="hr-pct green">25.8%</span>
-            <span class="hr-flag flag-good">Good</span>
-          </div>
-          <div class="hour-row hr-yellow">
-            <span class="hr-time">12 PM</span>
-            <div class="hr-bar-bg"><div class="hr-bar-fill yellow" style="width:55%"></div></div>
-            <span class="hr-pct yellow">27.3%</span>
-            <span class="hr-flag flag-warn">Watch</span>
-          </div>
-          <div class="hour-row hr-red">
-            <span class="hr-time">1 PM</span>
-            <div class="hr-bar-bg"><div class="hr-bar-fill red" style="width:80%"></div></div>
-            <span class="hr-pct red">30.4%</span>
-            <span class="hr-flag flag-over">Alert</span>
-          </div>
-          <div class="hour-row hr-yellow">
-            <span class="hr-time">2 PM</span>
-            <div class="hr-bar-bg"><div class="hr-bar-fill yellow" style="width:57%"></div></div>
-            <span class="hr-pct yellow">28.1%</span>
-            <span class="hr-flag flag-warn">Watch</span>
-          </div>
-          <div class="hour-row hr-green">
-            <span class="hr-time">3 PM</span>
-            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:48%"></div></div>
-            <span class="hr-pct green">26.4%</span>
-            <span class="hr-flag flag-good">Good</span>
-          </div>
-          <div class="hour-row hr-green">
-            <span class="hr-time">4 PM</span>
-            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:47%"></div></div>
-            <span class="hr-pct green">26.2%</span>
-            <span class="hr-flag flag-good">Good</span>
-          </div>
-          <div class="hour-row hr-red">
-            <span class="hr-time">5 PM</span>
-            <div class="hr-bar-bg"><div class="hr-bar-fill red" style="width:75%"></div></div>
-            <span class="hr-pct red">29.8%</span>
-            <span class="hr-flag flag-over">Alert</span>
-          </div>
-          <div class="hour-row hr-future">
-            <span class="hr-time">6 PM</span>
-            <div class="hr-bar-bg"><div class="hr-bar-fill future" style="width:20%"></div></div>
-            <span class="hr-pct future">—</span>
-            <span class="hr-flag flag-tbd">TBD</span>
-          </div>
+          <span class="cm-badge pill pill-green">On Track</span>
         </div>
       </div>
-
-    </div><!-- /ops-row -->
+      <div class="cm-list">
+        <div class="cm-item shift-change"><span class="cm-label">AM Pre-Shift Check</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">11 AM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item shift-change"><span class="cm-label">Shift Change</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">3 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">5 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item shift-change"><span class="cm-label">PM Pre-Shift Check</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">7 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">9 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">11 PM &middot; Closing Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item" id="cm-milkshake-row" style="display:none;"><span class="cm-label">Milkshake Cleaning Checklist <span style="color:var(--white-60); font-weight:500;">&middot; Tue/Fri AM only</span></span><span class="cm-pct tbd">Not Today</span></div>
+      </div>
+    </div>
 
     <!-- ══ SECRET SHOP + STERITECH + NOTES ══ -->
     <div class="ss-row">
@@ -1150,6 +1001,184 @@ body {
 
     </div><!-- /ss-row -->
 
+    <!-- ══ SCHEDULE + HOURLY LABOR ══ -->
+    <div class="ops-row">
+
+      <!-- Schedule card -->
+      <div class="card">
+        <div class="card-hdr">
+          <div>
+            <div class="card-title">Today's Schedule</div>
+            <div class="card-sub">Scheduled vs actual hours by employee</div>
+          </div>
+          <div class="pill pill-white">April 26</div>
+        </div>
+        <div class="schedule-tabs">
+          <button class="sched-tab active" onclick="showShift('am', this)">AM Shift &nbsp;8AM&ndash;4PM</button>
+          <button class="sched-tab" onclick="showShift('pm', this)">PM Shift &nbsp;4PM&ndash;Close</button>
+        </div>
+
+        <!-- AM Shift -->
+        <div id="shift-am">
+          <table class="sched-table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Sched Hrs</th>
+                <th>Actual Hrs</th>
+                <th>Variance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="emp-name">Lidy H.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Francisco L.</div><div class="emp-role">Crew</div></td>
+                <td>6.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Vicki L.</div><div class="emp-role">Shift Lead</div></td>
+                <td>8.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Nathan R.</div><div class="emp-role">Shift Lead</div></td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td>AM Total</td>
+                <td>29.5 hrs</td>
+                <td class="pending">Pending</td>
+                <td class="pending">—</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- PM Shift -->
+        <div id="shift-pm" style="display:none">
+          <table class="sched-table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Sched Hrs</th>
+                <th>Actual Hrs</th>
+                <th>Variance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="emp-name">Brianna G.</div><div class="emp-role">Crew</div></td>
+                <td>5.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Richard G.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Ailen G.</div><div class="emp-role">Crew</div></td>
+                <td>5.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Autumn H.</div><div class="emp-role">Crew</div></td>
+                <td>6.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Maylin H.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">DJuan J.</div><div class="emp-role">Crew</div></td>
+                <td>5.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Kasey W.</div><div class="emp-role">Shift Lead</div></td>
+                <td>6.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td>PM Total</td>
+                <td>44.0 hrs</td>
+                <td class="pending">Pending close</td>
+                <td class="pending">—</td>
+              </tr>
+            </tfoot>
+          </table>
+      </div>
+
+      <!-- Hourly labor alerts -->
+      <div class="card">
+        <div class="card-hdr">
+          <div>
+            <div class="card-title">Hourly Labor %</div>
+            <div class="card-sub">Goal: 18.5% &nbsp;&middot;&nbsp; Alerts above 20%</div>
+          </div>
+          <div class="pill pill-red">2 Alerts</div>
+        </div>
+        <div class="hourly-grid">
+          <div class="hour-row hr-green">
+            <span class="hr-time">10 AM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:45%"></div></div>
+            <span class="hr-pct green">24.1%</span>
+            <span class="hr-flag flag-good">Good</span>
+          </div>
+          <div class="hour-row hr-green">
+            <span class="hr-time">11 AM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:50%"></div></div>
+            <span class="hr-pct green">25.8%</span>
+            <span class="hr-flag flag-good">Good</span>
+          </div>
+          <div class="hour-row hr-yellow">
+            <span class="hr-time">12 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill yellow" style="width:55%"></div></div>
+            <span class="hr-pct yellow">27.3%</span>
+            <span class="hr-flag flag-warn">Watch</span>
+          </div>
+          <div class="hour-row hr-red">
+            <span class="hr-time">1 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill red" style="width:80%"></div></div>
+            <span class="hr-pct red">30.4%</span>
+            <span class="hr-flag flag-over">Alert</span>
+          </div>
+          <div class="hour-row hr-yellow">
+            <span class="hr-time">2 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill yellow" style="width:57%"></div></div>
+            <span class="hr-pct yellow">28.1%</span>
+            <span class="hr-flag flag-warn">Watch</span>
+          </div>
+          <div class="hour-row hr-green">
+            <span class="hr-time">3 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:48%"></div></div>
+            <span class="hr-pct green">26.4%</span>
+            <span class="hr-flag flag-good">Good</span>
+          </div>
+          <div class="hour-row hr-green">
+            <span class="hr-time">4 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill green" style="width:47%"></div></div>
+            <span class="hr-pct green">26.2%</span>
+            <span class="hr-flag flag-good">Good</span>
+          </div>
+          <div class="hour-row hr-red">
+            <span class="hr-time">5 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill red" style="width:75%"></div></div>
+            <span class="hr-pct red">29.8%</span>
+            <span class="hr-flag flag-over">Alert</span>
+          </div>
+          <div class="hour-row hr-future">
+            <span class="hr-time">6 PM</span>
+            <div class="hr-bar-bg"><div class="hr-bar-fill future" style="width:20%"></div></div>
+            <span class="hr-pct future">—</span>
+            <span class="hr-flag flag-tbd">TBD</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /ops-row -->
+
     <!-- ══ DISCOUNTS & COMPS ══ -->
     <div class="card">
       <div class="card-hdr">
@@ -1163,13 +1192,13 @@ body {
       <div class="dr-grid" style="grid-template-columns: repeat(2, 1fr);">
         <div class="dr-box">
           <div class="dr-lbl">Total Discounts</div>
-          <div class="dr-val" id="dc-discounts-val">$—</div>
-          <div class="dr-sub" id="dc-discounts-sub">Awaiting Par Brink sales export</div>
+          <div class="dr-val" id="dc-discounts-val">$103.84</div>
+          <div class="dr-sub" id="dc-discounts-sub">8 redemptions &middot; 1.87% of sales</div>
         </div>
         <div class="dr-box">
           <div class="dr-lbl">Total Comps</div>
-          <div class="dr-val" id="dc-comps-val">$—</div>
-          <div class="dr-sub" id="dc-comps-sub">Awaiting Par Brink sales export</div>
+          <div class="dr-val" id="dc-comps-val">$0.00</div>
+          <div class="dr-sub" id="dc-comps-sub">No item comps today</div>
         </div>
       </div>
 
@@ -1184,7 +1213,13 @@ body {
           </tr>
         </thead>
         <tbody id="dc-tbody">
-          <tr><td colspan="5" style="color:rgba(255,255,255,0.55);padding:14px;text-align:center">Discount / comp breakdown wires in from Par Brink Sales export&hellip;</td></tr>
+          <tr>
+            <td>Employee 100%</td>
+            <td>Discount</td>
+            <td class="num">8</td>
+            <td class="num">$103.84</td>
+            <td class="num">1.87%</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -1206,7 +1241,7 @@ body {
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>3:54 PM</span> &nbsp;&middot;&nbsp; April 26 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>12:28 PM</span> &nbsp;&middot;&nbsp; April 26 2026</span>
   </div>
 
 </div><!-- /main -->
@@ -1216,13 +1251,28 @@ body {
 lucide.createIcons();
 
 // ── Period toggle (Today / Week / Month / Quarter) ──
+function applyPeriod(period) {
+  document.querySelectorAll('.data-swap').forEach(el => {
+    const v = el.getAttribute('data-' + period);
+    if (v !== null) el.innerHTML = v;
+  });
+}
 document.querySelectorAll('#periodToggle .period-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('#periodToggle .period-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    // TODO: swap numbers on screen based on btn.dataset.period
+    applyPeriod(btn.dataset.period);
   });
 });
+
+// ── Milkshake checklist: only show on Tue/Fri AM ──
+(function () {
+  const dow = new Date().getDay(); // 0=Sun ... 2=Tue, 5=Fri
+  if (dow === 2 || dow === 5) {
+    const row = document.getElementById('cm-milkshake-row');
+    if (row) row.style.display = '';
+  }
+})();
 
 // ── Shift tab toggle ──
 function showShift(shift, btn) {

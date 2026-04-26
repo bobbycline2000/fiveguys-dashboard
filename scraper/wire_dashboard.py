@@ -65,6 +65,9 @@ if cogs is None:
     except FileNotFoundError:
         cogs = None
 
+discounts, _ = load_latest("parbrink", "discount_summary.json")
+sales_summary, _ = load_latest("parbrink", "sales_summary.json")
+
 sched, sched_path = load_latest("parbrink", "weekly_schedule.json")
 if sched is None:
     legacy = sorted((ROOT / "data" / "parbrink").glob("*/weekly_schedule_2065.json"))
@@ -92,8 +95,19 @@ sales_net = f"${latest['sales']['net']:,.0f}"
 sales_ly = f"${latest['sales']['ly']:,.0f}"
 sales_forecast = f"${latest['sales']['forecast']:,.0f}"
 per_guest = f"${latest['sales']['per_guest']:.2f}"
-compliance_pct = f"{cm['overall_pct']}%"
-compliance_sub = f"{len([l for l in cm['lists'] if l['pct']==100])}/{len(cm['lists'])} lists at 100%"
+# Compliance KPI is computed from Bobby's REQUIRED list only, not all 20 lists.
+# Required source names — keep in sync with CM_REQUIRED below.
+_REQUIRED_SRC = {"AM Pre-Shift Check", "11AM: Time and Temp", "Shift Change",
+                 "3PM: Time and Temp", "5PM: Time and Temp", "PM Pre-Shift Check",
+                 "7PM: Time and Temp", "9PM: Time and Temp", "Closing Checklist"}
+_req_lists = [l for l in cm["lists"] if l["name"] in _REQUIRED_SRC]
+if _req_lists:
+    _overall = round(sum(l["pct"] for l in _req_lists) / len(_req_lists))
+    compliance_pct = f"{_overall}%"
+    compliance_sub = f"{sum(1 for l in _req_lists if l['pct']==100)}/{len(_req_lists)} required lists"
+else:
+    compliance_pct = f"{cm['overall_pct']}%"
+    compliance_sub = f"{len([l for l in cm['lists'] if l['pct']==100])}/{len(cm['lists'])} lists at 100%"
 
 if ss:
     ss_quarter = f"{ss['averages']['quarter']['score']:.0f}%"
@@ -213,38 +227,48 @@ if cogs and cogs.get("items"):
         "variance week label")
 
 # ── KPI row: Daily Sales / Sales per Guest / Compliance ────────────────
-# Daily Sales value (kpi-val preceding "Daily Sales" label)
-rep(r'(<div class="kpi-val">)[^<]*(</div>\s*<div class="kpi-lbl">Daily Sales</div>)',
-    rf'\g<1>{sales_net}\g<2>',
+# Patterns allow extra classes (e.g. "data-swap") and any attributes after the class.
+KPI_VAL_OPEN = r'<div class="kpi-val[^"]*"[^>]*>'
+KPI_LBL_OPEN = r'<div class="kpi-lbl[^"]*"[^>]*>'
+KPI_SUB_OPEN = r'<div class="kpi-sub[^"]*"[^>]*>'
+
+sales_net_week = f"${latest['sales']['net_week']:,.0f}"
+sales_ly_week = f"${latest['sales']['ly_week']:,.0f}"
+sales_forecast_week = f"${latest['sales']['forecast_week']:,.0f}"
+per_guest_week = f"${latest['sales']['per_guest_week']:.2f}"
+
+# Daily Sales value (kpi-val preceding "Daily Sales" label) — also refresh data-today/week
+rep(rf'(<div class="kpi-val data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>\s*{KPI_LBL_OPEN}[^<]*Daily Sales)',
+    rf'\g<1>{sales_net}\g<2>{sales_net_week}\g<3>{sales_net}\g<4>',
     "Daily Sales value",
     flags=DOTALL)
 
-# Daily Sales sub (kpi-sub after "Daily Sales" label)
-rep(r'(<div class="kpi-lbl">Daily Sales</div>\s*<div class="kpi-sub">)[^<]*(</div>)',
-    rf'\g<1>LY {sales_ly} &nbsp;&middot;&nbsp; Fcst {sales_forecast}\g<2>',
+# Daily Sales sub — refresh today + week attributes too
+rep(rf'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Daily Sales[^<]*</div>\s*<div class="kpi-sub data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>)',
+    rf'\g<1>LY {sales_ly} &nbsp;&middot;&nbsp; Fcst {sales_forecast}\g<2>LY {sales_ly_week} &nbsp;&middot;&nbsp; Fcst {sales_forecast_week}\g<3>LY {sales_ly} &nbsp;&middot;&nbsp; Fcst {sales_forecast}\g<4>',
     "Daily Sales sub",
     flags=DOTALL)
 
-# Sales / Guest value — the kpi-val before "Sales / Guest" label
-rep(r'(<div class="kpi-val">)[^<]*(</div>\s*<div class="kpi-lbl">Sales / Guest</div>)',
-    rf'\g<1>{per_guest}\g<2>',
+# Sales / Guest value
+rep(rf'(<div class="kpi-val data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>\s*{KPI_LBL_OPEN}[^<]*Sales / Guest)',
+    rf'\g<1>{per_guest}\g<2>{per_guest_week}\g<3>{per_guest}\g<4>',
     "Sales / Guest value",
     flags=DOTALL)
 
 # Sales / Guest sub
-rep(r'(<div class="kpi-lbl">Sales / Guest</div>\s*<div class="kpi-sub">)[^<]*(</div>)',
-    rf'\g<1>Week avg ${latest["sales"]["per_guest_week"]:.2f}\g<2>',
+rep(rf'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Sales / Guest[^<]*</div>\s*<div class="kpi-sub data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>)',
+    rf'\g<1>Week avg {per_guest_week}\g<2>Day avg {per_guest}\g<3>Week avg {per_guest_week}\g<4>',
     "Sales / Guest sub",
     flags=DOTALL)
 
-# Compliance value
-rep(r'(<div class="kpi-val">)[^<]*(</div>\s*<div class="kpi-lbl">Compliance</div>)',
+# Compliance value (no data-swap on this card)
+rep(rf'({KPI_VAL_OPEN})[^<]*(</div>\s*{KPI_LBL_OPEN}[^<]*Compliance)',
     rf'\g<1>{compliance_pct}\g<2>',
     "Compliance value",
     flags=DOTALL)
 
 # Compliance sub
-rep(r'(<div class="kpi-lbl">Compliance</div>\s*<div class="kpi-sub">)[^<]*(</div>)',
+rep(rf'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Compliance[^<]*</div>\s*{KPI_SUB_OPEN})[^<]*(</div>)',
     rf'\g<1>{compliance_sub}\g<2>',
     "Compliance sub",
     flags=DOTALL)
@@ -373,6 +397,150 @@ if ss:
     rep(r'(<div class="ss-kpi-list">)(.*?)(</div>\s*</div>\s*<!-- Steritech)',
         rf'\g<1>\n{new_kpi_block}\n        \g<3>',
         "SS KPI list",
+        flags=DOTALL)
+
+# ── ComplianceMate detail card (Bobby's required-only list) ────────────
+# Source-name → display-label mapping. Checklists not in this map are ignored.
+CM_REQUIRED = [
+    ("AM Pre-Shift Check",   "AM Pre-Shift Check",            True),   # shift-change styled
+    ("11AM: Time and Temp",  "11 AM &middot; Time and Temp",  False),
+    ("Shift Change",         "Shift Change",                  True),
+    ("3PM: Time and Temp",   "3 PM &middot; Time and Temp",   False),
+    ("5PM: Time and Temp",   "5 PM &middot; Time and Temp",   False),
+    ("PM Pre-Shift Check",   "PM Pre-Shift Check",            True),
+    ("7PM: Time and Temp",   "7 PM &middot; Time and Temp",   False),
+    ("9PM: Time and Temp",   "9 PM &middot; Time and Temp",   False),
+    ("Closing Checklist",    "11 PM &middot; Closing Time and Temp", False),
+]
+
+if cm and cm.get("lists"):
+    by_name = {l["name"]: l for l in cm["lists"]}
+    pct_buckets = []
+    rows = []
+    for src_name, label, is_shift in CM_REQUIRED:
+        item = by_name.get(src_name)
+        if item is None:
+            cls = "cm-pct tbd"
+            pct_disp = "N/A"
+        else:
+            p = item["pct"]
+            pct_buckets.append(p)
+            if p >= 100: cls = "cm-pct good"
+            elif p >= 80: cls = "cm-pct warn"
+            else: cls = "cm-pct over"
+            pct_disp = f"{p}%"
+        item_class = "cm-item shift-change" if is_shift else "cm-item"
+        rows.append(
+            f'        <div class="{item_class}"><span class="cm-label">{label}</span>'
+            f'<span class="{cls}">{pct_disp}</span></div>'
+        )
+
+    # Milkshake row — show on Tue/Fri only (JS handles display, but we also wire status if present)
+    msk = by_name.get("Milkshake Cleaning Checklist") or by_name.get("Milkshake Cleaning")
+    msk_pct = msk["pct"] if msk else None
+    if msk_pct is None:
+        msk_disp = "Not Today"; msk_cls = "cm-pct tbd"
+    else:
+        if msk_pct >= 100: msk_cls = "cm-pct good"
+        elif msk_pct >= 80: msk_cls = "cm-pct warn"
+        else: msk_cls = "cm-pct over"
+        msk_disp = f"{msk_pct}%"
+    rows.append(
+        f'        <div class="cm-item" id="cm-milkshake-row" style="display:none;">'
+        f'<span class="cm-label">Milkshake Cleaning Checklist '
+        f'<span style="color:var(--white-60); font-weight:500;">&middot; Tue/Fri AM only</span></span>'
+        f'<span class="{msk_cls}">{msk_disp}</span></div>'
+    )
+
+    new_cm_list = "\n".join(rows)
+    rep(r'(<div class="cm-list">)(.*?)(</div>\s*</div>\s*<!-- ══ SECRET SHOP)',
+        rf'\g<1>\n{new_cm_list}\n      \g<3>',
+        "ComplianceMate required-list rows",
+        flags=DOTALL)
+
+    overall = round(sum(pct_buckets) / len(pct_buckets)) if pct_buckets else 0
+    rep(r'(<div class="cm-overall-val">)[^<]*(</div>)',
+        rf'\g<1>{overall}%\g<2>',
+        "ComplianceMate overall %")
+
+    if overall >= 100:
+        badge_html = '<span class="cm-badge pill pill-green">On Track</span>'
+    elif overall >= 90:
+        badge_html = '<span class="cm-badge pill pill-yellow">Watch</span>'
+    else:
+        badge_html = '<span class="cm-badge pill pill-red">Behind</span>'
+    rep(r'<span class="cm-badge[^"]*"[^>]*>[^<]*</span>',
+        badge_html,
+        "ComplianceMate status badge")
+
+# ── Transactions KPI card (from Par Brink Sales Summary) ───────────────
+if sales_summary and "order_count" in sales_summary:
+    order_count = sales_summary["order_count"]
+    guest_count = sales_summary.get("guest_count")
+    avg_ticket = sales_summary.get("order_average")
+    tx_today = f"{order_count:,}"
+    sub_parts = []
+    if guest_count is not None:
+        sub_parts.append(f"{guest_count:,} guests")
+    if avg_ticket is not None:
+        sub_parts.append(f"${avg_ticket:.2f} avg ticket")
+    tx_sub_today = " &middot; ".join(sub_parts) if sub_parts else "—"
+
+    # Update the data-today on the value (preserve data-week/month/quarter)
+    rep(r'(<div class="kpi-val data-swap" data-today=")[^"]*(" data-week="[^"]*" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>\s*<div class="kpi-lbl[^"]*"[^>]*>[^<]*Transactions)',
+        rf'\g<1>{tx_today}\g<2>{tx_today}\g<3>',
+        "Transactions value",
+        flags=DOTALL)
+
+    rep(r'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Transactions[^<]*</div>\s*<div class="kpi-sub data-swap" data-today=")[^"]*(" data-week="[^"]*" data-month="[^"]*" data-quarter="[^"]*">)[^<]*(</div>)',
+        rf'\g<1>{tx_sub_today}\g<2>{tx_sub_today}\g<3>',
+        "Transactions sub",
+        flags=DOTALL)
+
+# ── Discounts & Comps card (from Par Brink Discount Summary) ───────────
+if discounts:
+    net_sales = latest['sales']['net'] or 0
+    disc_total = discounts.get('discounts_total', 0.0)
+    comps_total = discounts.get('comps_total', 0.0)
+    total_count = discounts.get('total_count', 0)
+
+    disc_pct = (disc_total / net_sales * 100.0) if net_sales else 0.0
+    pct_str = f"{disc_pct:.2f}% of sales"
+
+    rep(r'(<div class="dr-val" id="dc-discounts-val">)[^<]*(</div>)',
+        rf'\g<1>${disc_total:,.2f}\g<2>',
+        "Discounts total value")
+    rep(r'(<div class="dr-sub" id="dc-discounts-sub">)[^<]*(</div>)',
+        rf'\g<1>{total_count} redemptions &middot; {pct_str}\g<2>',
+        "Discounts sub-line")
+    rep(r'(<div class="dr-val" id="dc-comps-val">)[^<]*(</div>)',
+        rf'\g<1>${comps_total:,.2f}\g<2>',
+        "Comps total value")
+    comps_sub = "No item comps today" if comps_total == 0 else f"{sum(1 for it in discounts['items'] if it['type']=='Comp' and it['count']>0)} types"
+    rep(r'(<div class="dr-sub" id="dc-comps-sub">)[^<]*(</div>)',
+        rf'\g<1>{comps_sub}\g<2>',
+        "Comps sub-line")
+
+    used_items = [it for it in discounts['items'] if it['count'] > 0]
+    if used_items:
+        rows = []
+        for it in used_items:
+            row_pct = (it['total'] / net_sales * 100.0) if net_sales else 0.0
+            rows.append(
+                f'          <tr>\n'
+                f'            <td>{it["name"]}</td>\n'
+                f'            <td>{it["type"]}</td>\n'
+                f'            <td class="num">{it["count"]}</td>\n'
+                f'            <td class="num">${it["total"]:,.2f}</td>\n'
+                f'            <td class="num">{row_pct:.2f}%</td>\n'
+                f'          </tr>'
+            )
+        new_tbody = "\n".join(rows)
+    else:
+        new_tbody = '          <tr><td colspan="5" style="color:rgba(255,255,255,0.55);padding:14px;text-align:center">No discounts or comps today</td></tr>'
+    rep(r'(<tbody id="dc-tbody">)(.*?)(</tbody>)',
+        rf'\g<1>\n{new_tbody}\n        \g<3>',
+        "Discounts table body",
         flags=DOTALL)
 
 # ── Footer timestamp ───────────────────────────────────────────────────

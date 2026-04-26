@@ -75,6 +75,19 @@ jobs:
         continue-on-error: true
         run: python scraper/parbrink_email_pickup.py --store 2065 --mode daily
 
+      # ── 4e. Parse the Par Brink Discount Summary PDF → JSON ───────────────
+      # wire_dashboard.py reads the JSON to populate the Comps & Discounts card.
+      - name: Parse Par Brink Discount Summary
+        continue-on-error: true
+        run: python scraper/parbrink_parse_discounts.py --store 2065
+
+      # ── 4f. Parse the Par Brink Sales Summary PDF → JSON ──────────────────
+      # wire_dashboard.py reads the JSON to populate the Transactions KPI card
+      # (orders / guests / avg ticket) and as a backstop labor source.
+      - name: Parse Par Brink Sales Summary
+        continue-on-error: true
+        run: python scraper/parbrink_parse_sales_summary.py --store 2065
+
       # ── 5. Scrape ComplianceMate first so dashboard.html includes fresh data ─
       - name: Scrape ComplianceMate (store 2065)
         continue-on-error: true
