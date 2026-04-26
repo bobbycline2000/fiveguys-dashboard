@@ -9,9 +9,15 @@ data/_debug/
 data/raw/**/*.html
 data/raw/**/*.txt
 data/raw/**/*.png
+data/raw/**/*.pdf
+data/raw/**/*.zip
 
 # Top-level scraper scratch files (pre-migration)
 data/ct_api_calls.json
 data/ct_captured.json
 data/pnl_api_calls*.json
 data/parbrink.json
+
+# OAuth client credentials + per-machine refresh tokens — never commit
+secrets/
+*.token.json
