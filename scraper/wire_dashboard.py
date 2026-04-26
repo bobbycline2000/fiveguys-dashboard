@@ -75,6 +75,11 @@ try:
 except FileNotFoundError:
     rollups = None
 
+try:
+    cm_rollups = json.loads((ROOT / "data" / "compliance_rollups.json").read_text(encoding="utf-8"))
+except FileNotFoundError:
+    cm_rollups = None
+
 sched, sched_path = load_latest("parbrink", "weekly_schedule.json")
 if sched is None:
     legacy = sorted((ROOT / "data" / "parbrink").glob("*/weekly_schedule_2065.json"))
@@ -126,6 +131,23 @@ if _req_lists:
 else:
     compliance_pct = f"{cm['overall_pct']}%"
     compliance_sub = f"{len([l for l in cm['lists'] if l['pct']==100])}/{len(cm['lists'])} lists at 100%"
+
+# ── Compliance rollups (Week/Month/Quarter averages of required-only %) ───
+def _cm_period(bucket):
+    """Return (val, sub) strings for a compliance rollup bucket. Falls back to today."""
+    if not bucket or bucket.get("required_pct_avg") is None or bucket.get("days", 0) == 0:
+        return compliance_pct, compliance_sub
+    val = f"{round(bucket['required_pct_avg'])}%"
+    sub = f"{bucket['days']}d avg"
+    return val, sub
+
+if cm_rollups:
+    compliance_pct_week, compliance_sub_week = _cm_period(cm_rollups.get("week"))
+    compliance_pct_month, compliance_sub_month = _cm_period(cm_rollups.get("month"))
+    compliance_pct_quarter, compliance_sub_quarter = _cm_period(cm_rollups.get("quarter"))
+else:
+    compliance_pct_week = compliance_pct_month = compliance_pct_quarter = compliance_pct
+    compliance_sub_week = compliance_sub_month = compliance_sub_quarter = compliance_sub
 
 if ss:
     ss_quarter = f"{ss['averages']['quarter']['score']:.0f}%"
@@ -379,15 +401,15 @@ rep(rf'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Sales / Guest[^<]*</div>\s*<div clas
     "Sales / Guest sub",
     flags=DOTALL)
 
-# Compliance value (no data-swap on this card)
-rep(rf'({KPI_VAL_OPEN})[^<]*(</div>\s*{KPI_LBL_OPEN}[^<]*Compliance)',
-    rf'\g<1>{compliance_pct}\g<2>',
+# Compliance value — refresh all four data-* attrs (data-swap toggled by topbar JS)
+rep(rf'(<div class="kpi-val data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month=")[^"]*(" data-quarter=")[^"]*(">)[^<]*(</div>\s*<div class="kpi-lbl[^"]*"[^>]*>[^<]*Compliance)',
+    rf'\g<1>{compliance_pct}\g<2>{compliance_pct_week}\g<3>{compliance_pct_month}\g<4>{compliance_pct_quarter}\g<5>{compliance_pct}\g<6>',
     "Compliance value",
     flags=DOTALL)
 
-# Compliance sub
-rep(rf'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Compliance[^<]*</div>\s*{KPI_SUB_OPEN})[^<]*(</div>)',
-    rf'\g<1>{compliance_sub}\g<2>',
+# Compliance sub — refresh all four data-* attrs
+rep(rf'(<div class="kpi-lbl[^"]*"[^>]*>[^<]*Compliance[^<]*</div>\s*<div class="kpi-sub data-swap" data-today=")[^"]*(" data-week=")[^"]*(" data-month=")[^"]*(" data-quarter=")[^"]*(">)[^<]*(</div>)',
+    rf'\g<1>{compliance_sub}\g<2>{compliance_sub_week}\g<3>{compliance_sub_month}\g<4>{compliance_sub_quarter}\g<5>{compliance_sub}\g<6>',
     "Compliance sub",
     flags=DOTALL)
 

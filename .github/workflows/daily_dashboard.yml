@@ -130,6 +130,15 @@ jobs:
         # NOTE: When scaling to all 11 stores, add additional steps here
         # with the store-specific env vars and a STORE_ID env variable.
 
+      # ── 5a2. Roll up daily ComplianceMate snapshots → Week/Month/Quarter ─
+      # Reads every data/raw/compliancemate/2065/<date>/compliance.json and
+      # writes data/compliance_rollups.json. wire_dashboard.py uses this to
+      # populate the Compliance KPI's data-week / data-month / data-quarter
+      # attributes. Without this step those attributes stay frozen at "today".
+      - name: Aggregate ComplianceMate rollups (Week / Month / Quarter)
+        continue-on-error: true
+        run: python scraper/aggregate_compliance.py --store 2065
+
       # ── 5b2. Scrape CrunchTime food-cost variance (Top 10 widget + week %)
       # Closes the Food Cost card's Big % + Top 3 Variance Items. Reuses the
       # main.py login/location helpers. Output:
@@ -192,8 +201,8 @@ jobs:
           # Stage dashboard + JSON snapshots. data/raw/parbrink/ JSONs are
           # critical history for aggregate_periods.py — without committing them,
           # every run starts with empty rollup history.
-          git add dashboard.html data/latest.json data/compliancemate.json data/period_rollups.json data/cm_results_source.html data/cm_page_text.txt || true
-          git add data/raw/parbrink/ data/raw/crunchtime/ || true
+          git add dashboard.html data/latest.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cm_results_source.html data/cm_page_text.txt || true
+          git add data/raw/parbrink/ data/raw/crunchtime/ data/raw/compliancemate/ || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."

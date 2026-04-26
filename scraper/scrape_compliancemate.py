@@ -458,6 +458,17 @@ if __name__ == "__main__":
     DATA_DIR.mkdir(exist_ok=True)
     import sys
     data = asyncio.run(scrape())
-    out = Path(__file__).parent.parent / "data" / "compliancemate.json"
+    repo_root = Path(__file__).parent.parent
+    out = repo_root / "data" / "compliancemate.json"
     out.write_text(json.dumps(data, indent=2))
     log.info(f"Saved {out}  |  status={data['meta']['status']}  |  overall={data['overall_pct']}%  |  {len(data['lists'])} individual checklists")
+
+    # Daily snapshot for the rollup aggregator (data/raw/compliancemate/<store>/<date>/compliance.json)
+    store_id = data.get("meta", {}).get("location") or "2065"
+    snap_date = data.get("meta", {}).get("date")
+    if snap_date:
+        snap_dir = repo_root / "data" / "raw" / "compliancemate" / str(store_id) / snap_date
+        snap_dir.mkdir(parents=True, exist_ok=True)
+        snap_path = snap_dir / "compliance.json"
+        snap_path.write_text(json.dumps(data, indent=2))
+        log.info(f"Snapshot {snap_path}")

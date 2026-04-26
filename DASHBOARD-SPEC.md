@@ -1,6 +1,6 @@
 # Five Guys Dashboard — Master Spec
 
-> **Last verified:** 2026-04-26 15:00 ET (Item #6 closed — `scrape_cogs.py` is now wired into the daily workflow. Pulls Top 10 variance widget + week COGS % from CrunchTime, writes `data/raw/crunchtime/<store>/<week>/cogs_variance.json`. `wire_dashboard.py` now wires the Food Cost Big % + Over/On Goal flag from `cogs_pct_week` (gated on data; falls back to existing hardcoded value when scrape misses).)
+> **Last verified:** 2026-04-26 15:08 ET (Items #8 + #9 closed — Quarter aggregator was already built into Item #3; ComplianceMate rolling rollups shipped via `scraper/aggregate_compliance.py` + a daily snapshot in `scrape_compliancemate.py`. Compliance KPI now wires Week/Month/Quarter averages of the required-only %.)
 
 This is the source-of-truth doc for what the dashboard is and what makes each piece work. If you ever want to know "is X working?" — find the row, read the status, read the closer.
 
@@ -59,14 +59,14 @@ Status legend: 🟢 = working today · 🟡 = partial / hardcoded / placeholder 
 | Daily Sales ($5,541) | 🟢 wired from Par Brink | 🟢 wired | 🟢 wired (rollup of daily JSONs) | 🟢 wired (rollup of daily JSONs) | Par Brink Sales Summary (daily) + `aggregate_periods.py` rollup | All four periods wired 4/26. Month/Quarter values converge to Week until ≥7 days of daily JSONs accumulate. |
 | Transactions (207) | 🟢 wired (from `parbrink_parse_sales_summary.py`) | 🟢 wired (rollup) | 🟢 wired (rollup) | 🟢 wired (rollup) | Same as Daily Sales | Today: parser shipped, awaiting Mon 8:05 AM CI. Week/Month/Quarter wired via aggregator 4/26. |
 | Sales / Guest ($5.46) | 🟢 wired | 🟢 wired | 🟢 wired (rollup) | 🟢 wired (rollup) | Computed from Sales Summary (Net / Guests) — rollup uses same formula on aggregated totals | Wired 4/26. Diverges from Week as days accumulate. |
-| Compliance (100%, 9/9) | 🟢 wired from ComplianceMate scraper | 🟡 today only | 🟡 today only | 🟡 today only | ComplianceMate Playwright scrape (`scraper/compliancemate_scrape.py`) | Filter to required-only checklists working. Week+/Month+/Quarter+ rolling avg not built. |
+| Compliance (100%, 9/9) | 🟢 wired from ComplianceMate scraper | 🟢 wired from `aggregate_compliance.py` (avg of required-only % across last 7 days of snapshots) | 🟢 wired (30d) | 🟢 wired (90d) | ComplianceMate Playwright scrape + `scraper/aggregate_compliance.py` rollup | Required-only filter applied (matches wire_dashboard's KPI logic). Daily snapshot lands in `data/raw/compliancemate/<store>/<date>/compliance.json`; rollup converges as days accumulate. |
 
 ### ComplianceMate detail card
 | Item | Today | Status | What it needs |
 |---|---|---|---|
 | List of required checklists w/ pass % | 🟢 9 items, daily refresh, only required-only filter applied | 🟢 (closed Gap 2 on 4/26) | — |
 | Overall pill (On Track / Behind) | 🟢 | 🟢 | — |
-| Period view (W/M/Q rollups of pass %) | not built | 🔴 | Decision: store ComplianceMate snapshot daily into `data/raw/compliancemate/<date>.json`, then a rollup script computes 7/30/90-day averages. ~1 day of work. |
+| Period view (W/M/Q rollups of pass %) | wired from `aggregate_compliance.py` | 🟢 (closed 4/26 — daily snapshots stored in `data/raw/compliancemate/<store>/<date>/compliance.json`, rollup writes `data/compliance_rollups.json`, `wire_dashboard.py` reads it for the KPI's data-week/month/quarter attributes) | — |
 
 ### Right column — Secret Shop / Steritech / Team Notes
 | Card | Today | Status | What it needs |
@@ -117,8 +117,8 @@ If you give me a green light, I'd build in this order — biggest visible impact
 5. ~~Par Brink Weekly Labor Schedule parser~~ — **DONE 4/26 via `scraper/parbrink_parse_weekly_schedule.py`** (parses per-store `weekly_schedule.pdf` into the JSON shape `wire_dashboard.py` already consumes; closes Today's Schedule card. Multi-store batch split is a follow-up.)
 6. ~~CrunchTime food-cost export step~~ — **DONE 4/26 via `scraper/scrape_cogs.py`** (shipped to daily workflow; `wire_dashboard.py` now wires Big % + Top 3 + Over/On Goal flag from `cogs_variance.json`. Period boxes Week/Month/QTD still need a separate rollup over committed weekly JSONs — pulled out as a follow-up.)
 7. **Marketforce Secret Shop pickup + parser** — closes Secret Shop card + KPI rollups. (~1–2 sessions; depends on you giving me access + a sample email.)
-8. **Quarter aggregator** — closes Quarter tab. (~½ session, depends on having Month working first.)
-9. **ComplianceMate rolling rollups** — Week/Month/Quarter for compliance %. (~½ session.)
+8. ~~Quarter aggregator~~ — **DONE 4/26 as part of Item #3** (`aggregate_periods.py` already emits `week` / `month` / `quarter` buckets in one pass; `wire_dashboard.py` injects all three into `data-week` / `data-month` / `data-quarter` attributes for Daily Sales, Transactions, Sales/Guest, WTD labor stats. Compliance Quarter still pending — that's Item #9.)
+9. ~~ComplianceMate rolling rollups~~ — **DONE 4/26 via `scraper/aggregate_compliance.py`** (daily snapshot added to `scrape_compliancemate.py`; aggregator computes 7/30/90-day averages of required-only %; `wire_dashboard.py` populates Compliance KPI's Week/Month/Quarter cells. Will converge as days accumulate.)
 
 ---
 
