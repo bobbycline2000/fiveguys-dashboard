@@ -20,7 +20,8 @@ Status legend: 🟢 = working today · 🟡 = partial / hardcoded / placeholder 
 | Item | Today | Status | What it needs |
 |---|---|---|---|
 | Overview (the main page) | the only built page | 🟢 | — |
-| Employee List | downloads `employee_directory.xlsx` | 🔴 file doesn't exist yet | **Bobby:** give me the roster (name, role, phone, hire date if you have it). I'll drop it in as `.xlsx` and the link works immediately. Static file, doesn't refresh. |
+| Employee List | downloads `employee_directory.xlsx` (20 active employees, name + phone + status) | 🟢 (shipped via PR #8 mobile session 4/26; corrected 4/26 PM) | Source list lives in `scripts/build_employee_directory.py`. To update: edit the EMPLOYEES list there, run `python scripts/build_employee_directory.py`, commit, push. |
+| Phone Directory (PDF) | downloads `employee_directory.pdf` (print-friendly, name + phone) | 🟢 (shipped via PR #9 mobile session 4/26) | Same script regenerates both .xlsx and .pdf in one run. |
 | Locations | empty button | 🔴 not built | Decision: 1-store summary card (when you go DM)? 11-store roll-up? Defer until DM role is real. |
 | Settings | empty button | 🔴 not built | Probably never needed unless we add per-user prefs. Can hide. |
 
