@@ -2,12 +2,14 @@
 
 ## What This Is
 An automated daily operations dashboard for Five Guys restaurant locations.
-It scrapes CrunchTime Net Chef, generates a live HTML dashboard (hosted on Netlify),
+It scrapes CrunchTime Net Chef, generates a live HTML dashboard (hosted on **GitHub Pages**),
 and updates a SharePoint Excel daily report — all automatically every morning.
 
 **Current active location:** KY-2065 Dixie Highway  
-**Live dashboard:** deployed via Netlify from `dashboard.html` on the `main` branch  
-**Automation:** GitHub Actions runs daily at 8:05 AM Eastern
+**Live dashboard URL:** https://bobbycline2000.github.io/fiveguys-dashboard/dashboard.html  
+**Hosting:** GitHub Pages, deployed automatically from `dashboard.html` on the `main` branch  
+**Automation:** GitHub Actions runs daily at 8:05 AM Eastern  
+**Note:** Netlify was the original host but the project moved to GitHub Pages. Netlify project may still appear in the account; the live site is GitHub Pages.
 
 ---
 
@@ -27,7 +29,7 @@ GitHub Actions (cron 8:05 AM ET)
     ├── scraper/main.py          ← Playwright scrapes CrunchTime → generates dashboard.html
     ├── scraper/update_excel.py  ← Microsoft Graph API updates SharePoint Excel
     │
-    ├── dashboard.html           ← committed to main → Netlify auto-deploys
+    ├── dashboard.html           ← committed to main → GitHub Pages auto-deploys
     └── data/latest.json         ← JSON snapshot of scraped data
 ```
 
@@ -38,7 +40,7 @@ GitHub Actions (cron 8:05 AM ET)
 4. Extracts Performance Metrics using 3-strategy fallback (see below)
 5. Saves `data/latest.json` snapshot
 6. Generates `dashboard.html` and commits it to `main`
-7. Netlify auto-deploys the new HTML
+7. GitHub Pages auto-deploys the new HTML
 8. `update_excel.py` writes the same data into the SharePoint Excel file
 
 ---
@@ -115,7 +117,7 @@ GitHub Actions (cron 8:05 AM ET)
 ```
 /
 ├── CLAUDE.md                  ← this file — read at start of every session
-├── dashboard.html             ← auto-generated daily, served by Netlify
+├── dashboard.html             ← auto-generated daily, served by GitHub Pages
 ├── index.html                 ← redirects / → dashboard.html
 ├── requirements.txt           ← playwright==1.44.0, requests==2.31.0
 ├── scraper/
@@ -151,7 +153,7 @@ STORE_CONFIG = {
 
 For a multi-client consulting product, each client would get:
 - Their own GitHub repo (fork of this one)
-- Their own Netlify site
+- Their own GitHub Pages site (or other static host)
 - Their own GitHub Secrets (credentials)
 - Their own SharePoint Excel item ID
 
