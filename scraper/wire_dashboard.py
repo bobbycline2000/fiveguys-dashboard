@@ -238,6 +238,29 @@ rep(r'(<div class="ctrl-stat-val">)[^<]*(</div>\s*<div class="ctrl-stat-lbl">Avg
     "Avg Hrly Wage",
     flags=DOTALL)
 
+# WTD Labor stats — fed by aggregate_periods.py rollups (week bucket).
+# Falls back to "—" if the rollups file is missing.
+if rollups and rollups["week"]["days"]:
+    _wk = rollups["week"]
+    wtd_pct       = f"{_wk['labor_percent']:.1f}%"
+    wtd_labor_dol = f"${_wk['labor_cost']:,.0f}"
+    wtd_hours     = f"{_wk['labor_hours']:.1f}"
+else:
+    wtd_pct = wtd_labor_dol = wtd_hours = "—"
+
+rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">WTD %</div>)',
+    rf'\g<1>{wtd_pct}\g<2>',
+    "WTD % value",
+    flags=DOTALL)
+rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">WTD Labor \$</div>)',
+    rf'\g<1>{wtd_labor_dol}\g<2>',
+    "WTD Labor $ value",
+    flags=DOTALL)
+rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">WTD Hours</div>)',
+    rf'\g<1>{wtd_hours}\g<2>',
+    "WTD Hours value",
+    flags=DOTALL)
+
 # Hourly labor bars — replace the hardcoded laborData JS array (11A–10P)
 if hourly_labor and hourly_labor.get("hours"):
     display_hours = [h for h in hourly_labor["hours"] if 11 <= h["hour_24"] <= 22]
