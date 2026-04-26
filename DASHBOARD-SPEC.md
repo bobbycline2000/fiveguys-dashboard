@@ -43,11 +43,14 @@ Status legend: 🟢 = working today · 🟡 = partial / hardcoded / placeholder 
 ### The Controllables — Labor
 | Field | Today | Status | What it needs |
 |---|---|---|---|
-| Big Labor % (19.1%) | should come from Par Brink Hourly Sales And Labor PDF | 🟡 verify it's actually wired (recent commit added the parser); right now likely hardcoded | Check `data/latest.json` after tomorrow's run — confirm `labor.pct_today` populated. If not, parser doesn't exist yet — build `parbrink_parse_hourly_sales_labor.py`. |
+| Big Labor % | wired from Par Brink Hourly Sales And Labor totals (e.g. 19.4%) | 🟢 (parser shipped 4/26, awaiting Mon 8:05 AM CI proof) | — |
 | Goal (18.5%) | hardcoded constant | 🟢 (corrected this week from 17.5 → 18.5) | — |
-| Labor $ Today / Actual Hrs / Sched Hrs / Avg Hrly Wage | hardcoded today | 🔴 | Same Par Brink Hourly report. Each is one row in the PDF. Build the parser. |
+| Labor $ Today | wired from Par Brink Hourly totals (e.g. $1,073) | 🟢 | — |
+| Actual Hrs | wired from Par Brink Hourly totals (e.g. 102.6) | 🟢 | — |
+| Sched Hrs | wired from Par Brink Weekly Labor Schedule | 🟡 only when sched JSON exists; otherwise "—" | Build `parbrink_parse_weekly_schedule.py` (item #5 in queue). |
+| Avg Hrly Wage | computed labor_$ / labor_hrs (e.g. $10.46) | 🟢 | — |
 | WTD %, WTD Labor $, WTD Hours | hardcoded | 🟡 | Par Brink "Sales And Labor Summary By Location" (weekly batch, lands ~2:30 AM Tue). Already on the report list — just need parser + wire. |
-| Labor % by Hour bars | hardcoded | 🔴 | Par Brink "Hourly Sales And Labor By Section" PDF. Build `parbrink_parse_hourly_labor_by_hour.py`. |
+| Labor % by Hour bars (11A–10P) | wired from Par Brink Hourly per-hour rows | 🟢 (parser shipped 4/26, awaiting Mon 8:05 AM CI proof) | — |
 
 ### Secondary KPIs row (the 4 cards under Controllables)
 | Card | Today | Week | Month | Quarter | Source | Status |

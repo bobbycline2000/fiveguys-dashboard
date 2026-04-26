@@ -67,6 +67,7 @@ if cogs is None:
 
 discounts, _ = load_latest("parbrink", "discount_summary.json")
 sales_summary, _ = load_latest("parbrink", "sales_summary.json")
+hourly_labor, _ = load_latest("parbrink", "hourly_sales_labor.json")
 
 sched, sched_path = load_latest("parbrink", "weekly_schedule.json")
 if sched is None:
@@ -89,7 +90,18 @@ if report_date_str:
 else:
     header_date_chip = now.strftime("%A, %B %d &nbsp;%Y").replace(" 0", " ")
 
-labor_pct = f"{latest['labor']['pct']:.1f}%" if latest['labor'].get('pct') is not None else "—"
+# Labor card values — prefer Par Brink Hourly Sales And Labor when available
+if hourly_labor and hourly_labor.get("totals"):
+    _hl_totals = hourly_labor["totals"]
+    labor_pct = f"{_hl_totals['labor_percent']:.1f}%"
+    labor_dollars_today = f"${_hl_totals['labor_dollars']:,.0f}"
+    actual_hrs_today = f"{_hl_totals['labor_hours']:.1f}"
+    avg_hourly_wage = f"${_hl_totals['avg_hourly_wage']:.2f}"
+else:
+    labor_pct = f"{latest['labor']['pct']:.1f}%" if latest['labor'].get('pct') is not None else "—"
+    labor_dollars_today = "—"
+    actual_hrs_today = "—"
+    avg_hourly_wage = "—"
 sched_hrs_today = f"{sched['today']['scheduled_hours']:.1f}" if sched else "—"
 sales_net = f"${latest['sales']['net']:,.0f}"
 sales_ly = f"${latest['sales']['ly']:,.0f}"
@@ -201,6 +213,37 @@ rep(r'(<div class="ctrl-stat-val">)[^<]*(</div>\s*<div class="ctrl-stat-lbl">Sch
     rf'\g<1>{sched_hrs_today}\g<2>',
     "Sched Hrs today",
     flags=DOTALL)
+
+# Labor $ Today — preceding "Labor $ Today" label
+rep(r'(<div class="ctrl-stat-val">)[^<]*(</div>\s*<div class="ctrl-stat-lbl">Labor \$ Today</div>)',
+    rf'\g<1>{labor_dollars_today}\g<2>',
+    "Labor $ Today",
+    flags=DOTALL)
+
+# Actual Hrs — preceding "Actual Hrs" label
+rep(r'(<div class="ctrl-stat-val">)[^<]*(</div>\s*<div class="ctrl-stat-lbl">Actual Hrs</div>)',
+    rf'\g<1>{actual_hrs_today}\g<2>',
+    "Actual Hrs today",
+    flags=DOTALL)
+
+# Avg Hrly Wage — preceding "Avg Hrly Wage" label
+rep(r'(<div class="ctrl-stat-val">)[^<]*(</div>\s*<div class="ctrl-stat-lbl">Avg Hrly Wage</div>)',
+    rf'\g<1>{avg_hourly_wage}\g<2>',
+    "Avg Hrly Wage",
+    flags=DOTALL)
+
+# Hourly labor bars — replace the hardcoded laborData JS array (11A–10P)
+if hourly_labor and hourly_labor.get("hours"):
+    display_hours = [h for h in hourly_labor["hours"] if 11 <= h["hour_24"] <= 22]
+    js_rows = ",\n  ".join(
+        f'{{ hr: \'{h["label"]}\', pct: {h["labor_percent"]:.1f} }}'
+        for h in display_hours
+    )
+    new_array = f"const laborData = [\n  {js_rows}\n];"
+    rep(r'const laborData = \[[^\]]*\];',
+        new_array.replace('\\', '\\\\'),
+        "hourly labor bars",
+        flags=DOTALL)
 
 # ── Food Cost top-3 variance items (if cogs data) ──────────────────────
 if cogs and cogs.get("items"):

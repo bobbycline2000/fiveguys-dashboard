@@ -681,7 +681,7 @@ body {
         <div class="page-title">Good afternoon, Bobby.</div>
         <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>12:28 PM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>2:06 PM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -741,7 +741,7 @@ body {
         <div class="ctrl-eyebrow">The Controllables &nbsp;&mdash;&nbsp; Labor</div>
         <div class="ctrl-main">
           <div>
-            <div class="ctrl-value">19.1%</div>
+            <div class="ctrl-value">19.4%</div>
             <div class="ctrl-flag"><i data-lucide="flag"></i> Over Goal</div>
           </div>
           <div class="ctrl-meta">
@@ -751,11 +751,11 @@ body {
         <div class="ctrl-divider"></div>
         <div class="ctrl-stats" style="grid-template-columns: repeat(4, 1fr);">
           <div>
-            <div class="ctrl-stat-val">$2,392</div>
+            <div class="ctrl-stat-val">$1,073</div>
             <div class="ctrl-stat-lbl">Labor $ Today</div>
           </div>
           <div>
-            <div class="ctrl-stat-val">47.5</div>
+            <div class="ctrl-stat-val">102.6</div>
             <div class="ctrl-stat-lbl">Actual Hrs</div>
           </div>
           <div>
@@ -763,7 +763,7 @@ body {
             <div class="ctrl-stat-lbl">Sched Hrs</div>
           </div>
           <div>
-            <div class="ctrl-stat-val">$13.45</div>
+            <div class="ctrl-stat-val">$10.46</div>
             <div class="ctrl-stat-lbl">Avg Hrly Wage</div>
           </div>
         </div>
@@ -1244,7 +1244,7 @@ body {
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>12:28 PM</span> &nbsp;&middot;&nbsp; April 26 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>2:06 PM</span> &nbsp;&middot;&nbsp; April 26 2026</span>
   </div>
 
 </div><!-- /main -->
@@ -1288,18 +1288,18 @@ function showShift(shift, btn) {
 // ── Labor % mini bars (11 AM – 10 PM, goal 18.5%) ──
 const LABOR_GOAL = 18.5;
 const laborData = [
-  { hr: '11A', pct: 15.2 },
-  { hr: '12P', pct: 17.8 },
-  { hr: '1P',  pct: 21.4 },
-  { hr: '2P',  pct: 19.6 },
-  { hr: '3P',  pct: 16.3 },
-  { hr: '4P',  pct: 15.8 },
-  { hr: '5P',  pct: 22.1 },
-  { hr: '6P',  pct: 23.4 },
-  { hr: '7P',  pct: 20.7 },
-  { hr: '8P',  pct: 17.2 },
-  { hr: '9P',  pct: 18.9 },
-  { hr: '10P', pct: null },  // TBD
+  { hr: '11A', pct: 18.3 },
+  { hr: '12P', pct: 12.3 },
+  { hr: '1P', pct: 11.3 },
+  { hr: '2P', pct: 15.7 },
+  { hr: '3P', pct: 25.7 },
+  { hr: '4P', pct: 19.7 },
+  { hr: '5P', pct: 11.8 },
+  { hr: '6P', pct: 10.7 },
+  { hr: '7P', pct: 14.9 },
+  { hr: '8P', pct: 14.6 },
+  { hr: '9P', pct: 24.6 },
+  { hr: '10P', pct: 100.0 }
 ];
 const realPcts = laborData.filter(d => d.pct !== null).map(d => d.pct);
 const maxPct = Math.max(...realPcts, LABOR_GOAL) * 1.1;

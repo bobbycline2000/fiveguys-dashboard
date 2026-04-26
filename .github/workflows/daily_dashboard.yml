@@ -88,6 +88,14 @@ jobs:
         continue-on-error: true
         run: python scraper/parbrink_parse_sales_summary.py --store 2065
 
+      # ── 4g. Parse the Par Brink Hourly Sales And Labor PDF → JSON ─────────
+      # wire_dashboard.py reads the JSON to populate the Labor controllable
+      # card (Labor %, Labor $ Today, Actual Hrs, Avg Hrly Wage) and the
+      # hourly bar chart (11A–10P).
+      - name: Parse Par Brink Hourly Sales And Labor
+        continue-on-error: true
+        run: python scraper/parbrink_parse_hourly_sales_labor.py --store 2065
+
       # ── 5. Scrape ComplianceMate first so dashboard.html includes fresh data ─
       - name: Scrape ComplianceMate (store 2065)
         continue-on-error: true
