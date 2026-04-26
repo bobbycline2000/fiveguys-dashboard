@@ -274,6 +274,21 @@ if hourly_labor and hourly_labor.get("hours"):
         "hourly labor bars",
         flags=DOTALL)
 
+# ── Food Cost Big % (cogs_pct_week from CrunchTime) ────────────────────
+FOOD_COST_GOAL = 27.5
+if cogs and cogs.get("cogs_pct_week") is not None:
+    fc_pct = float(cogs["cogs_pct_week"])
+    fc_val = f"{fc_pct:.1f}%"
+    fc_flag = "Over Goal" if fc_pct > FOOD_COST_GOAL else "On Goal"
+    rep(r'(<div class="ctrl-card food-cost">.*?<div class="ctrl-value">)[^<]*(</div>)',
+        rf'\g<1>{fc_val}\g<2>',
+        "Food Cost Big %",
+        flags=DOTALL)
+    rep(r'(<div class="ctrl-card food-cost">.*?<div class="ctrl-flag"><i data-lucide="flag"></i> )[^<]*(</div>)',
+        rf'\g<1>{fc_flag}\g<2>',
+        "Food Cost goal flag",
+        flags=DOTALL)
+
 # ── Food Cost top-3 variance items (if cogs data) ──────────────────────
 if cogs and cogs.get("items"):
     def trim(n, maxlen=28):

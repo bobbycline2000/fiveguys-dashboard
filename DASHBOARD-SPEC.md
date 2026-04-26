@@ -1,6 +1,6 @@
 # Five Guys Dashboard — Master Spec
 
-> **Last verified:** 2026-04-26 14:55 ET (Item #5 closed — `parbrink_parse_weekly_schedule.py` parses the per-store Weekly Labor Schedule PDF into the JSON shape `wire_dashboard.py` already consumes. Today's Schedule card + Sched Hrs cell now wire from real data when the per-store PDF is present.)
+> **Last verified:** 2026-04-26 15:00 ET (Item #6 closed — `scrape_cogs.py` is now wired into the daily workflow. Pulls Top 10 variance widget + week COGS % from CrunchTime, writes `data/raw/crunchtime/<store>/<week>/cogs_variance.json`. `wire_dashboard.py` now wires the Food Cost Big % + Over/On Goal flag from `cogs_pct_week` (gated on data; falls back to existing hardcoded value when scrape misses).)
 
 This is the source-of-truth doc for what the dashboard is and what makes each piece work. If you ever want to know "is X working?" — find the row, read the status, read the closer.
 
@@ -36,10 +36,10 @@ Status legend: 🟢 = working today · 🟡 = partial / hardcoded / placeholder 
 ### The Controllables — Food Cost
 | Field | Today | Status | What it needs |
 |---|---|---|---|
-| Big % (e.g. 31.2%) | hardcoded | 🟡 | CrunchTime "Consolidated Actual Theoretical Costs" report. Weekly only. Need a CrunchTime export step (not Par Brink — wrong tool). |
+| Big % (e.g. 31.2%) | wired from CrunchTime "Top 10 Actual vs. Theoretical Cost Items" widget date-range drilldown | 🟢 (closed 4/26 — `scrape_cogs.py` shipped to daily workflow; `wire_dashboard.py` reads `cogs_pct_week`. Awaiting Mon 8:05 AM CI proof.) | — |
 | Goal % (27.5%) | hardcoded | 🟢 (it's a constant) | Confirm 27.5% is the right corporate goal. |
-| Top 3 Variance Items + dollars | hardcoded "Ground Beef +$110, Hot Dog +$84, Bun Burger +$47" | 🟡 | Same CrunchTime weekly report. Top-N from variance column. |
-| Period boxes (Week / Month / QTD %) | hardcoded | 🟡 | Same source, rolled across last 1 / 4 / 13 weeks. |
+| Top 3 Variance Items + dollars | wired from CrunchTime widget via `scrape_cogs.py` (sorted by `over_dollars` desc) | 🟢 (closed 4/26 — `scrape_cogs.py` shipped to daily workflow. Awaiting Mon 8:05 AM CI proof.) | — |
+| Period boxes (Week / Month / QTD %) | hardcoded | 🟡 | Same source, rolled across last 1 / 4 / 13 weeks. Needs a `crunchtime_cogs_rollup.py` over committed weekly JSONs. |
 
 ### The Controllables — Labor
 | Field | Today | Status | What it needs |
@@ -115,7 +115,7 @@ If you give me a green light, I'd build in this order — biggest visible impact
 3. ~~Par Brink Sales By Day weekly parser + aggregator~~ — **DONE 4/26 via `scraper/aggregate_periods.py`** (rolls up existing daily JSONs; weekly batch parser unnecessary because daily JSONs are fresher and already collected).
 4. ~~Par Brink Sales And Labor Summary By Location weekly parser~~ — **DONE 4/26 via the same `aggregate_periods.py`** (PDF turned out to be single-day; rollup's `week.labor_*` fields cover WTD stats. Wired into wire_dashboard.py `period-val` cells.)
 5. ~~Par Brink Weekly Labor Schedule parser~~ — **DONE 4/26 via `scraper/parbrink_parse_weekly_schedule.py`** (parses per-store `weekly_schedule.pdf` into the JSON shape `wire_dashboard.py` already consumes; closes Today's Schedule card. Multi-store batch split is a follow-up.)
-6. **CrunchTime food-cost export step** — closes Food Cost card. (~1–2 sessions, harder because CrunchTime is a Playwright scrape.)
+6. ~~CrunchTime food-cost export step~~ — **DONE 4/26 via `scraper/scrape_cogs.py`** (shipped to daily workflow; `wire_dashboard.py` now wires Big % + Top 3 + Over/On Goal flag from `cogs_variance.json`. Period boxes Week/Month/QTD still need a separate rollup over committed weekly JSONs — pulled out as a follow-up.)
 7. **Marketforce Secret Shop pickup + parser** — closes Secret Shop card + KPI rollups. (~1–2 sessions; depends on you giving me access + a sample email.)
 8. **Quarter aggregator** — closes Quarter tab. (~½ session, depends on having Month working first.)
 9. **ComplianceMate rolling rollups** — Week/Month/Quarter for compliance %. (~½ session.)

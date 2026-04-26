@@ -130,6 +130,19 @@ jobs:
         # NOTE: When scaling to all 11 stores, add additional steps here
         # with the store-specific env vars and a STORE_ID env variable.
 
+      # ── 5b2. Scrape CrunchTime food-cost variance (Top 10 widget + week %)
+      # Closes the Food Cost card's Big % + Top 3 Variance Items. Reuses the
+      # main.py login/location helpers. Output:
+      #   data/raw/crunchtime/<store>/<week_end>/cogs_variance.json
+      # wire_dashboard.py reads cogs_pct_week and items[].
+      - name: Scrape CrunchTime food-cost variance (store 2065)
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+          STORE_ID: "2065"
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_cogs.py
+
       # ── 5c. Wire fresh data into dashboard.html (idempotent) ──────────────
       # main.py only updates data/latest.json; wire_dashboard.py is what
       # actually reflects those numbers in the served HTML. Without this step
@@ -180,7 +193,7 @@ jobs:
           # critical history for aggregate_periods.py — without committing them,
           # every run starts with empty rollup history.
           git add dashboard.html data/latest.json data/compliancemate.json data/period_rollups.json data/cm_results_source.html data/cm_page_text.txt || true
-          git add data/raw/parbrink/ || true
+          git add data/raw/parbrink/ data/raw/crunchtime/ || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
