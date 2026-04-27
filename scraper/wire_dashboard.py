@@ -114,10 +114,16 @@ else:
     actual_hrs_today = "—"
     avg_hourly_wage = "—"
 sched_hrs_today = f"{sched['today']['scheduled_hours']:.1f}" if sched else "—"
-sales_net = f"${latest['sales']['net']:,.0f}"
+# Prefer Par Brink Sales Summary for net sales (more reliable than CrunchTime text scrape)
+if sales_summary and sales_summary.get("net_sales"):
+    _pb_net = sales_summary["net_sales"]
+    sales_net = f"${_pb_net:,.0f}"
+else:
+    _pb_net = latest["sales"]["net"] or 0
+    sales_net = f"${_pb_net:,.0f}"
 sales_ly = f"${latest['sales']['ly']:,.0f}"
 sales_forecast = f"${latest['sales']['forecast']:,.0f}"
-per_guest = f"${latest['sales']['per_guest']:.2f}"
+per_guest = f"${sales_summary['order_average']:.2f}" if sales_summary and sales_summary.get("order_average") else f"${latest['sales']['per_guest']:.2f}"
 # Compliance KPI is computed from Bobby's REQUIRED list only, not all 20 lists.
 # Required source names — keep in sync with CM_REQUIRED below.
 _REQUIRED_SRC = {"AM Pre-Shift Check", "11AM: Time and Temp", "Shift Change",
@@ -639,7 +645,7 @@ if sales_summary and "order_count" in sales_summary:
 
 # ── Discounts & Comps card (from Par Brink Discount Summary) ───────────
 if discounts:
-    net_sales = latest['sales']['net'] or 0
+    net_sales = _pb_net or 0
     disc_total = discounts.get('discounts_total', 0.0)
     comps_total = discounts.get('comps_total', 0.0)
     total_count = discounts.get('total_count', 0)
