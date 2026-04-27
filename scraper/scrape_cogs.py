@@ -150,62 +150,179 @@ def _period_dates(today: date) -> dict:
     }
 
 
+async def _navigate_to_pnl(page) -> bool:
+    """
+    Navigate to Inventory → Reports → Profit and Loss via the sidebar.
+    Uses ncext/modern.ct sidebar clicks — NOT index.ct hash URLs (those log out the session).
+    Returns True if the report page loaded.
+    """
+    try:
+        # Click "Inventory" in the top-level sidebar
+        clicked = await page.evaluate("""
+            () => {
+                const items = [...document.querySelectorAll('.x-navigationitem, .x-treelist-item, [role="menuitem"], .x-navitem')];
+                const inv = items.find(el => (el.innerText || '').trim().toLowerCase() === 'inventory');
+                if (inv) { inv.click(); return true; }
+                // Broader fallback: any clickable element with text "Inventory"
+                const all = [...document.querySelectorAll('*')].filter(
+                    el => el.children.length === 0 && (el.innerText || '').trim() === 'Inventory'
+                );
+                if (all.length) { all[0].click(); return true; }
+                return false;
+            }
+        """)
+        if not clicked:
+            log.warning("Could not find Inventory sidebar item")
+            return False
+        await page.wait_for_timeout(1_500)
+
+        # Click "Reports" submenu item under Inventory
+        clicked = await page.evaluate("""
+            () => {
+                const all = [...document.querySelectorAll('*')].filter(
+                    el => el.children.length === 0 && (el.innerText || '').trim() === 'Reports'
+                );
+                if (all.length) { all[0].click(); return true; }
+                return false;
+            }
+        """)
+        if not clicked:
+            log.warning("Could not find Reports submenu under Inventory")
+            return False
+        await page.wait_for_timeout(1_500)
+
+        # Click "Profit and Loss" report link
+        clicked = await page.evaluate("""
+            () => {
+                const all = [...document.querySelectorAll('*')].filter(
+                    el => (el.innerText || '').trim().toLowerCase().includes('profit and loss')
+                        || (el.innerText || '').trim().toLowerCase().includes('profit & loss')
+                );
+                if (all.length) { all[0].click(); return true; }
+                return false;
+            }
+        """)
+        if not clicked:
+            log.warning("Could not find 'Profit and Loss' link")
+            return False
+
+        await page.wait_for_timeout(3_000)
+        return True
+
+    except Exception as e:
+        log.warning(f"Sidebar navigation error: {e}")
+        return False
+
+
+async def _set_date_range_and_retrieve(page, start_date: str, end_date: str) -> bool:
+    """
+    Set the Start Date / End Date fields on the P&L report and click Retrieve.
+    Does NOT touch the Period dropdown — Bobby's stores don't use periods.
+    start_date / end_date format: M/D/YYYY
+    """
+    try:
+        # Clear and fill Start Date
+        filled = await page.evaluate(f"""
+            (start, end) => {{
+                // Find date input fields by label proximity or placeholder
+                const inputs = [...document.querySelectorAll('input[type=text], input[type=date], .x-input-el')];
+                let startFld = inputs.find(i =>
+                    (i.placeholder || '').toLowerCase().includes('start')
+                    || (i.name || '').toLowerCase().includes('start')
+                    || (i.id || '').toLowerCase().includes('start')
+                );
+                let endFld = inputs.find(i =>
+                    (i.placeholder || '').toLowerCase().includes('end')
+                    || (i.name || '').toLowerCase().includes('end')
+                    || (i.id || '').toLowerCase().includes('end')
+                );
+                // Fallback: first two date-like inputs on page
+                const dateInputs = inputs.filter(i => /date/i.test(i.placeholder + i.name + i.id + i.className));
+                if (!startFld && dateInputs.length >= 1) startFld = dateInputs[0];
+                if (!endFld   && dateInputs.length >= 2) endFld   = dateInputs[1];
+                if (!startFld || !endFld) return false;
+                startFld.value = start;
+                startFld.dispatchEvent(new Event('change', {{bubbles: true}}));
+                endFld.value = end;
+                endFld.dispatchEvent(new Event('change', {{bubbles: true}}));
+                return true;
+            }}
+        """, start_date, end_date)
+
+        if not filled:
+            log.warning("Could not find date fields on P&L report")
+            return False
+
+        await page.wait_for_timeout(500)
+
+        # Click Retrieve (or Run, or the CrunchTime blue action button)
+        clicked = await page.evaluate("""
+            () => {
+                const btns = [...document.querySelectorAll('.x-button, button, [role=button]')];
+                const retrieve = btns.find(b =>
+                    /retrieve|run|go|apply/i.test((b.innerText || b.value || '').trim())
+                );
+                if (retrieve) { retrieve.click(); return true; }
+                return false;
+            }
+        """)
+        if not clicked:
+            log.warning("Could not find Retrieve button")
+            return False
+
+        await page.wait_for_timeout(5_000)
+        return True
+
+    except Exception as e:
+        log.warning(f"Date/Retrieve error: {e}")
+        return False
+
+
 async def _extract_cogs_pct(page, start_date: str, end_date: str, label: str = "") -> float | None:
     """
-    Navigate to the Actual vs. Theoretical Cost report page and extract
-    the total Food COGS % for the given date range.
-    Same report every time — just different startDate/endDate.
+    Navigate to Inventory → Reports → Profit and Loss, set the date range,
+    click Retrieve, and extract the COGS % (Food line or Supplies+COGS sum).
+    Same report every time — just different date ranges.
+    Bobby's stores don't use Periods — date range inputs only.
     """
-    url = (
-        f"{NETCHEF_BASE}/ncext/index.ct#inventoryMenu~actualtheoreticalcost"
-        f"?parentModule=inventoryMenu"
-        f"&startDate={start_date}"
-        f"&endDate={end_date}"
-        f"&loadImmediately=true"
-    )
     log.info(f"P&L report [{label}]: {start_date} → {end_date}")
     try:
-        await page.goto(url, wait_until="domcontentloaded", timeout=30_000)
-        # Wait for the report table to render (it loads async)
-        await page.wait_for_timeout(5_000)
+        # Navigate to P&L via sidebar (stay in modern.ct — never use index.ct, it logs out)
+        if not await _navigate_to_pnl(page):
+            log.warning(f"[{label}] Could not navigate to P&L — skipping")
+            return None
+
+        if not await _set_date_range_and_retrieve(page, start_date, end_date):
+            log.warning(f"[{label}] Could not set date range — skipping")
+            return None
+
         safe_label = label.replace(" ", "_")
         await page.screenshot(path=str(DATA_DIR / f"08_cogs_{safe_label}.png"))
-
         body_text = await page.inner_text("body")
 
-        # Try to find COGS % — look for "Food" category total % near the end
-        # Pattern 1: "Food" row followed by a percentage on same/adjacent line
+        # P&L report separates COGS and Supplies; Bobby confirmed COGS % is the food line.
+        # Look for "COGS" or "Food" category row with an Actual % column.
         patterns = [
-            r"(?:COGS|Cost of Goods)[^\d\-]{0,60}(\d{1,2}(?:\.\d{1,2})?)\s*%",
-            r"(?:Food)[^\d\-]{0,40}(\d{1,2}(?:\.\d{1,2})?)\s*%",
-            r"(?:Total Food Cost)[^\d\-]{0,30}(\d{1,2}(?:\.\d{1,2})?)\s*%",
-            r"(?:Actual\s*%)[^\d]{0,20}(\d{1,2}(?:\.\d{1,2})?)",
+            r"COGS[^\d\n]{0,40}(\d{1,2}(?:\.\d{1,2})?)\s*%",
+            r"Food[^\d\n]{0,40}(\d{1,2}(?:\.\d{1,2})?)\s*%",
+            r"Cost of Goods[^\d\n]{0,40}(\d{1,2}(?:\.\d{1,2})?)\s*%",
         ]
         for pat in patterns:
-            m = re.search(pat, body_text, re.I | re.DOTALL)
+            m = re.search(pat, body_text, re.I)
             if m:
                 pct = float(m.group(1))
-                if 5.0 <= pct <= 60.0:  # sanity check — COGS should be between 5% and 60%
-                    log.info(f"COGS % extracted: {pct}% (pattern: {pat[:40]})")
+                if 5.0 <= pct <= 60.0:
+                    log.info(f"[{label}] COGS % = {pct}%")
                     return pct
 
-        # Fallback: look for any percentage in the 20–45% range near "Food"
-        blocks = re.findall(r"Food.{0,200}", body_text, re.I | re.DOTALL)
-        for block in blocks:
-            for m in re.finditer(r"(\d{2}(?:\.\d{1,2})?)\s*%", block):
-                pct = float(m.group(1))
-                if 20.0 <= pct <= 45.0:
-                    log.info(f"COGS % fallback: {pct}%")
-                    return pct
-
-        log.warning("Could not extract COGS % from P&L page — returning None")
+        log.warning(f"[{label}] Could not parse COGS % from page text")
         return None
 
     except PlaywrightTimeout:
-        log.warning("P&L page timed out — COGS % will be None")
+        log.warning(f"[{label}] P&L page timed out")
         return None
     except Exception as e:
-        log.warning(f"P&L page error ({e}) — COGS % will be None")
+        log.warning(f"[{label}] Error: {e}")
         return None
 
 
