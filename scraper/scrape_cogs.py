@@ -122,10 +122,38 @@ async def _fetch_variance_api(page) -> dict | None:
     return result
 
 
-async def _extract_cogs_pct(page, start_date: str, end_date: str) -> float | None:
+def _ct_date_str(d: date) -> str:
+    """Format date as M/D/YYYY (no leading zeros) for CrunchTime URLs."""
+    return f"{d.month}/{d.day}/{d.year}"
+
+
+def _period_dates(today: date) -> dict:
+    """Return start dates for week, month, and QTD periods."""
+    # Week: last completed Mon–Sun
+    last_sun = today - timedelta(days=(today.weekday() + 1) % 7 + 1)
+    week_start = last_sun - timedelta(days=6)
+
+    # Month: first day of current month
+    month_start = today.replace(day=1)
+
+    # Quarter: first day of current quarter (Jan=Q1, Apr=Q2, Jul=Q3, Oct=Q4)
+    q_first_month = ((today.month - 1) // 3) * 3 + 1
+    quarter_start = today.replace(month=q_first_month, day=1)
+
+    return {
+        "week_start":    week_start,
+        "week_end":      last_sun,
+        "month_start":   month_start,
+        "quarter_start": quarter_start,
+        "through":       today - timedelta(days=1),  # yesterday = most recent complete day
+    }
+
+
+async def _extract_cogs_pct(page, start_date: str, end_date: str, label: str = "") -> float | None:
     """
     Navigate to the Actual vs. Theoretical Cost report page and extract
     the total Food COGS % for the given date range.
+    Same report every time — just different startDate/endDate.
     """
     url = (
         f"{NETCHEF_BASE}/ncext/index.ct#inventoryMenu~actualtheoreticalcost"
@@ -134,12 +162,13 @@ async def _extract_cogs_pct(page, start_date: str, end_date: str) -> float | Non
         f"&endDate={end_date}"
         f"&loadImmediately=true"
     )
-    log.info(f"Navigating to P&L report: {url}")
+    log.info(f"P&L report [{label}]: {start_date} → {end_date}")
     try:
         await page.goto(url, wait_until="domcontentloaded", timeout=30_000)
         # Wait for the report table to render (it loads async)
         await page.wait_for_timeout(5_000)
-        await page.screenshot(path=str(DATA_DIR / "08_cogs_pnl_report.png"))
+        safe_label = label.replace(" ", "_")
+        await page.screenshot(path=str(DATA_DIR / f"08_cogs_{safe_label}.png"))
 
         body_text = await page.inner_text("body")
 
@@ -211,45 +240,57 @@ async def run():
         week_end = _parse_ct_date(week_end_raw)
 
         if not week_start or not week_end:
-            # Fall back to last completed Mon-Sun week
-            today = datetime.now(tz=ET).date()
-            last_sun = today - timedelta(days=(today.weekday() + 1) % 7 + 1)
+            today_fb = datetime.now(tz=ET).date()
+            last_sun = today_fb - timedelta(days=(today_fb.weekday() + 1) % 7 + 1)
             week_end = last_sun
             week_start = last_sun - timedelta(days=6)
             log.warning(f"Could not parse API date range; using fallback {week_start}–{week_end}")
 
-        # Format for the report URL (MM/DD/YYYY, no leading zeros)
-        start_str = week_start.strftime("%-m/%-d/%Y") if sys.platform != "win32" \
-                    else week_start.strftime("%m/%d/%Y").lstrip("0").replace("/0", "/")
-        end_str   = week_end.strftime("%-m/%-d/%Y") if sys.platform != "win32" \
-                    else week_end.strftime("%m/%d/%Y").lstrip("0").replace("/0", "/")
-
         log.info(f"Week: {week_start} → {week_end}  ({len(items)} variance items)")
 
-        # Step 2: COGS % from P&L report
-        cogs_pct = await _extract_cogs_pct(page, start_str, end_str)
+        # Step 2: COGS % for week, month, and QTD — same P&L report, different dates
+        today = datetime.now(tz=ET).date()
+        periods = _period_dates(today)
+
+        # Use API-derived week dates (authoritative); month/QTD use calendar math
+        week_s = _ct_date_str(week_start)
+        week_e = _ct_date_str(week_end)
+        month_s = _ct_date_str(periods["month_start"])
+        through  = _ct_date_str(periods["through"])
+        qtd_s    = _ct_date_str(periods["quarter_start"])
+
+        cogs_pct_week    = await _extract_cogs_pct(page, week_s,   week_e,  "week")
+        cogs_pct_month   = await _extract_cogs_pct(page, month_s,  through, "month")
+        cogs_pct_qtd     = await _extract_cogs_pct(page, qtd_s,    through, "qtd")
 
         await browser.close()
 
-    # Compute variance to goal
-    variance_to_goal = round(cogs_pct - COGS_GOAL_PCT, 1) if cogs_pct is not None else None
+    def _vtg(pct):
+        return round(pct - COGS_GOAL_PCT, 1) if pct is not None else None
 
     now = datetime.now(tz=ET)
     out = {
         "meta": {
-            "source": "CrunchTime Net Chef — /resource/dashboard/top/actual/vs/theoretical",
+            "source": "CrunchTime Net Chef — P&L Actual vs. Theoretical Cost report",
             "category": "Food",
             "store": STORE_ID,
-            "week_start": week_start.strftime("%Y-%m-%d"),
-            "week_end":   week_end.strftime("%Y-%m-%d"),
-            "pulled":     now.strftime("%Y-%m-%d %H:%M ET"),
-            "method":     "api+playwright",
+            "week_start":    week_start.strftime("%Y-%m-%d"),
+            "week_end":      week_end.strftime("%Y-%m-%d"),
+            "month_start":   periods["month_start"].strftime("%Y-%m-%d"),
+            "quarter_start": periods["quarter_start"].strftime("%Y-%m-%d"),
+            "through":       periods["through"].strftime("%Y-%m-%d"),
+            "pulled":        now.strftime("%Y-%m-%d %H:%M ET"),
+            "method":        "api+playwright",
         },
-        "cogs_pct_week":        cogs_pct,
-        "cogs_goal_pct":        COGS_GOAL_PCT,
-        "variance_to_goal_pct": variance_to_goal,
-        "items":                items,
-        "ranking":              "over_dollars_desc",
+        "cogs_goal_pct":         COGS_GOAL_PCT,
+        "cogs_pct_week":         cogs_pct_week,
+        "cogs_pct_month":        cogs_pct_month,
+        "cogs_pct_qtd":          cogs_pct_qtd,
+        "variance_to_goal_week": _vtg(cogs_pct_week),
+        "variance_to_goal_month": _vtg(cogs_pct_month),
+        "variance_to_goal_qtd":  _vtg(cogs_pct_qtd),
+        "items":                 items,
+        "ranking":               "over_dollars_desc",
     }
 
     raw_dir = DATA_DIR / "raw" / "crunchtime" / STORE_ID / out["meta"]["week_end"]
@@ -266,7 +307,7 @@ async def run():
         sys.exit(1)
 
     log.info(
-        f"Done. COGS%={cogs_pct}% "
+        f"Done. Week={cogs_pct_week}% Month={cogs_pct_month}% QTD={cogs_pct_qtd}% "
         f"({'N/A' if variance_to_goal is None else f'{variance_to_goal:+.1f}% vs {COGS_GOAL_PCT}% goal'}) "
         f"| Top item: {items[0]['name']} +${items[0]['over_dollars']}"
     )

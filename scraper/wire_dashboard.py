@@ -335,17 +335,28 @@ if cogs and cogs.get("cogs_pct_week") is not None:
         "Food Cost goal flag",
         flags=DOTALL)
 
-# ── Food Cost Week variance-to-goal period box ─────────────────────────
-if cogs and cogs.get("cogs_pct_week") is not None:
-    vtg = float(cogs["cogs_pct_week"]) - FOOD_COST_GOAL
-    vtg_str = f"{vtg:+.1f}%"
-    # Replace the Week period-box value inside the food-cost card
-    rep(
-        r'(<div class="ctrl-card food-cost">.*?<div class="period-var">.*?<div class="period-box">.*?<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">Week</div>)',
-        rf'\g<1>{vtg_str}\g<2>',
-        "Food Cost week variance-to-goal",
-        flags=DOTALL,
-    )
+# ── Food Cost period variance-to-goal boxes (Week / Month / QTD) ───────
+def _vtg_str(cogs_data, key):
+    val = cogs_data.get(key) if cogs_data else None
+    if val is not None:
+        return f"{float(val):+.1f}%"
+    # Fall back to computing from raw pct if pre-computed key missing
+    pct_key = key.replace("variance_to_goal_", "cogs_pct_")
+    pct = cogs_data.get(pct_key) if cogs_data else None
+    return f"{float(pct) - FOOD_COST_GOAL:+.1f}%" if pct is not None else None
+
+if cogs:
+    for period_lbl, vtg_key in [("Week", "variance_to_goal_week"),
+                                  ("Month", "variance_to_goal_month"),
+                                  ("QTD", "variance_to_goal_qtd")]:
+        vtg_str = _vtg_str(cogs, vtg_key)
+        if vtg_str:
+            rep(
+                rf'(<div class="ctrl-card food-cost">.*?<div class="period-var">.*?<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">{period_lbl}</div>)',
+                rf'\g<1>{vtg_str}\g<2>',
+                f"Food Cost {period_lbl} variance-to-goal",
+                flags=DOTALL,
+            )
 
 # ── Food Cost top-3 variance items (if cogs data) ──────────────────────
 if cogs and cogs.get("items"):
