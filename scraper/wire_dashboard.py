@@ -346,9 +346,9 @@ def _vtg_str(cogs_data, key):
     return f"{float(pct) - FOOD_COST_GOAL:+.1f}%" if pct is not None else None
 
 if cogs:
-    for period_lbl, vtg_key in [("Week", "variance_to_goal_week"),
-                                  ("Month", "variance_to_goal_month"),
-                                  ("QTD", "variance_to_goal_qtd")]:
+    for period_lbl, vtg_key in [("Week",    "variance_to_goal_week"),
+                                  ("Month",   "variance_to_goal_month"),
+                                  ("Last Mo", "variance_to_goal_last_mo")]:
         vtg_str = _vtg_str(cogs, vtg_key)
         if vtg_str:
             rep(

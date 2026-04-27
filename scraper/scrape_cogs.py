@@ -133,19 +133,20 @@ def _period_dates(today: date) -> dict:
     last_sun = today - timedelta(days=(today.weekday() + 1) % 7 + 1)
     week_start = last_sun - timedelta(days=6)
 
-    # Month: first day of current month
+    # Month: first day of current month through yesterday
     month_start = today.replace(day=1)
 
-    # Quarter: first day of current quarter (Jan=Q1, Apr=Q2, Jul=Q3, Oct=Q4)
-    q_first_month = ((today.month - 1) // 3) * 3 + 1
-    quarter_start = today.replace(month=q_first_month, day=1)
+    # Last month: full calendar month
+    last_month_end = today.replace(day=1) - timedelta(days=1)
+    last_month_start = last_month_end.replace(day=1)
 
     return {
-        "week_start":    week_start,
-        "week_end":      last_sun,
-        "month_start":   month_start,
-        "quarter_start": quarter_start,
-        "through":       today - timedelta(days=1),  # yesterday = most recent complete day
+        "week_start":       week_start,
+        "week_end":         last_sun,
+        "month_start":      month_start,
+        "last_month_start": last_month_start,
+        "last_month_end":   last_month_end,
+        "through":          today - timedelta(days=1),
     }
 
 
@@ -253,15 +254,17 @@ async def run():
         periods = _period_dates(today)
 
         # Use API-derived week dates (authoritative); month/QTD use calendar math
-        week_s = _ct_date_str(week_start)
-        week_e = _ct_date_str(week_end)
+        week_s  = _ct_date_str(week_start)
+        week_e  = _ct_date_str(week_end)
         month_s = _ct_date_str(periods["month_start"])
-        through  = _ct_date_str(periods["through"])
-        qtd_s    = _ct_date_str(periods["quarter_start"])
+        through = _ct_date_str(periods["through"])
 
-        cogs_pct_week    = await _extract_cogs_pct(page, week_s,   week_e,  "week")
-        cogs_pct_month   = await _extract_cogs_pct(page, month_s,  through, "month")
-        cogs_pct_qtd     = await _extract_cogs_pct(page, qtd_s,    through, "qtd")
+        last_mo_s = _ct_date_str(periods["last_month_start"])
+        last_mo_e = _ct_date_str(periods["last_month_end"])
+
+        cogs_pct_week     = await _extract_cogs_pct(page, week_s,   week_e,   "week")
+        cogs_pct_month    = await _extract_cogs_pct(page, month_s,  through,  "month")
+        cogs_pct_last_mo  = await _extract_cogs_pct(page, last_mo_s, last_mo_e, "last_mo")
 
         await browser.close()
 
@@ -276,19 +279,20 @@ async def run():
             "store": STORE_ID,
             "week_start":    week_start.strftime("%Y-%m-%d"),
             "week_end":      week_end.strftime("%Y-%m-%d"),
-            "month_start":   periods["month_start"].strftime("%Y-%m-%d"),
-            "quarter_start": periods["quarter_start"].strftime("%Y-%m-%d"),
-            "through":       periods["through"].strftime("%Y-%m-%d"),
+            "month_start":      periods["month_start"].strftime("%Y-%m-%d"),
+            "last_month_start": periods["last_month_start"].strftime("%Y-%m-%d"),
+            "last_month_end":   periods["last_month_end"].strftime("%Y-%m-%d"),
+            "through":          periods["through"].strftime("%Y-%m-%d"),
             "pulled":        now.strftime("%Y-%m-%d %H:%M ET"),
             "method":        "api+playwright",
         },
-        "cogs_goal_pct":         COGS_GOAL_PCT,
-        "cogs_pct_week":         cogs_pct_week,
-        "cogs_pct_month":        cogs_pct_month,
-        "cogs_pct_qtd":          cogs_pct_qtd,
-        "variance_to_goal_week": _vtg(cogs_pct_week),
-        "variance_to_goal_month": _vtg(cogs_pct_month),
-        "variance_to_goal_qtd":  _vtg(cogs_pct_qtd),
+        "cogs_goal_pct":           COGS_GOAL_PCT,
+        "cogs_pct_week":           cogs_pct_week,
+        "cogs_pct_month":          cogs_pct_month,
+        "cogs_pct_last_month":     cogs_pct_last_mo,
+        "variance_to_goal_week":   _vtg(cogs_pct_week),
+        "variance_to_goal_month":  _vtg(cogs_pct_month),
+        "variance_to_goal_last_mo": _vtg(cogs_pct_last_mo),
         "items":                 items,
         "ranking":               "over_dollars_desc",
     }
@@ -307,7 +311,7 @@ async def run():
         sys.exit(1)
 
     log.info(
-        f"Done. Week={cogs_pct_week}% Month={cogs_pct_month}% QTD={cogs_pct_qtd}% "
+        f"Done. Week={cogs_pct_week}% Month={cogs_pct_month}% LastMo={cogs_pct_last_mo}% "
         f"({'N/A' if variance_to_goal is None else f'{variance_to_goal:+.1f}% vs {COGS_GOAL_PCT}% goal'}) "
         f"| Top item: {items[0]['name']} +${items[0]['over_dollars']}"
     )
