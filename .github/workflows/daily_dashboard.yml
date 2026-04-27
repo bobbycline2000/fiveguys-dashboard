@@ -139,13 +139,13 @@ jobs:
         continue-on-error: true
         run: python scraper/aggregate_compliance.py --store 2065
 
-      # ── 5b2. Scrape CrunchTime food-cost variance (Top 10 widget + week %)
-      # Closes the Food Cost card's Big % + Top 3 Variance Items. Reuses the
-      # main.py login/location helpers. Output:
-      #   data/raw/crunchtime/<store>/<week_end>/cogs_variance.json
-      # wire_dashboard.py reads cogs_pct_week and items[].
+      # ── 5b2. Scrape CrunchTime food-cost variance (API + P&L page)
+      # Step 1: JS fetch /resource/dashboard/top/actual/vs/theoretical → variance items + week dates
+      # Step 2: Playwright navigates to the Actual vs. Theoretical Cost report → COGS %
+      # Output: data/raw/crunchtime/<store>/<week_end>/cogs_variance.json
+      # wire_dashboard.py reads cogs_pct_week, items[], and meta.week_start/end.
+      # Monday CI run automatically shows the prior week's final numbers.
       - name: Scrape CrunchTime food-cost variance (store 2065)
-        continue-on-error: true
         env:
           CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
           CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}

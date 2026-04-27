@@ -320,7 +320,12 @@ FOOD_COST_GOAL = 27.5
 if cogs and cogs.get("cogs_pct_week") is not None:
     fc_pct = float(cogs["cogs_pct_week"])
     fc_val = f"{fc_pct:.1f}%"
-    fc_flag = "Over Goal" if fc_pct > FOOD_COST_GOAL else "On Goal"
+    if fc_pct > FOOD_COST_GOAL + 0.5:
+        fc_flag = "Over Goal"
+    elif fc_pct < FOOD_COST_GOAL - 0.5:
+        fc_flag = "Under Goal"
+    else:
+        fc_flag = "On Goal"
     rep(r'(<div class="ctrl-card food-cost">.*?<div class="ctrl-value">)[^<]*(</div>)',
         rf'\g<1>{fc_val}\g<2>',
         "Food Cost Big %",
@@ -329,6 +334,18 @@ if cogs and cogs.get("cogs_pct_week") is not None:
         rf'\g<1>{fc_flag}\g<2>',
         "Food Cost goal flag",
         flags=DOTALL)
+
+# ── Food Cost Week variance-to-goal period box ─────────────────────────
+if cogs and cogs.get("cogs_pct_week") is not None:
+    vtg = float(cogs["cogs_pct_week"]) - FOOD_COST_GOAL
+    vtg_str = f"{vtg:+.1f}%"
+    # Replace the Week period-box value inside the food-cost card
+    rep(
+        r'(<div class="ctrl-card food-cost">.*?<div class="period-var">.*?<div class="period-box">.*?<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">Week</div>)',
+        rf'\g<1>{vtg_str}\g<2>',
+        "Food Cost week variance-to-goal",
+        flags=DOTALL,
+    )
 
 # ── Food Cost top-3 variance items (if cogs data) ──────────────────────
 if cogs and cogs.get("items"):
@@ -339,7 +356,7 @@ if cogs and cogs.get("items"):
         f'          <div class="var-item">\n'
         f'            <span class="var-rank">{i+1}</span>\n'
         f'            <span class="var-name">{trim(it["name"])}</span>\n'
-        f'            <span class="var-pct">+${it["over_dollars"]}</span>\n'
+        f'            <span class="var-pct">+${it["over_dollars"]:.0f}</span>\n'
         f'          </div>'
         for i, it in enumerate(top3)
     )

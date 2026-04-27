@@ -1,37 +1,36 @@
 #!/usr/bin/env python3
 """
-CrunchTime COGS Variance Scraper
-================================
-Pulls two things from Net Chef for store 2065:
+CrunchTime COGS Variance Scraper — API-based
+=============================================
+Replaces the fragile Playwright widget-scroll approach.
 
-  1. "Top 10 Actual vs. Theoretical Cost Items" widget (Food category)
-     — found at the bottom of the landing dashboard.
-  2. Week COGS % from the drilldown inventory page (opened via the
-     date-range link in the widget's top-right corner).
+Step 1 — API call (inside the live Playwright session):
+  GET /resource/dashboard/top/actual/vs/theoretical
+  Returns top-10 variance items + the week date range.
+  No extra login required; runs inside the same session as main.py.
 
-Writes: data/cogs_variance.json
+Step 2 — P&L page (Playwright, targeted navigation):
+  Navigates to the Actual vs. Theoretical Cost report URL
+  (using the startDate/endDate from Step 1) to extract COGS %.
 
-Reuses login / location-select from main.py — run this AFTER the main
-scraper has left the browser on the dashboard, or stand-alone (it will
-log in itself).
+Writes:
+  data/raw/crunchtime/<store>/<week_end>/cogs_variance.json
+  data/cogs_variance.json  (legacy compat symlink copy)
 
 Env:
   CRUNCHTIME_USERNAME
   CRUNCHTIME_PASSWORD
-  STORE_ID               (default "2065")
+  STORE_ID  (default "2065")
 """
+
 import os, sys, json, re, asyncio, logging
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, date
 from pathlib import Path
 
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
 
-# Reuse login/location helpers from main scraper
 sys.path.insert(0, str(Path(__file__).parent))
-from main import (  # noqa: E402
-    NETCHEF_BASE, USERNAME, PASSWORD, DATA_DIR,
-    do_login, select_location,
-)
+from main import NETCHEF_BASE, USERNAME, PASSWORD, DATA_DIR, do_login, select_location
 
 STORE_ID = os.environ.get("STORE_ID", "2065")
 ET = timezone(timedelta(hours=-4))
@@ -43,136 +42,145 @@ logging.basicConfig(
 )
 log = logging.getLogger("cogs")
 
-
-# ── Parsing ──────────────────────────────────────────────────────────
-_MONEY = re.compile(r"\$?([\d,]+(?:\.\d{1,2})?)")
-
-def _money(s):
-    m = _MONEY.search(s or "")
-    if not m:
-        return None
-    return float(m.group(1).replace(",", ""))
+COGS_GOAL_PCT = 27.5  # Five Guys standard food cost goal
 
 
-def parse_variance_rows(text):
-    """
-    Parse the widget's text block. Expected line pattern per item:
-        <rank>.<name> $<actual> $<theoretical> <pct>%
-    Example:
-        1.Ground Beef $2,812 $2,702 -4%
-    The widget also sometimes wraps the name onto multiple lines — we
-    rebuild rows by splitting on leading "\n<digit>." markers.
-    """
-    # Normalize and split into "row blobs" that each start with "N."
-    blobs = re.split(r"(?m)^\s*(\d{1,2})\s*\.\s*", text)
-    # blobs = ['', '1', 'Ground Beef …', '2', 'Hot Dog …', ...]
-    items = []
-    for i in range(1, len(blobs) - 1, 2):
-        rank = int(blobs[i])
-        body = blobs[i + 1]
-        # first two money values are actual/theoretical; last % is variance
-        money_vals = _MONEY.findall(body)
-        pct = re.search(r"(-?\d+(?:\.\d+)?)\s*%", body)
-        if len(money_vals) < 2 or not pct:
+# ── helpers ──────────────────────────────────────────────────────────────────
+
+def _parse_ct_date(s: str) -> date | None:
+    """Parse CrunchTime date strings: 'MM/DD/YYYY HH:MM:SS' or 'YYYY-MM-DD'."""
+    for fmt in ("%m/%d/%Y %H:%M:%S", "%m/%d/%Y", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(s.strip(), fmt).date()
+        except ValueError:
             continue
-        actual = float(money_vals[0].replace(",", ""))
-        theo   = float(money_vals[1].replace(",", ""))
-        # the name is everything before the first $
-        name = re.split(r"\$", body, 1)[0].strip().rstrip(",").strip()
-        name = re.sub(r"\s+", " ", name)
+    return None
+
+
+def _parse_items(raw_list: list) -> list:
+    """
+    Convert API listSummary items → internal format.
+
+    API sign convention: variance = theoretical - actual
+      negative variance → actual > theoretical → OVER budget
+    We store over_dollars = actual - theoretical (positive = over budget).
+    """
+    items = []
+    for entry in raw_list:
+        name = entry.get("name", "")
+        actual = entry.get("actual", {}).get("value")
+        theoretical = entry.get("theoretical", {}).get("value")
+        api_variance = entry.get("variance", {}).get("value")
+        api_var_pct = entry.get("variancePercentage", {}).get("value")
+
+        if actual is None or theoretical is None:
+            continue
+
+        over_dollars = round(actual - theoretical, 2)
+        # variance_pct: positive % = under, negative % = over (CrunchTime convention)
+        variance_pct = round(api_var_pct * 100, 1) if api_var_pct is not None else None
+
         items.append({
-            "rank": rank,
             "name": name,
             "actual": round(actual, 2),
-            "theoretical": round(theo, 2),
-            "over_dollars": round(actual - theo, 2),
-            "variance_pct": float(pct.group(1)),
+            "theoretical": round(theoretical, 2),
+            "over_dollars": over_dollars,
+            "variance_pct": variance_pct,
         })
+
+    # Sort: most over-budget first (highest over_dollars descending)
+    items.sort(key=lambda x: x["over_dollars"], reverse=True)
+    for i, it in enumerate(items, 1):
+        it["rank"] = i
+
     return items
 
 
-# ── Scraping ─────────────────────────────────────────────────────────
-async def locate_variance_widget(page):
-    """Scroll to reveal the widget, then return its text."""
-    widget_title = "Top 10 Actual vs. Theoretical Cost Items"
-    # Scroll down until widget appears in the DOM
-    for _ in range(8):
-        found = await page.evaluate(
-            "(t) => { const el = [...document.querySelectorAll('*')]"
-            ".find(e => e.innerText && e.innerText.trim().startsWith(t));"
-            " if (el) el.scrollIntoView({block:'center'}); return !!el; }",
-            widget_title,
-        )
-        if found:
-            break
-        await page.evaluate("window.scrollBy(0, 600)")
-        await page.wait_for_timeout(800)
-
-    await page.wait_for_timeout(1_500)
-    await page.screenshot(path=str(DATA_DIR / "07_cogs_widget.png"))
-
-    # Extract the widget's container text (the nearest card/div wrapping the title)
-    widget_text = await page.evaluate(
-        """(t) => {
-            const start = [...document.querySelectorAll('*')]
-                .find(e => e.innerText && e.innerText.trim().startsWith(t));
-            if (!start) return null;
-            // Walk up until we find a container with all 10 items (≥ 3 "$" signs)
-            let node = start;
-            for (let i = 0; i < 8; i++) {
-                node = node.parentElement;
-                if (!node) break;
-                const txt = node.innerText || "";
-                if ((txt.match(/\\$/g) || []).length >= 6) return txt;
+async def _fetch_variance_api(page) -> dict | None:
+    """
+    Call the variance API endpoint from within the live Playwright session.
+    Uses page.evaluate (JS fetch) so session cookies are carried automatically.
+    """
+    result = await page.evaluate("""
+        async () => {
+            try {
+                const r = await fetch('/resource/dashboard/top/actual/vs/theoretical', {
+                    credentials: 'include'
+                });
+                if (!r.ok) return { error: r.status };
+                return await r.json();
+            } catch (e) {
+                return { error: String(e) };
             }
-            return start.innerText;
-        }""",
-        widget_title,
+        }
+    """)
+    if not result or "error" in result:
+        log.error(f"Variance API error: {result}")
+        return None
+    log.info(f"Variance API: got {len(result.get('listSummary', []))} items, "
+             f"dateRange={result.get('dateRange')}")
+    return result
+
+
+async def _extract_cogs_pct(page, start_date: str, end_date: str) -> float | None:
+    """
+    Navigate to the Actual vs. Theoretical Cost report page and extract
+    the total Food COGS % for the given date range.
+    """
+    url = (
+        f"{NETCHEF_BASE}/ncext/index.ct#inventoryMenu~actualtheoreticalcost"
+        f"?parentModule=inventoryMenu"
+        f"&startDate={start_date}"
+        f"&endDate={end_date}"
+        f"&loadImmediately=true"
     )
-    return widget_text
-
-
-async def scrape_cogs_pct(page):
-    """
-    Open the drilldown (click the date range in widget corner) and
-    extract the COGS % from the inventory/COGS page.
-    """
+    log.info(f"Navigating to P&L report: {url}")
     try:
-        # Click the date-range link/button in the widget's top-right corner
-        clicked = await page.evaluate("""
-            () => {
-                const title = [...document.querySelectorAll('*')]
-                    .find(e => e.innerText && e.innerText.trim().startsWith('Top 10 Actual vs. Theoretical'));
-                if (!title) return false;
-                let container = title;
-                for (let i=0;i<6;i++){ container = container.parentElement; if(!container) break; }
-                if (!container) return false;
-                // Find a text matching date-range pattern MM/DD/YYYY - MM/DD/YYYY
-                const link = [...container.querySelectorAll('*')]
-                    .find(e => /\\d{2}\\/\\d{2}\\/\\d{4}\\s*-\\s*\\d{2}\\/\\d{2}\\/\\d{4}/.test(e.innerText||''));
-                if (!link) return false;
-                link.click();
-                return true;
-            }
-        """)
-        if not clicked:
-            log.info("Could not find date-range link to drill down; skipping COGS %")
-            return None
-        await page.wait_for_timeout(4_000)
-        await page.screenshot(path=str(DATA_DIR / "08_cogs_drilldown.png"))
-        body = await page.inner_text("body")
+        await page.goto(url, wait_until="domcontentloaded", timeout=30_000)
+        # Wait for the report table to render (it loads async)
+        await page.wait_for_timeout(5_000)
+        await page.screenshot(path=str(DATA_DIR / "08_cogs_pnl_report.png"))
 
-        # Look for a "COGS %" or "Cost of Goods" value
-        m = re.search(r"(?:COGS|Cost of Goods)[^\d\-]{0,40}(-?\d+(?:\.\d+)?)\s*%", body, re.I)
-        if m:
-            return float(m.group(1))
+        body_text = await page.inner_text("body")
+
+        # Try to find COGS % — look for "Food" category total % near the end
+        # Pattern 1: "Food" row followed by a percentage on same/adjacent line
+        patterns = [
+            r"(?:COGS|Cost of Goods)[^\d\-]{0,60}(\d{1,2}(?:\.\d{1,2})?)\s*%",
+            r"(?:Food)[^\d\-]{0,40}(\d{1,2}(?:\.\d{1,2})?)\s*%",
+            r"(?:Total Food Cost)[^\d\-]{0,30}(\d{1,2}(?:\.\d{1,2})?)\s*%",
+            r"(?:Actual\s*%)[^\d]{0,20}(\d{1,2}(?:\.\d{1,2})?)",
+        ]
+        for pat in patterns:
+            m = re.search(pat, body_text, re.I | re.DOTALL)
+            if m:
+                pct = float(m.group(1))
+                if 5.0 <= pct <= 60.0:  # sanity check — COGS should be between 5% and 60%
+                    log.info(f"COGS % extracted: {pct}% (pattern: {pat[:40]})")
+                    return pct
+
+        # Fallback: look for any percentage in the 20–45% range near "Food"
+        blocks = re.findall(r"Food.{0,200}", body_text, re.I | re.DOTALL)
+        for block in blocks:
+            for m in re.finditer(r"(\d{2}(?:\.\d{1,2})?)\s*%", block):
+                pct = float(m.group(1))
+                if 20.0 <= pct <= 45.0:
+                    log.info(f"COGS % fallback: {pct}%")
+                    return pct
+
+        log.warning("Could not extract COGS % from P&L page — returning None")
+        return None
+
+    except PlaywrightTimeout:
+        log.warning("P&L page timed out — COGS % will be None")
         return None
     except Exception as e:
-        log.warning(f"COGS % drilldown failed: {e}")
+        log.warning(f"P&L page error ({e}) — COGS % will be None")
         return None
 
 
-# ── Main ─────────────────────────────────────────────────────────────
+# ── main ─────────────────────────────────────────────────────────────────────
+
 async def run():
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
@@ -180,58 +188,88 @@ async def run():
         page = await ctx.new_page()
 
         await page.goto(NETCHEF_BASE, wait_until="domcontentloaded", timeout=30_000)
-        await do_login(page)
+        if not await do_login(page):
+            log.error("Login failed")
+            await browser.close()
+            sys.exit(1)
         await select_location(page)
         await page.wait_for_timeout(3_000)
 
-        widget_text = await locate_variance_widget(page)
-        if not widget_text:
-            log.error("Widget not found on dashboard")
+        # Step 1: Variance items via API
+        api_data = await _fetch_variance_api(page)
+        if not api_data:
+            log.error("Could not fetch variance data — aborting")
             await browser.close()
-            return
+            sys.exit(1)
 
-        items = parse_variance_rows(widget_text)
-        log.info(f"Parsed {len(items)} variance items")
+        items = _parse_items(api_data.get("listSummary", []))
+        date_range = api_data.get("dateRange", {})
 
-        # Sort by $ over theoretical (descending) — Bobby's preferred ranking
-        items_by_dollars = sorted(items, key=lambda x: x["over_dollars"], reverse=True)
-        for idx, it in enumerate(items_by_dollars, 1):
-            it["rank"] = idx
+        week_start_raw = date_range.get("startDate", "")
+        week_end_raw = date_range.get("endDate", "")
+        week_start = _parse_ct_date(week_start_raw)
+        week_end = _parse_ct_date(week_end_raw)
 
-        cogs_pct = await scrape_cogs_pct(page)
-        log.info(f"Week COGS %: {cogs_pct}")
+        if not week_start or not week_end:
+            # Fall back to last completed Mon-Sun week
+            today = datetime.now(tz=ET).date()
+            last_sun = today - timedelta(days=(today.weekday() + 1) % 7 + 1)
+            week_end = last_sun
+            week_start = last_sun - timedelta(days=6)
+            log.warning(f"Could not parse API date range; using fallback {week_start}–{week_end}")
+
+        # Format for the report URL (MM/DD/YYYY, no leading zeros)
+        start_str = week_start.strftime("%-m/%-d/%Y") if sys.platform != "win32" \
+                    else week_start.strftime("%m/%d/%Y").lstrip("0").replace("/0", "/")
+        end_str   = week_end.strftime("%-m/%-d/%Y") if sys.platform != "win32" \
+                    else week_end.strftime("%m/%d/%Y").lstrip("0").replace("/0", "/")
+
+        log.info(f"Week: {week_start} → {week_end}  ({len(items)} variance items)")
+
+        # Step 2: COGS % from P&L report
+        cogs_pct = await _extract_cogs_pct(page, start_str, end_str)
 
         await browser.close()
 
-    now = datetime.now(tz=ET)
-    # Last-week Mon-Sun range
-    today = now.date()
-    last_sun = today - timedelta(days=(today.weekday() + 1) % 7 + 1)
-    last_mon = last_sun - timedelta(days=6)
+    # Compute variance to goal
+    variance_to_goal = round(cogs_pct - COGS_GOAL_PCT, 1) if cogs_pct is not None else None
 
+    now = datetime.now(tz=ET)
     out = {
         "meta": {
-            "source": "CrunchTime Net Chef — Top 10 Actual vs. Theoretical Cost Items",
+            "source": "CrunchTime Net Chef — /resource/dashboard/top/actual/vs/theoretical",
             "category": "Food",
             "store": STORE_ID,
-            "week_start": last_mon.strftime("%Y-%m-%d"),
-            "week_end":   last_sun.strftime("%Y-%m-%d"),
+            "week_start": week_start.strftime("%Y-%m-%d"),
+            "week_end":   week_end.strftime("%Y-%m-%d"),
             "pulled":     now.strftime("%Y-%m-%d %H:%M ET"),
-            "method":     "playwright",
+            "method":     "api+playwright",
         },
-        "cogs_pct_week": cogs_pct,
-        "items": items_by_dollars,
-        "ranking": "over_dollars_desc",
+        "cogs_pct_week":        cogs_pct,
+        "cogs_goal_pct":        COGS_GOAL_PCT,
+        "variance_to_goal_pct": variance_to_goal,
+        "items":                items,
+        "ranking":              "over_dollars_desc",
     }
 
-    # New canonical path: data/raw/crunchtime/<store>/<week_end>/cogs_variance.json
     raw_dir = DATA_DIR / "raw" / "crunchtime" / STORE_ID / out["meta"]["week_end"]
     raw_dir.mkdir(parents=True, exist_ok=True)
     out_path = raw_dir / "cogs_variance.json"
     out_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
     log.info(f"Wrote {out_path}")
-    # Compat: also write legacy top-level file for existing readers
+
+    # Legacy compat copy
     (DATA_DIR / "cogs_variance.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
+
+    if not items:
+        log.error("Zero variance items — something went wrong with the API")
+        sys.exit(1)
+
+    log.info(
+        f"Done. COGS%={cogs_pct}% "
+        f"({'N/A' if variance_to_goal is None else f'{variance_to_goal:+.1f}% vs {COGS_GOAL_PCT}% goal'}) "
+        f"| Top item: {items[0]['name']} +${items[0]['over_dollars']}"
+    )
 
 
 if __name__ == "__main__":
