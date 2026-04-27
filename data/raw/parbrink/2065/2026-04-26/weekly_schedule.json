@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "source": "parbrink_parse_weekly_schedule.py",
+    "store_id": "2065",
+    "report_date": "2026-04-26",
+    "generated": "2026-04-27T15:29:51",
+    "source_pdf": "data/raw/parbrink/2065/2026-04-26/Weekly Labor Schedule.pdf"
+  },
+  "totals_by_day": {
+    "2026-04-20": 63.0,
+    "2026-04-21": 81.75,
+    "2026-04-22": 80.5,
+    "2026-04-23": 73.75,
+    "2026-04-24": 82.0,
+    "2026-04-25": 90.5,
+    "2026-04-26": 82.0,
+    "week_total": 553.5
+  },
+  "today": {
+    "date": "2026-04-26",
+    "day_of_week": "Sunday",
+    "scheduled_hours": 82.0,
+    "shifts": [
+      {
+        "name": "Noel B.",
+        "role": "Crew",
+        "start": "08:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Jada C.",
+        "role": "Crew",
+        "start": "12:00 PM",
+        "end": "08:00 PM"
+      },
+      {
+        "name": "Brianna G.",
+        "role": "Crew",
+        "start": "08:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Richard G.",
+        "role": "Crew",
+        "start": "03:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Autumn H.",
+        "role": "Crew",
+        "start": "05:30 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Maylin H.",
+        "role": "Crew",
+        "start": "05:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "DJuan J.",
+        "role": "Crew",
+        "start": "06:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Emanuela K.",
+        "role": "Crew",
+        "start": "12:00 PM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Francisco L.",
+        "role": "Crew",
+        "start": "08:00 AM",
+        "end": "02:30 PM"
+      },
+      {
+        "name": "Vicki L.",
+        "role": "Crew",
+        "start": "08:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Jeremiah M.",
+        "role": "Crew",
+        "start": "03:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Kasey W.",
+        "role": "Crew",
+        "start": "03:00 PM",
+        "end": "11:00 PM"
+      }
+    ]
+  }
+}

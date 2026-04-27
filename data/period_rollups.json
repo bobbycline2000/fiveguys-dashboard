@@ -1,47 +1,47 @@
 {
   "meta": {
     "store_id": "2065",
-    "anchor_date": "2026-04-25",
-    "generated": "2026-04-26T14:39:21",
-    "days_seen_total": 2,
-    "days_in_week": 2,
-    "days_in_month": 2,
-    "days_in_quarter": 2
+    "anchor_date": "2026-04-26",
+    "generated": "2026-04-27T15:29:51",
+    "days_seen_total": 3,
+    "days_in_week": 3,
+    "days_in_month": 3,
+    "days_in_quarter": 3
   },
   "week": {
-    "net_sales": 10185.05,
-    "gross_sales": 10396.95,
-    "order_count": 394,
-    "guest_count": 1882,
-    "labor_cost": 1897.77,
-    "labor_hours": 172.91,
-    "labor_percent": 18.63,
-    "sales_per_guest": 5.41,
-    "avg_ticket": 25.85,
-    "days": 2
+    "net_sales": 15250.34,
+    "gross_sales": 15557.39,
+    "order_count": 598,
+    "guest_count": 2797,
+    "labor_cost": 2964.0,
+    "labor_hours": 251.41,
+    "labor_percent": 19.44,
+    "sales_per_guest": 5.45,
+    "avg_ticket": 25.5,
+    "days": 3
   },
   "month": {
-    "net_sales": 10185.05,
-    "gross_sales": 10396.95,
-    "order_count": 394,
-    "guest_count": 1882,
-    "labor_cost": 1897.77,
-    "labor_hours": 172.91,
-    "labor_percent": 18.63,
-    "sales_per_guest": 5.41,
-    "avg_ticket": 25.85,
-    "days": 2
+    "net_sales": 15250.34,
+    "gross_sales": 15557.39,
+    "order_count": 598,
+    "guest_count": 2797,
+    "labor_cost": 2964.0,
+    "labor_hours": 251.41,
+    "labor_percent": 19.44,
+    "sales_per_guest": 5.45,
+    "avg_ticket": 25.5,
+    "days": 3
   },
   "quarter": {
-    "net_sales": 10185.05,
-    "gross_sales": 10396.95,
-    "order_count": 394,
-    "guest_count": 1882,
-    "labor_cost": 1897.77,
-    "labor_hours": 172.91,
-    "labor_percent": 18.63,
-    "sales_per_guest": 5.41,
-    "avg_ticket": 25.85,
-    "days": 2
+    "net_sales": 15250.34,
+    "gross_sales": 15557.39,
+    "order_count": 598,
+    "guest_count": 2797,
+    "labor_cost": 2964.0,
+    "labor_hours": 251.41,
+    "labor_percent": 19.44,
+    "sales_per_guest": 5.45,
+    "avg_ticket": 25.5,
+    "days": 3
   }
 }

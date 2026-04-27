@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "store_id": "2065",
+    "report_date": "2026-04-26",
+    "generated": "2026-04-27T15:29:50",
+    "source_pdf": "data/raw/parbrink/2065/2026-04-26/Discount Summary.pdf"
+  },
+  "items": [
+    {
+      "name": "$ Discount",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "% Discount",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "1% Tax 85+",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "10% Casino Discount",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "100% Mgr Promo AI",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Comp"
+    },
+    {
+      "name": "100% Mrg/PR",
+      "count": 1,
+      "total": 8.39,
+      "average": 8.39,
+      "type": "Comp"
+    },
+    {
+      "name": "15% Venetian Employee",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Airport/Mall 10% Discount",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Am. Dream Discount",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Burger/Fry Calibration",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "DD Promo",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Don't Use",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Employee 100%",
+      "count": 7,
+      "total": 86.76,
+      "average": 12.39,
+      "type": "Discount"
+    },
+    {
+      "name": "Employee 50%",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Employee 60%",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Employee Shake 100%",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Employee Shake 50%",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "GH Promo",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Give Back $5 Off",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Industry Night",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Innovation",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Item Comp",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Comp"
+    },
+    {
+      "name": "Little Coupon",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Manager Meal 100%",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Comp"
+    },
+    {
+      "name": "Marketing",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "No Show",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Comp"
+    },
+    {
+      "name": "OLO Discount",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "OLO Fundraiser",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Reward - 200 Points",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Reward - Signup",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Supply Chain",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "Training",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    },
+    {
+      "name": "UE Promo",
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
+      "type": "Discount"
+    }
+  ],
+  "total_count": 8,
+  "total_amount": 95.15,
+  "total_average": 11.89,
+  "comps_total": 8.39,
+  "discounts_total": 86.76
+}
