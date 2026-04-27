@@ -89,6 +89,19 @@ if sched is None:
 
 # ── derived values ──────────────────────────────────────────────────────
 now = datetime.now()
+
+# Resolve today's schedule entry — prefer the actual current date over the PDF's report_date.
+# The full `schedule` dict (keyed by ISO date) covers all 7 days; fall back to `today` key.
+if sched:
+    _today_iso = now.strftime("%Y-%m-%d")
+    _full_schedule = sched.get("schedule", {})
+    if _today_iso in _full_schedule:
+        sched = {**sched, "today": _full_schedule[_today_iso]}
+    elif _full_schedule:
+        # Find the closest available day that isn't in the future
+        _available = sorted(d for d in _full_schedule if d <= _today_iso)
+        if _available:
+            sched = {**sched, "today": _full_schedule[_available[-1]]}
 time_str = now.strftime("%#I:%M %p") if sys.platform == "win32" else now.strftime("%-I:%M %p")
 date_display = now.strftime("%B %d %Y").replace(" 0", " ")
 card_pill = now.strftime("%B %d").replace(" 0", " ")

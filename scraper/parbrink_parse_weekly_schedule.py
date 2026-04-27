@@ -135,19 +135,19 @@ def is_role_token(s: str) -> bool:
     return s in ("Crew",) or "Shift Lead" in s or "General Manager" in s
 
 
-def parse_shifts_from_page(text: str, today_idx: int | None) -> tuple[list[dict], dict[str, float]]:
-    """Walk the page, return (today_shifts, totals_by_day).
-    today_idx: 0=Mon..6=Sun. If None, today shifts come back empty.
+def parse_shifts_from_page(text: str, today_idx: int | None) -> tuple[dict[str, list[dict]], dict[str, float]]:
+    """Walk the page, return (shifts_by_day, totals_by_day).
+    shifts_by_day: {"Monday": [...], "Tuesday": [...], ...}
+    today_idx: kept for signature compat but no longer filters output.
     """
     lines = text.split("\n")
     cols = find_day_columns(lines)
     if not cols:
-        return [], {}
+        return {}, {}
 
     day_to_idx = {d: i for i, d in enumerate(DAY_NAMES)}
-    today_day = DAY_NAMES[today_idx] if today_idx is not None else None
 
-    today_shifts: list[dict] = []
+    shifts_by_day: dict[str, list[dict]] = {d: [] for d in DAY_NAMES}
     totals_by_day: dict[str, float] = {}
 
     # We sweep the page line by line. Most rows look like:
@@ -257,9 +257,9 @@ def parse_shifts_from_page(text: str, today_idx: int | None) -> tuple[list[dict]
                     if pos_tokens:
                         role = min(pos_tokens, key=lambda t: abs(t[0] - sx))[1]
 
-            if today_day and day == today_day and start_time and end_time:
+            if day and start_time and end_time:
                 short_name = format_short_name(name)
-                today_shifts.append({
+                shifts_by_day[day].append({
                     "name": short_name,
                     "role": role,
                     "start": format_time(start_time),
@@ -274,7 +274,7 @@ def parse_shifts_from_page(text: str, today_idx: int | None) -> tuple[list[dict]
         # We don't have dates here — caller will inject from week_dates
         totals_by_day = {f"_idx_{k}": v for k, v in enumerate(last_total_row[:8])}
 
-    return today_shifts, totals_by_day
+    return shifts_by_day, totals_by_day
 
 
 def format_short_name(full: str) -> str:
@@ -321,11 +321,12 @@ def main() -> int:
     monday = report_dt - timedelta(days=today_idx)
     week_dates = [monday + timedelta(days=i) for i in range(7)]
 
-    all_today_shifts: list[dict] = []
+    all_shifts_by_day: dict[str, list[dict]] = {d: [] for d in DAY_NAMES}
     totals_by_day_raw: dict[str, float] = {}
     for page_text in pages:
-        shifts, totals = parse_shifts_from_page(page_text, today_idx)
-        all_today_shifts.extend(shifts)
+        shifts_by_day, totals = parse_shifts_from_page(page_text, today_idx)
+        for day_name, day_shifts in shifts_by_day.items():
+            all_shifts_by_day[day_name].extend(day_shifts)
         if totals and not totals_by_day_raw:
             totals_by_day_raw = totals
 
@@ -341,33 +342,52 @@ def main() -> int:
             elif idx == 7:
                 totals_by_day["week_total"] = v
 
-    scheduled_hours = sum(s for d, s in totals_by_day.items() if d != "week_total" and d.endswith(report_dt.strftime("%Y-%m-%d")))
-    if not scheduled_hours and totals_by_day:
-        scheduled_hours = totals_by_day.get(report_dt.date().isoformat(), 0.0)
+    # Build full schedule dict keyed by ISO date
+    schedule: dict[str, dict] = {}
+    for day_name, shifts in all_shifts_by_day.items():
+        idx = DAY_NAMES.index(day_name)
+        if idx < len(week_dates):
+            iso = week_dates[idx].date().isoformat()
+            hrs = totals_by_day.get(iso, 0.0)
+            schedule[iso] = {
+                "date": iso,
+                "day_of_week": day_name,
+                "scheduled_hours": round(hrs, 2),
+                "shifts": shifts,
+            }
+
+    # today key = report_date of the PDF (backward compat for wire_dashboard.py)
+    report_iso = report_dt.date().isoformat()
+    today_entry = schedule.get(report_iso, {
+        "date": report_iso,
+        "day_of_week": report_dt.strftime("%A"),
+        "scheduled_hours": totals_by_day.get(report_iso, 0.0),
+        "shifts": [],
+    })
 
     out = {
         "meta": {
             "source": "parbrink_parse_weekly_schedule.py",
             "store_id": args.store,
-            "report_date": report_dt.date().isoformat(),
+            "report_date": report_iso,
+            "week_start": week_dates[0].date().isoformat() if week_dates else None,
+            "week_end": week_dates[-1].date().isoformat() if week_dates else None,
             "generated": datetime.now().isoformat(timespec="seconds"),
             "source_pdf": str(pdf.relative_to(ROOT)).replace("\\", "/") if pdf.is_relative_to(ROOT) else str(pdf),
         },
         "totals_by_day": totals_by_day,
-        "today": {
-            "date": report_dt.date().isoformat(),
-            "day_of_week": report_dt.strftime("%A"),
-            "scheduled_hours": round(scheduled_hours, 2),
-            "shifts": all_today_shifts,
-        },
+        "schedule": schedule,
+        "today": today_entry,
     }
 
     out_path = pdf.parent / "weekly_schedule.json"
     out_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
     print(f"Wrote {out_path}")
     print(f"  Report date: {report_dt.date().isoformat()} ({report_dt.strftime('%A')})")
-    print(f"  Today scheduled hours: {scheduled_hours}")
-    print(f"  Today shifts: {len(all_today_shifts)}")
+    print(f"  Week: {out['meta'].get('week_start')} – {out['meta'].get('week_end')}")
+    total_shifts = sum(len(v["shifts"]) for v in schedule.values())
+    print(f"  Total shifts across all days: {total_shifts}")
+    print(f"  Today ({report_dt.strftime('%A')}) shifts: {len(today_entry['shifts'])}")
     return 0
 
 
