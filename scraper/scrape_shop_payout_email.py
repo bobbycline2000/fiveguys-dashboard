@@ -99,140 +99,20 @@ def save_emailed(store_id: str, emailed: set[str]) -> None:
 
 async def _navigate_to_time_detail(page) -> bool:
     """
-    Sidebar nav: Labor → Reports → Consolidated Employee Time Detail.
-    Labor fly-out is lazy-loaded; uses wait_for_selector to confirm it appeared.
-    "Reports" is clicked within the Labor fly-out (identified by co-location with
-    "Labor Overview"). "Consolidated Employee Time Detail" is then clicked directly.
-    Daily News modal is dismissed after the fly-out opens.
+    Navigate directly to the Consolidated Employee Time Detail report via URL.
+    Confirmed working 2026-04-28 via live DOM inspection.
+    URL: /ncext/next.ct#ConsolidatedEmployeeTimeDetail
     """
     try:
-        # Step 1: Hover + click the Labor sidebar icon to open the fly-out.
-        # Hover is required — JS click alone doesn't trigger the hover-based fly-out.
-        try:
-            labor_sel = '[ces-selenium-id="menuitem_laborMenu"]'
-            await page.hover(labor_sel, timeout=10_000)
-            await page.wait_for_timeout(500)
-            await page.click(labor_sel, timeout=5_000)
-            log("Hovered and clicked Labor sidebar item")
-        except Exception as hover_err:
-            log(f"Labor hover/click failed ({hover_err}); falling back to JS click")
-            clicked = await page.evaluate("""
-                () => {
-                    const el = document.querySelector('[ces-selenium-id="menuitem_laborMenu"]');
-                    if (el) { el.dispatchEvent(new MouseEvent('mouseenter', {bubbles:true})); el.click(); return true; }
-                    return false;
-                }
-            """)
-            if not clicked:
-                log("Could not find Labor sidebar item at all")
-                return False
-
-        # Step 2: Wait for Labor fly-out to load (lazy-rendered into DOM)
-        try:
-            await page.wait_for_function(
-                "() => [...document.querySelectorAll('*')].some(el => "
-                "(el.textContent || '').includes('Labor Overview'))",
-                timeout=12_000
-            )
-            log("Labor fly-out is visible")
-        except PlaywrightTimeout:
-            log("Labor fly-out did not appear (timeout)")
-            try:
-                await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
-            except Exception:
-                pass
-            return False
-
-        # Step 3: Dismiss Daily News modal if present
-        closed = await page.evaluate("""
-            () => {
-                for (const el of [...document.querySelectorAll('*')]) {
-                    if (el.children.length === 0 && (el.innerText || '').trim() === 'Daily News') {
-                        let p = el.parentElement;
-                        while (p && !p.classList.contains('x-dialog') && !p.classList.contains('x-window') && p !== document.body) {
-                            p = p.parentElement;
-                        }
-                        if (p) {
-                            const btn = p.querySelector('[ces-selenium-id="tool_close"], .x-dialogtool-close, .x-paneltool-close');
-                            if (btn) { btn.click(); return true; }
-                        }
-                        break;
-                    }
-                }
-                return false;
-            }
-        """)
-        if closed:
-            log("Dismissed Daily News modal")
-            await page.wait_for_timeout(800)
-
-        # Step 4: Click "Reports" within the Labor fly-out container.
-        # Anchor on "Labor Overview" to identify the correct fly-out container.
-        clicked = await page.evaluate("""
-            () => {
-                const laborOv = [...document.querySelectorAll('*')].find(el =>
-                    el.children.length === 0 &&
-                    (el.innerText || '').trim() === 'Labor Overview'
-                );
-                if (!laborOv) return false;
-                let ancestor = laborOv.parentElement;
-                while (ancestor && ancestor !== document.body) {
-                    const rpt = [...ancestor.querySelectorAll('*')].find(el =>
-                        (el.innerText || '').trim() === 'Reports'
-                    );
-                    if (rpt) { rpt.click(); return true; }
-                    ancestor = ancestor.parentElement;
-                }
-                return false;
-            }
-        """)
-        if not clicked:
-            log("Could not find Reports within Labor fly-out")
-            try:
-                await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
-            except Exception:
-                pass
-            return False
-        log("Clicked Reports in Labor fly-out")
-
-        # Step 5: Wait for CETD to appear, then click it
-        try:
-            await page.wait_for_function(
-                "() => [...document.querySelectorAll('*')].some(el => "
-                "(el.textContent || '').trim() === 'Consolidated Employee Time Detail')",
-                timeout=10_000
-            )
-            log("Consolidated Employee Time Detail is visible")
-        except PlaywrightTimeout:
-            log("Consolidated Employee Time Detail did not appear (timeout)")
-            try:
-                await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
-                txt = await page.inner_text("body")
-                (ROOT / "data" / "shop_email_page_text.txt").write_text(txt[:20000], encoding="utf-8")
-            except Exception:
-                pass
-            return False
-
-        cetd_clicked = await page.evaluate("""
-            () => {
-                const el = [...document.querySelectorAll('*')].find(el =>
-                    (el.innerText || '').trim() === 'Consolidated Employee Time Detail'
-                );
-                if (el) { el.click(); return true; }
-                return false;
-            }
-        """)
-        if not cetd_clicked:
-            log("Could not click Consolidated Employee Time Detail")
-            return False
-        log("Clicked Consolidated Employee Time Detail")
-        await page.wait_for_timeout(3_000)
+        cetd_url = "https://fiveguysfr77.net-chef.com/ncext/next.ct#ConsolidatedEmployeeTimeDetail"
+        await page.goto(cetd_url, wait_until="domcontentloaded", timeout=30_000)
+        await page.wait_for_selector('[ces-selenium-id="button_retrieveBtn"]', timeout=20_000)
+        log("CETD page loaded via direct URL")
         return True
-
     except Exception as e:
-        log(f"Sidebar nav error: {e}")
+        log(f"CETD navigation error: {e}")
         try:
-            await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
+            await page.screenshot(path=str(ROOT / "data" / "shop_email_page_text.txt".replace(".txt", ".png")))
         except Exception:
             pass
         return False
@@ -240,56 +120,92 @@ async def _navigate_to_time_detail(page) -> bool:
 
 async def _set_date_and_retrieve(page, shop_date: str) -> bool:
     """
-    Set the date range to a single day (start = end = shop_date, M/D/YYYY)
-    and click Retrieve. Matches scrape_cogs._set_date_range_and_retrieve.
+    Set date range (single day) via ExtJS Ext.getCmp() API, select GM30 Dixie Highway
+    from the hierarchy combo picker, then click Retrieve.
+    shop_date: 'M/D/YYYY' format.
+    Confirmed working 2026-04-28 via live DOM inspection in Bobby's browser.
     """
     try:
-        filled = await page.evaluate(f"""
-            (d) => {{
-                const inputs = [...document.querySelectorAll(
-                    'input[type=text], input[type=date], .x-input-el'
-                )];
-                const dateInputs = inputs.filter(i =>
-                    /date/i.test(i.placeholder + i.name + i.id + i.className)
-                );
-                let startFld = inputs.find(i =>
-                    /start/i.test(i.placeholder + i.name + i.id)
-                ) || dateInputs[0];
-                let endFld = inputs.find(i =>
-                    /end/i.test(i.placeholder + i.name + i.id)
-                ) || dateInputs[1];
-                if (!startFld) return false;
-                startFld.value = d;
-                startFld.dispatchEvent(new Event('change', {{bubbles: true}}));
-                if (endFld) {{
-                    endFld.value = d;
-                    endFld.dispatchEvent(new Event('change', {{bubbles: true}}));
-                }}
-                return true;
-            }}
-        """, shop_date)
-        if not filled:
-            log("Could not fill date fields on Time Detail report")
-            return False
+        parts = shop_date.split("/")
+        month, day, year = int(parts[0]), int(parts[1]), int(parts[2])
 
+        # Set start/end dates using ExtJS component API (JS month is 0-indexed)
+        raw = await page.evaluate(f"""
+            (() => {{
+                const startEl = document.querySelector('[ces-selenium-id="cesdatefield_startDate"]');
+                const endEl   = document.querySelector('[ces-selenium-id="cesdatefield_endDate"]');
+                const startCmp = Ext.getCmp(startEl.id);
+                const endCmp   = Ext.getCmp(endEl.id);
+                const d = new Date({year}, {month - 1}, {day});
+                startCmp.setValue(d);
+                endCmp.setValue(d);
+                return startCmp.getRawValue();
+            }})()
+        """)
+        log(f"Date fields set to: {raw}")
+
+        # Open hierarchy combo picker then select GM30 (Dixie Highway)
+        await page.evaluate("""
+            (() => {
+                const hierEl = document.querySelector('[ces-selenium-id="cescombogridpicker_hierarchyCombo"]');
+                if (hierEl) hierEl.click();
+            })()
+        """)
+        await page.wait_for_timeout(1_500)
+
+        selected = await page.evaluate("""
+            (() => {
+                const rows = document.querySelectorAll('.x-grid-row');
+                const dixie = [...rows].find(r => (r.innerText || '').includes('GM30'));
+                if (dixie) { dixie.click(); return true; }
+                return false;
+            })()
+        """)
+        if not selected:
+            log("GM30 not visible after combo click — trying Retrieve to trigger picker")
+            await page.evaluate("""
+                document.querySelector('[ces-selenium-id="button_retrieveBtn"]').click();
+            """)
+            await page.wait_for_timeout(2_000)
+            selected = await page.evaluate("""
+                (() => {
+                    const rows = document.querySelectorAll('.x-grid-row');
+                    const dixie = [...rows].find(r => (r.innerText || '').includes('GM30'));
+                    if (dixie) { dixie.click(); return true; }
+                    return false;
+                })()
+            """)
+            if not selected:
+                log("Could not select GM30 Dixie Highway from hierarchy picker")
+                return False
+
+        log("Selected GM30 Dixie Highway hierarchy")
         await page.wait_for_timeout(500)
 
-        clicked = await page.evaluate("""
-            () => {
-                const btns = [...document.querySelectorAll('.x-button, button, [role=button]')];
-                const btn = btns.find(b =>
-                    /retrieve|run|go|apply/i.test((b.innerText || b.value || '').trim())
-                );
-                if (btn) { btn.click(); return true; }
-                return false;
-            }
+        # Click Retrieve
+        await page.evaluate("""
+            document.querySelector('[ces-selenium-id="button_retrieveBtn"]').click();
         """)
-        if not clicked:
-            log("Could not find Retrieve button")
+        log("Clicked Retrieve")
+
+        # Wait for data to load (display item changes from "No data to display")
+        try:
+            await page.wait_for_function(
+                '() => { const el = document.querySelector(\'[ces-selenium-id="tbtext_displayItem"]\'); '
+                "return el && el.innerText && !el.innerText.includes('No data'); }",
+                timeout=20_000
+            )
+            log("Time detail data loaded")
+            return True
+        except PlaywrightTimeout:
+            log("Timed out waiting for time detail data — saving debug snapshot")
+            try:
+                txt = await page.inner_text("body")
+                (ROOT / "data" / "shop_email_after_labor.txt").write_text(txt[:20000], encoding="utf-8")
+            except Exception:
+                pass
             return False
 
-        await page.wait_for_timeout(5_000)
-        return True
     except Exception as e:
         log(f"Date/Retrieve error: {e}")
         return False
@@ -322,58 +238,57 @@ def _parse_time_hour(time_str: str) -> int | None:
 
 async def _extract_employees(page, meal_period: str) -> list[str]:
     """
-    Read the Consolidated Employee Time Detail page text.
-    Returns a list of employee names who were on shift during the meal window.
-    Falls back to returning ALL employees found if filtering yields none.
+    Extract employee names from CETD group headers.
+    Group headers have format "LastName, FirstName - E<id>".
+    Filters to employees whose Time In falls within the meal period window.
+    Falls back to all employees found if meal-window filtering yields none.
+    Confirmed working 2026-04-28 via live DOM inspection.
     """
-    await page.wait_for_timeout(2_000)
-    body = await page.inner_text("body")
+    await page.wait_for_timeout(1_000)
 
     start_h, end_h = _meal_window(meal_period)
 
-    # Heuristic: look for lines that match "LastName, FirstName" or
-    # "FirstName LastName" adjacent to a time value.
-    # CrunchTime time detail typically lists: Name | Date | In-Time | Out-Time | Hours
-    # We extract every name that appears alongside an in-time in the meal window.
+    result = await page.evaluate(f"""
+        (() => {{
+            const startH = {start_h};
+            const endH   = {end_h};
 
-    # Pattern 1: "Name\t<date>\t<in-time>\t<out-time>\t<hours>"
-    # Pattern 2: table rows with similar structure
-    employees_in_window: list[str] = []
-    employees_all: list[str] = []
+            // Each employee is a group in the grid; group header text = "Last, First - E<id>"
+            const groupHds = [...document.querySelectorAll('.x-grid-group-hd')];
+            const inWindow  = [];
+            const allNames  = [];
 
-    # Split into logical rows — any line with a time value
-    lines = [l.strip() for l in body.splitlines() if l.strip()]
-    i = 0
-    while i < len(lines):
-        line = lines[i]
-        # Look for time patterns (HH:MM AM/PM or HH:MM)
-        times = re.findall(r"\d{1,2}:\d{2}\s*(?:AM|PM)?", line, re.IGNORECASE)
-        if times:
-            # Try to find an employee name nearby (within ±2 lines)
-            context = " ".join(lines[max(0, i-2): i+3])
-            # Name pattern: "Word, Word" or "Word Word" (2+ words, title case)
-            name_matches = re.findall(
-                r"\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+|[A-Z][a-z]+,\s*[A-Z][a-z]+)\b",
-                context
-            )
-            for name in name_matches:
-                # Check if any of the times fall in the meal window
-                in_window = False
-                for t in times:
-                    h = _parse_time_hour(t)
-                    if h is not None and start_h <= h <= end_h:
-                        in_window = True
-                        break
-                clean = name.strip()
-                if clean not in employees_all:
-                    employees_all.append(clean)
-                if in_window and clean not in employees_in_window:
-                    employees_in_window.append(clean)
-        i += 1
+            groupHds.forEach(hd => {{
+                const text = hd.innerText?.trim() || '';
+                const nameMatch = text.match(/^([A-Za-zÀ-ɏ]+(?:['-][A-Za-zÀ-ɏ]+)?,\\s+[A-Za-zÀ-ɏ]+(?:['-][A-Za-zÀ-ɏ]+)*)\\s*-\\s*E\\d+/);
+                if (!nameMatch) return;
+                const name = nameMatch[1];
+                allNames.push(name);
 
-    result = employees_in_window if employees_in_window else employees_all
-    log(f"Employees found: {len(result)} in window, {len(employees_all)} total")
-    return result
+                // Find data rows within this employee's group to check shift times
+                // ExtJS renders group rows as siblings after the group header row
+                let sibling = hd.closest('tr, .x-grid-row')?.nextElementSibling;
+                let workedInWindow = false;
+                while (sibling && !sibling.classList.contains('x-grid-group-hd') &&
+                       !sibling.querySelector('.x-grid-group-hd')) {{
+                    const rowText = sibling.innerText || '';
+                    // Time In is the 3rd column: Date | Location | TimeIn | TimeOut ...
+                    const timeMatch = rowText.match(/\\d{{2}}\\/\\d{{2}}\\/\\d{{4}}[^\\d]+(\\d{{1,2}}):(\\d{{2}})/);
+                    if (timeMatch) {{
+                        const h = parseInt(timeMatch[1], 10);
+                        if (h >= startH && h <= endH) {{ workedInWindow = true; break; }}
+                    }}
+                    sibling = sibling.nextElementSibling;
+                }}
+                if (workedInWindow) inWindow.push(name);
+            }});
+
+            return inWindow.length > 0 ? inWindow : allNames;
+        }})()
+    """)
+
+    log(f"Employees extracted: {len(result)} ({meal_period} window)")
+    return result or []
 
 
 async def pull_employees_for_shop(shop: dict) -> list[str]:
