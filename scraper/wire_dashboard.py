@@ -568,12 +568,13 @@ if ss:
 
     # SS KPI bars — rewrite the full ss-kpi-list block
     def ss_kpi_html(name, pct_str):
-        pct_num = int(pct_str.rstrip('%'))
+        pct_num = int(round(float(pct_str.rstrip('%'))))
         under = ' under' if pct_num < 88 else ''
+        # Re-render the displayed string as integer % so we don't show "77.0%"
         return (f'          <div class="ss-kpi">\n'
                 f'            <span class="ss-kpi-name">{name}</span>\n'
                 f'            <span class="ss-kpi-bar-bg"><span class="ss-kpi-bar-fill{under}" style="width:{pct_num}%"></span></span>\n'
-                f'            <span class="ss-kpi-pct">{pct_str}</span>\n'
+                f'            <span class="ss-kpi-pct">{pct_num}%</span>\n'
                 f'          </div>')
     new_kpi_block = "\n".join([
         ss_kpi_html("Service", ss_service),

@@ -102,19 +102,34 @@ def select_all_periods(page) -> None:
                 page.wait_for_timeout(3_000)
                 continue
             raise
-    # Click "Select All" inside the Year filter group, then re-run
+    # Click EVERY "Select All" link (one per filter group: Year/Quarter/Month/period2)
+    # so the Individual Shops table includes the full history, not just the
+    # latest period.
     try:
-        page.click('text="Select All"', timeout=5_000)
-        page.wait_for_timeout(2_000)
-        # Trigger filter apply if present
-        for label in ("Apply", "Run", "Filter", "Submit"):
-            btn = page.locator(f'button:has-text("{label}")').first
-            if btn.count() and btn.is_visible():
-                btn.click()
+        select_all_count = page.evaluate("""
+            () => {
+                const links = [...document.querySelectorAll('a, span, button, label')]
+                    .filter(el => (el.innerText || '').trim() === 'Select All');
+                let clicked = 0;
+                for (const l of links) {
+                    try { l.click(); clicked += 1; } catch(e) {}
+                }
+                return clicked;
+            }
+        """)
+        log(f"Clicked {select_all_count} 'Select All' link(s)")
+        page.wait_for_timeout(1_500)
+        # Trigger filter apply / refresh if present
+        for label in ("Apply", "Run", "Filter", "Submit", "Refresh"):
+            try:
+                page.click(f'button:has-text("{label}")', timeout=2_000)
+                log(f"Clicked filter button: {label}")
                 break
+            except PlaywrightTimeout:
+                continue
         page.wait_for_load_state("networkidle", timeout=15_000)
-    except PlaywrightTimeout:
-        log("Could not click Select All — proceeding with default filter")
+    except Exception as e:
+        log(f"Select All filter widening failed ({e}) — proceeding with default filter")
 
 
 def read_individual_shops_table(page) -> list[dict]:
