@@ -122,16 +122,31 @@ async def _navigate_to_time_detail(page) -> bool:
                 return False
             await page.wait_for_timeout(1_500)
 
-        # Partial match for the report — sidebar may truncate the label
+        # Save sidebar state for debugging if report link search fails
+        try:
+            await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
+        except Exception:
+            pass
+
+        # Partial match for the report — sidebar may have child icon spans so
+        # don't require leaf-only; pick the shortest matching text element.
+        await page.wait_for_timeout(1_000)
         clicked = await page.evaluate("""
             () => {
-                const t = [...document.querySelectorAll('*')].find(el =>
-                    el.children.length === 0 &&
-                    (el.innerText || '').toLowerCase().includes('consolidated') &&
-                    (el.innerText || '').toLowerCase().includes('time')
+                const all = [...document.querySelectorAll('*')];
+                const candidates = all.filter(el => {
+                    const txt = (el.innerText || el.textContent || '').trim().toLowerCase();
+                    return txt.includes('consolidated') && txt.includes('time') && txt.length < 120;
+                });
+                if (!candidates.length) return null;
+                // Prefer the shortest text (most specific element)
+                candidates.sort((a, b) =>
+                    (a.innerText || a.textContent || '').length -
+                    (b.innerText || b.textContent || '').length
                 );
-                if (t) { t.click(); return (t.innerText || '').trim(); }
-                return null;
+                const target = candidates[0];
+                target.click();
+                return (target.innerText || target.textContent || '').trim();
             }
         """)
         if not clicked:
