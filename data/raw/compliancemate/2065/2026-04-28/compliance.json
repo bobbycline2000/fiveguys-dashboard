@@ -1,11 +1,11 @@
 {
   "meta": {
     "date": "2026-04-28",
-    "generated": "4/28/2026 at 12:29 AM",
+    "generated": "4/28/2026 at 2:23 PM",
     "location": "2065",
     "status": "ok"
   },
-  "overall_pct": 48,
+  "overall_pct": 71,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -34,8 +34,8 @@
     },
     {
       "name": "9PM: Time and Temp",
-      "pct": 0,
-      "raw": "9PM: Time and Temp\n0% | 0%"
+      "pct": 100,
+      "raw": "9PM: Time and Temp\n100% | 100%"
     },
     {
       "name": "AM Pre-Shift Check",
@@ -49,8 +49,8 @@
     },
     {
       "name": "Closing Checklist",
-      "pct": 0,
-      "raw": "Closing Checklist\n0% | 0%"
+      "pct": 100,
+      "raw": "Closing Checklist\n100% | 100%"
     },
     {
       "name": "Pre Open",
@@ -64,8 +64,8 @@
     },
     {
       "name": "Closing",
-      "pct": 0,
-      "raw": "Closing\n0% | 0%"
+      "pct": 100,
+      "raw": "Closing\n100% | 100%"
     },
     {
       "name": "Weekly Store Inspection",

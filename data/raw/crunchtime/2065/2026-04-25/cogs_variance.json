@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-04-19",
+    "week_end": "2026-04-25",
+    "month_start": "2026-04-01",
+    "last_month_start": "2026-03-01",
+    "last_month_end": "2026-03-31",
+    "through": "2026-04-27",
+    "pulled": "2026-04-28 10:24 ET",
+    "method": "api+playwright"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": null,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": null,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [],
+  "ranking": "over_dollars_desc"
+}
