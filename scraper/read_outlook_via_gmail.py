@@ -351,6 +351,127 @@ def extract_new_hire_info(body: str, subject: str) -> dict:
 
 # ── Brief generation ─────────────────────────────────────────────────────────
 
+def build_secret_shop_corner() -> str:
+    """Reads latest shops.json from KnowledgeForce pipeline and produces the
+    Secret Shop Corner section: latest shop, KPI focus areas, and team rallying
+    message. Returns empty string if shops.json not found."""
+    marketforce_root = REPO_ROOT / "data" / "raw" / "marketforce" / "2065"
+    if not marketforce_root.exists():
+        return ""
+
+    latest_dir = None
+    for d in sorted(marketforce_root.iterdir(), reverse=True):
+        if d.is_dir() and (d / "shops.json").exists():
+            latest_dir = d
+            break
+    if not latest_dir:
+        return ""
+
+    try:
+        data = json.loads((latest_dir / "shops.json").read_text(encoding="utf-8"))
+    except Exception:
+        return ""
+
+    shops = data.get("shops", []) or []
+    if not shops:
+        return ""
+
+    latest = data.get("latest", shops[0])
+    avg = data.get("averages", {})
+
+    # Compute per-KPI averages across all shops
+    def _avg(field: str) -> float | None:
+        vals = [s.get(field) for s in shops if s.get(field) is not None]
+        return round(sum(vals) / len(vals), 1) if vals else None
+
+    svc_avg   = _avg("service")
+    qual_avg  = _avg("quality")
+    clean_avg = _avg("cleanliness")
+    csat_avg  = _avg("customer_satisfaction")
+
+    # Lunch vs Dinner split — surfaces shift-level pattern
+    lunch_scores  = [s["score"] for s in shops if "lunch" in (s.get("meal_period","").lower())]
+    dinner_scores = [s["score"] for s in shops if "dinner" in (s.get("meal_period","").lower())]
+    lunch_avg  = round(sum(lunch_scores)/len(lunch_scores), 1) if lunch_scores else None
+    dinner_avg = round(sum(dinner_scores)/len(dinner_scores), 1) if dinner_scores else None
+
+    # Identify weakest KPI
+    kpi_avgs = {
+        "Service": svc_avg, "Quality": qual_avg,
+        "Cleanliness": clean_avg, "Customer Satisfaction": csat_avg,
+    }
+    weakest = sorted(((v, k) for k, v in kpi_avgs.items() if v is not None))
+    weakest_kpi, weakest_score = (weakest[0][1], weakest[0][0]) if weakest else (None, None)
+
+    lines: list[str] = []
+    lines.append("## 🛒 Secret Shop Corner — Team Focus")
+    lines.append("")
+    lines.append("**Where we stand right now:**")
+    lines.append("")
+    lines.append(f"- **Latest shop:** {latest.get('date','?')} {latest.get('meal_period','?')} — **{latest.get('score','?')}%**")
+    lines.append(f"  - Service {latest.get('service','?')}% · Quality {latest.get('quality','?')}% · "
+                 f"Cleanliness {latest.get('cleanliness','?')}% · CSAT {latest.get('customer_satisfaction','?')}%")
+    if avg.get("month", {}).get("score") is not None:
+        lines.append(f"- **Month average:** {avg['month']['score']}% (n={avg['month']['n']})")
+    if avg.get("quarter", {}).get("score") is not None:
+        lines.append(f"- **Quarter average:** {avg['quarter']['score']}% (n={avg['quarter']['n']})")
+    lines.append(f"- **Total shops on file:** {len(shops)}")
+    lines.append("")
+
+    lines.append("**KPI averages across all shops on record:**")
+    lines.append("")
+    lines.append("| KPI | Avg | Status |")
+    lines.append("|---|---|---|")
+    for k, v in kpi_avgs.items():
+        if v is None:
+            continue
+        status = "🟢 Strong" if v >= 95 else ("🟡 Watch" if v >= 90 else "🔴 Focus area")
+        lines.append(f"| {k} | {v}% | {status} |")
+    lines.append("")
+
+    if lunch_avg is not None and dinner_avg is not None:
+        lines.append(f"**Shift pattern:** Lunch avg **{lunch_avg}%** · Dinner avg **{dinner_avg}%**")
+        if lunch_avg < dinner_avg - 3:
+            lines.append("> Lunch shift is dragging the score. Most sub-100 shops happen at lunch.")
+        elif dinner_avg < lunch_avg - 3:
+            lines.append("> Dinner shift is dragging the score. Reinforce evening standards.")
+        lines.append("")
+
+    # Team focus + rally
+    lines.append("**Where we focus this week:**")
+    lines.append("")
+    if weakest_kpi == "Service":
+        lines.append("- 🎯 **SERVICE** is our #1 drag. Greeting at the door, eye contact, "
+                     "thank-you on the way out — every guest, every order. No exceptions.")
+        lines.append("- Speed of service: register → window in under 6 minutes target.")
+    elif weakest_kpi == "Cleanliness":
+        lines.append("- 🎯 **CLEANLINESS** is our #1 drag. Lobby sweeps every 15 minutes, "
+                     "tables wiped between guests, restrooms checked hourly with sign-off sheet.")
+    elif weakest_kpi == "Quality":
+        lines.append("- 🎯 **QUALITY** is our drag. Build-to-spec on every burger. "
+                     "Buns toasted, lettuce crisp, no shortcuts on toppings.")
+    elif weakest_kpi == "Customer Satisfaction":
+        lines.append("- 🎯 **CSAT** is our drag. Recovery moments matter — if a guest hesitates, ask. "
+                     "If something's wrong, fix it before they leave.")
+
+    # Always reinforce the secondary KPIs that show up below 100
+    secondary = [k for k, v in kpi_avgs.items() if v is not None and v < 95 and k != weakest_kpi]
+    for s in secondary:
+        lines.append(f"- Secondary watch: **{s}** is also showing gaps — keep eyes on it.")
+
+    lines.append("")
+    lines.append("**Team message:**")
+    lines.append("")
+    lines.append("> We must improve these scores **dramatically**. Every shop is a snapshot "
+                 "of what a real guest sees on a real shift. Two perfect shops in a row don't "
+                 "cancel out a 47% — corporate sees the average and the trend. The fundamentals "
+                 "win this: greet, speed, clean, build to spec. Lock it in shift by shift.")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    return "\n".join(lines)
+
+
 def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
     """Builds the daily brief markdown string."""
     lines: list[str] = []
@@ -490,6 +611,11 @@ def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
             lines.append("")
         lines.append("---")
         lines.append("")
+
+    # ── Secret Shop Corner (KnowledgeForce data — runs every brief) ──────────
+    corner = build_secret_shop_corner()
+    if corner:
+        lines.append(corner)
 
     # ── Estep Corporate / Admin ──────────────────────────────────────────────
     estep_emails = categorized.get("Estep Corporate / Admin", [])
