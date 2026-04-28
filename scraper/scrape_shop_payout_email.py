@@ -100,64 +100,34 @@ def save_emailed(store_id: str, emailed: set[str]) -> None:
 async def _navigate_to_time_detail(page) -> bool:
     """
     Sidebar nav: Labor → Reports → Consolidated Employee Time Detail.
-    Uses ces-selenium-id="menuitem_laborMenu" (reliable) for the Labor icon,
-    then text-based search for the sub-menu items.
-    Dismisses the Daily News modal that appears post-login.
-    Never navigates via index.ct hash URLs (those log out the modern.ct session).
+    Labor fly-out is lazy-loaded; uses wait_for_selector to confirm it appeared.
+    "Reports" is clicked within the Labor fly-out (identified by co-location with
+    "Labor Overview"). "Consolidated Employee Time Detail" is then clicked directly.
+    Daily News modal is dismissed after the fly-out opens.
     """
     try:
         # Step 1: Click the Labor sidebar icon via its ces-selenium-id
-        clicked = await page.evaluate("""
-            () => {
-                const el = document.querySelector('[ces-selenium-id="menuitem_laborMenu"]');
-                if (el) { el.click(); return true; }
-                // Fallback: text-based search for "Labor"
-                const all = [...document.querySelectorAll('*')].filter(el =>
-                    el.children.length === 0 &&
-                    (el.innerText || '').trim().toLowerCase() === 'labor'
-                );
-                if (all.length) { all[0].click(); return true; }
-                return false;
-            }
-        """)
-        if not clicked:
-            log("Could not find Labor sidebar item")
-            return False
+        await page.locator('[ces-selenium-id="menuitem_laborMenu"]').click(timeout=10_000)
         log("Clicked Labor sidebar item")
-        await page.wait_for_timeout(2_000)
 
-        # Dump page text after Labor click to see what sub-menu appeared
+        # Step 2: Wait for Labor fly-out to load (lazy-rendered)
         try:
-            txt = await page.inner_text("body")
-            (ROOT / "data" / "shop_email_after_labor.txt").write_text(txt[:20000], encoding="utf-8")
-        except Exception:
-            pass
-
-        # Step 2: Click "Reports" from the Labor sub-menu
-        clicked = await page.evaluate("""
-            () => {
-                const all = [...document.querySelectorAll('*')].filter(el =>
-                    el.children.length === 0 &&
-                    (el.innerText || '').trim().toLowerCase() === 'reports'
-                );
-                if (all.length) { all[0].click(); return true; }
-                return false;
-            }
-        """)
-        if not clicked:
-            log("Could not find Reports submenu under Labor")
+            await page.wait_for_selector("text=Labor Overview", timeout=10_000)
+            log("Labor fly-out is visible")
+        except PlaywrightTimeout:
+            log("Labor fly-out did not appear (timeout)")
+            try:
+                await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
+            except Exception:
+                pass
             return False
-        log("Clicked Reports submenu")
-        await page.wait_for_timeout(3_000)
 
-        # Dismiss Daily News modal NOW — it may have appeared asynchronously
-        # Target it specifically by finding the dialog containing "Daily News" text
+        # Step 3: Dismiss Daily News modal if it appeared during fly-out load
         closed = await page.evaluate("""
             () => {
                 const allEls = [...document.querySelectorAll('*')];
                 for (const el of allEls) {
                     if (el.children.length === 0 && (el.innerText || '').trim() === 'Daily News') {
-                        // Walk up to find the dialog container
                         let p = el.parentElement;
                         while (p && !p.classList.contains('x-dialog') && !p.classList.contains('x-window') && p !== document.body) {
                             p = p.parentElement;
@@ -174,43 +144,66 @@ async def _navigate_to_time_detail(page) -> bool:
         """)
         if closed:
             log("Dismissed Daily News modal")
-            await page.wait_for_timeout(1_000)
+            await page.wait_for_timeout(800)
 
-        # Save screenshot + page text for debugging
-        try:
-            await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
-            body_txt = await page.inner_text("body")
-            (ROOT / "data" / "shop_email_page_text.txt").write_text(body_txt[:20000], encoding="utf-8")
-        except Exception:
-            pass
-
-        # Step 3: Click Consolidated Employee Time Detail (partial match, shortest text wins)
+        # Step 4: Click "Reports" WITHIN the Labor fly-out.
+        # Find it by looking for "Reports" in the same container as "Labor Overview".
         clicked = await page.evaluate("""
             () => {
-                const all = [...document.querySelectorAll('*')];
-                const candidates = all.filter(el => {
-                    const txt = (el.innerText || el.textContent || '').trim().toLowerCase();
-                    return txt.includes('consolidated') && txt.includes('time') && txt.length < 120;
-                });
-                if (!candidates.length) return null;
-                candidates.sort((a, b) =>
-                    (a.innerText || a.textContent || '').length -
-                    (b.innerText || b.textContent || '').length
+                const allEls = [...document.querySelectorAll('*')];
+                // Find "Labor Overview" as an anchor for the fly-out container
+                const laborOv = allEls.find(el =>
+                    el.children.length === 0 &&
+                    (el.innerText || '').trim() === 'Labor Overview'
                 );
-                const target = candidates[0];
-                target.click();
-                return (target.innerText || target.textContent || '').trim();
+                if (!laborOv) return false;
+                // Walk up through ancestors until we find a container that also has "Reports"
+                let ancestor = laborOv.parentElement;
+                while (ancestor && ancestor !== document.body) {
+                    const rpt = [...ancestor.querySelectorAll('*')].find(el =>
+                        (el.innerText || '').trim() === 'Reports'
+                    );
+                    if (rpt) { rpt.click(); return true; }
+                    ancestor = ancestor.parentElement;
+                }
+                return false;
             }
         """)
         if not clicked:
-            log("Could not find 'Consolidated ... Time ...' report link")
+            log("Could not find Reports within Labor fly-out")
+            try:
+                await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
+            except Exception:
+                pass
             return False
-        log(f"Clicked report link: '{clicked}'")
+        log("Clicked Reports in Labor fly-out")
+        await page.wait_for_timeout(3_000)
 
-        await page.wait_for_timeout(2_000)
+        # Step 5: Wait for CETD to appear and click it
+        try:
+            await page.wait_for_selector("text=Consolidated Employee Time Detail", timeout=10_000)
+            log("CETD report link found")
+        except PlaywrightTimeout:
+            log("Consolidated Employee Time Detail did not appear (timeout)")
+            try:
+                await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
+                txt = await page.inner_text("body")
+                (ROOT / "data" / "shop_email_page_text.txt").write_text(txt[:20000], encoding="utf-8")
+            except Exception:
+                pass
+            return False
+
+        await page.locator("text=Consolidated Employee Time Detail").first.click(timeout=5_000)
+        log("Clicked Consolidated Employee Time Detail")
+        await page.wait_for_timeout(3_000)
         return True
+
     except Exception as e:
         log(f"Sidebar nav error: {e}")
+        try:
+            await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
+        except Exception:
+            pass
         return False
 
 
