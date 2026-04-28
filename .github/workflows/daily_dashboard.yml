@@ -67,6 +67,16 @@ jobs:
           printf '%s' "$SCG_OAUTH_CLIENT_JSON"        > secrets/scg_oauth_client.json
           printf '%s' "$SCG_GMAIL_REFRESH_TOKEN_JSON" > secrets/scg_refresh_token.json
 
+      # ── 4d0. Generate daily Outlook email debrief from Gmail ─────────────
+      # Reads fg2065 emails forwarded to bob.cline2000@gmail.com (last 28h),
+      # generates a structured brief, and sends it to fg2065@estep-co.com.
+      # No browser required — runs headlessly using saved Gmail OAuth token.
+      # On failure: writes to data/debug-log.txt only (no Chrome needed).
+      - name: Generate daily email debrief (fg2065 → Gmail → brief)
+        if: env.PARBRINK_SKIP != '1'
+        continue-on-error: true
+        run: python scraper/read_outlook_via_gmail.py
+
       # ── 4d. Pull yesterday's Par Brink reports email + attachments ────────
       # Source of truth for sales / labor / discounts. Runs BEFORE CrunchTime
       # so wire_dashboard.py can prefer Par Brink data over scraped CT data.
@@ -218,7 +228,7 @@ jobs:
           # Stage dashboard + JSON snapshots. data/raw/parbrink/ JSONs are
           # critical history for aggregate_periods.py — without committing them,
           # every run starts with empty rollup history.
-          git add dashboard.html data/latest.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cm_results_source.html data/cm_page_text.txt || true
+          git add dashboard.html data/latest.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cm_results_source.html data/cm_page_text.txt data/daily-brief/ || true
           git add data/raw/parbrink/ data/raw/crunchtime/ data/raw/compliancemate/ data/raw/marketforce/ || true
 
           if git diff --cached --quiet; then
