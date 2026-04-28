@@ -100,37 +100,74 @@ def save_emailed(store_id: str, emailed: set[str]) -> None:
 async def _navigate_to_time_detail(page) -> bool:
     """
     Sidebar nav: Labor → Reports → Consolidated Employee Time Detail.
-    "Labor" and "Reports" use exact match; the report name uses partial
-    match (contains "consolidated" + "time") to handle sidebar truncation.
+    Uses ces-selenium-id="menuitem_laborMenu" (reliable) for the Labor icon,
+    then text-based search for the sub-menu items.
+    Dismisses the Daily News modal that appears post-login.
     Never navigates via index.ct hash URLs (those log out the modern.ct session).
     """
     try:
-        # Exact-match clicks for the top two levels
-        for label in ("Labor", "Reports"):
-            clicked = await page.evaluate(f"""
-                () => {{
-                    const candidates = [...document.querySelectorAll('*')].filter(el =>
-                        el.children.length === 0 &&
-                        (el.innerText || '').trim().toLowerCase() === {json.dumps(label.lower())}
-                    );
-                    if (candidates.length) {{ candidates[0].click(); return true; }}
-                    return false;
-                }}
-            """)
-            if not clicked:
-                log(f"Could not find sidebar item: '{label}'")
-                return False
-            await page.wait_for_timeout(1_500)
+        # Dismiss Daily News or any other modal dialog that appears post-login
+        await page.keyboard.press("Escape")
+        await page.wait_for_timeout(500)
+        await page.evaluate("""
+            () => {
+                // Click any visible x-dialogtool (modal close button)
+                const closeBtn = document.querySelector('.x-dialogtool, .x-paneltool[data-componentid]');
+                if (closeBtn) closeBtn.click();
+            }
+        """)
+        await page.wait_for_timeout(500)
 
-        # Save sidebar state for debugging if report link search fails
+        # Step 1: Click the Labor sidebar icon via its ces-selenium-id
+        clicked = await page.evaluate("""
+            () => {
+                const el = document.querySelector('[ces-selenium-id="menuitem_laborMenu"]');
+                if (el) { el.click(); return true; }
+                return false;
+            }
+        """)
+        if not clicked:
+            # Fallback: text-based search for "Labor"
+            clicked = await page.evaluate("""
+                () => {
+                    const all = [...document.querySelectorAll('*')].filter(el =>
+                        el.children.length === 0 &&
+                        (el.innerText || '').trim().toLowerCase() === 'labor'
+                    );
+                    if (all.length) { all[0].click(); return true; }
+                    return false;
+                }
+            """)
+        if not clicked:
+            log("Could not find Labor sidebar item")
+            return False
+        log("Clicked Labor sidebar item")
+        await page.wait_for_timeout(2_000)
+
+        # Step 2: Click "Reports" from the Labor sub-menu
+        clicked = await page.evaluate("""
+            () => {
+                const all = [...document.querySelectorAll('*')].filter(el =>
+                    el.children.length === 0 &&
+                    (el.innerText || '').trim().toLowerCase() === 'reports'
+                );
+                if (all.length) { all[0].click(); return true; }
+                return false;
+            }
+        """)
+        if not clicked:
+            log("Could not find Reports submenu under Labor")
+            return False
+        log("Clicked Reports submenu")
+        await page.wait_for_timeout(2_000)
+
+        # Save screenshot for debugging before searching for the report link
         try:
             await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
         except Exception:
             pass
 
-        # Partial match for the report — sidebar may have child icon spans so
-        # don't require leaf-only; pick the shortest matching text element.
-        await page.wait_for_timeout(1_000)
+        # Step 3: Click Consolidated Employee Time Detail (partial match, shortest text wins)
         clicked = await page.evaluate("""
             () => {
                 const all = [...document.querySelectorAll('*')];
@@ -139,7 +176,6 @@ async def _navigate_to_time_detail(page) -> bool:
                     return txt.includes('consolidated') && txt.includes('time') && txt.length < 120;
                 });
                 if (!candidates.length) return null;
-                // Prefer the shortest text (most specific element)
                 candidates.sort((a, b) =>
                     (a.innerText || a.textContent || '').length -
                     (b.innerText || b.textContent || '').length
