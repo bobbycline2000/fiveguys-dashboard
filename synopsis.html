@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estep &amp; Co — Weekly Synopsis</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, sans-serif; background:#0a0a0a; color:#fff; }
+
+/* ── HEADER ── */
+.checker-bar {
+  background-color: #DA291C;
+  background-image: repeating-linear-gradient(45deg,rgba(255,255,255,0.1) 0px,rgba(255,255,255,0.1) 14px,transparent 14px,transparent 28px);
+  padding:16px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:4px solid #fff; gap:12px;
+}
+.logo-group { display:flex; align-items:center; gap:12px; min-width:0; }
+.fg-logo {
+  width:52px; height:52px; background:#fff; border-radius:50%;
+  border:3px solid rgba(255,255,255,0.4); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:900; font-size:10px; color:#DA291C; text-align:center; line-height:1.2;
+}
+.brand h1 { font-size:16px; font-weight:900; color:#fff; text-transform:uppercase; letter-spacing:0.5px; }
+.brand p  { font-size:10px; color:rgba(255,255,255,0.8); margin-top:2px; letter-spacing:1px; text-transform:uppercase; }
+.hdr-right { text-align:right; flex-shrink:0; }
+.hdr-right .week { font-size:18px; font-weight:900; color:#fff; }
+.hdr-right .sub  { font-size:10px; color:rgba(255,255,255,0.75); margin-top:2px; letter-spacing:0.5px; }
+.auto-pill {
+  display:inline-flex; align-items:center; gap:5px;
+  background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.2);
+  padding:3px 10px; border-radius:20px;
+  font-size:9px; color:rgba(255,255,255,0.9); letter-spacing:1px; margin-top:5px;
+}
+.pulse { width:6px; height:6px; border-radius:50%; background:#4ade80; animation:p 2s infinite; }
+@keyframes p{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* ── TABS ── */
+.tabs {
+  background:#111; border-bottom:3px solid #DA291C;
+  display:flex; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  padding:0 16px; scrollbar-width:none;
+}
+.tabs::-webkit-scrollbar { display:none; }
+.tab-btn {
+  padding:12px 22px; font-size:11px; font-weight:800;
+  letter-spacing:1px; text-transform:uppercase;
+  cursor:pointer; color:#555; white-space:nowrap;
+  border:none; background:none;
+  border-bottom:3px solid transparent; margin-bottom:-3px; flex-shrink:0;
+}
+.tab-btn.active { color:#fff; border-bottom-color:#DA291C; background:rgba(218,41,28,0.1); }
+.tab-btn:hover:not(.active) { color:#aaa; }
+
+/* ── GOALS BAND ── */
+.goals-band {
+  background:#0f0f0f; border-bottom:2px solid #222;
+  padding:10px 16px; display:flex; align-items:flex-start; gap:0;
+}
+.goals-label {
+  font-size:9px; font-weight:900; letter-spacing:2px; text-transform:uppercase;
+  color:#DA291C; padding-right:14px; border-right:1px solid #2a2a2a;
+  margin-right:14px; white-space:nowrap; padding-top:1px; flex-shrink:0;
+}
+.goals-cols { display:flex; flex-wrap:wrap; gap:3px 14px; }
+.gc { font-size:10px; color:#666; }
+.gc strong { color:#fff; }
+
+/* ── DISTRICT SECTIONS ── */
+.district { display:none; padding:14px 16px 24px; }
+.district.active { display:block; }
+
+.dist-header {
+  background:#DA291C;
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.05) 0px,rgba(255,255,255,0.05) 2px,transparent 2px,transparent 20px);
+  padding:10px 16px; border-radius:8px 8px 0 0;
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+}
+.dist-header h2 { font-size:13px; font-weight:900; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+.dist-header .dm { font-size:10px; color:rgba(255,255,255,0.7); margin-top:2px; }
+.store-badge { background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.25); color:#fff; padding:3px 10px; border-radius:4px; font-size:9px; font-weight:800; letter-spacing:1px; flex-shrink:0; }
+
+/* ── TABLE ── */
+.table-wrap { background:#111; border-radius:0 0 8px 8px; overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid #1e1e1e; border-top:none; }
+table { width:100%; border-collapse:collapse; min-width:480px; }
+
+thead tr.snames th {
+  background:#1a1a1a; color:#fff;
+  font-size:13px; font-weight:900;
+  padding:11px 12px; text-align:center;
+  border-right:1px solid #2a2a2a; letter-spacing:0.5px;
+}
+thead tr.snames th:first-child { text-align:left; width:200px; background:#111; color:#555; font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
+thead tr.snames th.you   { background:#6b2d00; color:#fbbf24; }
+thead tr.snames th.tot   { background:#0d0d0d; color:#666; font-size:10px; letter-spacing:1px; }
+thead tr.goals-row th {
+  background:#0d0d0d; padding:5px 12px; text-align:center;
+  font-size:9px; font-weight:700; color:#DA291C; font-style:italic;
+  border-right:1px solid #1a1a1a; border-bottom:2px solid #DA291C; letter-spacing:0.3px;
+}
+thead tr.goals-row th:first-child { text-align:left; color:#444; font-size:9px; letter-spacing:2px; text-transform:uppercase; font-style:normal; }
+
+tr.sec td {
+  background:#DA291C; color:#fff;
+  font-size:9px; font-weight:900; letter-spacing:2px; text-transform:uppercase;
+  padding:5px 12px;
+}
+tr.dr td {
+  padding:9px 12px; text-align:center; font-size:12px; font-weight:700; color:#bbb;
+  border-bottom:1px solid #1a1a1a; border-right:1px solid #1a1a1a;
+}
+tr.dr td:first-child { text-align:left; font-size:11px; font-weight:700; color:#777; background:#0d0d0d; border-right:2px solid #222; }
+tr.dr:hover td { background:#161616; }
+tr.dr:hover td:first-child { background:#111; }
+
+.g  { background:#052e16 !important; color:#4ade80 !important; }
+.r  { background:#2d0a0a !important; color:#f87171 !important; }
+.y  { background:#2d1f00 !important; color:#fbbf24 !important; }
+.na { color:#2a2a2a !important; }
+
+tr.hlth td {
+  background:#0a0a0a; padding:9px 12px; text-align:center;
+  font-size:10px; font-weight:900; letter-spacing:1px; text-transform:uppercase;
+  border-right:1px solid #1e1e1e; border-top:2px solid #2a2a2a;
+}
+tr.hlth td:first-child { text-align:left; color:#333; font-size:9px; letter-spacing:2px; }
+tr.hlth td.g { background:#052e16 !important; color:#4ade80 !important; }
+tr.hlth td.r { background:#2d0a0a !important; color:#f87171 !important; }
+tr.hlth td.y { background:#2d1f00 !important; color:#fbbf24 !important; }
+
+/* ── ACTION PLANS ── */
+.action-section { margin-top:12px; }
+.ap-header {
+  background:#1a0a00; border:1px solid #3d1a00;
+  padding:10px 16px; border-radius:8px 8px 0 0;
+  display:flex; align-items:center; gap:8px;
+  font-size:11px; font-weight:900; letter-spacing:2px; text-transform:uppercase; color:#fbbf24;
+}
+.ap-sub { font-size:9px; color:#666; font-weight:400; letter-spacing:1px; margin-left:4px; }
+.ap-icon { font-size:14px; }
+.ap-stores { background:#0f0a00; border:1px solid #2a1500; border-top:none; border-radius:0 0 8px 8px; padding:8px; display:flex; flex-direction:column; gap:6px; }
+.ap-store { border:1px solid #2a1500; border-radius:6px; overflow:hidden; }
+.ap-toggle {
+  width:100%; text-align:left; background:#1a0f00; border:none; cursor:pointer;
+  padding:10px 14px; font-size:11px; font-weight:900; letter-spacing:1px;
+  text-transform:uppercase; color:#fbbf24; display:flex; justify-content:space-between; align-items:center;
+}
+.ap-toggle:hover { background:#221500; }
+.ap-toggle .badge { background:#DA291C; color:#fff; font-size:9px; padding:2px 8px; border-radius:10px; font-weight:800; }
+.ap-chevron { font-size:10px; color:#555; transition:transform 0.2s; }
+.ap-chevron.open { transform:rotate(180deg); }
+.ap-body { background:#0a0800; padding:10px 14px; display:flex; flex-direction:column; gap:8px; }
+.ap-week { font-size:9px; font-weight:900; letter-spacing:2px; text-transform:uppercase; color:#DA291C; margin-bottom:4px; }
+.ap-item { border-left:3px solid #DA291C; padding:8px 10px; background:#110c00; border-radius:0 4px 4px 0; }
+.ap-metric { font-size:10px; font-weight:900; letter-spacing:1px; text-transform:uppercase; color:#f87171; margin-bottom:4px; }
+.ap-action { font-size:12px; color:#ccc; line-height:1.5; }
+.ap-empty { font-size:11px; color:#4ade80; font-weight:700; letter-spacing:1px; padding:10px 14px; }
+
+/* ── FOOTER ── */
+.footer {
+  padding:10px 16px; background:#0a0a0a; border-top:1px solid #1a1a1a;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px;
+}
+.footer span { font-size:9px; color:#2a2a2a; letter-spacing:1px; text-transform:uppercase; }
+
+/* ═══════════════════════════════════
+   MOBILE — phone-first responsive
+═══════════════════════════════════ */
+@media (max-width: 640px) {
+  .checker-bar { flex-direction:column; align-items:flex-start; padding:12px 14px; gap:8px; }
+  .hdr-right { text-align:left; }
+  .hdr-right .week { font-size:15px; }
+  .brand h1 { font-size:13px; }
+  .fg-logo { width:44px; height:44px; font-size:9px; }
+
+  .goals-band { padding:8px 12px; }
+  .goals-label { font-size:8px; padding-right:10px; margin-right:10px; }
+  .gc { font-size:9px; }
+
+  .district { padding:10px 8px 20px; }
+  .dist-header { padding:8px 10px; }
+  .dist-header h2 { font-size:11px; }
+  .dist-header .dm { font-size:9px; }
+
+  thead tr.snames th { font-size:11px; padding:9px 8px; }
+  thead tr.snames th:first-child { width:130px; font-size:8px; }
+  tr.dr td { padding:8px 8px; font-size:11px; }
+  tr.dr td:first-child { font-size:10px; }
+  tr.sec td { font-size:8px; padding:4px 10px; }
+  tr.hlth td { font-size:9px; padding:8px 8px; }
+
+  .ap-toggle { font-size:10px; padding:9px 10px; }
+  .ap-action { font-size:11px; }
+  .footer { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="checker-bar">
+  <div class="logo-group">
+    <div class="fg-logo">FIVE<br>GUYS</div>
+    <div class="brand">
+      <h1>Estep &amp; Co — Weekly Operations Synopsis</h1>
+      <p>737 Ventures &amp; CFG Markets &nbsp;·&nbsp; 11 Locations &nbsp;·&nbsp; 3 Districts</p>
+    </div>
+  </div>
+  <div class="hdr-right">
+    <div class="week">April 20 – 26, 2026</div>
+    <div class="sub">Monday 3:00 PM Review &nbsp;·&nbsp; JP Estep &amp; Brad Davis</div>
+    <div><span class="auto-pill"><span class="pulse"></span> AUTO-GENERATED 6:00 AM ET</span></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('cfg',this)">CFG Market</button>
+  <button class="tab-btn" onclick="showTab('west',this)">737 West</button>
+  <button class="tab-btn" onclick="showTab('east',this)">737 East</button>
+</div>
+
+<div class="goals-band">
+  <div class="goals-label">Goals</div>
+  <div class="goals-cols">
+    <div class="gc">Variance <strong>≤ 1.0%</strong></div>
+    <div class="gc">Supplies <strong>≤ 1.5%</strong></div>
+    <div class="gc">OT Hours <strong>= ZERO</strong></div>
+    <div class="gc">Steritech <strong>≥ 97</strong></div>
+    <div class="gc">Criticals <strong>= 0</strong></div>
+    <div class="gc">Cmate <strong>= 100%</strong></div>
+    <div class="gc">Secret Shop <strong>≥ 87%</strong></div>
+    <div class="gc">FGU Overdue <strong>= 0%</strong></div>
+    <div class="gc">CSP <strong>= 0</strong></div>
+    <div class="gc" style="border-left:1px solid #333;padding-left:10px;">CFG Labor <strong>≤ 22%</strong></div>
+    <div class="gc">737 West Labor <strong>≤ 18%</strong></div>
+    <div class="gc">737 East Labor <strong>≤ 20%</strong></div>
+    <div class="gc">CFG COGS <strong>≤ 27.5%</strong></div>
+    <div class="gc">737 West COGS <strong>≤ 26.5%</strong></div>
+    <div class="gc">737 East COGS <strong>≤ 27.5%</strong></div>
+  </div>
+</div>
+
+<!-- ═══════════════ CFG ═══════════════ -->
+<div class="district active" id="cfg">
+  <div class="dist-header">
+    <div><h2>CFG Market</h2><div class="dm">DM: Andrew Campbell &nbsp;·&nbsp; Month: April &nbsp;·&nbsp; Week: 4/20–4/26</div></div>
+    <div class="store-badge">3 STORES</div>
+  </div>
+  <div class="table-wrap">
+    <table id="tbl-cfg">
+      <thead>
+        <tr class="snames">
+          <th>METRIC</th><th>FG1616</th><th>FG1910</th><th>FG1959</th><th class="tot">TOTALS</th>
+        </tr>
+        <tr class="goals-row">
+          <th>Goal</th><th>—</th><th>—</th><th>—</th><th>—</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="sec"><td colspan="5">Sales</td></tr>
+        <tr class="dr"><td>Forecast Sales</td><td>$25,150</td><td>$30,300</td><td>$35,356</td><td>$90,806</td></tr>
+        <tr class="dr"><td>Net Sales</td><td>$23,485</td><td>$29,584</td><td>$34,704</td><td>$87,773</td></tr>
+        <tr class="dr"><td>Over / Under Forecast</td><td class="r">−$1,665</td><td class="r">−$716</td><td class="r">−$652</td><td class="r">−$3,033</td></tr>
+
+        <tr class="sec"><td colspan="5">Food Cost &nbsp;·&nbsp; Goal: COGS ≤ 27.5%</td></tr>
+        <tr class="dr"><td>COGS %</td><td class="r">29.2%</td><td class="g">23.5%</td><td class="y">27.9%</td><td class="g">26.9%</td></tr>
+        <tr class="dr"><td>Variance</td><td class="na">0.45</td><td class="g">0.16</td><td class="r">1.15</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Supplies %</td><td class="g">1.0%</td><td class="g">0.9%</td><td class="g">—</td><td class="g">0.6%</td></tr>
+        <tr class="dr"><td>Total (COGS + Supplies)</td><td class="r">30.3%</td><td class="g">24.4%</td><td class="g">27.6%</td><td class="g">27.4%</td></tr>
+        <tr class="dr"><td>QTD COGS %</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="g">—</td></tr>
+
+        <tr class="sec"><td colspan="5">Labor &nbsp;·&nbsp; Goal: ≤ 22%</td></tr>
+        <tr class="dr"><td>Hourly Labor %</td><td class="r">25.9%</td><td class="g">18.7%</td><td class="g">18.6%</td><td class="g">21.1%</td></tr>
+        <tr class="dr"><td>OT Hours</td><td class="r">11.55</td><td class="g">2.85</td><td class="g">1.18</td><td class="r">15.58</td></tr>
+        <tr class="dr"><td>Labor All-In w/ Tax</td><td class="r">32.0%</td><td class="g">24.3%</td><td class="g">20.9%</td><td class="y">27.0%</td></tr>
+        <tr class="dr"><td>COGS + Labor All-In</td><td class="r">62.3%</td><td class="g">48.7%</td><td class="g">48.6%</td><td class="g">53.2%</td></tr>
+        <tr class="dr"><td>QTD Labor %</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Tips $</td><td>$692.50</td><td>$1,029.99</td><td>$937.10</td><td>$2,659.59</td></tr>
+
+        <tr class="sec"><td colspan="5">Food Safety</td></tr>
+        <tr class="dr"><td>Steritech Score</td><td class="y">99% (Q1)</td><td class="r">92% (Q1)</td><td class="r">93% (Q2)</td><td class="r">93%</td></tr>
+        <tr class="dr"><td>Steritech Criticals</td><td class="g">0</td><td class="r">1</td><td class="r">2</td><td class="r">1</td></tr>
+
+        <tr class="sec"><td colspan="5">Compliance</td></tr>
+        <tr class="dr"><td>Cmate Completion %</td><td class="y">99.9%</td><td class="y">98.1%</td><td class="y">97.7%</td><td class="y">98.6%</td></tr>
+        <tr class="dr"><td>Short Completions</td><td class="g">0</td><td class="g">0</td><td class="g">0</td><td class="g">0</td></tr>
+        <tr class="dr"><td>Milkshake Pics</td><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td></tr>
+        <tr class="dr"><td>Midshift Checklist %</td><td class="r">81.6%</td><td class="r">0%</td><td class="r">0%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>AM–PM Checklist %</td><td class="r">64%</td><td class="r">42%</td><td class="r">67%</td><td class="na">—</td></tr>
+
+        <tr class="sec"><td colspan="5">Guest Experience</td></tr>
+        <tr class="dr"><td>Secret Shop — This Week</td><td class="na">—</td><td class="g">100%</td><td class="r">19%</td><td class="g">83.6%</td></tr>
+        <tr class="dr"><td>Secret Shop — QTD</td><td class="r">77.8%</td><td class="r">70.5%</td><td class="r">71.5%</td><td class="r">76.9%</td></tr>
+        <tr class="dr"><td>Secret Shop — Prev Quarter</td><td class="r">82.5%</td><td class="r">74.8%</td><td class="r">75.0%</td><td class="r">76.96%</td></tr>
+        <tr class="dr"><td>FGU Overdue Rate</td><td class="r">12%</td><td class="r">30%</td><td class="g">0%</td><td class="r">42%</td></tr>
+        <tr class="dr"><td>CSP</td><td class="g">0</td><td class="g">0</td><td class="r">3</td><td class="r">3</td></tr>
+
+        <tr class="hlth">
+          <td>Store Health</td>
+          <td class="r">NEEDS WORK</td>
+          <td class="y">MIXED</td>
+          <td class="y">MIXED</td>
+          <td class="na">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="action-section" id="ap-cfg"></div>
+</div>
+
+<!-- ═══════════════ 737 WEST ═══════════════ -->
+<div class="district" id="west">
+  <div class="dist-header">
+    <div><h2>737 West Market</h2><div class="dm">DM: Crystal Hess &nbsp;·&nbsp; Month: April &nbsp;·&nbsp; Week: 4/20–4/26</div></div>
+    <div class="store-badge">4 STORES</div>
+  </div>
+  <div class="table-wrap">
+    <table id="tbl-west">
+      <thead>
+        <tr class="snames">
+          <th>METRIC</th><th>FG384</th><th>FG1954</th><th class="you">FG2065</th><th>FG2079</th><th class="tot">TOTALS</th>
+        </tr>
+        <tr class="goals-row">
+          <th>Goal</th><th>—</th><th>—</th><th>—</th><th>—</th><th>—</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="sec"><td colspan="6">Sales</td></tr>
+        <tr class="dr"><td>Forecast Sales</td><td>$29,800</td><td>$32,587</td><td>$30,497</td><td>$26,672</td><td>$119,556</td></tr>
+        <tr class="dr"><td>Net Sales</td><td>$28,746</td><td>$33,513</td><td>$30,344</td><td>$25,393</td><td>$117,996</td></tr>
+        <tr class="dr"><td>Over / Under Forecast</td><td class="r">−$1,054</td><td class="r">−$926</td><td class="r">−$156</td><td class="r">−$1,279</td><td class="r">−$3,415</td></tr>
+
+        <tr class="sec"><td colspan="6">Food Cost &nbsp;·&nbsp; Goal: COGS ≤ 26.5%</td></tr>
+        <tr class="dr"><td>COGS %</td><td class="r">28.5%</td><td class="r">28.0%</td><td class="r">27.6%</td><td class="r">28.4%</td><td class="r">28.0%</td></tr>
+        <tr class="dr"><td>Variance %</td><td class="r">−1.19%</td><td class="r">−1.36%</td><td class="r">−0.80%</td><td class="r">−0.26%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Supplies %</td><td class="g">1.3%</td><td class="g">1.0%</td><td class="g">0.9%</td><td class="r">3.4%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Total (COGS + Supplies)</td><td class="r">29.8%</td><td class="r">29.0%</td><td class="r">28.5%</td><td class="r">31.8%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>QTD COGS %</td><td class="r">29.8%</td><td class="r">29.4%</td><td class="r">31.5%</td><td class="r">25.4%</td><td class="na">—</td></tr>
+
+        <tr class="sec"><td colspan="6">Labor &nbsp;·&nbsp; Goal: ≤ 18%</td></tr>
+        <tr class="dr"><td>Hourly Labor %</td><td class="r">19.2%</td><td class="g">16.5%</td><td class="r">21.1%</td><td class="r">24.7%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>OT Hours</td><td class="y">3.76</td><td class="g">0</td><td class="r">12.34</td><td class="r">21.12</td><td class="r">37.22</td></tr>
+        <tr class="dr"><td>Labor All-In w/ Tax</td><td class="r">25.6%</td><td class="r">21.7%</td><td class="r">23.4%</td><td class="r">31.3%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>COGS + Labor All-In</td><td class="r">55.4%</td><td class="r">50.7%</td><td class="r">51.9%</td><td class="r">63.1%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>QTD Labor %</td><td class="r">27.2%</td><td class="r">24.1%</td><td class="r">25.0%</td><td class="r">33.6%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Tips $</td><td>$1,041.56</td><td>$1,133.88</td><td>$693.50</td><td>$774.94</td><td>$3,643.88</td></tr>
+
+        <tr class="sec"><td colspan="6">Food Safety</td></tr>
+        <tr class="dr"><td>Steritech Score</td><td class="na">—</td><td class="g">97%</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Steritech Criticals</td><td class="na">—</td><td class="g">0</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+
+        <tr class="sec"><td colspan="6">Compliance</td></tr>
+        <tr class="dr"><td>Cmate Completion %</td><td class="y">97.7%</td><td class="y">98.4%</td><td class="y">98.4%</td><td class="y">97.5%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Short Completions</td><td class="g">0</td><td class="g">0</td><td class="g">0</td><td class="g">0</td><td class="g">0</td></tr>
+        <tr class="dr"><td>Milkshake Pics</td><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td></tr>
+        <tr class="dr"><td>AM–PM Checklist %</td><td class="r">78.6%</td><td class="r">28.6%</td><td class="r">71.4%</td><td class="r">85.7%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Shift Change %</td><td class="r">85.7%</td><td class="r">0%</td><td class="y">92.9%</td><td class="r">71.4%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Pump Completion</td><td class="r">0%</td><td class="g">100%</td><td class="g">100%</td><td class="r">0%</td><td class="na">—</td></tr>
+
+        <tr class="sec"><td colspan="6">Guest Experience</td></tr>
+        <tr class="dr"><td>Secret Shop — MTD (April)</td><td class="r">73.3%</td><td class="r">71.0%</td><td class="r">81.5%</td><td class="r">83.5%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Secret Shop — QTD</td><td class="r">73.3%</td><td class="r">71.0%</td><td class="r">81.5%</td><td class="r">83.5%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>Secret Shop — Q1 (Prev Qtr)</td><td class="g">80.1%</td><td class="r">68.1%</td><td class="r">81.4%</td><td class="g">91.9%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>FGU Overdue Rate</td><td class="r">13%</td><td class="g">0%</td><td class="r">20%</td><td class="r">7%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>CSP</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+
+        <tr class="hlth">
+          <td>Store Health</td>
+          <td class="r">NEEDS WORK</td>
+          <td class="y">MIXED</td>
+          <td class="r">NEEDS WORK</td>
+          <td class="r">NEEDS WORK</td>
+          <td class="na">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="action-section" id="ap-west"></div>
+</div>
+
+<!-- ═══════════════ 737 EAST ═══════════════ -->
+<div class="district" id="east">
+  <div class="dist-header">
+    <div><h2>737 East Market</h2><div class="dm">DM: Sam Biery &nbsp;·&nbsp; Month: April &nbsp;·&nbsp; Week: 4/20–4/26</div></div>
+    <div class="store-badge">4 STORES</div>
+  </div>
+  <div class="table-wrap">
+    <table id="tbl-east">
+      <thead>
+        <tr class="snames">
+          <th>METRIC</th><th>FG475</th><th>FG1704</th><th>FG1731</th><th>FG1788</th><th class="tot">TOTALS</th>
+        </tr>
+        <tr class="goals-row">
+          <th>Goal</th><th>—</th><th>—</th><th>—</th><th>—</th><th>—</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="sec"><td colspan="6">Sales</td></tr>
+        <tr class="dr"><td>Forecast Sales</td><td>$39,738</td><td>$38,713</td><td>$29,425</td><td>$29,722</td><td>$137,598</td></tr>
+        <tr class="dr"><td>Net Sales</td><td>$38,189</td><td>$37,380</td><td>$29,036</td><td>$28,097</td><td>$132,702</td></tr>
+        <tr class="dr"><td>Over / Under Forecast</td><td class="g">+$1,549</td><td class="g">+$1,333</td><td class="g">+$389</td><td class="g">+$1,625</td><td class="r">−$4,896</td></tr>
+
+        <tr class="sec"><td colspan="6">Food Cost &nbsp;·&nbsp; Goal: COGS ≤ 27.5%</td></tr>
+        <tr class="dr"><td>COGS %</td><td class="g">26.6%</td><td class="g">27.0%</td><td class="r">28.8%</td><td class="r">28.2%</td><td class="g">27.6%</td></tr>
+        <tr class="dr"><td>Variance %</td><td class="g">0.45%</td><td class="g">0.42%</td><td class="g">0.33%</td><td class="r">1.43%</td><td class="g">0.66%</td></tr>
+        <tr class="dr"><td>Supplies %</td><td class="g">1.1%</td><td class="y">1.6%</td><td class="g">1.4%</td><td class="g">1.3%</td><td class="g">1.4%</td></tr>
+        <tr class="dr"><td>Total COGS + Supplies</td><td class="g">27.6%</td><td class="r">28.6%</td><td class="r">30.2%</td><td class="r">29.5%</td><td class="r">29.0%</td></tr>
+
+        <tr class="sec"><td colspan="6">Labor &nbsp;·&nbsp; Goal: ≤ 20%</td></tr>
+        <tr class="dr"><td>Hourly Labor %</td><td class="g">17.9%</td><td class="g">18.9%</td><td class="r">22.1%</td><td class="g">18.6%</td><td class="g">19.4%</td></tr>
+        <tr class="dr"><td>OT Hours</td><td class="g">1.33</td><td class="r">7.07</td><td class="r">8.78</td><td class="g">0</td><td class="r">17.18</td></tr>
+        <tr class="dr"><td>Labor All-In w/ Tax</td><td class="g">25.8%</td><td class="g">24.0%</td><td class="g">24.5%</td><td class="g">25.5%</td><td class="g">24.9%</td></tr>
+        <tr class="dr"><td>COGS + Labor All-In</td><td class="g">53.4%</td><td class="g">52.5%</td><td class="r">54.7%</td><td class="r">54.9%</td><td class="g">53.9%</td></tr>
+        <tr class="dr"><td>Tips $</td><td>$1,797.37</td><td>$1,646.32</td><td>$826.90</td><td>$1,176.20</td><td class="na">—</td></tr>
+
+        <tr class="sec"><td colspan="6">Food Safety</td></tr>
+        <tr class="dr"><td>Steritech Score</td><td class="g">100%</td><td class="r">94%</td><td class="g">100%</td><td class="g">97%</td><td class="y">97.8%</td></tr>
+        <tr class="dr"><td>Steritech Criticals</td><td class="g">0</td><td class="r">1</td><td class="g">0</td><td class="g">0</td><td class="na">0.25 avg</td></tr>
+
+        <tr class="sec"><td colspan="6">Compliance</td></tr>
+        <tr class="dr"><td>Cmate Completion %</td><td class="g">100%</td><td class="g">100%</td><td class="g">100%</td><td class="g">100%</td><td class="g">100%</td></tr>
+        <tr class="dr"><td>Short Completions</td><td class="g">0</td><td class="g">0</td><td class="g">0</td><td class="g">0</td><td class="g">0</td></tr>
+        <tr class="dr"><td>Milkshake Pics</td><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td></tr>
+        <tr class="dr"><td>Shift Change Checklist %</td><td class="r">87%</td><td class="g">100%</td><td class="g">100%</td><td class="r">87%</td><td class="y">93.5%</td></tr>
+        <tr class="dr"><td>AM–PM Checklist %</td><td class="y">92%</td><td class="y">92%</td><td class="g">100%</td><td class="g">100%</td><td class="y">96%</td></tr>
+        <tr class="dr"><td>Pump Completion</td><td class="g">100%</td><td class="g">100%</td><td class="g">100%</td><td class="g">100%</td><td class="g">100%</td></tr>
+
+        <tr class="sec"><td colspan="6">Guest Experience</td></tr>
+        <tr class="dr"><td>Secret Shop — MTD</td><td class="g">95%</td><td class="y">84%</td><td class="y">88.8%</td><td class="g">93%</td><td class="g">90.2%</td></tr>
+        <tr class="dr"><td>Secret Shop — QTD</td><td class="g">95%</td><td class="y">84%</td><td class="y">88.8%</td><td class="g">93%</td><td class="g">90.2%</td></tr>
+        <tr class="dr"><td>Secret Shop — Prev Quarter</td><td class="r">85.3%</td><td class="r">86.4%</td><td class="g">98.5%</td><td class="r">80.9%</td><td class="r">87.8%</td></tr>
+        <tr class="dr"><td>FGU Overdue Rate</td><td class="g">0%</td><td class="g">0%</td><td class="r">16%</td><td class="r">4%</td><td class="na">—</td></tr>
+        <tr class="dr"><td>FGU Overdue Names</td><td class="na">—</td><td class="na">—</td><td class="r">Roary Nau</td><td class="y">Destiny Tiggs</td><td class="na">—</td></tr>
+        <tr class="dr"><td>CSP</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+
+        <tr class="hlth">
+          <td>Store Health</td>
+          <td class="g">STRONG</td>
+          <td class="y">MIXED</td>
+          <td class="r">NEEDS WORK</td>
+          <td class="y">MIXED</td>
+          <td class="na">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="action-section" id="ap-east"></div>
+</div>
+
+<div class="footer">
+  <span>ESTEP &amp; CO &nbsp;·&nbsp; FIVE GUYS FRANCHISE &nbsp;·&nbsp; CONFIDENTIAL &nbsp;·&nbsp; WE 04/26/2026</span>
+  <span>MONDAY 3:00 PM REVIEW &nbsp;·&nbsp; JP ESTEP &amp; BRAD DAVIS</span>
+</div>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.district').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleAP(btn){
+  const body = btn.nextElementSibling;
+  const chevron = btn.querySelector('.ap-chevron');
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  if(chevron) chevron.classList.toggle('open', !open);
+}
+
+const actionMap = [
+  { keys:['COGS %','COGS%'],      text:'Conduct a waste audit this week. Verify portioning with the fry guide and beef scale. Pull a mid-week COGS check on Wednesday to catch the trend early.' },
+  { keys:['QTD COGS'],            text:'Quarter-to-date COGS is above goal — this is a trend issue, not a one-week spike. Review the top 3 waste contributors with your team daily in pre-shift this week.' },
+  { keys:['Variance'],            text:'Negative variance means product is leaving without a sale. Complete a full inventory count mid-week. Check cooler temps 2×/day and audit portioning at peak times.' },
+  { keys:['Supplies'],            text:'Supplies cost is over 1.5%. Audit par levels, lock the supply room between uses, and reconcile purchases against actual usage this week.' },
+  { keys:['Total (COGS','Total COGS'], text:'Both food cost and supplies are over goal simultaneously. Run a combined cost-reduction meeting with all managers before Wednesday.' },
+  { keys:['Hourly Labor'],        text:'Labor % is over goal. Build your schedule to budget using the daily forecast. Calculate hours allowed per day before posting — no add-on shifts without GM approval.' },
+  { keys:['OT Hours'],            text:'ZERO overtime target this week — no exceptions. Review the schedule Sunday before posting and split any employee approaching 40 hours immediately.' },
+  { keys:['QTD Labor'],           text:'Labor trend is above goal for the quarter. Implement a daily hours-used vs. hours-allowed tracker and share it with every manager.' },
+  { keys:['Labor All-In'],        text:'All-in labor (with tax and benefits) is over goal. Review salaried manager hours distribution and ensure all punches are accurate.' },
+  { keys:['COGS + Labor'],        text:'Prime cost (food + labor combined) is critically high. Both buckets need attention this week — treat this as a 5-alarm issue for the Monday debrief.' },
+  { keys:['Over / Under'],        text:'Sales came in below forecast. Review your top-line forecast accuracy, run a gap analysis on transaction count vs. ticket average, and look at speed of service times.' },
+  { keys:['Steritech Score'],     text:'Conduct a self-audit using the Steritech checklist before the next visit. Focus on the specific failure areas from the last report: temps, sanitizer concentration, handwashing compliance.' },
+  { keys:['Steritech Criticals'], text:'A critical violation requires immediate documented corrective action. Review the report with ALL managers this week. Re-audit internally within 72 hours and document completion.' },
+  { keys:['Cmate Completion'],    text:'Assign a named manager owner for each Cmate task. Review incomplete items in every pre-shift. 100% is the only acceptable score — this is non-negotiable.' },
+  { keys:['Midshift Checklist'],  text:'Assign the midshift checklist to the mid manager as a hard close requirement. Spot-check completion at 2 PM and 5 PM daily.' },
+  { keys:['AM–PM Checklist','AM-PM Checklist'], text:'Post the AM/PM checklist at the manager station. Opening and closing managers must sign off before they leave — no exceptions.' },
+  { keys:['Shift Change'],        text:'Conduct a 5-minute walkthrough at every shift handoff. Verbal acknowledgment is not sufficient — the checklist must be completed and signed each time.' },
+  { keys:['Pump Completion'],     text:'The pump checklist must be completed before opening. Assign the opening crew lead full accountability. GM verifies on arrival.' },
+  { keys:['Secret Shop'],         text:'Review the full secret shop scoring rubric with your crew this week. Role-play the entire order process — speed, accuracy, hospitality, and table touches. Identify the exact point of failure from the last report.' },
+  { keys:['FGU Overdue'],         text:'Set a firm 48-hour deadline for all overdue FGU training. Assign a dedicated training partner to each overdue employee. GM confirms individual completion.' },
+  { keys:['CSP'],                 text:'A CSP is a formal guest complaint — review it in full detail with your management team. Identify root cause, confirm corrective action was communicated, and document for Brad.' },
+];
+
+function getAction(metric){
+  for(const entry of actionMap){
+    if(entry.keys.some(k => metric.includes(k))) return entry.text;
+  }
+  return 'Review this metric with your management team and develop a written corrective action plan by Wednesday — report progress to your DM.';
+}
+
+function buildActionPlans(tableId, apContainerId){
+  const table = document.getElementById(tableId);
+  const container = document.getElementById(apContainerId);
+  if(!table || !container) return;
+
+  const storeHeaders = table.querySelectorAll('thead tr.snames th');
+  const dataRows = table.querySelectorAll('tbody tr.dr');
+
+  // Build per-store red metric list (skip col 0 = metric name, skip last col = totals)
+  const storeCount = storeHeaders.length - 2; // exclude first and last
+  const storeData = [];
+  for(let s=0; s<storeCount; s++){
+    storeData.push({ name: storeHeaders[s+1].textContent.trim(), metrics:[] });
+  }
+
+  dataRows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    const metricName = cells[0] ? cells[0].textContent.trim() : '';
+    for(let s=0; s<storeCount; s++){
+      const cell = cells[s+1];
+      if(cell && cell.classList.contains('r')){
+        storeData[s].metrics.push(metricName);
+      }
+    }
+  });
+
+  const hasIssues = storeData.some(s => s.metrics.length > 0);
+  if(!hasIssues){
+    container.innerHTML = '';
+    return;
+  }
+
+  let html = `<div class="ap-header"><span class="ap-icon">📋</span> WEEK ACTION PLANS <span class="ap-sub">Auto-generated · Week of 4/27/2026</span></div><div class="ap-stores">`;
+
+  storeData.forEach(store => {
+    if(store.metrics.length === 0) return;
+    const id = 'ap-' + store.name.replace(/\W/g,'');
+    html += `<div class="ap-store">
+      <button class="ap-toggle" onclick="toggleAP(this)">
+        <span>${store.name} &nbsp;—&nbsp; <span class="badge">${store.metrics.length} Red Item${store.metrics.length>1?'s':''}</span></span>
+        <span class="ap-chevron">▼</span>
+      </button>
+      <div class="ap-body" style="display:none">
+        <div class="ap-week">📅 Action Plan — Week of April 27, 2026</div>`;
+    store.metrics.forEach(m => {
+      html += `<div class="ap-item">
+        <div class="ap-metric">🔴 ${m}</div>
+        <div class="ap-action">${getAction(m)}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// Build action plans on load
+buildActionPlans('tbl-cfg',  'ap-cfg');
+buildActionPlans('tbl-west', 'ap-west');
+buildActionPlans('tbl-east', 'ap-east');
+</script>
+</body>
+</html>
