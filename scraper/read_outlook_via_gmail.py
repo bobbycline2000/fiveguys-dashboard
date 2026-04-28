@@ -472,6 +472,163 @@ def build_secret_shop_corner() -> str:
     return "\n".join(lines)
 
 
+def build_blackberry_lto_update(today: date) -> list[str]:
+    """Blackberry LTO countdown + training reminders. Active until end date."""
+    launch = date(2026, 5, 25)
+    fgu_due = date(2026, 5, 15)
+    pos_active = date(2026, 5, 18)
+    force_ship_start = date(2026, 5, 4)
+    force_ship_end = date(2026, 5, 15)
+    end_date = date(2026, 8, 16)
+
+    if today > end_date:
+        return []
+
+    lines: list[str] = []
+    lines.append("**🫐 Blackberry LTO — In-Store Prep**")
+    days_to_launch = (launch - today).days
+    days_to_fgu = (fgu_due - today).days
+    days_to_pos = (pos_active - today).days
+
+    if today < launch:
+        lines.append(f"- **Launch in {days_to_launch} days** (May 25, 2026). Online ordering activates same day.")
+    else:
+        days_since = (today - launch).days
+        days_remaining = (end_date - today).days
+        lines.append(f"- LTO is **LIVE** (launched {days_since} days ago). Ends Aug 16 ({days_remaining} days remaining).")
+
+    if today < fgu_due:
+        urgency = "🔴 OVERDUE prep" if days_to_fgu <= 7 else "🟡 do this week"
+        lines.append(f"- **FGU course due May 15** ({days_to_fgu} days) — {urgency}. Every shift lead + GM completes.")
+    if today < pos_active:
+        lines.append(f"- POS activation **May 18** ({days_to_pos} days). Verify menu button placement same day.")
+    if today < force_ship_end and today >= force_ship_start - timedelta(days=3):
+        lines.append(f"- Product force-shipping **May 4–15**. Two cases per store. Storage prep: clear space at fountainside, beside banana marinade. Shelf life of in-use syrup is **7 days**.")
+    elif today < force_ship_start:
+        days_to_ship = (force_ship_start - today).days
+        lines.append(f"- Product ships starting May 4 ({days_to_ship} days). Make sure walk-in has space.")
+
+    lines.append("- Each store sets its own shake pricing — confirm the price point before launch.")
+    lines.append("- Menu board lug-on sign ships Week of May 18 (we get invoiced — expect it).")
+    return lines
+
+
+def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | None = None) -> str:
+    """Daily 5-minute shift huddle plan focused on in-store operations.
+    Anchors are constant (the fundamentals don't change), but the spotlight
+    rotates by day-of-week so the team hears emphasis on different areas
+    across the week. Pulled into every brief moving forward."""
+    # Day-of-week spotlight rotation — 0=Monday … 6=Sunday
+    dow = today.weekday()
+    spotlight_by_dow = {
+        0: ("Stainless Steel + Handwashing",
+            "Hand sinks should sparkle — wipe down stainless steel around hand sinks first thing. "
+            "Handwash procedure: 20 seconds, soap to wrists, rinse thoroughly, paper towel only. "
+            "Demo the wash for anyone unsure."),
+        1: ("Ticket Times + Guest Greeting",
+            "TICKET TIMES are huge. Register-to-window under 6 minutes, every order. "
+            "Greet at the door AND at the register — eye contact, smile, energy. "
+            "Call-back the order on hand-off. Thank every guest leaving."),
+        2: ("Dumpster Area + Garbage Cans",
+            "Walk the dumpster area before opening — doors CLOSED, area swept, no overflow. "
+            "Garbage cans inside: liners straight, lids clean, no overflow. "
+            "Lobby cans checked every 30 minutes minimum."),
+        3: ("Smiling Faces + Energy + Call-Back",
+            "Energy at the register sets the tone for the whole shift. Smile, make eye contact, "
+            "call-back the order so the guest knows you heard them. Hand-off with a thank-you."),
+        4: ("Secret Shop Review + Friday Reset",
+            "Shop scores arrive Thu/Fri. Today we review — what worked, what didn't, what changes. "
+            "Reset the lobby, hit the deep-clean items, and walk into the weekend tight."),
+        5: ("Saturday Volume + Speed",
+            "Saturday is our biggest day. Speed of service matters more than ever. "
+            "Pre-position fries, keep buns ahead of the line, second person on register at peak."),
+        6: ("Reset + Week Ahead",
+            "Sunday close = Monday's open. Deep clean wherever the week was light. "
+            "Walk-through with the closing manager — what are we starting Monday with?"),
+    }
+    spotlight_title, spotlight_body = spotlight_by_dow[dow]
+
+    lines: list[str] = []
+    lines.append("## 📋 Shift Huddle Plan — Today's 5-Minute Pre-Shift")
+    lines.append(f"*({today.strftime('%A %B %d')} — read this to the team before the shift starts.)*")
+    lines.append("")
+
+    lines.append(f"### 🎯 Today's Spotlight: {spotlight_title}")
+    lines.append("")
+    lines.append(f"> {spotlight_body}")
+    lines.append("")
+
+    lines.append("### The Fundamentals — Hit These Every Shift")
+    lines.append("")
+    lines.append("**1. Guest Experience**")
+    lines.append("- Greet at the **door** AND at the **register** — eye contact, smile, energy.")
+    lines.append("- **Call-back** every order so the guest knows you heard them.")
+    lines.append("- Thank every guest on the way out. No one walks past silent.")
+    lines.append("")
+    lines.append("**2. Ticket Times — HUGE**")
+    lines.append("- Register → window in **under 6 minutes**, every order.")
+    lines.append("- If we're slipping, second person on register, somebody bagging, somebody calling out.")
+    lines.append("- Watch the screen. Don't let an order sit.")
+    lines.append("")
+    lines.append("**3. Cleanliness (Steritech-ready every shift)**")
+    lines.append("- **Stainless steel around hand sinks** — wipe down, no streaks, no splash marks.")
+    lines.append("- **Garbage cans** — lids clean, liners straight, never overflowing.")
+    lines.append("- **Dumpster area** — doors CLOSED, area swept, no debris.")
+    lines.append("- Lobby sweep every 15 minutes during peak. Tables wiped between guests.")
+    lines.append("")
+    lines.append("**4. Handwashing**")
+    lines.append("- 20 seconds, soap to wrists, paper towel only — no shortcuts.")
+    lines.append("- After every register-to-grill transition, every break, every glove change.")
+    lines.append("- Hand sinks are for handwashing ONLY — never grill water, never anything else.")
+    lines.append("")
+    lines.append("**5. Energy & Attitude**")
+    lines.append("- Smiles are the cheapest thing we sell and they bring guests back.")
+    lines.append("- If you're tired, the guest can hear it. Pick it up.")
+    lines.append("- Lead each other — call out wins, fix gaps in the moment.")
+    lines.append("")
+    lines.append("### What Corporate / The Shop Sees")
+    lines.append("- A 100% shop = the team gets paid. **Every shop is real money on the line.**")
+    lines.append("- One bad shift can drop a quarter average. Stay sharp every shift.")
+    lines.append("")
+
+    # ── Training & Corporate Updates ─────────────────────────────────────────
+    training_lines: list[str] = []
+
+    # Blackberry LTO is the active major rollout — surface it every shift
+    bb = build_blackberry_lto_update(today)
+    if bb:
+        training_lines.extend(bb)
+        training_lines.append("")
+
+    # Director directives surfaced when present (Brad Davis emails today)
+    if categorized:
+        director_emails = categorized.get("Director's Corner", [])
+        if director_emails:
+            training_lines.append("**👔 From the Director (Brad Davis) — today**")
+            for em in director_emails[:2]:  # cap at 2 to keep huddle tight
+                subj = em.get("subject", "")
+                body = (em.get("body", "") or em.get("snippet", "")).strip()
+                training_lines.append(f"- **{subj}** — {body[:300]}")
+            training_lines.append("")
+
+        # Patty Press / corporate training reminders surfaced when present
+        patty = categorized.get("Patty Press", [])
+        corp = categorized.get("Corporate Announcements", [])
+        if patty or corp:
+            training_lines.append("**📺 Training / Corporate this week** — see brief above for full content. "
+                                  "Read the relevant Patty Press section before shift; assign FGU courses on a TV/tablet during prep if any are open.")
+            training_lines.append("")
+
+    if training_lines:
+        lines.append("### Training & Corporate Updates")
+        lines.append("")
+        lines.extend(training_lines)
+
+    lines.append("---")
+    lines.append("")
+    return "\n".join(lines)
+
+
 def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
     """Builds the daily brief markdown string."""
     lines: list[str] = []
@@ -616,6 +773,11 @@ def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
     corner = build_secret_shop_corner()
     if corner:
         lines.append(corner)
+
+    # ── Shift Huddle Plan (always — runs every brief) ────────────────────────
+    huddle = build_shift_huddle_plan(today, categorized)
+    if huddle:
+        lines.append(huddle)
 
     # ── Estep Corporate / Admin ──────────────────────────────────────────────
     estep_emails = categorized.get("Estep Corporate / Admin", [])
