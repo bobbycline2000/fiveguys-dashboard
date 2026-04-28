@@ -9,19 +9,19 @@
 7PM: Time and Temp
 100% | 100%
 9PM: Time and Temp
-0% | 0%
+100% | 100%
 AM Pre-Shift Check
 100% | 100%
 PM Pre-Shift Check
 100% | 100%
 Closing Checklist
-0% | 0%
+100% | 100%
 Pre Open
 100% | 100%
 Shift Change
 100% | 100%
 Closing
-0% | 0%
+100% | 100%
 Weekly Store Inspection
 0% | 0%
 Delivery Check
