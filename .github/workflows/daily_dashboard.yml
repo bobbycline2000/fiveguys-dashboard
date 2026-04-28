@@ -173,6 +173,7 @@ jobs:
       # wire_dashboard.py reads it to refresh the Secret Shop card.
       # Discovery notes: scraper/KNOWLEDGEFORCE_DISCOVERY.md
       - name: Scrape KnowledgeForce Secret Shops (store 2065)
+        continue-on-error: true
         env:
           KNOWLEDGEFORCE_USERNAME: ${{ secrets.KNOWLEDGEFORCE_USERNAME }}
           KNOWLEDGEFORCE_PASSWORD: ${{ secrets.KNOWLEDGEFORCE_PASSWORD }}
