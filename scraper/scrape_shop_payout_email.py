@@ -106,30 +106,33 @@ async def _navigate_to_time_detail(page) -> bool:
     Daily News modal is dismissed after the fly-out opens.
     """
     try:
-        # Step 1: Click the Labor sidebar icon via JS (bypasses headless actionability checks)
-        clicked = await page.evaluate("""
-            () => {
-                const el = document.querySelector('[ces-selenium-id="menuitem_laborMenu"]');
-                if (el) { el.click(); return true; }
-                const all = [...document.querySelectorAll('*')].filter(el =>
-                    el.children.length === 0 &&
-                    (el.innerText || '').trim().toLowerCase() === 'labor'
-                );
-                if (all.length) { all[0].click(); return true; }
-                return false;
-            }
-        """)
-        if not clicked:
-            log("Could not find Labor sidebar item")
-            return False
-        log("Clicked Labor sidebar item")
+        # Step 1: Hover + click the Labor sidebar icon to open the fly-out.
+        # Hover is required — JS click alone doesn't trigger the hover-based fly-out.
+        try:
+            labor_sel = '[ces-selenium-id="menuitem_laborMenu"]'
+            await page.hover(labor_sel, timeout=10_000)
+            await page.wait_for_timeout(500)
+            await page.click(labor_sel, timeout=5_000)
+            log("Hovered and clicked Labor sidebar item")
+        except Exception as hover_err:
+            log(f"Labor hover/click failed ({hover_err}); falling back to JS click")
+            clicked = await page.evaluate("""
+                () => {
+                    const el = document.querySelector('[ces-selenium-id="menuitem_laborMenu"]');
+                    if (el) { el.dispatchEvent(new MouseEvent('mouseenter', {bubbles:true})); el.click(); return true; }
+                    return false;
+                }
+            """)
+            if not clicked:
+                log("Could not find Labor sidebar item at all")
+                return False
 
         # Step 2: Wait for Labor fly-out to load (lazy-rendered into DOM)
         try:
             await page.wait_for_function(
                 "() => [...document.querySelectorAll('*')].some(el => "
-                "(el.innerText || '').trim() === 'Labor Overview')",
-                timeout=10_000
+                "(el.textContent || '').includes('Labor Overview'))",
+                timeout=12_000
             )
             log("Labor fly-out is visible")
         except PlaywrightTimeout:
@@ -196,7 +199,7 @@ async def _navigate_to_time_detail(page) -> bool:
         try:
             await page.wait_for_function(
                 "() => [...document.querySelectorAll('*')].some(el => "
-                "(el.innerText || '').trim() === 'Consolidated Employee Time Detail')",
+                "(el.textContent || '').trim() === 'Consolidated Employee Time Detail')",
                 timeout=10_000
             )
             log("Consolidated Employee Time Detail is visible")
