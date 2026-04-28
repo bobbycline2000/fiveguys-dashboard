@@ -83,7 +83,25 @@ def select_all_periods(page) -> None:
     Individual Shops table shows all available shops (not just the
     most recent period).
     """
-    page.goto(LIST_URL, wait_until="networkidle", timeout=30_000)
+    # Let any post-login redirect chain finish before navigating away
+    page.wait_for_timeout(2_500)
+    # Retry once on ERR_ABORTED (post-login redirect race)
+    for attempt in range(2):
+        try:
+            page.goto(LIST_URL, wait_until="domcontentloaded", timeout=30_000)
+            page.wait_for_load_state("networkidle", timeout=20_000)
+            break
+        except PlaywrightTimeout:
+            if attempt == 1:
+                raise
+            log(f"goto retry (attempt {attempt + 1})")
+            page.wait_for_timeout(2_000)
+        except Exception as e:
+            if "ERR_ABORTED" in str(e) and attempt == 0:
+                log("ERR_ABORTED on first goto — waiting and retrying")
+                page.wait_for_timeout(3_000)
+                continue
+            raise
     # Click "Select All" inside the Year filter group, then re-run
     try:
         page.click('text="Select All"', timeout=5_000)
