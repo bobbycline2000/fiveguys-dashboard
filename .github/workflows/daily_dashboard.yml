@@ -225,6 +225,7 @@ jobs:
             data/page_source.html
             data/page_text.txt
             data/shop_email_page_text.txt
+            data/shop_email_after_labor.txt
             data/02b_page_source.html
             data/02b_page_text.txt
             data/cm_page_source.html

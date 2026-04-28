@@ -126,6 +126,13 @@ async def _navigate_to_time_detail(page) -> bool:
         log("Clicked Labor sidebar item")
         await page.wait_for_timeout(2_000)
 
+        # Dump page text after Labor click to see what sub-menu appeared
+        try:
+            txt = await page.inner_text("body")
+            (ROOT / "data" / "shop_email_after_labor.txt").write_text(txt[:20000], encoding="utf-8")
+        except Exception:
+            pass
+
         # Step 2: Click "Reports" from the Labor sub-menu
         clicked = await page.evaluate("""
             () => {
