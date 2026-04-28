@@ -244,15 +244,46 @@ def compute_averages(shops: list[dict]) -> dict:
     }
 
 
+def load_historical_shops(store_id: str) -> list[dict]:
+    """
+    Return the shops list from the most recent existing shops.json for this
+    store so that each run accumulates history rather than starting over.
+    The current run's scrape is merged on top of this — new job_ids win,
+    historical-only job_ids are kept.
+    """
+    store_dir = DATA_ROOT / store_id
+    if not store_dir.exists():
+        return []
+    dated_dirs = sorted(
+        (d for d in store_dir.iterdir() if d.is_dir()),
+        reverse=True,
+    )
+    for d in dated_dirs:
+        candidate = d / "shops.json"
+        if candidate.exists():
+            try:
+                data = json.loads(candidate.read_text(encoding="utf-8"))
+                shops = data.get("shops", [])
+                log(f"Loaded {len(shops)} historical shops from {candidate}")
+                return shops
+            except Exception as e:
+                log(f"Could not load {candidate}: {e}")
+    return []
+
+
 def build_payload(store_id: str, rows: list[dict]) -> dict:
     """
     Convert the scraped rows into the shops.json schema that
-    wire_dashboard.py already consumes.
+    wire_dashboard.py already consumes.  Historical shops from the most
+    recent prior run are merged in so the quarterly average is always
+    computed over the full known history (not just what the CI filter
+    returned this run).
     """
-    shops = []
+    # Map freshly-scraped rows by job_id
+    scraped: dict[str, dict] = {}
     for r in rows:
         d = parse_us_date(r["date_raw"])
-        shops.append({
+        scraped[r["job_id"]] = {
             "job_id":                r["job_id"],
             "date":                  d.strftime("%Y-%m-%d") if d else r["date_raw"],
             "meal_period":           r["meal_period"],
@@ -263,9 +294,32 @@ def build_payload(store_id: str, rows: list[dict]) -> dict:
             "cleanliness":           r.get("cleanliness"),
             "customer_satisfaction": r.get("customer_satisfaction"),
             "_date":                 d,
-        })
+        }
+
+    # Merge historical shops — fresh scrape wins on overlap
+    historical = load_historical_shops(store_id)
+    merged: dict[str, dict] = {}
+    for h in historical:
+        job_id = h.get("job_id")
+        if not job_id:
+            continue
+        d = parse_us_date(h.get("date", "")) if "date_raw" not in h else parse_us_date(h["date_raw"])
+        if d is None:
+            try:
+                d = date.fromisoformat(h.get("date", ""))
+            except Exception:
+                d = None
+        entry = dict(h)
+        entry["_date"] = d
+        merged[job_id] = entry
+    # Fresh-scraped entries overwrite historical
+    merged.update(scraped)
+    shops = list(merged.values())
+
+    log(f"Total shops after merge: {len(shops)} ({len(scraped)} fresh, {len(merged) - len(scraped)} historical-only)")
+
     # Sort newest first
-    shops.sort(key=lambda s: s["_date"] or date.min, reverse=True)
+    shops.sort(key=lambda s: s.get("_date") or date.min, reverse=True)
     averages = compute_averages(shops)
 
     latest = None

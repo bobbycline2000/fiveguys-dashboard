@@ -100,26 +100,31 @@ async def _fetch_variance_api(page) -> dict | None:
     """
     Call the variance API endpoint from within the live Playwright session.
     Uses page.evaluate (JS fetch) so session cookies are carried automatically.
+    Tries /ncext/ prefix first (correct path from modern.ct context), then
+    falls back to the root-relative path in case the routing changes.
     """
-    result = await page.evaluate("""
-        async () => {
-            try {
-                const r = await fetch('/resource/dashboard/top/actual/vs/theoretical', {
-                    credentials: 'include'
-                });
-                if (!r.ok) return { error: r.status };
-                return await r.json();
-            } catch (e) {
-                return { error: String(e) };
-            }
-        }
-    """)
-    if not result or "error" in result:
-        log.error(f"Variance API error: {result}")
-        return None
-    log.info(f"Variance API: got {len(result.get('listSummary', []))} items, "
-             f"dateRange={result.get('dateRange')}")
-    return result
+    paths = [
+        "/ncext/resource/dashboard/top/actual/vs/theoretical",
+        "/resource/dashboard/top/actual/vs/theoretical",
+    ]
+    for path in paths:
+        result = await page.evaluate(f"""
+            async () => {{
+                try {{
+                    const r = await fetch('{path}', {{credentials: 'include'}});
+                    if (!r.ok) return {{error: r.status, path: '{path}'}};
+                    return await r.json();
+                }} catch (e) {{
+                    return {{error: String(e), path: '{path}'}};
+                }}
+            }}
+        """)
+        if result and "error" not in result:
+            log.info(f"Variance API ({path}): got {len(result.get('listSummary', []))} items, "
+                     f"dateRange={result.get('dateRange')}")
+            return result
+        log.warning(f"Variance API path {path}: {result}")
+    return None
 
 
 def _ct_date_str(d: date) -> str:
@@ -340,29 +345,31 @@ async def run():
             await browser.close()
             sys.exit(1)
         await select_location(page)
-        await page.wait_for_timeout(3_000)
+        # Extra settle time so NCDashboard widgets finish loading before API call
+        await page.wait_for_timeout(5_000)
 
-        # Step 1: Variance items via API
+        # Step 1: Variance items via API (best-effort — failure is non-fatal)
         api_data = await _fetch_variance_api(page)
         if not api_data:
-            log.error("Could not fetch variance data — aborting")
-            await browser.close()
-            sys.exit(1)
+            log.warning("Variance API unavailable — will still attempt P&L COGS extraction")
+            items = []
+        else:
+            items = _parse_items(api_data.get("listSummary", []))
 
-        items = _parse_items(api_data.get("listSummary", []))
-        date_range = api_data.get("dateRange", {})
-
-        week_start_raw = date_range.get("startDate", "")
-        week_end_raw = date_range.get("endDate", "")
-        week_start = _parse_ct_date(week_start_raw)
-        week_end = _parse_ct_date(week_end_raw)
+        # Derive week dates from API response or fall back to calendar math
+        week_start: date | None = None
+        week_end: date | None = None
+        if api_data:
+            date_range = api_data.get("dateRange", {})
+            week_start = _parse_ct_date(date_range.get("startDate", ""))
+            week_end   = _parse_ct_date(date_range.get("endDate", ""))
 
         if not week_start or not week_end:
             today_fb = datetime.now(tz=ET).date()
             last_sun = today_fb - timedelta(days=(today_fb.weekday() + 1) % 7 + 1)
-            week_end = last_sun
+            week_end   = last_sun
             week_start = last_sun - timedelta(days=6)
-            log.warning(f"Could not parse API date range; using fallback {week_start}–{week_end}")
+            log.warning(f"Using computed week dates: {week_start}–{week_end}")
 
         log.info(f"Week: {week_start} → {week_end}  ({len(items)} variance items)")
 
@@ -423,14 +430,12 @@ async def run():
     # Legacy compat copy
     (DATA_DIR / "cogs_variance.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
 
-    if not items:
-        log.error("Zero variance items — something went wrong with the API")
-        sys.exit(1)
-
+    vtg_week = _vtg(cogs_pct_week)
+    top = f" | Top item: {items[0]['name']} +${items[0]['over_dollars']}" if items else ""
     log.info(
-        f"Done. Week={cogs_pct_week}% Month={cogs_pct_month}% LastMo={cogs_pct_last_mo}% "
-        f"({'N/A' if variance_to_goal is None else f'{variance_to_goal:+.1f}% vs {COGS_GOAL_PCT}% goal'}) "
-        f"| Top item: {items[0]['name']} +${items[0]['over_dollars']}"
+        f"Done. Week={cogs_pct_week}% Month={cogs_pct_month}% LastMo={cogs_pct_last_mo}%"
+        f" (vtg_week={'N/A' if vtg_week is None else f'{vtg_week:+.1f}% vs {COGS_GOAL_PCT}% goal'})"
+        f"{top}"
     )
 
 
