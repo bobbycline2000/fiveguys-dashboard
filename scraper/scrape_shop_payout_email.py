@@ -106,17 +106,20 @@ async def _navigate_to_time_detail(page) -> bool:
     Never navigates via index.ct hash URLs (those log out the modern.ct session).
     """
     try:
-        # Dismiss Daily News or any other modal dialog that appears post-login
-        await page.keyboard.press("Escape")
-        await page.wait_for_timeout(500)
-        await page.evaluate("""
+        # Dismiss Daily News modal — close button has ces-selenium-id="tool_close"
+        closed = await page.evaluate("""
             () => {
-                // Click any visible x-dialogtool (modal close button)
-                const closeBtn = document.querySelector('.x-dialogtool, .x-paneltool[data-componentid]');
-                if (closeBtn) closeBtn.click();
+                const btn = document.querySelector('[ces-selenium-id="tool_close"]');
+                if (btn) { btn.click(); return true; }
+                // Fallback: any x-dialogtool-close element
+                const fb = document.querySelector('.x-dialogtool-close, .x-paneltool-close');
+                if (fb) { fb.click(); return true; }
+                return false;
             }
         """)
-        await page.wait_for_timeout(500)
+        if closed:
+            log("Dismissed Daily News modal")
+        await page.wait_for_timeout(800)
 
         # Step 1: Click the Labor sidebar icon via its ces-selenium-id
         clicked = await page.evaluate("""
@@ -159,9 +162,9 @@ async def _navigate_to_time_detail(page) -> bool:
             log("Could not find Reports submenu under Labor")
             return False
         log("Clicked Reports submenu")
-        await page.wait_for_timeout(2_000)
+        await page.wait_for_timeout(3_000)
 
-        # Save screenshot for debugging before searching for the report link
+        # Save screenshot to see the Reports sub-list state
         try:
             await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
         except Exception:
