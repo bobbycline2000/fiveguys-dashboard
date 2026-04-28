@@ -219,7 +219,7 @@ jobs:
           # critical history for aggregate_periods.py — without committing them,
           # every run starts with empty rollup history.
           git add dashboard.html data/latest.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cm_results_source.html data/cm_page_text.txt || true
-          git add data/raw/parbrink/ data/raw/crunchtime/ data/raw/compliancemate/ || true
+          git add data/raw/parbrink/ data/raw/crunchtime/ data/raw/compliancemate/ data/raw/marketforce/ || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
