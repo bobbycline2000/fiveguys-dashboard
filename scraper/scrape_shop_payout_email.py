@@ -106,13 +106,31 @@ async def _navigate_to_time_detail(page) -> bool:
     Daily News modal is dismissed after the fly-out opens.
     """
     try:
-        # Step 1: Click the Labor sidebar icon via its ces-selenium-id
-        await page.locator('[ces-selenium-id="menuitem_laborMenu"]').click(timeout=10_000)
+        # Step 1: Click the Labor sidebar icon via JS (bypasses headless actionability checks)
+        clicked = await page.evaluate("""
+            () => {
+                const el = document.querySelector('[ces-selenium-id="menuitem_laborMenu"]');
+                if (el) { el.click(); return true; }
+                const all = [...document.querySelectorAll('*')].filter(el =>
+                    el.children.length === 0 &&
+                    (el.innerText || '').trim().toLowerCase() === 'labor'
+                );
+                if (all.length) { all[0].click(); return true; }
+                return false;
+            }
+        """)
+        if not clicked:
+            log("Could not find Labor sidebar item")
+            return False
         log("Clicked Labor sidebar item")
 
-        # Step 2: Wait for Labor fly-out to load (lazy-rendered)
+        # Step 2: Wait for Labor fly-out to load (lazy-rendered into DOM)
         try:
-            await page.wait_for_selector("text=Labor Overview", timeout=10_000)
+            await page.wait_for_function(
+                "() => [...document.querySelectorAll('*')].some(el => "
+                "(el.innerText || '').trim() === 'Labor Overview')",
+                timeout=10_000
+            )
             log("Labor fly-out is visible")
         except PlaywrightTimeout:
             log("Labor fly-out did not appear (timeout)")
@@ -122,11 +140,10 @@ async def _navigate_to_time_detail(page) -> bool:
                 pass
             return False
 
-        # Step 3: Dismiss Daily News modal if it appeared during fly-out load
+        # Step 3: Dismiss Daily News modal if present
         closed = await page.evaluate("""
             () => {
-                const allEls = [...document.querySelectorAll('*')];
-                for (const el of allEls) {
+                for (const el of [...document.querySelectorAll('*')]) {
                     if (el.children.length === 0 && (el.innerText || '').trim() === 'Daily News') {
                         let p = el.parentElement;
                         while (p && !p.classList.contains('x-dialog') && !p.classList.contains('x-window') && p !== document.body) {
@@ -146,18 +163,15 @@ async def _navigate_to_time_detail(page) -> bool:
             log("Dismissed Daily News modal")
             await page.wait_for_timeout(800)
 
-        # Step 4: Click "Reports" WITHIN the Labor fly-out.
-        # Find it by looking for "Reports" in the same container as "Labor Overview".
+        # Step 4: Click "Reports" within the Labor fly-out container.
+        # Anchor on "Labor Overview" to identify the correct fly-out container.
         clicked = await page.evaluate("""
             () => {
-                const allEls = [...document.querySelectorAll('*')];
-                // Find "Labor Overview" as an anchor for the fly-out container
-                const laborOv = allEls.find(el =>
+                const laborOv = [...document.querySelectorAll('*')].find(el =>
                     el.children.length === 0 &&
                     (el.innerText || '').trim() === 'Labor Overview'
                 );
                 if (!laborOv) return false;
-                // Walk up through ancestors until we find a container that also has "Reports"
                 let ancestor = laborOv.parentElement;
                 while (ancestor && ancestor !== document.body) {
                     const rpt = [...ancestor.querySelectorAll('*')].find(el =>
@@ -177,12 +191,15 @@ async def _navigate_to_time_detail(page) -> bool:
                 pass
             return False
         log("Clicked Reports in Labor fly-out")
-        await page.wait_for_timeout(3_000)
 
-        # Step 5: Wait for CETD to appear and click it
+        # Step 5: Wait for CETD to appear, then click it
         try:
-            await page.wait_for_selector("text=Consolidated Employee Time Detail", timeout=10_000)
-            log("CETD report link found")
+            await page.wait_for_function(
+                "() => [...document.querySelectorAll('*')].some(el => "
+                "(el.innerText || '').trim() === 'Consolidated Employee Time Detail')",
+                timeout=10_000
+            )
+            log("Consolidated Employee Time Detail is visible")
         except PlaywrightTimeout:
             log("Consolidated Employee Time Detail did not appear (timeout)")
             try:
@@ -193,7 +210,18 @@ async def _navigate_to_time_detail(page) -> bool:
                 pass
             return False
 
-        await page.locator("text=Consolidated Employee Time Detail").first.click(timeout=5_000)
+        cetd_clicked = await page.evaluate("""
+            () => {
+                const el = [...document.querySelectorAll('*')].find(el =>
+                    (el.innerText || '').trim() === 'Consolidated Employee Time Detail'
+                );
+                if (el) { el.click(); return true; }
+                return false;
+            }
+        """)
+        if not cetd_clicked:
+            log("Could not click Consolidated Employee Time Detail")
+            return False
         log("Clicked Consolidated Employee Time Detail")
         await page.wait_for_timeout(3_000)
         return True
