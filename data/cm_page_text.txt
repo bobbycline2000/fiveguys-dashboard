@@ -9,25 +9,25 @@
 7PM: Time and Temp
 100% | 100%
 9PM: Time and Temp
-100% | 100%
+0% | 0%
 AM Pre-Shift Check
 100% | 100%
 PM Pre-Shift Check
-0% | 0%
-Closing Checklist
 100% | 100%
-Pre Open
+Closing Checklist
 0% | 0%
+Pre Open
+100% | 100%
 Shift Change
 100% | 100%
 Closing
-100% | 100%
+0% | 0%
 Weekly Store Inspection
 0% | 0%
 Delivery Check
-0% | 0%
+100% | 100%
 Temperature Sample
-0% | 0%
+100% | 100%
 Calibration Test
 0% | 0%
 Operational Spot Check
