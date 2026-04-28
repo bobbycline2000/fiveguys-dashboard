@@ -100,16 +100,16 @@ def save_emailed(store_id: str, emailed: set[str]) -> None:
 async def _navigate_to_time_detail(page) -> bool:
     """
     Sidebar nav: Labor → Reports → Consolidated Employee Time Detail.
-    Uses the same click pattern as scrape_cogs._navigate_to_pnl — never
-    navigates via index.ct hash URLs (those log out the modern.ct session).
+    "Labor" and "Reports" use exact match; the report name uses partial
+    match (contains "consolidated" + "time") to handle sidebar truncation.
+    Never navigates via index.ct hash URLs (those log out the modern.ct session).
     """
     try:
-        for label in ("Labor", "Reports", "Consolidated Employee Time Detail"):
+        # Exact-match clicks for the top two levels
+        for label in ("Labor", "Reports"):
             clicked = await page.evaluate(f"""
                 () => {{
-                    const candidates = [...document.querySelectorAll(
-                        '.x-navigationitem, .x-treelist-item, [role="menuitem"], .x-navitem, *'
-                    )].filter(el =>
+                    const candidates = [...document.querySelectorAll('*')].filter(el =>
                         el.children.length === 0 &&
                         (el.innerText || '').trim().toLowerCase() === {json.dumps(label.lower())}
                     );
@@ -121,6 +121,23 @@ async def _navigate_to_time_detail(page) -> bool:
                 log(f"Could not find sidebar item: '{label}'")
                 return False
             await page.wait_for_timeout(1_500)
+
+        # Partial match for the report — sidebar may truncate the label
+        clicked = await page.evaluate("""
+            () => {
+                const t = [...document.querySelectorAll('*')].find(el =>
+                    el.children.length === 0 &&
+                    (el.innerText || '').toLowerCase().includes('consolidated') &&
+                    (el.innerText || '').toLowerCase().includes('time')
+                );
+                if (t) { t.click(); return (t.innerText || '').trim(); }
+                return null;
+            }
+        """)
+        if not clicked:
+            log("Could not find 'Consolidated ... Time ...' report link")
+            return False
+        log(f"Clicked report link: '{clicked}'")
 
         await page.wait_for_timeout(2_000)
         return True
