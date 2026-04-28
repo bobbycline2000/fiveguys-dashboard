@@ -236,6 +236,7 @@ jobs:
           else
             DATE=$(date -u +"%Y-%m-%d")
             git commit -m "chore: auto-update dashboard for ${DATE}"
+            git pull --rebase origin main
             git push origin main
             echo "Dashboard committed — open locally via view-dashboard.bat"
           fi
