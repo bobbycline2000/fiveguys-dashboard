@@ -9,7 +9,7 @@
     "last_month_start": "2026-03-01",
     "last_month_end": "2026-03-31",
     "through": "2026-04-27",
-    "pulled": "2026-04-28 11:45 ET",
+    "pulled": "2026-04-28 11:56 ET",
     "method": "api+playwright"
   },
   "cogs_goal_pct": 27.5,
