@@ -146,6 +146,10 @@ jobs:
       # wire_dashboard.py reads cogs_pct_week, items[], and meta.week_start/end.
       # Monday CI run automatically shows the prior week's final numbers.
       - name: Scrape CrunchTime food-cost variance (store 2065)
+        # TEMP continue-on-error: variance API returns 404 from modern.ct
+        # context — needs investigation. Without this flag, downstream
+        # KnowledgeForce step is blocked. Track in DASHBOARD-MAP.md.
+        continue-on-error: true
         env:
           CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
           CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
