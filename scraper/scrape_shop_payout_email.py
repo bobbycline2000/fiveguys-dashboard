@@ -106,41 +106,20 @@ async def _navigate_to_time_detail(page) -> bool:
     Never navigates via index.ct hash URLs (those log out the modern.ct session).
     """
     try:
-        # Dismiss Daily News modal — close button has ces-selenium-id="tool_close"
-        closed = await page.evaluate("""
-            () => {
-                const btn = document.querySelector('[ces-selenium-id="tool_close"]');
-                if (btn) { btn.click(); return true; }
-                // Fallback: any x-dialogtool-close element
-                const fb = document.querySelector('.x-dialogtool-close, .x-paneltool-close');
-                if (fb) { fb.click(); return true; }
-                return false;
-            }
-        """)
-        if closed:
-            log("Dismissed Daily News modal")
-        await page.wait_for_timeout(800)
-
         # Step 1: Click the Labor sidebar icon via its ces-selenium-id
         clicked = await page.evaluate("""
             () => {
                 const el = document.querySelector('[ces-selenium-id="menuitem_laborMenu"]');
                 if (el) { el.click(); return true; }
+                // Fallback: text-based search for "Labor"
+                const all = [...document.querySelectorAll('*')].filter(el =>
+                    el.children.length === 0 &&
+                    (el.innerText || '').trim().toLowerCase() === 'labor'
+                );
+                if (all.length) { all[0].click(); return true; }
                 return false;
             }
         """)
-        if not clicked:
-            # Fallback: text-based search for "Labor"
-            clicked = await page.evaluate("""
-                () => {
-                    const all = [...document.querySelectorAll('*')].filter(el =>
-                        el.children.length === 0 &&
-                        (el.innerText || '').trim().toLowerCase() === 'labor'
-                    );
-                    if (all.length) { all[0].click(); return true; }
-                    return false;
-                }
-            """)
         if not clicked:
             log("Could not find Labor sidebar item")
             return False
@@ -164,9 +143,37 @@ async def _navigate_to_time_detail(page) -> bool:
         log("Clicked Reports submenu")
         await page.wait_for_timeout(3_000)
 
-        # Save screenshot to see the Reports sub-list state
+        # Dismiss Daily News modal NOW — it may have appeared asynchronously
+        # Target it specifically by finding the dialog containing "Daily News" text
+        closed = await page.evaluate("""
+            () => {
+                const allEls = [...document.querySelectorAll('*')];
+                for (const el of allEls) {
+                    if (el.children.length === 0 && (el.innerText || '').trim() === 'Daily News') {
+                        // Walk up to find the dialog container
+                        let p = el.parentElement;
+                        while (p && !p.classList.contains('x-dialog') && !p.classList.contains('x-window') && p !== document.body) {
+                            p = p.parentElement;
+                        }
+                        if (p) {
+                            const btn = p.querySelector('[ces-selenium-id="tool_close"], .x-dialogtool-close, .x-paneltool-close');
+                            if (btn) { btn.click(); return true; }
+                        }
+                        break;
+                    }
+                }
+                return false;
+            }
+        """)
+        if closed:
+            log("Dismissed Daily News modal")
+            await page.wait_for_timeout(1_000)
+
+        # Save screenshot + page text for debugging
         try:
             await page.screenshot(path=str(ROOT / "data" / "shop_email_sidebar.png"))
+            body_txt = await page.inner_text("body")
+            (ROOT / "data" / "shop_email_page_text.txt").write_text(body_txt[:20000], encoding="utf-8")
         except Exception:
             pass
 
