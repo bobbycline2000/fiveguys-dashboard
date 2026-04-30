@@ -152,13 +152,23 @@ jobs:
       # ── 5b2. Scrape CrunchTime food-cost variance (API + P&L page)
       # Step 1: JS fetch /resource/dashboard/top/actual/vs/theoretical → variance items + week dates
       # Step 2: Playwright navigates to the Actual vs. Theoretical Cost report → COGS %
-      # Output: data/raw/crunchtime/<store>/<week_end>/cogs_variance.json
-      # wire_dashboard.py reads cogs_pct_week, items[], and meta.week_start/end.
-      # Monday CI run automatically shows the prior week's final numbers.
-      - name: Scrape CrunchTime food-cost variance (store 2065)
-        # TEMP continue-on-error: variance API returns 404 from modern.ct
-        # context — needs investigation. Without this flag, downstream
-        # KnowledgeForce step is blocked. Track in DASHBOARD-MAP.md.
+      # Output: data/raw/crunchtime/<store>/<today>/cogs_variance.json
+      # Reads the daily "COGS Review Week Ending" email from fg2065@estep-co.com
+      # via Microsoft Graph API and parses the FP% (food cost %) from the table.
+      # Requires Mail.Read application permission on the app registration.
+      # Also runs scrape_cogs.py to populate the top-variance items list from
+      # the NCDashboard widget (no extra navigation — reads page text).
+      - name: Read COGS Flash Report email (store 2065)
+        continue-on-error: true
+        env:
+          MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
+          MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+          COGS_MAILBOX: "fg2065@estep-co.com"
+          STORE_ID: "2065"
+        run: python scraper/read_cogs_email.py
+
+      - name: Scrape CrunchTime food-cost variance items (store 2065)
         continue-on-error: true
         env:
           CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
