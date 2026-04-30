@@ -62,12 +62,36 @@ def extract_pages(pdf_path: Path) -> list[str]:
 
 
 def parse_report_date(text: str) -> datetime | None:
+    # Format 1: "Monday, April 28, 2026"
     m = re.search(r'(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+'
                   r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+'
                   r'(\d{1,2}),\s+(\d{4})', text)
-    if not m:
-        return None
-    return datetime.strptime(f"{m.group(2)} {m.group(3)} {m.group(4)}", "%B %d %Y")
+    if m:
+        return datetime.strptime(f"{m.group(2)} {m.group(3)} {m.group(4)}", "%B %d %Y")
+
+    # Format 2: layout PDF with "Monday ... Sunday" header row + date row below
+    # Reads the actual Monday column date (most reliable — ignores header range typos)
+    lines = text.splitlines()
+    for i, line in enumerate(lines):
+        if 'Monday' in line and 'Sunday' in line:
+            for j in range(i + 1, min(i + 4, len(lines))):
+                dates = re.findall(r'(\d{1,2})/(\d{1,2})/(\d{4})', lines[j])
+                if len(dates) >= 6:
+                    mm, dd, yy = dates[0]
+                    try:
+                        return datetime(int(yy), int(mm), int(dd))
+                    except ValueError:
+                        continue
+
+    # Format 3: week range "M/D/YYYY - M/D/YYYY" — use the start date
+    wr = re.search(r'(\d{1,2})/(\d{1,2})/(\d{4})\s*-\s*(\d{1,2})/(\d{1,2})/(\d{4})', text)
+    if wr:
+        try:
+            return datetime(int(wr.group(3)), int(wr.group(1)), int(wr.group(2)))
+        except ValueError:
+            pass
+
+    return None
 
 
 def parse_week_dates(text: str) -> list[datetime]:

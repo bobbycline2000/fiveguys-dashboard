@@ -106,6 +106,15 @@ jobs:
         continue-on-error: true
         run: python scraper/parbrink_parse_hourly_sales_labor.py --store 2065
 
+      # ── 4g1. Pickup Par Brink weekly reports email (schedule + rollups) ─────
+      # Grabs the latest "Prometheus Weekly reports" email from bob.cline2000@gmail.com.
+      # Typically arrives Monday/Tuesday with the previous week's full data set.
+      # Runs every day so we catch the email the day it arrives.
+      - name: Pickup Par Brink weekly reports email
+        if: env.PARBRINK_SKIP != '1'
+        continue-on-error: true
+        run: python scraper/parbrink_email_pickup.py --store 2065 --mode weekly
+
       # ── 4g2. Parse the Par Brink Weekly Labor Schedule PDF → JSON ────────
       # Source for the Today's Schedule card (employee names + start/end times)
       # and totals_by_day (Mon..Sun scheduled hours). Reads per-store

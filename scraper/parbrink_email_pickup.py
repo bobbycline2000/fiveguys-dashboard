@@ -242,14 +242,9 @@ def validate(
         errors.append("Could not parse Business Date from email body.")
     if not locations:
         errors.append("Could not parse Locations line from email body.")
-    elif len(locations) != 1:
+    elif not any(expected_location_substr.lower() in loc.lower() for loc in locations):
         errors.append(
-            f"Expected exactly 1 location, found {len(locations)}: {locations}. "
-            "Schedule entry may have reverted to multi-location."
-        )
-    elif expected_location_substr.lower() not in locations[0].lower():
-        errors.append(
-            f"Location mismatch: expected '{expected_location_substr}', got '{locations[0]}'."
+            f"Location mismatch: expected '{expected_location_substr}' in {locations}."
         )
 
     if not attachments:
