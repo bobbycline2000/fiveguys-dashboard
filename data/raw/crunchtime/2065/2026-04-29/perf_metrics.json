@@ -2,55 +2,43 @@
   "meta": {
     "report_date": "2026-04-29",
     "report_display": "Wednesday, April 29, 2026",
-    "generated": "4/30/2026 at 12:00 AM",
-    "source": "manual_chrome_extract"
+    "generated": "4/30/2026 at 1:25 AM"
   },
   "sales": {
-    "net": 4637.88,
-    "net_week": 11802.26,
-    "ly": 4192.12,
-    "ly_week": 11486.3,
+    "net": 4638.0,
+    "net_week": 11802.0,
+    "ly": 4192.0,
+    "ly_week": 5862.0,
     "forecast": 4597.0,
     "forecast_week": 12810.0,
-    "vs_ly": 445.76,
-    "vs_ly_week": 316.0,
-    "vs_forecast": 40.88,
-    "vs_forecast_week": -1007.74,
+    "vs_ly": 446.0,
+    "vs_ly_week": 446.0,
+    "vs_forecast": 41.0,
     "per_guest": 5.51,
-    "per_guest_week": null
+    "per_guest_week": 5.47
   },
   "labor": {
-    "cost": 753.69,
-    "cost_week": 2450.41,
+    "cost": 11.0,
+    "cost_week": 0.0,
     "pct": 16.26,
     "pct_week": 20.76,
-    "actual_hours": 70.89,
-    "actual_hours_week": 205.56,
+    "actual_hours": 0.15,
+    "actual_hours_week": 39.57,
     "sched_hours": 64.25,
     "sched_hours_week": 208.25,
-    "hours_variance": -6.64,
-    "productivity": 65.43,
-    "productivity_week": null,
-    "hours_var": -6.64
+    "hours_variance": null,
+    "productivity": 72.0,
+    "productivity_week": 62.0,
+    "hours_var": null
   },
   "cash": {
-    "over_short": -429.23
+    "over_short": 429.23
   },
   "comps": [
     {
-      "name": "COGS Less: Employee Meals",
-      "day": "$62.72",
-      "week": "$166.46"
-    },
-    {
-      "name": "Refunds",
-      "day": "$20.53",
+      "name": "Comps and Discounts",
+      "day": "$281.26",
       "week": "$20.53"
-    },
-    {
-      "name": "Burger/Fry Calibration",
-      "day": "$0.00",
-      "week": "$39.85"
     }
   ],
   "raw": {
@@ -60,47 +48,47 @@
     },
     "Last Year Same Day": {
       "day": "$4,192",
-      "week": "$11,486"
+      "week": "$5,862"
     },
     "Forecasted Sales": {
       "day": "$4,597",
       "week": "$12,810"
     },
     "Net Sales to Last Year": {
-      "day": "+$446",
-      "week": "+$316"
+      "day": "$446",
+      "week": "$446"
     },
     "Actual Labor": {
-      "day": "$753.69",
-      "week": "$2,450.41"
+      "day": "11",
+      "week": "0.00"
     },
     "Hours Variance": {
-      "day": "-6.64",
-      "week": "-2.69"
+      "day": "",
+      "week": ""
     },
     "Labor % of Net Sales": {
       "day": "16.26%",
       "week": "20.76%"
     },
     "Total Cash Over/Short": {
-      "day": "-$429.23",
-      "week": "-$429.23"
+      "day": "$429.23",
+      "week": "$429.23"
     },
     "Comps and Discounts": {
-      "day": "$83.25",
-      "week": "$226.84"
+      "day": "$281.26",
+      "week": "$20.53"
     },
     "Sales / Guest": {
       "day": "$5.51",
-      "week": null
+      "week": "$5.47"
     },
     "Labor Productivity": {
-      "day": "$65.43",
-      "week": null
+      "day": "$72",
+      "week": "$62"
     },
     "Actual Hours": {
-      "day": "70.89",
-      "week": "205.56"
+      "day": "0.15",
+      "week": "39.57"
     },
     "Scheduled Hours": {
       "day": "64.25",

@@ -1,0 +1,255 @@
+{
+  "meta": {
+    "generated": "2026-04-30 01:26",
+    "location": "2065",
+    "status": "ok",
+    "shops_total": 20
+  },
+  "latest": {
+    "job_id": "20763859",
+    "date": "2026-04-17",
+    "meal_period": "Lunch",
+    "score": 47.0,
+    "period2": 530400277,
+    "service": 77.0,
+    "quality": 100.0,
+    "cleanliness": 80.0,
+    "customer_satisfaction": 90.0
+  },
+  "averages": {
+    "week": {
+      "score": null,
+      "n": 0
+    },
+    "month": {
+      "score": 85.2,
+      "n": 5
+    },
+    "quarter": {
+      "score": 84.25,
+      "n": 16
+    }
+  },
+  "shops": [
+    {
+      "job_id": "20763859",
+      "date": "2026-04-17",
+      "meal_period": "Lunch",
+      "score": 47.0,
+      "period2": 530400277,
+      "service": 77.0,
+      "quality": 100.0,
+      "cleanliness": 80.0,
+      "customer_satisfaction": 90.0
+    },
+    {
+      "job_id": "20752330",
+      "date": "2026-04-11",
+      "meal_period": "Dinner",
+      "score": 95.0,
+      "period2": 530400276,
+      "service": 95,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20744756",
+      "date": "2026-04-09",
+      "meal_period": "Lunch",
+      "score": 87.0,
+      "period2": 530400276,
+      "service": 87,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20747008",
+      "date": "2026-04-02",
+      "meal_period": "Dinner",
+      "score": 97.0,
+      "period2": 530400275,
+      "service": 100,
+      "quality": 100,
+      "cleanliness": 97,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20747930",
+      "date": "2026-03-31",
+      "meal_period": "Lunch",
+      "score": 100.0,
+      "period2": 530400274,
+      "service": 100,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20743045",
+      "date": "2026-03-24",
+      "meal_period": "Late Dinner",
+      "score": 49.0,
+      "period2": 530400273,
+      "service": 77,
+      "quality": 100,
+      "cleanliness": 72,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20734340",
+      "date": "2026-03-15",
+      "meal_period": "Lunch",
+      "score": 72.0,
+      "period2": 530400272,
+      "service": 72,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20722737",
+      "date": "2026-03-09",
+      "meal_period": "Lunch",
+      "score": 80.0,
+      "period2": 530400271,
+      "service": 100,
+      "quality": 100,
+      "cleanliness": 80,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20725210",
+      "date": "2026-03-05",
+      "meal_period": "Dinner",
+      "score": 72.0,
+      "period2": 530400271,
+      "service": 72,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20701465",
+      "date": "2026-02-28",
+      "meal_period": "Dinner",
+      "score": 95.0,
+      "period2": 530400270,
+      "service": 95,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20703980",
+      "date": "2026-02-27",
+      "meal_period": "Lunch",
+      "score": 100.0,
+      "period2": 530400270,
+      "service": 100,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20692443",
+      "date": "2026-02-22",
+      "meal_period": "Dinner",
+      "score": 100.0,
+      "period2": 530400269,
+      "service": 100,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20685367",
+      "date": "2026-02-19",
+      "meal_period": "Lunch",
+      "score": 69.0,
+      "period2": 530400269,
+      "service": 69,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20698566",
+      "date": "2026-02-12",
+      "meal_period": "Dinner",
+      "score": 100.0,
+      "period2": 530400268,
+      "service": 100,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20689193",
+      "date": "2026-02-07",
+      "meal_period": "Lunch",
+      "score": 100.0,
+      "period2": 530400267,
+      "service": 100,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20673321",
+      "date": "2026-01-31",
+      "meal_period": "Lunch",
+      "score": 85.0,
+      "period2": 530400266,
+      "service": 100,
+      "quality": 85,
+      "cleanliness": 80,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20681743",
+      "date": "2026-01-29",
+      "meal_period": "Dinner",
+      "score": 80.0,
+      "period2": 530400266,
+      "service": 100,
+      "quality": 100,
+      "cleanliness": 80,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20680431",
+      "date": "2026-01-28",
+      "meal_period": "Dinner",
+      "score": 100.0,
+      "period2": 530400265,
+      "service": 100,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20659897",
+      "date": "2026-01-23",
+      "meal_period": "Lunch",
+      "score": 100.0,
+      "period2": 530400265,
+      "service": 100,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    },
+    {
+      "job_id": "20650374",
+      "date": "2026-01-16",
+      "meal_period": "Dinner",
+      "score": 72.0,
+      "period2": 530400264,
+      "service": 72,
+      "quality": 100,
+      "cleanliness": 100,
+      "customer_satisfaction": 100
+    }
+  ]
+}
