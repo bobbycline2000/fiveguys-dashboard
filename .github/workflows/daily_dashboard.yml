@@ -226,6 +226,42 @@ jobs:
           STORE_ID: "2065"
         run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_knowledgeforce.py --store 2065
 
+      # ── 5b3a. Pull visit-time bucket for each shop (KnowledgeForce Q.04) ──
+      # Reads latest shops.json, fills `visit_window` from .04 Time In bucket
+      # (e.g. "4 pm-6:59 pm" → [16.0, 19.0]). Used by build_shop_tracker.py
+      # to apply the actual shop window when matching CETD employees.
+      # Incremental: skips shops that already have visit_window.
+      - name: Scrape Marketforce visit-time buckets (store 2065)
+        continue-on-error: true
+        env:
+          KNOWLEDGEFORCE_USERNAME: ${{ secrets.KNOWLEDGEFORCE_USERNAME }}
+          KNOWLEDGEFORCE_PASSWORD: ${{ secrets.KNOWLEDGEFORCE_PASSWORD }}
+          STORE_ID: "2065"
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_visit_time.py --store 2065
+
+      # ── 5b3b. Pull CETD participation for each shop (Shop Tracker) ────────
+      # For every shop in shops.json, pulls CETD employees and filters to
+      # those with 30+ min in the visit window. Output:
+      # data/raw/marketforce/2065/participation.json. Incremental: skips
+      # shops already cached.
+      - name: Scrape Shop Tracker participation (store 2065)
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+          STORE_ID: "2065"
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_shop_participation.py --store 2065
+
+      # ── 5b3c. Build Shop_Tracker_2065_2026.xlsx for download ──────────────
+      # Reads shops.json + participation.json, emits the Excel tracker with
+      # 4 monthly tabs (Jan-Apr-...), Manager/Crew sections, auto-calc avgs.
+      # The dashboard sidebar links to this file.
+      - name: Build Shop Tracker Excel
+        continue-on-error: true
+        env:
+          STORE_ID: "2065"
+        run: python scraper/build_shop_tracker.py
+
       # ── 5b4. Draft payout email for any new 100% secret shops ────────────
       # Reads latest shops.json, finds new 100% shops not yet emailed,
       # pulls CrunchTime Consolidated Employee Time Detail for that date/shift,
@@ -311,7 +347,7 @@ jobs:
           # Stage dashboard + JSON snapshots. data/raw/parbrink/ JSONs are
           # critical history for aggregate_periods.py — without committing them,
           # every run starts with empty rollup history.
-          git add dashboard.html data/latest.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cm_results_source.html data/cm_page_text.txt data/daily-brief/ data/team_notes.json || true
+          git add dashboard.html Shop_Tracker_2065_2026.xlsx data/latest.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cm_results_source.html data/cm_page_text.txt data/daily-brief/ data/team_notes.json || true
           git add data/raw/parbrink/ data/raw/crunchtime/ data/raw/compliancemate/ data/raw/marketforce/ || true
           git add data/drafts/ data/debug-log.txt data/heal-log.txt data/debug-log.archive/ || true
 
