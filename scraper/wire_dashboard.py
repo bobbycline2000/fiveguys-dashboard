@@ -136,9 +136,11 @@ if hourly_labor and hourly_labor.get("totals"):
     avg_hourly_wage = f"${_hl_totals['avg_hourly_wage']:.2f}"
 else:
     labor_pct = f"{latest['labor']['pct']:.1f}%" if latest['labor'].get('pct') is not None else "—"
-    labor_dollars_today = "—"
-    actual_hrs_today = "—"
-    avg_hourly_wage = "—"
+    _lc = latest['labor'].get('cost')
+    _ah = latest['labor'].get('actual_hours')
+    labor_dollars_today = f"${_lc:,.0f}" if _lc is not None else "—"
+    actual_hrs_today = f"{_ah:.1f}" if _ah is not None else "—"
+    avg_hourly_wage = f"${_lc/_ah:.2f}" if (_lc is not None and _ah) else "—"
 sched_hrs_today = f"{sched['today']['scheduled_hours']:.1f}" if sched else "—"
 # Prefer Par Brink Sales Summary for net sales (more reliable than CrunchTime text scrape)
 if sales_summary and sales_summary.get("net_sales"):
@@ -292,9 +294,16 @@ rep(r'(<div class="ctrl-stat-val">)[^<]*(</div>\s*<div class="ctrl-stat-lbl">Avg
     "Avg Hrly Wage",
     flags=DOTALL)
 
-# WTD Labor stats — fed by aggregate_periods.py rollups (week bucket).
-# Falls back to "—" if the rollups file is missing.
-if rollups and rollups["week"]["days"]:
+# WTD Labor stats — prefer CrunchTime perf_metrics WTD when available (direct from NCDashboard).
+# Falls back to aggregate_periods.py rollups, then "—".
+_ct_wp = latest['labor'].get('pct_week')
+_ct_wc = latest['labor'].get('cost_week')
+_ct_wh = latest['labor'].get('actual_hours_week')
+if _ct_wp is not None and _ct_wc is not None:
+    wtd_pct       = f"{_ct_wp:.1f}%"
+    wtd_labor_dol = f"${_ct_wc:,.0f}"
+    wtd_hours     = f"{_ct_wh:.1f}" if _ct_wh is not None else "—"
+elif rollups and rollups["week"]["days"]:
     _wk = rollups["week"]
     wtd_pct       = f"{_wk['labor_percent']:.1f}%"
     wtd_labor_dol = f"${_wk['labor_cost']:,.0f}"
@@ -404,7 +413,8 @@ KPI_SUB_OPEN = r'<div class="kpi-sub[^"]*"[^>]*>'
 sales_net_week = f"${latest['sales']['net_week']:,.0f}"
 sales_ly_week = f"${latest['sales']['ly_week']:,.0f}"
 sales_forecast_week = f"${latest['sales']['forecast_week']:,.0f}"
-per_guest_week = f"${latest['sales']['per_guest_week']:.2f}"
+_pg_week = latest['sales'].get('per_guest_week')
+per_guest_week = f"${_pg_week:.2f}" if _pg_week is not None else "—"
 
 # Month / Quarter rollup-derived strings (data-month / data-quarter attrs)
 if rollups:

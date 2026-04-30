@@ -2,7 +2,8 @@
   "meta": {
     "report_date": "2026-04-29",
     "report_display": "Wednesday, April 29, 2026",
-    "generated": "4/30/2026 at 12:00 AM"
+    "generated": "4/30/2026 at 12:00 AM",
+    "source": "manual_chrome_extract"
   },
   "sales": {
     "net": 4637.88,
@@ -68,10 +69,6 @@
     "Net Sales to Last Year": {
       "day": "+$446",
       "week": "+$316"
-    },
-    "Net Sales vs Forecast": {
-      "day": "+$41",
-      "week": "-$1,008"
     },
     "Actual Labor": {
       "day": "$753.69",
