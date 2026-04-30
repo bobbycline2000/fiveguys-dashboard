@@ -77,20 +77,14 @@ def login(page, username: str, password: str) -> bool:
     return True
 
 
-def select_all_periods(page) -> None:
-    """
-    On the Secret Shop dashboard, select every Year checkbox so the
-    Individual Shops table shows all available shops (not just the
-    most recent period).
-    """
-    # Let any post-login redirect chain finish before navigating away
+def _navigate_to_report(page) -> None:
+    """Navigate to the Secret Shop report page with retry on ERR_ABORTED."""
     page.wait_for_timeout(2_500)
-    # Retry once on ERR_ABORTED (post-login redirect race)
     for attempt in range(2):
         try:
             page.goto(LIST_URL, wait_until="domcontentloaded", timeout=30_000)
             page.wait_for_load_state("networkidle", timeout=20_000)
-            break
+            return
         except PlaywrightTimeout:
             if attempt == 1:
                 raise
@@ -102,34 +96,250 @@ def select_all_periods(page) -> None:
                 page.wait_for_timeout(3_000)
                 continue
             raise
-    # Click EVERY "Select All" link (one per filter group: Year/Quarter/Month/period2)
-    # so the Individual Shops table includes the full history, not just the
-    # latest period.
+
+
+def _extract_all_period_ids(node) -> list:
+    """Recursively collect all leaf IDs from the KnowledgeForce filter tree."""
+    ids: list = []
+
+    def walk(n):
+        if isinstance(n, dict):
+            children = n.get("values") or n.get("children") or n.get("items")
+            node_id = n.get("id") or n.get("value") or n.get("key")
+            if children:
+                for c in children:
+                    walk(c)
+            elif node_id is not None:
+                ids.append(node_id)
+            else:
+                for v in n.values():
+                    if isinstance(v, (dict, list)):
+                        walk(v)
+        elif isinstance(n, list):
+            for item in n:
+                walk(item)
+
+    walk(node)
+    return ids
+
+
+def _rows_from_widget_json(widget_json) -> list[dict] | None:
+    """
+    Parse shop rows from the widget API JSON response.
+    KnowledgeForce typically returns DataTables server-side format
+    ({"aaData": [...]}) or {"data": [...]}.
+    Each row is an array: [job_id, loc_id, location, date, meal_period, score, href?]
+    """
+    if not isinstance(widget_json, (dict, list)):
+        return None
+
+    raw_rows = None
+    if isinstance(widget_json, list):
+        raw_rows = widget_json
+    elif isinstance(widget_json, dict):
+        for key in ("aaData", "data", "rows", "results", "records", "shops"):
+            if key in widget_json:
+                raw_rows = widget_json[key]
+                break
+
+    if not raw_rows:
+        return None
+
+    out = []
+    for row in raw_rows:
+        if isinstance(row, (list, tuple)) and len(row) >= 6:
+            href = str(row[6]) if len(row) > 6 else ""
+            m = re.search(r"dataset=([^&]+)", href)
+            dataset_raw = ""
+            if m:
+                from urllib.parse import unquote
+                dataset_raw = unquote(m.group(1))
+            try:
+                dataset_obj = json.loads(dataset_raw) if dataset_raw else {}
+            except Exception:
+                dataset_obj = {}
+            try:
+                score = float(str(row[5]).replace("%", ""))
+            except (TypeError, ValueError):
+                score = None
+            out.append({
+                "job_id":      str(row[0]),
+                "location_id": str(row[1]),
+                "location":    str(row[2]),
+                "date_raw":    str(row[3]),
+                "meal_period": str(row[4]),
+                "score":       score,
+                "jid":         dataset_obj.get("jid"),
+                "period2":     (dataset_obj.get("period2") or [None])[0],
+                "scheme":      (dataset_obj.get("scheme") or [None])[0],
+                "href":        href,
+            })
+        elif isinstance(row, dict):
+            score_val = row.get("score") or row.get("Score") or row.get("total_score")
+            try:
+                score = float(str(score_val).replace("%", ""))
+            except (TypeError, ValueError):
+                score = None
+            out.append({
+                "job_id":      str(row.get("job_id") or row.get("job") or row.get("Job #") or ""),
+                "location_id": str(row.get("location_id") or row.get("loc_id") or ""),
+                "location":    str(row.get("location") or row.get("Location") or ""),
+                "date_raw":    str(row.get("date") or row.get("Date") or row.get("shop_date") or ""),
+                "meal_period": str(row.get("meal_period") or row.get("Meal Period") or ""),
+                "score":       score,
+                "jid":         None,
+                "period2":     None,
+                "scheme":      None,
+                "href":        "",
+            })
+
+    return out if out else None
+
+
+def fetch_all_shops_via_api(page) -> list[dict] | None:
+    """
+    Use KnowledgeForce's JSON APIs directly to get ALL available shops.
+
+    1. Call /reporting/api/filters/903 to get the full period tree.
+    2. Build a dataset selecting all periods.
+    3. Call /reporting/api/widget/175639 with that dataset.
+    4. Parse and return rows.
+
+    Saves raw API responses to data/raw/marketforce/api_debug.json for tuning.
+    Returns None if the API approach fails (caller should fall back to DOM).
+    """
+    import urllib.parse as _up
+
+    api_debug: dict = {}
+
+    # Step 1 — get filter tree
+    filter_result = page.evaluate("""
+        async () => {
+            try {
+                const r = await fetch('/reporting/api/filters/903?dataset=%5B%5D', {credentials: 'include'});
+                const data = r.ok ? await r.json() : null;
+                return {status: r.status, ok: r.ok, data};
+            } catch (e) { return {error: String(e)}; }
+        }
+    """)
+    api_debug["filter_api"] = {k: v for k, v in (filter_result or {}).items() if k != "data"}
+    log(f"Filter API: status={filter_result.get('status')} ok={filter_result.get('ok')}")
+
+    # Step 2 — build dataset with all period IDs
+    dataset_variants: list[tuple[str, str]] = []
+
+    if filter_result.get("ok") and filter_result.get("data"):
+        period_ids = _extract_all_period_ids(filter_result["data"])
+        api_debug["period_ids_count"] = len(period_ids)
+        log(f"Extracted {len(period_ids)} period IDs from filter tree")
+
+        if period_ids:
+            # Try a few dataset encoding formats — KnowledgeForce may expect objects or plain IDs
+            variants_raw = [
+                [{"period2": pid} for pid in period_ids],
+                period_ids,
+                [{"id": pid} for pid in period_ids],
+            ]
+            for v in variants_raw:
+                dataset_variants.append((_up.quote(json.dumps(v)), f"all-periods({type(v[0]).__name__})"))
+
+    # Always try empty dataset as last resort
+    dataset_variants.append(("%5B%5D", "empty"))
+
+    # Step 3 — call widget API with each dataset variant, stop on first success with >0 rows
+    for dataset_enc, label in dataset_variants:
+        widget_result = page.evaluate(f"""
+            async () => {{
+                try {{
+                    const url = '/reporting/api/widget/175639?isDash=1&reportId=923&dataset={dataset_enc}';
+                    const r = await fetch(url, {{credentials: 'include'}});
+                    const data = r.ok ? await r.json() : null;
+                    return {{status: r.status, ok: r.ok, data}};
+                }} catch (e) {{ return {{error: String(e)}}; }}
+            }}
+        """)
+        log(f"Widget API ({label}): status={widget_result.get('status')} ok={widget_result.get('ok')}")
+        api_debug[f"widget_{label}"] = {k: v for k, v in (widget_result or {}).items() if k != "data"}
+
+        if widget_result.get("ok") and widget_result.get("data") is not None:
+            rows = _rows_from_widget_json(widget_result["data"])
+            if rows:
+                api_debug[f"widget_{label}_rows"] = len(rows)
+                log(f"  → {len(rows)} shops from widget API ({label})")
+                _save_api_debug(api_debug)
+                return rows
+            else:
+                api_debug[f"widget_{label}_parse_note"] = "ok but no parseable rows"
+                log(f"  → API ok but no parseable rows; data keys: {list(widget_result.get('data', {}).keys()) if isinstance(widget_result.get('data'), dict) else type(widget_result.get('data')).__name__}")
+
+    _save_api_debug(api_debug)
+    log("All widget API variants failed — falling back to DOM")
+    return None
+
+
+def _save_api_debug(data: dict) -> None:
+    try:
+        debug_path = DATA_ROOT.parent.parent / "marketforce" / "api_debug.json"
+        debug_path.parent.mkdir(parents=True, exist_ok=True)
+        debug_path.write_text(json.dumps(data, indent=2, default=str), encoding="utf-8")
+    except Exception:
+        pass
+
+
+def _expand_dom_filter(page) -> None:
+    """
+    DOM fallback: try to expand the period filter by clicking 'Select All' links,
+    and set the DataTable to show all rows (overrides default 10-row pagination).
+    """
     try:
         select_all_count = page.evaluate("""
             () => {
                 const links = [...document.querySelectorAll('a, span, button, label')]
                     .filter(el => (el.innerText || '').trim() === 'Select All');
                 let clicked = 0;
-                for (const l of links) {
-                    try { l.click(); clicked += 1; } catch(e) {}
-                }
+                for (const l of links) { try { l.click(); clicked += 1; } catch(e) {} }
                 return clicked;
             }
         """)
         log(f"Clicked {select_all_count} 'Select All' link(s)")
         page.wait_for_timeout(1_500)
-        # Trigger filter apply / refresh if present
-        for label in ("Apply", "Run", "Filter", "Submit", "Refresh"):
+
+        # Try named filter buttons
+        for label in ("Apply", "Run", "Filter", "Submit", "Refresh", "Update"):
             try:
-                page.click(f'button:has-text("{label}")', timeout=2_000)
+                page.click(f'button:has-text("{label}"), input[value="{label}"]', timeout=2_000)
                 log(f"Clicked filter button: {label}")
                 break
             except PlaywrightTimeout:
                 continue
         page.wait_for_load_state("networkidle", timeout=15_000)
     except Exception as e:
-        log(f"Select All filter widening failed ({e}) — proceeding with default filter")
+        log(f"DOM filter expand failed ({e})")
+
+    # Override DataTable pagination to show all rows
+    dt_result = page.evaluate("""
+        () => {
+            try {
+                if (typeof $ === 'undefined' || !$.fn.DataTable) return 'no-jquery';
+                let n = 0;
+                $('table').each(function() {
+                    if ($.fn.DataTable.isDataTable(this)) {
+                        $(this).DataTable().page.len(-1).draw(false);
+                        n++;
+                    }
+                });
+                return n + ' tables set to show-all';
+            } catch(e) { return String(e); }
+        }
+    """)
+    log(f"DataTable show-all: {dt_result}")
+    page.wait_for_timeout(1_500)
+
+
+def select_all_periods(page) -> None:
+    """Navigate to report page and widen the date scope (DOM approach)."""
+    _navigate_to_report(page)
+    _expand_dom_filter(page)
 
 
 def read_individual_shops_table(page) -> list[dict]:
@@ -379,11 +589,21 @@ def main() -> int:
             return 3
 
         log("Login OK; loading Secret Shop Dashboard")
-        select_all_periods(page)
+        _navigate_to_report(page)
 
-        log("Reading Individual Shops table")
-        rows = read_individual_shops_table(page)
-        log(f"Found {len(rows)} shops")
+        # Strategy 1: call KnowledgeForce's JSON widget API directly (bypasses DOM filter)
+        log("Trying widget API approach for full shop history")
+        rows = fetch_all_shops_via_api(page)
+
+        if rows is None:
+            # Strategy 2: DOM fallback — widen filter checkboxes + DataTable show-all
+            log("API approach failed — falling back to DOM table")
+            _expand_dom_filter(page)
+            rows = read_individual_shops_table(page)
+        else:
+            log(f"API returned {len(rows)} shops")
+
+        log(f"Total shops from primary source: {len(rows)}")
 
         if not rows:
             log("Zero shops returned — filter may not have widened correctly")

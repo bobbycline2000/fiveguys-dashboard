@@ -21,7 +21,7 @@ import json
 import os
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, date
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -53,6 +53,33 @@ def try_open_github_issue(title, body):
     except (FileNotFoundError, subprocess.TimeoutExpired):
         pass
 
+def _load_latest_parbrink(report: str):
+    """Return the most-recent Par Brink JSON for store 2065, or None."""
+    base = ROOT / "data" / "raw" / "parbrink" / "2065"
+    if not base.exists():
+        return None
+    for d in sorted([x for x in base.iterdir() if x.is_dir()], reverse=True):
+        cand = d / report
+        if cand.exists():
+            try:
+                return json.loads(cand.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+    return None
+
+
+def _pb_is_current(pb_data, ct_report_date: str) -> bool:
+    """True if Par Brink report_date is within 1 day of the CrunchTime report_date."""
+    if not pb_data or not ct_report_date:
+        return False
+    try:
+        pb_d = date.fromisoformat(pb_data.get("meta", {}).get("report_date", ""))
+        ct_d = date.fromisoformat(ct_report_date)
+        return abs((pb_d - ct_d).days) <= 1
+    except (ValueError, TypeError):
+        return False
+
+
 def main():
     if not DASH.exists():
         print("FAIL: dashboard.html missing")
@@ -64,19 +91,29 @@ def main():
     data = json.loads(LATEST.read_text(encoding="utf-8"))
     html = DASH.read_text(encoding="utf-8")
 
+    ct_report_date = data.get("meta", {}).get("report_date")
+    pb_sales = _load_latest_parbrink("sales_summary.json")
+    use_pb = _pb_is_current(pb_sales, ct_report_date)
+
     failures = []
 
-    # Check 1: the scraped sales.net value appears in the dashboard
-    sales_net = data.get("sales", {}).get("net")
-    if sales_net is not None:
+    # Check 1: the expected sales.net value appears in the dashboard.
+    # wire_dashboard.py prefers Par Brink net_sales when current; falls back to CrunchTime.
+    if use_pb and pb_sales.get("net_sales") is not None:
+        sales_net = pb_sales["net_sales"]
         needle = f"${sales_net:,.0f}"
-        if needle not in html:
-            failures.append(
-                f"sales.net={needle} from latest.json NOT found in dashboard.html — "
-                f"the Daily Sales KPI is stale or wire_dashboard.py failed to update it."
-            )
+        source = "parbrink/sales_summary"
+    else:
+        sales_net = data.get("sales", {}).get("net")
+        needle = f"${sales_net:,.0f}" if sales_net is not None else None
+        source = "latest.json (CrunchTime)"
+    if needle and needle not in html:
+        failures.append(
+            f"sales.net={needle} from {source} NOT found in dashboard.html — "
+            f"the Daily Sales KPI is stale or wire_dashboard.py failed to update it."
+        )
 
-    # Check 2: the scraped sales.per_guest appears
+    # Check 2: the scraped sales.per_guest appears (CrunchTime is always the source).
     per_guest = data.get("sales", {}).get("per_guest")
     if per_guest is not None:
         needle = f"${per_guest:.2f}"

@@ -106,6 +106,9 @@ async def _fetch_variance_api(page) -> dict | None:
     paths = [
         "/ncext/resource/dashboard/top/actual/vs/theoretical",
         "/resource/dashboard/top/actual/vs/theoretical",
+        "/ncext/resource/performance/top/actual/vs/theoretical",
+        "/ncext/resource/inventory/top/actual/vs/theoretical",
+        "/ncext/api/dashboard/top/actual/vs/theoretical",
     ]
     for path in paths:
         result = await page.evaluate(f"""
@@ -347,6 +350,31 @@ async def run():
         await select_location(page)
         # Extra settle time so NCDashboard widgets finish loading before API call
         await page.wait_for_timeout(5_000)
+
+        # Intercept XHR/fetch requests to find the real variance API path CrunchTime uses.
+        # Logs are visible in GitHub Actions — this resolves the 404 mystery on the next run.
+        captured_api_calls: list[str] = []
+
+        def _capture_request(request):
+            url = request.url.lower()
+            if any(kw in url for kw in ("actual", "theoretical", "variance", "cogs", "dashboard/top")):
+                captured_api_calls.append(f"{request.method} {request.url}")
+
+        page.on("request", _capture_request)
+
+        # Trigger a page interaction so CrunchTime fires any lazy-loaded widget XHRs
+        await page.evaluate("() => window.scrollTo(0, 300)")
+        await page.wait_for_timeout(2_000)
+        await page.evaluate("() => window.scrollTo(0, 0)")
+        await page.wait_for_timeout(1_000)
+
+        page.remove_listener("request", _capture_request)
+        if captured_api_calls:
+            log.info(f"Intercepted {len(captured_api_calls)} relevant XHR/fetch calls:")
+            for c in captured_api_calls:
+                log.info(f"  CAPTURED: {c}")
+        else:
+            log.warning("No matching XHR calls intercepted — Performance dashboard may not fire the variance API on scroll")
 
         # Step 1: Variance items via API (best-effort — failure is non-fatal)
         api_data = await _fetch_variance_api(page)
