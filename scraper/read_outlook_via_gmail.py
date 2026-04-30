@@ -523,35 +523,44 @@ def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | No
     iso_week = today.isocalendar()[1]
     biweek_flag = iso_week % 2  # alternates 0/1 each week
     rotating_ideas = {
-        0: ("Monday Reset — Portion Calibration",
-            "Re-weigh the fry scoop and topping cups in front of the team. "
-            "Show what an over-portion looks like vs spec — this is real money on COGS."),
-        1: ("Tuesday — Line-Ahead Drill",
-            "Practice loading meat on the grill before the customer orders. "
-            "Read the lobby — if 3+ people are in line, fire patties NOW. Head start = ticket times down."),
-        2: ("Wednesday — Upsell Script Practice",
-            "Run register upsells: 'Make it a regular fry?' / 'Add bacon?' / 'Cajun fries today?' "
-            "Every shift leader role-plays 3 upsells with a crew member before doors open."),
-        3: ("Thursday — Steritech Walk Rehearsal",
-            "Walk the store like the Steritech inspector. Lids on mushrooms and onions? Wet dishes stacked? "
-            "Critical checklist signed off? Find one thing to fix BEFORE shift starts."),
-        4: ("Friday — Shop Score Review",
-            "Pull this week's shop. What did we miss? Hand wash? Greet? Upsell? Ticket time? "
-            "Name the miss out loud, name the fix, assign the owner. Shops MUST improve."),
+        0: ("Monday — VERBAL GREETING Drill",
+            "Our 4/17 shop scored 0/20 on verbal greeting. That ONE miss = 47% overall. "
+            "Every shift leader runs the greeting drill: 'Welcome to Five Guys, what can I get started for you?' — "
+            "every guest, EVERY time. Eye contact. Energy. Pull anyone who skips it aside immediately."),
+        1: ("Tuesday — Restroom Hourly Check Owner",
+            "4/17 shop also scored 0/20 on restroom (dirty floor, sink, mirror). "
+            "Assign a NAMED owner each hour for restroom check — sign the sheet, no exceptions. "
+            "If the lobby is busy, the restroom still gets checked. Pre-assign at huddle, don't wing it."),
+        2: ("Wednesday — Hand Sink Discipline",
+            "Steritech caught an employee getting water from the hand sink to clean the grill — that's a MAJOR. "
+            "Hand sinks are for HANDWASHING ONLY. Demo it. Re-coach it. If you see anyone using it for anything "
+            "else — water for cleaning, filling buckets, rinsing rags — stop them on the spot."),
+        3: ("Thursday — New Customer Service Course Check",
+            "Brad assigned the new Customer Service Course on April 21 to ALL employees. "
+            "Pull FGU progress at huddle — name who hasn't started, name who's behind. "
+            "Goal: every crew member completes it this week. This directly addresses our shop drag."),
+        4: ("Friday — Shop Trend Review (47 → 100 → 87)",
+            "We've gone 47% → 100% → 87% in three shops. What did the 100% shift do that the others didn't? "
+            "Pull all three reports at huddle. Name the difference. The 100% wasn't luck — it was execution. "
+            "Lock in what worked. Shops MUST improve — corporate KPI weights shop avg at 20%."),
         5: ("Saturday — Volume + Break Discipline",
             "Big day. Make cuts as labor allows, but breaks are 30 MINUTES — no shortcuts. "
-            "Employee meals rung in at break time, every time."),
+            "Employee meals rung in at break time, every time. "
+            "And read the line — meat on the grill BEFORE the order, head start at peak."),
         6: ("Sunday — Reset + Coach the Coach",
             "Walk through with the closing manager. What's Monday starting with? "
-            "Pick one shift leader and coach them on one fundamental — pass it forward."),
+            "Pick one shift leader and coach them on one fundamental — pass it forward. "
+            "Specific pick this week: who's going to own the verbal greeting standard on Monday open?"),
     }
     biweekly_themes = [
-        ("Even Weeks — COGS Deep Dive",
-         "This week, every shift leader counts a portion (fries, toppings, cheese) and reports actual vs spec. "
-         "We don't fix what we don't measure."),
-        ("Odd Weeks — Guest Experience Sprint",
-         "This week, every shift leader watches one full transaction (greet → register → window) "
-         "and gives the cashier ONE specific piece of feedback. Build the muscle."),
+        ("Even Weeks — Service Recovery Sprint",
+         "Service is our #1 drag — 47% shop with the verbal greeting miss is dragging the corporate KPI ranking. "
+         "Every shift leader watches one full transaction (greet → register → window) per shift "
+         "and gives the cashier ONE specific piece of feedback. Build the muscle. Shops MUST improve."),
+        ("Odd Weeks — COGS + Steritech Tighten",
+         "Re-calibrate portions (fries, toppings) and walk the store like Steritech's here today. "
+         "Lids on mushrooms and onions, wet dishes stacked clean, hand sinks for handwashing ONLY — "
+         "the 4/28 hand sink violation can't repeat. Find one gap, fix it before shift."),
     ]
     rot_title, rot_body = rotating_ideas[dow]
     bi_title, bi_body = biweekly_themes[biweek_flag]
