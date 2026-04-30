@@ -2,7 +2,7 @@
   "meta": {
     "report_date": "2026-04-29",
     "report_display": "Wednesday, April 29, 2026",
-    "generated": "4/30/2026 at 8:07 AM"
+    "generated": "4/30/2026 at 1:04 PM"
   },
   "sales": {
     "net": 4638.0,
@@ -12,7 +12,7 @@
     "forecast": 4597.0,
     "forecast_week": 12810.0,
     "vs_ly": 446.0,
-    "vs_ly_week": 446.0,
+    "vs_ly_week": 5199.0,
     "vs_forecast": 41.0,
     "per_guest": 5.51,
     "per_guest_week": 5.47
@@ -56,7 +56,7 @@
     },
     "Net Sales to Last Year": {
       "day": "$446",
-      "week": "$446"
+      "week": "$5,199"
     },
     "Actual Labor": {
       "day": "",
