@@ -37,7 +37,8 @@ def latest_pdf(store_id: str) -> Path | None:
     base = ROOT / "data" / "raw" / "parbrink" / store_id
     if not base.exists():
         return None
-    for d in sorted([x for x in base.iterdir() if x.is_dir()], reverse=True):
+    daily = [x for x in base.iterdir() if x.is_dir() and re.match(r'^\d{4}-\d{2}-\d{2}$', x.name)]
+    for d in sorted(daily, reverse=True):
         cand = d / "Hourly Sales And Labor.pdf"
         if cand.exists():
             return cand

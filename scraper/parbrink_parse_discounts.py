@@ -38,7 +38,7 @@ def latest_pdf(store_id: str) -> Path | None:
     base = ROOT / "data" / "raw" / "parbrink" / store_id
     if not base.exists():
         return None
-    dated = sorted([d for d in base.iterdir() if d.is_dir()], reverse=True)
+    dated = sorted([d for d in base.iterdir() if d.is_dir() and re.match(r'^\d{4}-\d{2}-\d{2}$', d.name)], reverse=True)
     for d in dated:
         cand = d / "Discount Summary.pdf"
         if cand.exists():

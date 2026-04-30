@@ -1,47 +1,47 @@
 {
   "meta": {
     "store_id": "2065",
-    "anchor_date": "2026-04-26",
-    "generated": "2026-04-28T00:28:46",
-    "days_seen_total": 3,
-    "days_in_week": 3,
-    "days_in_month": 3,
-    "days_in_quarter": 3
+    "anchor_date": "2026-04-28",
+    "generated": "2026-04-30T01:08:53",
+    "days_seen_total": 4,
+    "days_in_week": 4,
+    "days_in_month": 4,
+    "days_in_quarter": 4
   },
   "week": {
-    "net_sales": 15250.34,
-    "gross_sales": 15557.39,
-    "order_count": 598,
-    "guest_count": 2797,
-    "labor_cost": 2964.0,
-    "labor_hours": 251.41,
-    "labor_percent": 19.44,
-    "sales_per_guest": 5.45,
-    "avg_ticket": 25.5,
-    "days": 3
+    "net_sales": 18609.07,
+    "gross_sales": 18926.61,
+    "order_count": 726,
+    "guest_count": 3397,
+    "labor_cost": 3702.73,
+    "labor_hours": 302.98,
+    "labor_percent": 19.9,
+    "sales_per_guest": 5.48,
+    "avg_ticket": 25.63,
+    "days": 4
   },
   "month": {
-    "net_sales": 15250.34,
-    "gross_sales": 15557.39,
-    "order_count": 598,
-    "guest_count": 2797,
-    "labor_cost": 2964.0,
-    "labor_hours": 251.41,
-    "labor_percent": 19.44,
-    "sales_per_guest": 5.45,
-    "avg_ticket": 25.5,
-    "days": 3
+    "net_sales": 18609.07,
+    "gross_sales": 18926.61,
+    "order_count": 726,
+    "guest_count": 3397,
+    "labor_cost": 3702.73,
+    "labor_hours": 302.98,
+    "labor_percent": 19.9,
+    "sales_per_guest": 5.48,
+    "avg_ticket": 25.63,
+    "days": 4
   },
   "quarter": {
-    "net_sales": 15250.34,
-    "gross_sales": 15557.39,
-    "order_count": 598,
-    "guest_count": 2797,
-    "labor_cost": 2964.0,
-    "labor_hours": 251.41,
-    "labor_percent": 19.44,
-    "sales_per_guest": 5.45,
-    "avg_ticket": 25.5,
-    "days": 3
+    "net_sales": 18609.07,
+    "gross_sales": 18926.61,
+    "order_count": 726,
+    "guest_count": 3397,
+    "labor_cost": 3702.73,
+    "labor_hours": 302.98,
+    "labor_percent": 19.9,
+    "sales_per_guest": 5.48,
+    "avg_ticket": 25.63,
+    "days": 4
   }
 }

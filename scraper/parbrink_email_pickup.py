@@ -137,29 +137,29 @@ def get_credentials(setup_mode: bool = False) -> Credentials:
 def find_latest_email(service, subject: str, target_date: date | None) -> dict | None:
     """Returns the newest matching message metadata, or None.
 
-    Prefers unread; falls back to most-recent overall when target_date is given.
+    Searches across ALL matching emails (read or unread). If target_date is
+    given, returns the newest message whose Business Date matches; otherwise
+    falls back to the absolute most-recent message.
     """
     base_query = f'from:{SENDER} subject:"{subject}"'
-    queries = [f"{base_query} is:unread", base_query]
 
-    for q in queries:
-        try:
-            resp = service.users().messages().list(userId="me", q=q, maxResults=10).execute()
-        except HttpError as e:
-            raise SystemExit(f"Gmail list failed: {e}")
-        messages = resp.get("messages", [])
-        if not messages:
-            continue
+    try:
+        resp = service.users().messages().list(userId="me", q=base_query, maxResults=15).execute()
+    except HttpError as e:
+        raise SystemExit(f"Gmail list failed: {e}")
+    messages = resp.get("messages", [])
+    if not messages:
+        return None
+
+    if target_date is not None:
         for m in messages:
             full = service.users().messages().get(userId="me", id=m["id"], format="full").execute()
-            if target_date is None:
-                return full
             body = extract_plain_body(full)
             biz = parse_business_date(body)
             if biz == target_date:
                 return full
-        return service.users().messages().get(userId="me", id=messages[0]["id"], format="full").execute()
-    return None
+
+    return service.users().messages().get(userId="me", id=messages[0]["id"], format="full").execute()
 
 
 def extract_plain_body(message: dict) -> str:

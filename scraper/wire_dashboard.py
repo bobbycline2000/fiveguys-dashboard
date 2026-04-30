@@ -33,10 +33,18 @@ CRITICAL_LABELS = {
 def load(rel):
     return json.loads((ROOT / rel).read_text(encoding="utf-8"))
 
+def _folder_effective_date(p):
+    # YYYY-MM-DD/ → that date; week-ending-YYYY-MM-DD/ → that date.
+    # Anything else sorts last (epoch).
+    import re as _re
+    m = _re.match(r'^(?:week-ending-)?(\d{4}-\d{2}-\d{2})$', p.name)
+    return m.group(1) if m else "0000-00-00"
+
 def load_latest(source, report):
     base = RAW / source / STORE_ID
     if base.exists():
-        for d in sorted([x for x in base.iterdir() if x.is_dir()], reverse=True):
+        dirs = [x for x in base.iterdir() if x.is_dir()]
+        for d in sorted(dirs, key=_folder_effective_date, reverse=True):
             cand = d / report
             if cand.exists():
                 return json.loads(cand.read_text(encoding="utf-8")), cand
