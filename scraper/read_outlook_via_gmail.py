@@ -515,80 +515,89 @@ def build_blackberry_lto_update(today: date) -> list[str]:
 
 def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | None = None) -> str:
     """Daily 5-minute shift huddle plan focused on in-store operations.
-    Anchors are constant (the fundamentals don't change), but the spotlight
-    rotates by day-of-week so the team hears emphasis on different areas
-    across the week. Pulled into every brief moving forward."""
-    # Day-of-week spotlight rotation — 0=Monday … 6=Sunday
+    Four pillars run EVERY day until Bobby updates them: COGS, Shops, Steritech, Labor.
+    A rotating weekly/biweekly idea is layered on top to keep huddles fresh.
+    Pulled into every brief moving forward."""
+    # Weekly/biweekly rotating shift-leader idea — 0=Monday … 6=Sunday
     dow = today.weekday()
-    spotlight_by_dow = {
-        0: ("Stainless Steel + Handwashing",
-            "Hand sinks should sparkle — wipe down stainless steel around hand sinks first thing. "
-            "Handwash procedure: 20 seconds, soap to wrists, rinse thoroughly, paper towel only. "
-            "Demo the wash for anyone unsure."),
-        1: ("Ticket Times + Guest Greeting",
-            "TICKET TIMES are huge. Register-to-window under 6 minutes, every order. "
-            "Greet at the door AND at the register — eye contact, smile, energy. "
-            "Call-back the order on hand-off. Thank every guest leaving."),
-        2: ("Dumpster Area + Garbage Cans",
-            "Walk the dumpster area before opening — doors CLOSED, area swept, no overflow. "
-            "Garbage cans inside: liners straight, lids clean, no overflow. "
-            "Lobby cans checked every 30 minutes minimum."),
-        3: ("Smiling Faces + Energy + Call-Back",
-            "Energy at the register sets the tone for the whole shift. Smile, make eye contact, "
-            "call-back the order so the guest knows you heard them. Hand-off with a thank-you."),
-        4: ("Secret Shop Review + Friday Reset",
-            "Shop scores arrive Thu/Fri. Today we review — what worked, what didn't, what changes. "
-            "Reset the lobby, hit the deep-clean items, and walk into the weekend tight."),
-        5: ("Saturday Volume + Speed",
-            "Saturday is our biggest day. Speed of service matters more than ever. "
-            "Pre-position fries, keep buns ahead of the line, second person on register at peak."),
-        6: ("Reset + Week Ahead",
-            "Sunday close = Monday's open. Deep clean wherever the week was light. "
-            "Walk-through with the closing manager — what are we starting Monday with?"),
+    iso_week = today.isocalendar()[1]
+    biweek_flag = iso_week % 2  # alternates 0/1 each week
+    rotating_ideas = {
+        0: ("Monday Reset — Portion Calibration",
+            "Re-weigh the fry scoop and topping cups in front of the team. "
+            "Show what an over-portion looks like vs spec — this is real money on COGS."),
+        1: ("Tuesday — Line-Ahead Drill",
+            "Practice loading meat on the grill before the customer orders. "
+            "Read the lobby — if 3+ people are in line, fire patties NOW. Head start = ticket times down."),
+        2: ("Wednesday — Upsell Script Practice",
+            "Run register upsells: 'Make it a regular fry?' / 'Add bacon?' / 'Cajun fries today?' "
+            "Every shift leader role-plays 3 upsells with a crew member before doors open."),
+        3: ("Thursday — Steritech Walk Rehearsal",
+            "Walk the store like the Steritech inspector. Lids on mushrooms and onions? Wet dishes stacked? "
+            "Critical checklist signed off? Find one thing to fix BEFORE shift starts."),
+        4: ("Friday — Shop Score Review",
+            "Pull this week's shop. What did we miss? Hand wash? Greet? Upsell? Ticket time? "
+            "Name the miss out loud, name the fix, assign the owner. Shops MUST improve."),
+        5: ("Saturday — Volume + Break Discipline",
+            "Big day. Make cuts as labor allows, but breaks are 30 MINUTES — no shortcuts. "
+            "Employee meals rung in at break time, every time."),
+        6: ("Sunday — Reset + Coach the Coach",
+            "Walk through with the closing manager. What's Monday starting with? "
+            "Pick one shift leader and coach them on one fundamental — pass it forward."),
     }
-    spotlight_title, spotlight_body = spotlight_by_dow[dow]
+    biweekly_themes = [
+        ("Even Weeks — COGS Deep Dive",
+         "This week, every shift leader counts a portion (fries, toppings, cheese) and reports actual vs spec. "
+         "We don't fix what we don't measure."),
+        ("Odd Weeks — Guest Experience Sprint",
+         "This week, every shift leader watches one full transaction (greet → register → window) "
+         "and gives the cashier ONE specific piece of feedback. Build the muscle."),
+    ]
+    rot_title, rot_body = rotating_ideas[dow]
+    bi_title, bi_body = biweekly_themes[biweek_flag]
 
     lines: list[str] = []
     lines.append("## 📋 Shift Huddle Plan — Today's 5-Minute Pre-Shift")
     lines.append(f"*({today.strftime('%A %B %d')} — read this to the team before the shift starts.)*")
     lines.append("")
 
-    lines.append(f"### 🎯 Today's Spotlight: {spotlight_title}")
+    lines.append(f"### 🎯 Today's Idea: {rot_title}")
     lines.append("")
-    lines.append(f"> {spotlight_body}")
+    lines.append(f"> {rot_body}")
+    lines.append("")
+    lines.append(f"**This Week's Theme — {bi_title}:** {bi_body}")
     lines.append("")
 
-    lines.append("### The Fundamentals — Hit These Every Shift")
+    lines.append("### The Four Pillars — Hit These Every Shift")
     lines.append("")
-    lines.append("**1. Guest Experience**")
-    lines.append("- Greet at the **door** AND at the **register** — eye contact, smile, energy.")
-    lines.append("- **Call-back** every order so the guest knows you heard them.")
-    lines.append("- Thank every guest on the way out. No one walks past silent.")
+    lines.append("**1. 💰 COGS — Portion & Waste Control**")
+    lines.append("- **Portion the FRIES** — use the scoop, level it, don't overstuff. Every overscoop is profit on the floor.")
+    lines.append("- **Portion the TOPPINGS** — onions, mushrooms, cheese, bacon, peppers — measured, not eyeballed.")
+    lines.append("- **Stop wasting product** — cooked-not-sold, dropped buns, over-portioned condiments. Watch it shift-long.")
+    lines.append("- Cooked product to spec — no extra patties idling on the grill at slow times.")
     lines.append("")
-    lines.append("**2. Ticket Times — HUGE**")
-    lines.append("- Register → window in **under 6 minutes**, every order.")
-    lines.append("- If we're slipping, second person on register, somebody bagging, somebody calling out.")
-    lines.append("- Watch the screen. Don't let an order sit.")
+    lines.append("**2. 🔍 Shops — SHOPS MUST IMPROVE**")
+    lines.append("- **Wash hands** — 20 seconds, soap, paper towel. Every glove change, every transition.")
+    lines.append("- **GREET every customer** — door AND register. Eye contact, smile, energy.")
+    lines.append("- **UPSELL AT THE REGISTER** — every single order. Fries, drink, bacon, Cajun. Ask the question.")
+    lines.append("- **TICKET TIMES** — register to window UNDER 6 MINUTES. Every order. Watch the clock.")
+    lines.append("- **Meat on the grill BEFORE the customer orders** — read the line, fire patties early. "
+                 "If 3+ people are coming, we get a head start.")
     lines.append("")
-    lines.append("**3. Cleanliness (Steritech-ready every shift)**")
-    lines.append("- **Stainless steel around hand sinks** — wipe down, no streaks, no splash marks.")
-    lines.append("- **Garbage cans** — lids clean, liners straight, never overflowing.")
-    lines.append("- **Dumpster area** — doors CLOSED, area swept, no debris.")
-    lines.append("- Lobby sweep every 15 minutes during peak. Tables wiped between guests.")
+    lines.append("**3. 🧼 Steritech Focus**")
+    lines.append("- **Manager walk-through completed** — sign-off before doors open. Find the gaps before the inspector does.")
+    lines.append("- **Cleaning calendar items assigned** — every shift, every item, name on it.")
+    lines.append("- **Critical checklist assigned** — this is non-negotiable. Owner named, completed, signed.")
+    lines.append("- **LIDS on mushrooms and onions** — every time, all the time. No exceptions.")
+    lines.append("- **Stack wet dishes** — properly. Dishes must be clean and in good condition AT ALL TIMES.")
+    lines.append("- Walk the store like the inspector is here today. Fix it now, not later.")
     lines.append("")
-    lines.append("**4. Handwashing**")
-    lines.append("- 20 seconds, soap to wrists, paper towel only — no shortcuts.")
-    lines.append("- After every register-to-grill transition, every break, every glove change.")
-    lines.append("- Hand sinks are for handwashing ONLY — never grill water, never anything else.")
-    lines.append("")
-    lines.append("**5. Energy & Attitude**")
-    lines.append("- Smiles are the cheapest thing we sell and they bring guests back.")
-    lines.append("- If you're tired, the guest can hear it. Pick it up.")
-    lines.append("- Lead each other — call out wins, fix gaps in the moment.")
-    lines.append("")
-    lines.append("### What Corporate / The Shop Sees")
-    lines.append("- A 100% shop = the team gets paid. **Every shop is real money on the line.**")
-    lines.append("- One bad shift can drop a quarter average. Stay sharp every shift.")
+    lines.append("**4. ⏱️ Labor Discipline**")
+    lines.append("- **Make cuts** — when sales drop, labor drops. Don't ride out the slow patch with a full crew.")
+    lines.append("- **Check labor HOURLY** — every hour, look at the number. Adjust live, not at end of shift.")
+    lines.append("- **Breaks = 30 MINUTES** — no 10-minute breaks, no 45-minute breaks. Thirty.")
+    lines.append("- **Employee meals RUNG INTO THE REGISTER at the time of the break** — every meal, every break, every time. "
+                 "No free food off the books.")
     lines.append("")
 
     # ── Training & Corporate Updates ─────────────────────────────────────────
