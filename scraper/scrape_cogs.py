@@ -47,6 +47,81 @@ COGS_GOAL_PCT = 27.5  # Five Guys standard food cost goal
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 
+def _parse_ncdashboard_avt(page_text: str) -> dict | None:
+    """
+    Parse the 'Top 10 Actual vs. Theoretical Cost Items' widget from NCDashboard
+    inner_text(). This widget is always visible after login — no extra navigation.
+
+    Returns {"week_start": date, "week_end": date, "items": [...]} or None.
+    """
+    marker = "Top 10 Actual vs. Theoretical Cost Items"
+    idx = page_text.find(marker)
+    if idx < 0:
+        return None
+
+    chunk = page_text[idx: idx + 1200]
+    lines = [l.strip() for l in chunk.splitlines() if l.strip()]
+
+    # Date range line: "MM/DD/YYYY - MM/DD/YYYY"
+    week_start = week_end = None
+    date_re = re.compile(r"(\d{2}/\d{2}/\d{4})\s*[-–]\s*(\d{2}/\d{2}/\d{4})")
+    for line in lines[:5]:
+        m = date_re.search(line)
+        if m:
+            week_start = datetime.strptime(m.group(1), "%m/%d/%Y").date()
+            week_end   = datetime.strptime(m.group(2), "%m/%d/%Y").date()
+            break
+
+    # Items: "N.Item Name", "$actual", "$theoretical", "±pct%"
+    dollar_re  = re.compile(r"^\$-?[\d,]+$")
+    pct_re     = re.compile(r"^-?\d+%$")
+    item_re    = re.compile(r"^(\d+)\.\s*(.+)$")
+
+    items = []
+    i = 0
+    while i < len(lines):
+        m = item_re.match(lines[i])
+        if m:
+            name = m.group(2).strip()
+            # Collect up to 3 more lines: actual, theoretical, pct
+            vals = []
+            j = i + 1
+            while j < len(lines) and len(vals) < 3:
+                if dollar_re.match(lines[j]) or pct_re.match(lines[j]):
+                    vals.append(lines[j])
+                elif item_re.match(lines[j]):
+                    break
+                j += 1
+
+            if len(vals) >= 2:
+                def _parse_dollar(s):
+                    return float(s.replace("$", "").replace(",", ""))
+                actual = _parse_dollar(vals[0])
+                theoretical = _parse_dollar(vals[1])
+                pct_str = vals[2].rstrip("%") if len(vals) >= 3 else None
+                variance_pct = float(pct_str) if pct_str is not None else None
+                over_dollars = round(actual - theoretical, 2)
+                items.append({
+                    "name": name,
+                    "actual": actual,
+                    "theoretical": theoretical,
+                    "over_dollars": over_dollars,
+                    "variance_pct": variance_pct,
+                })
+            i = j
+        else:
+            i += 1
+
+    if not items:
+        return None
+
+    items.sort(key=lambda x: x["over_dollars"], reverse=True)
+    for rank, it in enumerate(items, 1):
+        it["rank"] = rank
+
+    return {"week_start": week_start, "week_end": week_end, "items": items}
+
+
 def _parse_ct_date(s: str) -> date | None:
     """Parse CrunchTime date strings: 'MM/DD/YYYY HH:MM:SS' or 'YYYY-MM-DD'."""
     for fmt in ("%m/%d/%Y %H:%M:%S", "%m/%d/%Y", "%Y-%m-%d"):
@@ -376,21 +451,27 @@ async def run():
         else:
             log.warning("No matching XHR calls intercepted — Performance dashboard may not fire the variance API on scroll")
 
-        # Step 1: Variance items via API (best-effort — failure is non-fatal)
-        api_data = await _fetch_variance_api(page)
-        if not api_data:
-            log.warning("Variance API unavailable — will still attempt P&L COGS extraction")
-            items = []
+        # Step 1a: NCDashboard widget text parse (primary — no extra navigation needed)
+        page_text = await page.inner_text("body")
+        widget_data = _parse_ncdashboard_avt(page_text)
+        if widget_data and widget_data["items"]:
+            log.info(f"NCDashboard AVT widget: {len(widget_data['items'])} items, "
+                     f"week={widget_data['week_start']}–{widget_data['week_end']}")
+            items = widget_data["items"]
+            week_start = widget_data["week_start"]
+            week_end   = widget_data["week_end"]
         else:
-            items = _parse_items(api_data.get("listSummary", []))
-
-        # Derive week dates from API response or fall back to calendar math
-        week_start: date | None = None
-        week_end: date | None = None
-        if api_data:
-            date_range = api_data.get("dateRange", {})
-            week_start = _parse_ct_date(date_range.get("startDate", ""))
-            week_end   = _parse_ct_date(date_range.get("endDate", ""))
+            log.warning("NCDashboard AVT widget not found — falling back to API")
+            # Step 1b: Variance items via API (fallback)
+            api_data = await _fetch_variance_api(page)
+            if not api_data:
+                log.warning("Variance API unavailable — no items")
+                items = []
+            else:
+                items = _parse_items(api_data.get("listSummary", []))
+                date_range = api_data.get("dateRange", {})
+                week_start = _parse_ct_date(date_range.get("startDate", ""))
+                week_end   = _parse_ct_date(date_range.get("endDate", ""))
 
         if not week_start or not week_end:
             today_fb = datetime.now(tz=ET).date()

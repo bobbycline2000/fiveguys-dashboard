@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "source": "CrunchTime NCDashboard — Top 10 Actual vs. Theoretical Cost widget",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-04-20",
+    "week_end": "2026-04-26",
+    "pulled": "2026-04-30 via Chrome MCP",
+    "method": "ncDashboard_widget"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": null,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": null,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {"name": "Ground Beef",             "actual": 2762, "theoretical": 2637, "variance_pct": -5,   "over_dollars": 125},
+    {"name": "Bun, Burger",             "actual": 907,  "theoretical": 846,  "variance_pct": -7,   "over_dollars": 61},
+    {"name": "Cajun Season",            "actual": 132,  "theoretical": 79,   "variance_pct": -66,  "over_dollars": 53},
+    {"name": "Tomatoes, Fresh",         "actual": 233,  "theoretical": 204,  "variance_pct": -14,  "over_dollars": 29},
+    {"name": "Topping, Caramel",        "actual": 27,   "theoretical": 6,    "variance_pct": -388, "over_dollars": 21},
+    {"name": "Pickles",                 "actual": 109,  "theoretical": 92,   "variance_pct": -18,  "over_dollars": 17},
+    {"name": "Topping, Peanut Butter Cup", "actual": -27, "theoretical": 27, "variance_pct": 200,  "over_dollars": -54},
+    {"name": "Mushroom Pcs",            "actual": 27,   "theoretical": 82,   "variance_pct": 67,   "over_dollars": -55},
+    {"name": "Hot Dog",                 "actual": 10,   "theoretical": 80,   "variance_pct": 88,   "over_dollars": -70},
+    {"name": "Potato, Idaho",           "actual": 796,  "theoretical": 878,  "variance_pct": 9,    "over_dollars": -82}
+  ],
+  "ranking": "over_dollars_desc"
+}
