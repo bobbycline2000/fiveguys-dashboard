@@ -9,7 +9,7 @@ dashboard silently stopped updating after the first successful run.
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, date
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -68,6 +68,19 @@ if cogs is None:
 discounts, _ = load_latest("parbrink", "discount_summary.json")
 sales_summary, _ = load_latest("parbrink", "sales_summary.json")
 hourly_labor, _ = load_latest("parbrink", "hourly_sales_labor.json")
+
+# Discard stale Par Brink data — only use if its report_date matches CrunchTime's (within 1 day).
+# Par Brink emails haven't arrived → load_latest returns the last file regardless of age.
+_ct_report_date = latest.get("meta", {}).get("report_date")
+if _ct_report_date and sales_summary:
+    try:
+        _pb_date = date.fromisoformat(sales_summary.get("meta", {}).get("report_date", ""))
+        _ct_date = date.fromisoformat(_ct_report_date)
+        if abs((_pb_date - _ct_date).days) > 1:
+            print(f"  [STALENESS] Par Brink {_pb_date} vs CrunchTime {_ct_date} — discarding Par Brink data (using CrunchTime fallback)")
+            sales_summary = discounts = hourly_labor = None
+    except (ValueError, TypeError):
+        pass
 
 # ── period rollups (Week / Month / Quarter aggregates) ─────────────────
 try:
@@ -730,6 +743,57 @@ if discounts:
         rf'\g<1>\n{new_tbody}\n        \g<3>',
         "Discounts table body",
         flags=DOTALL)
+
+# ── Team Notes card (from daily email brief) ──────────────────────────
+team_notes_path = ROOT / "data" / "team_notes.json"
+if team_notes_path.exists():
+    try:
+        tn = json.loads(team_notes_path.read_text(encoding="utf-8"))
+        notes = tn.get("notes", [])
+        new_count = tn.get("new_count", len(notes))
+
+        role_css = {"director": "from-director", "dm": "from-dm", "gm": "", "alert": ""}
+        role_badge = {"director": "director", "dm": "dm", "gm": "", "alert": ""}
+
+        items_html = ""
+        for n in notes:
+            css_class = role_css.get(n.get("role", ""), "")
+            badge_css = role_badge.get(n.get("role", ""), "")
+            badge_html = (
+                f'<span class="note-role {badge_css}">{n["role_label"]}</span>'
+                if badge_css else
+                f'<span class="note-role">{n["role_label"]}</span>'
+            )
+            items_html += (
+                f'\n          <div class="note-item {css_class}">'
+                f'\n            <div class="note-head">'
+                f'\n              <span>'
+                f'\n                <span class="note-from">{n["from"]}</span>'
+                f'\n                {badge_html}'
+                f'\n              </span>'
+                f'\n              <span class="note-time">{n["time"]}</span>'
+                f'\n            </div>'
+                f'\n            <div class="note-body">{n["body"]}</div>'
+                f'\n          </div>'
+            )
+
+        notes_block = f'\n        <div class="notes-list">{items_html}\n        </div>'
+
+        rep(
+            r'<!-- TEAM-NOTES-START -->.*?<!-- TEAM-NOTES-END -->',
+            f'<!-- TEAM-NOTES-START -->{notes_block}\n        <!-- TEAM-NOTES-END -->',
+            "Team Notes card",
+            flags=re.DOTALL,
+        )
+
+        # Update the "N new" pill
+        rep(
+            r'(<div class="pill pill-white">)\d+ new(</div>)',
+            rf'\g<1>{new_count} new\g<2>',
+            "Team Notes new pill",
+        )
+    except Exception as exc:
+        print(f"  ⚠ team_notes.json parse error: {exc}")
 
 # ── Footer timestamp ───────────────────────────────────────────────────
 rep(r'(<span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>)[^<]*(</span> &nbsp;&middot;&nbsp; )[^<]*(</span>)',

@@ -827,6 +827,187 @@ def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
     return "\n".join(lines)
 
 
+# ── HTML renderer ────────────────────────────────────────────────────────────
+
+def md_to_html(md: str) -> str:
+    """Converts the brief markdown into a styled HTML email — Five Guys brand."""
+    RED   = "#DA291C"
+    NAVY  = "#1A2744"
+    GOLD  = "#F5C518"
+    LGRAY = "#F7F7F7"
+    MGRAY = "#E0E0E0"
+
+    css = f"""
+    <style>
+      body {{font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#222;background:#fff;margin:0;padding:0}}
+      .wrapper {{max-width:680px;margin:0 auto;background:#fff}}
+      .header {{background:{RED};color:#fff;padding:18px 24px;border-radius:4px 4px 0 0}}
+      .header h1 {{margin:0;font-size:20px;font-weight:700;letter-spacing:0.5px}}
+      .header .meta {{font-size:12px;opacity:0.85;margin-top:4px}}
+      .body {{padding:0 24px 24px}}
+      h2 {{font-size:15px;font-weight:700;color:{NAVY};border-left:4px solid {RED};
+           padding:8px 12px;background:{LGRAY};margin:20px 0 8px;border-radius:0 4px 4px 0}}
+      h2.critical {{border-left-color:{RED};background:#FFF0EF;color:{RED}}}
+      h2.director {{border-left-color:{NAVY};background:#EEF1F8}}
+      h2.shop     {{border-left-color:{GOLD};background:#FFFBEE}}
+      h2.huddle   {{border-left-color:#2E7D32;background:#F1F8F1}}
+      h3 {{font-size:13px;font-weight:700;color:{NAVY};margin:14px 0 4px;padding-left:4px}}
+      p  {{margin:4px 0 10px;line-height:1.55}}
+      ul {{margin:4px 0 10px 18px;padding:0;line-height:1.6}}
+      li {{margin-bottom:3px}}
+      table {{border-collapse:collapse;width:100%;margin:10px 0 14px;font-size:13px}}
+      th {{background:{NAVY};color:#fff;padding:7px 10px;text-align:left;font-weight:700}}
+      td {{padding:6px 10px;border-bottom:1px solid {MGRAY}}}
+      tr:nth-child(even) td {{background:{LGRAY}}}
+      blockquote {{border-left:4px solid {GOLD};margin:10px 0;padding:8px 14px;
+                   background:#FFFBEE;color:#444;font-style:italic;border-radius:0 4px 4px 0}}
+      .pill-red  {{display:inline-block;background:{RED};color:#fff;border-radius:3px;
+                   padding:1px 7px;font-size:12px;font-weight:700}}
+      .pill-gold {{display:inline-block;background:{GOLD};color:#111;border-radius:3px;
+                   padding:1px 7px;font-size:12px;font-weight:700}}
+      .footer {{font-size:11px;color:#999;text-align:center;padding:12px;
+                border-top:1px solid {MGRAY};margin-top:16px}}
+      hr {{border:none;border-top:1px solid {MGRAY};margin:16px 0}}
+      strong {{color:#111}}
+      code {{background:{LGRAY};padding:1px 5px;border-radius:3px;font-size:12px}}
+    </style>"""
+
+    lines = md.split("\n")
+    html_lines: list[str] = []
+    in_table = False
+    table_header_done = False
+    in_ul = False
+
+    def flush_ul():
+        nonlocal in_ul
+        if in_ul:
+            html_lines.append("</ul>")
+            in_ul = False
+
+    def flush_table():
+        nonlocal in_table, table_header_done
+        if in_table:
+            html_lines.append("</table>")
+            in_table = False
+            table_header_done = False
+
+    def inline(text: str) -> str:
+        """Apply inline markdown: bold, italic, code, emoji passthrough."""
+        text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
+        text = re.sub(r"\*(.+?)\*",     r"<em>\1</em>",         text)
+        text = re.sub(r"`(.+?)`",       r"<code>\1</code>",      text)
+        return text
+
+    for raw_line in lines:
+        line = raw_line.rstrip()
+
+        # --- horizontal rule ---
+        if re.match(r"^-{3,}$", line):
+            flush_ul(); flush_table()
+            html_lines.append("<hr>")
+            continue
+
+        # --- blank line ---
+        if line.strip() == "":
+            flush_ul(); flush_table()
+            html_lines.append("")
+            continue
+
+        # --- H1 (title — handled separately in wrapper) ---
+        if line.startswith("# ") and not line.startswith("## "):
+            flush_ul(); flush_table()
+            # Skip — title goes in the header block
+            continue
+
+        # --- H2 ---
+        if line.startswith("## "):
+            flush_ul(); flush_table()
+            text = line[3:].strip()
+            cls = "critical" if "CRITICAL" in text.upper() else \
+                  "director" if "DIRECTOR" in text.upper() else \
+                  "shop"     if "SECRET SHOP" in text.upper() else \
+                  "huddle"   if "HUDDLE" in text.upper() else ""
+            html_lines.append(f'<h2 class="{cls}">{inline(text)}</h2>')
+            continue
+
+        # --- H3 ---
+        if line.startswith("### "):
+            flush_ul(); flush_table()
+            html_lines.append(f"<h3>{inline(line[4:].strip())}</h3>")
+            continue
+
+        # --- blockquote ---
+        if line.startswith("> "):
+            flush_ul(); flush_table()
+            html_lines.append(f"<blockquote>{inline(line[2:].strip())}</blockquote>")
+            continue
+
+        # --- table row ---
+        if line.startswith("|"):
+            flush_ul()
+            cells = [c.strip() for c in line.strip("|").split("|")]
+            if all(re.match(r"^[-: ]+$", c) for c in cells):
+                table_header_done = True
+                continue
+            if not in_table:
+                in_table = True
+                table_header_done = False
+                html_lines.append("<table>")
+            if not table_header_done:
+                html_lines.append("<tr>" + "".join(f"<th>{inline(c)}</th>" for c in cells) + "</tr>")
+                table_header_done = True
+            else:
+                html_lines.append("<tr>" + "".join(f"<td>{inline(c)}</td>" for c in cells) + "</tr>")
+            continue
+
+        flush_table()
+
+        # --- bullet list ---
+        m = re.match(r"^(\s*)[*\-]\s+(.+)", line)
+        if m:
+            if not in_ul:
+                html_lines.append("<ul>")
+                in_ul = True
+            html_lines.append(f"<li>{inline(m.group(2))}</li>")
+            continue
+
+        flush_ul()
+
+        # --- plain paragraph ---
+        if line.strip():
+            html_lines.append(f"<p>{inline(line.strip())}</p>")
+
+    flush_ul()
+    flush_table()
+
+    # Extract title from first H1 in md
+    title_match = re.search(r"^# (.+)$", md, re.MULTILINE)
+    title = title_match.group(1) if title_match else "Daily Brief"
+
+    # Extract pull time
+    meta_match = re.search(r"\*\*Pull time:\*\*\s*(.+?)\s*\|", md)
+    meta = meta_match.group(1) if meta_match else ""
+
+    body_html = "\n".join(html_lines)
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">{css}</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <h1>🍔 {title}</h1>
+    <div class="meta">Store 2065 — Dixie Highway, Louisville KY &nbsp;|&nbsp; {meta}</div>
+  </div>
+  <div class="body">
+    {body_html}
+  </div>
+  <div class="footer">Generated by Prometheus &nbsp;·&nbsp; fg2065@estep-co.com</div>
+</div>
+</body>
+</html>"""
+
+
 # ── Email send ───────────────────────────────────────────────────────────────
 
 def send_brief(service, subject: str, body_md: str) -> bool:
@@ -836,12 +1017,8 @@ def send_brief(service, subject: str, body_md: str) -> bool:
     msg["From"] = FROM_ADDRESS
     msg["To"] = TO_ADDRESS
 
-    # Plain text version
     msg.attach(MIMEText(body_md, "plain"))
-
-    # Simple HTML version — wrap in pre for readability
-    html_body = f"<html><body><pre style='font-family:monospace;font-size:13px;white-space:pre-wrap'>{body_md}</pre></body></html>"
-    msg.attach(MIMEText(html_body, "html"))
+    msg.attach(MIMEText(md_to_html(body_md), "html"))
 
     raw = base64.urlsafe_b64encode(msg.as_bytes()).decode("utf-8")
     try:
@@ -981,6 +1158,58 @@ def main() -> int:
         log(f"Newsletter rollup written to {rollup_dir}/raw-content-{dow}.md")
     except Exception as exc:
         log(f"Could not write newsletter rollup (non-fatal): {exc}")
+
+    # ── Write team_notes.json for dashboard Team Notes card ──────────────────
+    try:
+        notes = []
+        now_str = datetime.now().strftime("%-I:%M %p")
+
+        # Director messages → red border
+        for em in categorized.get("Director's Corner", []):
+            body = (em.get("body") or em.get("snippet") or "").strip()
+            body = re.sub(r"\s+", " ", body)[:300]
+            notes.append({
+                "from": "Brad Davis",
+                "role": "director",
+                "role_label": "Director",
+                "time": f"Today {now_str}",
+                "body": body,
+            })
+
+        # Crystal / DM messages → gold border
+        for em in categorized.get("Crystal Hess (DM)", []):
+            body = (em.get("body") or em.get("snippet") or "").strip()
+            body = re.sub(r"\s+", " ", body)[:300]
+            notes.append({
+                "from": "Crystal Hess",
+                "role": "dm",
+                "role_label": "DM",
+                "time": f"Today {now_str}",
+                "body": body,
+            })
+
+        # Critical / new-hire items → plain GM note
+        for em in categorized.get("New Hire / Onboarding", []):
+            hire = em.get("_hire_info", {})
+            names = ", ".join(hire.get("names", [])) or "New hire"
+            action = hire.get("action", "review and action")
+            notes.append({
+                "from": "Prometheus",
+                "role": "gm",
+                "role_label": "Alert",
+                "time": f"Today {now_str}",
+                "body": f"🚨 New hire: {names} — {action}",
+            })
+
+        team_notes_path = REPO_ROOT / "data" / "team_notes.json"
+        team_notes_path.parent.mkdir(parents=True, exist_ok=True)
+        team_notes_path.write_text(
+            json.dumps({"notes": notes, "new_count": len(notes), "date": today.isoformat()}, indent=2),
+            encoding="utf-8"
+        )
+        log(f"team_notes.json written — {len(notes)} note(s)")
+    except Exception as exc:
+        log(f"Could not write team_notes.json (non-fatal): {exc}")
 
     # ── Send ──────────────────────────────────────────────────────────────────
     if args.dry_run:
