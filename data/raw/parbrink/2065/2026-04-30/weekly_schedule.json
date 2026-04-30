@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "source": "Teamworx Daily Roster (Chrome MCP scrape)",
+    "store_id": "2065",
+    "report_date": "2026-04-30",
+    "week_start": "2026-04-27",
+    "week_end": "2026-05-03",
+    "generated": "2026-04-30T01:50:00",
+    "source_url": "https://fiveguysfr77.ct-teamworx.com/views/manager/tablet/dailyRoster.jsp"
+  },
+  "totals_by_day": {
+    "2026-04-30": 85.75
+  },
+  "schedule": {
+    "2026-04-30": {
+      "date": "2026-04-30",
+      "day_of_week": "Thursday",
+      "scheduled_hours": 85.75,
+      "shifts": [
+        {"name": "Vicki L.",    "role": "Shift Lead",      "start": "07:30 AM", "end": "04:00 PM"},
+        {"name": "Lidy H.",     "role": "Crew",            "start": "08:00 AM", "end": "04:00 PM"},
+        {"name": "Robert C.",   "role": "General Manager", "start": "09:00 AM", "end": "07:00 PM"},
+        {"name": "Jeremiah M.", "role": "Crew",            "start": "10:00 AM", "end": "08:00 PM"},
+        {"name": "Kasey W.",    "role": "Shift Lead",      "start": "11:00 AM", "end": "05:00 PM"},
+        {"name": "Francisco L.","role": "Crew",            "start": "12:00 PM", "end": "04:00 PM"},
+        {"name": "Madison C.",  "role": "Shift Lead",      "start": "03:00 PM", "end": "11:00 PM"},
+        {"name": "Nathan R.",   "role": "Shift Lead",      "start": "03:00 PM", "end": "11:00 PM"},
+        {"name": "Maylin H.",   "role": "Crew",            "start": "03:00 PM", "end": "11:00 PM"},
+        {"name": "DJuan J.",    "role": "Crew",            "start": "05:00 PM", "end": "09:00 PM"},
+        {"name": "Richard G.",  "role": "Crew",            "start": "05:00 PM", "end": "11:00 PM"},
+        {"name": "Ailen G.",    "role": "Crew",            "start": "05:45 PM", "end": "11:00 PM"}
+      ]
+    }
+  },
+  "today": {
+    "date": "2026-04-30",
+    "day_of_week": "Thursday",
+    "scheduled_hours": 85.75,
+    "shifts": [
+      {"name": "Vicki L.",    "role": "Shift Lead",      "start": "07:30 AM", "end": "04:00 PM"},
+      {"name": "Lidy H.",     "role": "Crew",            "start": "08:00 AM", "end": "04:00 PM"},
+      {"name": "Robert C.",   "role": "General Manager", "start": "09:00 AM", "end": "07:00 PM"},
+      {"name": "Jeremiah M.", "role": "Crew",            "start": "10:00 AM", "end": "08:00 PM"},
+      {"name": "Kasey W.",    "role": "Shift Lead",      "start": "11:00 AM", "end": "05:00 PM"},
+      {"name": "Francisco L.","role": "Crew",            "start": "12:00 PM", "end": "04:00 PM"},
+      {"name": "Madison C.",  "role": "Shift Lead",      "start": "03:00 PM", "end": "11:00 PM"},
+      {"name": "Nathan R.",   "role": "Shift Lead",      "start": "03:00 PM", "end": "11:00 PM"},
+      {"name": "Maylin H.",   "role": "Crew",            "start": "03:00 PM", "end": "11:00 PM"},
+      {"name": "DJuan J.",    "role": "Crew",            "start": "05:00 PM", "end": "09:00 PM"},
+      {"name": "Richard G.",  "role": "Crew",            "start": "05:00 PM", "end": "11:00 PM"},
+      {"name": "Ailen G.",    "role": "Crew",            "start": "05:45 PM", "end": "11:00 PM"}
+    ]
+  }
+}

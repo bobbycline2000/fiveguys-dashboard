@@ -571,9 +571,9 @@ if sched:
     else:
         missed.append("AM Shift table body")
 
-    # PM Shift block: from marker through its closing </table> before Hourly labor alerts
+    # PM Shift block: from marker through its closing </table> before end of schedule card
     new_pm, n_pm = re.subn(
-        r'        <!-- PM Shift -->.*?</table>(?=\s*\n\s*</div>\s*\n\s*<!-- Hourly labor alerts -->)',
+        r'        <!-- PM Shift -->.*?</table>(?=\s*\n\s*</div>\s*\n(?:\s*<!-- Hourly labor alerts -->|\s*</div>))',
         lambda m: pm_section,
         html, count=1, flags=DOTALL,
     )
