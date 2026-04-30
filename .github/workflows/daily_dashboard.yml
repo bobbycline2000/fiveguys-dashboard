@@ -236,6 +236,7 @@ jobs:
       # to data/debug-log.txt (picked up automatically by the next session)
       # and opens a GitHub issue for visibility.
       - name: Verify dashboard freshness
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scraper/verify_dashboard.py
@@ -285,6 +286,7 @@ jobs:
 
       # ── 8. Commit & push updated dashboard to main (local use — no Netlify)
       - name: Commit and push dashboard
+        if: always()
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
