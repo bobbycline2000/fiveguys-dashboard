@@ -138,6 +138,18 @@ jobs:
         continue-on-error: true
         run: python scraper/parbrink_parse_weekly_schedule.py --store 2065
 
+      # ── 4g3. Scrape today's published roster from Teamworx ────────────────
+      # Par Brink's weekly schedule arrives AFTER the week ends — too stale
+      # for the "Today's Schedule" card. Teamworx is where Bobby actually
+      # plans/publishes shifts, so we pull TODAY's roster from there.
+      # wire_dashboard's load_latest sorts by ISO date — today's folder wins.
+      - name: Scrape Teamworx Daily Roster (store 2065)
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_teamworx_roster.py --store 2065
+
       # ── 4h. Roll up daily sales_summary.json into Week/Month/Quarter ──────
       # Reads every data/raw/parbrink/2065/<date>/sales_summary.json and writes
       # data/period_rollups.json. wire_dashboard.py uses this to populate the
