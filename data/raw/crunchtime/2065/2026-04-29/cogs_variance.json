@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "source": "CrunchTime COGS Flash Report email (noreply@net-chef.com → fg2065@estep-co.com)",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-04-27",
+    "week_end": "2026-05-03",
+    "email_subject": "COGS Review Week Ending [May 3, 2026]",
+    "email_received": "2026-04-29T06:22:48Z",
+    "pulled": "2026-04-30 via Outlook REST API",
+    "method": "email_parse",
+    "items_source": "NCDashboard Top 10 AVT widget (week Apr 20-26 — last complete week)"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 23.4,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": -4.1,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {"name": "Ground Beef",                "actual": 2762, "theoretical": 2637, "variance_pct": -5,   "over_dollars": 125,  "rank": 1},
+    {"name": "Bun, Burger",                "actual": 907,  "theoretical": 846,  "variance_pct": -7,   "over_dollars": 61,   "rank": 2},
+    {"name": "Cajun Season",               "actual": 132,  "theoretical": 79,   "variance_pct": -66,  "over_dollars": 53,   "rank": 3},
+    {"name": "Tomatoes, Fresh",            "actual": 233,  "theoretical": 204,  "variance_pct": -14,  "over_dollars": 29,   "rank": 4},
+    {"name": "Topping, Caramel",           "actual": 27,   "theoretical": 6,    "variance_pct": -388, "over_dollars": 21,   "rank": 5},
+    {"name": "Pickles",                    "actual": 109,  "theoretical": 92,   "variance_pct": -18,  "over_dollars": 17,   "rank": 6},
+    {"name": "Topping, Peanut Butter Cup", "actual": -27,  "theoretical": 27,   "variance_pct": 200,  "over_dollars": -54,  "rank": 7},
+    {"name": "Mushroom Pcs",               "actual": 27,   "theoretical": 82,   "variance_pct": 67,   "over_dollars": -55,  "rank": 8},
+    {"name": "Hot Dog",                    "actual": 10,   "theoretical": 80,   "variance_pct": 88,   "over_dollars": -70,  "rank": 9},
+    {"name": "Potato, Idaho",              "actual": 796,  "theoretical": 878,  "variance_pct": 9,    "over_dollars": -82,  "rank": 10}
+  ],
+  "ranking": "over_dollars_desc"
+}
