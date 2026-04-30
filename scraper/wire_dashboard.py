@@ -161,7 +161,7 @@ else:
     sales_net = f"${_pb_net:,.0f}"
 sales_ly = f"${latest['sales']['ly']:,.0f}"
 sales_forecast = f"${latest['sales']['forecast']:,.0f}"
-per_guest = f"${sales_summary['order_average']:.2f}" if sales_summary and sales_summary.get("order_average") else f"${latest['sales']['per_guest']:.2f}"
+per_guest = f"${latest['sales']['per_guest']:.2f}" if latest['sales'].get('per_guest') is not None else "—"
 # Compliance KPI is computed from Bobby's REQUIRED list only, not all 20 lists.
 # Required source names — keep in sync with CM_REQUIRED below.
 _REQUIRED_SRC = {"AM Pre-Shift Check", "11AM: Time and Temp", "Shift Change",
