@@ -1,9 +1,15 @@
-name: Daily Dashboard Update
+name: Daily Dashboard Update (Backup 8:45 AM)
+
+# Contingency run — 40 minutes after the primary 8:05 AM run.
+# If the 8:05 AM run failed or any data was stale, this run picks up
+# fresh emails (since Par Brink can be delayed) and re-wires the
+# dashboard. Uses the same scripts; only the schedule and run label
+# differ.
 
 on:
   schedule:
-    # 8:05 AM Eastern (12:05 UTC summer / 13:05 UTC winter)
-    - cron: "5 12 * * *"
+    # 8:45 AM Eastern (12:45 UTC summer / 13:45 UTC winter)
+    - cron: "45 12 * * *"
   workflow_dispatch:  # allow manual trigger from GitHub Actions tab
 
 permissions:
@@ -279,7 +285,7 @@ jobs:
           MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
           CONFIRMATION_FROM: "fg2065@estep-co.com"
           CONFIRMATION_TO:   "fg2065@estep-co.com"
-          CONFIRMATION_RUN_LABEL: "primary 8:05 AM ET"
+          CONFIRMATION_RUN_LABEL: "backup 8:45 AM ET"
           STORE_ID: "2065"
         run: python scraper/send_daily_confirmation.py
 
