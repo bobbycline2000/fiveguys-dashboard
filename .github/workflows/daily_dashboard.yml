@@ -10,6 +10,11 @@ permissions:
   contents: write  # needed to commit dashboard.html back to main
   issues: write    # verify_dashboard.py opens an issue if the HTML is stale
 
+# Serialize with the backup workflow so they don't race on git push.
+concurrency:
+  group: dashboard-update
+  cancel-in-progress: false
+
 jobs:
   update-dashboard:
     runs-on: ubuntu-22.04

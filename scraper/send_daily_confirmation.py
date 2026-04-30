@@ -218,7 +218,7 @@ def gather_sections() -> list[dict]:
         section("Food Cost (COGS Flash Report)",    8,
                 "crunchtime", "cogs_variance.json", kpi_cogs),
         section("ComplianceMate",                   2,
-                "compliancemate", "lists.json", kpi_compliance),
+                "compliancemate", "compliance.json", kpi_compliance),
         section("Secret Shops (KnowledgeForce)",   14,
                 "marketforce", "shops.json", kpi_shops),
     ]

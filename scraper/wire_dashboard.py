@@ -55,7 +55,9 @@ latest, _ = load_latest("crunchtime", "perf_metrics.json")
 if latest is None:
     latest = load("data/latest.json")
 
-cm, _ = load_latest("compliancemate", "lists.json")
+cm, _ = load_latest("compliancemate", "compliance.json")
+if cm is None:
+    cm, _ = load_latest("compliancemate", "lists.json")  # legacy filename
 if cm is None:
     cm = load("data/compliancemate.json")
 
