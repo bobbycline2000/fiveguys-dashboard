@@ -32,6 +32,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from pathlib import Path
 
+import requests as _requests
+
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -103,6 +105,101 @@ DOW_ABBREV = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
 
 def log(msg: str) -> None:
     print(f"[outlook-gmail] {msg}", flush=True)
+
+
+# ── MS Graph helpers (CI path — no Gmail forwarding required) ───────────────
+
+def _graph_token() -> str:
+    resp = _requests.post(
+        f"https://login.microsoftonline.com/{os.environ['MS_TENANT_ID']}/oauth2/v2.0/token",
+        data={
+            "grant_type": "client_credentials",
+            "client_id": os.environ["MS_CLIENT_ID"],
+            "client_secret": os.environ["MS_CLIENT_SECRET"],
+            "scope": "https://graph.microsoft.com/.default",
+        }, timeout=30)
+    resp.raise_for_status()
+    return resp.json()["access_token"]
+
+
+def _graph_fetch(token: str, lookback_hours: int) -> list[dict]:
+    cutoff = (datetime.now(timezone.utc) - timedelta(hours=lookback_hours)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    url = (
+        f"https://graph.microsoft.com/v1.0/users/{WORK_INBOX}/messages"
+        f"?$top=50"
+        f"&$filter=receivedDateTime ge {cutoff}"
+        f"&$select=id,subject,from,receivedDateTime,bodyPreview,body"
+        f"&$orderby=receivedDateTime desc"
+    )
+    resp = _requests.get(url, headers={
+        "Authorization": f"Bearer {token}",
+        "Prefer": 'outlook.body-content-type="text"',
+    }, timeout=30)
+    if resp.status_code == 403:
+        log("Graph 403 — app may be missing Mail.Read application permission on fg2065 mailbox")
+        return []
+    resp.raise_for_status()
+    messages = resp.json().get("value", [])
+    log(f"Graph: fetched {len(messages)} messages from {WORK_INBOX}")
+    normalized = []
+    for m in messages:
+        sender = m.get("from", {}).get("emailAddress", {}).get("address", "")
+        subject = m.get("subject", "") or ""
+        received = m.get("receivedDateTime", "")
+        try:
+            dt = datetime.fromisoformat(received.replace("Z", "+00:00"))
+            sent_str = dt.astimezone().strftime("%a %m/%d/%Y %-I:%M %p")
+        except Exception:
+            sent_str = received
+        body = m.get("body", {}).get("content", "") or ""
+        body = re.sub(r"<[^>]+>", " ", body).strip()  # strip any residual HTML tags
+        normalized.append({
+            "sender": sender,
+            "subject": subject,
+            "sent": sent_str,
+            "snippet": m.get("bodyPreview", ""),
+            "body": body,
+            "pdf_texts": [],
+            "_graph_msg_id": m["id"],
+        })
+    return normalized
+
+
+def _graph_get_pdfs(token: str, msg_id: str) -> list[tuple[str, bytes]]:
+    url = f"https://graph.microsoft.com/v1.0/users/{WORK_INBOX}/messages/{msg_id}/attachments"
+    resp = _requests.get(url, headers={"Authorization": f"Bearer {token}"}, timeout=30)
+    if not resp.ok:
+        return []
+    out = []
+    for att in resp.json().get("value", []):
+        name = att.get("name", "")
+        if name.lower().endswith(".pdf") and att.get("contentBytes"):
+            try:
+                out.append((name, base64.b64decode(att["contentBytes"])))
+            except Exception:
+                pass
+    return out
+
+
+def _graph_send(token: str, subject: str, html_body: str) -> bool:
+    url = f"https://graph.microsoft.com/v1.0/users/{WORK_INBOX}/sendMail"
+    payload = {
+        "message": {
+            "subject": subject,
+            "body": {"contentType": "HTML", "content": html_body},
+            "toRecipients": [{"emailAddress": {"address": TO_ADDRESS}}],
+        },
+        "saveToSentItems": False,
+    }
+    resp = _requests.post(url, json=payload, headers={
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+    }, timeout=30)
+    if resp.ok:
+        log(f"Brief sent via Graph to {TO_ADDRESS}")
+        return True
+    log(f"Graph send failed: {resp.status_code} {resp.text[:200]}")
+    return False
 
 
 def write_debug(reason: str, detail_path: str = "") -> None:
@@ -1063,23 +1160,50 @@ def main() -> int:
     dow = DOW_ABBREV[today.weekday()]
     monday = today - timedelta(days=today.weekday())
 
-    try:
-        creds = get_credentials(setup_mode=args.setup)
-    except Exception as e:
-        log(f"AUTH FAILURE: {e}")
-        write_debug(f"auth failure: {e}")
-        return 3
+    # ── Auth: prefer MS Graph in CI, fall back to Gmail OAuth locally ────────
+    _use_graph = all(os.environ.get(k) for k in ("MS_TENANT_ID", "MS_CLIENT_ID", "MS_CLIENT_SECRET"))
+    graph_token: str | None = None
+    service = None
 
-    if args.setup:
-        log("Setup complete. Re-run without --setup to generate a brief.")
-        return 0
+    if _use_graph:
+        log("MS Graph path active (CI mode — no Gmail forwarding needed)")
+        try:
+            graph_token = _graph_token()
+        except Exception as e:
+            log(f"Graph token failed: {e}")
+            write_debug(f"graph auth failure: {e}")
+            return 3
+        raw_messages = _graph_fetch(graph_token, args.hours)
+    else:
+        try:
+            creds = get_credentials(setup_mode=args.setup)
+        except Exception as e:
+            log(f"AUTH FAILURE: {e}")
+            write_debug(f"auth failure: {e}")
+            return 3
+        if args.setup:
+            log("Setup complete. Re-run without --setup to generate a brief.")
+            return 0
+        service = build("gmail", "v1", credentials=creds, cache_discovery=False)
+        # Normalize Gmail messages to the same dict format as Graph
+        gmail_raw = fetch_work_emails(service, args.hours)
+        raw_messages = []
+        for m in gmail_raw:
+            body = extract_plain_body(m)
+            if not body:
+                body = re.sub(r"<[^>]+>", " ", extract_html_body(m))
+            raw_messages.append({
+                "sender": get_header(m, "From"),
+                "subject": get_header(m, "Subject"),
+                "sent": format_date(m.get("internalDate", "0")),
+                "snippet": m.get("snippet", ""),
+                "body": body,
+                "pdf_texts": [],
+                "_gmail_raw": m,
+            })
 
-    service = build("gmail", "v1", credentials=creds, cache_discovery=False)
-
-    # ── Fetch emails ─────────────────────────────────────────────────────────
-    raw_messages = fetch_work_emails(service, args.hours)
     if not raw_messages:
-        log("No messages matched the query — nothing to brief.")
+        log("No messages found — nothing to brief.")
         write_debug("no fg2065 emails found in lookback window")
         return 1
 
@@ -1088,37 +1212,33 @@ def main() -> int:
     skipped: list[dict] = []
 
     for msg in raw_messages:
-        sender = get_header(msg, "From")
-        subject = get_header(msg, "Subject")
-        sent = format_date(msg.get("internalDate", "0"))
-        snippet = msg.get("snippet", "")
+        sender = msg["sender"]
+        subject = msg["subject"]
 
         category = classify_email(sender, subject)
         if category is None:
             skipped.append({"sender": sender, "subject": subject, "skip_reason": "auto-filtered"})
             continue
 
-        body = extract_plain_body(msg)
-        if not body:
-            body = re.sub(r"<[^>]+>", " ", extract_html_body(msg))  # strip HTML tags
-
         entry: dict = {
             "sender": sender,
             "subject": subject,
-            "sent": sent,
-            "snippet": snippet,
-            "body": body,
+            "sent": msg["sent"],
+            "snippet": msg["snippet"],
+            "body": msg["body"],
             "pdf_texts": [],
         }
 
-        # Deep-read: pull PDF attachments for these categories
+        # Deep-read: pull PDF attachments for key categories
         if category in ("Patty Press", "Secret Shop", "New Hire / Onboarding"):
-            pdfs = get_pdf_attachments(service, msg)
+            if _use_graph:
+                pdfs = _graph_get_pdfs(graph_token, msg["_graph_msg_id"])
+            else:
+                pdfs = get_pdf_attachments(service, msg["_gmail_raw"])
             log(f"  {category}: {len(pdfs)} PDF attachment(s) for '{subject}'")
             for pdf_name, pdf_bytes in pdfs:
                 pdf_text = extract_pdf_text(pdf_bytes)
                 entry["pdf_texts"].append((pdf_name, pdf_text))
-                # Save PDF to newsletter assets
                 assets_dir = (
                     REPO_ROOT
                     / "_drafts"
@@ -1134,9 +1254,8 @@ def main() -> int:
                 except Exception as exc:
                     log(f"  Could not save PDF {pdf_name}: {exc}")
 
-        # Extra parsing for new hire emails
         if category == "New Hire / Onboarding":
-            entry["_hire_info"] = extract_new_hire_info(body, subject)
+            entry["_hire_info"] = extract_new_hire_info(entry["body"], subject)
 
         categorized.setdefault(category, []).append(entry)
 
@@ -1236,7 +1355,10 @@ def main() -> int:
         return 0
 
     subject_line = f"Daily Brief — {today.strftime('%Y-%m-%d')}"
-    sent_ok = send_brief(service, subject_line, brief_md)
+    if _use_graph:
+        sent_ok = _graph_send(graph_token, subject_line, md_to_html(brief_md))
+    else:
+        sent_ok = send_brief(service, subject_line, brief_md)
     if not sent_ok:
         write_debug("brief generated but send failed", str(brief_path))
         return 2
