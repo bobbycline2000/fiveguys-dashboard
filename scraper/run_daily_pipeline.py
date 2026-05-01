@@ -132,8 +132,7 @@ def main() -> int:
         print(f"{'='*60}")
         today = date.today().isoformat()
         subprocess.run(
-            ["git", "add", "dashboard.html", "data/latest.json",
-             f"data/raw/parbrink/{args.store}"],
+            ["git", "add", "dashboard.html", "data/latest.json"],
             cwd=ROOT,
         )
         subprocess.run(
