@@ -79,16 +79,17 @@ discounts, _ = load_latest("parbrink", "discount_summary.json")
 sales_summary, _ = load_latest("parbrink", "sales_summary.json")
 hourly_labor, _ = load_latest("parbrink", "hourly_sales_labor.json")
 
-# Discard stale Par Brink data — only use if its report_date matches CrunchTime's (within 1 day).
-# Par Brink emails haven't arrived → load_latest returns the last file regardless of age.
+# CrunchTime staleness check — Par Brink is the authoritative source.
+# If CrunchTime report_date is more than 1 day behind today, treat its
+# LY/Forecast/WTD fields as unavailable (show "—"). Never discard Par Brink.
 _ct_report_date = latest.get("meta", {}).get("report_date")
-if _ct_report_date and sales_summary:
+_ct_stale = False
+if _ct_report_date:
     try:
-        _pb_date = date.fromisoformat(sales_summary.get("meta", {}).get("report_date", ""))
         _ct_date = date.fromisoformat(_ct_report_date)
-        if abs((_pb_date - _ct_date).days) > 1:
-            print(f"  [STALENESS] Par Brink {_pb_date} vs CrunchTime {_ct_date} — discarding Par Brink data (using CrunchTime fallback)")
-            sales_summary = discounts = hourly_labor = None
+        if (date.today() - _ct_date).days > 1:
+            _ct_stale = True
+            print(f"  [CT-STALE] CrunchTime data is from {_ct_date} — LY/Forecast/WTD will show '—'")
     except (ValueError, TypeError):
         pass
 
@@ -159,9 +160,9 @@ if sales_summary and sales_summary.get("net_sales"):
 else:
     _pb_net = latest["sales"]["net"] or 0
     sales_net = f"${_pb_net:,.0f}"
-sales_ly = f"${latest['sales']['ly']:,.0f}"
-sales_forecast = f"${latest['sales']['forecast']:,.0f}"
-per_guest = f"${latest['sales']['per_guest']:.2f}" if latest['sales'].get('per_guest') is not None else "—"
+sales_ly       = "—" if _ct_stale else (f"${latest['sales']['ly']:,.0f}" if latest['sales'].get('ly') else "—")
+sales_forecast = "—" if _ct_stale else (f"${latest['sales']['forecast']:,.0f}" if latest['sales'].get('forecast') else "—")
+per_guest      = "—" if _ct_stale else (f"${latest['sales']['per_guest']:.2f}" if latest['sales'].get('per_guest') is not None else "—")
 # Compliance KPI is computed from Bobby's REQUIRED list only, not all 20 lists.
 # Required source names — keep in sync with CM_REQUIRED below.
 _REQUIRED_SRC = {"AM Pre-Shift Check", "11AM: Time and Temp", "Shift Change",
@@ -304,11 +305,11 @@ rep(r'(<div class="ctrl-stat-val">)[^<]*(</div>\s*<div class="ctrl-stat-lbl">Avg
     "Avg Hrly Wage",
     flags=DOTALL)
 
-# WTD Labor stats — prefer CrunchTime perf_metrics WTD when available (direct from NCDashboard).
-# Falls back to aggregate_periods.py rollups, then "—".
-_ct_wp = latest['labor'].get('pct_week')
-_ct_wc = latest['labor'].get('cost_week')
-_ct_wh = latest['labor'].get('actual_hours_week')
+# WTD Labor stats — Par Brink rollups are primary; CrunchTime is enrichment only.
+# If CrunchTime is stale, skip its WTD values and go straight to Par Brink rollups.
+_ct_wp = None if _ct_stale else latest['labor'].get('pct_week')
+_ct_wc = None if _ct_stale else latest['labor'].get('cost_week')
+_ct_wh = None if _ct_stale else latest['labor'].get('actual_hours_week')
 if _ct_wp is not None and _ct_wc is not None:
     wtd_pct       = f"{_ct_wp:.1f}%"
     wtd_labor_dol = f"${_ct_wc:,.0f}"

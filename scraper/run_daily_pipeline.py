@@ -105,9 +105,16 @@ def main() -> int:
     else:
         print(f"WARNING: Hourly Sales And Labor.pdf missing in {folder} — skipping")
 
-    # ── Step 4: Wire dashboard ────────────────────────────────────────────────
+    # ── Step 4a: Compute WTD/MTD/QTD rollups from Par Brink history ──────────
     run(
-        "Step 4/5 — Wire dashboard",
+        "Step 4a/5 — Compute Par Brink period rollups (WTD/MTD/QTD)",
+        [python, str(SCRAPER / "aggregate_periods.py"), "--store", args.store],
+        allow_fail=True,
+    )
+
+    # ── Step 4b: Wire dashboard ───────────────────────────────────────────────
+    run(
+        "Step 4b/5 — Wire dashboard",
         [python, str(SCRAPER / "wire_dashboard.py")],
     )
 
