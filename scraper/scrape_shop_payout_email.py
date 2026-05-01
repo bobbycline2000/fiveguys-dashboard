@@ -144,42 +144,46 @@ async def _set_date_and_retrieve(page, shop_date: str) -> bool:
         """)
         log(f"Date fields set to: {raw}")
 
-        # Open hierarchy combo picker then select GM30 (Dixie Highway)
-        await page.evaluate("""
-            (() => {
+        # Select GM30 Dixie Highway via ExtJS API.
+        # Confirmed working 2026-04-30 in headed Chrome: open picker → wait for
+        # store records → SelectionModel.select() + setValue(record). DOM clicks
+        # don't register in headless ExtJS pickers, but the JS API works.
+        if not await page.evaluate('''(() => {
+            const hierEl = document.querySelector('[ces-selenium-id="cescombogridpicker_hierarchyCombo"]');
+            const cmp = Ext.getCmp(hierEl.id);
+            const cur = cmp.getRawValue() || "";
+            return cur.includes("GM30");
+        })()'''):
+            selected = await page.evaluate('''(async () => {
+                const sleep = ms => new Promise(r => setTimeout(r, ms));
                 const hierEl = document.querySelector('[ces-selenium-id="cescombogridpicker_hierarchyCombo"]');
-                if (hierEl) hierEl.click();
-            })()
-        """)
-        await page.wait_for_timeout(1_500)
-
-        selected = await page.evaluate("""
-            (() => {
-                const rows = document.querySelectorAll('.x-grid-row');
-                const dixie = [...rows].find(r => (r.innerText || '').includes('GM30'));
-                if (dixie) { dixie.click(); return true; }
-                return false;
-            })()
-        """)
-        if not selected:
-            log("GM30 not visible after combo click — trying Retrieve to trigger picker")
-            await page.evaluate("""
-                document.querySelector('[ces-selenium-id="button_retrieveBtn"]').click();
-            """)
-            await page.wait_for_timeout(2_000)
-            selected = await page.evaluate("""
-                (() => {
-                    const rows = document.querySelectorAll('.x-grid-row');
-                    const dixie = [...rows].find(r => (r.innerText || '').includes('GM30'));
-                    if (dixie) { dixie.click(); return true; }
-                    return false;
-                })()
-            """)
+                const cmp = Ext.getCmp(hierEl.id);
+                if (!cmp.isExpanded) cmp.expand();
+                // Wait for the picker store to populate (up to 10 s)
+                let picker = null;
+                for (let i = 0; i < 20; i++) {
+                    await sleep(500);
+                    picker = cmp.getPicker();
+                    if (picker?.getStore()?.getCount() > 0) break;
+                }
+                if (!picker || picker.getStore().getCount() === 0) return false;
+                let gm30 = null;
+                picker.getStore().getRange().forEach(r => {
+                    if (JSON.stringify(r.data).includes("GM30")) gm30 = r;
+                });
+                if (!gm30) return false;
+                picker.getSelectionModel().select(gm30, false, false);
+                await sleep(200);
+                cmp.setValue(gm30);
+                await sleep(200);
+                cmp.collapse();
+                await sleep(400);
+                return cmp.getRawValue();
+            })()''')
             if not selected:
                 log("Could not select GM30 Dixie Highway from hierarchy picker")
                 return False
-
-        log("Selected GM30 Dixie Highway hierarchy")
+            log(f"Selected GM30 Dixie Highway: {selected}")
         await page.wait_for_timeout(500)
 
         # Click Retrieve

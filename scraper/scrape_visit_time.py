@@ -177,6 +177,21 @@ def fetch_visit_window(page, shop: dict) -> list[float] | None:
     return None
 
 
+def load_overrides(store_id: str) -> dict[str, list[float]]:
+    """Manual visit_window overrides for shops where KnowledgeForce returns
+    ambiguous buckets (e.g., two shops same week + same meal period).
+    File: data/raw/marketforce/<store>/visit_window_overrides.json
+    """
+    p = DATA_ROOT / store_id / "visit_window_overrides.json"
+    if not p.exists():
+        return {}
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+        return {k: v for k, v in d.items() if not k.startswith("_")}
+    except Exception:
+        return {}
+
+
 def run(store_id: str, do_all: bool) -> int:
     user = os.environ.get("KNOWLEDGEFORCE_USERNAME")
     pw = os.environ.get("KNOWLEDGEFORCE_PASSWORD")
@@ -191,11 +206,26 @@ def run(store_id: str, do_all: bool) -> int:
 
     data = json.loads(shops_path.read_text(encoding="utf-8"))
     shops = data.get("shops", [])
+    overrides = load_overrides(store_id)
+
+    # Apply overrides FIRST (these are Bobby's confirmed values from Marketforce email)
+    override_count = 0
+    for s in shops:
+        jid = str(s.get("job_id"))
+        if jid in overrides:
+            s["visit_window"] = overrides[jid]
+            s["visit_window_source"] = "manual"
+            override_count += 1
+    if override_count:
+        log(f"Applied {override_count} manual overrides from visit_window_overrides.json")
+
     targets = [s for s in shops if do_all or "visit_window" not in s]
-    log(f"Found {len(shops)} shops; {len(targets)} need visit_window")
+    log(f"Found {len(shops)} shops; {len(targets)} need visit_window scrape")
 
     if not targets:
-        log("Nothing to do.")
+        log("Nothing to scrape (overrides handled everything else).")
+        # Still write the file in case overrides were just applied
+        shops_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
         return 0
 
     with sync_playwright() as p:
