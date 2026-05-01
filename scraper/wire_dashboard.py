@@ -122,10 +122,8 @@ if sched:
     if _today_iso in _full_schedule:
         sched = {**sched, "today": _full_schedule[_today_iso]}
     elif _full_schedule:
-        # Find the closest available day that isn't in the future
-        _available = sorted(d for d in _full_schedule if d <= _today_iso)
-        if _available:
-            sched = {**sched, "today": _full_schedule[_available[-1]]}
+        # No data for today — treat as missing so we don't show yesterday's wrong crew.
+        sched = None
 time_str = now.strftime("%#I:%M %p") if sys.platform == "win32" else now.strftime("%-I:%M %p")
 date_display = now.strftime("%B %d %Y").replace(" 0", " ")
 card_pill = now.strftime("%B %d").replace(" 0", " ")
@@ -507,6 +505,34 @@ rep(r'(<div class="card-title">Today\'s Schedule</div>.*?<div class="pill pill-w
     flags=DOTALL)
 
 # ── Schedule AM / PM tables (structural regex replace of whole block) ──
+if not sched:
+    # No today's data — replace both shift tables with a "pending" placeholder
+    _no_sched_row = '              <tr><td colspan="4" style="text-align:center;color:#aaa;padding:1.2rem;">Schedule not yet available for today</td></tr>'
+    for _marker, _div_id, _label in [
+        ("AM Shift", "shift-am", "AM Shift table body"),
+        ("PM Shift", "shift-pm", "PM Shift table body"),
+    ]:
+        _block = (
+            f'        <!-- {_marker} -->\n'
+            f'        <div id="{_div_id}"{" style=\"display:none\"" if _div_id == "shift-pm" else ""}>\n'
+            f'          <table class="sched-table">\n'
+            f'            <thead><tr><th>Employee</th><th>Sched Hrs</th><th>Actual Hrs</th><th>Variance</th></tr></thead>\n'
+            f'            <tbody>\n{_no_sched_row}\n            </tbody>\n'
+            f'          </table'
+        )
+        if _marker == "AM Shift":
+            new_html, n = re.subn(
+                r'        <!-- AM Shift -->.*?</div>(?=\s*\n\s*<!-- PM Shift -->)',
+                _block + '>\n        </div>', html, count=1, flags=DOTALL)
+            if n: html = new_html; applied.append(_label)
+            else: missed.append(_label)
+        else:
+            new_html, n = re.subn(
+                r'        <!-- PM Shift -->.*?</table>(?=\s*\n\s*</div>\s*\n(?:\s*<!-- Hourly labor alerts -->|\s*</div>))',
+                _block + '>', html, count=1, flags=DOTALL)
+            if n: html = new_html; applied.append(_label)
+            else: missed.append(_label)
+
 if sched:
     am_section = (
         '        <!-- AM Shift -->\n'
