@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-04-30 20:14",
+    "generated": "2026-04-30 20:41",
     "location": "2065",
     "status": "ok",
     "shops_total": 22
@@ -40,7 +40,12 @@
       "service": 87.0,
       "quality": 100.0,
       "cleanliness": 100.0,
-      "customer_satisfaction": 100.0
+      "customer_satisfaction": 100.0,
+      "visit_window": [
+        13.5,
+        16.0
+      ],
+      "visit_window_source": "manual"
     },
     {
       "job_id": "20758995",
@@ -54,9 +59,9 @@
       "customer_satisfaction": 100.0,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19.0
       ],
-      "visit_window_source": "knowledgeforce"
+      "visit_window_source": "manual"
     },
     {
       "job_id": "20763859",
@@ -70,9 +75,9 @@
       "customer_satisfaction": 90.0,
       "visit_window": [
         11.0,
-        14
+        13.5
       ],
-      "visit_window_source": "knowledgeforce"
+      "visit_window_source": "manual"
     },
     {
       "job_id": "20752330",
@@ -85,10 +90,10 @@
       "cleanliness": 100,
       "customer_satisfaction": 100,
       "visit_window": [
-        16.0,
-        18.983333333333334
+        19.5,
+        22.0
       ],
-      "visit_window_source": "knowledgeforce"
+      "visit_window_source": "manual"
     },
     {
       "job_id": "20744756",
@@ -99,7 +104,12 @@
       "service": 87,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        11.0,
+        13.5
+      ],
+      "visit_window_source": "manual"
     },
     {
       "job_id": "20747008",
@@ -112,10 +122,10 @@
       "cleanliness": 97,
       "customer_satisfaction": 100,
       "visit_window": [
-        16.0,
-        18.983333333333334
+        19.0,
+        22.0
       ],
-      "visit_window_source": "knowledgeforce"
+      "visit_window_source": "manual"
     },
     {
       "job_id": "20747930",
