@@ -144,46 +144,73 @@ async def _set_date_and_retrieve(page, shop_date: str) -> bool:
         """)
         log(f"Date fields set to: {raw}")
 
-        # Select GM30 Dixie Highway via ExtJS API.
-        # Confirmed working 2026-04-30 in headed Chrome: open picker → wait for
-        # store records → SelectionModel.select() + setValue(record). DOM clicks
-        # don't register in headless ExtJS pickers, but the JS API works.
-        if not await page.evaluate('''(() => {
-            const hierEl = document.querySelector('[ces-selenium-id="cescombogridpicker_hierarchyCombo"]');
-            const cmp = Ext.getCmp(hierEl.id);
-            const cur = cmp.getRawValue() || "";
-            return cur.includes("GM30");
-        })()'''):
-            selected = await page.evaluate('''(async () => {
-                const sleep = ms => new Promise(r => setTimeout(r, ms));
-                const hierEl = document.querySelector('[ces-selenium-id="cescombogridpicker_hierarchyCombo"]');
-                const cmp = Ext.getCmp(hierEl.id);
+        # Select GM30 Dixie Highway. Skip if already set.
+        already_set = await page.evaluate('''(() => {
+            const el = document.querySelector('[ces-selenium-id="cescombogridpicker_hierarchyCombo"]');
+            if (!el) return false;
+            const cmp = Ext.getCmp(el.id);
+            return (cmp.getRawValue() || "").includes("GM30");
+        })()''')
+
+        if not already_set:
+            # 1) Programmatically expand the picker via ExtJS API
+            await page.evaluate('''(() => {
+                const el = document.querySelector('[ces-selenium-id="cescombogridpicker_hierarchyCombo"]');
+                const cmp = Ext.getCmp(el.id);
                 if (!cmp.isExpanded) cmp.expand();
-                // Wait for the picker store to populate (up to 10 s)
-                let picker = null;
-                for (let i = 0; i < 20; i++) {
-                    await sleep(500);
-                    picker = cmp.getPicker();
-                    if (picker?.getStore()?.getCount() > 0) break;
-                }
-                if (!picker || picker.getStore().getCount() === 0) return false;
-                let gm30 = null;
-                picker.getStore().getRange().forEach(r => {
-                    if (JSON.stringify(r.data).includes("GM30")) gm30 = r;
-                });
-                if (!gm30) return false;
-                picker.getSelectionModel().select(gm30, false, false);
-                await sleep(200);
-                cmp.setValue(gm30);
-                await sleep(200);
-                cmp.collapse();
-                await sleep(400);
-                return cmp.getRawValue();
             })()''')
-            if not selected:
-                log("Could not select GM30 Dixie Highway from hierarchy picker")
+
+            # 2) Wait for the picker store to populate
+            try:
+                await page.wait_for_function(
+                    '''() => {
+                        const el = document.querySelector('[ces-selenium-id="cescombogridpicker_hierarchyCombo"]');
+                        if (!el) return false;
+                        const cmp = Ext.getCmp(el.id);
+                        const p = cmp.getPicker();
+                        return p && p.getStore() && p.getStore().getCount() > 0;
+                    }''',
+                    timeout=15_000,
+                )
+            except PlaywrightTimeout:
+                log("Hierarchy picker store never populated")
                 return False
-            log(f"Selected GM30 Dixie Highway: {selected}")
+
+            # 3) Use Playwright locator to click the GM30 row natively.
+            # This dispatches mouse events through CDP, which the ExtJS grid
+            # registers correctly (raw DOM dispatchEvent does not in headless).
+            try:
+                gm30_row = page.locator(".x-grid-row", has_text="GM30").first
+                await gm30_row.click(timeout=5_000)
+            except PlaywrightTimeout:
+                # Fallback: select via ExtJS SelectionModel + setValue
+                selected = await page.evaluate('''(() => {
+                    const el = document.querySelector('[ces-selenium-id="cescombogridpicker_hierarchyCombo"]');
+                    const cmp = Ext.getCmp(el.id);
+                    const picker = cmp.getPicker();
+                    let gm30 = null;
+                    picker.getStore().getRange().forEach(r => {
+                        if (JSON.stringify(r.data).includes("GM30")) gm30 = r;
+                    });
+                    if (!gm30) return null;
+                    picker.getSelectionModel().select(gm30, false, false);
+                    cmp.setValue(gm30);
+                    cmp.collapse();
+                    return cmp.getRawValue();
+                })()''')
+                if not selected:
+                    log("Could not select GM30 Dixie Highway (both methods failed)")
+                    return False
+
+            await page.wait_for_timeout(800)
+            final = await page.evaluate('''(() => {
+                const el = document.querySelector('[ces-selenium-id="cescombogridpicker_hierarchyCombo"]');
+                return Ext.getCmp(el.id).getRawValue();
+            })()''')
+            if not final or "GM30" not in final:
+                log(f"Hierarchy not set after click+fallback: '{final}'")
+                return False
+            log(f"Selected GM30 Dixie Highway: {final}")
         await page.wait_for_timeout(500)
 
         # Click Retrieve
