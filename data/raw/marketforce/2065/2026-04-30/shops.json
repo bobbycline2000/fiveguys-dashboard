@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-04-30 13:53",
+    "generated": "2026-04-30 20:14",
     "location": "2065",
     "status": "ok",
     "shops_total": 22
@@ -51,7 +51,12 @@
       "service": 100.0,
       "quality": 100.0,
       "cleanliness": 100.0,
-      "customer_satisfaction": 100.0
+      "customer_satisfaction": 100.0,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20763859",
@@ -62,7 +67,12 @@
       "service": 77.0,
       "quality": 100.0,
       "cleanliness": 80.0,
-      "customer_satisfaction": 90.0
+      "customer_satisfaction": 90.0,
+      "visit_window": [
+        11.0,
+        14
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20752330",
@@ -73,7 +83,12 @@
       "service": 95,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20744756",
@@ -95,7 +110,12 @@
       "service": 100,
       "quality": 100,
       "cleanliness": 97,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20747930",
@@ -106,7 +126,12 @@
       "service": 100,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        13.5,
+        15.983333333333333
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20743045",
@@ -117,7 +142,12 @@
       "service": 77,
       "quality": 100,
       "cleanliness": 72,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        19.0,
+        22.0
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20734340",
@@ -128,7 +158,12 @@
       "service": 72,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        13.5,
+        15.983333333333333
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20722737",
@@ -150,7 +185,12 @@
       "service": 72,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20701465",
@@ -161,7 +201,12 @@
       "service": 95,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20703980",
@@ -183,7 +228,12 @@
       "service": 100,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20685367",
@@ -205,7 +255,12 @@
       "service": 100,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20689193",
@@ -216,7 +271,12 @@
       "service": 100,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        13.5,
+        15.983333333333333
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20673321",
@@ -238,7 +298,12 @@
       "service": 100,
       "quality": 100,
       "cleanliness": 80,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20680431",
@@ -249,7 +314,12 @@
       "service": 100,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20659897",
@@ -271,7 +341,12 @@
       "service": 72,
       "quality": 100,
       "cleanliness": 100,
-      "customer_satisfaction": 100
+      "customer_satisfaction": 100,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     }
   ]
 }
