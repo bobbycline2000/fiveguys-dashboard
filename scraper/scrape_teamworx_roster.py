@@ -34,8 +34,9 @@ sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[1]
 ET = timezone(timedelta(hours=-4))
 
-LOGIN_URL = "https://fiveguysfr77.ct-teamworx.com/views/auth.jsp"
-ROSTER_URL = "https://fiveguysfr77.ct-teamworx.com/views/manager/tablet/dailyRoster.jsp"
+LOGIN_URL    = "https://fiveguysfr77.ct-teamworx.com/views/auth.jsp"
+HOME_URL     = "https://fiveguysfr77.ct-teamworx.com/views/manager/tablet/home.jsp"
+ROSTER_URL   = HOME_URL  # kept for JSON meta field — roster is SPA-loaded inside home.jsp
 LOCATION_URL = "https://fiveguysfr77.ct-teamworx.com/views/locationSelection.jsp"
 
 
@@ -76,47 +77,45 @@ def normalize_time(s: str) -> str:
 
 def parse_roster_text(page_text: str) -> list[dict]:
     """
-    Parse Teamworx Daily Roster page text into a flat list of shifts.
-    Roster groups employees under section headers like:
-      'General Manager-Salary'
-      'Shift Leader-Hourly'
-      '2. Crew'  (or just 'Crew')
-    Each shift row: <name> <position> <in_time> <out_time> <hrs> <ot_hrs>
+    Parse Teamworx Daily Roster inner_text() into a flat list of shifts.
+
+    Teamworx renders a table whose cells are tab-separated in inner_text:
+      'KBKaisha Brewer\t2. Crew\t8:00 AM\t2:00 PM\t6\t0'
+    The first cell prepends a 2-char initials block with no separator.
     """
     shifts: list[dict] = []
-    current_section = None
-    section_re = re.compile(
-        r'^(General Manager[-\s]?Salary|Shift Leader[-\s]?Hourly|\d?\.?\s*Crew|Crew)\b',
-        re.IGNORECASE,
-    )
-    # Row pattern: name (multi-word) ... time time hrs ot
-    row_re = re.compile(
-        r'^(?P<name>[A-Z][A-Za-z\-\'\.]+(?:\s+[A-Z][A-Za-z\-\'\.]+)+)\s+'
-        r'(?P<position>(?:General Manager[-\s]?Salary|Shift Leader[-\s]?Hourly|\d?\.?\s*Crew|Crew))\s+'
-        r'(?P<in>\d{1,2}:\d{2}\s*(?:AM|PM))\s+'
-        r'(?P<out>\d{1,2}:\d{2}\s*(?:AM|PM))\s+'
-        r'(?P<hrs>\d+(?:\.\d+)?)\s+'
-        r'(?P<ot>\d+(?:\.\d+)?)\s*$',
-        re.IGNORECASE,
-    )
+    time_re = re.compile(r'^\d{1,2}:\d{2}\s*(?:AM|PM)$', re.IGNORECASE)
 
     for raw in page_text.splitlines():
-        line = raw.strip()
-        if not line:
+        parts = raw.split('\t')
+        if len(parts) < 5:
             continue
-        sm = section_re.match(line)
-        if sm and "total" not in line.lower():
-            current_section = sm.group(1)
+        name_raw, position, in_t, out_t = parts[0], parts[1], parts[2], parts[3]
+        hrs_raw = parts[4]
+
+        # Validate times
+        if not time_re.match(in_t.strip()) or not time_re.match(out_t.strip()):
             continue
-        m = row_re.match(line)
-        if m:
-            shifts.append({
-                "name": short_name(m.group("name")),
-                "role": map_role(m.group("position")),
-                "start": normalize_time(m.group("in")),
-                "end":   normalize_time(m.group("out")),
-                "hrs":   float(m.group("hrs")),
-            })
+        if not position.strip():
+            continue
+
+        # Strip 2-char uppercase initials prefix (e.g. "KBKaisha Brewer" → "Kaisha Brewer")
+        name_clean = re.sub(r'^[A-Z]{2}', '', name_raw).strip()
+        if not name_clean:
+            continue
+
+        try:
+            hrs = float(hrs_raw.strip())
+        except ValueError:
+            hrs = 0.0
+
+        shifts.append({
+            "name":  short_name(name_clean),
+            "role":  map_role(position.strip()),
+            "start": normalize_time(in_t.strip()),
+            "end":   normalize_time(out_t.strip()),
+            "hrs":   hrs,
+        })
     return shifts
 
 
@@ -141,35 +140,36 @@ def run(store_id: str, target_date: date) -> int:
 
         # 1. Login
         page.goto(LOGIN_URL, wait_until="domcontentloaded")
-        page.fill('input[name="username"], input[type="text"]', user)
-        page.fill('input[name="password"], input[type="password"]', pwd)
-        # Click Sign In button (orange button)
-        page.click('button:has-text("Sign In"), input[type="submit"]')
+        page.fill('input[placeholder*="Username"], input[type="text"]', user)
+        page.fill('input[type="password"]', pwd)
+        page.get_by_role("button", name="Sign In").click()
         page.wait_for_load_state("networkidle", timeout=20000)
 
         # 2. Pick KY-2065 if Location Selection appears
         if "locationSelection" in page.url:
-            page.fill('input[placeholder*="Select Location"], input[type="search"]', store_id)
-            page.wait_for_timeout(800)
-            # Click the matching row
-            page.click(f'text=KY-{store_id}')
+            page.get_by_role("cell", name=f"KY-{store_id}").first.click()
             page.wait_for_load_state("networkidle", timeout=20000)
 
-        # 3. Navigate to Daily Roster
-        page.goto(ROSTER_URL, wait_until="domcontentloaded")
-        page.wait_for_load_state("networkidle", timeout=20000)
-        page.wait_for_timeout(1500)  # allow data to render
+        # 3. Click Daily Roster nav item (SPA — stays on home.jsp, loads roster content)
+        page.get_by_text("Daily Roster", exact=True).first.click()
+        # Wait for the roster table to render (employee rows have 6 cells)
+        page.wait_for_selector("table td:nth-child(3)", timeout=15000)
+        page.wait_for_timeout(800)
 
-        # 4. Verify date matches; if not, navigate via the date arrows
+        # 4. Verify the date shown is today
         page_text = page.inner_text("body")
-        if target_date.strftime("%a, %b %d, %Y") not in page_text \
-           and target_date.strftime("%A, %b %d, %Y") not in page_text:
-            print(f"WARNING: roster page may not be on {today_iso}", file=sys.stderr)
+        # Build both padded and non-padded variants (cross-platform)
+        _day = str(target_date.day)
+        date_str  = f"{target_date.strftime('%A, %B')} {_day}, {target_date.year}"  # "Friday, May 1, 2026"
+        date_str2 = target_date.strftime("%A, %b %d, %Y")                            # "Friday, May 01, 2026"
+        if date_str not in page_text and date_str2 not in page_text:
+            print(f"WARNING: roster page may not be showing {today_iso} — found different date",
+                  file=sys.stderr)
 
         # 5. Save raw page text for debugging
         (ROOT / "data" / "teamworx_roster_text.txt").write_text(page_text, encoding="utf-8")
 
-        # 6. Parse shifts
+        # 6. Parse shifts from inner_text (tab-separated table cells)
         shifts = parse_roster_text(page_text)
 
         ctx.close()
@@ -181,7 +181,7 @@ def run(store_id: str, target_date: date) -> int:
         return 1
 
     total_hrs = sum(s.get("hrs", 0) for s in shifts)
-    # Strip the hrs key before writing (dashboard schema doesn't use it directly)
+    # Drop the hrs key — dashboard schema uses name/role/start/end only
     out_shifts = [{k: v for k, v in s.items() if k != "hrs"} for s in shifts]
 
     monday = target_date - timedelta(days=target_date.weekday())
