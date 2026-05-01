@@ -104,7 +104,7 @@ def main() -> int:
     ap.add_argument("--pdf", help="Override path to Sales Summary.pdf")
     args = ap.parse_args()
 
-    pdf = Path(args.pdf) if args.pdf else latest_pdf(args.store)
+    pdf = Path(args.pdf).resolve() if args.pdf else latest_pdf(args.store)
     if pdf is None or not pdf.exists():
         print(f"No Sales Summary.pdf found for store {args.store}", file=sys.stderr)
         return 1
