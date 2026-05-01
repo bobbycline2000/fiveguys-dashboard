@@ -1,11 +1,11 @@
 {
   "meta": {
-    "date": "2026-04-30",
-    "generated": "4/30/2026 at 8:07 AM",
+    "date": "2026-05-01",
+    "generated": "5/1/2026 at 7:49 PM",
     "location": "2065",
     "status": "ok"
   },
-  "overall_pct": 65,
+  "overall_pct": 47,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -24,8 +24,8 @@
     },
     {
       "name": "5PM: Time and Temp",
-      "pct": 100,
-      "raw": "5PM: Time and Temp\n100% | 100%"
+      "pct": 15,
+      "raw": "5PM: Time and Temp\n15% | 15%"
     },
     {
       "name": "7PM: Time and Temp",
@@ -48,11 +48,6 @@
       "raw": "PM Pre-Shift Check\n100% | 100%"
     },
     {
-      "name": "Milkshake Pump Cleaning Check",
-      "pct": 100,
-      "raw": "Milkshake Pump Cleaning Check\n100% | 100%"
-    },
-    {
       "name": "Closing Checklist",
       "pct": 100,
       "raw": "Closing Checklist\n100% | 100%"
@@ -64,13 +59,13 @@
     },
     {
       "name": "Shift Change",
-      "pct": 100,
-      "raw": "Shift Change\n100% | 100%"
+      "pct": 0,
+      "raw": "Shift Change\n0% | 0%"
     },
     {
       "name": "Closing",
-      "pct": 100,
-      "raw": "Closing\n100% | 100%"
+      "pct": 0,
+      "raw": "Closing\n0% | 0%"
     },
     {
       "name": "Weekly Store Inspection",
@@ -94,8 +89,8 @@
     },
     {
       "name": "Operational Spot Check",
-      "pct": 100,
-      "raw": "Operational Spot Check\n100% | 100%"
+      "pct": 0,
+      "raw": "Operational Spot Check\n0% | 0%"
     },
     {
       "name": "Battery Swap Checklist",

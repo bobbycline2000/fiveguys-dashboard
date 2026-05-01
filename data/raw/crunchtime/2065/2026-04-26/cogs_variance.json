@@ -1,12 +1,16 @@
 {
   "meta": {
-    "source": "CrunchTime NCDashboard — Top 10 Actual vs. Theoretical Cost widget",
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
     "category": "Food",
     "store": "2065",
     "week_start": "2026-04-20",
     "week_end": "2026-04-26",
-    "pulled": "2026-04-30 via Chrome MCP",
-    "method": "ncDashboard_widget"
+    "month_start": "2026-05-01",
+    "last_month_start": "2026-04-01",
+    "last_month_end": "2026-04-30",
+    "through": "2026-04-30",
+    "pulled": "2026-05-01 19:48 ET",
+    "method": "api+playwright"
   },
   "cogs_goal_pct": 27.5,
   "cogs_pct_week": null,
@@ -16,16 +20,166 @@
   "variance_to_goal_month": null,
   "variance_to_goal_last_mo": null,
   "items": [
-    {"name": "Ground Beef",             "actual": 2762, "theoretical": 2637, "variance_pct": -5,   "over_dollars": 125},
-    {"name": "Bun, Burger",             "actual": 907,  "theoretical": 846,  "variance_pct": -7,   "over_dollars": 61},
-    {"name": "Cajun Season",            "actual": 132,  "theoretical": 79,   "variance_pct": -66,  "over_dollars": 53},
-    {"name": "Tomatoes, Fresh",         "actual": 233,  "theoretical": 204,  "variance_pct": -14,  "over_dollars": 29},
-    {"name": "Topping, Caramel",        "actual": 27,   "theoretical": 6,    "variance_pct": -388, "over_dollars": 21},
-    {"name": "Pickles",                 "actual": 109,  "theoretical": 92,   "variance_pct": -18,  "over_dollars": 17},
-    {"name": "Topping, Peanut Butter Cup", "actual": -27, "theoretical": 27, "variance_pct": 200,  "over_dollars": -54},
-    {"name": "Mushroom Pcs",            "actual": 27,   "theoretical": 82,   "variance_pct": 67,   "over_dollars": -55},
-    {"name": "Hot Dog",                 "actual": 10,   "theoretical": 80,   "variance_pct": 88,   "over_dollars": -70},
-    {"name": "Potato, Idaho",           "actual": 796,  "theoretical": 878,  "variance_pct": 9,    "over_dollars": -82}
+    {
+      "name": "Cheeseburger",
+      "actual": 3382.0,
+      "theoretical": 782.0,
+      "over_dollars": 2600.0,
+      "variance_pct": null,
+      "rank": 1
+    },
+    {
+      "name": "Bacon Cheeseburger",
+      "actual": 3020.0,
+      "theoretical": 711.0,
+      "over_dollars": 2309.0,
+      "variance_pct": null,
+      "rank": 2
+    },
+    {
+      "name": "Little Cheeseburger",
+      "actual": 1545.0,
+      "theoretical": 288.0,
+      "over_dollars": 1257.0,
+      "variance_pct": null,
+      "rank": 3
+    },
+    {
+      "name": "Milkshake",
+      "actual": 1011.0,
+      "theoretical": 178.0,
+      "over_dollars": 833.0,
+      "variance_pct": null,
+      "rank": 4
+    },
+    {
+      "name": "Little Fry",
+      "actual": 1032.0,
+      "theoretical": 206.0,
+      "over_dollars": 826.0,
+      "variance_pct": null,
+      "rank": 5
+    },
+    {
+      "name": "Little Bacon Cheeseburger",
+      "actual": 881.0,
+      "theoretical": 178.0,
+      "over_dollars": 703.0,
+      "variance_pct": null,
+      "rank": 6
+    },
+    {
+      "name": "Regular Fry",
+      "actual": 832.0,
+      "theoretical": 200.0,
+      "over_dollars": 632.0,
+      "variance_pct": null,
+      "rank": 7
+    },
+    {
+      "name": "Large Fry",
+      "actual": 806.0,
+      "theoretical": 205.0,
+      "over_dollars": 601.0,
+      "variance_pct": null,
+      "rank": 8
+    },
+    {
+      "name": "Patty Melt",
+      "actual": 577.0,
+      "theoretical": 110.0,
+      "over_dollars": 467.0,
+      "variance_pct": null,
+      "rank": 9
+    },
+    {
+      "name": "Little Cajun Fry",
+      "actual": 590.0,
+      "theoretical": 132.0,
+      "over_dollars": 458.0,
+      "variance_pct": null,
+      "rank": 10
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 2762.0,
+      "theoretical": 2637.0,
+      "over_dollars": 125.0,
+      "variance_pct": -5.0,
+      "rank": 11
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 907.0,
+      "theoretical": 846.0,
+      "over_dollars": 61.0,
+      "variance_pct": -7.0,
+      "rank": 12
+    },
+    {
+      "name": "Cajun Season",
+      "actual": 132.0,
+      "theoretical": 79.0,
+      "over_dollars": 53.0,
+      "variance_pct": -66.0,
+      "rank": 13
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 233.0,
+      "theoretical": 204.0,
+      "over_dollars": 29.0,
+      "variance_pct": -14.0,
+      "rank": 14
+    },
+    {
+      "name": "Topping, Caramel",
+      "actual": 27.0,
+      "theoretical": 6.0,
+      "over_dollars": 21.0,
+      "variance_pct": -388.0,
+      "rank": 15
+    },
+    {
+      "name": "Pickles",
+      "actual": 109.0,
+      "theoretical": 92.0,
+      "over_dollars": 17.0,
+      "variance_pct": -18.0,
+      "rank": 16
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": -27.0,
+      "theoretical": 27.0,
+      "over_dollars": -54.0,
+      "variance_pct": 200.0,
+      "rank": 17
+    },
+    {
+      "name": "Mushroom Pcs",
+      "actual": 27.0,
+      "theoretical": 82.0,
+      "over_dollars": -55.0,
+      "variance_pct": 67.0,
+      "rank": 18
+    },
+    {
+      "name": "Hot Dog",
+      "actual": 10.0,
+      "theoretical": 80.0,
+      "over_dollars": -70.0,
+      "variance_pct": 88.0,
+      "rank": 19
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 796.0,
+      "theoretical": 878.0,
+      "over_dollars": -82.0,
+      "variance_pct": 9.0,
+      "rank": 20
+    }
   ],
   "ranking": "over_dollars_desc"
 }

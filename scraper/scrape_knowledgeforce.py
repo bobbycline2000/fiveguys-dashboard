@@ -55,7 +55,8 @@ SHOP_URL_TPL = (
 
 
 def log(msg: str) -> None:
-    print(f"[knowledgeforce] {msg}", flush=True)
+    safe = msg.encode("ascii", errors="replace").decode("ascii")
+    print(f"[knowledgeforce] {safe}", flush=True)
 
 
 def login(page, username: str, password: str) -> bool:
@@ -71,6 +72,10 @@ def login(page, username: str, password: str) -> bool:
         return False
 
     # Verify by checking we're past the login wall
+    try:
+        page.wait_for_load_state("networkidle", timeout=10_000)
+    except Exception:
+        pass
     if "/login" in page.url.lower() or "username" in page.content().lower()[:5000]:
         log("Login appears to have failed — still on login page")
         return False

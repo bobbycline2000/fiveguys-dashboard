@@ -98,8 +98,8 @@ def _parse_ncdashboard_avt(page_text: str) -> dict | None:
                     return float(s.replace("$", "").replace(",", ""))
                 actual = _parse_dollar(vals[0])
                 theoretical = _parse_dollar(vals[1])
-                pct_str = vals[2].rstrip("%") if len(vals) >= 3 else None
-                variance_pct = float(pct_str) if pct_str is not None else None
+                pct_str = vals[2] if len(vals) >= 3 and pct_re.match(vals[2]) else None
+                variance_pct = float(pct_str.rstrip("%")) if pct_str is not None else None
                 over_dollars = round(actual - theoretical, 2)
                 items.append({
                     "name": name,
