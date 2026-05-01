@@ -1,11 +1,11 @@
 {
   "meta": {
     "date": "2026-05-01",
-    "generated": "5/1/2026 at 1:37 AM",
+    "generated": "5/1/2026 at 2:51 PM",
     "location": "2065",
     "status": "ok"
   },
-  "overall_pct": 29,
+  "overall_pct": 47,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -34,8 +34,8 @@
     },
     {
       "name": "9PM: Time and Temp",
-      "pct": 0,
-      "raw": "9PM: Time and Temp\n0% | 0%"
+      "pct": 100,
+      "raw": "9PM: Time and Temp\n100% | 100%"
     },
     {
       "name": "AM Pre-Shift Check",
@@ -49,8 +49,8 @@
     },
     {
       "name": "Closing Checklist",
-      "pct": 0,
-      "raw": "Closing Checklist\n0% | 0%"
+      "pct": 100,
+      "raw": "Closing Checklist\n100% | 100%"
     },
     {
       "name": "Pre Open",
