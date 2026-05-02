@@ -11,13 +11,15 @@
 9PM: Time and Temp
 100% | 100%
 AM Pre-Shift Check
-100% | 100%
+0% | 0%
 PM Pre-Shift Check
+100% | 100%
+Friday Milkshake Cleaning Check
 100% | 100%
 Closing Checklist
 100% | 100%
 Pre Open
-100% | 100%
+0% | 0%
 Shift Change
 100% | 100%
 Closing
@@ -25,9 +27,9 @@ Closing
 Weekly Store Inspection
 0% | 0%
 Delivery Check
-100% | 100%
+0% | 0%
 Temperature Sample
-100% | 100%
+0% | 0%
 Calibration Test
 0% | 0%
 Operational Spot Check

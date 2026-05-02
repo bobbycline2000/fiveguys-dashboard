@@ -1,11 +1,11 @@
 {
   "meta": {
-    "date": "2026-05-01",
-    "generated": "5/1/2026 at 7:55 PM",
+    "date": "2026-05-02",
+    "generated": "5/2/2026 at 8:07 AM",
     "location": "2065",
     "status": "ok"
   },
-  "overall_pct": 47,
+  "overall_pct": 57,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -24,8 +24,8 @@
     },
     {
       "name": "5PM: Time and Temp",
-      "pct": 15,
-      "raw": "5PM: Time and Temp\n15% | 15%"
+      "pct": 100,
+      "raw": "5PM: Time and Temp\n100% | 100%"
     },
     {
       "name": "7PM: Time and Temp",
@@ -39,13 +39,18 @@
     },
     {
       "name": "AM Pre-Shift Check",
-      "pct": 100,
-      "raw": "AM Pre-Shift Check\n100% | 100%"
+      "pct": 0,
+      "raw": "AM Pre-Shift Check\n0% | 0%"
     },
     {
       "name": "PM Pre-Shift Check",
       "pct": 100,
       "raw": "PM Pre-Shift Check\n100% | 100%"
+    },
+    {
+      "name": "Friday Milkshake Cleaning Check",
+      "pct": 100,
+      "raw": "Friday Milkshake Cleaning Check\n100% | 100%"
     },
     {
       "name": "Closing Checklist",
@@ -59,13 +64,13 @@
     },
     {
       "name": "Shift Change",
-      "pct": 0,
-      "raw": "Shift Change\n0% | 0%"
+      "pct": 100,
+      "raw": "Shift Change\n100% | 100%"
     },
     {
       "name": "Closing",
-      "pct": 0,
-      "raw": "Closing\n0% | 0%"
+      "pct": 100,
+      "raw": "Closing\n100% | 100%"
     },
     {
       "name": "Weekly Store Inspection",
