@@ -152,6 +152,36 @@ def main():
             f"The HTML was not regenerated on this run."
         )
 
+    # Check 5: <div> open/close balance.
+    # Catches structural breaks like the 2026-05-02 missing-</div> bug
+    # that hid the entire Today's Schedule card.
+    import re as _re
+    open_divs = len(_re.findall(r'<div\b', html))
+    close_divs = len(_re.findall(r'</div>', html))
+    if open_divs != close_divs:
+        failures.append(
+            f"<div> tags unbalanced: {open_divs} open vs {close_divs} close "
+            f"(diff {open_divs - close_divs}). Layout is broken — a section "
+            f"is likely missing or visually swallowing the next one."
+        )
+
+    # Check 6: Today's Schedule card is present AND populated.
+    # The schedule section can silently disappear if the card div breaks
+    # or the wire fails to inject employee rows. Assert both.
+    sched_card_idx = html.find("Today's Schedule")
+    if sched_card_idx < 0:
+        failures.append("Today's Schedule card not found in dashboard.html.")
+    else:
+        # Look for at least one employee row in the schedule region
+        # (next ~6000 chars after the card title, where AM+PM tables live).
+        sched_region = html[sched_card_idx:sched_card_idx + 8000]
+        emp_rows = _re.findall(r'<div class="emp-name">[^<]+</div>', sched_region)
+        if len(emp_rows) < 1:
+            failures.append(
+                "Today's Schedule card has no employee rows — "
+                "shift tables are empty, wire_dashboard.py likely missed them."
+            )
+
     if failures:
         print("DASHBOARD STALE — " + str(len(failures)) + " check(s) failed:\n")
         for f in failures:
