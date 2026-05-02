@@ -512,9 +512,10 @@ if not sched:
         ("AM Shift", "shift-am", "AM Shift table body"),
         ("PM Shift", "shift-pm", "PM Shift table body"),
     ]:
+        _hidden_attr = ' style="display:none"' if _div_id == "shift-pm" else ''
         _block = (
             f'        <!-- {_marker} -->\n'
-            f'        <div id="{_div_id}"{" style=\"display:none\"" if _div_id == "shift-pm" else ""}>\n'
+            f'        <div id="{_div_id}"{_hidden_attr}>\n'
             f'          <table class="sched-table">\n'
             f'            <thead><tr><th>Employee</th><th>Sched Hrs</th><th>Actual Hrs</th><th>Variance</th></tr></thead>\n'
             f'            <tbody>\n{_no_sched_row}\n            </tbody>\n'
