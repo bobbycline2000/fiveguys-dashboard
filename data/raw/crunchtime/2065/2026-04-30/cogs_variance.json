@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-04-27",
+    "week_end": "2026-04-30",
+    "month_start": "2026-05-01",
+    "last_month_start": "2026-04-01",
+    "last_month_end": "2026-04-30",
+    "through": "2026-05-01",
+    "pulled": "2026-05-02 10:43 ET",
+    "method": "api+playwright"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": null,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": null,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {
+      "name": "Cheeseburger",
+      "actual": 4318.0,
+      "theoretical": 997.0,
+      "over_dollars": 3321.0,
+      "variance_pct": null,
+      "rank": 1
+    },
+    {
+      "name": "Bacon Cheeseburger",
+      "actual": 4086.0,
+      "theoretical": 959.0,
+      "over_dollars": 3127.0,
+      "variance_pct": null,
+      "rank": 2
+    },
+    {
+      "name": "Little Cheeseburger",
+      "actual": 2023.0,
+      "theoretical": 376.0,
+      "over_dollars": 1647.0,
+      "variance_pct": null,
+      "rank": 3
+    },
+    {
+      "name": "Little Fry",
+      "actual": 1405.0,
+      "theoretical": 280.0,
+      "over_dollars": 1125.0,
+      "variance_pct": null,
+      "rank": 4
+    },
+    {
+      "name": "Milkshake",
+      "actual": 1307.0,
+      "theoretical": 229.0,
+      "over_dollars": 1078.0,
+      "variance_pct": null,
+      "rank": 5
+    },
+    {
+      "name": "Little Bacon Cheeseburger",
+      "actual": 1255.0,
+      "theoretical": 253.0,
+      "over_dollars": 1002.0,
+      "variance_pct": null,
+      "rank": 6
+    },
+    {
+      "name": "Regular Fry",
+      "actual": 1092.0,
+      "theoretical": 262.0,
+      "over_dollars": 830.0,
+      "variance_pct": null,
+      "rank": 7
+    },
+    {
+      "name": "Large Fry",
+      "actual": 1064.0,
+      "theoretical": 269.0,
+      "over_dollars": 795.0,
+      "variance_pct": null,
+      "rank": 8
+    },
+    {
+      "name": "Little Cajun Fry",
+      "actual": 728.0,
+      "theoretical": 163.0,
+      "over_dollars": 565.0,
+      "variance_pct": null,
+      "rank": 9
+    },
+    {
+      "name": "Patty Melt",
+      "actual": 668.0,
+      "theoretical": 127.0,
+      "over_dollars": 541.0,
+      "variance_pct": null,
+      "rank": 10
+    },
+    {
+      "name": "Bacon, Raw Sliced",
+      "actual": 238.0,
+      "theoretical": 182.0,
+      "over_dollars": 56.0,
+      "variance_pct": -31.0,
+      "rank": 11
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 185.0,
+      "theoretical": 150.0,
+      "over_dollars": 35.0,
+      "variance_pct": -23.0,
+      "rank": 12
+    },
+    {
+      "name": "Banana Marinade",
+      "actual": 39.0,
+      "theoretical": 6.0,
+      "over_dollars": 33.0,
+      "variance_pct": -523.0,
+      "rank": 13
+    },
+    {
+      "name": "Mushroom Pcs",
+      "actual": 79.0,
+      "theoretical": 46.0,
+      "over_dollars": 33.0,
+      "variance_pct": -70.0,
+      "rank": 14
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 492.0,
+      "theoretical": 467.0,
+      "over_dollars": 25.0,
+      "variance_pct": -5.0,
+      "rank": 15
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 454.0,
+      "theoretical": 485.0,
+      "over_dollars": -31.0,
+      "variance_pct": 6.0,
+      "rank": 16
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 66.0,
+      "theoretical": 103.0,
+      "over_dollars": -37.0,
+      "variance_pct": 36.0,
+      "rank": 17
+    },
+    {
+      "name": "Cajun Season",
+      "actual": -42.0,
+      "theoretical": 41.0,
+      "over_dollars": -83.0,
+      "variance_pct": 204.0,
+      "rank": 18
+    },
+    {
+      "name": "A1 Steak Sauce",
+      "actual": -95.0,
+      "theoretical": 6.0,
+      "over_dollars": -101.0,
+      "variance_pct": null,
+      "rank": 19
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 1300.0,
+      "theoretical": 1509.0,
+      "over_dollars": -209.0,
+      "variance_pct": 14.0,
+      "rank": 20
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
