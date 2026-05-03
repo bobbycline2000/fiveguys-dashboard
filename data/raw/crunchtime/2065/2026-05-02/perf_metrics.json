@@ -2,7 +2,7 @@
   "meta": {
     "report_date": "2026-05-02",
     "report_display": "Saturday, May 2, 2026",
-    "generated": "5/3/2026 at 8:09 AM"
+    "generated": "5/3/2026 at 11:07 AM"
   },
   "sales": {
     "net": 4659.0,
@@ -18,8 +18,8 @@
     "per_guest_week": 5.38
   },
   "labor": {
-    "cost": null,
-    "cost_week": null,
+    "cost": 10.0,
+    "cost_week": 10.0,
     "pct": 20.95,
     "pct_week": 21.14,
     "actual_hours": 0.42,
@@ -59,8 +59,8 @@
       "week": "$1,306"
     },
     "Actual Labor": {
-      "day": "",
-      "week": ""
+      "day": "10",
+      "week": "10"
     },
     "Hours Variance": {
       "day": "",
