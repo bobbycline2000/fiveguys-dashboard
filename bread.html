@@ -104,9 +104,9 @@
 <p class="lede">Count what's on hand. Submit. CrunchTime handles the forecast, math handles the rest.</p>
 
 <div class="strip">
-  <div class="chip"><div class="k">Today</div><div class="v" id="today">Mon May 4</div></div>
-  <div class="chip"><div class="k">Next delivery</div><div class="v">Wed <small>2 days</small></div></div>
-  <div class="chip"><div class="k">Sales window</div><div class="v">$8,500 <small>Mon–Thu</small></div></div>
+  <div class="chip"><div class="k">Today</div><div class="v" id="today">—</div></div>
+  <div class="chip"><div class="k">Next delivery</div><div class="v" id="next-delivery">—</div></div>
+  <div class="chip"><div class="k">Sales window</div><div class="v" id="window-sales">—</div></div>
   <div class="chip"><div class="k">Order by</div><div class="v">10 AM</div></div>
 </div>
 
@@ -115,13 +115,8 @@
     <h2>Inputs</h2>
 
     <div class="field">
-      <label>Sales projection · CrunchTime</label>
-      <div class="fc">
-        <div class="d"><div class="day">Mon</div><div class="amt">$2.5K</div></div>
-        <div class="d"><div class="day">Tue</div><div class="amt">$2.0K</div></div>
-        <div class="d"><div class="day">Wed</div><div class="amt">$2.0K</div></div>
-        <div class="d"><div class="day">Thu</div><div class="amt">$2.0K</div></div>
-      </div>
+      <label>Sales projection · <span id="forecast-source">CrunchTime</span></label>
+      <div class="fc" id="fc"></div>
       <div class="hint">Auto-pulled from CrunchTime performance metrics. Sum of days the order has to cover.</div>
     </div>
 
@@ -143,21 +138,21 @@
 
     <div class="row">
       <div class="lbl">Hamburger</div>
-      <div class="big" id="hb-out">8</div>
+      <div class="big" id="hb-out">—</div>
       <div class="unit">trays</div>
-      <div class="calc">build-to <b style="color:var(--white-80)">9</b><br>− on-hand 0.6 trays</div>
+      <div class="calc">build-to <b style="color:var(--white-80)" id="hb-build">—</b><br>− on-hand <span id="hb-onhand">—</span> trays</div>
     </div>
 
     <div class="row">
       <div class="lbl">Hot dog</div>
-      <div class="big" id="hd-out">1</div>
+      <div class="big" id="hd-out">—</div>
       <div class="unit">tray</div>
-      <div class="calc">build-to <b style="color:var(--white-80)">1</b><br>− on-hand 1.0 tray</div>
+      <div class="calc">build-to <b style="color:var(--white-80)" id="hd-build">—</b><br>− on-hand <span id="hd-onhand">—</span> trays</div>
     </div>
 
     <div class="deliver">
       <span>Delivery</span>
-      <strong>Wednesday · KY-2065</strong>
+      <strong id="deliver-line">— · KY-2065</strong>
     </div>
 
     <div class="actions">
@@ -172,29 +167,123 @@
 </div>
 
 <script>
-  // Live recompute on input change — placeholder constants until wired to live PMIX
+  // === CONFIG (KY-2065) =====================================================
   const HB_PER_TRAY = 5, HD_PER_TRAY = 6;
-  const SALES_PER_HB_TRAY = 986, SALES_PER_HD_TRAY = 19974;
-  const WINDOW_SALES = 8500;
+  const SALES_PER_HB_TRAY = 986;     // from 8wk PMIX, refreshes quarterly
+  const SALES_PER_HD_TRAY = 19974;   // from 8wk PMIX, refreshes quarterly
+  // Delivery days: 0=Sun, 1=Mon ... 6=Sat
+  const DELIVERY_DAYS = [1, 2, 4, 6]; // Mon, Tue, Thu, Sat for KY-2065
+  const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const DAY_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
+  // === STATE ================================================================
+  let state = {
+    forecast: 8500,        // window sales — replaced by live CT data
+    windowDays: ['Mon','Tue','Wed','Thu'],
+    perDay: [2500,2000,2000,2000],
+    nextDelivery: 'Wed',
+    nextDeliveryDate: '',
+    daysOut: 2,
+    forecastSource: 'mock',
+    reportDate: ''
+  };
+
+  // === LIVE DATA FETCH ======================================================
+  async function loadCT() {
+    try {
+      const r = await fetch('data/latest.json', { cache: 'no-store' });
+      if (!r.ok) throw new Error('no latest.json');
+      const d = await r.json();
+      const dailyForecast = d.sales?.forecast || 0;
+      const weekForecast = d.sales?.forecast_week || 0;
+      const reportDate = d.meta?.report_date || '';
+      computeWindow(dailyForecast, weekForecast);
+      state.forecastSource = 'CrunchTime · ' + (d.meta?.report_display || 'live');
+      state.reportDate = reportDate;
+    } catch (e) {
+      // Fall back to mock data, keep page usable
+      state.forecastSource = 'mock data — CT feed offline';
+    }
+    render();
+  }
+
+  // === WINDOW CALC ==========================================================
+  // Find next delivery after today, then the delivery after that. The order
+  // placed today must cover sales from next-delivery → following-delivery.
+  function nextDeliveryAfter(dow) {
+    for (let i = 1; i <= 7; i++) {
+      const d = (dow + i) % 7;
+      if (DELIVERY_DAYS.includes(d)) return { dow: d, daysOut: i };
+    }
+  }
+  function computeWindow(todayForecast, weekForecast) {
+    const today = new Date();
+    const dow = today.getDay();
+    const next = nextDeliveryAfter(dow);
+    const after = nextDeliveryAfter(next.dow);
+    // Window = days from next delivery through day before the one after
+    const windowLen = after.daysOut - next.daysOut; // # days the order must cover
+    // Per-day proxy: distribute weekForecast across days, or use todayForecast if no week
+    const perDayAvg = weekForecast > 0 ? weekForecast / 7 : (todayForecast || 3000);
+    const days = [];
+    const perDay = [];
+    for (let i = 0; i < windowLen; i++) {
+      const d = (next.dow + i) % 7;
+      days.push(DAY_NAMES[d]);
+      perDay.push(Math.round(perDayAvg));
+    }
+    state.windowDays = days;
+    state.perDay = perDay;
+    state.forecast = perDay.reduce((a,b)=>a+b, 0);
+    state.nextDelivery = DAY_NAMES[next.dow];
+    state.nextDeliveryFull = DAY_FULL[next.dow];
+    state.daysOut = next.daysOut;
+  }
+
+  // === RECOMPUTE ORDER ======================================================
   function recalc() {
     const hbBags = +document.getElementById('hb').value || 0;
     const hdBags = +document.getElementById('hd').value || 0;
-    const hbBuild = Math.ceil(WINDOW_SALES / SALES_PER_HB_TRAY);
-    const hdBuild = Math.ceil(WINDOW_SALES / SALES_PER_HD_TRAY);
-    const hbOrder = Math.max(0, hbBuild - Math.floor(hbBags / HB_PER_TRAY));
-    const hdOrder = Math.max(0, hdBuild - Math.floor(hdBags / HD_PER_TRAY));
+    const hbBuild = Math.ceil(state.forecast / SALES_PER_HB_TRAY);
+    const hdBuild = Math.ceil(state.forecast / SALES_PER_HD_TRAY);
+    const hbOnHandTrays = hbBags / HB_PER_TRAY;
+    const hdOnHandTrays = hdBags / HD_PER_TRAY;
+    const hbOrder = Math.max(0, hbBuild - Math.floor(hbOnHandTrays));
+    const hdOrder = Math.max(0, hdBuild - Math.floor(hdOnHandTrays));
     document.getElementById('hb-out').textContent = hbOrder;
     document.getElementById('hd-out').textContent = hdOrder;
+    document.getElementById('hb-build').textContent = hbBuild;
+    document.getElementById('hd-build').textContent = hdBuild;
+    document.getElementById('hb-onhand').textContent = hbOnHandTrays.toFixed(1);
+    document.getElementById('hd-onhand').textContent = hdOnHandTrays.toFixed(1);
   }
+
+  // === RENDER ===============================================================
+  function render() {
+    const today = new Date();
+    document.getElementById('today').textContent = today.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    document.getElementById('next-delivery').innerHTML = state.nextDelivery + ' <small>' + state.daysOut + ' day' + (state.daysOut===1?'':'s') + '</small>';
+    const fmtK = '$' + (state.forecast/1000).toFixed(1) + 'K';
+    document.getElementById('window-sales').innerHTML = fmtK + ' <small>' + state.windowDays.join('–') + '</small>';
+    document.getElementById('forecast-source').textContent = state.forecastSource;
+
+    // Forecast row
+    const fc = document.getElementById('fc');
+    fc.innerHTML = '';
+    fc.style.gridTemplateColumns = `repeat(${state.windowDays.length}, 1fr)`;
+    state.windowDays.forEach((d, i) => {
+      const amt = state.perDay[i];
+      const k = amt >= 1000 ? '$' + (amt/1000).toFixed(1) + 'K' : '$' + amt;
+      fc.innerHTML += `<div class="d"><div class="day">${d}</div><div class="amt">${k}</div></div>`;
+    });
+
+    document.getElementById('deliver-line').textContent = (state.nextDeliveryFull || state.nextDelivery) + ' · KY-2065';
+    recalc();
+  }
+
   document.getElementById('hb').addEventListener('input', recalc);
   document.getElementById('hd').addEventListener('input', recalc);
-
-  // Today's date
-  const d = new Date();
-  document.getElementById('today').textContent = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-
-  recalc();
+  loadCT();
 </script>
 
 </body>
