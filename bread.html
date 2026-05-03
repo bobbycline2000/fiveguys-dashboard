@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bread Order — 3 Directions</title>
+<style>
+  :root { --red:#DA291C; --navy:#0B2545; --gold:#C9A227; --cream:#F5EFE2; --ink:#1A1A1A; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; padding:0; }
+  body { font-family:-apple-system,Segoe UI,Roboto,sans-serif; color:var(--ink); }
+  .nav { position:fixed; top:14px; right:14px; z-index:100; background:rgba(255,255,255,.95);
+         border:1px solid #ddd; border-radius:24px; padding:6px 8px; font-size:13px;
+         box-shadow:0 4px 14px rgba(0,0,0,.08); display:flex; gap:4px; }
+  .nav a { padding:6px 12px; border-radius:18px; text-decoration:none; color:#333; font-weight:600; }
+  .nav a:hover { background:#f2f2f2; }
+  section { min-height:100vh; padding:80px 6vw 100px; }
+  .label { display:inline-block; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+           font-weight:700; padding:4px 10px; border-radius:3px; margin-bottom:14px; }
+  h1 { margin:0 0 6px; line-height:1.05; }
+  .lede { color:#555; max-width:62ch; margin-bottom:36px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .num-input { font-size:48px; font-weight:800; width:120px; text-align:center;
+               border:2px solid #ddd; border-radius:10px; padding:10px; }
+  @media (max-width:780px) { .grid2 { grid-template-columns:1fr; } }
+
+  /* ================ DIRECTION 1: TRAINER ================ */
+  .v1 { background:#fafbff; }
+  .v1 .label { background:#E8F0FE; color:#1B5BE0; }
+  .v1 h1 { font-size:54px; font-weight:800; color:#0F1F4D; }
+  .v1 .step { background:#fff; border:1px solid #E5E9F2; border-left:6px solid #1B5BE0;
+              padding:24px 28px; margin-bottom:14px; border-radius:8px;
+              box-shadow:0 1px 3px rgba(20,30,80,.06); transition:.2s; }
+  .v1 .step.lit { background:#F2F7FF; border-left-color:#0F8B40; }
+  .v1 .step h3 { margin:0 0 8px; font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:#1B5BE0; }
+  .v1 .step .body { font-size:18px; color:#333; }
+  .v1 .step .calc { font-family:ui-monospace,Menlo,monospace; color:#0F8B40; font-size:15px; margin-top:8px; }
+  .v1 .answer { background:linear-gradient(135deg,#0F8B40,#1B5BE0); color:#fff;
+                padding:36px; border-radius:14px; margin-top:24px;
+                box-shadow:0 14px 40px rgba(15,139,64,.25); }
+  .v1 .answer .pill { display:inline-block; background:rgba(255,255,255,.18); padding:6px 14px;
+                       border-radius:20px; font-size:12px; letter-spacing:.15em; text-transform:uppercase; margin-bottom:14px; }
+  .v1 .answer .num { font-size:96px; font-weight:900; line-height:1; }
+  .v1 .answer .small { font-size:14px; opacity:.85; margin-top:6px; }
+  .v1 .hero { position:relative; height:120px; margin-bottom:30px; overflow:hidden; border-radius:12px;
+              background:linear-gradient(120deg,#1B5BE0 0%,#0F8B40 100%); }
+  .v1 .hero svg { position:absolute; inset:0; width:100%; height:100%; }
+  .v1 .hero .h1 { position:absolute; top:50%; left:36px; transform:translateY(-50%);
+                  color:#fff; font-size:30px; font-weight:800; }
+  .why { font-size:13px; color:#666; font-style:italic; margin-top:6px; }
+
+  /* ================ DIRECTION 2: OPERATOR CONSOLE ================ */
+  .v2 { background:#0E1116; color:#E5E7EB; }
+  .v2 .label { background:rgba(218,41,28,.15); color:#F87171; }
+  .v2 h1 { font-size:48px; font-weight:700; color:#F3F4F6; letter-spacing:-.02em; }
+  .v2 .lede { color:#9CA3AF; }
+  .v2 .panel { background:#161B22; border:1px solid #2A2F3A; border-radius:6px; padding:24px; }
+  .v2 .panel h3 { margin:0 0 10px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#9CA3AF; font-weight:600; }
+  .v2 .stat { display:flex; align-items:baseline; gap:10px; }
+  .v2 .stat .v { font-size:54px; font-weight:700; font-family:ui-monospace,Menlo,monospace; color:#F3F4F6; }
+  .v2 .stat .u { font-size:13px; color:#9CA3AF; letter-spacing:.1em; text-transform:uppercase; }
+  .v2 .num-input { background:#0E1116; border-color:#2A2F3A; color:#F3F4F6; }
+  .v2 .order { background:#1F2937; border:1px solid #DA291C; border-radius:6px; padding:32px; margin-top:24px; }
+  .v2 .order .head { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+  .v2 .order .pill { background:#DA291C; color:#fff; padding:4px 12px; border-radius:3px; font-size:11px; letter-spacing:.15em; font-weight:700; }
+  .v2 .order .row { display:flex; align-items:baseline; gap:14px; padding:14px 0; border-bottom:1px solid #2A2F3A; }
+  .v2 .order .row:last-child { border:none; }
+  .v2 .order .row .lbl { width:160px; color:#9CA3AF; font-size:13px; text-transform:uppercase; letter-spacing:.1em; }
+  .v2 .order .row .big { font-size:48px; font-weight:700; font-family:ui-monospace,Menlo,monospace; color:#F87171; }
+  .v2 .order .row .sub { color:#9CA3AF; font-size:13px; }
+  .v2 button { background:#DA291C; color:#fff; border:none; padding:14px 26px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; border-radius:4px; cursor:pointer; }
+  .v2 .hero { height:160px; margin-bottom:30px; position:relative; overflow:hidden; border-radius:6px; background:#000; }
+  .v2 .hero canvas { width:100%; height:100%; display:block; }
+  .v2 .hero .h2 { position:absolute; left:30px; top:50%; transform:translateY(-50%); color:#fff; font-family:ui-monospace,Menlo,monospace; }
+  .v2 .hero .h2 .a { color:#F87171; font-size:11px; letter-spacing:.3em; }
+  .v2 .hero .h2 .b { font-size:30px; font-weight:700; margin-top:6px; }
+
+  /* ================ DIRECTION 3: HERITAGE BAKERY ================ */
+  .v3 { background:#F5EFE2; color:#2A1810; font-family:Georgia,'Times New Roman',serif; }
+  .v3 .label { background:transparent; color:#8B4513; border:1px solid #8B4513; font-family:-apple-system,sans-serif; }
+  .v3 h1 { font-size:72px; font-weight:400; font-style:italic; color:#2A1810; line-height:1; }
+  .v3 h1 em { font-style:normal; color:#8B4513; font-weight:700; }
+  .v3 .lede { font-size:19px; color:#5C4030; max-width:60ch; line-height:1.5; }
+  .v3 .card { background:#fff; border:1px solid #D6C9AE; padding:32px; border-radius:2px;
+              box-shadow:0 8px 28px rgba(60,30,10,.08); }
+  .v3 .card h3 { margin:0 0 6px; font-size:13px; letter-spacing:.25em; text-transform:uppercase;
+                 color:#8B4513; font-weight:700; font-family:-apple-system,sans-serif; }
+  .v3 .card .lab { font-size:13px; color:#7A5A40; font-family:-apple-system,sans-serif; margin-top:18px; margin-bottom:6px; letter-spacing:.05em; }
+  .v3 .num-input { font-family:Georgia,serif; border-color:#D6C9AE; color:#2A1810; background:#FAF7EE; }
+  .v3 .verdict { background:#2A1810; color:#F5EFE2; padding:48px; margin-top:30px; position:relative; }
+  .v3 .verdict::before { content:'❦'; position:absolute; left:50%; top:-12px; transform:translateX(-50%);
+                          background:#F5EFE2; color:#8B4513; width:36px; height:24px; display:flex;
+                          align-items:center; justify-content:center; font-size:16px; }
+  .v3 .verdict h2 { font-style:italic; font-weight:400; font-size:28px; margin:0 0 24px; }
+  .v3 .verdict .ord { font-family:Georgia,serif; font-size:16px; line-height:2.2; letter-spacing:.02em; }
+  .v3 .verdict .ord em { font-style:italic; color:#C9A227; }
+  .v3 .verdict .ord strong { font-size:32px; font-weight:700; color:#fff; font-family:Georgia,serif; }
+  .v3 .verdict button { background:#C9A227; color:#2A1810; border:none; padding:14px 32px;
+                          font-family:-apple-system,sans-serif; font-weight:700; letter-spacing:.15em;
+                          text-transform:uppercase; font-size:12px; cursor:pointer; margin-top:24px; border-radius:2px; }
+  .v3 .hero { height:200px; margin-bottom:30px; position:relative; overflow:hidden; border-radius:2px; background:linear-gradient(180deg,#E8DCC0,#D6C9AE); border:1px solid #D6C9AE; }
+  .v3 .hero svg { position:absolute; inset:0; width:100%; height:100%; }
+  .v3 .hero .ttl { position:absolute; left:36px; bottom:24px; font-style:italic; font-size:32px; color:#2A1810; }
+  .v3 .hero .ttl em { font-style:normal; color:#8B4513; font-weight:700; }
+  .why3 { font-size:13px; color:#7A5A40; font-style:italic; margin-top:16px; padding-top:16px; border-top:1px solid #E8DCC0; font-family:-apple-system,sans-serif; }
+
+  .picker-line { font-family:-apple-system,sans-serif; font-size:14px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#v1">1 · Trainer</a>
+  <a href="#v2">2 · Operator</a>
+  <a href="#v3">3 · Heritage</a>
+</nav>
+
+<!-- ============================================================
+     DIRECTION 1 — THE TRAINER
+     For new managers. Steps light up green as they're filled in.
+     Friendly, explanatory, "shows its work."
+============================================================ -->
+<section id="v1" class="v1">
+  <div class="hero">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <defs>
+        <pattern id="wheat" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M30 10 L30 50 M22 18 L30 24 M38 18 L30 24 M22 28 L30 34 M38 28 L30 34 M22 38 L30 44 M38 38 L30 44" stroke="rgba(255,255,255,.18)" stroke-width="1.5" fill="none"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="120" fill="url(#wheat)"/>
+    </svg>
+    <div class="h1">Bread Order — Trainer Mode</div>
+  </div>
+
+  <span class="label">Direction 1 · The Trainer</span>
+  <h1>Order bread like a 15-year operator.</h1>
+  <p class="lede">Built for new managers. The math is hidden, but the <em>reason</em> for each step is right there. Three inputs, one answer. No spreadsheet, no guessing.</p>
+
+  <div class="grid2">
+    <div>
+      <div class="step lit">
+        <h3>Step 1 · Sales projection</h3>
+        <div class="body">Mon $2,500 · Tue $2,000 · Wed $2,000 · Thu $2,000<br><strong>Total: $8,500</strong></div>
+        <div class="calc">auto-pulled from CrunchTime</div>
+        <div class="why">Why these days? You're ordering today (Mon) for Wed delivery, and that bread has to last until the next delivery on Thu.</div>
+      </div>
+
+      <div class="step lit">
+        <h3>Step 2 · Hamburger buns on hand</h3>
+        <div class="body">
+          <input class="num-input" type="number" value="3"> <span style="font-size:18px; color:#666;">bags</span>
+        </div>
+        <div class="why">Count what's in the back. We'll subtract this from the build-to.</div>
+      </div>
+
+      <div class="step lit">
+        <h3>Step 3 · Hot dog buns on hand</h3>
+        <div class="body">
+          <input class="num-input" type="number" value="6"> <span style="font-size:18px; color:#666;">bags</span>
+        </div>
+        <div class="why">Hot dog buns expire in 5 days — including delivery day. We bias small/frequent.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="answer">
+        <span class="pill">Place this order on BOSS</span>
+        <div style="display:flex; gap:30px; align-items:flex-end;">
+          <div>
+            <div class="num">8</div>
+            <div class="small">Hamburger trays<br>(8.62 needed − 0 on hand → round up)</div>
+          </div>
+          <div>
+            <div class="num">1</div>
+            <div class="small">Hot dog trays<br>(half-tray needed → round up to 1)</div>
+          </div>
+        </div>
+        <div style="margin-top:20px; padding-top:20px; border-top:1px solid rgba(255,255,255,.2);">
+          <div class="small">Delivery: <strong>Wednesday</strong> · covers Wed-Thu · next order Tuesday</div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px; padding:18px; background:#fff8e1; border-radius:8px; font-size:14px; color:#5C4030;">
+        <strong>Why this works:</strong> Every $986 of sales = 1 hamburger tray. Every $19,974 = 1 hot dog tray. Those numbers come from your store's last 8 weeks of POS data, not a guess.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DIRECTION 2 — OPERATOR CONSOLE
+     Industrial, dark mode, "pro tool" feel.
+     For the experienced manager. Compact, terminal-like.
+============================================================ -->
+<section id="v2" class="v2">
+  <div class="hero">
+    <canvas id="grid-bg"></canvas>
+    <div class="h2">
+      <div class="a">PROD · BREAD ORDER · KY-2065</div>
+      <div class="b">/ORDER ENGINE</div>
+    </div>
+  </div>
+
+  <span class="label">Direction 2 · Operator Console</span>
+  <h1>Order engine. KY-2065.</h1>
+  <p class="lede">Compact pro tool. No hand-holding, no math shown. Punch in two numbers, get the order. For managers who've done this 100 times and just want speed.</p>
+
+  <div class="grid2" style="margin-bottom:20px;">
+    <div class="panel">
+      <h3>Forecast · Mon-Thu</h3>
+      <div class="stat"><span class="v">$8.5K</span><span class="u">CT auto</span></div>
+    </div>
+    <div class="panel">
+      <h3>Next delivery</h3>
+      <div class="stat"><span class="v">WED</span><span class="u">2 days</span></div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-bottom:20px;">
+    <div class="panel">
+      <h3>HB on-hand</h3>
+      <input class="num-input" type="number" value="3" style="margin-top:6px;"> <span style="color:#9CA3AF; margin-left:6px;">bags</span>
+    </div>
+    <div class="panel">
+      <h3>HD on-hand</h3>
+      <input class="num-input" type="number" value="6" style="margin-top:6px;"> <span style="color:#9CA3AF; margin-left:6px;">bags</span>
+    </div>
+  </div>
+
+  <div class="order">
+    <div class="head">
+      <div style="font-size:13px; color:#9CA3AF; letter-spacing:.15em; text-transform:uppercase;">Order · ready to submit</div>
+      <span class="pill">BOSS</span>
+    </div>
+    <div class="row">
+      <div class="lbl">Hamburger</div>
+      <div class="big">8</div>
+      <div class="sub">trays · build-to 9, on-hand 0.6 trays</div>
+    </div>
+    <div class="row">
+      <div class="lbl">Hot dog</div>
+      <div class="big">1</div>
+      <div class="sub">tray · build-to 1, on-hand 1 tray</div>
+    </div>
+    <div style="margin-top:24px; display:flex; gap:12px;">
+      <button>Submit to BOSS</button>
+      <button style="background:transparent; border:1px solid #2A2F3A; color:#9CA3AF;">Adjust</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DIRECTION 3 — HERITAGE BAKERY
+     Warm, editorial, premium.
+     This is the one that fits the consulting-pitch portfolio mood.
+============================================================ -->
+<section id="v3" class="v3">
+  <div class="hero">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="flour" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff" stop-opacity=".7"/>
+          <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <!-- Flour-dust particle field -->
+      <g opacity=".7">
+        <circle cx="120" cy="60" r="40" fill="url(#flour)"/>
+        <circle cx="280" cy="120" r="55" fill="url(#flour)"/>
+        <circle cx="450" cy="50" r="35" fill="url(#flour)"/>
+        <circle cx="620" cy="140" r="60" fill="url(#flour)"/>
+        <circle cx="820" cy="80" r="42" fill="url(#flour)"/>
+        <circle cx="1000" cy="130" r="50" fill="url(#flour)"/>
+        <circle cx="1140" cy="60" r="35" fill="url(#flour)"/>
+      </g>
+      <!-- Etched bread loaf -->
+      <g transform="translate(880,40)" stroke="#8B4513" stroke-width="1.3" fill="none" opacity=".55">
+        <ellipse cx="80" cy="60" rx="70" ry="38"/>
+        <path d="M30 50 Q80 28 130 50"/>
+        <path d="M40 60 Q80 40 120 60"/>
+        <path d="M50 70 Q80 52 110 70"/>
+        <path d="M55 80 Q80 64 105 80"/>
+      </g>
+    </svg>
+    <div class="ttl"><em>Daily</em> Bread Order</div>
+  </div>
+
+  <span class="label">Direction 3 · Heritage</span>
+  <h1>The <em>daily</em> bread.</h1>
+  <p class="lede">Editorial. Calm. Reads like a bakery card, works like a calculator. The version that goes in the consulting portfolio — the proof that a Five Guys 15-year operator can package craft into product.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>The Forecast</h3>
+      <div style="font-size:34px; font-weight:400; font-style:italic; color:#2A1810; margin-top:6px;">$8,500 <span style="font-size:14px; color:#7A5A40; font-style:normal; font-family:-apple-system,sans-serif; letter-spacing:.05em;">Mon–Thu · CrunchTime</span></div>
+
+      <div class="lab">Hamburger buns on hand (bags)</div>
+      <input class="num-input" type="number" value="3">
+
+      <div class="lab">Hot dog buns on hand (bags)</div>
+      <input class="num-input" type="number" value="6">
+
+      <div class="why3">Hot dog buns hold 5 days, including the day they arrive. We round small and order more often — fresh bread, no waste.</div>
+    </div>
+
+    <div class="verdict">
+      <h2>Today's order, prepared.</h2>
+      <div class="ord">
+        <div>For <em>Wednesday's</em> delivery —</div>
+        <div style="margin-top:14px;"><strong>8</strong> trays of hamburger buns</div>
+        <div><strong>1</strong> tray of hot dog buns</div>
+        <div style="margin-top:24px; font-style:italic; color:#C9A227; font-size:14px;">Submit to BOSS · then count again Tuesday morning.</div>
+        <button>Place order</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Operator console grid background
+const c = document.getElementById('grid-bg');
+const ctx = c.getContext('2d');
+function resize(){ c.width = c.offsetWidth*2; c.height = c.offsetHeight*2; ctx.scale(2,2); draw(); }
+function draw(){
+  const w = c.offsetWidth, h = c.offsetHeight;
+  ctx.fillStyle = '#000'; ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle = 'rgba(218,41,28,.12)'; ctx.lineWidth = 1;
+  for(let x=0; x<w; x+=24){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+  for(let y=0; y<h; y+=24){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+  // pulse dots
+  for(let i=0; i<14; i++){
+    const x = (i*97)%w, y = (i*53)%h;
+    ctx.fillStyle = 'rgba(248,113,113,.5)';
+    ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
+  }
+}
+window.addEventListener('resize', resize); resize();
+</script>
+
+</body>
+</html>
