@@ -1,20 +1,20 @@
 {
   "meta": {
     "store_id": "2065",
-    "report_date": "2026-05-01",
-    "generated": "2026-05-03T04:00:11",
-    "source_pdf": "data/raw/parbrink/2065/2026-05-01/Hourly Sales And Labor.pdf"
+    "report_date": "2026-05-02",
+    "generated": "2026-05-03T08:43:10",
+    "source_pdf": "data/raw/parbrink/2065/2026-05-02/Hourly Sales And Labor.pdf"
   },
   "totals": {
-    "net_sales": 4865.71,
-    "guests": 918,
-    "guest_average": 5.3,
-    "orders": 214,
-    "order_average": 22.74,
-    "labor_hours": 94.65,
-    "labor_dollars": 1096.45,
-    "labor_percent": 22.53,
-    "avg_hourly_wage": 11.58
+    "net_sales": 4659.25,
+    "guests": 889,
+    "guest_average": 5.24,
+    "orders": 181,
+    "order_average": 25.74,
+    "labor_hours": 77.03,
+    "labor_dollars": 975.98,
+    "labor_percent": 20.95,
+    "avg_hourly_wage": 12.67
   },
   "hours": [
     {
@@ -25,7 +25,7 @@
       "guest_average": 0.0,
       "orders": 0,
       "order_average": 0.0,
-      "labor_hours": 0.03,
+      "labor_hours": 0.0,
       "labor_dollars": 0.0,
       "labor_percent": 0.0
     },
@@ -61,8 +61,8 @@
       "guest_average": 0.0,
       "orders": 0,
       "order_average": 0.0,
-      "labor_hours": 0.93,
-      "labor_dollars": 16.8,
+      "labor_hours": 0.62,
+      "labor_dollars": 9.6,
       "labor_percent": 100.0
     },
     {
@@ -74,7 +74,7 @@
       "orders": 0,
       "order_average": 0.0,
       "labor_hours": 3.0,
-      "labor_dollars": 45.0,
+      "labor_dollars": 43.0,
       "labor_percent": 100.0
     },
     {
@@ -85,8 +85,8 @@
       "guest_average": 0.0,
       "orders": 0,
       "order_average": 0.0,
-      "labor_hours": 3.0,
-      "labor_dollars": 45.0,
+      "labor_hours": 3.08,
+      "labor_dollars": 44.0,
       "labor_percent": 100.0
     },
     {
@@ -97,141 +97,141 @@
       "guest_average": 0.0,
       "orders": 0,
       "order_average": 0.0,
-      "labor_hours": 1.87,
-      "labor_dollars": 27.7,
+      "labor_hours": 3.13,
+      "labor_dollars": 42.72,
       "labor_percent": 100.0
     },
     {
       "hour_24": 11,
       "label": "11A",
-      "net_sales": 412.18,
-      "guests": 75,
-      "guest_average": 5.5,
-      "orders": 21,
-      "order_average": 19.63,
-      "labor_hours": 4.22,
-      "labor_dollars": 63.4,
-      "labor_percent": 15.38
+      "net_sales": 309.29,
+      "guests": 53,
+      "guest_average": 5.84,
+      "orders": 10,
+      "order_average": 30.93,
+      "labor_hours": 5.12,
+      "labor_dollars": 68.27,
+      "labor_percent": 22.07
     },
     {
       "hour_24": 12,
       "label": "12P",
-      "net_sales": 256.79,
-      "guests": 49,
-      "guest_average": 5.24,
+      "net_sales": 259.72,
+      "guests": 46,
+      "guest_average": 5.65,
       "orders": 12,
-      "order_average": 21.4,
-      "labor_hours": 5.02,
-      "labor_dollars": 72.75,
-      "labor_percent": 28.33
+      "order_average": 21.64,
+      "labor_hours": 5.78,
+      "labor_dollars": 74.43,
+      "labor_percent": 28.66
     },
     {
       "hour_24": 13,
       "label": "1P",
-      "net_sales": 369.56,
-      "guests": 68,
-      "guest_average": 5.43,
-      "orders": 15,
-      "order_average": 24.64,
-      "labor_hours": 4.95,
-      "labor_dollars": 58.55,
-      "labor_percent": 15.84
+      "net_sales": 539.82,
+      "guests": 89,
+      "guest_average": 6.07,
+      "orders": 20,
+      "order_average": 26.99,
+      "labor_hours": 5.0,
+      "labor_dollars": 65.0,
+      "labor_percent": 12.04
     },
     {
       "hour_24": 14,
       "label": "2P",
-      "net_sales": 236.95,
-      "guests": 41,
-      "guest_average": 5.78,
-      "orders": 11,
-      "order_average": 21.54,
-      "labor_hours": 4.12,
-      "labor_dollars": 47.62,
-      "labor_percent": 20.1
+      "net_sales": 338.25,
+      "guests": 77,
+      "guest_average": 4.39,
+      "orders": 20,
+      "order_average": 16.91,
+      "labor_hours": 4.5,
+      "labor_dollars": 59.5,
+      "labor_percent": 17.59
     },
     {
       "hour_24": 15,
       "label": "3P",
-      "net_sales": 212.72,
-      "guests": 61,
-      "guest_average": 3.49,
-      "orders": 17,
-      "order_average": 12.51,
-      "labor_hours": 5.93,
-      "labor_dollars": 72.48,
-      "labor_percent": 34.07
+      "net_sales": 315.39,
+      "guests": 55,
+      "guest_average": 5.73,
+      "orders": 12,
+      "order_average": 26.28,
+      "labor_hours": 5.53,
+      "labor_dollars": 72.43,
+      "labor_percent": 22.97
     },
     {
       "hour_24": 16,
       "label": "4P",
-      "net_sales": 539.62,
-      "guests": 94,
-      "guest_average": 5.74,
-      "orders": 20,
-      "order_average": 26.98,
-      "labor_hours": 6.38,
-      "labor_dollars": 74.88,
-      "labor_percent": 13.88
+      "net_sales": 218.03,
+      "guests": 49,
+      "guest_average": 4.45,
+      "orders": 13,
+      "order_average": 16.77,
+      "labor_hours": 5.05,
+      "labor_dollars": 60.75,
+      "labor_percent": 27.86
     },
     {
       "hour_24": 17,
       "label": "5P",
-      "net_sales": 621.65,
-      "guests": 108,
-      "guest_average": 5.76,
-      "orders": 24,
-      "order_average": 25.9,
-      "labor_hours": 6.53,
-      "labor_dollars": 73.65,
-      "labor_percent": 11.85
+      "net_sales": 722.08,
+      "guests": 135,
+      "guest_average": 5.35,
+      "orders": 21,
+      "order_average": 34.38,
+      "labor_hours": 5.57,
+      "labor_dollars": 66.8,
+      "labor_percent": 9.25
     },
     {
       "hour_24": 18,
       "label": "6P",
-      "net_sales": 640.95,
-      "guests": 113,
-      "guest_average": 5.67,
-      "orders": 23,
-      "order_average": 27.87,
-      "labor_hours": 8.4,
-      "labor_dollars": 93.5,
-      "labor_percent": 14.59
+      "net_sales": 502.55,
+      "guests": 95,
+      "guest_average": 5.29,
+      "orders": 18,
+      "order_average": 27.92,
+      "labor_hours": 6.98,
+      "labor_dollars": 82.82,
+      "labor_percent": 16.48
     },
     {
       "hour_24": 19,
       "label": "7P",
-      "net_sales": 626.72,
-      "guests": 119,
-      "guest_average": 5.27,
-      "orders": 28,
-      "order_average": 22.38,
-      "labor_hours": 8.48,
-      "labor_dollars": 96.82,
-      "labor_percent": 15.45
+      "net_sales": 445.38,
+      "guests": 83,
+      "guest_average": 5.37,
+      "orders": 15,
+      "order_average": 29.69,
+      "labor_hours": 5.08,
+      "labor_dollars": 61.48,
+      "labor_percent": 13.8
     },
     {
       "hour_24": 20,
       "label": "8P",
-      "net_sales": 542.93,
-      "guests": 96,
-      "guest_average": 5.66,
-      "orders": 24,
-      "order_average": 22.62,
-      "labor_hours": 8.97,
-      "labor_dollars": 102.13,
-      "labor_percent": 18.81
+      "net_sales": 665.7,
+      "guests": 120,
+      "guest_average": 5.55,
+      "orders": 22,
+      "order_average": 30.26,
+      "labor_hours": 5.0,
+      "labor_dollars": 60.0,
+      "labor_percent": 9.01
     },
     {
       "hour_24": 21,
       "label": "9P",
-      "net_sales": 405.64,
-      "guests": 94,
-      "guest_average": 4.32,
-      "orders": 19,
-      "order_average": 21.35,
-      "labor_hours": 9.0,
-      "labor_dollars": 102.5,
-      "labor_percent": 25.27
+      "net_sales": 343.04,
+      "guests": 87,
+      "guest_average": 3.94,
+      "orders": 18,
+      "order_average": 19.06,
+      "labor_hours": 5.0,
+      "labor_dollars": 60.0,
+      "labor_percent": 17.49
     },
     {
       "hour_24": 22,
@@ -241,8 +241,8 @@
       "guest_average": 0.0,
       "orders": 0,
       "order_average": 0.0,
-      "labor_hours": 8.32,
-      "labor_dollars": 95.38,
+      "labor_hours": 4.93,
+      "labor_dollars": 59.27,
       "labor_percent": 100.0
     },
     {
@@ -253,8 +253,8 @@
       "guest_average": 0.0,
       "orders": 0,
       "order_average": 0.0,
-      "labor_hours": 1.5,
-      "labor_dollars": 8.27,
+      "labor_hours": 3.38,
+      "labor_dollars": 41.92,
       "labor_percent": 100.0
     },
     {
@@ -265,9 +265,9 @@
       "guest_average": 0.0,
       "orders": 0,
       "order_average": 0.0,
-      "labor_hours": 1.0,
-      "labor_dollars": 0.0,
-      "labor_percent": 0.0
+      "labor_hours": 0.27,
+      "labor_dollars": 4.0,
+      "labor_percent": 100.0
     },
     {
       "hour_24": 1,
@@ -277,7 +277,7 @@
       "guest_average": 0.0,
       "orders": 0,
       "order_average": 0.0,
-      "labor_hours": 1.0,
+      "labor_hours": 0.0,
       "labor_dollars": 0.0,
       "labor_percent": 0.0
     },
@@ -289,7 +289,7 @@
       "guest_average": 0.0,
       "orders": 0,
       "order_average": 0.0,
-      "labor_hours": 1.0,
+      "labor_hours": 0.0,
       "labor_dollars": 0.0,
       "labor_percent": 0.0
     },
@@ -301,7 +301,7 @@
       "guest_average": 0.0,
       "orders": 0,
       "order_average": 0.0,
-      "labor_hours": 1.0,
+      "labor_hours": 0.0,
       "labor_dollars": 0.0,
       "labor_percent": 0.0
     }
