@@ -1,27 +1,27 @@
 {
-  "date": "2026-05-02",
+  "date": "2026-05-03",
   "new_count": 3,
   "notes": [
-    {
-      "from": "Crystal Hess",
-      "role": "dm",
-      "role_label": "DM",
-      "time": "Fri 2:05 PM",
-      "body": "Shopper Dashboard & FGX Info — print and post on the communication board this week."
-    },
     {
       "from": "Tonya Tucker",
       "role": "director",
       "role_label": "Accounting",
-      "time": "Fri 9:25 AM",
-      "body": "Upload the 4/29 deposit receipts ASAP. Action required."
+      "time": "Carryover",
+      "body": "4/29 deposit receipts still outstanding — upload to Egnyte and reply."
     },
     {
       "from": "CrunchTime",
       "role": "alert",
       "role_label": "Alert",
       "time": "Sat 3:10 AM",
-      "body": "KY-2065 5/1 task alerts: L-Rev and VO-Rec BOSS Alpha–Ohio Valley still flagged."
+      "body": "KY-2065 Task Alert 5/2: VO-Rec-BOSS Alpha – Ohio Valley still pending."
+    },
+    {
+      "from": "Elena Pinchbeck (Indeed)",
+      "role": "applicant",
+      "role_label": "Applicant",
+      "time": "Sat 12:08 PM",
+      "body": "Crew applicant — Dixie Highway: 'Heyy can I get a interview still'. Reply with slot or decline."
     }
   ]
 }
