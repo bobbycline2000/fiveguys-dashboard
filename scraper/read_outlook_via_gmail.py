@@ -620,44 +620,56 @@ def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | No
     iso_week = today.isocalendar()[1]
     biweek_flag = iso_week % 2  # alternates 0/1 each week
     rotating_ideas = {
-        0: ("Monday — VERBAL GREETING Drill",
-            "Our 4/17 shop scored 0/20 on verbal greeting. That ONE miss = 47% overall. "
-            "Every shift leader runs the greeting drill: 'Welcome to Five Guys, what can I get started for you?' — "
-            "every guest, EVERY time. Eye contact. Energy. Pull anyone who skips it aside immediately."),
-        1: ("Tuesday — Restroom Hourly Check Owner",
-            "4/17 shop also scored 0/20 on restroom (dirty floor, sink, mirror). "
-            "Assign a NAMED owner each hour for restroom check — sign the sheet, no exceptions. "
-            "If the lobby is busy, the restroom still gets checked. Pre-assign at huddle, don't wing it."),
-        2: ("Wednesday — Hand Sink Discipline",
-            "Steritech caught an employee getting water from the hand sink to clean the grill — that's a MAJOR. "
-            "Hand sinks are for HANDWASHING ONLY. Demo it. Re-coach it. If you see anyone using it for anything "
-            "else — water for cleaning, filling buckets, rinsing rags — stop them on the spot."),
-        3: ("Thursday — New Customer Service Course Check",
-            "Brad assigned the new Customer Service Course on April 21 to ALL employees. "
-            "Pull FGU progress at huddle — name who hasn't started, name who's behind. "
-            "Goal: every crew member completes it this week. This directly addresses our shop drag."),
-        4: ("Friday — Shop Trend Review (47 → 100 → 87)",
-            "We've gone 47% → 100% → 87% in three shops. What did the 100% shift do that the others didn't? "
-            "Pull all three reports at huddle. Name the difference. The 100% wasn't luck — it was execution. "
-            "Lock in what worked. Shops MUST improve — corporate KPI weights shop avg at 20%."),
-        5: ("Saturday — Volume + Break Discipline",
-            "Big day. Make cuts as labor allows, but breaks are 30 MINUTES — no shortcuts. "
-            "Employee meals rung in at break time, every time. "
-            "And read the line — meat on the grill BEFORE the order, head start at peak."),
-        6: ("Sunday — Reset + Coach the Coach",
-            "Walk through with the closing manager. What's Monday starting with? "
-            "Pick one shift leader and coach them on one fundamental — pass it forward. "
-            "Specific pick this week: who's going to own the verbal greeting standard on Monday open?"),
+        0: ("Monday — Blackberry FGU + Customer Service Course HARD DEADLINE",
+            "Two FGU deadlines collide TODAY: Blackberry shake videos due **today (May 4)** and Brad's "
+            "new Customer Service course is sitting at 13% overdue (third-worst in district). "
+            "Pull FGU at huddle. Name who hasn't completed Blackberry. Name who hasn't started Customer Service. "
+            "Crystal is visiting locations this week to verify readiness — we are NOT the store that gets caught short."),
+        1: ("Tuesday — Blackberry LTO Storage Prep (force ship arrives this week)",
+            "Product force-shipping May 4–15, 2 cases. Walk the cooler now — clear space at fountainside, "
+            "beside banana marinade. **Mix goes on the BOTTOM ROW of the milkshake cooler** (Crystal's directive). "
+            "Coffee is moving to pumps — confirm equipment is in place. Print/post the Blackberry all-in-one guide "
+            "and the Shopper Dashboard & FGX Info doc on the comm board today if it's not already up. "
+            "Shelf life of in-use syrup = 7 days."),
+        2: ("Wednesday — Hand Sink Discipline (1704 MAJOR last week)",
+            "1704 just took a MAJOR for an employee using the hand sink to get water to clean the grill. "
+            "That happens in this store and we wear it. Hand sinks are for HANDWASHING ONLY. "
+            "Demo it at huddle. If you see anyone using it for anything else — water for cleaning, filling buckets, "
+            "rinsing rags — stop them on the spot. Steritech is in market."),
+        3: ("Thursday — DayMark Labels + Equipment Integrity Check",
+            "Two food-safety hits to learn from: (1) the 4/23 system-wide DayMark bug that printed wrong discard "
+            "dates, and (2) 1704's CRITICAL on a chipped potato cutter tooth (foreign-object risk). "
+            "Spot-check every label on the line — discard date right? Spot-check the potato cutter teeth and the "
+            "slicer blades for chips or cracks BEFORE the shift starts. Find it before the inspector does."),
+        4: ("Friday — Call-Back-The-Order at Handoff (L3 prevention)",
+            "Customer Complaints carry the **biggest** corporate KPI weight (25%) — and a wrong order at handoff "
+            "is how an L3 starts. Every shift leader runs the call-back drill: "
+            "the runner repeats what's in the bag back to the guest before it leaves the counter. "
+            "Catch the missing fry, the wrong burger, the no-cheese — at the counter, not in the parking lot. "
+            "Also: pull the latest 3 shops at huddle. Service is still our #1 drag (87% on 4/25)."),
+        5: ("Saturday — Volume + Restroom Hourly Owner",
+            "Big Saturday. Make cuts as labor allows, but breaks are 30 MINUTES — no shortcuts, employee meals "
+            "rung in at break time. Read the line — meat on the grill BEFORE the order at peak. "
+            "And the 4/17 shop scored 0/20 on restroom — assign a NAMED owner each hour for the restroom check, "
+            "signed sheet, no exceptions. Lobby being busy is not a reason to skip it."),
+        6: ("Sunday — Reset + Coach the Verbal Greeting Owner",
+            "Walk through with the closing manager. What's Monday opening with? "
+            "Service is still the #1 drag — pick ONE shift leader and coach them on the verbal greeting "
+            "standard so they can own it on Monday open. 'Welcome to Five Guys, what can I get started for you?' "
+            "— every guest, every time, eye contact, energy. Pass it forward."),
     }
     biweekly_themes = [
-        ("Even Weeks — Service Recovery Sprint",
-         "Service is our #1 drag — 47% shop with the verbal greeting miss is dragging the corporate KPI ranking. "
-         "Every shift leader watches one full transaction (greet → register → window) per shift "
-         "and gives the cashier ONE specific piece of feedback. Build the muscle. Shops MUST improve."),
-        ("Odd Weeks — COGS + Steritech Tighten",
-         "Re-calibrate portions (fries, toppings) and walk the store like Steritech's here today. "
-         "Lids on mushrooms and onions, wet dishes stacked clean, hand sinks for handwashing ONLY — "
-         "the 4/28 hand sink violation can't repeat. Find one gap, fix it before shift."),
+        ("Even Weeks — Service Recovery + Order Accuracy Sprint",
+         "Service is our #1 shop drag and Customer Complaints is the heaviest corporate KPI weight (25%). "
+         "Every shift leader watches one full transaction (greet → register → handoff → window) per shift "
+         "and gives the cashier or runner ONE specific piece of feedback — verbal greeting AND a call-back "
+         "of the order at handoff. Build both muscles together. Shops MUST improve."),
+        ("Odd Weeks — Blackberry LTO Readiness + Steritech Tighten",
+         "We're inside the Blackberry ramp window: force-ship May 4–15, activation May 18. "
+         "FGU completed, mix on bottom row, coffee pumps live, comm-board guide posted. "
+         "And walk the store like Steritech is here today — hand sinks for handwashing ONLY (don't repeat the "
+         "4/28 1704 MAJOR), DayMark dates correct, potato cutter and slicer blades chip-free, lids on mushrooms "
+         "and onions, wet dishes stacked clean. Win the launch by being squared away NOW."),
     ]
     rot_title, rot_body = rotating_ideas[dow]
     bi_title, bi_body = biweekly_themes[biweek_flag]
