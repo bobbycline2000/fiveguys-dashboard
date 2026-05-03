@@ -39,19 +39,33 @@
   h1 .red { color: var(--red); }
   .lede { color: var(--white-60); font-size: 14px; max-width: 60ch; margin-top: 10px; }
 
+  /* Lock banner */
+  .lock-banner { margin-top: 24px; padding: 18px 22px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .lock-banner.open { background: rgba(34,197,94,.06); border: 1px solid rgba(34,197,94,.25); }
+  .lock-banner.urgent { background: rgba(245,168,0,.08); border: 1px solid rgba(245,168,0,.35); }
+  .lock-banner.locked { background: rgba(206,23,38,.08); border: 1px solid var(--red-dim); }
+  .lock-banner .k { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--white-60); font-weight: 600; margin-bottom: 4px; }
+  .lock-banner .v { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; }
+  .lock-banner .countdown { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 36px; line-height: 1; }
+  .lock-banner.open .countdown { color: var(--green); }
+  .lock-banner.urgent .countdown { color: var(--gold); }
+  .lock-banner.locked .countdown { color: var(--red-soft); }
+
   /* Status strip */
-  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 32px 0; }
+  .strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0 32px; }
   .chip { background: var(--panel); border: 1px solid var(--line); padding: 16px 18px; border-radius: 4px; }
   .chip .k { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--white-40); font-weight: 600; }
-  .chip .v { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 28px; margin-top: 2px; }
+  .chip .v { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; margin-top: 2px; }
   .chip .v small { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--white-60); margin-left: 6px; letter-spacing: .1em; text-transform: uppercase; }
 
   /* Main grid */
   .main { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  @media (max-width: 880px) { .main { grid-template-columns: 1fr; } .strip { grid-template-columns: 1fr 1fr; } h1 { font-size: 44px; } }
+  @media (max-width: 880px) { .main { grid-template-columns: 1fr; } .strip { grid-template-columns: 1fr; } h1 { font-size: 44px; } }
 
-  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 28px; }
-  .panel h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .25em; text-transform: uppercase; color: var(--white-60); margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid var(--line-2); }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 28px; position: relative; }
+  .step-tag { position: absolute; top: -10px; left: 22px; background: var(--red); color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .25em; padding: 4px 12px; border-radius: 2px; }
+  .panel h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: .15em; text-transform: uppercase; color: var(--white); margin-bottom: 6px; }
+  .panel .sub { font-size: 12px; color: var(--white-60); margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid var(--line-2); }
 
   /* Inputs */
   .field { margin-bottom: 22px; }
@@ -61,28 +75,34 @@
   .num { display: flex; align-items: baseline; gap: 12px; }
   .num input { background: var(--bg); border: 1px solid var(--line-2); color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 44px; width: 110px; padding: 8px 14px; border-radius: 3px; text-align: center; }
   .num input:focus { outline: none; border-color: var(--red); }
+  .num input::placeholder { color: var(--white-40); }
   .num .u { font-size: 13px; color: var(--white-60); letter-spacing: .1em; text-transform: uppercase; }
 
-  /* Forecast row */
-  .fc { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--line-2); border: 1px solid var(--line-2); border-radius: 3px; margin-top: 6px; }
-  .fc .d { background: var(--bg); padding: 12px 8px; text-align: center; }
-  .fc .d .day { font-size: 10px; color: var(--white-40); letter-spacing: .15em; text-transform: uppercase; }
-  .fc .d .amt { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; margin-top: 4px; }
+  /* Forecast row — editable */
+  .fc { display: grid; gap: 1px; background: var(--line-2); border: 1px solid var(--line-2); border-radius: 3px; margin-top: 6px; }
+  .fc .d { background: var(--bg); padding: 10px 6px; text-align: center; }
+  .fc .d .day { font-size: 10px; color: var(--white-40); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 4px; }
+  .fc .d input { background: transparent; border: 1px dashed transparent; color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; width: 100%; text-align: center; padding: 4px 2px; border-radius: 2px; }
+  .fc .d input:focus { outline: none; border-color: var(--red); background: rgba(206,23,38,.05); }
+  .fc .d input:hover { border-color: var(--line-2); }
+  .fc .total { background: rgba(206,23,38,.08); padding: 10px 6px; text-align: center; }
+  .fc .total .day { font-size: 10px; color: var(--red-soft); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 4px; font-weight: 700; }
+  .fc .total .amt { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22px; color: var(--white); }
 
   /* Order panel */
-  .order { background: linear-gradient(135deg, #1a0508 0%, #0d0d0d 100%); border: 1px solid var(--red-dim); position: relative; overflow: hidden; }
+  .order { background: linear-gradient(135deg, #1a0508 0%, #0d0d0d 100%); border: 1px solid var(--red-dim); overflow: hidden; }
   .order::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); }
-  .order h2 { color: var(--red-soft); border-bottom-color: var(--red-dim); }
+  .order .step-tag { background: var(--white); color: var(--red); }
   .row { display: flex; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line-2); }
   .row:last-of-type { border-bottom: none; }
-  .row .lbl { flex: 0 0 140px; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--white-60); font-weight: 600; }
+  .row .lbl { flex: 0 0 110px; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--white-60); font-weight: 600; }
   .row .big { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 88px; line-height: .9; color: var(--white); }
   .row .unit { font-size: 13px; color: var(--white-60); letter-spacing: .1em; text-transform: uppercase; margin-left: 14px; }
   .row .calc { margin-left: auto; text-align: right; font-size: 11px; color: var(--white-40); line-height: 1.6; }
   .deliver { background: rgba(206,23,38,.08); border: 1px solid var(--red-dim); padding: 14px 18px; border-radius: 3px; margin-top: 22px; font-size: 13px; color: var(--white-80); display: flex; justify-content: space-between; align-items: center; }
   .deliver strong { color: var(--red-soft); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; }
   .actions { display: flex; gap: 10px; margin-top: 22px; }
-  button { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .15em; text-transform: uppercase; padding: 14px 22px; border-radius: 3px; cursor: pointer; border: none; transition: .15s; }
+  button, .btn-link { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .15em; text-transform: uppercase; padding: 14px 22px; border-radius: 3px; cursor: pointer; border: none; transition: .15s; text-decoration: none; text-align: center; display: inline-block; }
   .btn-primary { background: var(--red); color: var(--white); flex: 1; }
   .btn-primary:hover { background: var(--red-soft); }
   .btn-ghost { background: transparent; color: var(--white-60); border: 1px solid var(--line-2); }
@@ -100,150 +120,196 @@
   <div class="crumb"><a href="dashboard.html">← Dashboard</a></div>
 </div>
 
-<h1>Bread <span class="red">Order</span></h1>
-<p class="lede">Count what's on hand. Submit. CrunchTime handles the forecast, math handles the rest.</p>
+<h1 id="headline"><span id="day-name">—</span>'S <span class="red">Bread Order</span></h1>
+<p class="lede">Count what's on hand. Confirm sales. Done.</p>
+
+<div class="lock-banner" id="lock-banner">
+  <div>
+    <div class="k">Lock cutoff</div>
+    <div class="v" id="lock-time">—</div>
+  </div>
+  <div style="text-align:right;">
+    <div class="k" id="lock-state-k">Time remaining</div>
+    <div class="countdown" id="countdown">—</div>
+  </div>
+</div>
 
 <div class="strip">
   <div class="chip"><div class="k">Today</div><div class="v" id="today">—</div></div>
-  <div class="chip"><div class="k">Next delivery</div><div class="v" id="next-delivery">—</div></div>
-  <div class="chip"><div class="k">Sales window</div><div class="v" id="window-sales">—</div></div>
-  <div class="chip"><div class="k">Order by</div><div class="v">10 AM</div></div>
+  <div class="chip"><div class="k">Delivery</div><div class="v" id="next-delivery">—</div></div>
+  <div class="chip"><div class="k">Coverage</div><div class="v" id="window-sales">—</div></div>
 </div>
 
 <div class="main">
   <div class="panel">
-    <h2>Inputs</h2>
-
-    <div class="field">
-      <label>Sales projection · <span id="forecast-source">CrunchTime</span></label>
-      <div class="fc" id="fc"></div>
-      <div class="hint">Auto-pulled from CrunchTime performance metrics. Sum of days the order has to cover.</div>
-    </div>
+    <div class="step-tag">Step 1</div>
+    <h2>Count what's on hand</h2>
+    <div class="sub">Walk to the back. Count bags. Type the numbers.</div>
 
     <div class="field">
       <label>Hamburger buns on hand</label>
-      <div class="num"><input type="number" value="3" id="hb"><span class="u">bags</span></div>
-      <div class="hint">Count bags in the back. 5 bags = 1 tray.</div>
+      <div class="num"><input type="number" placeholder="0" id="hb"><span class="u">bags</span></div>
+      <div class="hint">5 bags = 1 tray.</div>
     </div>
 
     <div class="field">
       <label>Hot dog buns on hand</label>
-      <div class="num"><input type="number" value="6" id="hd"><span class="u">bags</span></div>
+      <div class="num"><input type="number" placeholder="0" id="hd"><span class="u">bags</span></div>
       <div class="hint">6 bags = 1 tray. Shelf life is 5 days from delivery — order small, order often.</div>
     </div>
   </div>
 
-  <div class="panel order">
-    <h2>Submit to BOSS</h2>
+  <div class="panel">
+    <div class="step-tag">Step 2</div>
+    <h2>Confirm projected sales</h2>
+    <div class="sub" id="step2-sub">Auto-pulled from CrunchTime for the days this order covers. Tap any number to override.</div>
 
-    <div class="row">
-      <div class="lbl">Hamburger</div>
-      <div class="big" id="hb-out">—</div>
-      <div class="unit">trays</div>
-      <div class="calc">build-to <b style="color:var(--white-80)" id="hb-build">—</b><br>− on-hand <span id="hb-onhand">—</span> trays</div>
+    <div class="field" style="margin:0;">
+      <label>Sales projection · <span id="forecast-source">CrunchTime</span></label>
+      <div class="fc" id="fc"></div>
+      <div class="hint">If something feels off (event, weather, shop), edit the day directly. The order recalculates instantly.</div>
     </div>
+  </div>
+</div>
 
-    <div class="row">
-      <div class="lbl">Hot dog</div>
-      <div class="big" id="hd-out">—</div>
-      <div class="unit">tray</div>
-      <div class="calc">build-to <b style="color:var(--white-80)" id="hd-build">—</b><br>− on-hand <span id="hd-onhand">—</span> trays</div>
-    </div>
+<div class="panel order" style="margin-top:24px;">
+  <div class="step-tag">Step 3</div>
+  <h2>Your order</h2>
+  <div class="sub">This is what to enter in BOSS. Open the link, match these numbers.</div>
 
-    <div class="deliver">
-      <span>Delivery</span>
-      <strong id="deliver-line">— · KY-2065</strong>
-    </div>
+  <div class="row">
+    <div class="lbl">Hamburger</div>
+    <div class="big" id="hb-out">—</div>
+    <div class="unit">trays</div>
+    <div class="calc">build-to <b style="color:var(--white-80)" id="hb-build">—</b><br>− on-hand <span id="hb-onhand">—</span> trays</div>
+  </div>
 
-    <div class="actions">
-      <button class="btn-primary">Open BOSS · place order</button>
-      <button class="btn-ghost">Save draft</button>
-    </div>
+  <div class="row">
+    <div class="lbl">Hot dog</div>
+    <div class="big" id="hd-out">—</div>
+    <div class="unit">trays</div>
+    <div class="calc">build-to <b style="color:var(--white-80)" id="hd-build">—</b><br>− on-hand <span id="hd-onhand">—</span> trays</div>
+  </div>
+
+  <div class="deliver">
+    <span>Delivery</span>
+    <strong id="deliver-line">— · KY-2065</strong>
+  </div>
+
+  <div class="actions">
+    <a class="btn-primary btn-link" href="https://bread2.fiveguys.com" target="_blank">Open BOSS · place order</a>
   </div>
 </div>
 
 <div class="why">
   <b>How the math works.</b> Every $986 in sales = 1 hamburger tray. Every $19,974 = 1 hot dog tray. Those numbers come from your store's last 8 weeks of POS data — not a guess. Build-to = sales window ÷ tray rate, rounded up. Order = build-to − on-hand. Hot dogs round small because of the 5-day shelf life.
+  <br><br>
+  <b>Lock rules (KY-2065).</b> Mon delivery locks Thu 2 PM. Wed locks Mon 2 PM. Fri locks Wed 2 PM. Sat locks Thu 2 PM. After lock, the order is final.
 </div>
 
 <script>
   // === CONFIG (KY-2065) =====================================================
   const HB_PER_TRAY = 5, HD_PER_TRAY = 6;
-  const SALES_PER_HB_TRAY = 986;     // from 8wk PMIX, refreshes quarterly
-  const SALES_PER_HD_TRAY = 19974;   // from 8wk PMIX, refreshes quarterly
-  // Delivery days: 0=Sun, 1=Mon ... 6=Sat
+  const SALES_PER_HB_TRAY = 986;
+  const SALES_PER_HD_TRAY = 19974;
   const DELIVERY_DAYS = [1, 3, 5, 6]; // Mon, Wed, Fri, Sat for KY-2065
   const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const DAY_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const DAY_FULL = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+  const LOCK_HOUR = 14; // 2 PM
+  // Days before delivery that lock occurs:
+  // Mon = 4 (locks Thu, weekend closed). Wed/Fri/Sat = 2 days before.
+  const LOCK_DAYS_BEFORE = { 1: 4, 3: 2, 5: 2, 6: 2 };
 
   // === STATE ================================================================
   let state = {
-    forecast: 8500,        // window sales — replaced by live CT data
-    windowDays: ['Mon','Tue','Wed','Thu'],
-    perDay: [2500,2000,2000,2000],
-    nextDelivery: 'Wed',
-    nextDeliveryDate: '',
-    daysOut: 2,
+    deliveryDate: null,
+    lockTime: null,
+    windowDays: [],
+    perDay: [],
+    forecast: 0,
     forecastSource: 'mock',
-    reportDate: ''
+    perDayManualOverride: {} // dayIndex -> bool
   };
+
+  // === LOCK + DELIVERY DETECTION ===========================================
+  function lockTimeFor(deliveryDate) {
+    const dow = deliveryDate.getDay();
+    const offset = LOCK_DAYS_BEFORE[dow] || 2;
+    const lock = new Date(deliveryDate);
+    lock.setDate(lock.getDate() - offset);
+    lock.setHours(LOCK_HOUR, 0, 0, 0);
+    return lock;
+  }
+  function nextEditableDelivery(now) {
+    for (let i = 0; i < 14; i++) {
+      const d = new Date(now);
+      d.setDate(d.getDate() + i);
+      d.setHours(0, 0, 0, 0);
+      if (DELIVERY_DAYS.includes(d.getDay())) {
+        const lock = lockTimeFor(d);
+        if (lock > now) return { date: d, lock };
+      }
+    }
+    return null;
+  }
+  function deliveryAfter(deliveryDate) {
+    for (let i = 1; i <= 7; i++) {
+      const d = new Date(deliveryDate);
+      d.setDate(d.getDate() + i);
+      if (DELIVERY_DAYS.includes(d.getDay())) return d;
+    }
+  }
 
   // === LIVE DATA FETCH ======================================================
   async function loadCT() {
+    let dailyForecast = 0, weekForecast = 0;
     try {
       const r = await fetch('data/latest.json', { cache: 'no-store' });
-      if (!r.ok) throw new Error('no latest.json');
-      const d = await r.json();
-      const dailyForecast = d.sales?.forecast || 0;
-      const weekForecast = d.sales?.forecast_week || 0;
-      const reportDate = d.meta?.report_date || '';
-      computeWindow(dailyForecast, weekForecast);
-      state.forecastSource = 'CrunchTime · ' + (d.meta?.report_display || 'live');
-      state.reportDate = reportDate;
+      if (r.ok) {
+        const d = await r.json();
+        dailyForecast = d.sales?.forecast || 0;
+        weekForecast = d.sales?.forecast_week || 0;
+        state.forecastSource = 'CrunchTime · ' + (d.meta?.report_display || 'live');
+      } else {
+        state.forecastSource = 'mock — CT feed offline';
+      }
     } catch (e) {
-      // Fall back to mock data, keep page usable
-      state.forecastSource = 'mock data — CT feed offline';
+      state.forecastSource = 'mock — CT feed offline';
     }
+    computeWindow(dailyForecast, weekForecast);
     render();
+    tickCountdown();
+    setInterval(tickCountdown, 1000 * 30);
   }
 
   // === WINDOW CALC ==========================================================
-  // Find next delivery after today, then the delivery after that. The order
-  // placed today must cover sales from next-delivery → following-delivery.
-  function nextDeliveryAfter(dow) {
-    for (let i = 1; i <= 7; i++) {
-      const d = (dow + i) % 7;
-      if (DELIVERY_DAYS.includes(d)) return { dow: d, daysOut: i };
-    }
-  }
   function computeWindow(todayForecast, weekForecast) {
-    const today = new Date();
-    const dow = today.getDay();
-    const next = nextDeliveryAfter(dow);
-    const after = nextDeliveryAfter(next.dow);
-    // Window = days from next delivery through day before the one after
-    const windowLen = after.daysOut - next.daysOut; // # days the order must cover
-    // Per-day proxy: distribute weekForecast across days, or use todayForecast if no week
+    const now = new Date();
+    const next = nextEditableDelivery(now);
+    if (!next) return;
+    state.deliveryDate = next.date;
+    state.lockTime = next.lock;
+    const after = deliveryAfter(next.date);
+    const windowLen = Math.round((after - next.date) / (1000 * 60 * 60 * 24));
     const perDayAvg = weekForecast > 0 ? weekForecast / 7 : (todayForecast || 3000);
-    const days = [];
-    const perDay = [];
+    const days = [], perDay = [];
     for (let i = 0; i < windowLen; i++) {
-      const d = (next.dow + i) % 7;
-      days.push(DAY_NAMES[d]);
+      const d = new Date(next.date);
+      d.setDate(d.getDate() + i);
+      days.push(DAY_NAMES[d.getDay()]);
       perDay.push(Math.round(perDayAvg));
     }
     state.windowDays = days;
     state.perDay = perDay;
     state.forecast = perDay.reduce((a,b)=>a+b, 0);
-    state.nextDelivery = DAY_NAMES[next.dow];
-    state.nextDeliveryFull = DAY_FULL[next.dow];
-    state.daysOut = next.daysOut;
+    state.perDayManualOverride = {};
   }
 
   // === RECOMPUTE ORDER ======================================================
   function recalc() {
     const hbBags = +document.getElementById('hb').value || 0;
     const hdBags = +document.getElementById('hd').value || 0;
+    state.forecast = state.perDay.reduce((a,b)=>a+(+b||0), 0);
     const hbBuild = Math.ceil(state.forecast / SALES_PER_HB_TRAY);
     const hdBuild = Math.ceil(state.forecast / SALES_PER_HD_TRAY);
     const hbOnHandTrays = hbBags / HB_PER_TRAY;
@@ -256,29 +322,90 @@
     document.getElementById('hd-build').textContent = hdBuild;
     document.getElementById('hb-onhand').textContent = hbOnHandTrays.toFixed(1);
     document.getElementById('hd-onhand').textContent = hdOnHandTrays.toFixed(1);
+    // Update window total chip
+    const total = state.forecast;
+    const fmt = total >= 1000 ? '$' + (total/1000).toFixed(1) + 'K' : '$' + total;
+    const win = state.windowDays.length === 1 ? state.windowDays[0] : state.windowDays[0] + '–' + state.windowDays[state.windowDays.length-1];
+    document.getElementById('window-sales').innerHTML = fmt + ' <small>' + win + '</small>';
+  }
+
+  // === COUNTDOWN ============================================================
+  function tickCountdown() {
+    if (!state.lockTime) return;
+    const now = new Date();
+    const diff = state.lockTime - now;
+    const banner = document.getElementById('lock-banner');
+    banner.classList.remove('open','urgent','locked');
+    if (diff <= 0) {
+      banner.classList.add('locked');
+      document.getElementById('countdown').textContent = 'LOCKED';
+      document.getElementById('lock-state-k').textContent = 'Status';
+      // Re-detect — should advance to next delivery
+      computeWindow(0, 0); render();
+      return;
+    }
+    const hours = Math.floor(diff / (1000*60*60));
+    const days = Math.floor(hours / 24);
+    const h = hours % 24;
+    const mins = Math.floor((diff / (1000*60)) % 60);
+    let txt;
+    if (days > 0) txt = `${days}d ${h}h`;
+    else if (hours > 0) txt = `${h}h ${mins}m`;
+    else txt = `${mins}m`;
+    document.getElementById('countdown').textContent = txt;
+    document.getElementById('lock-state-k').textContent = 'Time remaining';
+    if (hours < 6) banner.classList.add('urgent');
+    else banner.classList.add('open');
   }
 
   // === RENDER ===============================================================
   function render() {
     const today = new Date();
+    const d = state.deliveryDate;
+    if (!d) return;
+    const dayFull = DAY_FULL[d.getDay()];
+    document.getElementById('day-name').textContent = dayFull;
+    document.title = `${dayFull[0]+dayFull.slice(1).toLowerCase()}'s Bread Order — KY-2065`;
     document.getElementById('today').textContent = today.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-    document.getElementById('next-delivery').innerHTML = state.nextDelivery + ' <small>' + state.daysOut + ' day' + (state.daysOut===1?'':'s') + '</small>';
-    const fmtK = '$' + (state.forecast/1000).toFixed(1) + 'K';
-    document.getElementById('window-sales').innerHTML = fmtK + ' <small>' + state.windowDays.join('–') + '</small>';
+    document.getElementById('next-delivery').textContent = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    document.getElementById('lock-time').textContent = state.lockTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ', 2:00 PM';
     document.getElementById('forecast-source').textContent = state.forecastSource;
+    document.getElementById('deliver-line').textContent = d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }) + ' · KY-2065';
+    // Coverage description
+    const covers = state.windowDays.length === 1 ? state.windowDays[0] : `${state.windowDays[0]} → ${state.windowDays[state.windowDays.length-1]}`;
+    document.getElementById('step2-sub').innerHTML = `These are the days <strong>this order has to cover</strong> (${covers}). Auto-pulled from CrunchTime — tap to override.`;
 
-    // Forecast row
+    // Forecast row — editable
     const fc = document.getElementById('fc');
     fc.innerHTML = '';
-    fc.style.gridTemplateColumns = `repeat(${state.windowDays.length}, 1fr)`;
-    state.windowDays.forEach((d, i) => {
-      const amt = state.perDay[i];
-      const k = amt >= 1000 ? '$' + (amt/1000).toFixed(1) + 'K' : '$' + amt;
-      fc.innerHTML += `<div class="d"><div class="day">${d}</div><div class="amt">${k}</div></div>`;
+    fc.style.gridTemplateColumns = `repeat(${state.windowDays.length + 1}, 1fr)`;
+    state.windowDays.forEach((dayLbl, i) => {
+      const cell = document.createElement('div');
+      cell.className = 'd';
+      cell.innerHTML = `<div class="day">${dayLbl}</div><input type="number" data-i="${i}" value="${state.perDay[i]}" inputmode="numeric">`;
+      fc.appendChild(cell);
     });
-
-    document.getElementById('deliver-line').textContent = (state.nextDeliveryFull || state.nextDelivery) + ' · KY-2065';
+    const totalCell = document.createElement('div');
+    totalCell.className = 'total';
+    totalCell.innerHTML = `<div class="day">Total</div><div class="amt" id="fc-total">—</div>`;
+    fc.appendChild(totalCell);
+    fc.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('input', e => {
+        const i = +e.target.dataset.i;
+        state.perDay[i] = +e.target.value || 0;
+        state.perDayManualOverride[i] = true;
+        updateFcTotal();
+        recalc();
+      });
+    });
+    updateFcTotal();
     recalc();
+  }
+  function updateFcTotal() {
+    const total = state.perDay.reduce((a,b)=>a+(+b||0), 0);
+    const fmt = total >= 1000 ? '$' + (total/1000).toFixed(1) + 'K' : '$' + total;
+    const el = document.getElementById('fc-total');
+    if (el) el.textContent = fmt;
   }
 
   document.getElementById('hb').addEventListener('input', recalc);
