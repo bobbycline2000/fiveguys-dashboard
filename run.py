@@ -79,19 +79,52 @@ async def run_store(store_id: str):
 
     # ── Par Brink emailed reports (reads Gmail inbox) ──────────────────────────
     log.info("\n--- Par Brink (Gmail) ---")
-    try:
-        from scraper.read_parbrink_email import run as pb_run
-        pb_run()
-    except Exception as e:
-        log.error(f"Par Brink email read failed: {e}")
+    import subprocess
+    pb_rc = subprocess.run(
+        [sys.executable, str(ROOT / "scraper" / "parbrink_email_pickup.py"),
+         "--store", store_id, "--mode", "daily"],
+        cwd=ROOT,
+    ).returncode
+    if pb_rc not in (0, 1):  # 1 = email already marked read (re-run), still OK
+        log.error(f"Par Brink email pickup exited {pb_rc}")
 
-    # ── Teamworx (scaffold — URL still TODO) ───────────────────────────────────
+    # Parse the daily Par Brink PDFs into JSON the dashboard reads.
+    pb_folder = sorted(
+        (p for p in (ROOT / "data" / "raw" / "parbrink" / store_id).glob("*")
+         if p.is_dir() and p.name[:4].isdigit()),
+        reverse=True,
+    )
+    pb_folder = pb_folder[0] if pb_folder else None
+    if pb_folder:
+        for label, script, pdf_name in [
+            ("Sales Summary",   "parbrink_parse_sales_summary.py",       "Sales Summary.pdf"),
+            ("Discount Summary","parbrink_parse_discounts.py",           "Discount Summary.pdf"),
+            ("Hourly Sales/Lab","parbrink_parse_hourly_sales_labor.py",  "Hourly Sales And Labor.pdf"),
+        ]:
+            pdf = pb_folder / pdf_name
+            if pdf.exists():
+                subprocess.run(
+                    [sys.executable, str(ROOT / "scraper" / script),
+                     "--store", store_id, "--pdf", str(pdf)],
+                    cwd=ROOT,
+                )
+
+    # Period rollups (WTD/MTD/QTD) for the dashboard.
+    subprocess.run(
+        [sys.executable, str(ROOT / "scraper" / "aggregate_periods.py"),
+         "--store", store_id],
+        cwd=ROOT,
+    )
+
+    # ── Teamworx (today's roster → weekly_schedule.json for store) ─────────────
     log.info("\n--- Teamworx ---")
-    try:
-        from scraper.scrape_teamworx import run as tw_run
-        tw_run()
-    except Exception as e:
-        log.error(f"Teamworx scrape failed: {e}")
+    tw_rc = subprocess.run(
+        [sys.executable, str(ROOT / "scraper" / "scrape_teamworx_roster.py"),
+         "--store", store_id],
+        cwd=ROOT,
+    ).returncode
+    if tw_rc != 0:
+        log.error(f"Teamworx roster scrape exited {tw_rc}")
 
     # ── CrunchTime scrape + generate dashboard.html (reads fresh CM data) ──────
     log.info("\n--- CrunchTime Net Chef ---")
