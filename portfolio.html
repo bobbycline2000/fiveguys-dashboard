@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bobby Cline — Portfolio</title>
+<meta name="description" content="Operations systems, dashboards, and Claude Code infrastructure built for Five Guys 2065 and Savior Consulting Group.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+Pro:wght@400;600;700;900&family=Bebas+Neue&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;color:#111;background:#fafafa;line-height:1.5}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+
+  /* TOP NAV — direction switcher */
+  .topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a0a;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 24px;border-bottom:1px solid #222}
+  .topnav .brand{font-family:'Playfair Display',serif;font-weight:900;font-size:18px;letter-spacing:.5px}
+  .topnav nav{display:flex;gap:6px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+  .topnav nav a{padding:8px 14px;border:1px solid #333;border-radius:999px;text-decoration:none;transition:all .15s}
+  .topnav nav a:hover{background:#fff;color:#000}
+  .topnav .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#888}
+  @media (max-width:720px){.topnav{flex-direction:column;gap:8px;padding:10px 12px}.topnav .meta{display:none}}
+
+  section.iteration{min-height:100vh;padding:96px 0 80px;border-bottom:6px solid #0a0a0a}
+  .iter-label{position:sticky;top:48px;z-index:5;background:#fef200;color:#000;padding:6px 16px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:inline-block;margin-left:24px;margin-bottom:24px;border:2px solid #000}
+  .iter-recommend{background:#16a34a;color:#fff;border-color:#16a34a}
+
+  /* ─────────── ITERATION 1 — INK PRESS ─────────── */
+  .ink{background:#f4f1ea;color:#1a1a1a;font-family:'Source Serif Pro',Georgia,serif}
+  .ink .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+  .ink .masthead{border-top:8px solid #1a1a1a;border-bottom:3px double #1a1a1a;padding:28px 0 18px;text-align:center}
+  .ink .masthead .kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:12px}
+  .ink .masthead h1{font-family:'Playfair Display',serif;font-size:clamp(56px,9vw,128px);font-weight:900;line-height:.95;letter-spacing:-.02em}
+  .ink .masthead .sub{font-style:italic;font-size:18px;margin-top:8px;color:#444}
+  .ink .lede{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;border-bottom:1px solid #1a1a1a;padding:32px 0;margin-top:0}
+  .ink .lede .col{column-rule:1px solid #ccc}
+  .ink .lede h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;margin-bottom:10px;line-height:1.1}
+  .ink .lede p{font-size:15px;color:#222}
+  .ink .pull{font-family:'Playfair Display',serif;font-style:italic;font-size:32px;line-height:1.25;border-left:4px solid #1a1a1a;padding-left:18px}
+  .ink h3.section{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;margin:48px 0 8px;border-bottom:3px double #1a1a1a;padding-bottom:8px}
+  .ink .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid #1a1a1a}
+  .ink .item{border-bottom:1px solid #1a1a1a;border-right:1px solid #1a1a1a;padding:22px 20px}
+  .ink .item:nth-child(3n){border-right:none}
+  .ink .item .tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;color:#888;text-transform:uppercase;margin-bottom:8px}
+  .ink .item h4{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;line-height:1.15;margin-bottom:8px}
+  .ink .item p{font-size:14px;color:#333;margin-bottom:10px}
+  .ink .item a.read{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#1a1a1a;border-bottom:2px solid #1a1a1a;text-decoration:none;padding-bottom:1px}
+  .ink .stamp{display:inline-block;border:2px solid #1a1a1a;padding:4px 10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;transform:rotate(-2deg);margin-top:6px}
+  .ink .live{color:#a8121f;border-color:#a8121f}
+  @media (max-width:900px){.ink .lede,.ink .grid{grid-template-columns:1fr}.ink .item{border-right:none}}
+
+  /* ─────────── ITERATION 2 — INDUSTRIAL OPERATOR ─────────── */
+  .ops{background:#0d0d0d;color:#f5f5f5;font-family:Inter,system-ui,sans-serif}
+  .ops .wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+  .ops .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:end;padding:56px 0 40px;border-bottom:1px solid #222}
+  .ops .hero .name{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,14vw,200px);line-height:.85;letter-spacing:-.01em;color:#fff}
+  .ops .hero .name span{color:#DA291C}
+  .ops .hero .tag{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#999;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .ops .hero p{font-size:18px;color:#bbb;max-width:42ch}
+  .ops .stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#222;margin-top:32px;border:1px solid #222}
+  .ops .stat-bar .s{background:#0d0d0d;padding:20px 18px}
+  .ops .stat-bar .v{font-family:'Bebas Neue',sans-serif;font-size:48px;color:#DA291C;line-height:1}
+  .ops .stat-bar .l{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#999;letter-spacing:.1em;text-transform:uppercase;margin-top:6px}
+  .ops h3.section{font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:.02em;margin:64px 0 24px;color:#fff}
+  .ops h3.section::before{content:"//";color:#DA291C;margin-right:14px}
+  .ops .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .ops .card{background:#161616;border:1px solid #252525;padding:24px;transition:all .2s;display:flex;flex-direction:column}
+  .ops .card:hover{border-color:#DA291C;transform:translateY(-2px)}
+  .ops .card .num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#DA291C;letter-spacing:.15em;margin-bottom:12px}
+  .ops .card h4{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;margin-bottom:10px;color:#fff}
+  .ops .card p{font-size:14px;color:#aaa;flex:1;margin-bottom:14px}
+  .ops .card .meta{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#666;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;border-top:1px solid #252525;padding-top:10px}
+  .ops .card .live{color:#22c55e}
+  .ops .card a.cta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#DA291C;text-decoration:none;letter-spacing:.1em;text-transform:uppercase;margin-top:auto}
+  .ops .card a.cta:hover{text-decoration:underline}
+  @media (max-width:900px){.ops .hero{grid-template-columns:1fr}.ops .stat-bar{grid-template-columns:repeat(2,1fr)}.ops .grid{grid-template-columns:1fr}}
+
+  /* ─────────── ITERATION 3 — HERITAGE CONSULTANT ─────────── */
+  .heritage{background:#f8f4ec;color:#1d2a3a;font-family:Lora,Georgia,serif}
+  .heritage .wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+  .heritage .hdr{text-align:center;padding:64px 0 40px}
+  .heritage .crest{width:64px;height:64px;border:2px solid #1d2a3a;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:24px;margin-bottom:18px;letter-spacing:-.02em}
+  .heritage .hdr h1{font-family:'Playfair Display',serif;font-size:clamp(44px,6vw,72px);font-weight:900;line-height:1.05}
+  .heritage .hdr .role{font-style:italic;color:#3d556e;margin-top:10px;font-size:18px;letter-spacing:.04em}
+  .heritage .hdr .rule{width:80px;height:2px;background:#c9a96e;margin:24px auto}
+  .heritage .hdr p{max-width:62ch;margin:0 auto;color:#3d556e;font-size:17px}
+  .heritage h3.section{font-family:'Playfair Display',serif;font-size:36px;text-align:center;margin:56px 0 8px;font-weight:900}
+  .heritage h3.section .gold{color:#c9a96e}
+  .heritage .section-sub{text-align:center;font-style:italic;color:#3d556e;margin-bottom:32px}
+  .heritage .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .heritage .card{background:#fff;border:1px solid #e0d8c8;border-top:3px solid #1d2a3a;padding:28px;position:relative}
+  .heritage .card::after{content:"";position:absolute;top:-3px;left:0;width:40px;height:3px;background:#c9a96e}
+  .heritage .card .cat{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#c9a96e;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}
+  .heritage .card h4{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:10px;color:#1d2a3a}
+  .heritage .card p{font-size:15px;color:#445}
+  .heritage .card .foot{margin-top:14px;padding-top:14px;border-top:1px solid #e0d8c8;display:flex;justify-content:space-between;font-size:12px;color:#3d556e;font-family:'IBM Plex Mono',monospace;letter-spacing:.05em}
+  .heritage .card .foot a{color:#1d2a3a;text-decoration:none;border-bottom:1px solid #c9a96e}
+  .heritage .card .foot .live{color:#16a34a;font-weight:600}
+  @media (max-width:760px){.heritage .grid{grid-template-columns:1fr}}
+
+  /* SHARED — recommendation banner + footer */
+  .reco{background:linear-gradient(135deg,#DA291C 0%,#a8121f 100%);color:#fff;padding:32px 0;text-align:center}
+  .reco .wrap{max-width:900px;margin:0 auto;padding:0 32px}
+  .reco h2{font-family:'Playfair Display',serif;font-size:32px;margin-bottom:8px}
+  .reco p{font-size:17px;opacity:.95;max-width:60ch;margin:0 auto}
+  .reco strong{background:#fff;color:#a8121f;padding:2px 10px;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.05em}
+
+  footer.fin{background:#0a0a0a;color:#888;padding:48px 24px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.05em}
+  footer.fin a{color:#DA291C;text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="brand">Bobby Cline — Portfolio</div>
+  <nav>
+    <a href="#ink">1. Ink Press</a>
+    <a href="#ops">2. Operator</a>
+    <a href="#heritage">3. Heritage</a>
+    <a href="#reco">Recommendation</a>
+  </nav>
+  <div class="meta">v1 · 2026-05-02 · 3 directions</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ITERATION 1 — INK PRESS                              -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="iteration ink" id="ink">
+  <span class="iter-label iter-recommend">▸ Direction 1 of 3 — Ink Press · Recommended</span>
+  <div class="wrap">
+
+    <div class="masthead">
+      <div class="kicker">Vol. I · No. 1 · Louisville, Kentucky · May 2026</div>
+      <h1>BOBBY CLINE</h1>
+      <div class="sub">Operations Systems · Dashboards · Claude Code Infrastructure</div>
+    </div>
+
+    <div class="lede">
+      <div class="col">
+        <h2>Operator first. Builder second.</h2>
+        <p>I run a Five Guys store in Louisville. Eleven years in restaurant operations, ex-Director of Operations across multiple stores, now GM at Store 2065 and building the systems I always wished I'd had.</p>
+      </div>
+      <div class="col">
+        <h2>What I build</h2>
+        <p>Live operational dashboards. Daily intelligence briefs. Schedule generators. Compliance trackers. The plumbing that turns a folder full of exports and emails into a single morning glance at how the store is doing.</p>
+      </div>
+      <div class="col">
+        <h2>Where this is going</h2>
+        <p>Savior Consulting Group — operations + web for owner-operators. The work below is the proof.</p>
+        <div class="stamp live">● Live · Currently shipping</div>
+      </div>
+    </div>
+
+    <div class="pull" style="margin:48px 0;max-width:80ch">
+      "Most franchise operators don't have a live dashboard. Corporate teams pay vendors six figures for less. I built mine in six weeks with Claude Code."
+    </div>
+
+    <h3 class="section">Operations Systems</h3>
+    <div class="grid">
+
+      <div class="item">
+        <div class="tag">Flagship · Live · Daily</div>
+        <h4>Five Guys Operations Dashboard</h4>
+        <p>Auto-updating dashboard pulling from CrunchTime, Par Brink, ComplianceMate, Marketforce, and Outlook. Sales, labor, food cost, inventory, compliance — one URL, refreshed at 8:05 AM ET every morning via GitHub Actions.</p>
+        <a class="read" href="dashboard.html">Read the dashboard →</a>
+      </div>
+
+      <div class="item">
+        <div class="tag">Daily · Branded HTML email</div>
+        <h4>The Morning Brief</h4>
+        <p>Reads the fg2065 Outlook inbox, summarizes director notes, shop-level alerts, and team huddle items, and ships a Five Guys-branded HTML email before the morning shift starts.</p>
+        <span class="stamp">Auto-ships · 7:30 AM ET</span>
+      </div>
+
+      <div class="item">
+        <div class="tag">Weekly · Monday 3PM call</div>
+        <h4>The Synopsis</h4>
+        <p>A weekly operational rollup tuned for the Monday DM call. Live page, shareable URL, prints clean to PDF for Bobby's notebook.</p>
+        <a class="read" href="synopsis.html">Read the synopsis →</a>
+      </div>
+
+      <div class="item">
+        <div class="tag">Generative · Training loop</div>
+        <h4>Schedule Builder</h4>
+        <p>Auto-builds the weekly schedule from CrunchTime hours and store rhythms. Each Monday's run gets diffed against Bobby's edits — the model learns what "good" looks like for 2065.</p>
+        <span class="stamp">Iter. 4 of training run</span>
+      </div>
+
+      <div class="item">
+        <div class="tag">Reference · Live</div>
+        <h4>Employee Directory</h4>
+        <p>Single source of truth for the 2065 team — names, roles, status, contact. Generated as XLSX + PDF, hosted on GitHub Pages, regenerated when the roster changes.</p>
+      </div>
+
+      <div class="item">
+        <div class="tag">Compliance · Word + PDF</div>
+        <h4>Steritech Morning Walk</h4>
+        <p>Manager-walk checklist built to Steritech's standard. Eight zones, observable line items, sign-off block. Used at 2065 daily; portable to any FG store.</p>
+      </div>
+
+    </div>
+
+    <h3 class="section">Brand & Web</h3>
+    <div class="grid">
+
+      <div class="item">
+        <div class="tag">Live · Recently approved</div>
+        <h4>Estep & Company Website</h4>
+        <p>Branding refresh and marketing site for the parent franchise group. Final design locked April 30, 2026.</p>
+        <a class="read" href="https://bobbycline2000.github.io/estep-branding/" target="_blank">Visit estep-branding →</a>
+      </div>
+
+      <div class="item">
+        <div class="tag">Identity · Locked</div>
+        <h4>Savior Consulting Group</h4>
+        <p>Name, positioning, services, and infrastructure for the consulting venture. Two practice areas: ops systems and web. Truthful positioning, anti-scam posture, $500–$750 entry deliverable.</p>
+        <span class="stamp">SCG · Est. 2026</span>
+      </div>
+
+      <div class="item">
+        <div class="tag">Concept · In development</div>
+        <h4>The Estep Press</h4>
+        <p>Weekly company-wide newsletter for all Estep locations. Editorial format, ships every Friday, written for the operators in the building — not corporate.</p>
+      </div>
+
+    </div>
+
+    <h3 class="section">Infrastructure</h3>
+    <div class="grid">
+
+      <div class="item">
+        <div class="tag">Methodology · Reusable</div>
+        <h4>Claude Code Operator Stack</h4>
+        <p>Custom rules, skills, hooks, and memory architecture that turns Claude Code into a co-director of operations. Session protocols, trigger phrases, dedupe sweeps, verifier subagents — the whole loop.</p>
+        <span class="stamp">~17 rules · 20+ skills</span>
+      </div>
+
+      <div class="item">
+        <div class="tag">Automation · Playwright</div>
+        <h4>CrunchTime + ComplianceMate Scrapers</h4>
+        <p>Headless browsers that log in, navigate, filter, extract, and ship data — daily. Engineered around the real-world auth quirks of each platform.</p>
+      </div>
+
+      <div class="item">
+        <div class="tag">Automation · MS Graph</div>
+        <h4>Outlook Brief Pipeline</h4>
+        <p>MSAL token harvesting + Outlook REST API for inbox reads and HTML sends. The brief and the dashboard's team-notes panel both flow from this pipe.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ITERATION 2 — INDUSTRIAL OPERATOR                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="iteration ops" id="ops">
+  <span class="iter-label">▸ Direction 2 of 3 — Industrial Operator</span>
+  <div class="wrap">
+
+    <div class="hero">
+      <div>
+        <div class="tag">Operator · Builder · Louisville KY</div>
+        <div class="name">BOBBY<br><span>CLINE.</span></div>
+      </div>
+      <div>
+        <div class="tag">// Mission</div>
+        <p>I build operational systems that work at 5 AM in a busy restaurant — not just in a slide deck. Live dashboards, automated briefs, schedule generators, compliance pipelines. For Five Guys 2065 today, for owner-operators tomorrow.</p>
+      </div>
+    </div>
+
+    <div class="stat-bar">
+      <div class="s"><div class="v">11</div><div class="l">Years in FG ops</div></div>
+      <div class="s"><div class="v">6</div><div class="l">Live data sources</div></div>
+      <div class="s"><div class="v">8:05</div><div class="l">AM auto-deploy ET</div></div>
+      <div class="s"><div class="v">100%</div><div class="l">Built with Claude Code</div></div>
+    </div>
+
+    <h3 class="section">Operations Systems</h3>
+    <div class="grid">
+
+      <div class="card">
+        <div class="num">01 / FLAGSHIP</div>
+        <h4>FG Operations Dashboard</h4>
+        <p>CrunchTime + Par Brink + ComplianceMate + Marketforce → one URL. Auto-deploys daily via GitHub Actions.</p>
+        <div class="meta"><span class="live">● LIVE</span><span>github.io · daily</span></div>
+        <a class="cta" href="dashboard.html">VIEW DASHBOARD →</a>
+      </div>
+
+      <div class="card">
+        <div class="num">02 / DAILY</div>
+        <h4>The Morning Brief</h4>
+        <p>Auto-pulls Outlook, summarizes director + huddle + alerts, ships HTML branded email pre-shift.</p>
+        <div class="meta"><span class="live">● LIVE</span><span>7:30 AM ET</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">03 / WEEKLY</div>
+        <h4>Synopsis Dashboard</h4>
+        <p>Operational rollup tuned for the Monday 3 PM call with the Director.</p>
+        <div class="meta"><span class="live">● LIVE</span><span>Mon · weekly</span></div>
+        <a class="cta" href="synopsis.html">VIEW SYNOPSIS →</a>
+      </div>
+
+      <div class="card">
+        <div class="num">04 / GENERATIVE</div>
+        <h4>Schedule Builder</h4>
+        <p>Auto-builds weekly schedules. Training loop diffs Bobby's edits, learns 2065's rhythm week over week.</p>
+        <div class="meta"><span>TRAINING</span><span>Iter. 4</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">05 / REFERENCE</div>
+        <h4>Employee Directory</h4>
+        <p>Live xlsx + pdf, GitHub Pages-hosted, source of truth for the 2065 team roster.</p>
+        <div class="meta"><span class="live">● LIVE</span><span>20 active</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">06 / COMPLIANCE</div>
+        <h4>Steritech Morning Walk</h4>
+        <p>Manager checklist to Steritech standard. Eight zones, observable line items, sign-off block.</p>
+        <div class="meta"><span>SHIPPED</span><span>Word · PDF</span></div>
+      </div>
+
+    </div>
+
+    <h3 class="section">Brand & Web</h3>
+    <div class="grid">
+
+      <div class="card">
+        <div class="num">07 / BRAND</div>
+        <h4>Estep & Company Site</h4>
+        <p>Branding refresh and marketing site for the parent franchise group. Final design locked Apr 30.</p>
+        <div class="meta"><span class="live">● LIVE</span><span>github.io</span></div>
+        <a class="cta" href="https://bobbycline2000.github.io/estep-branding/" target="_blank">VISIT SITE →</a>
+      </div>
+
+      <div class="card">
+        <div class="num">08 / IDENTITY</div>
+        <h4>Savior Consulting Group</h4>
+        <p>Two-service consulting venture: ops systems + web. Locked identity, infrastructure sprint complete.</p>
+        <div class="meta"><span>LOCKED</span><span>SCG · 2026</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">09 / IN-DEV</div>
+        <h4>The Estep Press</h4>
+        <p>Weekly newsletter for all Estep locations. Friday cadence. Written for the operators in the building.</p>
+        <div class="meta"><span>CONCEPT</span><span>weekly</span></div>
+      </div>
+
+    </div>
+
+    <h3 class="section">Infrastructure</h3>
+    <div class="grid">
+
+      <div class="card">
+        <div class="num">10 / METHODOLOGY</div>
+        <h4>Claude Code Operator Stack</h4>
+        <p>Custom rules, skills, hooks, memory. Turns Claude Code into a co-director of operations. Reusable across Estep + SCG.</p>
+        <div class="meta"><span>~17 RULES</span><span>20+ SKILLS</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">11 / AUTOMATION</div>
+        <h4>Playwright Scrapers</h4>
+        <p>CrunchTime, ComplianceMate, Marketforce. Auth-aware, selector-stable, retry-tolerant.</p>
+        <div class="meta"><span>3 ACTIVE</span><span>daily</span></div>
+      </div>
+
+      <div class="card">
+        <div class="num">12 / PIPELINE</div>
+        <h4>Outlook MS Graph Pipeline</h4>
+        <p>MSAL token capture + REST API. Powers the Morning Brief and dashboard team-notes panel.</p>
+        <div class="meta"><span class="live">● LIVE</span><span>fg2065 mailbox</span></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ITERATION 3 — HERITAGE CONSULTANT                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="iteration heritage" id="heritage">
+  <span class="iter-label">▸ Direction 3 of 3 — Heritage Consultant</span>
+  <div class="wrap">
+
+    <div class="hdr">
+      <div class="crest">BC</div>
+      <h1>Bobby Cline</h1>
+      <div class="role">Operations Systems &amp; Strategic Consulting</div>
+      <div class="rule"></div>
+      <p>Eleven years building and running franchise restaurants. Now building the operational systems — dashboards, briefs, automations — that owner-operators wish corporate had given them. Based in Louisville, Kentucky.</p>
+    </div>
+
+    <h3 class="section">Operations <span class="gold">·</span> Systems</h3>
+    <div class="section-sub">Live, in production, used daily at Five Guys Store 2065.</div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="cat">Flagship Engagement</div>
+        <h4>Five Guys Operations Dashboard</h4>
+        <p>A unified, auto-updating operational view spanning sales, labor, food cost, compliance, and team notes. Six external data sources, refreshed daily via automated pipeline.</p>
+        <div class="foot"><span><a href="dashboard.html">View Dashboard</a></span><span class="live">● Live</span></div>
+      </div>
+
+      <div class="card">
+        <div class="cat">Daily Intelligence</div>
+        <h4>The Morning Brief</h4>
+        <p>A branded HTML morning briefing automatically composed from the night-before inbox. Director notes, alerts, huddle items — distilled and delivered before the first crew arrives.</p>
+        <div class="foot"><span>Outlook · MS Graph</span><span class="live">● Live</span></div>
+      </div>
+
+      <div class="card">
+        <div class="cat">Weekly Rollup</div>
+        <h4>The Synopsis</h4>
+        <p>A weekly operational synopsis tuned for the Monday District Manager call. Print-clean, share-ready, anchored to a permanent URL.</p>
+        <div class="foot"><span><a href="synopsis.html">View Synopsis</a></span><span class="live">● Live</span></div>
+      </div>
+
+      <div class="card">
+        <div class="cat">Generative · Training Loop</div>
+        <h4>Schedule Builder</h4>
+        <p>Auto-builds the weekly labor schedule and learns each Monday from Bobby's edits — converging toward the operator's preferences over time.</p>
+        <div class="foot"><span>Iteration 4</span><span>In training</span></div>
+      </div>
+
+      <div class="card">
+        <div class="cat">Reference</div>
+        <h4>Employee Directory</h4>
+        <p>The team's source-of-truth roster — generated as both XLSX and PDF, hosted, and regenerated whenever the team changes.</p>
+        <div class="foot"><span>20 active</span><span class="live">● Live</span></div>
+      </div>
+
+      <div class="card">
+        <div class="cat">Compliance</div>
+        <h4>Steritech Morning Walk</h4>
+        <p>A manager's daily walk checklist built to Steritech's standard, in both Word and PDF — portable to any Five Guys location.</p>
+        <div class="foot"><span>Word · PDF</span><span>Shipped</span></div>
+      </div>
+
+    </div>
+
+    <h3 class="section">Brand <span class="gold">·</span> Web</h3>
+    <div class="grid">
+
+      <div class="card">
+        <div class="cat">Engagement · Live</div>
+        <h4>Estep &amp; Company</h4>
+        <p>Branding refresh and marketing website for the parent franchise group. Final design approved April 2026.</p>
+        <div class="foot"><span><a href="https://bobbycline2000.github.io/estep-branding/" target="_blank">Visit estep-branding</a></span><span class="live">● Live</span></div>
+      </div>
+
+      <div class="card">
+        <div class="cat">Practice</div>
+        <h4>Savior Consulting Group</h4>
+        <p>Two-service consulting practice — operations systems and web — built on truthful positioning and a $500–$750 entry deliverable. Identity locked, infrastructure complete.</p>
+        <div class="foot"><span>SCG · Est. 2026</span><span>Locked</span></div>
+      </div>
+
+      <div class="card">
+        <div class="cat">In Development</div>
+        <h4>The Estep Press</h4>
+        <p>A weekly company-wide newsletter for all Estep locations, written for the operators in the building.</p>
+        <div class="foot"><span>Friday cadence</span><span>Concept</span></div>
+      </div>
+
+    </div>
+
+    <h3 class="section">Infrastructure <span class="gold">·</span> Methodology</h3>
+    <div class="grid">
+
+      <div class="card">
+        <div class="cat">Reusable Asset</div>
+        <h4>Claude Code Operator Stack</h4>
+        <p>A complete operator-grade configuration for Claude Code: rules, skills, hooks, memory, session protocols, and a verifier subagent. The methodology behind everything above.</p>
+        <div class="foot"><span>~17 rules · 20+ skills</span><span>Reusable</span></div>
+      </div>
+
+      <div class="card">
+        <div class="cat">Automation</div>
+        <h4>Playwright Scraper Suite</h4>
+        <p>Headless-browser automations for CrunchTime, ComplianceMate, and Marketforce — built around each platform's real-world auth quirks.</p>
+        <div class="foot"><span>3 active</span><span>Daily</span></div>
+      </div>
+
+      <div class="card">
+        <div class="cat">Pipeline</div>
+        <h4>Outlook Graph Pipeline</h4>
+        <p>MSAL-token capture and Microsoft Graph integration. Reads the inbox, writes branded sends, and powers the Morning Brief and dashboard team-notes panel.</p>
+        <div class="foot"><span>fg2065 mailbox</span><span class="live">● Live</span></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- RECOMMENDATION                                       -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="reco" id="reco">
+  <div class="wrap">
+    <h2>My recommendation: <strong>Direction 1 — Ink Press</strong></h2>
+    <p style="margin-top:14px">It's already your locked dashboard aesthetic, so the personal brand and the operational work read as one voice. It's distinctive (most operators look like Direction 2 or 3), it photographs well in screenshots and pitch decks, and the editorial format gives every project room to be a real story — not just a tile in a grid. Direction 2 reads as "tech bro startup," Direction 3 reads as "established consulting firm" — neither matches where you actually are. Ink Press is yours.</p>
+    <p style="margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.05em;opacity:.9">Pick a direction and I'll build it out fully — real screenshots, case studies per project, downloadable PDF version for Phil.</p>
+  </div>
+</section>
+
+<footer class="fin">
+  Bobby Cline · Louisville, KY · Built with Claude Code · v1 · 2026-05-02
+  &nbsp;·&nbsp; <a href="dashboard.html">Dashboard</a>
+  &nbsp;·&nbsp; <a href="synopsis.html">Synopsis</a>
+  &nbsp;·&nbsp; <a href="https://bobbycline2000.github.io/estep-branding/" target="_blank">Estep</a>
+</footer>
+
+</body>
+</html>
