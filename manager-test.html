@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Five Guys Manager Test - Store 2065</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#FFF8E7;color:#1B2A4E;min-height:100vh;padding:20px;line-height:1.5}
+.wrap{max-width:780px;margin:0 auto}
+.hdr{background:#DA291C;color:#fff;padding:18px 22px;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.hdr h1{font-size:1.3rem;font-weight:800;letter-spacing:0.5px}
+.hdr .sub{font-size:0.85rem;opacity:0.95}
+.card{background:#fff;border:2px solid #1B2A4E;border-top:none;border-radius:0 0 8px 8px;padding:24px;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.intro h2{margin-bottom:14px;color:#1B2A4E}
+.intro p{margin-bottom:14px}
+input[type=text]{width:100%;padding:12px;font-size:1rem;border:2px solid #1B2A4E;border-radius:6px;font-family:inherit}
+.modes{display:flex;gap:10px;margin:16px 0}
+.mode{flex:1;padding:14px;border:2px solid #1B2A4E;border-radius:6px;background:#fff;cursor:pointer;text-align:center;font-weight:600}
+.mode.active{background:#1B2A4E;color:#fff}
+.btn{display:inline-block;padding:12px 24px;background:#DA291C;color:#fff;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:1rem;font-family:inherit}
+.btn:hover{background:#b81f15}
+.btn.ghost{background:#fff;color:#1B2A4E;border:2px solid #1B2A4E}
+.btn.ghost:hover{background:#1B2A4E;color:#fff}
+.btn:disabled{opacity:0.45;cursor:not-allowed}
+.progress{height:8px;background:#eee;border-radius:4px;margin-bottom:16px;overflow:hidden}
+.progress > div{height:100%;background:#DA291C;transition:width 0.25s}
+.qmeta{font-size:0.85rem;color:#666;margin-bottom:8px;display:flex;justify-content:space-between}
+.q{font-size:1.1rem;font-weight:600;margin-bottom:18px;line-height:1.45}
+.tf-row{display:flex;gap:10px;margin-bottom:12px}
+.tf-row .btn{flex:1}
+.tf-row .btn.sel{background:#1B2A4E}
+.feedback{margin-top:14px;padding:12px 14px;border-radius:6px;font-size:0.95rem;border-left:4px solid}
+.feedback.right{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20}
+.feedback.wrong{background:#ffebee;border-color:#c62828;color:#b71c1c}
+.feedback .lbl{font-weight:700;margin-bottom:4px}
+.nav{display:flex;gap:10px;margin-top:18px;justify-content:space-between;flex-wrap:wrap}
+.score{text-align:center;padding:30px 10px}
+.score .pct{font-size:3.5rem;font-weight:800;color:#DA291C;margin:10px 0}
+.score .stamp{display:inline-block;padding:8px 22px;border-radius:6px;font-weight:800;letter-spacing:1px;margin:8px 0}
+.stamp.pass{background:#2e7d32;color:#fff}
+.stamp.review{background:#DA291C;color:#fff}
+.review-list{margin-top:24px;text-align:left}
+.review-list .item{padding:14px;border:1px solid #ddd;border-left:4px solid #DA291C;border-radius:4px;margin-bottom:10px;background:#fafafa}
+.review-list .ans{margin-top:6px;font-weight:600;color:#1B2A4E}
+.review-list .you{margin-top:4px;color:#b71c1c;font-size:0.9rem}
+.self{display:flex;gap:10px;margin-top:10px;align-items:center;flex-wrap:wrap}
+.self span{font-size:0.9rem;color:#444;font-weight:600}
+.mini-btn{padding:8px 14px;border:2px solid #1B2A4E;background:#fff;border-radius:5px;cursor:pointer;font-weight:700;font-size:0.85rem;font-family:inherit}
+.mini-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+.mini-btn.wrong{background:#DA291C;color:#fff;border-color:#DA291C}
+@media print{.nav,.btn,.modes{display:none}}
+@media (max-width:600px){.card{padding:18px}.hdr h1{font-size:1.1rem}.q{font-size:1rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div><h1>FIVE GUYS MANAGER TEST</h1><div class="sub">Store 2065 - Training Binder Edition</div></div>
+    <div class="sub" id="counter"></div>
+  </div>
+  <div class="card" id="card"></div>
+</div>
+<script>
+const QUESTIONS = [{"q": "Why do we perform a fry calibration at each shift?", "a": "To ensure that we serve the perfect fries each shift.", "type": "text", "correct": "To ensure that we serve the perfect fries each shift."}, {"q": "Do you have to perform a boil out every time you change oil?", "a": "True", "type": "tf", "correct": "true"}, {"q": "What causes the acid effect to appear on cut potatoes?", "a": "The potatoes have been soaking for too long (over 24 hours)", "type": "text", "correct": "The potatoes have been soaking for too long (over 24 hours)"}, {"q": "Final cooked fries should be cooked until they are ________on the outside and like a ________potato on the inside.", "a": "Firm and mashed", "type": "text", "correct": "Firm and mashed"}, {"q": "Why do we shake the fries during the final cook?", "a": "To get an even cook and so they don't clump together", "type": "text", "correct": "To get an even cook and so they don't clump together"}, {"q": "Where are our potatoes grown?", "a": "Above the 42nd parallel", "type": "text", "correct": "Above the 42nd parallel"}, {"q": "What should you do if you have potatoes exhibiting the acid effect?", "a": "Throw out the potatoes and wash, rinse and sanitize all buckets", "type": "text", "correct": "Throw out the potatoes and wash, rinse and sanitize all buckets"}, {"q": "When finished, the fries must be shaken at least _____times to remove excess oil.", "a": "15", "type": "text", "correct": "15"}, {"q": "How many minutes must cut potatoes be soaked in cold clear water before they can be used?", "a": "15 min", "type": "text", "correct": "15 min"}, {"q": "Why is it important to do a mid-shift fry filter?", "a": "Better fry quality, helps night shift and easier filtering at close.", "type": "text", "correct": "Better fry quality, helps night shift and easier filtering at close."}, {"q": "Approximately how many minutes should a basket of fries pre-cook for?", "a": "2 1/2 min", "type": "text", "correct": "2 1/2 min"}, {"q": "During morning prep, when should stores start cutting the potatoes?", "a": "First thing in the morning", "type": "text", "correct": "First thing in the morning"}, {"q": "The fries should sit on the racks or above the oil until the appear ______, _______, and ______.", "a": "Soft, dull, and limp", "type": "text", "correct": "Soft, dull, and limp"}, {"q": "The _________ for a perfect Five Guys fry can change from shift to shift>", "a": "Color", "type": "text", "correct": "Color"}, {"q": "Cut potatoes turn black when they have been held ______________________.", "a": "Out of water for too long", "type": "text", "correct": "Out of water for too long"}, {"q": "At night, after you have cleaned the fryer filter drawer and reset with new paper, where should it be placed?", "a": "The lower shelf of the fry dump station", "type": "text", "correct": "The lower shelf of the fry dump station"}, {"q": "Why do we salt the cajun fries?", "a": "It enhances the cajun flavor", "type": "text", "correct": "It enhances the cajun flavor"}, {"q": "How do you fix pink potatoes?", "a": "Soak them in water longer to get all the starch out.", "type": "text", "correct": "Soak them in water longer to get all the starch out."}, {"q": "What is the prep time for potatoes?", "a": "5 minutes per bag", "type": "text", "correct": "5 minutes per bag"}, {"q": "What is the significance of never having empty fry baskets on the line?", "a": "It will eventually cause a bottle neck", "type": "text", "correct": "It will eventually cause a bottle neck"}, {"q": "Free standing potatoes can be stacked a maximum of ____bags high and potatoes against a wall can be stacked a maximum of _____bags high.", "a": "4,5", "type": "text", "correct": "4,5"}, {"q": "If the fryer filter pump is returning oil slowly what should you do?", "a": "Make sure filter paper is not too dirty", "type": "text", "correct": "Make sure filter paper is not too dirty"}, {"q": "The temperature of water for cut potatoes should not rise above _______.", "a": "55 degrees", "type": "text", "correct": "55 degrees"}, {"q": "Pre-cooked fries should sit and rest for at least how many minutes?", "a": "2 1/2 minutes (up to 2 hours)", "type": "text", "correct": "2 1/2 minutes (up to 2 hours)"}, {"q": "Cut potatoes should rotate in the Powersoak for a minimum of ____ minutes.", "a": "3 minutes", "type": "text", "correct": "3 minutes"}, {"q": "After close, the milkshake feed tube should be in the ______position.", "a": "Closed", "type": "text", "correct": "Closed"}, {"q": "The temperature of the milkshake mix in the hopper should always register between_____ and_______.", "a": "33 and 41", "type": "text", "correct": "33 and 41"}, {"q": "What should be done immediately after making a milkshake?", "a": "Using the Kleen cup clean the spindle", "type": "text", "correct": "Using the Kleen cup clean the spindle"}, {"q": "The milkshake mixture should be between ____ and ____ after dispensed.", "a": "24, 28", "type": "text", "correct": "24, 28"}, {"q": "Which day do we break the cycle of the milkshake machine?", "a": "Every Monday", "type": "text", "correct": "Every Monday"}, {"q": "Bananas should be _____ prior to prepping.", "a": "Freckled", "type": "text", "correct": "Freckled"}, {"q": "How many ounces is a milkshake?", "a": "16", "type": "text", "correct": "16"}, {"q": "Which day are the milkshake pumps cleaned?", "a": "Wednesday", "type": "text", "correct": "Wednesday"}, {"q": "It is necessary to fully disassemble the milkshake pumps to clean them properly.", "a": "Yes", "type": "yn", "correct": "yes"}, {"q": "If the PPM of a sanitizer is incorrect, the sanitizer will not be effective.", "a": "True", "type": "tf", "correct": "true"}, {"q": "Define wash and sanitize.", "a": "Wash removes surface dirt and Sanitize reduce pathogens to safe levels", "type": "text", "correct": "Wash removes surface dirt and Sanitize reduce pathogens to safe levels"}, {"q": "Name the six pathogens.", "a": "Shegellosis, salmonella typhi, salmonella non-typhi, e-coli, hep a, and norovirus", "type": "text", "correct": "Shegellosis, salmonella typhi, salmonella non-typhi, e-coli, hep a, and norovirus"}, {"q": "Food should be stored away from walls and at least ______ off the floor.", "a": "6 inches", "type": "text", "correct": "6 inches"}, {"q": "What is a best practice for a manager during a food safety audit?", "a": "Walk with auditor through the inspection", "type": "text", "correct": "Walk with auditor through the inspection"}, {"q": "What are three main components of an effective pest prevention program?", "a": "Prevent access, deny food and/or water, work with a licensed pest control operator", "type": "text", "correct": "Prevent access, deny food and/or water, work with a licensed pest control operator"}, {"q": "What qualifies a store for the CAFFEINE program?", "a": "Stores that score high risk (84 or lower and/or 3 criticals)", "type": "text", "correct": "Stores that score high risk (84 or lower and/or 3 criticals)"}, {"q": "What are hand sinks used for?", "a": "To only wash hands", "type": "text", "correct": "To only wash hands"}, {"q": "Approximately how long does it take a food safety auditor to complete an audit?", "a": "Approximately 2 hours", "type": "text", "correct": "Approximately 2 hours"}, {"q": "Define the following food contamination: biological, chemical, and physical.", "a": "Biological-hazardous microorganism called pathogens are passed on to food, chemical when cleaning/sanitizing agents contaminate food due to improper use or storage, and physical when hazardous foreign or naturally occurring objects are introduced to food.", "type": "text", "correct": "Biological-hazardous microorganism called pathogens are passed on to food, chemical when cleaning/sanitizing agents contaminate food due to improper use or storage, and physical when hazardous foreign or naturally occurring objects are introduced to food."}, {"q": "What temperature should the water be when washing hands?", "a": "100 degrees", "type": "text", "correct": "100 degrees"}, {"q": "What jewelry items are an employee allowed to wear while working?", "a": "Plain wedding band", "type": "text", "correct": "Plain wedding band"}, {"q": "Time and temperature checks should be performed at minimum every _____ hours.", "a": "2", "type": "text", "correct": "2"}, {"q": "If you have issues with greasy floors, doors that won't shut correctly, and haze in the air, what is likely the problem?", "a": "Hood system is out of balance", "type": "text", "correct": "Hood system is out of balance"}, {"q": "What is the purpose of food safety audits?", "a": "To protect the brand and lead us toward goal of being the safest restaurant system in world", "type": "text", "correct": "To protect the brand and lead us toward goal of being the safest restaurant system in world"}, {"q": "What is the shelf-life of bread?", "a": "5 days", "type": "text", "correct": "5 days"}, {"q": "If bread is not ordered, what happens?", "a": "The average of 4 weeks for that day will be sent", "type": "text", "correct": "The average of 4 weeks for that day will be sent"}, {"q": "How much bread should you have in stock in case delivery is delayed?", "a": "Enough to get you through the next delivery date", "type": "text", "correct": "Enough to get you through the next delivery date"}, {"q": "Where would you submit issues if you have problems with bread quality?", "a": "BOSS (Bread Ordering Subscriber System)", "type": "text", "correct": "BOSS (Bread Ordering Subscriber System)"}, {"q": "An under-toasted bun is likely caused for a soggy bun.", "a": "True", "type": "tf", "correct": "true"}, {"q": "We don't allow bags of bread to be stacked on top of each other primarily because the bread is ___________.", "a": "Is fragile", "type": "text", "correct": "Is fragile"}, {"q": "What is the primary reason for toasting the buns golden brown?", "a": "To prevent the bun from becoming soggy", "type": "text", "correct": "To prevent the bun from becoming soggy"}, {"q": "When can stores be visited by secret shoppers?", "a": "Any time the store is open", "type": "text", "correct": "Any time the store is open"}, {"q": "How many times per year will stores be visited by a secret shopper?", "a": "96", "type": "text", "correct": "96"}, {"q": "If you have a question about shop results, what should you do?", "a": "Contact your District Manager", "type": "text", "correct": "Contact your District Manager"}, {"q": "What is the purpose of the secret shopper program?", "a": "Create \"personal ownership\", reward employees for achieving standards of quality and service, and gain customer perspective", "type": "text", "correct": "Create \"personal ownership\", reward employees for achieving standards of quality and service, and gain customer perspective"}, {"q": "Secret shopper award payouts for a shop should be distributed equally among _________.", "a": "All employees working the shift", "type": "text", "correct": "All employees working the shift"}, {"q": "It is okay to leave entrances unlocked during prep or closing as long as nobody is around outside.", "a": "False", "type": "tf", "correct": "false"}, {"q": "In the morning if the fryers or grills will not turn on you should ______________.", "a": "Make sure it is fully plugged in, drain valve handle is fully closed, and gas hose is properly connected.", "type": "text", "correct": "Make sure it is fully plugged in, drain valve handle is fully closed, and gas hose is properly connected."}, {"q": "Describe the following technology systems: (FGU / Back of house / Extranet / BOSS / MarketForce)", "a": "Five Guys University-employee training, Back of house-store financial system, BOSS-Bread Ordering Subscriber System, Extranet-company document storage, and MarketForce-secret shopper website.", "type": "text", "correct": "Five Guys University-employee training, Back of house-store financial system, BOSS-Bread Ordering Subscriber System, Extranet-company document storage, and MarketForce-secret shopper website."}, {"q": "Floor cleaner should be mixed with _____ water.", "a": "Cold", "type": "text", "correct": "Cold"}, {"q": "Name the Five Guys", "a": "Jim, Matt, Chad, Ben and Tyler", "type": "text", "correct": "Jim, Matt, Chad, Ben and Tyler"}, {"q": "The three main items that must be included on a product issue form: a comprehensive description of the issue in question, the exact amount of product in question that the credit is being requested for, and _______________________________________.", "a": "High quality pictures of all affected items", "type": "text", "correct": "High quality pictures of all affected items"}, {"q": "Our tests for bacon are the ___________ and the _________ tests.", "a": "Horizontal and shatter", "type": "text", "correct": "Horizontal and shatter"}, {"q": "What makes our bacon special?", "a": "Because we use actual applewood chips to smoke bacon", "type": "text", "correct": "Because we use actual applewood chips to smoke bacon"}, {"q": "How often should employees working the register verify the contents of their drawers with their manager on duty?", "a": "Before and after each shift", "type": "text", "correct": "Before and after each shift"}, {"q": "When and where in the United States did Five Guys start?", "a": "1986 in Arlington, Virginia", "type": "text", "correct": "1986 in Arlington, Virginia"}, {"q": "What should be places at all entrances during inclement weather?", "a": "Wet floor signs and mats", "type": "text", "correct": "Wet floor signs and mats"}, {"q": "Hood vents should be taken down and washed _________.", "a": "Daily", "type": "text", "correct": "Daily"}, {"q": "Cashiers should repeat the order back to the customer before completing the order.", "a": "True", "type": "tf", "correct": "true"}, {"q": "It is acceptable to have employees that can only work one station as long as they show mastery at that station.", "a": "False", "type": "tf", "correct": "false"}, {"q": "How high can oil be stacked in the dining room?", "a": "2", "type": "text", "correct": "2"}, {"q": "What metric determines morning prep levels?", "a": "Store sales mix and forecasted sales", "type": "text", "correct": "Store sales mix and forecasted sales"}, {"q": "The lunch rush has been busier than expected so you prep another case of meat at 7 pm to get you thru night shift.  What time does that meat expire on the following day?", "a": "4 pm", "type": "text", "correct": "4 pm"}, {"q": "What is the name of the weekly newsletter that contains Five Guys news and potato board information?", "a": "Patty Press", "type": "text", "correct": "Patty Press"}, {"q": "Where does A-1, BBQ and Hot Sauce go on?", "a": "On the meat", "type": "text", "correct": "On the meat"}, {"q": "The BLT sandwich has how many full slices of bacon on it?", "a": "6 full pieces", "type": "text", "correct": "6 full pieces"}, {"q": "Why do we only stack tomatoes 2 high in the black container?", "a": "For quality reasons", "type": "text", "correct": "For quality reasons"}, {"q": "What should you NOT do if a customer has concerns about allergens in the food?", "a": "Make judgements about allergen safety for them", "type": "text", "correct": "Make judgements about allergen safety for them"}, {"q": "Why don't we prep lettuce or tomatoes directly into 1/3 pans?", "a": "For quality purposes and so it has time to come to temp in walk-in cooler", "type": "text", "correct": "For quality purposes and so it has time to come to temp in walk-in cooler"}, {"q": "What is the maximum number of days a new employee have to complete their required courses at Five Guys University?", "a": "31", "type": "text", "correct": "31"}, {"q": "What should you do if you notice a problem or defect with product in store?", "a": "Submit a product issue form", "type": "text", "correct": "Submit a product issue form"}, {"q": "To allow time for clean-up and pre-shift meetings, morning prep should be finished at least ________minutes prior to opening.", "a": "30", "type": "text", "correct": "30"}, {"q": "What stations should all new employees be able to work after their training is completer?", "a": "Register, dressing, grill, and fries", "type": "text", "correct": "Register, dressing, grill, and fries"}, {"q": "It is acceptable to prep in advance for more than one day.", "a": "False", "type": "tf", "correct": "false"}, {"q": "What is the best way to describe Five Guys approach to food cost?", "a": "To manage food cost in the back of house, but not between us and the customer", "type": "text", "correct": "To manage food cost in the back of house, but not between us and the customer"}, {"q": "When cooking burgers on section one of the grill you should wait for the edges to turn_____.", "a": "Gray/grey", "type": "text", "correct": "Gray/grey"}, {"q": "The burger wrapped in lettuce (lettuce wrap) is an alternative to using bread.", "a": "True", "type": "tf", "correct": "true"}, {"q": "What are some things you are not allowed to do one hour prior to closing?", "a": "Stack unused chairs and clean the bread grill", "type": "text", "correct": "Stack unused chairs and clean the bread grill"}, {"q": "If customer insists on a rare burger you should _____________________________.", "a": "Ask them to try one the Five Guys way, on the house", "type": "text", "correct": "Ask them to try one the Five Guys way, on the house"}, {"q": "Once a patty is well done and juicy, where does it go?", "a": "On a properly dressed bottom bun", "type": "text", "correct": "On a properly dressed bottom bun"}, {"q": "Patties should be smashed into groups of _____ and stacked a total of _____ patties high.", "a": "1, 6", "type": "text", "correct": "1, 6"}, {"q": "What comes on a standard veggie sandwich?", "a": "Grilled onions, grilled mushrooms, grilled green peppers, lettuce and tomato", "type": "text", "correct": "Grilled onions, grilled mushrooms, grilled green peppers, lettuce and tomato"}, {"q": "When cooking a hamburger, how many times should you even out the patty?", "a": "1", "type": "text", "correct": "1"}, {"q": "What are three things you must check when receiving ground beef during a delivery?", "a": "Packaging, temperature and pack/grind date (should 14 days)", "type": "text", "correct": "Packaging, temperature and pack/grind date (should 14 days)"}, {"q": "How many days can meat be accepted after the grind-on/pack date?", "a": "14", "type": "text", "correct": "14"}, {"q": "When dressing a burger with only ketchup, where would you place the ketchup?", "a": "Both top and bottom buns", "type": "text", "correct": "Both top and bottom buns"}, {"q": "Approximately how many ounces should a balled patty weigh?", "a": "3.5 to 3.7 ounces", "type": "text", "correct": "3.5 to 3.7 ounces"}, {"q": "What items go in the bag first?", "a": "Burger", "type": "text", "correct": "Burger"}, {"q": "What is the acceptable temperature range when receiving meat?", "a": "28 to 41 degrees", "type": "text", "correct": "28 to 41 degrees"}, {"q": "Meat prep with at least two people should take 10 minutes or less and is complete when the following occurs:", "a": "When the entire case is in a labeled Cambro and placed in walk-in cooler", "type": "text", "correct": "When the entire case is in a labeled Cambro and placed in walk-in cooler"}, {"q": "To properly even-out a patty, how many corners of the patty press should touch the grill?", "a": "All 4 corners", "type": "text", "correct": "All 4 corners"}, {"q": "When you see ________juice the patty is done.", "a": "Clear", "type": "text", "correct": "Clear"}, {"q": "What goes in the freezer?", "a": "We don't have a freezer", "type": "text", "correct": "We don't have a freezer"}, {"q": "How do we know the music is at the correct level?", "a": "It should be easy to hear the person next to you, but not the tables across the room", "type": "text", "correct": "It should be easy to hear the person next to you, but not the tables across the room"}, {"q": "What are the orange buckets used for?", "a": "Grease, fry debris, and empty bottles (ketchup, mustard, A-1, BBQ, and Hot Sauce)", "type": "text", "correct": "Grease, fry debris, and empty bottles (ketchup, mustard, A-1, BBQ, and Hot Sauce)"}];
+const PASS = 0.80;
+const state = JSON.parse(localStorage.getItem('mt_state_v2') || 'null') || {
+  name: '', mode: 'practice', idx: 0, started: false, answers: {}, marks: {}
+};
+function save(){ localStorage.setItem('mt_state_v2', JSON.stringify(state)); }
+function reset(){ localStorage.removeItem('mt_state_v2'); location.reload(); }
+const card = document.getElementById('card');
+const counter = document.getElementById('counter');
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);}
+
+function render(){
+  if(!state.started){ renderIntro(); return; }
+  if(state.idx >= QUESTIONS.length){ renderScore(); return; }
+  renderQuestion();
+}
+
+function renderIntro(){
+  counter.textContent = '';
+  const greet = state.name ? ', ' + escapeHtml(state.name) : '';
+  const resumeBtn = (state.idx>0) ? '<button class="btn ghost" id="resume" style="margin-left:10px">Resume (Q'+(state.idx+1)+')</button>' : '';
+  card.innerHTML =
+    '<div class="intro">'+
+    '<h2>Welcome'+greet+'.</h2>'+
+    '<p>Five Guys Manager Certification practice test from the official Training Binder. '+QUESTIONS.length+' questions covering fries, milkshakes, food safety, bread, secret shops, bacon, meat handling, dressing, dining room, and more.</p>'+
+    '<p><strong>Pick a mode and enter your name to begin.</strong></p>'+
+    '<input type="text" id="name" placeholder="Your name" value="'+escapeHtml(state.name)+'">'+
+    '<div class="modes">'+
+      '<div class="mode '+(state.mode==='practice'?'active':'')+'" data-mode="practice"><strong>Practice</strong><br><span style="font-size:0.85rem;font-weight:400">Reveal answer after each Q - self-mark</span></div>'+
+      '<div class="mode '+(state.mode==='exam'?'active':'')+'" data-mode="exam"><strong>Exam</strong><br><span style="font-size:0.85rem;font-weight:400">No reveal - self-grade at the end</span></div>'+
+    '</div>'+
+    '<button class="btn" id="start">Start Test</button>'+
+    resumeBtn+
+    '<button class="btn ghost" id="reset" style="margin-left:10px">Reset</button>'+
+    '</div>';
+  document.querySelectorAll('.mode').forEach(m=>m.onclick=()=>{state.mode=m.dataset.mode;save();render();});
+  document.getElementById('name').oninput=e=>{state.name=e.target.value;save();};
+  document.getElementById('start').onclick=()=>{
+    if(!state.name.trim()){alert('Enter your name first.');return;}
+    state.started=true;state.idx=0;state.answers={};state.marks={};save();render();
+  };
+  const rb = document.getElementById('resume');
+  if(rb) rb.onclick=()=>{state.started=true;save();render();};
+  document.getElementById('reset').onclick=reset;
+}
+
+function renderQuestion(){
+  const i = state.idx;
+  const Q = QUESTIONS[i];
+  const ans = state.answers[i];
+  const mark = state.marks[i];
+  counter.textContent = 'Q '+(i+1)+' / '+QUESTIONS.length;
+  const pct = ((i)/QUESTIONS.length*100).toFixed(0);
+  let inputHtml = '';
+  if(Q.type==='tf'){
+    inputHtml = '<div class="tf-row">'+
+      '<button class="btn '+(ans==='true'?'sel':'')+'" data-val="true">TRUE</button>'+
+      '<button class="btn '+(ans==='false'?'sel':'')+'" data-val="false">FALSE</button>'+
+    '</div>';
+  } else if(Q.type==='yn'){
+    inputHtml = '<div class="tf-row">'+
+      '<button class="btn '+(ans==='yes'?'sel':'')+'" data-val="yes">YES</button>'+
+      '<button class="btn '+(ans==='no'?'sel':'')+'" data-val="no">NO</button>'+
+    '</div>';
+  } else {
+    const v = (ans||'').replace(/"/g,'&quot;');
+    inputHtml = '<input type="text" id="answerBox" placeholder="Type your answer..." value="'+v+'">';
+  }
+  let feedback = '';
+  if(state.mode==='practice' && mark!==undefined){
+    const cls = mark==='right'?'right':'wrong';
+    const lbl = mark==='right'?'Marked correct':'Marked incorrect';
+    feedback = '<div class="feedback '+cls+'"><div class="lbl">'+lbl+'</div><div><strong>Official answer:</strong> '+escapeHtml(Q.a)+'</div></div>';
+  } else if(state.mode==='practice' && ans!==undefined && mark===undefined){
+    feedback = '<div class="feedback right" style="background:#fffde7;border-color:#f9a825;color:#5d4037">'+
+      '<div class="lbl">Official answer</div>'+
+      '<div>'+escapeHtml(Q.a)+'</div>'+
+      '<div class="self"><span>How did you do?</span>'+
+        '<button class="mini-btn right" data-mark="right">I had it right</button>'+
+        '<button class="mini-btn wrong" data-mark="wrong">Missed it</button>'+
+      '</div></div>';
+  }
+  const showReveal = state.mode==='practice' && ans===undefined;
+  card.innerHTML =
+    '<div class="progress"><div style="width:'+pct+'%"></div></div>'+
+    '<div class="qmeta"><span>Question '+(i+1)+'</span><span>'+(state.mode==='practice'?'Practice mode':'Exam mode')+'</span></div>'+
+    '<div class="q">'+escapeHtml(Q.q)+'</div>'+
+    inputHtml+
+    feedback+
+    '<div class="nav">'+
+      '<button class="btn ghost" id="prev" '+(i===0?'disabled':'')+'>Back</button>'+
+      (showReveal ? '<button class="btn" id="reveal">Reveal Answer</button>' : '')+
+      '<button class="btn" id="next">'+(i===QUESTIONS.length-1 ? 'Finish' : 'Next')+'</button>'+
+    '</div>';
+  card.querySelectorAll('.tf-row .btn').forEach(b=>b.onclick=()=>{state.answers[i]=b.dataset.val;save();render();});
+  const box = document.getElementById('answerBox');
+  if(box){ box.oninput = e=>{ state.answers[i]=e.target.value; save(); }; }
+  const rev = document.getElementById('reveal');
+  if(rev) rev.onclick = ()=>{
+    if(state.answers[i]===undefined) state.answers[i] = box ? box.value : '';
+    save();render();
+  };
+  card.querySelectorAll('.mini-btn').forEach(m=>m.onclick=()=>{state.marks[i]=m.dataset.mark;save();render();});
+  document.getElementById('prev').onclick=()=>{state.idx=Math.max(0,state.idx-1);save();render();};
+  document.getElementById('next').onclick=()=>{state.idx++;save();render();};
+}
+
+function renderScore(){
+  counter.textContent = 'Complete';
+  const ungraded = [];
+  for(let i=0;i<QUESTIONS.length;i++){
+    if(state.marks[i]===undefined){
+      const Q=QUESTIONS[i];
+      if(Q.type==='tf' || Q.type==='yn'){
+        state.marks[i] = (state.answers[i]===Q.correct) ? 'right' : 'wrong';
+      } else {
+        ungraded.push(i);
+      }
+    }
+  }
+  save();
+  if(ungraded.length){ renderSelfGrade(ungraded); return; }
+  const right = Object.values(state.marks).filter(m=>m==='right').length;
+  const total = QUESTIONS.length;
+  const pct = (right/total);
+  const passed = pct >= PASS;
+  const missed = QUESTIONS.map((Q,i)=>({i,Q,mark:state.marks[i],ans:state.answers[i]||''})).filter(x=>x.mark==='wrong');
+  let missedHtml = '';
+  if(missed.length){
+    missedHtml = '<h3 style="margin:20px 0 10px;color:#1B2A4E">Review ('+missed.length+' missed):</h3><div class="review-list">'+
+      missed.map(m=>'<div class="item">'+
+        '<div><strong>Q'+(m.i+1)+'.</strong> '+escapeHtml(m.Q.q)+'</div>'+
+        '<div class="ans">Answer: '+escapeHtml(m.Q.a)+'</div>'+
+        (m.ans?'<div class="you">Your answer: '+escapeHtml(m.ans)+'</div>':'')+
+      '</div>').join('')+
+    '</div>';
+  }
+  card.innerHTML =
+    '<div class="score">'+
+      '<div style="font-size:1rem;color:#666">'+escapeHtml(state.name)+'</div>'+
+      '<div class="pct">'+(pct*100).toFixed(0)+'%</div>'+
+      '<div>'+right+' of '+total+' correct - pass bar '+(PASS*100)+'%</div>'+
+      '<div class="stamp '+(passed?'pass':'review')+'">'+(passed?'PASS':'NEEDS REVIEW')+'</div>'+
+    '</div>'+
+    missedHtml+
+    '<div class="nav" style="margin-top:24px">'+
+      '<button class="btn ghost" onclick="window.print()">Print</button>'+
+      '<button class="btn" onclick="reset()">New Attempt</button>'+
+    '</div>';
+}
+
+function renderSelfGrade(list){
+  const i = list[0];
+  const Q = QUESTIONS[i];
+  counter.textContent = 'Self-grading '+list.length+' left';
+  card.innerHTML =
+    '<div class="qmeta"><span>Q'+(i+1)+' of '+QUESTIONS.length+'</span><span>Self-grade</span></div>'+
+    '<div class="q">'+escapeHtml(Q.q)+'</div>'+
+    '<div class="feedback right" style="background:#fffde7;border-color:#f9a825;color:#5d4037">'+
+      '<div class="lbl">Your answer</div><div>'+escapeHtml(state.answers[i]||'(blank)')+'</div>'+
+      '<div class="lbl" style="margin-top:8px">Official answer</div><div>'+escapeHtml(Q.a)+'</div>'+
+    '</div>'+
+    '<div class="nav">'+
+      '<button class="mini-btn right" id="r">I had it right</button>'+
+      '<button class="mini-btn wrong" id="w">Missed it</button>'+
+    '</div>';
+  document.getElementById('r').onclick=()=>{state.marks[i]='right';save();render();};
+  document.getElementById('w').onclick=()=>{state.marks[i]='wrong';save();render();};
+}
+window.reset = reset;
+render();
+</script>
+</body>
+</html>
