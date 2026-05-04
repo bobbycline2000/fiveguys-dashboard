@@ -1,0 +1,179 @@
+{
+  "weekEnding": "05/03/2026",
+  "weekStart": "04/27/2026",
+  "chargedTips": 704.93,
+  "poolHours": 475.98,
+  "tipsPerHour": 1.481,
+  "sumPayout": 704.93,
+  "delta": 0.0,
+  "payouts": {
+    "Belisle, Noel": {
+      "hours": 7.92,
+      "payout": 11.73,
+      "employeeId": 1325242,
+      "employeeNumber": "E2065340537",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Brewer, Kaisha": {
+      "hours": 17.26,
+      "payout": 25.56,
+      "employeeId": 870073,
+      "employeeNumber": "E2065272938",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Cox, Jada": {
+      "hours": 27.49,
+      "payout": 40.71,
+      "employeeId": 893093,
+      "employeeNumber": "E1704288479",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Cureton, Madison": {
+      "hours": 36.7,
+      "payout": 54.35,
+      "employeeId": 860503,
+      "employeeNumber": "E2065266168",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Dorsey, DaKayla": {
+      "hours": 15.57,
+      "payout": 23.06,
+      "employeeId": 1372423,
+      "employeeNumber": "E2065343531",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Gatewood, Brianna": {
+      "hours": 14.54,
+      "payout": 21.53,
+      "employeeId": 935123,
+      "employeeNumber": "E2065317265",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Gibbs, Richard": {
+      "hours": 19.17,
+      "payout": 28.39,
+      "employeeId": 1325244,
+      "employeeNumber": "E2065340543",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Gonzalez Cardero, Ailen": {
+      "hours": 20.41,
+      "payout": 30.23,
+      "employeeId": 885532,
+      "employeeNumber": "E2065283102",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Hearn, Autumn": {
+      "hours": 18.29,
+      "payout": 27.09,
+      "employeeId": 921535,
+      "employeeNumber": "E2065308121",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Henry, Lidy": {
+      "hours": 35.11,
+      "payout": 52.0,
+      "employeeId": 336368,
+      "employeeNumber": "1911737",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Hernandez Rodriguez, Maylin": {
+      "hours": 40.0,
+      "payout": 59.24,
+      "employeeId": 891008,
+      "employeeNumber": "E2065286918",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Johnson, DJuan": {
+      "hours": 14.98,
+      "payout": 22.19,
+      "employeeId": 931946,
+      "employeeNumber": "E2065315095",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Kamara, Emanuela": {
+      "hours": 4.8,
+      "payout": 7.11,
+      "employeeId": 1329622,
+      "employeeNumber": "E2065340844",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Llorente Mejias, Francisco": {
+      "hours": 40.0,
+      "payout": 59.24,
+      "employeeId": 898843,
+      "employeeNumber": "E2065292376",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Lucey, Vicki": {
+      "hours": 33.19,
+      "payout": 49.15,
+      "employeeId": 375652,
+      "employeeNumber": "E047592186",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Matthews, Jeremiah": {
+      "hours": 22.42,
+      "payout": 33.2,
+      "employeeId": 920938,
+      "employeeNumber": "E2065307712",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Milledge, Mykenize": {
+      "hours": 4.92,
+      "payout": 7.29,
+      "employeeId": 1295425,
+      "employeeNumber": "E2065338962",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Muncy Jr, Robert": {
+      "hours": 12.2,
+      "payout": 18.07,
+      "employeeId": 861813,
+      "employeeNumber": "E2065267212",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Roberts, Nathan": {
+      "hours": 40.0,
+      "payout": 59.24,
+      "employeeId": 1329032,
+      "employeeNumber": "E2065340809",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Whitten, Zack": {
+      "hours": 11.76,
+      "payout": 17.42,
+      "employeeId": 1369917,
+      "employeeNumber": "E2065343318",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Wilson, Kasey": {
+      "hours": 39.25,
+      "payout": 58.13,
+      "employeeId": 947008,
+      "employeeNumber": "E2065325930",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    }
+  }
+}

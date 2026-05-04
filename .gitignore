@@ -21,3 +21,19 @@ data/parbrink.json
 # OAuth client credentials + per-machine refresh tokens — never commit
 secrets/
 *.token.json
+
+# CrunchTime session — cookies + storage state. Never commit (live auth).
+data/ct_cookies.json
+data/ct_storage_state.json
+
+# Discovery / capture dumps — large, evidence not source. Keep local only.
+data/ct_api_endpoints*.json
+data/ct_endpoints_by_screen.json
+data/ct_ext_routes.json
+data/ct_menu_inventory.json
+data/ct_supwages_endpoints.json
+data/ct_supwages_save_body.json
+data/timedetail_*.json
+data/tips_we_*_raw.json
+data/tip_we_*_employees.json
+data/supwage_*.json

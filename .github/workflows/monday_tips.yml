@@ -1,0 +1,111 @@
+name: Monday Tip Entry (Store 2065)
+
+# Lights-out tip entry every Monday morning. Pulls Charged Tips + per-employee
+# hours from CrunchTime via cookie-auth API, computes payouts, and POSTs one
+# Supplemental Wages "Credit Card Tip" row per employee.
+#
+# Hard prereq inside the script: Sat + Sun labor actuals must be Reviewed for
+# the prior week. The script logs a warning and proceeds; if hours look wrong
+# the run can be re-run after labor is fixed (idempotency: re-running creates
+# duplicate rows — DO NOT auto-rerun without a delete pass).
+
+on:
+  schedule:
+    # 5:30 AM Eastern (Monday) — 09:30 UTC during EDT (Mar–Nov).
+    # During EST (Nov–Mar) this fires at 4:30 AM ET; revisit cron at DST flip.
+    - cron: "30 9 * * 1"
+  workflow_dispatch:
+    inputs:
+      week_ending:
+        description: "Sunday of the week to enter, MM/DD/YYYY (blank = auto prior Mon-Sun)"
+        required: false
+        default: ""
+      mode:
+        description: "live or dry"
+        required: false
+        default: "dry"
+
+permissions:
+  contents: write   # to commit the snapshot JSON
+
+concurrency:
+  group: monday-tips-2065
+  cancel-in-progress: false
+
+jobs:
+  enter-tips:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r scraper/requirements.txt
+
+      - name: Cache Playwright Chromium
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('scraper/requirements.txt') }}
+          restore-keys: playwright-chromium-${{ runner.os }}-
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install chromium --with-deps
+
+      # api_enter_tips.py self-mints cookies via api_discover.py if needed.
+      # api_discover.py uses headless Chromium (no Xvfb required).
+      - name: Run api_enter_tips.py
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+          STORE_ID: "2065"
+        run: |
+          set -e
+          ARGS=""
+          if [ -n "${{ github.event.inputs.week_ending }}" ]; then
+            ARGS="$ARGS ${{ github.event.inputs.week_ending }}"
+          fi
+          if [ "${{ github.event.inputs.mode }}" = "dry" ]; then
+            ARGS="$ARGS dry"
+          fi
+          # On the cron-triggered path (no inputs): default to LIVE — this is
+          # the Monday 5:30 AM run Bobby actually wants firing.
+          python scraper/api_enter_tips.py $ARGS
+
+      - name: Commit snapshot + log
+        if: always()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/tips_we_*_snapshot.json data/ct_cookies.json data/ct_storage_state.json || true
+          if git diff --cached --quiet; then
+            echo "No tip-entry artifacts to commit."
+          else
+            git commit -m "chore: tip entry snapshot for $(date -u +%Y-%m-%d)"
+            git pull --rebase -X theirs --autostash origin main
+            git push origin main
+          fi
+
+      - name: Upload debug artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monday-tips-${{ github.run_id }}
+          path: |
+            data/tips_*.json
+            data/timedetail_*.json
+            data/supwage_*.json
+            data/api_discover_*.png
+          if-no-files-found: ignore
+          retention-days: 14
