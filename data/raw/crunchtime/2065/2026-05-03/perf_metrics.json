@@ -2,26 +2,26 @@
   "meta": {
     "report_date": "2026-05-03",
     "report_display": "Sunday, May 3, 2026",
-    "generated": "5/4/2026 at 1:18 PM"
+    "generated": "5/4/2026 at 2:05 PM"
   },
   "sales": {
-    "net": 15373.0,
-    "net_week": 15373.0,
+    "net": 406.0,
+    "net_week": 406.0,
     "ly": 5318.0,
     "ly_week": 5318.0,
     "forecast": 5462.0,
     "forecast_week": 5462.0,
-    "vs_ly": 6552.0,
-    "vs_ly_week": 6552.0,
-    "vs_forecast": 9911.0,
-    "per_guest": 5.3,
-    "per_guest_week": 5.3
+    "vs_ly": 3275.0,
+    "vs_ly_week": 3275.0,
+    "vs_forecast": -5056.0,
+    "per_guest": 5.64,
+    "per_guest_week": 5.64
   },
   "labor": {
     "cost": null,
     "cost_week": null,
-    "pct": 19.79,
-    "pct_week": 19.79,
+    "pct": 56.4,
+    "pct_week": 56.4,
     "actual_hours": 0.0,
     "actual_hours_week": 0.0,
     "sched_hours": 77.5,
@@ -32,7 +32,7 @@
     "hours_var": null
   },
   "cash": {
-    "over_short": 630.76
+    "over_short": 37.05
   },
   "comps": [
     {
@@ -43,8 +43,8 @@
   ],
   "raw": {
     "Actual Net Sales": {
-      "day": "$15,373",
-      "week": "$15,373"
+      "day": "$406",
+      "week": "$406"
     },
     "Last Year Same Day": {
       "day": "$5,318",
@@ -55,8 +55,8 @@
       "week": "$5,462"
     },
     "Net Sales to Last Year": {
-      "day": "$6,552",
-      "week": "$6,552"
+      "day": "$3,275",
+      "week": "$3,275"
     },
     "Actual Labor": {
       "day": "",
@@ -67,20 +67,20 @@
       "week": ""
     },
     "Labor % of Net Sales": {
-      "day": "19.79%",
-      "week": "19.79%"
+      "day": "56.40%",
+      "week": "56.40%"
     },
     "Total Cash Over/Short": {
-      "day": "$630.76",
-      "week": "$630.76"
+      "day": "$37.05",
+      "week": "$37.05"
     },
     "Comps and Discounts": {
       "day": "$21.70",
       "week": "$21.70"
     },
     "Sales / Guest": {
-      "day": "$5.30",
-      "week": "$5.30"
+      "day": "$5.64",
+      "week": "$5.64"
     },
     "Labor Productivity": {
       "day": "$70",

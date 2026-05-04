@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-05-04 13:20",
+    "generated": "2026-05-04 14:07",
     "location": "2065",
     "status": "ok",
     "shops_total": 22
@@ -40,12 +40,7 @@
       "service": 87.0,
       "quality": 100.0,
       "cleanliness": 100.0,
-      "customer_satisfaction": 100.0,
-      "visit_window": [
-        13.5,
-        16.0
-      ],
-      "visit_window_source": "manual"
+      "customer_satisfaction": 100.0
     },
     {
       "job_id": "20758995",
@@ -56,12 +51,7 @@
       "service": 100.0,
       "quality": 100.0,
       "cleanliness": 100.0,
-      "customer_satisfaction": 100.0,
-      "visit_window": [
-        16.0,
-        19.0
-      ],
-      "visit_window_source": "manual"
+      "customer_satisfaction": 100.0
     },
     {
       "job_id": "20763859",
