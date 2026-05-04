@@ -1,27 +1,41 @@
 {
-  "date": "2026-05-03",
-  "new_count": 3,
+  "date": "2026-05-04",
+  "new_count": 5,
   "notes": [
+    {
+      "from": "CrunchTime",
+      "role": "alert",
+      "role_label": "Alert",
+      "time": "Mon 3:10 AM",
+      "body": "5 open KY-2065 tasks: L-Rev 5/2 (overdue), VO-Rec-BOSS Alpha-Ohio Valley 5/2 (overdue), Inv-Final for Post 5/3, Post Period - Labor Not Posted 5/3, L-Rev 5/3."
+    },
+    {
+      "from": "fg2065 (auto)",
+      "role": "alert",
+      "role_label": "Tip Entry",
+      "time": "Mon 5:09 AM",
+      "body": "WE 5/3 tips entered to Supplemental Wages: $704.93 across 21 employees, delta $0.00, $1.4810/hr on 475.98 hrs. Cline excluded as GM. Crystal got the breakdown email. Post Labor still on Bobby."
+    },
+    {
+      "from": "Brad Davis (Director)",
+      "role": "director",
+      "role_label": "Director's Corner",
+      "time": "Carryover (4/21)",
+      "body": "FGU Overdue Rate: Dixie at 13% overdue, asked to hit 0% by May 15. Two FGU courses with May 15 deadline (Customer Service + Blackberry LTO). Pull FGU at huddle today."
+    },
+    {
+      "from": "Crystal Hess (DM)",
+      "role": "dm",
+      "role_label": "DM Communication",
+      "time": "Carryover (5/1)",
+      "body": "Shopper Dashboard & FGX Info — print 2065 Shopper Dashboard & K.P.I., post on comm board, Crystal visiting locations this week to discuss in-store."
+    },
     {
       "from": "Tonya Tucker",
       "role": "director",
       "role_label": "Accounting",
       "time": "Carryover",
-      "body": "4/29 deposit receipts still outstanding — upload to Egnyte and reply."
-    },
-    {
-      "from": "CrunchTime",
-      "role": "alert",
-      "role_label": "Alert",
-      "time": "Sat 3:10 AM",
-      "body": "KY-2065 Task Alert 5/2: VO-Rec-BOSS Alpha – Ohio Valley still pending."
-    },
-    {
-      "from": "Elena Pinchbeck (Indeed)",
-      "role": "applicant",
-      "role_label": "Applicant",
-      "time": "Sat 12:08 PM",
-      "body": "Crew applicant — Dixie Highway: 'Heyy can I get a interview still'. Reply with slot or decline."
+      "body": "4/29 deposit receipts still outstanding — upload to Egnyte and reply if not done."
     }
   ]
 }
