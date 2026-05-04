@@ -17,7 +17,7 @@ PM Pre-Shift Check
 Closing Checklist
 100% | 100%
 Pre Open
-100% | 100%
+0% | 0%
 Shift Change
 100% | 100%
 Closing

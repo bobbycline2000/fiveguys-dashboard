@@ -1,9 +1,9 @@
 {
   "meta": {
     "store_id": "2065",
-    "report_date": "2026-05-02",
-    "generated": "2026-05-04T04:00:10",
-    "source_pdf": "data/raw/parbrink/2065/2026-05-02/Discount Summary.pdf"
+    "report_date": "2026-05-03",
+    "generated": "2026-05-04T08:41:02",
+    "source_pdf": "data/raw/parbrink/2065/2026-05-03/Discount Summary.pdf"
   },
   "items": [
     {
@@ -44,8 +44,8 @@
     {
       "name": "100% Mrg/PR",
       "count": 1,
-      "total": 25.87,
-      "average": 25.87,
+      "total": 42.44,
+      "average": 42.44,
       "type": "Comp"
     },
     {
@@ -71,9 +71,9 @@
     },
     {
       "name": "Burger/Fry Calibration",
-      "count": 2,
-      "total": 72.11,
-      "average": 36.05,
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
       "type": "Discount"
     },
     {
@@ -92,9 +92,9 @@
     },
     {
       "name": "Employee 100%",
-      "count": 14,
-      "total": 178.14,
-      "average": 12.72,
+      "count": 7,
+      "total": 89.16,
+      "average": 12.74,
       "type": "Discount"
     },
     {
@@ -238,9 +238,9 @@
       "type": "Discount"
     }
   ],
-  "total_count": 17,
-  "total_amount": 276.12,
-  "total_average": 16.24,
-  "comps_total": 25.87,
-  "discounts_total": 250.25
+  "total_count": 8,
+  "total_amount": 131.6,
+  "total_average": 16.45,
+  "comps_total": 42.44,
+  "discounts_total": 89.16
 }
