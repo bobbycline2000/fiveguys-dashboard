@@ -140,6 +140,63 @@ def pull_time_detail(jar, mon, sun):
     return dict(agg)
 
 
+# --- Tip sheet xlsx -----------------------------------------------------------
+def build_tip_sheet_xlsx(week_end, charged_tips, payouts, pool_hours, rate, out_path):
+    """Mirror the manual template format used by Bobby/Crystal.
+    Layout (current 22-employee template, see crunchtime-enter-tips.md):
+      A1 Online Tips
+      A2 Week End <MM/DD>           C2 Total Tips      D2 Tips Per Hour
+      C3 charged_tips                D3 =C3/B<total>
+      A5 Name        B5 Hours Worked  C4 Payout
+      A6..A<n> employee names         B6..B<n> hours    C6..C<n> =B*D3
+      A<n+1> Total hours for Store     B<n+1> =SUM(...)  C<n+1> =SUM(...)"""
+    try:
+        import openpyxl
+    except ImportError:
+        print(f"[xlsx] openpyxl not installed — skipping xlsx generation")
+        return None
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "2065 Dixie"
+
+    # Header
+    ws['A1'] = 'Online Tips'
+    ws['A2'] = f'Week End {week_end.strftime("%m/%d").lstrip("0").replace("/0","/")}'
+    ws['C2'] = 'Total Tips'
+    ws['D2'] = 'Tips Per Hour'
+    ws['C3'] = round(float(charged_tips), 2)
+    ws['C4'] = 'Payout'
+    ws['A5'] = 'Name'
+    ws['B5'] = 'Hours Worked'
+
+    # Employee rows
+    start = 6
+    sorted_names = sorted(payouts.keys())
+    for i, name in enumerate(sorted_names):
+        r = start + i
+        p = payouts[name]
+        ws.cell(row=r, column=1).value = name
+        ws.cell(row=r, column=2).value = p['hours']
+        ws.cell(row=r, column=3).value = f'=B{r}*D3'
+        ws.cell(row=r, column=3).number_format = '"$"#,##0.00'
+
+    total_row = start + len(sorted_names)
+    ws.cell(row=total_row, column=1).value = 'Total hours for Store'
+    ws.cell(row=total_row, column=2).value = f'=SUM(B{start}:B{total_row-1})'
+    ws.cell(row=total_row, column=3).value = f'=SUM(C{start}:C{total_row-1})'
+    ws.cell(row=total_row, column=3).number_format = '"$"#,##0.00'
+    ws['D3'] = f'=C3/B{total_row}'
+    ws['C3'].number_format = '"$"#,##0.00'
+    ws['D3'].number_format = '"$"#,##0.0000'
+
+    wb.save(out_path)
+    return out_path
+
+
 # --- Compute payouts ----------------------------------------------------------
 def compute_payouts(employees, charged_tips):
     """Return {name: {hours, payout, employeeId, positionCode, positionName}} keyed by name.
@@ -301,6 +358,19 @@ def main():
         "payouts": payouts,
     }, indent=2, default=str))
     print(f"\n[snapshot] {snap_path}")
+
+    # 4b. Build tip sheet xlsx (matches the format Bobby/Crystal use manually)
+    # Path: <repo>/data/tip-sheets/tip-sheet-2065-WE-MM-DD.xlsx (CI-friendly).
+    # Local runs also drop a copy in BobbyWorkspace/_reference/tip-sheets/ if that
+    # directory exists (per existing manual workflow).
+    xlsx_name = f"tip-sheet-2065-WE-{sun.strftime('%m-%d')}.xlsx"
+    xlsx_repo = DATA / "tip-sheets" / xlsx_name
+    build_tip_sheet_xlsx(sun, charged, payouts, pool_hrs, rate, xlsx_repo)
+    print(f"[xlsx]    {xlsx_repo}")
+    bobby_ref = ROOT.parent.parent / "_reference" / "tip-sheets" / xlsx_name
+    if bobby_ref.parent.exists():
+        build_tip_sheet_xlsx(sun, charged, payouts, pool_hrs, rate, bobby_ref)
+        print(f"[xlsx]    {bobby_ref}")
 
     if dry:
         print("\n[dry] Skipping POSTs. Re-run without 'dry' to commit.")
