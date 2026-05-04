@@ -78,7 +78,7 @@ GitHub Actions (cron 8:05 AM ET)
 **Item ID:** `B759AD2C-2B91-43AC-AC30-6993207012E7` — update monthly when new workbook created  
 **API:** Microsoft Graph with client credentials OAuth (no user login required)
 
-### Column Mapping (sheet tab = store ID, e.g. "2065")
+### Column Mapping (sheet tab = store ID + city, e.g. "2065 Dixie")
 | Column | Data | Notes |
 |--------|------|-------|
 | A | Day of month (1–31) | Used to find the right row |
@@ -96,7 +96,7 @@ GitHub Actions (cron 8:05 AM ET)
 | M | Deposit | Not available — skipped |
 | N | Burger Bags | Not available — skipped |
 | O | Burger Buns | `random.randint(4, 45)` placeholder |
-| P | Hot Dog Buns | `random.randint(4, 45)` placeholder |
+| P | Hot Dog Bags | `random.randint(4, 45)` placeholder |
 
 ---
 
@@ -164,7 +164,7 @@ For a multi-client consulting product, each client would get:
 - **Location selection:** Recently rewritten to handle ExtJS div-based picker with 13-selector fallback + JS text search. Not yet confirmed working — run a manual GitHub Actions workflow to test.
 - **Data extraction:** Three-strategy fallback added (tables → ExtJS divs → text parsing). Saves `page_source.html` and `page_text.txt` as debug artifacts every run.
 - **SharePoint Excel:** `continue-on-error: true` in workflow — won't block dashboard if Azure secrets not configured.
-- **Burger Buns / Hot Dog Buns:** Physical counts not in CrunchTime — using `random.randint(4, 45)` as placeholder.
+- **Burger Bags / Hot Dog Bags (cols O, P):** Physical counts not in CrunchTime — using `random.randint(4, 45)` as placeholder.
 
 ## How to Debug a Failed Run
 
