@@ -1,0 +1,32 @@
+name: Probe Graph App Scopes
+
+# One-shot diagnostic: prints the Application roles consented on the
+# Azure app registration (MS_CLIENT_ID). Used to confirm whether the
+# fg2065 mailbox has Mail.ReadWrite (drafts), Calendars.*, etc. before
+# wiring new automation against Graph.
+#
+# Run via Actions tab -> "Run workflow". Output is in the job log.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install requests
+        run: pip install requests==2.31.0
+
+      - name: Probe scopes
+        env:
+          MS_TENANT_ID:     ${{ secrets.MS_TENANT_ID }}
+          MS_CLIENT_ID:     ${{ secrets.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+        run: python scripts/probe_graph_scopes.py
