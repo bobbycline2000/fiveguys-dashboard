@@ -8,8 +8,8 @@
     "month_start": "2026-05-01",
     "last_month_start": "2026-04-01",
     "last_month_end": "2026-04-30",
-    "through": "2026-05-03",
-    "pulled": "2026-05-04 14:06 ET",
+    "through": "2026-05-04",
+    "pulled": "2026-05-05 13:10 ET",
     "method": "api+playwright"
   },
   "cogs_goal_pct": 27.5,
@@ -21,12 +21,92 @@
   "variance_to_goal_last_mo": null,
   "items": [
     {
+      "name": "Cheeseburger",
+      "actual": 627.0,
+      "theoretical": 147.0,
+      "over_dollars": 480.0,
+      "variance_pct": null,
+      "rank": 1
+    },
+    {
+      "name": "Bacon Cheeseburger",
+      "actual": 587.0,
+      "theoretical": 142.0,
+      "over_dollars": 445.0,
+      "variance_pct": null,
+      "rank": 2
+    },
+    {
+      "name": "Little Cheeseburger",
+      "actual": 404.0,
+      "theoretical": 74.0,
+      "over_dollars": 330.0,
+      "variance_pct": null,
+      "rank": 3
+    },
+    {
+      "name": "Little Fry",
+      "actual": 272.0,
+      "theoretical": 55.0,
+      "over_dollars": 217.0,
+      "variance_pct": null,
+      "rank": 4
+    },
+    {
+      "name": "Milkshake",
+      "actual": 251.0,
+      "theoretical": 43.0,
+      "over_dollars": 208.0,
+      "variance_pct": null,
+      "rank": 5
+    },
+    {
+      "name": "Little Bacon Cheeseburger",
+      "actual": 257.0,
+      "theoretical": 51.0,
+      "over_dollars": 206.0,
+      "variance_pct": null,
+      "rank": 6
+    },
+    {
+      "name": "Regular Fry",
+      "actual": 236.0,
+      "theoretical": 56.0,
+      "over_dollars": 180.0,
+      "variance_pct": null,
+      "rank": 7
+    },
+    {
+      "name": "Patty Melt",
+      "actual": 154.0,
+      "theoretical": 30.0,
+      "over_dollars": 124.0,
+      "variance_pct": null,
+      "rank": 8
+    },
+    {
+      "name": "Large Fry",
+      "actual": 152.0,
+      "theoretical": 40.0,
+      "over_dollars": 112.0,
+      "variance_pct": null,
+      "rank": 9
+    },
+    {
+      "name": "Little Cajun Fry",
+      "actual": 145.0,
+      "theoretical": 33.0,
+      "over_dollars": 112.0,
+      "variance_pct": null,
+      "rank": 10
+    },
+    {
       "name": "Bacon, Raw Sliced",
       "actual": 238.0,
       "theoretical": 182.0,
       "over_dollars": 56.0,
       "variance_pct": -31.0,
-      "rank": 1
+      "rank": 11
     },
     {
       "name": "Shake Mix",
@@ -34,7 +114,7 @@
       "theoretical": 150.0,
       "over_dollars": 35.0,
       "variance_pct": -23.0,
-      "rank": 2
+      "rank": 12
     },
     {
       "name": "Banana Marinade",
@@ -42,7 +122,7 @@
       "theoretical": 6.0,
       "over_dollars": 33.0,
       "variance_pct": -523.0,
-      "rank": 3
+      "rank": 13
     },
     {
       "name": "Mushroom Pcs",
@@ -50,7 +130,7 @@
       "theoretical": 46.0,
       "over_dollars": 33.0,
       "variance_pct": -70.0,
-      "rank": 4
+      "rank": 14
     },
     {
       "name": "Bun, Burger",
@@ -58,7 +138,7 @@
       "theoretical": 467.0,
       "over_dollars": 25.0,
       "variance_pct": -5.0,
-      "rank": 5
+      "rank": 15
     },
     {
       "name": "Potato, Idaho",
@@ -66,7 +146,7 @@
       "theoretical": 485.0,
       "over_dollars": -31.0,
       "variance_pct": 6.0,
-      "rank": 6
+      "rank": 16
     },
     {
       "name": "Tomatoes, Fresh",
@@ -74,7 +154,7 @@
       "theoretical": 103.0,
       "over_dollars": -37.0,
       "variance_pct": 36.0,
-      "rank": 7
+      "rank": 17
     },
     {
       "name": "Cajun Season",
@@ -82,7 +162,7 @@
       "theoretical": 41.0,
       "over_dollars": -83.0,
       "variance_pct": 204.0,
-      "rank": 8
+      "rank": 18
     },
     {
       "name": "A1 Steak Sauce",
@@ -90,7 +170,7 @@
       "theoretical": 6.0,
       "over_dollars": -101.0,
       "variance_pct": null,
-      "rank": 9
+      "rank": 19
     },
     {
       "name": "Ground Beef",
@@ -98,7 +178,7 @@
       "theoretical": 1509.0,
       "over_dollars": -209.0,
       "variance_pct": 14.0,
-      "rank": 10
+      "rank": 20
     }
   ],
   "ranking": "over_dollars_desc"
