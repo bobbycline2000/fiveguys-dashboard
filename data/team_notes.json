@@ -1,41 +1,34 @@
 {
-  "date": "2026-05-04",
-  "new_count": 5,
+  "date": "2026-05-05",
+  "new_count": 4,
   "notes": [
-    {
-      "from": "CrunchTime",
-      "role": "alert",
-      "role_label": "Alert",
-      "time": "Mon 3:10 AM",
-      "body": "5 open KY-2065 tasks: L-Rev 5/2 (overdue), VO-Rec-BOSS Alpha-Ohio Valley 5/2 (overdue), Inv-Final for Post 5/3, Post Period - Labor Not Posted 5/3, L-Rev 5/3."
-    },
-    {
-      "from": "fg2065 (auto)",
-      "role": "alert",
-      "role_label": "Tip Entry",
-      "time": "Mon 5:09 AM",
-      "body": "WE 5/3 tips entered to Supplemental Wages: $704.93 across 21 employees, delta $0.00, $1.4810/hr on 475.98 hrs. Cline excluded as GM. Crystal got the breakdown email. Post Labor still on Bobby."
-    },
     {
       "from": "Brad Davis (Director)",
       "role": "director",
       "role_label": "Director's Corner",
-      "time": "Carryover (4/21)",
-      "body": "FGU Overdue Rate: Dixie at 13% overdue, asked to hit 0% by May 15. Two FGU courses with May 15 deadline (Customer Service + Blackberry LTO). Pull FGU at huddle today."
+      "time": "Tue 1:31 AM",
+      "body": "Implement: Orientation Checklist + Halo Effect & Suggestive Sales Policy. ALL employees must review and sign Halo Policy by Friday 5/8/26 5:00 PM. Email signed forms to Crystal (DM) by that time. Begin using the Orientation Checklist with ALL new hires today. New hires sign Halo Policy as part of onboarding. Standing: FGU Overdue Rate to 0% by 5/15."
     },
     {
       "from": "Crystal Hess (DM)",
       "role": "dm",
       "role_label": "DM Communication",
       "time": "Carryover (5/1)",
-      "body": "Shopper Dashboard & FGX Info — print 2065 Shopper Dashboard & K.P.I., post on comm board, Crystal visiting locations this week to discuss in-store."
+      "body": "Shopper Dashboard & FGX Info — print 2065 Shopper Dashboard & K.P.I., post on comm board, Crystal visiting locations this week to discuss in-store. Pair with new Halo Effect rollout."
     },
     {
-      "from": "Tonya Tucker",
-      "role": "director",
-      "role_label": "Accounting",
-      "time": "Carryover",
-      "body": "4/29 deposit receipts still outstanding — upload to Egnyte and reply if not done."
+      "from": "ComplianceMate",
+      "role": "alert",
+      "role_label": "Alert — Steritech ticket",
+      "time": "Tue 12:01 AM",
+      "body": "Steritech ticket has had no response in 4 days. Auto-closes in 4 more days. Reply or close intentionally today."
+    },
+    {
+      "from": "CrunchTime",
+      "role": "alert",
+      "role_label": "Alert — Task Alerts",
+      "time": "Tue 3:10 AM",
+      "body": "Past due / due today: Post Period - Inventory Not Posted (5/3); L-Rev (5/4); VO-Rec Performance Foodservice (5/4); VO-Rec BOSS Alpha Ohio Valley (5/4). Clear before 5/5's alert."
     }
   ]
 }
