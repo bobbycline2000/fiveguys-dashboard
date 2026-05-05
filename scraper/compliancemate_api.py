@@ -56,13 +56,28 @@ def login(session: requests.Session, username: str, password: str) -> None:
     the login page and parsing the form. Logged in == subsequent GET to /
     returns the dashboard, not the login page.
     """
-    login_url = f"{BASE}/users/sign_in"
-    r = session.get(login_url, timeout=30)
+    # CM redirects unauthenticated GET / to the login form on the same page.
+    r = session.get(BASE + "/", timeout=30, allow_redirects=True)
     r.raise_for_status()
     soup = BeautifulSoup(r.text, "html.parser")
-    form = soup.find("form", {"action": re.compile(r"sign_in")}) or soup.find("form")
+    # Pick the form whose action looks login-shaped, or the one with a password field.
+    forms = soup.find_all("form")
+    form = None
+    for f in forms:
+        action = (f.get("action") or "").lower()
+        if "sign" in action or "login" in action or "session" in action:
+            form = f
+            break
     if not form:
-        raise RuntimeError("Could not find login form on " + login_url)
+        for f in forms:
+            if f.find("input", {"type": "password"}):
+                form = f
+                break
+    if not form:
+        raise RuntimeError(
+            f"Could not find login form. Got {r.status_code} {r.url} "
+            f"with {len(forms)} forms; saved body to data/cm_login_debug.html"
+        )
     action = form.get("action", "/users/sign_in")
     if not action.startswith("http"):
         action = BASE + action
@@ -135,6 +150,14 @@ def get_list_completions(
     """
     if csrf is None:
         csrf = get_csrf_token(session, group_id)
+
+    # Apply submits the report form. Returns ~35 KB HTML; #accordion contains:
+    #   - card[0] = header row ("Location/List ... Required % | Overall %")
+    #   - card[1] = the location's overall summary ("<store name> | <n>% | <n>%")
+    # The per-checklist breakdown is NOT in this response — it's loaded by a
+    # separate drill-down GET (with location= + target_selector= params) that
+    # appears to require state we haven't yet matched from a pure requests session.
+    # See COMPLIANCEMATE_API.md "Open: per-list drill-down" for the investigation gap.
     params = {
         "authenticity_token": csrf,
         "commit": "Apply",
@@ -151,45 +174,35 @@ def get_list_completions(
     r = session.get(f"{BASE}/groups/{group_id}/report/list_completions",
                     params=params, timeout=30)
     r.raise_for_status()
-
     soup = BeautifulSoup(r.text, "html.parser")
 
-    # Find the location's collapse container
-    container = soup.find("div", id=f"location_{location_id}_lists")
-    lists: list[dict] = []
-    if container:
-        for card in container.select("div.card.mb-0"):
+    overall_req, overall_all, list_count = 0, 0, 0
+    accordion = soup.find(id="accordion")
+    if accordion:
+        cards = accordion.select("div.card.mb-0")
+        # The location summary card is typically index 1 (after the header card).
+        for card in cards:
             txt = card.get_text("\n", strip=True)
-            # Expected shape:  "<list name>\n<n>% | <n>%"
-            m = re.search(r"^(.+?)\n(\d+)%\s*\|\s*(\d+)%", txt)
-            if m:
-                lists.append({
-                    "name":          m.group(1).strip(),
-                    "required_pct":  int(m.group(2)),
-                    "all_pct":       int(m.group(3)),
-                })
-
-    # Also pull the location header summary
-    overall_req, overall_all = 0, 0
-    header = soup.find("div", id=f"location_{location_id}_card") or soup.find(
-        "div", string=re.compile(r"\d+%\s*\|\s*\d+%")
-    )
-    # Fallback: scan the page for the location's own summary line
-    for div in soup.select("div.card-header"):
-        t = div.get_text("\n", strip=True)
-        if STORES.get(location_id, {}).get("name", "") in t or "Louisville" in t:
-            m = re.search(r"(\d+)%\s*\|\s*(\d+)%", t)
-            if m:
+            # Match "<n>% | <n>%" anywhere (skip header, which has 'Required %')
+            m = re.search(r"(\d+)%\s*\|\s*(\d+)%", txt)
+            if m and "Required" not in txt:
                 overall_req, overall_all = int(m.group(1)), int(m.group(2))
+                # The number after the location name is the list count
+                cm = re.search(r"\n(\d+)\n\d+%", txt)
+                if cm:
+                    list_count = int(cm.group(1))
                 break
+
+    # Per-list breakdown: not yet implemented (see module docstring + .md doc).
+    lists: list[dict] = []
 
     return {
         "date":                 target_date,
         "location_id":          location_id,
-        "list_count":           len(lists),
+        "list_count":           list_count,
         "overall_required_pct": overall_req,
         "overall_all_pct":      overall_all,
-        "lists":                lists,
+        "lists":                lists,  # empty until per-list drill-down is solved
         "fetched_at":           datetime.now(tz=ET).isoformat(),
         "source":               "compliancemate_url_replay",
     }

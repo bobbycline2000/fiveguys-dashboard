@@ -95,13 +95,44 @@ Returns the full Rails view (~35 KB HTML). The data lives in repeating
 The server appears tolerant — sending `date_range=today` with arbitrary start/end dates still
 worked in testing. But matching them is the safe pattern.
 
-### Drill-down (NOT NEEDED)
+### Drill-down (per-list breakdown — OPEN)
 
-The "click on 2065 - Louisville, KY to expand" interaction fires a follow-up GET with extra
-`location=` and `target_selector=` params. Returns an HTML fragment that Rails Turbo injects
-into the named selector. **You don't need this** — the initial Apply response already includes
-all the per-checklist cards, just inside `<div class="collapse">` (Bootstrap-collapsed-but-
-rendered). Skip the drill-down call entirely.
+The "click on 2065 - Louisville, KY to expand" interaction fires a follow-up GET like:
+
+```
+GET /groups/{group_id}/report/list_completions
+    ?authenticity_token=...
+    &location={location_id}
+    &start_date=YYYY-MM-DD&end_date=YYYY-MM-DD
+    &target_selector=#location-lists-{location_id}    # NOTE: hyphens, not underscores
+    &report_filters_presenter[*]=...                  # same set as Apply (no `commit`, no `report_form_submit`)
+```
+
+**Initial assumption was wrong** — the per-checklist cards are NOT in the Apply response. They
+are loaded by this drill-down call. The browser-side fetch returns the HTML and Rails Turbo
+injects it into `#location-lists-{location_id}`.
+
+**Open in pure-Python:** replaying this GET from a `requests.Session()` with the same cookies +
+CSRF returns the FULL page HTML (29KB), NOT a Turbo Stream fragment. The per-list cards are
+absent from that response. Likely causes (not yet confirmed):
+
+1. Server requires a specific cookie set that Devise issues only after a login flow that hits
+   the dashboard once first (we currently jump straight to the report URL).
+2. Server checks `Sec-Fetch-*` or other client hints that pure-`requests` doesn't send.
+3. There's a stateful "filter applied" flag in the session that the Apply call sets and the
+   drill-down call requires; our Apply succeeds but maybe doesn't set the flag the same way.
+
+**Workaround for now:** the existing Playwright scraper (`scrape_compliancemate.py`) still
+runs daily for the per-checklist data. The new URL-replay client provides the overall summary
+(faster, lighter — useful for the daily confirmation email's CM line + a summary card).
+
+**Next discovery pass:**
+
+- Capture the EXACT request headers Chrome sends on the drill-down (especially `Cookie` value
+  — pure requests + `session.cookies` may be missing one Devise sets only on dashboard load).
+- Replay with `curl` from the captured headers, see if it works.
+- If yes → diff against the requests session's headers, find the missing piece.
+- If no → maybe the per-list view requires a different report URL entirely.
 
 ## Other endpoints (not yet captured but visible in nav)
 
