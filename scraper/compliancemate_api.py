@@ -151,14 +151,9 @@ def get_list_completions(
     if csrf is None:
         csrf = get_csrf_token(session, group_id)
 
-    # Apply submits the report form. Returns ~35 KB HTML; #accordion contains:
-    #   - card[0] = header row ("Location/List ... Required % | Overall %")
-    #   - card[1] = the location's overall summary ("<store name> | <n>% | <n>%")
-    # The per-checklist breakdown is NOT in this response — it's loaded by a
-    # separate drill-down GET (with location= + target_selector= params) that
-    # appears to require state we haven't yet matched from a pure requests session.
-    # See COMPLIANCEMATE_API.md "Open: per-list drill-down" for the investigation gap.
-    params = {
+    # Call 1: Apply — returns ~35 KB HTML. #accordion contains the location summary
+    # card with the overall Required% / All% pair. Per-list breakdown is NOT here.
+    summary_params = {
         "authenticity_token": csrf,
         "commit": "Apply",
         "report_filters_presenter[date_range]": "custom",
@@ -171,30 +166,81 @@ def get_list_completions(
         "report_form_submit": "true",
         "requested_timezone": "America/New_York",
     }
-    r = session.get(f"{BASE}/groups/{group_id}/report/list_completions",
-                    params=params, timeout=30)
-    r.raise_for_status()
-    soup = BeautifulSoup(r.text, "html.parser")
+    r1 = session.get(f"{BASE}/groups/{group_id}/report/list_completions",
+                     params=summary_params, timeout=30)
+    r1.raise_for_status()
+    soup1 = BeautifulSoup(r1.text, "html.parser")
 
     overall_req, overall_all, list_count = 0, 0, 0
-    accordion = soup.find(id="accordion")
+    accordion = soup1.find(id="accordion")
     if accordion:
-        cards = accordion.select("div.card.mb-0")
-        # The location summary card is typically index 1 (after the header card).
-        for card in cards:
+        for card in accordion.select("div.card.mb-0"):
             txt = card.get_text("\n", strip=True)
-            # Match "<n>% | <n>%" anywhere (skip header, which has 'Required %')
             m = re.search(r"(\d+)%\s*\|\s*(\d+)%", txt)
             if m and "Required" not in txt:
                 overall_req, overall_all = int(m.group(1)), int(m.group(2))
-                # The number after the location name is the list count
                 cm = re.search(r"\n(\d+)\n\d+%", txt)
                 if cm:
                     list_count = int(cm.group(1))
                 break
 
-    # Per-list breakdown: not yet implemented (see module docstring + .md doc).
+    # Call 2: drill-down — server responds with text/javascript. Body is a jQuery
+    # `$("#location-lists-<id>").html("...escaped HTML...")` snippet. Extract the
+    # JS string literal, JSON-decode the escapes, parse the embedded HTML.
+    # Critical: must request Accept: text/javascript or server returns the full
+    # page HTML instead.
+    drill_params = {
+        "authenticity_token": csrf,
+        "location":        location_id,
+        "start_date":      target_date,
+        "end_date":        target_date,
+        "target_selector": f"#location-lists-{location_id}",
+        "report_filters_presenter[date_range]": "custom",
+        "report_filters_presenter[start_date]": target_date,
+        "report_filters_presenter[end_date]":   target_date,
+        "report_filters_presenter[filter_for]": "reports_form",
+        "report_filters_presenter[filter_type]": "lists",
+        "report_filters_presenter[name]": "",
+        "report_filters_presenter[report_type]": "list_completions",
+    }
+    r2 = session.get(f"{BASE}/groups/{group_id}/report/list_completions",
+                     params=drill_params,
+                     headers={"X-Requested-With": "XMLHttpRequest",
+                              "Accept": "text/javascript, application/javascript"},
+                     timeout=30)
+    r2.raise_for_status()
+
     lists: list[dict] = []
+    js = r2.text
+    i = js.find("html(")
+    j = js.find('"', i) if i >= 0 else -1
+    k = js.rfind('"')
+    if 0 <= j < k:
+        escaped = js[j + 1:k]
+        # Unescape JS string: handle \/ → /, then standard escapes.
+        html = escaped.replace("\\/", "/").encode("utf-8").decode("unicode_escape")
+        soup2 = BeautifulSoup(html, "html.parser")
+        for card in soup2.select("div.card.mb-0"):
+            name_el = card.select_one(".list-name")
+            if not name_el:
+                continue
+            name = name_el.get_text(strip=True)
+            anchors = card.select(".daily-percentages a")
+            if len(anchors) < 2:
+                continue
+            try:
+                req_pct = int(anchors[0].get_text(strip=True).rstrip("%"))
+                all_pct = int(anchors[1].get_text(strip=True).rstrip("%"))
+            except ValueError:
+                continue
+            # Each anchor's href reveals the list_id for that checklist
+            list_id_match = re.search(r"list_id=(\d+)", anchors[0].get("href", ""))
+            lists.append({
+                "name":         name,
+                "list_id":      list_id_match.group(1) if list_id_match else None,
+                "required_pct": req_pct,
+                "all_pct":      all_pct,
+            })
 
     return {
         "date":                 target_date,
@@ -202,7 +248,7 @@ def get_list_completions(
         "list_count":           list_count,
         "overall_required_pct": overall_req,
         "overall_all_pct":      overall_all,
-        "lists":                lists,  # empty until per-list drill-down is solved
+        "lists":                lists,
         "fetched_at":           datetime.now(tz=ET).isoformat(),
         "source":               "compliancemate_url_replay",
     }

@@ -95,44 +95,55 @@ Returns the full Rails view (~35 KB HTML). The data lives in repeating
 The server appears tolerant — sending `date_range=today` with arbitrary start/end dates still
 worked in testing. But matching them is the safe pattern.
 
-### Drill-down (per-list breakdown — OPEN)
+### Drill-down (per-list breakdown — SOLVED)
 
-The "click on 2065 - Louisville, KY to expand" interaction fires a follow-up GET like:
+The "click on 2065 - Louisville, KY to expand" interaction fires a follow-up XHR:
 
 ```
 GET /groups/{group_id}/report/list_completions
     ?authenticity_token=...
     &location={location_id}
     &start_date=YYYY-MM-DD&end_date=YYYY-MM-DD
-    &target_selector=#location-lists-{location_id}    # NOTE: hyphens, not underscores
-    &report_filters_presenter[*]=...                  # same set as Apply (no `commit`, no `report_form_submit`)
+    &target_selector=#location-lists-{location_id}    # hyphens, not underscores
+    &report_filters_presenter[*]=...                  # same as Apply, MINUS `commit` and `report_form_submit`
+
+X-Requested-With: XMLHttpRequest
+Accept: text/javascript
 ```
 
-**Initial assumption was wrong** — the per-checklist cards are NOT in the Apply response. They
-are loaded by this drill-down call. The browser-side fetch returns the HTML and Rails Turbo
-injects it into `#location-lists-{location_id}`.
+**The trick — the response content type is `text/javascript`, not HTML.** Rails uses the classic
+`.js.erb` responder pattern: the response body is a jQuery snippet that calls `.html(...)` on
+the target selector with the per-list HTML embedded as a JS string literal:
 
-**Open in pure-Python:** replaying this GET from a `requests.Session()` with the same cookies +
-CSRF returns the FULL page HTML (29KB), NOT a Turbo Stream fragment. The per-list cards are
-absent from that response. Likely causes (not yet confirmed):
+```js
+$("#location-lists-18170").
+    html(
+      "  <div class=\"card mb-0\">\n    <div class=\"card-header flex justify-between\" ...
+       11AM: Time and Temp ...
+       <a class=\"report-numbers--good ...\" href=\"/groups/.../responses?date=...&list_id=189006\">100%</a> |
+       <a ...>100%</a>
+       ..."
+    )
+```
 
-1. Server requires a specific cookie set that Devise issues only after a login flow that hits
-   the dashboard once first (we currently jump straight to the report URL).
-2. Server checks `Sec-Fetch-*` or other client hints that pure-`requests` doesn't send.
-3. There's a stateful "filter applied" flag in the session that the Apply call sets and the
-   drill-down call requires; our Apply succeeds but maybe doesn't set the flag the same way.
+**Why pure-`requests` returned the wrong response without the right Accept header:** Rails'
+`respond_to do |format|` block in the controller branches on the request's Accept header.
+With `Accept: text/html` (Python's default), it served the FULL page HTML (29 KB). With
+`Accept: text/javascript` (what XHR sends by default), it serves the per-list fragment as JS
+(~5 KB). The same URL serves two different responses based on `Accept`.
 
-**Workaround for now:** the existing Playwright scraper (`scrape_compliancemate.py`) still
-runs daily for the per-checklist data. The new URL-replay client provides the overall summary
-(faster, lighter — useful for the daily confirmation email's CM line + a summary card).
+**Parsing path:**
 
-**Next discovery pass:**
+1. Extract the JS string literal between `html("` and the trailing `")`.
+2. JSON-decode the escapes (`\/` → `/`, `\"` → `"`, `\n` → newline) — Python's
+   `bytes.decode('unicode_escape')` after a manual `\/` → `/` swap works.
+3. Parse the resulting HTML with BeautifulSoup; each per-list row is a `div.card.mb-0` with
+   `.list-name` (name) and two `.daily-percentages a` anchors (required %, all %).
+4. Bonus: each anchor's `href` carries `list_id=<n>` — useful for further drill-downs into
+   individual list responses.
 
-- Capture the EXACT request headers Chrome sends on the drill-down (especially `Cookie` value
-  — pure requests + `session.cookies` may be missing one Devise sets only on dashboard load).
-- Replay with `curl` from the captured headers, see if it works.
-- If yes → diff against the requests session's headers, find the missing piece.
-- If no → maybe the per-list view requires a different report URL entirely.
+**Validated 2026-05-04:** Returns 6 checklists for KY-2065 with names, list IDs, and percentages
+matching the live dashboard exactly.
 
 ## Other endpoints (not yet captured but visible in nav)
 
