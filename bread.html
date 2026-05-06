@@ -71,13 +71,40 @@
   .proj-actual { font-size: 10px; color: var(--w60); margin-top: 3px; }
   .proj-actual b { color: var(--white); font-weight: 700; }
 
-  /* On-hand block (delivery days only) */
-  .onhand { display: flex; flex-direction: column; gap: 5px; }
-  .onhand .field { background: var(--panel-2); border: 1px solid var(--line); border-radius: 3px; padding: 5px 7px; }
-  .onhand label { display: block; font-size: 8px; letter-spacing: .15em; text-transform: uppercase; color: var(--w60); font-weight: 600; }
-  .onhand input { background: transparent; border: none; color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 18px; width: 100%; padding: 1px 0 0; }
-  .onhand input:focus { outline: none; }
-  .onhand input::placeholder { color: var(--w40); }
+  /* === STEP 1: COUNT PANEL === */
+  .count-panel { margin-top: 18px; background: var(--panel); border: 1px solid rgba(0,0,0,.45); border-radius: 4px; padding: 18px 22px; box-shadow: 0 6px 18px rgba(0,0,0,.3); }
+  .count-step { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18px; letter-spacing: .18em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; padding-left: 10px; border-left: 4px solid var(--red-soft); }
+  .count-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 600px) { .count-grid { grid-template-columns: 1fr; } }
+  .count-field { background: var(--panel-2); border: 1px solid var(--line); border-radius: 3px; padding: 12px 16px; position: relative; }
+  .count-field label { display: block; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--w60); font-weight: 700; margin-bottom: 4px; }
+  .count-field input { background: transparent; border: none; color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 38px; line-height: 1; width: 100%; padding: 0; }
+  .count-field input:focus { outline: none; }
+  .count-field input::placeholder { color: var(--w20); }
+  .count-unit { position: absolute; bottom: 10px; right: 14px; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--w40); }
+  .count-help { margin-top: 10px; font-size: 11px; color: var(--w60); font-style: italic; }
+
+  /* === STEP 2: ORDERS PANEL === */
+  .orders-step { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18px; letter-spacing: .18em; text-transform: uppercase; color: var(--white); margin: 22px 0 12px; padding-left: 10px; border-left: 4px solid var(--red-soft); }
+  .orders { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 1000px) { .orders { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px)  { .orders { grid-template-columns: 1fr; } }
+
+  .order-card { background: var(--panel); border: 1px solid rgba(0,0,0,.45); border-left: 4px solid var(--red-soft); border-radius: 4px; padding: 14px 16px; box-shadow: 0 4px 14px rgba(0,0,0,.25); position: relative; }
+  .order-card.next-up { border-left-color: var(--gold); box-shadow: 0 0 0 2px rgba(245,168,0,.35), 0 4px 14px rgba(0,0,0,.25); }
+  .order-card.empty { opacity: .4; }
+  .order-when { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: .08em; text-transform: uppercase; line-height: 1; }
+  .order-when .next-tag { display: inline-block; font-size: 9px; letter-spacing: .2em; padding: 2px 6px; background: rgba(245,168,0,.2); color: var(--gold); border: 1px solid rgba(245,168,0,.5); border-radius: 2px; margin-left: 8px; vertical-align: middle; }
+  .order-cover { font-size: 10px; color: var(--w60); margin-top: 4px; letter-spacing: .08em; text-transform: uppercase; }
+  .order-cover b { color: var(--white); font-weight: 700; }
+  .order-rows { margin-top: 12px; display: grid; gap: 8px; }
+  .order-row { background: var(--panel-2); border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; display: flex; align-items: baseline; gap: 10px; }
+  .order-row .lbl { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--w60); font-weight: 700; flex: 0 0 60px; }
+  .order-row .qty { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 32px; line-height: .9; color: var(--white); }
+  .order-row .unit { font-size: 10px; color: var(--w60); letter-spacing: .1em; text-transform: uppercase; }
+  .order-row .calc { margin-left: auto; font-size: 9px; color: var(--w40); text-align: right; line-height: 1.4; }
+  .order-row.zero .qty { color: var(--w40); }
+  .order-empty { padding: 20px 12px; text-align: center; font-size: 11px; color: var(--w60); font-style: italic; }
 
   /* Footer / how-it-works */
   .why { margin-top: 28px; padding: 16px 20px; background: var(--panel); border: 1px solid rgba(0,0,0,.35); border-radius: 4px; font-size: 11px; color: var(--w60); line-height: 1.6; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
@@ -94,56 +121,191 @@
 </div>
 
 <h1>Bread <span class="a">Schedule</span></h1>
-<p class="lede">Two-week schedule with daily projected sales from CrunchTime. Delivery days highlighted — count on-hand bread on the day you're ordering on. Math layers on top after we lock the bones.</p>
+<p class="lede">Count what's in the store right now. We project forward using CrunchTime sales forecasts and tell you how many trays to order for every upcoming delivery this week.</p>
 <div class="source-tag" id="source-tag">Loading projections…</div>
 
-<div class="top-actions">
-  <a class="btn btn-primary" href="https://bread2.fiveguys.com" target="_blank">Open BOSS</a>
-  <button class="btn btn-ghost" id="reset-btn">Clear on-hand</button>
+<!-- STEP 1: COUNT -->
+<div class="count-panel">
+  <div class="count-step">Step 1 · Count what's in the store today</div>
+  <div class="count-grid">
+    <div class="count-field">
+      <label>Hamburger bags on hand</label>
+      <input type="number" inputmode="numeric" id="cur-hb" placeholder="0">
+      <span class="count-unit">5 bags / tray</span>
+    </div>
+    <div class="count-field">
+      <label>Hot dog bags on hand</label>
+      <input type="number" inputmode="numeric" id="cur-hd" placeholder="0">
+      <span class="count-unit">6 bags / tray</span>
+    </div>
+  </div>
+  <div class="count-help">Count once. The tool figures the rest.</div>
 </div>
 
-<div class="week-label" id="wk1-label">This Week</div>
+<!-- STEP 2: ORDERS -->
+<div class="orders-step">Step 2 · Here's what to order in BOSS</div>
+<div class="orders" id="orders"></div>
+
+<div class="top-actions">
+  <a class="btn btn-primary" href="https://bread2.fiveguys.com" target="_blank">Open BOSS · enter the orders</a>
+  <button class="btn btn-ghost" id="reset-btn">Clear count</button>
+</div>
+
+<div class="week-label" id="wk1-label">This Week · daily projections</div>
 <div class="week" id="wk1"></div>
 
-<div class="week-label" id="wk2-label">Next Week</div>
+<div class="week-label" id="wk2-label">Next Week · daily projections</div>
 <div class="week" id="wk2"></div>
 
 <div class="why">
-  <h3>What's wired so far</h3>
-  <p><b>Daily projections</b> come from CrunchTime: <i>this week</i> from the Performance Metrics box (Forecasted Sales row, day 1–7), <i>next week</i> from the Manage Sales Forecast endpoint.</p>
-  <p style="margin-top:6px;"><b>On-hand inputs</b> appear on delivery days (Mon, Wed, Fri, Sat). Type bag counts there.</p>
-  <h3 style="margin-top:14px;">Coming next <span class="tbd">TBD</span></h3>
-  <p>Order math on top of the projections (build-to per delivery, lock-day awareness), once you've used the bones a couple days and tell us what feels right.</p>
+  <h3>How the math works</h3>
+  <p><b>Tray rates:</b> every $986 in net sales = 1 HB tray (5 bags). Every $19,974 in net sales = 1 HD tray (6 bags).</p>
+  <p style="margin-top:6px;"><b>Per delivery:</b> we sum the CT-projected sales for the days that delivery covers (Mon delivery covers Mon+Tue, Wed covers Wed+Thu, Fri covers Fri, Sat covers Sat+Sun), figure how many bags you need, subtract what's already on the shelf, round up to whole trays.</p>
+  <p style="margin-top:6px;"><b>Forward chaining:</b> the tool simulates each delivery in order — what you have now + what arrives Mon − what gets used Mon+Tue = what's left for Wed, and so on. So a single count drives the whole week's orders.</p>
+  <h3 style="margin-top:14px;">Sources</h3>
+  <p><b>Daily projections</b> come from CrunchTime: <i>this week</i> from Performance Metrics (Forecasted Sales day 1–7), <i>next week</i> from Manage Sales Forecast. Refreshed every morning by the daily scrape.</p>
 </div>
 
 <script>
+  // ── CONFIG ──────────────────────────────────────────────────────────
   const DELIVERY_DOW = new Set([1, 3, 5, 6]); // Mon, Wed, Fri, Sat
   const DAY_NAMES = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const DAY_FULL  = {0:'SUNDAY',1:'MONDAY',2:'TUESDAY',3:'WEDNESDAY',4:'THURSDAY',5:'FRIDAY',6:'SATURDAY'};
+  const HB_PER_TRAY = 5;
+  const HD_PER_TRAY = 6;
+  const SALES_PER_HB_TRAY = 986;
+  const SALES_PER_HD_TRAY = 19974;
 
-  function fmt$(n) {
-    if (n == null) return '—';
-    if (n >= 1000) return '$' + (n/1000).toFixed(1) + 'K';
-    return '$' + Math.round(n);
-  }
-  function isoDateLocal(d) {
-    const yr = d.getFullYear();
-    const mo = String(d.getMonth() + 1).padStart(2, '0');
-    const da = String(d.getDate()).padStart(2, '0');
-    return `${yr}-${mo}-${da}`;
-  }
-  function fmtMD(iso) {
-    const [y,m,d] = iso.split('-').map(Number);
-    return new Date(y, m-1, d).toLocaleDateString('en-US', { month:'short', day:'numeric' });
-  }
+  // ── HELPERS ─────────────────────────────────────────────────────────
+  const fmt$ = n => n == null ? '—' : (n >= 1000 ? '$' + (n/1000).toFixed(1) + 'K' : '$' + Math.round(n));
+  const isoDateLocal = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const fmtMD = iso => { const [y,m,d] = iso.split('-').map(Number); return new Date(y, m-1, d).toLocaleDateString('en-US',{month:'short',day:'numeric'}); };
+  const fmtDOW = iso => { const [y,m,d] = iso.split('-').map(Number); return new Date(y, m-1, d).toLocaleDateString('en-US',{weekday:'short'}); };
 
-  function loadOnHand() {
-    try { return JSON.parse(localStorage.getItem('bread_onhand_v2') || '{}'); }
+  function loadCount() {
+    try { return JSON.parse(localStorage.getItem('bread_count_v3') || '{}'); }
     catch { return {}; }
   }
-  function saveOnHand(map) {
-    localStorage.setItem('bread_onhand_v2', JSON.stringify(map));
+  function saveCount(c) { localStorage.setItem('bread_count_v3', JSON.stringify(c)); }
+
+  // ── DELIVERY WINDOWS ────────────────────────────────────────────────
+  // For a given date, returns the set of dates this delivery covers
+  // (today through the day BEFORE the next delivery, inclusive).
+  function coverageDates(deliveryIso, allDays) {
+    const allIsos = allDays.map(d => d.date).sort();
+    const idx = allIsos.indexOf(deliveryIso);
+    if (idx < 0) return [deliveryIso];
+    const cover = [deliveryIso];
+    for (let j = idx + 1; j < allIsos.length; j++) {
+      const d = new Date(allIsos[j] + 'T00:00:00');
+      if (DELIVERY_DOW.has(d.getDay())) break;
+      cover.push(allIsos[j]);
+    }
+    return cover;
   }
 
+  function projectionFor(iso, days) {
+    const d = days.find(x => x.date === iso);
+    return d ? d.forecast : null;
+  }
+
+  // ── FORWARD SIM ─────────────────────────────────────────────────────
+  // Given today's HB+HD bag count and the 14-day projection set,
+  // walk every upcoming delivery in chrono order and compute the order.
+  function buildOrderPlan(curHB, curHD, days, todayIso) {
+    const upcoming = days
+      .filter(d => d.date >= todayIso)
+      .filter(d => DELIVERY_DOW.has(new Date(d.date + 'T00:00:00').getDay()));
+
+    let hb = curHB;
+    let hd = curHD;
+    const plan = [];
+
+    upcoming.forEach((dlv, i) => {
+      const cover = coverageDates(dlv.date, days);
+      let coverSales = 0;
+      let salesKnown = true;
+      cover.forEach(c => {
+        const f = projectionFor(c, days);
+        if (f == null) salesKnown = false;
+        else coverSales += f;
+      });
+
+      // Bag demand for this window
+      const needHB_bags = coverSales * (HB_PER_TRAY / SALES_PER_HB_TRAY);
+      const needHD_bags = coverSales * (HD_PER_TRAY / SALES_PER_HD_TRAY);
+
+      // Short bags = what we don't have on shelf going into delivery
+      const shortHB = Math.max(0, needHB_bags - hb);
+      const shortHD = Math.max(0, needHD_bags - hd);
+
+      // Round UP to whole trays
+      const orderHB_trays = Math.ceil(shortHB / HB_PER_TRAY);
+      const orderHD_trays = Math.ceil(shortHD / HD_PER_TRAY);
+
+      // Roll on-hand forward: arrive trays, consume coverSales worth
+      hb = Math.max(0, hb + orderHB_trays * HB_PER_TRAY - needHB_bags);
+      hd = Math.max(0, hd + orderHD_trays * HD_PER_TRAY - needHD_bags);
+
+      plan.push({
+        deliveryDate: dlv.date,
+        deliveryDOW: DAY_FULL[new Date(dlv.date + 'T00:00:00').getDay()],
+        coverDates: cover,
+        coverLabel: cover.map(c => fmtDOW(c).toUpperCase()).join('–'),
+        coverSales,
+        salesKnown,
+        needHB_bags,
+        needHD_bags,
+        orderHB_trays,
+        orderHD_trays,
+        startHB: i === 0 ? curHB : null,
+        startHD: i === 0 ? curHD : null,
+        isNextUp: i === 0,
+      });
+    });
+
+    return plan;
+  }
+
+  // ── RENDER: ORDERS ──────────────────────────────────────────────────
+  function renderOrders(plan, hasCount) {
+    const wrap = document.getElementById('orders');
+    if (!hasCount) {
+      wrap.innerHTML = `<div class="order-empty" style="grid-column: 1 / -1;">Enter your on-hand bread counts above to see this week's orders.</div>`;
+      return;
+    }
+    if (plan.length === 0) {
+      wrap.innerHTML = `<div class="order-empty" style="grid-column: 1 / -1;">No upcoming deliveries this week.</div>`;
+      return;
+    }
+    wrap.innerHTML = plan.map(p => {
+      const tag = p.isNextUp ? '<span class="next-tag">Next</span>' : '';
+      const dateShort = fmtMD(p.deliveryDate);
+      const noProj = !p.salesKnown ? `<div class="order-cover" style="color:var(--gold)">⚠ projection missing — order is rough</div>` : '';
+      return `
+        <div class="order-card ${p.isNextUp ? 'next-up' : ''}">
+          <div class="order-when">${p.deliveryDOW} ${tag}</div>
+          <div class="order-cover">${dateShort} · covers <b>${p.coverLabel}</b> · proj <b>${fmt$(p.coverSales)}</b></div>
+          ${noProj}
+          <div class="order-rows">
+            <div class="order-row ${p.orderHB_trays === 0 ? 'zero' : ''}">
+              <div class="lbl">HB</div>
+              <div class="qty">${p.orderHB_trays}</div>
+              <div class="unit">trays</div>
+              <div class="calc">need ${Math.ceil(p.needHB_bags)} bags<br>have ${Math.floor(p.startHB ?? 0)} →${p.orderHB_trays * HB_PER_TRAY} arrive</div>
+            </div>
+            <div class="order-row ${p.orderHD_trays === 0 ? 'zero' : ''}">
+              <div class="lbl">HD</div>
+              <div class="qty">${p.orderHD_trays}</div>
+              <div class="unit">trays</div>
+              <div class="calc">need ${Math.ceil(p.needHD_bags)} bags<br>have ${Math.floor(p.startHD ?? 0)} →${p.orderHD_trays * HD_PER_TRAY} arrive</div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── RENDER: WEEK STRIPS ─────────────────────────────────────────────
   function renderDay(d, todayIso) {
     const date = new Date(d.date + 'T00:00:00');
     const dow = date.getDay();
@@ -160,55 +322,18 @@
     const tags = [];
     if (isToday) tags.push('<span class="tag today">Today</span>');
     if (isDelivery) tags.push('<span class="tag delivery">Delivery</span>');
-    if (d.is_next_week && !isToday && !isDelivery) tags.push('<span class="tag next-week">Next wk</span>');
-
-    const onHand = loadOnHand();
-    const hb = onHand[d.date]?.hb ?? '';
-    const hd = onHand[d.date]?.hd ?? '';
-
-    const projHtml = `
-      <div class="d-section">
-        <div class="d-section-label">Projected</div>
-        <div class="proj-amt">${fmt$(d.forecast)}</div>
-        ${d.actual != null ? `<div class="proj-actual">Actual <b>${fmt$(d.actual)}</b></div>` : ''}
-      </div>`;
-
-    const onHandHtml = isDelivery ? `
-      <div class="d-section">
-        <div class="d-section-label">On-Hand Bread</div>
-        <div class="onhand">
-          <div class="field">
-            <label>HB bags</label>
-            <input type="number" inputmode="numeric" placeholder="0" data-date="${d.date}" data-kind="hb" value="${hb}">
-          </div>
-          <div class="field">
-            <label>HD bags</label>
-            <input type="number" inputmode="numeric" placeholder="0" data-date="${d.date}" data-kind="hd" value="${hd}">
-          </div>
-        </div>
-      </div>` : '';
 
     return `
       <div class="${cls.join(' ')}">
         <div class="d-name">${d.name}</div>
         <div class="d-date">${fmtMD(d.date)}</div>
         <div class="d-tags">${tags.join('')}</div>
-        ${projHtml}
-        ${onHandHtml}
+        <div class="d-section">
+          <div class="d-section-label">Projected</div>
+          <div class="proj-amt">${fmt$(d.forecast)}</div>
+          ${d.actual != null ? `<div class="proj-actual">Actual <b>${fmt$(d.actual)}</b></div>` : ''}
+        </div>
       </div>`;
-  }
-
-  function wireInputs() {
-    document.querySelectorAll('input[data-date]').forEach(inp => {
-      inp.addEventListener('input', () => {
-        const map = loadOnHand();
-        const date = inp.dataset.date;
-        const kind = inp.dataset.kind;
-        map[date] = map[date] || {};
-        map[date][kind] = inp.value;
-        saveOnHand(map);
-      });
-    });
   }
 
   function renderWeek(days, mountId) {
@@ -216,8 +341,8 @@
     document.getElementById(mountId).innerHTML = days.map(d => renderDay(d, todayIso)).join('');
   }
 
+  // ── FALLBACK / DATA LOAD ────────────────────────────────────────────
   function buildFallback() {
-    // 14 placeholder days starting at this week's Sunday
     const today = new Date();
     const sunday = new Date(today);
     sunday.setDate(today.getDate() - today.getDay());
@@ -226,14 +351,25 @@
       const d = new Date(sunday);
       d.setDate(sunday.getDate() + i);
       days.push({
-        date: isoDateLocal(d),
-        name: DAY_NAMES[d.getDay()],
-        forecast: null,
-        actual: null,
-        is_next_week: i >= 7,
+        date: isoDateLocal(d), name: DAY_NAMES[d.getDay()],
+        forecast: null, actual: null, is_next_week: i >= 7,
       });
     }
     return days;
+  }
+
+  async function tryLatestForFallback(days) {
+    // If forecast_by_day.json missing, use latest.json forecast_week ÷ 7 as a flat fallback
+    try {
+      const r = await fetch('data/latest.json', { cache: 'no-store' });
+      if (!r.ok) return null;
+      const j = await r.json();
+      const wk = j.sales?.forecast_week;
+      if (!wk) return null;
+      const perDay = wk / 7;
+      days.forEach(d => { if (d.forecast == null) d.forecast = perDay; });
+      return { perDay, source: 'latest.json (week ÷ 7)' };
+    } catch { return null; }
   }
 
   async function load() {
@@ -241,31 +377,59 @@
     try {
       const r = await fetch('data/forecast_by_day.json', { cache: 'no-store' });
       if (r.ok) payload = await r.json();
-    } catch (e) { /* fall through */ }
+    } catch (e) {}
 
-    const days = (payload && payload.days && payload.days.length === 14) ? payload.days : buildFallback();
-    const wk1 = days.slice(0, 7);
-    const wk2 = days.slice(7, 14);
-
-    const tag = document.getElementById('source-tag');
-    if (payload?.meta) {
-      const wk1Has = wk1.some(d => d.forecast != null);
-      const wk2Has = wk2.some(d => d.forecast != null);
-      tag.textContent = `CrunchTime · this wk ${wk1Has ? '✓' : '—'} · next wk ${wk2Has ? '✓' : '—'} · pulled ${(payload.meta.generated || '').slice(0,16).replace('T',' ')}`;
+    let days, sourceMsg;
+    if (payload?.days?.length === 14) {
+      days = payload.days;
+      const wk1Has = days.slice(0, 7).some(d => d.forecast != null);
+      const wk2Has = days.slice(7).some(d => d.forecast != null);
+      sourceMsg = `CrunchTime · this wk ${wk1Has ? '✓' : '—'} · next wk ${wk2Has ? '✓' : '—'} · pulled ${(payload.meta?.generated || '').slice(0,16).replace('T',' ')}`;
     } else {
-      tag.textContent = 'No CT feed yet — placeholder dates only. Daily scrape will populate.';
+      days = buildFallback();
     }
 
+    // If any forecast is null, fill from latest.json week ÷ 7
+    if (days.some(d => d.forecast == null)) {
+      const fb = await tryLatestForFallback(days);
+      if (fb) sourceMsg = (sourceMsg ? sourceMsg + ' · ' : '') + `gaps filled @ ${fmt$(fb.perDay)}/day from ${fb.source}`;
+    }
+
+    document.getElementById('source-tag').textContent = sourceMsg || 'No CT feed available — using placeholder zeros.';
+
+    const wk1 = days.slice(0, 7), wk2 = days.slice(7, 14);
     document.getElementById('wk1-label').textContent = `This Week · ${fmtMD(wk1[0].date)}–${fmtMD(wk1[6].date)}`;
     document.getElementById('wk2-label').textContent = `Next Week · ${fmtMD(wk2[0].date)}–${fmtMD(wk2[6].date)}`;
     renderWeek(wk1, 'wk1');
     renderWeek(wk2, 'wk2');
-    wireInputs();
+
+    // Restore counts from localStorage and recompute
+    const c = loadCount();
+    document.getElementById('cur-hb').value = c.hb ?? '';
+    document.getElementById('cur-hd').value = c.hd ?? '';
+    recompute(days);
+
+    document.getElementById('cur-hb').addEventListener('input', () => recompute(days));
+    document.getElementById('cur-hd').addEventListener('input', () => recompute(days));
+  }
+
+  function recompute(days) {
+    const hbStr = document.getElementById('cur-hb').value;
+    const hdStr = document.getElementById('cur-hd').value;
+    const hb = +hbStr || 0;
+    const hd = +hdStr || 0;
+    saveCount({ hb: hbStr, hd: hdStr });
+    const hasCount = (hbStr !== '' || hdStr !== '');
+    const todayIso = isoDateLocal(new Date());
+    const plan = buildOrderPlan(hb, hd, days, todayIso);
+    renderOrders(plan, hasCount);
   }
 
   document.getElementById('reset-btn').addEventListener('click', () => {
-    if (confirm('Clear all on-hand bread counts?')) {
-      localStorage.removeItem('bread_onhand_v2');
+    if (confirm('Clear your on-hand counts?')) {
+      localStorage.removeItem('bread_count_v3');
+      document.getElementById('cur-hb').value = '';
+      document.getElementById('cur-hd').value = '';
       load();
     }
   });
