@@ -113,6 +113,15 @@
   .locked-msg b { color: var(--white); font-weight: 700; }
   .lock-note { margin-top: 8px; font-size: 10px; color: var(--w60); letter-spacing: .05em; }
 
+  /* Locked-qty input row inside locked cards */
+  .order-card.locked.locked-warn { opacity: .85; border-left-color: var(--gold); }
+  .locked-qty { margin-top: 8px; padding: 6px 0 0; border-top: 1px solid var(--line); }
+  .locked-qty label { display: block; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--w60); font-weight: 700; margin-bottom: 6px; }
+  .locked-qty .qfield { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; color: var(--w60); margin-right: 10px; }
+  .locked-qty .qfield input { width: 38px; background: var(--panel-2); border: 1px solid var(--line); color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; padding: 2px 4px; text-align: center; border-radius: 2px; }
+  .locked-qty .qfield input:focus { outline: none; border-color: var(--red-soft); }
+  .locked-warn-msg { margin-top: 8px; font-size: 10px; color: var(--gold); font-style: italic; }
+
   /* Footer / how-it-works */
   .why { margin-top: 28px; padding: 16px 20px; background: var(--panel); border: 1px solid rgba(0,0,0,.35); border-radius: 4px; font-size: 11px; color: var(--w60); line-height: 1.6; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
   .why b { color: var(--white); font-weight: 700; }
@@ -202,6 +211,11 @@
     catch { return {}; }
   }
   function saveCount(c) { localStorage.setItem('bread_count_v3', JSON.stringify(c)); }
+  function loadLockedQty() {
+    try { return JSON.parse(localStorage.getItem('bread_locked_qty_v1') || '{}'); }
+    catch { return {}; }
+  }
+  function saveLockedQty(q) { localStorage.setItem('bread_locked_qty_v1', JSON.stringify(q)); }
 
   // ── DELIVERY WINDOWS ────────────────────────────────────────────────
   // For a given date, returns the set of dates this delivery covers
@@ -250,24 +264,26 @@
     return `${mins}m`;
   }
 
-  // ── FORWARD SIM ─────────────────────────────────────────────────────
-  // Walk every upcoming delivery. Locked deliveries are informational only —
-  // their math doesn't run, the count doesn't apply to them. Forward sim
-  // begins at the first UNLOCKED delivery using the manager's current count.
-  function buildOrderPlan(curHB, curHD, days, todayIso, now) {
-    const upcoming = days
+  // ── DAY-BY-DAY FORWARD SIM ──────────────────────────────────────────
+  // Walks every day from today. Subtracts that day's projected consumption.
+  // On a delivery morning: locked deliveries add their entered quantity,
+  // unlocked deliveries compute the order needed to cover from arrival
+  // through eve of next delivery + buffer.
+  //
+  // For "today": we apply only the FRACTION of today's projection that's
+  // still ahead (count was taken now; sales already booked are baked into
+  // the count). Approximated linearly from store-open span (~11h, close 10pm).
+  function buildOrderPlan(curHB, curHD, days, todayIso, now, lockedQty) {
+    // Build map of upcoming delivery dates -> info
+    const upcomingDeliveryDates = days
       .filter(d => d.date >= todayIso)
-      .filter(d => DELIVERY_DOW.has(new Date(d.date + 'T00:00:00').getDay()));
+      .filter(d => DELIVERY_DOW.has(new Date(d.date + 'T00:00:00').getDay()))
+      .map(d => d.date);
 
-    let hb = curHB;
-    let hd = curHD;
-    let firstUnlockedSeen = false;
-    const plan = [];
-
-    upcoming.forEach((dlv) => {
-      const lock = lockTimeFor(dlv.date);
-      const isLocked = now >= lock;
-      const cover = coverageDates(dlv.date, days);
+    const dlvByDate = {};
+    upcomingDeliveryDates.forEach((date, i) => {
+      const lock = lockTimeFor(date);
+      const cover = coverageDates(date, days);
       let coverSales = 0;
       let salesKnown = true;
       cover.forEach(c => {
@@ -275,57 +291,90 @@
         if (f == null) salesKnown = false;
         else coverSales += f;
       });
-
-      // Bag demand: sales × bag-rate + buffer
-      const needSales = coverSales + BUFFER_SALES;
-      const needHB_bags = needSales * (HB_PER_TRAY / SALES_PER_HB_TRAY);
-      const needHD_bags = needSales * (HD_PER_TRAY / SALES_PER_HD_TRAY);
-      const useHB_bags = coverSales * (HB_PER_TRAY / SALES_PER_HB_TRAY);
-      const useHD_bags = coverSales * (HD_PER_TRAY / SALES_PER_HD_TRAY);
-
-      let entry = {
-        deliveryDate: dlv.date,
-        deliveryDOW: DAY_FULL[new Date(dlv.date + 'T00:00:00').getDay()],
+      dlvByDate[date] = {
+        deliveryDate: date,
+        deliveryDOW: DAY_FULL[new Date(date + 'T00:00:00').getDay()],
         coverDates: cover,
         coverLabel: cover.map(c => fmtDOW(c).toUpperCase()).join('–'),
         coverSales,
         salesKnown,
-        isLocked,
+        isLocked: now >= lock,
         lockTime: lock,
         lockTimeStr: fmtLockTime(lock),
         timeLeft: lock - now,
         timeLeftStr: fmtTimeLeft(lock - now),
+        nextDeliveryDate: upcomingDeliveryDates[i + 1] || null,
       };
-
-      if (isLocked) {
-        // Locked deliveries are display-only. Don't apply count, don't roll forward.
-        plan.push({...entry, isLocked: true, isNextUp: false, orderHB_trays: null, orderHD_trays: null});
-        return;
-      }
-
-      // First unlocked delivery is the actionable one
-      const isNextUp = !firstUnlockedSeen;
-      firstUnlockedSeen = true;
-
-      const shortHB = Math.max(0, needHB_bags - hb);
-      const shortHD = Math.max(0, needHD_bags - hd);
-      const orderHB_trays = Math.ceil(shortHB / HB_PER_TRAY);
-      const orderHD_trays = Math.ceil(shortHD / HD_PER_TRAY);
-
-      plan.push({
-        ...entry,
-        orderHB_trays, orderHD_trays,
-        needHB_bags, needHD_bags,
-        startHB: hb, startHD: hd,
-        isNextUp,
-      });
-
-      // Roll on-hand forward: arrive trays, consume actual usage (NOT buffer)
-      hb = Math.max(0, hb + orderHB_trays * HB_PER_TRAY - useHB_bags);
-      hd = Math.max(0, hd + orderHD_trays * HD_PER_TRAY - useHD_bags);
     });
 
-    return plan;
+    // Walk day-by-day from today
+    let hb = curHB;
+    let hd = curHD;
+    let firstUnlockedSeen = false;
+    const sim = []; // step-by-step log for debugging / display
+
+    days.forEach(d => {
+      if (d.date < todayIso) return;
+
+      let arriveHB = 0, arriveHD = 0;
+      const dlv = dlvByDate[d.date];
+
+      if (dlv) {
+        if (dlv.isLocked) {
+          // Manager-entered locked qty (default 0 — surfaces a warning)
+          const q = lockedQty[d.date] || {};
+          dlv.orderHB_trays = +q.hb || 0;
+          dlv.orderHD_trays = +q.hd || 0;
+          dlv.locked_qty_unset = !((+q.hb) || (+q.hd));
+          arriveHB = dlv.orderHB_trays * HB_PER_TRAY;
+          arriveHD = dlv.orderHD_trays * HD_PER_TRAY;
+          dlv.startHB = hb;
+          dlv.startHD = hd;
+        } else {
+          // Unlocked: compute order to cover from arrival through eve of next delivery + buffer
+          const needSales = dlv.coverSales + BUFFER_SALES;
+          const needHB_bags = needSales * (HB_PER_TRAY / SALES_PER_HB_TRAY);
+          const needHD_bags = needSales * (HD_PER_TRAY / SALES_PER_HD_TRAY);
+          const shortHB = Math.max(0, needHB_bags - hb);
+          const shortHD = Math.max(0, needHD_bags - hd);
+          dlv.orderHB_trays = Math.ceil(shortHB / HB_PER_TRAY);
+          dlv.orderHD_trays = Math.ceil(shortHD / HD_PER_TRAY);
+          dlv.needHB_bags = needHB_bags;
+          dlv.needHD_bags = needHD_bags;
+          dlv.startHB = hb;
+          dlv.startHD = hd;
+          dlv.isNextUp = !firstUnlockedSeen;
+          firstUnlockedSeen = true;
+          arriveHB = dlv.orderHB_trays * HB_PER_TRAY;
+          arriveHD = dlv.orderHD_trays * HD_PER_TRAY;
+        }
+        hb += arriveHB;
+        hd += arriveHD;
+      }
+
+      // Apply this day's consumption
+      let dayFactor = 1;
+      if (d.date === todayIso) {
+        // Linear approx: store roughly open 11h (11am-10pm). Sales remaining = (close-now)/open-span
+        const hr = now.getHours() + now.getMinutes()/60;
+        dayFactor = Math.max(0, Math.min(1, (22 - hr) / 11));
+      }
+      const useSales = (d.forecast || 0) * dayFactor;
+      const useHB = useSales * (HB_PER_TRAY / SALES_PER_HB_TRAY);
+      const useHD = useSales * (HD_PER_TRAY / SALES_PER_HD_TRAY);
+      hb = Math.max(0, hb - useHB);
+      hd = Math.max(0, hd - useHD);
+
+      sim.push({date: d.date, name: d.name, arriveHB, arriveHD, useHB, useSales, endHB: hb, endHD: hd, dayFactor});
+
+      if (dlv) {
+        dlv.afterArriveHB = dlv.startHB + arriveHB;
+        dlv.afterArriveHD = dlv.startHD + arriveHD;
+      }
+    });
+
+    // Return plan in delivery date order
+    return upcomingDeliveryDates.map(d => dlvByDate[d]);
   }
 
   // ── RENDER: ORDERS ──────────────────────────────────────────────────
@@ -338,13 +387,22 @@
     wrap.innerHTML = plan.map(p => {
       const dateShort = fmtMD(p.deliveryDate);
 
-      // LOCKED card: informational only
+      // LOCKED card: informational + input for what BOSS locked in
       if (p.isLocked) {
+        const warnClass = p.locked_qty_unset ? 'locked-warn' : '';
         return `
-          <div class="order-card locked">
+          <div class="order-card locked ${warnClass}">
             <div class="order-when">${p.deliveryDOW} <span class="locked-tag">Locked</span></div>
             <div class="order-cover">${dateShort} · covers <b>${p.coverLabel}</b></div>
-            <div class="locked-msg">Order locked at<br><b>${p.lockTimeStr}</b></div>
+            <div class="locked-msg">
+              Locked at <b>${p.lockTimeStr}</b><br>
+              <div class="locked-qty">
+                <label>What BOSS locked:</label>
+                <span class="qfield">HB <input data-locked-date="${p.deliveryDate}" data-locked-kind="hb" type="number" inputmode="numeric" min="0" value="${p.orderHB_trays || ''}" placeholder="0"> trays</span>
+                <span class="qfield">HD <input data-locked-date="${p.deliveryDate}" data-locked-kind="hd" type="number" inputmode="numeric" min="0" value="${p.orderHD_trays || ''}" placeholder="0"> trays</span>
+              </div>
+              ${p.locked_qty_unset ? '<div class="locked-warn-msg">⚠ Enter what BOSS shows or downstream orders will over-shoot</div>' : ''}
+            </div>
           </div>`;
       }
 
@@ -505,8 +563,21 @@
     const hasCount = (hbStr !== '' || hdStr !== '');
     const now = new Date();
     const todayIso = isoDateLocal(now);
-    const plan = buildOrderPlan(hb, hd, days, todayIso, now);
+    const lockedQty = loadLockedQty();
+    const plan = buildOrderPlan(hb, hd, days, todayIso, now, lockedQty);
     renderOrders(plan, hasCount);
+    // Wire locked-qty inputs after render
+    document.querySelectorAll('input[data-locked-date]').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const m = loadLockedQty();
+        const date = inp.dataset.lockedDate;
+        const kind = inp.dataset.lockedKind;
+        m[date] = m[date] || {};
+        m[date][kind] = inp.value;
+        saveLockedQty(m);
+        recompute(days);
+      });
+    });
   }
 
   document.getElementById('reset-btn').addEventListener('click', () => {
