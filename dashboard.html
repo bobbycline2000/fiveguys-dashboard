@@ -224,6 +224,19 @@ body {
 .pill-yellow { background: var(--yellow-dim); color: var(--yellow); }
 .pill-red    { background: var(--alert-dim); color: var(--alert-red); }
 
+/* ── Collapsible cards ── */
+.card.collapsible { position: relative; }
+.card.collapsible > *:first-child { cursor: pointer; user-select: none; padding-right: 26px; }
+.card.collapsible::after {
+  content: "▾"; color: var(--white-60); font-size: 0.85rem;
+  position: absolute; top: 18px; right: 18px;
+  transition: transform 0.2s; pointer-events: none;
+}
+.card.collapsible.collapsed::after { transform: rotate(-90deg); }
+.card.collapsible.collapsed > *:not(:first-child) { display: none; }
+.card.collapsible.collapsed { padding-bottom: 14px; }
+.card.collapsible.collapsed > *:first-child { margin-bottom: 0; }
+
 /* ══════════════════════════════════════════
    THE CONTROLLABLES (hero section)
 ══════════════════════════════════════════ */
@@ -631,6 +644,9 @@ body {
     <a class="nav-item" href="Steritech-Morning-Manager-Walk.pdf" target="_blank">
       <span class="nav-ico"><i data-lucide="clipboard-check"></i></span>Steritech Walk
     </a>
+    <a class="nav-item" href="orientation.html">
+      <span class="nav-ico"><i data-lucide="user-plus"></i></span>Crew Orientation
+    </a>
     <a class="nav-item" href="Shop_Tracker_2065_2026.xlsx" download>
       <span class="nav-ico"><i data-lucide="trophy"></i></span>Shop Tracker
     </a>
@@ -849,7 +865,7 @@ body {
     </div>
 
     <!-- ══ COMPLIANCE CHECKLISTS ══ -->
-    <div class="card">
+    <div class="card collapsible collapsed" data-card-id="compliancemate">
       <div class="cm-header-row">
         <div>
           <div class="card-title"><i data-lucide="clipboard-check"></i> ComplianceMate &mdash; Required Checklists</div>
@@ -1035,7 +1051,7 @@ body {
     <div class="ops-row">
 
       <!-- Schedule card -->
-      <div class="card">
+      <div class="card collapsible" data-card-id="schedule">
         <div class="card-hdr">
           <div>
             <div class="card-title">Today's Schedule</div>
@@ -1140,7 +1156,7 @@ body {
     </div><!-- /ops-row -->
 
     <!-- ══ DISCOUNTS & COMPS ══ -->
-    <div class="card">
+    <div class="card collapsible" data-card-id="discounts">
       <div class="card-hdr">
         <div>
           <div class="card-title"><i data-lucide="ticket-percent"></i> Discounts &amp; Comps</div>
@@ -1238,6 +1254,26 @@ document.querySelectorAll('#periodToggle .period-btn').forEach(btn => {
     applyPeriod(btn.dataset.period);
   });
 });
+
+// ── Collapsible cards: persist state in localStorage ──
+(function () {
+  document.querySelectorAll('.card.collapsible').forEach(card => {
+    const id = card.dataset.cardId || card.querySelector('.card-title')?.textContent?.trim() || '';
+    if (!id) return;
+    const key = 'card-collapsed:' + id;
+    const saved = localStorage.getItem(key);
+    if (saved === '1') card.classList.add('collapsed');
+    else if (saved === '0') card.classList.remove('collapsed');
+    const trigger = card.firstElementChild;
+    if (!trigger) return;
+    trigger.addEventListener('click', (e) => {
+      // don't toggle if user clicked an actual link/button inside the header
+      if (e.target.closest('a, button')) return;
+      card.classList.toggle('collapsed');
+      localStorage.setItem(key, card.classList.contains('collapsed') ? '1' : '0');
+    });
+  });
+})();
 
 // ── Milkshake checklist: only show on Tue/Fri AM ──
 (function () {
