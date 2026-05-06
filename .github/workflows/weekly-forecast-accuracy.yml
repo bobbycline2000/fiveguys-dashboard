@@ -1,0 +1,64 @@
+name: Weekly Teamworx Forecast Accuracy Analysis
+
+on:
+  schedule:
+    # Mondays at 4:30 AM ET (8:30 UTC standard, 9:30 UTC EDT — using 9:30 UTC = 4:30 AM EDT/5:30 AM EST)
+    - cron: '30 9 * * 1'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'How many days back to pull (default 7)'
+        default: '7'
+
+permissions:
+  contents: write
+
+jobs:
+  pull-and-analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          pip install google-api-python-client google-auth google-auth-oauthlib pypdf openpyxl
+
+      - name: Restore Gmail OAuth token
+        env:
+          GMAIL_REFRESH_TOKEN_JSON: ${{ secrets.GMAIL_REFRESH_TOKEN_JSON }}
+        run: |
+          mkdir -p secrets
+          echo "$GMAIL_REFRESH_TOKEN_JSON" > secrets/scg_refresh_token.json
+
+      - name: Pull last ${{ github.event.inputs.days || 7 }} days of Brink reports
+        run: |
+          python scraper/pull_brink_history.py --store 2065 --days ${{ github.event.inputs.days || 7 }}
+        continue-on-error: true
+
+      - name: Build Teamworx vs Brink comparison Excel
+        run: |
+          python scraper/analyze_teamworx_vs_brink.py --store 2065
+
+      - name: Commit results
+        run: |
+          git config user.email "noreply@savior-consulting.com"
+          git config user.name "SCG Forecast Bot"
+          git add data/raw/parbrink/ || true
+          git add ../BobbyWorkspace/projects/scg/case-studies/teamworx-forecast-accuracy/ 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "weekly: Brink ${{ github.event.inputs.days || 7 }}-day pull + forecast accuracy refresh"
+          git push || echo "Nothing to push"
+
+      - name: Email summary
+        env:
+          MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
+          MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+        run: |
+          echo "TODO: send fg2065@estep-co.com a summary with Excel attached"
+        continue-on-error: true
