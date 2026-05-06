@@ -1,34 +1,41 @@
 {
-  "date": "2026-05-05",
-  "new_count": 4,
+  "date": "2026-05-06",
+  "new_count": 5,
   "notes": [
     {
       "from": "Brad Davis (Director)",
       "role": "director",
       "role_label": "Director's Corner",
-      "time": "Tue 1:31 AM",
-      "body": "Implement: Orientation Checklist + Halo Effect & Suggestive Sales Policy. ALL employees must review and sign Halo Policy by Friday 5/8/26 5:00 PM. Email signed forms to Crystal (DM) by that time. Begin using the Orientation Checklist with ALL new hires today. New hires sign Halo Policy as part of onboarding. Standing: FGU Overdue Rate to 0% by 5/15."
+      "time": "Tue 9:20 AM",
+      "body": "Bonus Impact: FGU Overdue — maintain 0% overdue. If a location is not at 0% overdue, bonuses may be reduced or forfeited. Ensure all team members complete required training within the 31-day Five Guys window."
+    },
+    {
+      "from": "Brad Davis (Director)",
+      "role": "director",
+      "role_label": "Director's Corner",
+      "time": "Carryover (5/5)",
+      "body": "Implement: Orientation Checklist + Halo Effect & Suggestive Sales Policy. ALL employees must review and sign Halo Policy by Friday 5/8/26 5:00 PM. Email signed forms to Crystal (DM) by that time. New hires sign Halo Policy as part of onboarding. Standing: FGU Overdue Rate to 0% by 5/15."
     },
     {
       "from": "Crystal Hess (DM)",
       "role": "dm",
       "role_label": "DM Communication",
       "time": "Carryover (5/1)",
-      "body": "Shopper Dashboard & FGX Info — print 2065 Shopper Dashboard & K.P.I., post on comm board, Crystal visiting locations this week to discuss in-store. Pair with new Halo Effect rollout."
+      "body": "Shopper Dashboard & FGX Info — print 2065 Shopper Dashboard & K.P.I., post on comm board, Crystal visiting locations this week to discuss in-store. Pair with Halo Effect rollout."
     },
     {
-      "from": "ComplianceMate",
+      "from": "Jeni Moffatt (HR)",
       "role": "alert",
-      "role_label": "Alert — Steritech ticket",
-      "time": "Tue 12:01 AM",
-      "body": "Steritech ticket has had no response in 4 days. Auto-closes in 4 more days. Reply or close intentionally today."
+      "role_label": "Alert — New Hire Cleared",
+      "time": "Tue 12:02 PM",
+      "body": "Nyatiek Keah is processed and good to schedule. Add to next available shift in Teamworx + CrunchTime; ensure orientation packet ready and Halo Policy signed during onboarding."
     },
     {
-      "from": "CrunchTime",
+      "from": "FoodLogiQ",
       "role": "alert",
-      "role_label": "Alert — Task Alerts",
-      "time": "Tue 3:10 AM",
-      "body": "Past due / due today: Post Period - Inventory Not Posted (5/3); L-Rev (5/4); VO-Rec Performance Foodservice (5/4); VO-Rec BOSS Alpha Ohio Valley (5/4). Clear before 5/5's alert."
+      "role_label": "Alert — Action Required",
+      "time": "Tue 9:30 PM",
+      "body": "Incident #26-10106 (Jalapeno) returned to store. Add image of DC case label and respond. 7-day auto-resolve clock from 5/4 incident — respond before 5/11."
     }
   ]
 }
