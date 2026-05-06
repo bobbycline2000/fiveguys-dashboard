@@ -62,16 +62,21 @@ def parse_brink_pdf(pdf_path: Path) -> dict | None:
 
 def load_teamworx_history(store: str) -> dict:
     """Returns {date: {sales: [18 hours], ideal, scheduled}} for the store."""
-    f = ROOT / "data" / f"teamworx_hourly_history_{store}.json"
-    if not f.exists():
-        # Fall back to the case-study captured Mondays
-        f2 = CASE_STUDY / "teamworx_mondays.json"
-        if f2.exists():
-            data = json.loads(f2.read_text())
-            return {date: {"sales": d["sales"], "ideal": d["ideal"], "scheduled": d["scheduled"]}
-                    for date, d in data.get("mondays", {}).items()}
-        return {}
-    return json.loads(f.read_text())
+    # Try repo-local copy first (for GitHub Actions)
+    candidates = [
+        ROOT / "data" / f"teamworx_hourly_history_{store}.json",
+        ROOT / "data" / "teamworx_mondays.json",
+        CASE_STUDY / "teamworx_mondays.json",
+    ]
+    for f in candidates:
+        if f.exists():
+            data = json.loads(f.read_text())
+            # Normalize: handle both flat {date: {...}} and nested {mondays: {date: {...}}}
+            if "mondays" in data:
+                return {date: {"sales": d["sales"], "ideal": d["ideal"], "scheduled": d["scheduled"]}
+                        for date, d in data["mondays"].items()}
+            return data
+    return {}
 
 
 def build_workbook(store: str):
