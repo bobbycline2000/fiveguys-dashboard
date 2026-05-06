@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
 """
-Pull this week + next week per-day Forecasted Sales from CrunchTime.
+Pull this week + next week per-day Forecasted Sales from CrunchTime
+and write data/forecast_by_day.json for the bread tool.
 
-THIS WEEK comes from /resource/dashboard/performance/metrics
-  - "Forecasted Sales" + "Actual Net Sales" rows, per calcId 1..7 (Sun..Sat)
+Two endpoints, two different week conventions — important:
 
-NEXT WEEK comes from /resource/sales/sales/forecast (the Manage Sales Forecast page)
-  - Body: {"node":"root","extraFilter":[]}
-  - Returns week objects with day1..day7. Day1 = Sunday. (CT week starts Sun.)
-  - We dump the raw response to data/_debug/sales_forecast.json for inspection
-    on first run, then extract next week's day1..day7 from it.
+1. /resource/sales/sales/forecast (Manage Sales Forecast)
+   - Returns top-level "type=forecast" items with `weekEnding` (Sunday, MM/DD/YYYY)
+     and day1..day7 = MONDAY..SUNDAY $ forecast.
+   - Each item has children with type=guests / type=checks (day1..day7 are counts,
+     NOT $ — the previous walker incorrectly grabbed those).
+   - Source for THIS WEEK and NEXT WEEK forecasts.
 
-Output: data/forecast_by_day.json
-{
-  "meta": { "generated": "...", "today": "...", "week_start": "...", "week_end_plus_7": "..." },
-  "days": [ { "date": "...", "name": "SUN", "forecast": 3500.0, "actual": 3200.0, "is_next_week": false }, ... ]
-}
+2. /resource/dashboard/performance/metrics (Performance Metrics box)
+   - calcId 1=Sun..7=Sat (Sun-Sat week starting from PAST Sunday).
+   - Source for THIS WEEK actuals only.
+
+Bread tool aligns to Mon-Sun weeks (matches Five Guys ops convention).
+Output: 14 days, Mon..Sun (this week) + Mon..Sun (next week).
 """
 
 import datetime, json, sys
@@ -30,54 +32,45 @@ from api_query import (
 )
 
 FORECAST_URL = f"{NETCHEF_BASE}/resource/sales/sales/forecast"
-DAY_NAMES = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']  # CT order: day1=Sun
+DAY_NAMES = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']  # forecast endpoint order
 
 
-def week_start_sunday(d: datetime.date) -> datetime.date:
-    # Python: Mon=0..Sun=6. CT week starts Sunday.
-    # If today is Sunday (weekday()==6), week_start = today.
-    return d - datetime.timedelta(days=(d.weekday() + 1) % 7)
+def this_week_monday(d: datetime.date) -> datetime.date:
+    return d - datetime.timedelta(days=d.weekday())  # Python weekday(): Mon=0..Sun=6
 
 
 def fetch_sales_forecast(jar):
     body = {"node": "root", "extraFilter": []}
     r = requests.post(FORECAST_URL, json=body, cookies=jar, headers=HEADERS, timeout=30)
     r.raise_for_status()
-    try:
-        return r.json()
-    except Exception:
-        return r.text
+    return r.json()
 
 
-def find_week_objects(payload):
-    """Walk payload recursively, return any dict that has day1..day7 keys."""
+def collect_forecast_weeks(payload):
+    """Return list of (weekEnding_date, day_values_dict) for type='forecast' items only."""
     out = []
 
-    def walk(node):
-        if isinstance(node, dict):
-            keys = set(node.keys())
-            if all(f"day{i}" in keys for i in range(1, 8)):
-                out.append(node)
-            for v in node.values():
-                walk(v)
-        elif isinstance(node, list):
-            for v in node:
+    def walk(n):
+        if isinstance(n, dict):
+            if n.get("type") == "forecast" and n.get("weekEnding"):
+                we_raw = str(n["weekEnding"]).split(" ")[0]  # "05/10/2026"
+                try:
+                    we = datetime.datetime.strptime(we_raw, "%m/%d/%Y").date()
+                except ValueError:
+                    we = None
+                if we:
+                    out.append((we, {f"day{i}": n.get(f"day{i}") for i in range(1, 8)}))
+            # IMPORTANT: do NOT recurse into 'children' — those are guests/checks counts
+            # but DO recurse into other container fields
+            for k, v in n.items():
+                if k != "children":
+                    walk(v)
+        elif isinstance(n, list):
+            for v in n:
                 walk(v)
 
     walk(payload)
     return out
-
-
-def parse_date(s):
-    if not s:
-        return None
-    s = str(s).strip()
-    for fmt in ("%Y-%m-%d", "%m/%d/%Y", "%d-%b-%y", "%d-%b-%Y", "%Y-%m-%dT%H:%M:%S"):
-        try:
-            return datetime.datetime.strptime(s.split("T")[0], fmt.split("T")[0]).date()
-        except ValueError:
-            continue
-    return None
 
 
 def coerce_float(v):
@@ -89,10 +82,17 @@ def coerce_float(v):
         return None
 
 
+def calcid_for_date(d: datetime.date) -> int:
+    # performance/metrics: Sun=1..Sat=7
+    return d.isoweekday() % 7 + 1
+
+
 def main():
     today = datetime.date.today()
-    this_week_start = week_start_sunday(today)
-    next_week_start = this_week_start + datetime.timedelta(days=7)
+    this_mon = this_week_monday(today)
+    next_mon = this_mon + datetime.timedelta(days=7)
+    this_week_ending = this_mon + datetime.timedelta(days=6)  # Sunday
+    next_week_ending = next_mon + datetime.timedelta(days=6)
 
     jar = load_cookies()
     if not jar or not session_alive(jar):
@@ -101,80 +101,63 @@ def main():
         if not session_alive(jar):
             raise RuntimeError("re-mint did not produce a live session")
 
-    # ── THIS WEEK from performance metrics ─────────────────────────────
-    metrics = fetch_metrics(jar)
-    fcst_row = find_metric(metrics, "Forecasted Sales")
-    actual_row = find_metric(metrics, "Actual Net Sales")
-    if not fcst_row:
-        raise RuntimeError("Forecasted Sales row not found in performance metrics")
-
-    this_week = []
-    for i in range(7):
-        d = this_week_start + datetime.timedelta(days=i)
-        calcid = d.isoweekday() % 7 + 1  # Sun=1..Sat=7
-        f = value_for_calcid(fcst_row, calcid)
-        a = value_for_calcid(actual_row, calcid)
-        this_week.append({
-            "date": d.isoformat(),
-            "name": DAY_NAMES[i],
-            "forecast": coerce_float(f),
-            "actual": coerce_float(a),
-            "is_next_week": False,
-        })
-
-    # ── NEXT WEEK from /resource/sales/sales/forecast ──────────────────
-    next_week = [
-        {"date": (next_week_start + datetime.timedelta(days=i)).isoformat(),
-         "name": DAY_NAMES[i],
-         "forecast": None, "actual": None, "is_next_week": True}
-        for i in range(7)
-    ]
-
+    # ── FORECASTS (this week + next week) from /sales/sales/forecast ────
     debug_dir = DATA_DIR / "_debug"
     debug_dir.mkdir(exist_ok=True)
+    payload = fetch_sales_forecast(jar)
+    (debug_dir / "sales_forecast_raw.json").write_text(json.dumps(payload, indent=2, default=str))
+
+    weeks = collect_forecast_weeks(payload)
+    by_ending = {we: vals for we, vals in weeks}
+    print(f"[forecast] {len(weeks)} forecast week objects (filtered out guests/checks children)")
+
+    this_vals = by_ending.get(this_week_ending)
+    next_vals = by_ending.get(next_week_ending)
+    if not this_vals:
+        print(f"[warn] no forecast for week ending {this_week_ending}")
+    if not next_vals:
+        print(f"[warn] no forecast for week ending {next_week_ending}")
+
+    days = []
+    for offset in range(14):
+        d = this_mon + datetime.timedelta(days=offset)
+        in_next_week = offset >= 7
+        vals = next_vals if in_next_week else this_vals
+        # offset 0..6 -> day1..day7 (Mon..Sun)
+        idx = (offset % 7) + 1
+        f = coerce_float(vals.get(f"day{idx}")) if vals else None
+        days.append({
+            "date": d.isoformat(),
+            "name": DAY_NAMES[offset % 7],
+            "forecast": f,
+            "actual": None,
+            "is_next_week": in_next_week,
+        })
+
+    # ── ACTUALS (this week, Mon..today) from performance/metrics ────────
     try:
-        payload = fetch_sales_forecast(jar)
-        (debug_dir / "sales_forecast_raw.json").write_text(
-            json.dumps(payload, indent=2, default=str)
-        )
-        weeks = find_week_objects(payload)
-        print(f"[forecast] /sales/sales/forecast returned {len(weeks)} week-shaped objects")
-
-        # Match each week object to a week-start date if possible
-        for w in weeks:
-            ws = None
-            for k in ("weekStartDate", "weekStart", "startDate", "weekBeginning",
-                      "fiscalWeekStart", "weekBeginDate", "beginDate"):
-                if k in w:
-                    ws = parse_date(w[k])
-                    if ws:
-                        break
-            if ws == next_week_start:
-                for i in range(7):
-                    val = coerce_float(w.get(f"day{i+1}"))
-                    if val is not None:
-                        next_week[i]["forecast"] = val
-                print(f"[forecast] matched next week ({next_week_start}) — filled day1..day7")
-                break
-        else:
-            # Fallback: if there are exactly 2 weeks and we can't match by date, assume order = [this, next]
-            if len(weeks) >= 2:
-                w = weeks[1]
-                for i in range(7):
-                    next_week[i]["forecast"] = coerce_float(w.get(f"day{i+1}"))
-                print(f"[forecast] no date match — used 2nd week object as next week (positional fallback)")
-            else:
-                print(f"[forecast] could not extract next week — see data/_debug/sales_forecast_raw.json")
+        metrics = fetch_metrics(jar)
+        actual_row = find_metric(metrics, "Actual Net Sales")
+        if actual_row:
+            for d in days:
+                if d["is_next_week"]:
+                    continue
+                date = datetime.date.fromisoformat(d["date"])
+                if date > today:
+                    continue
+                cid = calcid_for_date(date)
+                a = value_for_calcid(actual_row, cid)
+                d["actual"] = coerce_float(a)
     except Exception as e:
-        print(f"[forecast] FAILED to pull next week: {e}", file=sys.stderr)
+        print(f"[warn] couldn't pull actuals: {e}", file=sys.stderr)
 
-    days = this_week + next_week
     out = {
         "meta": {
             "generated": datetime.datetime.now().isoformat(timespec='seconds'),
             "today": today.isoformat(),
-            "week_start": this_week_start.isoformat(),
-            "week_end_plus_7": (this_week_start + datetime.timedelta(days=13)).isoformat(),
+            "this_week_mon": this_mon.isoformat(),
+            "next_week_mon": next_mon.isoformat(),
+            "week_convention": "Mon-Sun",
         },
         "days": days,
     }
