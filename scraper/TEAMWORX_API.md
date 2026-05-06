@@ -356,8 +356,19 @@ Every sidebar section visited with capture on. Endpoints grouped by trigger.
 - `POST /json/mn/staff-requests` — Swaps, Pick Ups, Time Off Requests, Availability Changes, Employee Record requests
 
 ### Message Center (`Message Center` nav, `/view#message-center` SPA route)
+
+The Message Center is on a **separate SPA** (`/view#...` hash routing) with its own
+dedicated endpoints under `/json/message-center/`. These are distinct from the
+`/json/emn/message/...` endpoints used by the Manager Console.
+
 - `GET  /json/message-center/controls` — UI controls/permissions
-- `POST /json/message-center/messages/filter` — message list with filters
+- `POST /json/message-center/messages/filter` — message list with filters (Inbox / Sent tabs share this endpoint, different filter param)
+- `GET  /json/message-center/inbox-messages/{messageId}` — open a single message thread
+- `POST /json/message-center/inbox-messages/{messageId}/read` ⚠️ **WRITE** — mark message read (auto-fires when opening)
+- `GET  /json/message-center/inbox-messages/{messageId}/recipients/{senderId}` — recipient list + per-recipient read status (the "eye" icons in "Sent to: All" dropdown)
+- `GET  /json/message-center/create-new-message/controls` — New Message composer config
+- `GET  /json/message-center/message/recipients` — recipient picker list (employees/positions to message)
+- **Not yet captured (would only fire on actual send):** the `POST /json/message-center/message` (or similar) endpoint that sends a new message. Catch by composing+sending a real test message with capture on.
 
 ### Employee List (`Employee List` nav)
 - `POST /json/emn/employee-list` — body `{sortInfo, filter, pagingInfo}` — full employee directory (paginated)
@@ -579,16 +590,74 @@ The **WRITE endpoints** above close the lights-out loop for:
 5. **Cross-location messaging:** `message/sendCrossLocationMessage`. Useful when SCG
    onboards a multi-location franchisee.
 
+## The SAVE endpoint — `import-changes` (closes the lights-out loop)
+
+**Captured 2026-05-05** by clicking the orange "Save" button on the Labor Schedule edit
+page with the AJAX_UTILS.postJson interceptor patched in.
+
+```http
+POST /json/mn/labor-schedule/import-changes
+Content-Type: application/json
+
+{
+  "weekEndingDate": "2026-05-10",
+  "staffingStructureIds": null,
+  "scheduleSubLineFlag": false
+}
+```
+
+**Important: the body contains NO shift data.** This endpoint commits whatever shifts
+have been staged client-side (or in a server-side staging area for this user's edit
+session) for the named week. The actual shift creation/edit happens via:
+
+- `POST /json/mn/laborSchedule/addMultipleEmployeePositionRowsAndLoadEmployeesData` (stage)
+- `POST /json/mn/laborSchedules/addEmployeePositionRowAndLoadEmployeeData` (stage)
+
+After save, the page automatically calls:
+- `POST /json/mn/laborSchedules/refreshWBLaborScheduleData` — reload schedule grid with violations
+- `POST /json/mn/laborSchedules/getRuleViolations` — rule violation check (overtime, minor laws, double-booking)
+
+**Full lights-out flow for the schedule builder:**
+
+```
+1. POST /json/mn/laborSchedules/getDataForManageSchedulesPage   { "year": 2026 }
+   → discover the lsi for the target week
+
+2. POST /json/mn/laborSchedule/startEditLaborSchedule           { "laborScheduleId": <lsi> }
+   → claim edit lock
+
+3. POST /json/mn/templates/getSchedulingTemplate                { "templateId": 29661 }
+   → pull "DIXIE LABOR Monday" template
+
+4. for each day, for each position, for each shift in template:
+   POST /json/mn/laborSchedule/addMultipleEmployeePositionRowsAndLoadEmployeesData
+   → stage shifts
+
+5. POST /json/mn/labor-schedule/import-changes                  { weekEndingDate, ... }
+   → commit staged shifts ⚠️ WRITE
+
+6. POST /json/mn/laborSchedules/getRuleViolations               (auto-fires)
+   → confirm no violations introduced
+
+7. POST /json/mn/laborSchedule/publishLaborSchedule             { laborScheduleId }
+   → "Mark As Ready" / publish ⚠️ WRITE
+```
+
+Pure HTTP. Total time: ~3 seconds. Runs from a Windows mini-PC, GitHub Actions cron, or
+anywhere with Python + Teamworx cookies.
+
 ## Next discovery passes
 
 When time permits — same pattern (interceptor + click target):
-- The actual **shift drag/drop SAVE payload** — drag a shift cell on the labor schedule
-  edit page with capture on. The function is somewhere in `LaborSchedule.LS_*` modules
-  but the URL constant didn't show up in the static scan (likely uses a runtime-built path).
+- **The exact stage-shift payload** — drag a shift cell or click "+" with capture on. The
+  endpoint is `addMultipleEmployeePositionRowsAndLoadEmployeesData` but the body shape
+  (employeeId, positionId, inTime, outTime, station, etc.) needs to be confirmed.
 - **Auto-scheduler RUN endpoint** — different from `getDataForAutoScheduler`. Click the
   "wand" icon on the labor schedule edit page header.
 - **Promotions / Holidays / Closed-calendar setup** — referenced in `dayForecast` schema
   but not yet captured.
+- **Send Message endpoint** — `POST /json/message-center/message` likely. Fires only on
+  actual send from "+ New Message" composer.
 
 ## Pattern source
 
