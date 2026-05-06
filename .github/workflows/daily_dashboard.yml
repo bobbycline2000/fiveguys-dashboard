@@ -179,6 +179,18 @@ jobs:
         # NOTE: When scaling to all 11 stores, add additional steps here
         # with the store-specific env vars and a STORE_ID env variable.
 
+      # ── 5b1. Pull this-week + next-week per-day forecasts (bread tool)
+      # Uses the same cached cookies as main.py (just-minted in step 5b).
+      # Hits /resource/sales/sales/forecast for forecasts (Mon-Sun, by weekEnding)
+      # and /resource/dashboard/performance/metrics for actuals.
+      # Output: data/forecast_by_day.json — read by bread.html.
+      - name: Pull per-day forecast for bread tool
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: python scraper/scrape_forecast_by_day.py
+
       # ── 5a2. Roll up daily ComplianceMate snapshots → Week/Month/Quarter ─
       # Reads every data/raw/compliancemate/2065/<date>/compliance.json and
       # writes data/compliance_rollups.json. wire_dashboard.py uses this to
