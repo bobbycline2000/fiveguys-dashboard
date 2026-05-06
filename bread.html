@@ -160,7 +160,7 @@
 <div class="why">
   <h3>How the math works</h3>
   <p><b>Tray rates:</b> every $986 in net sales = 1 HB tray (5 bags). Every $19,974 in net sales = 1 HD tray (6 bags).</p>
-  <p style="margin-top:6px;"><b>Per delivery:</b> we sum the CT-projected sales for the days that delivery covers (Mon delivery covers Mon+Tue, Wed covers Wed+Thu, Fri covers Fri, Sat covers Sat+Sun), figure how many bags you need, subtract what's already on the shelf, round up to whole trays.</p>
+  <p style="margin-top:6px;"><b>Per delivery:</b> we sum the CT-projected sales for the days that delivery covers (Mon covers Mon+Tue, Wed covers Wed+Thu, Fri covers Fri, Sat covers Sat+Sun), <b>add a $3K sales buffer</b> (your safety cushion — leaves ~15 HB bags on the shelf at the end of every window), figure how many bags you need, subtract what's already on the shelf, round up to whole trays.</p>
   <p style="margin-top:6px;"><b>Forward chaining:</b> the tool simulates each delivery in order — what you have now + what arrives Mon − what gets used Mon+Tue = what's left for Wed, and so on. So a single count drives the whole week's orders.</p>
   <h3 style="margin-top:14px;">Sources</h3>
   <p><b>Daily projections</b> come from CrunchTime: <i>this week</i> from Performance Metrics (Forecasted Sales day 1–7), <i>next week</i> from Manage Sales Forecast. Refreshed every morning by the daily scrape.</p>
@@ -175,6 +175,7 @@
   const HD_PER_TRAY = 6;
   const SALES_PER_HB_TRAY = 986;
   const SALES_PER_HD_TRAY = 19974;
+  const BUFFER_SALES = 3000;  // $ buffer baked into every delivery's need calc — your safety cushion
 
   // ── HELPERS ─────────────────────────────────────────────────────────
   const fmt$ = n => n == null ? '—' : (n >= 1000 ? '$' + (n/1000).toFixed(1) + 'K' : '$' + Math.round(n));
@@ -231,9 +232,14 @@
         else coverSales += f;
       });
 
-      // Bag demand for this window
-      const needHB_bags = coverSales * (HB_PER_TRAY / SALES_PER_HB_TRAY);
-      const needHD_bags = coverSales * (HD_PER_TRAY / SALES_PER_HD_TRAY);
+      // Bag demand for this window — sales × bag-rate, PLUS the buffer
+      const needSales = coverSales + BUFFER_SALES;
+      const needHB_bags = needSales * (HB_PER_TRAY / SALES_PER_HB_TRAY);
+      const needHD_bags = needSales * (HD_PER_TRAY / SALES_PER_HD_TRAY);
+
+      // Actual consumption = projected sales only (buffer stays on shelf)
+      const useHB_bags = coverSales * (HB_PER_TRAY / SALES_PER_HB_TRAY);
+      const useHD_bags = coverSales * (HD_PER_TRAY / SALES_PER_HD_TRAY);
 
       // Short bags = what we don't have on shelf going into delivery
       const shortHB = Math.max(0, needHB_bags - hb);
@@ -243,9 +249,9 @@
       const orderHB_trays = Math.ceil(shortHB / HB_PER_TRAY);
       const orderHD_trays = Math.ceil(shortHD / HD_PER_TRAY);
 
-      // Roll on-hand forward: arrive trays, consume coverSales worth
-      hb = Math.max(0, hb + orderHB_trays * HB_PER_TRAY - needHB_bags);
-      hd = Math.max(0, hd + orderHD_trays * HD_PER_TRAY - needHD_bags);
+      // Roll on-hand forward: arrive trays, consume actual usage (NOT buffer)
+      hb = Math.max(0, hb + orderHB_trays * HB_PER_TRAY - useHB_bags);
+      hd = Math.max(0, hd + orderHD_trays * HD_PER_TRAY - useHD_bags);
 
       plan.push({
         deliveryDate: dlv.date,
@@ -285,7 +291,7 @@
       return `
         <div class="order-card ${p.isNextUp ? 'next-up' : ''}">
           <div class="order-when">${p.deliveryDOW} ${tag}</div>
-          <div class="order-cover">${dateShort} · covers <b>${p.coverLabel}</b> · proj <b>${fmt$(p.coverSales)}</b></div>
+          <div class="order-cover">${dateShort} · covers <b>${p.coverLabel}</b> · proj <b>${fmt$(p.coverSales)}</b> + <b>$3K</b> buffer</div>
           ${noProj}
           <div class="order-rows">
             <div class="order-row ${p.orderHB_trays === 0 ? 'zero' : ''}">
