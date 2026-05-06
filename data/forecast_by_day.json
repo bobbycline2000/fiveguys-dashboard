@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "generated": "2026-05-06T12:58:26",
+    "today": "2026-05-06",
+    "week_start": "2026-05-03",
+    "week_end_plus_7": "2026-05-16"
+  },
+  "days": [
+    {
+      "date": "2026-05-03",
+      "name": "SUN",
+      "forecast": 5462.0,
+      "actual": null,
+      "is_next_week": false
+    },
+    {
+      "date": "2026-05-04",
+      "name": "MON",
+      "forecast": 3749.0,
+      "actual": 3539.85,
+      "is_next_week": false
+    },
+    {
+      "date": "2026-05-05",
+      "name": "TUE",
+      "forecast": 3772.0,
+      "actual": 3271.61,
+      "is_next_week": false
+    },
+    {
+      "date": "2026-05-06",
+      "name": "WED",
+      "forecast": 4385.0,
+      "actual": 102.55,
+      "is_next_week": false
+    },
+    {
+      "date": "2026-05-07",
+      "name": "THU",
+      "forecast": 4442.0,
+      "actual": null,
+      "is_next_week": false
+    },
+    {
+      "date": "2026-05-08",
+      "name": "FRI",
+      "forecast": 5443.0,
+      "actual": null,
+      "is_next_week": false
+    },
+    {
+      "date": "2026-05-09",
+      "name": "SAT",
+      "forecast": 4957.0,
+      "actual": null,
+      "is_next_week": false
+    },
+    {
+      "date": "2026-05-10",
+      "name": "SUN",
+      "forecast": 692.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-05-11",
+      "name": "MON",
+      "forecast": 705.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-05-12",
+      "name": "TUE",
+      "forecast": 803.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-05-13",
+      "name": "WED",
+      "forecast": 853.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-05-14",
+      "name": "THU",
+      "forecast": 1023.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-05-15",
+      "name": "FRI",
+      "forecast": 915.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-05-16",
+      "name": "SAT",
+      "forecast": 988.0,
+      "actual": null,
+      "is_next_week": true
+    }
+  ]
+}
