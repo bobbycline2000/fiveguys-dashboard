@@ -12,321 +12,265 @@
     --red: #CE1726;
     --red-dim: #a81120;
     --red-soft: #e8394a;
-    --red-deep: #8a0e1a;
-    --bg: #CE1726;          /* page background — Five Guys red */
-    --panel: #0d0d0d;       /* cards — black */
-    --panel-2: #1a1a1a;     /* nested fields */
-    --line: rgba(0,0,0,.25);
-    --line-2: #2a2a2a;
+    --bg: #CE1726;
+    --panel: #0d0d0d;
+    --panel-2: #1a1a1a;
+    --line: #2a2a2a;
     --white: #ffffff;
-    --white-80: rgba(255,255,255,.85);
-    --white-60: rgba(255,255,255,.70);
-    --white-40: rgba(255,255,255,.50);
-    --green: #22c55e;
+    --w80: rgba(255,255,255,.85);
+    --w60: rgba(255,255,255,.65);
+    --w40: rgba(255,255,255,.45);
+    --w20: rgba(255,255,255,.18);
     --gold: #F5A800;
+    --green: #22c55e;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; min-height: 100vh; }
-  body { padding: 18px 4vw 50px; }
+  body { padding: 18px 4vw 60px; }
 
-  /* Top bar */
-  .top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid rgba(0,0,0,.3); margin-bottom: 20px; }
-  .brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; color: var(--white); }
-  .brand .red { color: #0d0d0d; }
-  .crumb { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--white-80); }
+  .top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid rgba(0,0,0,.3); margin-bottom: 18px; }
+  .brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; }
+  .brand .a { color: #0d0d0d; }
+  .crumb { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--w80); }
   .crumb a { color: var(--white); text-decoration: none; }
 
-  /* Header */
-  h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 38px; line-height: .95; letter-spacing: -.01em; text-transform: uppercase; color: var(--white); }
-  h1 .red { color: #0d0d0d; }
-  .lede { color: var(--white-80); font-size: 12px; max-width: 80ch; margin-top: 6px; }
+  h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 38px; line-height: .95; letter-spacing: -.01em; text-transform: uppercase; }
+  h1 .a { color: #0d0d0d; }
+  .lede { color: var(--w80); font-size: 12px; max-width: 80ch; margin-top: 6px; }
+  .source-tag { display: inline-block; margin-top: 8px; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; background: rgba(0,0,0,.35); border: 1px solid rgba(0,0,0,.4); padding: 4px 10px; border-radius: 3px; }
 
-  .source-tag { display: inline-block; margin-top: 8px; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--white); background: rgba(0,0,0,.35); border: 1px solid rgba(0,0,0,.4); padding: 4px 10px; border-radius: 3px; }
-
-  /* Open BOSS button — top */
-  .top-actions { margin: 14px 0 4px; display: flex; gap: 8px; }
-  .btn { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; padding: 10px 18px; border-radius: 3px; cursor: pointer; border: none; transition: .15s; text-decoration: none; display: inline-block; }
+  .top-actions { margin: 14px 0 4px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn { font-weight: 700; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; padding: 10px 18px; border-radius: 3px; cursor: pointer; border: none; text-decoration: none; display: inline-block; }
   .btn-primary { background: #0d0d0d; color: var(--white); }
-  .btn-primary:hover { background: #1a1a1a; }
   .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(0,0,0,.4); }
-  .btn-ghost:hover { background: rgba(0,0,0,.2); }
 
-  /* Week grid */
-  .week { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 20px; }
-  @media (max-width: 880px) { .week { grid-template-columns: 1fr; } h1 { font-size: 30px; } }
+  /* Week schedule strip */
+  .week-label { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: var(--white); margin: 24px 0 8px; padding-left: 10px; border-left: 4px solid #0d0d0d; }
+  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  @media (max-width: 880px) { .week { grid-template-columns: repeat(7, minmax(86px, 1fr)); overflow-x: auto; padding-bottom: 6px; } }
 
-  /* Delivery card */
-  .card { background: var(--panel); border: 1px solid rgba(0,0,0,.35); border-radius: 4px; padding: 16px 18px; position: relative; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
-  .card.locked { opacity: .55; }
-  .card.locked::after { content: 'LOCKED'; position: absolute; top: 10px; right: 12px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 12px; letter-spacing: .25em; color: var(--red-soft); background: rgba(206,23,38,.12); border: 1px solid var(--red-dim); padding: 2px 8px; border-radius: 2px; }
-  .card.urgent { border-color: var(--gold); }
-  .card.urgent::after { content: 'CLOSING SOON'; position: absolute; top: 10px; right: 12px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 11px; letter-spacing: .2em; color: var(--gold); background: rgba(245,168,0,.12); border: 1px solid rgba(245,168,0,.4); padding: 2px 8px; border-radius: 2px; }
+  .day { background: var(--panel); border: 1px solid rgba(0,0,0,.4); border-radius: 4px; padding: 10px 8px 12px; position: relative; min-height: 200px; box-shadow: 0 4px 12px rgba(0,0,0,.22); }
+  .day.next-week { background: #161616; border-color: rgba(0,0,0,.45); }
+  .day.today { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(245,168,0,.35), 0 4px 12px rgba(0,0,0,.22); }
+  .day.delivery { background: var(--panel); border-color: var(--red-soft); }
+  .day.past { opacity: .45; }
 
-  .card-head { padding-bottom: 10px; border-bottom: 1px solid var(--line-2); margin-bottom: 12px; }
-  .card-day { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 26px; line-height: 1; text-transform: uppercase; }
-  .card-date { font-size: 11px; color: var(--white-60); margin-top: 2px; letter-spacing: .08em; }
-  .card-lock { font-size: 10px; color: var(--white-40); margin-top: 4px; letter-spacing: .08em; text-transform: uppercase; }
+  .d-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18px; letter-spacing: .1em; text-transform: uppercase; }
+  .d-date { font-size: 10px; color: var(--w60); margin-top: 1px; letter-spacing: .08em; }
+  .d-tags { margin-top: 6px; display: flex; flex-direction: column; gap: 3px; }
+  .tag { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; padding: 1px 5px; border-radius: 2px; align-self: flex-start; }
+  .tag.today { background: rgba(245,168,0,.18); color: var(--gold); border: 1px solid rgba(245,168,0,.5); }
+  .tag.delivery { background: rgba(232,57,74,.15); color: var(--red-soft); border: 1px solid var(--red-dim); }
+  .tag.next-week { background: rgba(255,255,255,.08); color: var(--w60); border: 1px solid var(--w20); }
 
-  /* Section labels — BOLD AND PROMINENT */
-  .sec-label { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; letter-spacing: .12em; text-transform: uppercase; color: var(--white); font-weight: 800; margin-bottom: 6px; padding-left: 8px; border-left: 3px solid var(--red-soft); }
+  .d-section { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); }
+  .d-section-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--w60); margin-bottom: 4px; }
 
-  /* Per-day projection */
-  .proj { display: grid; gap: 1px; background: var(--line-2); border: 1px solid var(--line-2); border-radius: 3px; margin-bottom: 12px; }
-  .proj .cell { background: var(--panel-2); padding: 6px 4px; text-align: center; }
-  .proj .cell .day { font-size: 9px; color: var(--white-40); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 2px; }
-  .proj .cell input { background: transparent; border: 1px dashed transparent; color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; width: 100%; text-align: center; padding: 2px 2px; border-radius: 2px; }
-  .proj .cell input:focus { outline: none; border-color: var(--red); background: rgba(206,23,38,.06); }
-  .proj .cell input:hover { border-color: var(--line-2); }
-  .proj .total-cell { background: rgba(206,23,38,.08); padding: 6px 4px; text-align: center; }
-  .proj .total-cell .day { color: var(--red-soft); font-weight: 700; }
-  .proj .total-cell .amt { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 16px; }
+  /* Projection block (every day) */
+  .proj-amt { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 20px; line-height: 1; }
+  .proj-actual { font-size: 10px; color: var(--w60); margin-top: 3px; }
+  .proj-actual b { color: var(--white); font-weight: 700; }
 
-  /* Spacer between section block and label */
-  .sec-block + .sec-label { margin-top: 14px; }
-
-  /* On-hand inputs */
-  .onhand { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-  .onhand .field { background: var(--panel-2); border: 1px solid var(--line-2); border-radius: 3px; padding: 8px 10px; }
-  .onhand label { display: block; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--white-60); font-weight: 600; margin-bottom: 2px; }
-  .onhand input { background: transparent; border: none; color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; width: 100%; padding: 0; }
+  /* On-hand block (delivery days only) */
+  .onhand { display: flex; flex-direction: column; gap: 5px; }
+  .onhand .field { background: var(--panel-2); border: 1px solid var(--line); border-radius: 3px; padding: 5px 7px; }
+  .onhand label { display: block; font-size: 8px; letter-spacing: .15em; text-transform: uppercase; color: var(--w60); font-weight: 600; }
+  .onhand input { background: transparent; border: none; color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 18px; width: 100%; padding: 1px 0 0; }
   .onhand input:focus { outline: none; }
-  .onhand input::placeholder { color: var(--white-40); }
-  .onhand .u { font-size: 9px; color: var(--white-40); letter-spacing: .1em; text-transform: uppercase; margin-left: 2px; }
+  .onhand input::placeholder { color: var(--w40); }
 
-  /* Order output */
-  .order-out { background: linear-gradient(135deg, rgba(206,23,38,.10) 0%, rgba(13,13,13,0) 100%); border: 1px solid var(--red-dim); border-radius: 3px; padding: 10px 14px; }
-  .order-out .row { display: flex; align-items: baseline; padding: 4px 0; }
-  .order-out .row + .row { border-top: 1px solid var(--line-2); padding-top: 8px; margin-top: 2px; }
-  .order-out .lbl { flex: 0 0 80px; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--white-60); font-weight: 600; }
-  .order-out .big { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 34px; line-height: .9; color: var(--white); }
-  .order-out .unit { font-size: 10px; color: var(--white-60); letter-spacing: .1em; text-transform: uppercase; margin-left: 8px; }
-  .order-out .calc { margin-left: auto; text-align: right; font-size: 9px; color: var(--white-40); line-height: 1.4; }
-
-  /* Footer */
-  .why { margin-top: 24px; padding: 16px 20px; background: var(--panel); border: 1px solid rgba(0,0,0,.35); border-radius: 4px; font-size: 11px; color: var(--white-60); line-height: 1.6; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+  /* Footer / how-it-works */
+  .why { margin-top: 28px; padding: 16px 20px; background: var(--panel); border: 1px solid rgba(0,0,0,.35); border-radius: 4px; font-size: 11px; color: var(--w60); line-height: 1.6; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
   .why b { color: var(--white); font-weight: 700; }
+  .why h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 14px; letter-spacing: .15em; text-transform: uppercase; color: var(--white); margin: 0 0 6px; }
+  .why .tbd { display: inline-block; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; background: rgba(245,168,0,.15); color: var(--gold); border: 1px solid rgba(245,168,0,.4); padding: 2px 7px; border-radius: 2px; margin-left: 6px; }
 </style>
 </head>
 <body>
 
 <div class="top">
-  <div class="brand">FIVE <span class="red">GUYS</span> · KY-2065</div>
+  <div class="brand">FIVE <span class="a">GUYS</span> · KY-2065</div>
   <div class="crumb"><a href="dashboard.html">← Dashboard</a></div>
 </div>
 
-<h1>This Week's <span class="red">Bread Orders</span></h1>
-<p class="lede">All four deliveries on one screen. Type the projected sales for each day, count what's on hand, the order is calculated for you. Adjust in BOSS to match.</p>
+<h1>Bread <span class="a">Schedule</span></h1>
+<p class="lede">Two-week schedule with daily projected sales from CrunchTime. Delivery days highlighted — count on-hand bread on the day you're ordering on. Math layers on top after we lock the bones.</p>
 <div class="source-tag" id="source-tag">Loading projections…</div>
 
 <div class="top-actions">
-  <a class="btn btn-primary" href="https://bread2.fiveguys.com" target="_blank">Open BOSS · adjust orders</a>
-  <button class="btn btn-ghost" id="reset-btn">Reset projections</button>
+  <a class="btn btn-primary" href="https://bread2.fiveguys.com" target="_blank">Open BOSS</a>
+  <button class="btn btn-ghost" id="reset-btn">Clear on-hand</button>
 </div>
 
-<div class="week" id="week"></div>
+<div class="week-label" id="wk1-label">This Week</div>
+<div class="week" id="wk1"></div>
+
+<div class="week-label" id="wk2-label">Next Week</div>
+<div class="week" id="wk2"></div>
 
 <div class="why">
-  <b>How the math works.</b> Every $986 in sales = 1 hamburger tray. Every $19,974 = 1 hot dog tray. Build-to = total covered sales ÷ tray rate, rounded up. Order = build-to − on-hand. Hot dogs round small because of their 5-day shelf life.
-  <br><br>
-  <b>Lock rules (KY-2065).</b> Mon delivery locks Thu 2 PM. Wed locks Mon 2 PM. Fri locks Wed 2 PM. Sat locks Thu 2 PM. After lock, the order is final.
-  <br><br>
-  <b>How to use it.</b> Pre-place all four orders on Sunday in BOSS (your best guess). Each day before the lock, open this page, count on-hand, confirm/edit projections, and click Adjust Order in BOSS to match the suggestion.
+  <h3>What's wired so far</h3>
+  <p><b>Daily projections</b> come from CrunchTime: <i>this week</i> from the Performance Metrics box (Forecasted Sales row, day 1–7), <i>next week</i> from the Manage Sales Forecast endpoint.</p>
+  <p style="margin-top:6px;"><b>On-hand inputs</b> appear on delivery days (Mon, Wed, Fri, Sat). Type bag counts there.</p>
+  <h3 style="margin-top:14px;">Coming next <span class="tbd">TBD</span></h3>
+  <p>Order math on top of the projections (build-to per delivery, lock-day awareness), once you've used the bones a couple days and tell us what feels right.</p>
 </div>
 
 <script>
-  // === CONFIG (KY-2065) =====================================================
-  const HB_PER_TRAY = 5, HD_PER_TRAY = 6;
-  const SALES_PER_HB_TRAY = 986;
-  const SALES_PER_HD_TRAY = 19974;
-  const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const DAY_FULL  = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
-  const DELIVERY_DAYS = [1, 3, 5, 6]; // Mon, Wed, Fri, Sat
-  const LOCK_DAYS_BEFORE = { 1: 4, 3: 2, 5: 2, 6: 2 };
-  const LOCK_HOUR = 14;
+  const DELIVERY_DOW = new Set([1, 3, 5, 6]); // Mon, Wed, Fri, Sat
+  const DAY_NAMES = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
 
-  // === HELPERS ==============================================================
-  function lockTimeFor(deliveryDate) {
-    const dow = deliveryDate.getDay();
-    const lock = new Date(deliveryDate);
-    lock.setDate(lock.getDate() - (LOCK_DAYS_BEFORE[dow] || 2));
-    lock.setHours(LOCK_HOUR, 0, 0, 0);
-    return lock;
-  }
-  function deliveryAfter(deliveryDate) {
-    for (let i = 1; i <= 7; i++) {
-      const d = new Date(deliveryDate);
-      d.setDate(d.getDate() + i);
-      if (DELIVERY_DAYS.includes(d.getDay())) return d;
-    }
-  }
   function fmt$(n) {
+    if (n == null) return '—';
     if (n >= 1000) return '$' + (n/1000).toFixed(1) + 'K';
     return '$' + Math.round(n);
   }
-  function fmtDate(d) {
-    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  function isoDateLocal(d) {
+    const yr = d.getFullYear();
+    const mo = String(d.getMonth() + 1).padStart(2, '0');
+    const da = String(d.getDate()).padStart(2, '0');
+    return `${yr}-${mo}-${da}`;
   }
-  function fmtLock(d) {
-    return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ' 2 PM';
-  }
-
-  // === BUILD WEEK ===========================================================
-  // Find the 4 deliveries starting from today (or this week's Monday, whichever is earlier)
-  function buildDeliveries(now) {
-    const out = [];
-    // Start from today, walk forward 8 days, capture the next 4 deliveries
-    for (let i = 0; i < 14 && out.length < 4; i++) {
-      const d = new Date(now);
-      d.setDate(d.getDate() + i);
-      d.setHours(0,0,0,0);
-      if (DELIVERY_DAYS.includes(d.getDay())) {
-        const after = deliveryAfter(d);
-        const windowLen = Math.round((after - d) / (1000*60*60*24));
-        const days = [];
-        for (let j = 0; j < windowLen; j++) {
-          const dd = new Date(d);
-          dd.setDate(dd.getDate() + j);
-          days.push({ name: DAY_NAMES[dd.getDay()], date: dd });
-        }
-        out.push({
-          delivery: d,
-          lock: lockTimeFor(d),
-          coverDays: days
-        });
-      }
-    }
-    return out;
+  function fmtMD(iso) {
+    const [y,m,d] = iso.split('-').map(Number);
+    return new Date(y, m-1, d).toLocaleDateString('en-US', { month:'short', day:'numeric' });
   }
 
-  // === RENDER ==============================================================
-  let perDayAvg = 3000; // fallback
-  function renderCard(dlv, idx, now) {
-    const card = document.createElement('div');
-    card.className = 'card';
-    if (dlv.lock <= now) card.classList.add('locked');
-    else if ((dlv.lock - now) < 6*60*60*1000) card.classList.add('urgent');
+  function loadOnHand() {
+    try { return JSON.parse(localStorage.getItem('bread_onhand_v2') || '{}'); }
+    catch { return {}; }
+  }
+  function saveOnHand(map) {
+    localStorage.setItem('bread_onhand_v2', JSON.stringify(map));
+  }
 
-    const dayName = DAY_FULL[dlv.delivery.getDay()];
-    const lockTxt = (dlv.lock <= now) ? 'Locked' : 'Locks ' + fmtLock(dlv.lock);
+  function renderDay(d, todayIso) {
+    const date = new Date(d.date + 'T00:00:00');
+    const dow = date.getDay();
+    const isToday = (d.date === todayIso);
+    const isDelivery = DELIVERY_DOW.has(dow);
+    const isPast = (d.date < todayIso);
 
-    let projHtml = '';
-    dlv.coverDays.forEach((cd, j) => {
-      projHtml += `<div class="cell"><div class="day">${cd.name}</div><input type="number" inputmode="numeric" data-card="${idx}" data-day="${j}" value="${Math.round(perDayAvg)}"></div>`;
-    });
-    projHtml += `<div class="total-cell"><div class="day">Total</div><div class="amt" id="total-${idx}">—</div></div>`;
+    const cls = ['day'];
+    if (d.is_next_week) cls.push('next-week');
+    if (isPast) cls.push('past');
+    if (isDelivery) cls.push('delivery');
+    if (isToday) cls.push('today');
 
-    card.innerHTML = `
-      <div class="card-head">
-        <div class="card-day">${dayName}</div>
-        <div class="card-date">Delivery · ${fmtDate(dlv.delivery)} · covers ${dlv.coverDays.map(c=>c.name).join('–')}</div>
-        <div class="card-lock">${lockTxt}</div>
-      </div>
+    const tags = [];
+    if (isToday) tags.push('<span class="tag today">Today</span>');
+    if (isDelivery) tags.push('<span class="tag delivery">Delivery</span>');
+    if (d.is_next_week && !isToday && !isDelivery) tags.push('<span class="tag next-week">Next wk</span>');
 
-      <div class="sec-label">Projected sales</div>
-      <div class="proj" id="proj-${idx}" style="grid-template-columns: repeat(${dlv.coverDays.length+1}, 1fr);">
+    const onHand = loadOnHand();
+    const hb = onHand[d.date]?.hb ?? '';
+    const hd = onHand[d.date]?.hd ?? '';
+
+    const projHtml = `
+      <div class="d-section">
+        <div class="d-section-label">Projected</div>
+        <div class="proj-amt">${fmt$(d.forecast)}</div>
+        ${d.actual != null ? `<div class="proj-actual">Actual <b>${fmt$(d.actual)}</b></div>` : ''}
+      </div>`;
+
+    const onHandHtml = isDelivery ? `
+      <div class="d-section">
+        <div class="d-section-label">On-Hand Bread</div>
+        <div class="onhand">
+          <div class="field">
+            <label>HB bags</label>
+            <input type="number" inputmode="numeric" placeholder="0" data-date="${d.date}" data-kind="hb" value="${hb}">
+          </div>
+          <div class="field">
+            <label>HD bags</label>
+            <input type="number" inputmode="numeric" placeholder="0" data-date="${d.date}" data-kind="hd" value="${hd}">
+          </div>
+        </div>
+      </div>` : '';
+
+    return `
+      <div class="${cls.join(' ')}">
+        <div class="d-name">${d.name}</div>
+        <div class="d-date">${fmtMD(d.date)}</div>
+        <div class="d-tags">${tags.join('')}</div>
         ${projHtml}
-      </div>
-
-      <div class="sec-label">On-hand at start of delivery day</div>
-      <div class="onhand">
-        <div class="field">
-          <label>Hamburger</label>
-          <input type="number" inputmode="numeric" placeholder="0" data-onhand="hb" data-card="${idx}">
-          <span class="u">bags · 5/tray</span>
-        </div>
-        <div class="field">
-          <label>Hot dog</label>
-          <input type="number" inputmode="numeric" placeholder="0" data-onhand="hd" data-card="${idx}">
-          <span class="u">bags · 6/tray</span>
-        </div>
-      </div>
-
-      <div class="sec-label">Order</div>
-      <div class="order-out">
-        <div class="row">
-          <div class="lbl">Hamburger</div>
-          <div class="big" id="hb-out-${idx}">—</div>
-          <div class="unit">trays</div>
-          <div class="calc">build-to <b style="color:var(--white-80)" id="hb-build-${idx}">—</b><br>− on-hand <span id="hb-onhand-${idx}">0.0</span></div>
-        </div>
-        <div class="row">
-          <div class="lbl">Hot dog</div>
-          <div class="big" id="hd-out-${idx}">—</div>
-          <div class="unit">trays</div>
-          <div class="calc">build-to <b style="color:var(--white-80)" id="hd-build-${idx}">—</b><br>− on-hand <span id="hd-onhand-${idx}">0.0</span></div>
-        </div>
-      </div>
-    `;
-    return card;
+        ${onHandHtml}
+      </div>`;
   }
 
-  function recalcCard(idx, dlv) {
-    const projInputs = document.querySelectorAll(`input[data-card="${idx}"][data-day]`);
-    let total = 0;
-    projInputs.forEach(inp => total += (+inp.value || 0));
-    document.getElementById(`total-${idx}`).textContent = fmt$(total);
-
-    const hbBags = +document.querySelector(`input[data-onhand="hb"][data-card="${idx}"]`).value || 0;
-    const hdBags = +document.querySelector(`input[data-onhand="hd"][data-card="${idx}"]`).value || 0;
-    const hbBuild = Math.ceil(total / SALES_PER_HB_TRAY);
-    const hdBuild = Math.ceil(total / SALES_PER_HD_TRAY);
-    const hbOH = hbBags / HB_PER_TRAY;
-    const hdOH = hdBags / HD_PER_TRAY;
-    const hbOrder = Math.max(0, hbBuild - Math.floor(hbOH));
-    const hdOrder = Math.max(0, hdBuild - Math.floor(hdOH));
-    document.getElementById(`hb-out-${idx}`).textContent = hbOrder;
-    document.getElementById(`hd-out-${idx}`).textContent = hdOrder;
-    document.getElementById(`hb-build-${idx}`).textContent = hbBuild;
-    document.getElementById(`hd-build-${idx}`).textContent = hdBuild;
-    document.getElementById(`hb-onhand-${idx}`).textContent = hbOH.toFixed(1);
-    document.getElementById(`hd-onhand-${idx}`).textContent = hdOH.toFixed(1);
-  }
-
-  let allDeliveries = [];
-  function renderAll() {
-    const wrap = document.getElementById('week');
-    wrap.innerHTML = '';
-    const now = new Date();
-    allDeliveries.forEach((dlv, i) => {
-      wrap.appendChild(renderCard(dlv, i, now));
-    });
-    wrap.querySelectorAll('input').forEach(inp => {
+  function wireInputs() {
+    document.querySelectorAll('input[data-date]').forEach(inp => {
       inp.addEventListener('input', () => {
-        const idx = +inp.dataset.card;
-        recalcCard(idx, allDeliveries[idx]);
+        const map = loadOnHand();
+        const date = inp.dataset.date;
+        const kind = inp.dataset.kind;
+        map[date] = map[date] || {};
+        map[date][kind] = inp.value;
+        saveOnHand(map);
       });
     });
-    allDeliveries.forEach((dlv, i) => recalcCard(i, dlv));
   }
 
-  // === LOAD CT FORECAST =====================================================
-  async function loadCT() {
-    try {
-      const r = await fetch('data/latest.json', { cache: 'no-store' });
-      if (r.ok) {
-        const d = await r.json();
-        const week = d.sales?.forecast_week || 0;
-        const day = d.sales?.forecast || 0;
-        if (week > 0) perDayAvg = week / 7;
-        else if (day > 0) perDayAvg = day;
-        document.getElementById('source-tag').textContent =
-          'Default projection: ' + fmt$(perDayAvg) + '/day · CrunchTime · ' + (d.meta?.report_display || 'live');
-      } else {
-        document.getElementById('source-tag').textContent = 'Default projection: $3,000/day · mock — CT feed offline';
-      }
-    } catch (e) {
-      document.getElementById('source-tag').textContent = 'Default projection: $3,000/day · mock — CT feed offline';
+  function renderWeek(days, mountId) {
+    const todayIso = isoDateLocal(new Date());
+    document.getElementById(mountId).innerHTML = days.map(d => renderDay(d, todayIso)).join('');
+  }
+
+  function buildFallback() {
+    // 14 placeholder days starting at this week's Sunday
+    const today = new Date();
+    const sunday = new Date(today);
+    sunday.setDate(today.getDate() - today.getDay());
+    const days = [];
+    for (let i = 0; i < 14; i++) {
+      const d = new Date(sunday);
+      d.setDate(sunday.getDate() + i);
+      days.push({
+        date: isoDateLocal(d),
+        name: DAY_NAMES[d.getDay()],
+        forecast: null,
+        actual: null,
+        is_next_week: i >= 7,
+      });
     }
-    allDeliveries = buildDeliveries(new Date());
-    renderAll();
+    return days;
+  }
+
+  async function load() {
+    let payload = null;
+    try {
+      const r = await fetch('data/forecast_by_day.json', { cache: 'no-store' });
+      if (r.ok) payload = await r.json();
+    } catch (e) { /* fall through */ }
+
+    const days = (payload && payload.days && payload.days.length === 14) ? payload.days : buildFallback();
+    const wk1 = days.slice(0, 7);
+    const wk2 = days.slice(7, 14);
+
+    const tag = document.getElementById('source-tag');
+    if (payload?.meta) {
+      const wk1Has = wk1.some(d => d.forecast != null);
+      const wk2Has = wk2.some(d => d.forecast != null);
+      tag.textContent = `CrunchTime · this wk ${wk1Has ? '✓' : '—'} · next wk ${wk2Has ? '✓' : '—'} · pulled ${(payload.meta.generated || '').slice(0,16).replace('T',' ')}`;
+    } else {
+      tag.textContent = 'No CT feed yet — placeholder dates only. Daily scrape will populate.';
+    }
+
+    document.getElementById('wk1-label').textContent = `This Week · ${fmtMD(wk1[0].date)}–${fmtMD(wk1[6].date)}`;
+    document.getElementById('wk2-label').textContent = `Next Week · ${fmtMD(wk2[0].date)}–${fmtMD(wk2[6].date)}`;
+    renderWeek(wk1, 'wk1');
+    renderWeek(wk2, 'wk2');
+    wireInputs();
   }
 
   document.getElementById('reset-btn').addEventListener('click', () => {
-    allDeliveries = buildDeliveries(new Date());
-    renderAll();
+    if (confirm('Clear all on-hand bread counts?')) {
+      localStorage.removeItem('bread_onhand_v2');
+      load();
+    }
   });
 
-  loadCT();
+  load();
 </script>
 
 </body>
