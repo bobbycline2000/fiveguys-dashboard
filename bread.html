@@ -106,6 +106,13 @@
   .order-row.zero .qty { color: var(--w40); }
   .order-empty { padding: 20px 12px; text-align: center; font-size: 11px; color: var(--w60); font-style: italic; }
 
+  /* Locked / lock-note styling */
+  .order-card.locked { opacity: .5; border-left-color: var(--w40); }
+  .locked-tag { display: inline-block; font-size: 9px; letter-spacing: .25em; padding: 2px 6px; background: rgba(255,255,255,.08); color: var(--w60); border: 1px solid var(--w20); border-radius: 2px; margin-left: 8px; vertical-align: middle; }
+  .locked-msg { margin-top: 14px; padding: 10px 12px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 3px; font-size: 11px; color: var(--w60); text-align: center; line-height: 1.5; }
+  .locked-msg b { color: var(--white); font-weight: 700; }
+  .lock-note { margin-top: 8px; font-size: 10px; color: var(--w60); letter-spacing: .05em; }
+
   /* Footer / how-it-works */
   .why { margin-top: 28px; padding: 16px 20px; background: var(--panel); border: 1px solid rgba(0,0,0,.35); border-radius: 4px; font-size: 11px; color: var(--w60); line-height: 1.6; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
   .why b { color: var(--white); font-weight: 700; }
@@ -171,6 +178,13 @@
   const DELIVERY_DOW = new Set([1, 3, 5, 6]); // Mon, Wed, Fri, Sat
   const DAY_NAMES = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
   const DAY_FULL  = {0:'SUNDAY',1:'MONDAY',2:'TUESDAY',3:'WEDNESDAY',4:'THURSDAY',5:'FRIDAY',6:'SATURDAY'};
+  // Lock rules: how many days BEFORE delivery the order locks at 2 PM ET.
+  // Mon delivery -> locks Thu 2 PM (4 days before)
+  // Wed delivery -> locks Mon 2 PM (2 days before)
+  // Fri delivery -> locks Wed 2 PM (2 days before)
+  // Sat delivery -> locks Thu 2 PM (2 days before)
+  const LOCK_DAYS_BEFORE = {1: 4, 3: 2, 5: 2, 6: 2};
+  const LOCK_HOUR = 14; // 2 PM local
   const HB_PER_TRAY = 5;
   const HD_PER_TRAY = 6;
   const SALES_PER_HB_TRAY = 986;
@@ -210,19 +224,49 @@
     return d ? d.forecast : null;
   }
 
+  // ── LOCK TIME ───────────────────────────────────────────────────────
+  function lockTimeFor(deliveryIso) {
+    const [y, m, d] = deliveryIso.split('-').map(Number);
+    const dlv = new Date(y, m - 1, d);
+    const dow = dlv.getDay();
+    const offset = LOCK_DAYS_BEFORE[dow] || 2;
+    const lock = new Date(dlv);
+    lock.setDate(lock.getDate() - offset);
+    lock.setHours(LOCK_HOUR, 0, 0, 0);
+    return lock;
+  }
+
+  function fmtLockTime(lockDate) {
+    return lockDate.toLocaleDateString('en-US', { weekday: 'short' }) + ' ' +
+           lockDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' 2 PM';
+  }
+
+  function fmtTimeLeft(ms) {
+    if (ms <= 0) return 'closed';
+    const hrs = Math.floor(ms / 3600000);
+    const mins = Math.floor((ms % 3600000) / 60000);
+    if (hrs >= 24) return `${Math.floor(hrs / 24)}d ${hrs % 24}h`;
+    if (hrs >= 1) return `${hrs}h ${mins}m`;
+    return `${mins}m`;
+  }
+
   // ── FORWARD SIM ─────────────────────────────────────────────────────
-  // Given today's HB+HD bag count and the 14-day projection set,
-  // walk every upcoming delivery in chrono order and compute the order.
-  function buildOrderPlan(curHB, curHD, days, todayIso) {
+  // Walk every upcoming delivery. Locked deliveries are informational only —
+  // their math doesn't run, the count doesn't apply to them. Forward sim
+  // begins at the first UNLOCKED delivery using the manager's current count.
+  function buildOrderPlan(curHB, curHD, days, todayIso, now) {
     const upcoming = days
       .filter(d => d.date >= todayIso)
       .filter(d => DELIVERY_DOW.has(new Date(d.date + 'T00:00:00').getDay()));
 
     let hb = curHB;
     let hd = curHD;
+    let firstUnlockedSeen = false;
     const plan = [];
 
-    upcoming.forEach((dlv, i) => {
+    upcoming.forEach((dlv) => {
+      const lock = lockTimeFor(dlv.date);
+      const isLocked = now >= lock;
       const cover = coverageDates(dlv.date, days);
       let coverSales = 0;
       let salesKnown = true;
@@ -232,42 +276,53 @@
         else coverSales += f;
       });
 
-      // Bag demand for this window — sales × bag-rate, PLUS the buffer
+      // Bag demand: sales × bag-rate + buffer
       const needSales = coverSales + BUFFER_SALES;
       const needHB_bags = needSales * (HB_PER_TRAY / SALES_PER_HB_TRAY);
       const needHD_bags = needSales * (HD_PER_TRAY / SALES_PER_HD_TRAY);
-
-      // Actual consumption = projected sales only (buffer stays on shelf)
       const useHB_bags = coverSales * (HB_PER_TRAY / SALES_PER_HB_TRAY);
       const useHD_bags = coverSales * (HD_PER_TRAY / SALES_PER_HD_TRAY);
 
-      // Short bags = what we don't have on shelf going into delivery
-      const shortHB = Math.max(0, needHB_bags - hb);
-      const shortHD = Math.max(0, needHD_bags - hd);
-
-      // Round UP to whole trays
-      const orderHB_trays = Math.ceil(shortHB / HB_PER_TRAY);
-      const orderHD_trays = Math.ceil(shortHD / HD_PER_TRAY);
-
-      // Roll on-hand forward: arrive trays, consume actual usage (NOT buffer)
-      hb = Math.max(0, hb + orderHB_trays * HB_PER_TRAY - useHB_bags);
-      hd = Math.max(0, hd + orderHD_trays * HD_PER_TRAY - useHD_bags);
-
-      plan.push({
+      let entry = {
         deliveryDate: dlv.date,
         deliveryDOW: DAY_FULL[new Date(dlv.date + 'T00:00:00').getDay()],
         coverDates: cover,
         coverLabel: cover.map(c => fmtDOW(c).toUpperCase()).join('–'),
         coverSales,
         salesKnown,
-        needHB_bags,
-        needHD_bags,
-        orderHB_trays,
-        orderHD_trays,
-        startHB: i === 0 ? curHB : null,
-        startHD: i === 0 ? curHD : null,
-        isNextUp: i === 0,
+        isLocked,
+        lockTime: lock,
+        lockTimeStr: fmtLockTime(lock),
+        timeLeft: lock - now,
+        timeLeftStr: fmtTimeLeft(lock - now),
+      };
+
+      if (isLocked) {
+        // Locked deliveries are display-only. Don't apply count, don't roll forward.
+        plan.push({...entry, isLocked: true, isNextUp: false, orderHB_trays: null, orderHD_trays: null});
+        return;
+      }
+
+      // First unlocked delivery is the actionable one
+      const isNextUp = !firstUnlockedSeen;
+      firstUnlockedSeen = true;
+
+      const shortHB = Math.max(0, needHB_bags - hb);
+      const shortHD = Math.max(0, needHD_bags - hd);
+      const orderHB_trays = Math.ceil(shortHB / HB_PER_TRAY);
+      const orderHD_trays = Math.ceil(shortHD / HD_PER_TRAY);
+
+      plan.push({
+        ...entry,
+        orderHB_trays, orderHD_trays,
+        needHB_bags, needHD_bags,
+        startHB: hb, startHD: hd,
+        isNextUp,
       });
+
+      // Roll on-hand forward: arrive trays, consume actual usage (NOT buffer)
+      hb = Math.max(0, hb + orderHB_trays * HB_PER_TRAY - useHB_bags);
+      hd = Math.max(0, hd + orderHD_trays * HD_PER_TRAY - useHD_bags);
     });
 
     return plan;
@@ -276,23 +331,45 @@
   // ── RENDER: ORDERS ──────────────────────────────────────────────────
   function renderOrders(plan, hasCount) {
     const wrap = document.getElementById('orders');
-    if (!hasCount) {
-      wrap.innerHTML = `<div class="order-empty" style="grid-column: 1 / -1;">Enter your on-hand bread counts above to see this week's orders.</div>`;
-      return;
-    }
     if (plan.length === 0) {
       wrap.innerHTML = `<div class="order-empty" style="grid-column: 1 / -1;">No upcoming deliveries this week.</div>`;
       return;
     }
     wrap.innerHTML = plan.map(p => {
-      const tag = p.isNextUp ? '<span class="next-tag">Next</span>' : '';
       const dateShort = fmtMD(p.deliveryDate);
+
+      // LOCKED card: informational only
+      if (p.isLocked) {
+        return `
+          <div class="order-card locked">
+            <div class="order-when">${p.deliveryDOW} <span class="locked-tag">Locked</span></div>
+            <div class="order-cover">${dateShort} · covers <b>${p.coverLabel}</b></div>
+            <div class="locked-msg">Order locked at<br><b>${p.lockTimeStr}</b></div>
+          </div>`;
+      }
+
+      // UNLOCKED card: active math (only renders if a count was entered)
+      if (!hasCount) {
+        const closingSoon = p.timeLeft < 6 * 3600 * 1000;
+        return `
+          <div class="order-card ${p.isNextUp ? 'next-up' : ''}">
+            <div class="order-when">${p.deliveryDOW} ${p.isNextUp ? '<span class="next-tag">Next</span>' : ''}</div>
+            <div class="order-cover">${dateShort} · covers <b>${p.coverLabel}</b> · proj <b>${fmt$(p.coverSales)}</b> + <b>$3K</b> buffer</div>
+            <div class="locked-msg">Locks ${p.lockTimeStr}<br><b style="color:${closingSoon?'var(--gold)':'var(--w80)'}">${p.timeLeftStr} left</b></div>
+            <div class="order-empty" style="padding: 12px 0 0;">Enter your count above ↑</div>
+          </div>`;
+      }
+
+      const tag = p.isNextUp ? '<span class="next-tag">Next</span>' : '';
       const noProj = !p.salesKnown ? `<div class="order-cover" style="color:var(--gold)">⚠ projection missing — order is rough</div>` : '';
+      const closingSoon = p.timeLeft < 6 * 3600 * 1000;
+      const lockNote = `<div class="lock-note">Locks ${p.lockTimeStr} · <b style="color:${closingSoon?'var(--gold)':'var(--w80)'}">${p.timeLeftStr} left</b></div>`;
       return `
         <div class="order-card ${p.isNextUp ? 'next-up' : ''}">
           <div class="order-when">${p.deliveryDOW} ${tag}</div>
           <div class="order-cover">${dateShort} · covers <b>${p.coverLabel}</b> · proj <b>${fmt$(p.coverSales)}</b> + <b>$3K</b> buffer</div>
           ${noProj}
+          ${lockNote}
           <div class="order-rows">
             <div class="order-row ${p.orderHB_trays === 0 ? 'zero' : ''}">
               <div class="lbl">HB</div>
@@ -426,8 +503,9 @@
     const hd = +hdStr || 0;
     saveCount({ hb: hbStr, hd: hdStr });
     const hasCount = (hbStr !== '' || hdStr !== '');
-    const todayIso = isoDateLocal(new Date());
-    const plan = buildOrderPlan(hb, hd, days, todayIso);
+    const now = new Date();
+    const todayIso = isoDateLocal(now);
+    const plan = buildOrderPlan(hb, hd, days, todayIso, now);
     renderOrders(plan, hasCount);
   }
 
