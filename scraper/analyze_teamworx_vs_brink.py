@@ -62,6 +62,39 @@ def parse_brink_pdf(pdf_path: Path) -> dict | None:
     return rows
 
 
+def parse_brink_json(json_path: Path) -> dict | None:
+    """Load pre-parsed JSON dump (from split_brink_pulls.py) — same shape as PDF parser output."""
+    if not json_path.exists():
+        return None
+    data = json.loads(json_path.read_text())
+    rows_list = data.get("rows", [])
+    rows = {}
+    for r in rows_list:
+        hour_str = r["hour"].strip()
+        h = int(hour_str.split(":")[0])
+        if "PM" in hour_str and h != 12:
+            h += 12
+        elif "AM" in hour_str and h == 12:
+            h = 0
+        rows[h] = {
+            "netSales": r["netSales"],
+            "guests": r["guests"],
+            "orders": r.get("orders", 0),
+            "laborHrs": r["laborHrs"],
+            "laborDollars": r["laborDollars"],
+            "laborPct": r["laborPct"],
+        }
+    return rows
+
+
+def load_brink_day(date_str: str, store: str) -> dict | None:
+    """Try JSON first (fast), then PDF (slow)."""
+    base = ROOT / "data" / "raw" / "parbrink" / store / date_str
+    j = parse_brink_json(base / "hourly_sales_labor.json")
+    if j: return j
+    return parse_brink_pdf(base / "Hourly Sales And Labor.pdf")
+
+
 def load_teamworx_history(store: str) -> dict:
     """Returns {date: {sales: [18 hours], ideal, scheduled}} for the store."""
     # Try repo-local copy first (for GitHub Actions)
@@ -94,8 +127,7 @@ def build_workbook(store: str):
     # Pull Brink for each date in twx
     brink_data = {}
     for date_str in sorted(twx.keys()):
-        pdf = ROOT / "data" / "raw" / "parbrink" / store / date_str / "Hourly Sales And Labor.pdf"
-        rows = parse_brink_pdf(pdf)
+        rows = load_brink_day(date_str, store)
         if rows:
             brink_data[date_str] = rows
 
@@ -231,17 +263,27 @@ def build_workbook(store: str):
         ws.cell(row=row, column=9, value=worst).font = Font(color="DA291C", bold=abs(worst_pct) > 20)
         row += 1
 
-    # Write to repo-local path (always works); also try workspace path for local convenience
+    # Write to repo-local path; if file is locked, fall back to timestamped filename
+    from datetime import datetime as _dt2
     fname = f"Teamworx_Forecast_vs_Brink_Actual_{store}.xlsx"
     repo_out = REPO_OUT / fname
     repo_out.parent.mkdir(parents=True, exist_ok=True)
-    wb.save(repo_out)
-    print(f"Wrote {repo_out}")
+    try:
+        wb.save(repo_out)
+        print(f"Wrote {repo_out}")
+    except PermissionError:
+        ts = _dt2.now().strftime("%Y%m%d-%H%M")
+        repo_out = REPO_OUT / f"Teamworx_Forecast_vs_Brink_Actual_{store}_{ts}.xlsx"
+        wb.save(repo_out)
+        print(f"Wrote {repo_out} (original locked, used timestamped name)")
     if WORKSPACE.exists():
         ws_out = CASE_STUDY / fname
         ws_out.parent.mkdir(parents=True, exist_ok=True)
-        wb.save(ws_out)
-        print(f"Also wrote {ws_out}")
+        try:
+            wb.save(ws_out)
+            print(f"Also wrote {ws_out}")
+        except PermissionError:
+            print(f"Workspace path locked, skipped: {ws_out}")
     print(f"Tabs: Summary + {len(overlap_dates)} day-detail tabs")
 
 

@@ -1,5 +1,5 @@
 {
-  "date": "2026-04-30",
+  "date": "2026-03-22",
   "store": "2065",
   "rows": [
     {
@@ -34,8 +34,8 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 0.88,
-      "laborDollars": 15.85,
+      "laborHrs": 1.08,
+      "laborDollars": 16.5,
       "laborPct": 100
     },
     {
@@ -43,8 +43,8 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 2,
-      "laborDollars": 33,
+      "laborHrs": 2.87,
+      "laborDollars": 40.53,
       "laborPct": 100
     },
     {
@@ -52,8 +52,8 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 2,
-      "laborDollars": 33,
+      "laborHrs": 4,
+      "laborDollars": 58.63,
       "laborPct": 100
     },
     {
@@ -61,116 +61,116 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 2.12,
-      "laborDollars": 31.57,
+      "laborHrs": 2.52,
+      "laborDollars": 38.11,
       "laborPct": 100
     },
     {
       "hour": "11:00\u00c2\u00a0AM",
-      "netSales": 360.92,
-      "guests": 63,
-      "orders": 13,
-      "laborHrs": 3.78,
-      "laborDollars": 55.75,
-      "laborPct": 15.45
+      "netSales": 259.66,
+      "guests": 43,
+      "orders": 10,
+      "laborHrs": 5.07,
+      "laborDollars": 70.43,
+      "laborPct": 27.12
     },
     {
       "hour": "12:00\u00c2\u00a0PM",
-      "netSales": 340.87,
-      "guests": 60,
-      "orders": 14,
-      "laborHrs": 4.97,
-      "laborDollars": 70.36,
-      "laborPct": 20.64
+      "netSales": 562.97,
+      "guests": 99,
+      "orders": 17,
+      "laborHrs": 6,
+      "laborDollars": 81.63,
+      "laborPct": 14.5
     },
     {
       "hour": "1:00\u00c2\u00a0PM",
-      "netSales": 450.7,
-      "guests": 79,
-      "orders": 20,
-      "laborHrs": 5,
-      "laborDollars": 70.75,
-      "laborPct": 15.7
+      "netSales": 441.84,
+      "guests": 77,
+      "orders": 16,
+      "laborHrs": 6.08,
+      "laborDollars": 82.54,
+      "laborPct": 18.68
     },
     {
       "hour": "2:00\u00c2\u00a0PM",
-      "netSales": 148.46,
-      "guests": 30,
-      "orders": 8,
-      "laborHrs": 5.45,
-      "laborDollars": 77.92,
-      "laborPct": 52.48
+      "netSales": 773.08,
+      "guests": 138,
+      "orders": 26,
+      "laborHrs": 6.5,
+      "laborDollars": 87.23,
+      "laborPct": 11.28
     },
     {
       "hour": "3:00\u00c2\u00a0PM",
-      "netSales": 165.58,
-      "guests": 32,
-      "orders": 7,
-      "laborHrs": 8,
-      "laborDollars": 116.75,
-      "laborPct": 70.51
+      "netSales": 522.54,
+      "guests": 100,
+      "orders": 20,
+      "laborHrs": 8.47,
+      "laborDollars": 119.23,
+      "laborPct": 22.82
     },
     {
       "hour": "4:00\u00c2\u00a0PM",
-      "netSales": 424.68,
-      "guests": 96,
-      "orders": 22,
-      "laborHrs": 4.9,
-      "laborDollars": 71.8,
-      "laborPct": 16.91
+      "netSales": 382.26,
+      "guests": 73,
+      "orders": 14,
+      "laborHrs": 6.18,
+      "laborDollars": 85.83,
+      "laborPct": 22.45
     },
     {
       "hour": "5:00\u00c2\u00a0PM",
-      "netSales": 530.52,
-      "guests": 102,
-      "orders": 26,
-      "laborHrs": 4.72,
-      "laborDollars": 64.88,
-      "laborPct": 12.23
+      "netSales": 632.7,
+      "guests": 113,
+      "orders": 23,
+      "laborHrs": 7.07,
+      "laborDollars": 99.8,
+      "laborPct": 15.77
     },
     {
       "hour": "6:00\u00c2\u00a0PM",
-      "netSales": 592.11,
-      "guests": 112,
-      "orders": 20,
-      "laborHrs": 5.4,
-      "laborDollars": 70.29,
-      "laborPct": 11.87
+      "netSales": 613.89,
+      "guests": 114,
+      "orders": 26,
+      "laborHrs": 7,
+      "laborDollars": 99,
+      "laborPct": 16.13
     },
     {
       "hour": "7:00\u00c2\u00a0PM",
-      "netSales": 662.42,
-      "guests": 121,
+      "netSales": 718.63,
+      "guests": 128,
       "orders": 23,
-      "laborHrs": 5.13,
-      "laborDollars": 67.93,
-      "laborPct": 10.26
+      "laborHrs": 6.23,
+      "laborDollars": 90.57,
+      "laborPct": 12.6
     },
     {
       "hour": "8:00\u00c2\u00a0PM",
-      "netSales": 873.15,
-      "guests": 155,
-      "orders": 31,
-      "laborHrs": 5.38,
-      "laborDollars": 71.3,
-      "laborPct": 8.17
+      "netSales": 523.09,
+      "guests": 106,
+      "orders": 25,
+      "laborHrs": 5.5,
+      "laborDollars": 82,
+      "laborPct": 15.68
     },
     {
       "hour": "9:00\u00c2\u00a0PM",
-      "netSales": 365.93,
-      "guests": 66,
-      "orders": 15,
-      "laborHrs": 5.02,
-      "laborDollars": 68.93,
-      "laborPct": 18.84
+      "netSales": 148.04,
+      "guests": 27,
+      "orders": 5,
+      "laborHrs": 5.85,
+      "laborDollars": 86.2,
+      "laborPct": 58.23
     },
     {
       "hour": "10:00\u00c2\u00a0PM",
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 5,
-      "laborDollars": 68.75,
+      "laborHrs": 6,
+      "laborDollars": 92.2,
       "laborPct": 100
     },
     {
@@ -178,8 +178,8 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 2.63,
-      "laborDollars": 36.92,
+      "laborHrs": 1.88,
+      "laborDollars": 35.28,
       "laborPct": 100
     },
     {
@@ -187,36 +187,36 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 0,
-      "laborDollars": 0,
-      "laborPct": 0
+      "laborHrs": 1,
+      "laborDollars": 15,
+      "laborPct": 100
     },
     {
       "hour": "1:00\u00c2\u00a0AM",
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 0,
-      "laborDollars": 0,
-      "laborPct": 0
+      "laborHrs": 1,
+      "laborDollars": 16.63,
+      "laborPct": 100
     },
     {
       "hour": "2:00\u00c2\u00a0AM",
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 0,
-      "laborDollars": 0,
-      "laborPct": 0
+      "laborHrs": 1,
+      "laborDollars": 22.5,
+      "laborPct": 100
     },
     {
       "hour": "3:00\u00c2\u00a0AM",
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 0,
-      "laborDollars": 0,
-      "laborPct": 0
+      "laborHrs": 1,
+      "laborDollars": 22.5,
+      "laborPct": 100
     }
   ],
   "_source": "Chrome MCP localStorage dump"

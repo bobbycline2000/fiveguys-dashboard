@@ -1,5 +1,5 @@
 {
-  "date": "2026-04-23",
+  "date": "2026-03-13",
   "store": "2065",
   "rows": [
     {
@@ -25,17 +25,17 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 0.1,
-      "laborDollars": 1.8,
-      "laborPct": 100
+      "laborHrs": 0,
+      "laborDollars": 0,
+      "laborPct": 0
     },
     {
       "hour": "7:00\u00c2\u00a0AM",
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 1.03,
-      "laborDollars": 18.5,
+      "laborHrs": 1.15,
+      "laborDollars": 19.65,
       "laborPct": 100
     },
     {
@@ -44,7 +44,7 @@
       "guests": 0,
       "orders": 0,
       "laborHrs": 3,
-      "laborDollars": 44.75,
+      "laborDollars": 45,
       "laborPct": 100
     },
     {
@@ -52,134 +52,134 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 3.72,
-      "laborDollars": 56.22,
+      "laborHrs": 3,
+      "laborDollars": 45,
       "laborPct": 100
     },
     {
       "hour": "10:00\u00c2\u00a0AM",
-      "netSales": 0,
-      "guests": 0,
-      "orders": 0,
-      "laborHrs": 3.67,
-      "laborDollars": 56.29,
-      "laborPct": 100
+      "netSales": 22.37,
+      "guests": 5,
+      "orders": 1,
+      "laborHrs": 2.55,
+      "laborDollars": 38.9,
+      "laborPct": 173.89
     },
     {
       "hour": "11:00\u00c2\u00a0AM",
-      "netSales": 298.41,
-      "guests": 51,
-      "orders": 15,
-      "laborHrs": 4,
-      "laborDollars": 60.75,
-      "laborPct": 20.36
+      "netSales": 1026.33,
+      "guests": 115,
+      "orders": 27,
+      "laborHrs": 3,
+      "laborDollars": 45,
+      "laborPct": 4.38
     },
     {
       "hour": "12:00\u00c2\u00a0PM",
-      "netSales": 302.79,
-      "guests": 56,
-      "orders": 12,
-      "laborHrs": 4,
-      "laborDollars": 60.75,
-      "laborPct": 20.06
+      "netSales": 316.32,
+      "guests": 59,
+      "orders": 14,
+      "laborHrs": 5.23,
+      "laborDollars": 72.27,
+      "laborPct": 22.85
     },
     {
       "hour": "1:00\u00c2\u00a0PM",
-      "netSales": 145.06,
-      "guests": 29,
-      "orders": 7,
-      "laborHrs": 4,
-      "laborDollars": 60.75,
-      "laborPct": 41.88
+      "netSales": 306.04,
+      "guests": 51,
+      "orders": 14,
+      "laborHrs": 5.78,
+      "laborDollars": 69.1,
+      "laborPct": 22.58
     },
     {
       "hour": "2:00\u00c2\u00a0PM",
-      "netSales": 289.43,
-      "guests": 56,
-      "orders": 12,
-      "laborHrs": 3.2,
-      "laborDollars": 51.54,
-      "laborPct": 17.81
+      "netSales": 244.03,
+      "guests": 44,
+      "orders": 11,
+      "laborHrs": 5.17,
+      "laborDollars": 57.33,
+      "laborPct": 23.49
     },
     {
       "hour": "3:00\u00c2\u00a0PM",
-      "netSales": 233.06,
-      "guests": 43,
-      "orders": 13,
-      "laborHrs": 3.12,
-      "laborDollars": 47.1,
+      "netSales": 434.89,
+      "guests": 80,
+      "orders": 19,
+      "laborHrs": 7.48,
+      "laborDollars": 87.88,
       "laborPct": 20.21
     },
     {
       "hour": "4:00\u00c2\u00a0PM",
-      "netSales": 326.08,
-      "guests": 58,
-      "orders": 13,
-      "laborHrs": 2.93,
-      "laborDollars": 40.3,
-      "laborPct": 12.36
+      "netSales": 523.05,
+      "guests": 93,
+      "orders": 24,
+      "laborHrs": 6.37,
+      "laborDollars": 67.18,
+      "laborPct": 12.84
     },
     {
       "hour": "5:00\u00c2\u00a0PM",
-      "netSales": 683.17,
-      "guests": 124,
-      "orders": 27,
-      "laborHrs": 4.27,
-      "laborDollars": 54.43,
-      "laborPct": 7.97
+      "netSales": 690.26,
+      "guests": 137,
+      "orders": 26,
+      "laborHrs": 7.53,
+      "laborDollars": 80.4,
+      "laborPct": 11.65
     },
     {
       "hour": "6:00\u00c2\u00a0PM",
-      "netSales": 439.95,
-      "guests": 85,
-      "orders": 16,
-      "laborHrs": 5.63,
-      "laborDollars": 70.65,
-      "laborPct": 16.06
+      "netSales": 983.81,
+      "guests": 182,
+      "orders": 34,
+      "laborHrs": 8.3,
+      "laborDollars": 89.94,
+      "laborPct": 9.14
     },
     {
       "hour": "7:00\u00c2\u00a0PM",
-      "netSales": 566.62,
-      "guests": 101,
-      "orders": 18,
-      "laborHrs": 5.58,
-      "laborDollars": 70.17,
-      "laborPct": 12.38
+      "netSales": 1159.14,
+      "guests": 215,
+      "orders": 36,
+      "laborHrs": 8.58,
+      "laborDollars": 93.17,
+      "laborPct": 8.04
     },
     {
       "hour": "8:00\u00c2\u00a0PM",
-      "netSales": 348.53,
-      "guests": 66,
-      "orders": 15,
-      "laborHrs": 6,
-      "laborDollars": 74.75,
-      "laborPct": 21.45
+      "netSales": 608.19,
+      "guests": 112,
+      "orders": 23,
+      "laborHrs": 8.05,
+      "laborDollars": 86.35,
+      "laborPct": 14.2
     },
     {
       "hour": "9:00\u00c2\u00a0PM",
-      "netSales": 173.47,
-      "guests": 34,
-      "orders": 8,
-      "laborHrs": 5.02,
-      "laborDollars": 63.93,
-      "laborPct": 36.86
+      "netSales": 354.65,
+      "guests": 60,
+      "orders": 12,
+      "laborHrs": 8,
+      "laborDollars": 85.75,
+      "laborPct": 24.18
     },
     {
       "hour": "10:00\u00c2\u00a0PM",
-      "netSales": 0,
-      "guests": 0,
-      "orders": 0,
-      "laborHrs": 5,
-      "laborDollars": 63.75,
-      "laborPct": 100
+      "netSales": 10.49,
+      "guests": 2,
+      "orders": 1,
+      "laborHrs": 6.97,
+      "laborDollars": 74.38,
+      "laborPct": 709.09
     },
     {
       "hour": "11:00\u00c2\u00a0PM",
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 1.88,
-      "laborDollars": 25.9,
+      "laborHrs": 2.82,
+      "laborDollars": 24.95,
       "laborPct": 100
     },
     {
@@ -187,7 +187,7 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 1,
+      "laborHrs": 2,
       "laborDollars": 15,
       "laborPct": 100
     },
@@ -196,7 +196,7 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 1,
+      "laborHrs": 2,
       "laborDollars": 15,
       "laborPct": 100
     },
@@ -205,7 +205,7 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 1,
+      "laborHrs": 2,
       "laborDollars": 15,
       "laborPct": 100
     },
@@ -214,7 +214,7 @@
       "netSales": 0,
       "guests": 0,
       "orders": 0,
-      "laborHrs": 1,
+      "laborHrs": 2,
       "laborDollars": 15,
       "laborPct": 100
     }

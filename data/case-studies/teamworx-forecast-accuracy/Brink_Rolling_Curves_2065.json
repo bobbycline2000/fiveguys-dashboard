@@ -1,0 +1,1620 @@
+{
+  "Mon": {
+    "n_days": 8,
+    "hours": {
+      "4": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.0,
+        "labDol_mean": 0.0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "5": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.0,
+        "labDol_mean": 0.0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "6": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.0,
+        "labDol_mean": 0.0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "7": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 0.645,
+        "labHrs_mean": 0.6387499999999999,
+        "labDol_mean": 8.77,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "8": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 3.335,
+        "labHrs_mean": 3.06875,
+        "labDol_mean": 37.155,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "9": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 3.55,
+        "labHrs_mean": 3.54625,
+        "labDol_mean": 42.55625,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "10": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 2.9450000000000003,
+        "labHrs_mean": 2.605,
+        "labDol_mean": 27.35,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "11": {
+        "netSales_med": 278.09000000000003,
+        "netSales_mean": 253.72625,
+        "labHrs_med": 5.0,
+        "labHrs_mean": 4.3725000000000005,
+        "labDol_mean": 46.56875,
+        "guests_mean": 44.5,
+        "n": 8
+      },
+      "12": {
+        "netSales_med": 402.275,
+        "netSales_mean": 370.04375,
+        "labHrs_med": 5.0,
+        "labHrs_mean": 4.375,
+        "labDol_mean": 46.59375,
+        "guests_mean": 64.25,
+        "n": 8
+      },
+      "13": {
+        "netSales_med": 306.40999999999997,
+        "netSales_mean": 283.64125,
+        "labHrs_med": 5.0,
+        "labHrs_mean": 4.375,
+        "labDol_mean": 46.59375,
+        "guests_mean": 52.25,
+        "n": 8
+      },
+      "14": {
+        "netSales_med": 201.19,
+        "netSales_mean": 197.4225,
+        "labHrs_med": 4.255,
+        "labHrs_mean": 4.00125,
+        "labDol_mean": 41.11,
+        "guests_mean": 37.125,
+        "n": 8
+      },
+      "15": {
+        "netSales_med": 257.125,
+        "netSales_mean": 224.05375,
+        "labHrs_med": 5.765000000000001,
+        "labHrs_mean": 5.19875,
+        "labDol_mean": 57.95375,
+        "guests_mean": 45,
+        "n": 8
+      },
+      "16": {
+        "netSales_med": 275.70500000000004,
+        "netSales_mean": 274.83375,
+        "labHrs_med": 4.1450000000000005,
+        "labHrs_mean": 3.71625,
+        "labDol_mean": 38.085,
+        "guests_mean": 50.125,
+        "n": 8
+      },
+      "17": {
+        "netSales_med": 436.095,
+        "netSales_mean": 403.26375,
+        "labHrs_med": 6.25,
+        "labHrs_mean": 5.485,
+        "labDol_mean": 61.05,
+        "guests_mean": 74.875,
+        "n": 8
+      },
+      "18": {
+        "netSales_med": 484.53999999999996,
+        "netSales_mean": 476.91375,
+        "labHrs_med": 6.609999999999999,
+        "labHrs_mean": 5.8149999999999995,
+        "labDol_mean": 65.97,
+        "guests_mean": 84.25,
+        "n": 8
+      },
+      "19": {
+        "netSales_med": 483.43,
+        "netSales_mean": 428.5125,
+        "labHrs_med": 6.51,
+        "labHrs_mean": 5.6675,
+        "labDol_mean": 64.08125,
+        "guests_mean": 79.25,
+        "n": 8
+      },
+      "20": {
+        "netSales_med": 307.44,
+        "netSales_mean": 304.35,
+        "labHrs_med": 7.0,
+        "labHrs_mean": 5.93375,
+        "labDol_mean": 66.985,
+        "guests_mean": 53.75,
+        "n": 8
+      },
+      "21": {
+        "netSales_med": 93.095,
+        "netSales_mean": 140.69,
+        "labHrs_med": 6.175,
+        "labHrs_mean": 5.62125,
+        "labDol_mean": 63.435,
+        "guests_mean": 29.625,
+        "n": 8
+      },
+      "22": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 5.53,
+        "labHrs_mean": 5.06875,
+        "labDol_mean": 57.06125,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "23": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 1.425,
+        "labHrs_mean": 1.52125,
+        "labDol_mean": 9.7925,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "24": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.125,
+        "labDol_mean": 4.125,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "25": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.125,
+        "labDol_mean": 4.125,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "26": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.125,
+        "labDol_mean": 4.125,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "27": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0.0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.125,
+        "labDol_mean": 4.125,
+        "guests_mean": 0,
+        "n": 8
+      }
+    },
+    "dates": [
+      "2026-03-16",
+      "2026-03-23",
+      "2026-03-30",
+      "2026-04-06",
+      "2026-04-13",
+      "2026-04-20",
+      "2026-04-27",
+      "2026-05-04"
+    ]
+  },
+  "Tue": {
+    "n_days": 9,
+    "hours": {
+      "4": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "5": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "6": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 0,
+        "labHrs_mean": 0.014444444444444446,
+        "labDol_mean": 0.26666666666666666,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "7": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.2,
+        "labHrs_mean": 1.2044444444444444,
+        "labDol_mean": 20.137777777777778,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "8": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 4,
+        "labHrs_mean": 3.4322222222222223,
+        "labDol_mean": 50.92777777777778,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "9": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 4,
+        "labHrs_mean": 3.648888888888889,
+        "labDol_mean": 53.403333333333336,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "10": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 2.17,
+        "labHrs_mean": 2.3066666666666666,
+        "labDol_mean": 33.03888888888889,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "11": {
+        "netSales_med": 363.16,
+        "netSales_mean": 380.68111111111114,
+        "labHrs_med": 4,
+        "labHrs_mean": 4.326666666666666,
+        "labDol_mean": 61.15555555555556,
+        "guests_mean": 69,
+        "n": 9
+      },
+      "12": {
+        "netSales_med": 324.5,
+        "netSales_mean": 328.96777777777777,
+        "labHrs_med": 4,
+        "labHrs_mean": 4.535555555555556,
+        "labDol_mean": 62.583333333333336,
+        "guests_mean": 63.22222222222222,
+        "n": 9
+      },
+      "13": {
+        "netSales_med": 217.8,
+        "netSales_mean": 249.86333333333334,
+        "labHrs_med": 4,
+        "labHrs_mean": 4.444444444444445,
+        "labDol_mean": 61.30555555555556,
+        "guests_mean": 47.22222222222222,
+        "n": 9
+      },
+      "14": {
+        "netSales_med": 218.48,
+        "netSales_mean": 226.07555555555555,
+        "labHrs_med": 3.27,
+        "labHrs_mean": 3.7377777777777776,
+        "labDol_mean": 51.73222222222222,
+        "guests_mean": 41.666666666666664,
+        "n": 9
+      },
+      "15": {
+        "netSales_med": 200.16,
+        "netSales_mean": 200.20444444444445,
+        "labHrs_med": 4.17,
+        "labHrs_mean": 4.368888888888889,
+        "labDol_mean": 57.48888888888889,
+        "guests_mean": 39.44444444444444,
+        "n": 9
+      },
+      "16": {
+        "netSales_med": 359.67,
+        "netSales_mean": 352.88,
+        "labHrs_med": 3.25,
+        "labHrs_mean": 3.568888888888889,
+        "labDol_mean": 44.93333333333334,
+        "guests_mean": 66.88888888888889,
+        "n": 9
+      },
+      "17": {
+        "netSales_med": 446.09,
+        "netSales_mean": 419.27222222222224,
+        "labHrs_med": 5.38,
+        "labHrs_mean": 5.495555555555556,
+        "labDol_mean": 68.27444444444444,
+        "guests_mean": 77.22222222222223,
+        "n": 9
+      },
+      "18": {
+        "netSales_med": 539.39,
+        "netSales_mean": 559.7777777777777,
+        "labHrs_med": 6,
+        "labHrs_mean": 5.953333333333333,
+        "labDol_mean": 73.19333333333333,
+        "guests_mean": 102.33333333333333,
+        "n": 9
+      },
+      "19": {
+        "netSales_med": 486.93,
+        "netSales_mean": 548.8555555555556,
+        "labHrs_med": 6,
+        "labHrs_mean": 6.066666666666666,
+        "labDol_mean": 74.39111111111112,
+        "guests_mean": 99.88888888888889,
+        "n": 9
+      },
+      "20": {
+        "netSales_med": 415.65,
+        "netSales_mean": 451.32111111111107,
+        "labHrs_med": 6,
+        "labHrs_mean": 5.945555555555556,
+        "labDol_mean": 72.94222222222223,
+        "guests_mean": 86.88888888888889,
+        "n": 9
+      },
+      "21": {
+        "netSales_med": 167.18,
+        "netSales_mean": 194.27,
+        "labHrs_med": 5.88,
+        "labHrs_mean": 5.833333333333333,
+        "labDol_mean": 71.89666666666666,
+        "guests_mean": 43.55555555555556,
+        "n": 9
+      },
+      "22": {
+        "netSales_med": 0,
+        "netSales_mean": 2.1522222222222225,
+        "labHrs_med": 5,
+        "labHrs_mean": 5.453333333333333,
+        "labDol_mean": 67.27888888888889,
+        "guests_mean": 2.888888888888889,
+        "n": 9
+      },
+      "23": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 1,
+        "labHrs_mean": 1.3044444444444445,
+        "labDol_mean": 12.22111111111111,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "24": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 0,
+        "labHrs_mean": 0.7777777777777778,
+        "labDol_mean": 5.111111111111111,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "25": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 0,
+        "labHrs_mean": 0.7777777777777778,
+        "labDol_mean": 5.111111111111111,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "26": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 0,
+        "labHrs_mean": 0.7777777777777778,
+        "labDol_mean": 5.111111111111111,
+        "guests_mean": 0,
+        "n": 9
+      },
+      "27": {
+        "netSales_med": 0,
+        "netSales_mean": 0,
+        "labHrs_med": 0,
+        "labHrs_mean": 0.7777777777777778,
+        "labDol_mean": 5.111111111111111,
+        "guests_mean": 0,
+        "n": 9
+      }
+    },
+    "dates": [
+      "2026-03-10",
+      "2026-03-17",
+      "2026-03-24",
+      "2026-03-31",
+      "2026-04-07",
+      "2026-04-14",
+      "2026-04-21",
+      "2026-04-28",
+      "2026-05-05"
+    ]
+  },
+  "Wed": {
+    "n_days": 8,
+    "hours": {
+      "4": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "5": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "6": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.0025,
+        "labDol_mean": 0.0375,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "7": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.44,
+        "labHrs_mean": 1.4625,
+        "labDol_mean": 23.384999999999998,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "8": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 3.0,
+        "labHrs_mean": 3.00875,
+        "labDol_mean": 44.56625,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "9": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 3.23,
+        "labHrs_mean": 3.32,
+        "labDol_mean": 47.894999999999996,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "10": {
+        "netSales_med": 0.0,
+        "netSales_mean": 3.1075,
+        "labHrs_med": 2.115,
+        "labHrs_mean": 2.2675,
+        "labDol_mean": 30.0,
+        "guests_mean": 0.625,
+        "n": 8
+      },
+      "11": {
+        "netSales_med": 428.94,
+        "netSales_mean": 455.99,
+        "labHrs_med": 4.0,
+        "labHrs_mean": 4.0125,
+        "labDol_mean": 54.885,
+        "guests_mean": 85.625,
+        "n": 8
+      },
+      "12": {
+        "netSales_med": 346.105,
+        "netSales_mean": 349.4475,
+        "labHrs_med": 4.390000000000001,
+        "labHrs_mean": 4.445,
+        "labDol_mean": 59.655,
+        "guests_mean": 65,
+        "n": 8
+      },
+      "13": {
+        "netSales_med": 248.58999999999997,
+        "netSales_mean": 279.73875,
+        "labHrs_med": 4.1899999999999995,
+        "labHrs_mean": 4.3075,
+        "labDol_mean": 57.93125,
+        "guests_mean": 52.625,
+        "n": 8
+      },
+      "14": {
+        "netSales_med": 221.465,
+        "netSales_mean": 238.70375,
+        "labHrs_med": 3.4749999999999996,
+        "labHrs_mean": 3.82125,
+        "labDol_mean": 51.29375,
+        "guests_mean": 46.75,
+        "n": 8
+      },
+      "15": {
+        "netSales_med": 221.845,
+        "netSales_mean": 237.17875,
+        "labHrs_med": 3.02,
+        "labHrs_mean": 3.94875,
+        "labDol_mean": 50.05875,
+        "guests_mean": 45.875,
+        "n": 8
+      },
+      "16": {
+        "netSales_med": 351.545,
+        "netSales_mean": 401.595,
+        "labHrs_med": 3.615,
+        "labHrs_mean": 3.9475000000000002,
+        "labDol_mean": 45.82875,
+        "guests_mean": 76.875,
+        "n": 8
+      },
+      "17": {
+        "netSales_med": 423.21000000000004,
+        "netSales_mean": 489.3125,
+        "labHrs_med": 5.555,
+        "labHrs_mean": 5.8925,
+        "labDol_mean": 67.7625,
+        "guests_mean": 93.25,
+        "n": 8
+      },
+      "18": {
+        "netSales_med": 632.8,
+        "netSales_mean": 665.70625,
+        "labHrs_med": 6.475,
+        "labHrs_mean": 6.695,
+        "labDol_mean": 77.24249999999999,
+        "guests_mean": 120.5,
+        "n": 8
+      },
+      "19": {
+        "netSales_med": 609.83,
+        "netSales_mean": 647.08875,
+        "labHrs_med": 6.5,
+        "labHrs_mean": 6.55875,
+        "labDol_mean": 75.765,
+        "guests_mean": 119.5,
+        "n": 8
+      },
+      "20": {
+        "netSales_med": 489.885,
+        "netSales_mean": 476.81874999999997,
+        "labHrs_med": 6.205,
+        "labHrs_mean": 6.44125,
+        "labDol_mean": 74.295,
+        "guests_mean": 87.5,
+        "n": 8
+      },
+      "21": {
+        "netSales_med": 254.40500000000003,
+        "netSales_mean": 254.90125,
+        "labHrs_med": 5.92,
+        "labHrs_mean": 6.35625,
+        "labDol_mean": 73.51,
+        "guests_mean": 53.25,
+        "n": 8
+      },
+      "22": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 5.1899999999999995,
+        "labHrs_mean": 5.4037500000000005,
+        "labDol_mean": 62.85125,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "23": {
+        "netSales_med": 0.0,
+        "netSales_mean": 2.0475,
+        "labHrs_med": 1.3199999999999998,
+        "labHrs_mean": 1.6875,
+        "labDol_mean": 17.3425,
+        "guests_mean": 0.375,
+        "n": 8
+      },
+      "24": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.5,
+        "labHrs_mean": 0.75,
+        "labDol_mean": 5.25,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "25": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.5,
+        "labHrs_mean": 0.75,
+        "labDol_mean": 5.25,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "26": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.5,
+        "labHrs_mean": 0.75,
+        "labDol_mean": 5.25,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "27": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.5,
+        "labHrs_mean": 0.75,
+        "labDol_mean": 5.25,
+        "guests_mean": 0,
+        "n": 8
+      }
+    },
+    "dates": [
+      "2026-03-11",
+      "2026-03-18",
+      "2026-03-25",
+      "2026-04-01",
+      "2026-04-08",
+      "2026-04-15",
+      "2026-04-22",
+      "2026-04-29"
+    ]
+  },
+  "Thu": {
+    "n_days": 8,
+    "hours": {
+      "4": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "5": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.0375,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "6": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.14375000000000002,
+        "labDol_mean": 0.3375,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "7": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.865,
+        "labHrs_mean": 1.0,
+        "labDol_mean": 15.345,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "8": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 3.0,
+        "labHrs_mean": 2.99375,
+        "labDol_mean": 43.20125,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "9": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 3.175,
+        "labHrs_mean": 3.39375,
+        "labDol_mean": 48.89375,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "10": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 2.9299999999999997,
+        "labHrs_mean": 3.1999999999999997,
+        "labDol_mean": 42.31875,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "11": {
+        "netSales_med": 291.785,
+        "netSales_mean": 317.0125,
+        "labHrs_med": 4.91,
+        "labHrs_mean": 4.8825,
+        "labDol_mean": 66.7,
+        "guests_mean": 57.375,
+        "n": 8
+      },
+      "12": {
+        "netSales_med": 413.025,
+        "netSales_mean": 456.44375,
+        "labHrs_med": 5.525,
+        "labHrs_mean": 5.465,
+        "labDol_mean": 72.42,
+        "guests_mean": 84,
+        "n": 8
+      },
+      "13": {
+        "netSales_med": 339.79999999999995,
+        "netSales_mean": 307.99,
+        "labHrs_med": 5.140000000000001,
+        "labHrs_mean": 5.3475,
+        "labDol_mean": 69.2775,
+        "guests_mean": 58.125,
+        "n": 8
+      },
+      "14": {
+        "netSales_med": 279.63,
+        "netSales_mean": 300.9925,
+        "labHrs_med": 5.025,
+        "labHrs_mean": 4.91125,
+        "labDol_mean": 62.3125,
+        "guests_mean": 59,
+        "n": 8
+      },
+      "15": {
+        "netSales_med": 235.565,
+        "netSales_mean": 270.19625,
+        "labHrs_med": 7.54,
+        "labHrs_mean": 7.08125,
+        "labDol_mean": 89.7875,
+        "guests_mean": 52.125,
+        "n": 8
+      },
+      "16": {
+        "netSales_med": 362.405,
+        "netSales_mean": 371.845,
+        "labHrs_med": 6.54,
+        "labHrs_mean": 6.4525,
+        "labDol_mean": 75.95,
+        "guests_mean": 76.125,
+        "n": 8
+      },
+      "17": {
+        "netSales_med": 591.395,
+        "netSales_mean": 579.04375,
+        "labHrs_med": 8.725,
+        "labHrs_mean": 7.75125,
+        "labDol_mean": 88.54249999999999,
+        "guests_mean": 111.5,
+        "n": 8
+      },
+      "18": {
+        "netSales_med": 604.365,
+        "netSales_mean": 694.125,
+        "labHrs_med": 8.84,
+        "labHrs_mean": 8.15,
+        "labDol_mean": 92.1225,
+        "guests_mean": 130.625,
+        "n": 8
+      },
+      "19": {
+        "netSales_med": 698.8050000000001,
+        "netSales_mean": 667.7275,
+        "labHrs_med": 8.965,
+        "labHrs_mean": 8.35125,
+        "labDol_mean": 93.01875,
+        "guests_mean": 127.125,
+        "n": 8
+      },
+      "20": {
+        "netSales_med": 671.2249999999999,
+        "netSales_mean": 608.7175,
+        "labHrs_med": 8.29,
+        "labHrs_mean": 7.9712499999999995,
+        "labDol_mean": 88.3725,
+        "guests_mean": 111.875,
+        "n": 8
+      },
+      "21": {
+        "netSales_med": 327.425,
+        "netSales_mean": 288.90625,
+        "labHrs_med": 8.76,
+        "labHrs_mean": 7.9475,
+        "labDol_mean": 88.01375,
+        "guests_mean": 62.625,
+        "n": 8
+      },
+      "22": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 7.675,
+        "labHrs_mean": 7.22,
+        "labDol_mean": 79.7425,
+        "guests_mean": 5.5,
+        "n": 8
+      },
+      "23": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 2.83,
+        "labHrs_mean": 3.41625,
+        "labDol_mean": 33.43125,
+        "guests_mean": 2.625,
+        "n": 8
+      },
+      "24": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.2125,
+        "labDol_mean": 4.93125,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "25": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.125,
+        "labDol_mean": 3.75,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "26": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.125,
+        "labDol_mean": 3.75,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "27": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.125,
+        "labDol_mean": 3.75,
+        "guests_mean": 0,
+        "n": 8
+      }
+    },
+    "dates": [
+      "2026-03-12",
+      "2026-03-19",
+      "2026-03-26",
+      "2026-04-02",
+      "2026-04-09",
+      "2026-04-16",
+      "2026-04-23",
+      "2026-04-30"
+    ]
+  },
+  "Fri": {
+    "n_days": 8,
+    "hours": {
+      "4": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "5": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "6": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.01875,
+        "labDol_mean": 0.3375,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "7": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.125,
+        "labHrs_mean": 1.1712500000000001,
+        "labDol_mean": 20.0975,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "8": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 3.025,
+        "labHrs_mean": 3.65,
+        "labDol_mean": 53.53875,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "9": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 3.525,
+        "labHrs_mean": 4.14,
+        "labDol_mean": 59.655,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "10": {
+        "netSales_med": 0.0,
+        "netSales_mean": 2.79625,
+        "labHrs_med": 2.975,
+        "labHrs_mean": 3.34125,
+        "labDol_mean": 45.82125,
+        "guests_mean": 0.625,
+        "n": 8
+      },
+      "11": {
+        "netSales_med": 417.99,
+        "netSales_mean": 499.38375,
+        "labHrs_med": 4.109999999999999,
+        "labHrs_mean": 5.00125,
+        "labDol_mean": 66.77875,
+        "guests_mean": 80.125,
+        "n": 8
+      },
+      "12": {
+        "netSales_med": 417.69,
+        "netSales_mean": 443.09000000000003,
+        "labHrs_med": 5.98,
+        "labHrs_mean": 6.4625,
+        "labDol_mean": 83.18125,
+        "guests_mean": 81,
+        "n": 8
+      },
+      "13": {
+        "netSales_med": 298.525,
+        "netSales_mean": 294.73375,
+        "labHrs_med": 6.4,
+        "labHrs_mean": 6.5125,
+        "labDol_mean": 80.19624999999999,
+        "guests_mean": 58.125,
+        "n": 8
+      },
+      "14": {
+        "netSales_med": 263.345,
+        "netSales_mean": 279.06875,
+        "labHrs_med": 5.825,
+        "labHrs_mean": 5.45875,
+        "labDol_mean": 65.59625,
+        "guests_mean": 56.75,
+        "n": 8
+      },
+      "15": {
+        "netSales_med": 305.42499999999995,
+        "netSales_mean": 317.25,
+        "labHrs_med": 7.7,
+        "labHrs_mean": 7.4712499999999995,
+        "labDol_mean": 91.19375,
+        "guests_mean": 62.375,
+        "n": 8
+      },
+      "16": {
+        "netSales_med": 406.87,
+        "netSales_mean": 421.9525,
+        "labHrs_med": 6.375,
+        "labHrs_mean": 6.8525,
+        "labDol_mean": 78.82,
+        "guests_mean": 77.75,
+        "n": 8
+      },
+      "17": {
+        "netSales_med": 663.3,
+        "netSales_mean": 661.92125,
+        "labHrs_med": 7.025,
+        "labHrs_mean": 7.3075,
+        "labDol_mean": 83.01125,
+        "guests_mean": 121.625,
+        "n": 8
+      },
+      "18": {
+        "netSales_med": 840.56,
+        "netSales_mean": 764.23375,
+        "labHrs_med": 8.15,
+        "labHrs_mean": 8.4625,
+        "labDol_mean": 96.25625,
+        "guests_mean": 141.875,
+        "n": 8
+      },
+      "19": {
+        "netSales_med": 934.99,
+        "netSales_mean": 866.6537500000001,
+        "labHrs_med": 8.49,
+        "labHrs_mean": 8.37875,
+        "labDol_mean": 94.69125,
+        "guests_mean": 157.5,
+        "n": 8
+      },
+      "20": {
+        "netSales_med": 619.34,
+        "netSales_mean": 636.3525,
+        "labHrs_med": 7.3500000000000005,
+        "labHrs_mean": 7.58375,
+        "labDol_mean": 84.745,
+        "guests_mean": 114.125,
+        "n": 8
+      },
+      "21": {
+        "netSales_med": 377.095,
+        "netSales_mean": 334.8525,
+        "labHrs_med": 7.085,
+        "labHrs_mean": 7.1625,
+        "labDol_mean": 79.9025,
+        "guests_mean": 68.25,
+        "n": 8
+      },
+      "22": {
+        "netSales_med": 0.0,
+        "netSales_mean": 1.31125,
+        "labHrs_med": 6.245,
+        "labHrs_mean": 6.51,
+        "labDol_mean": 72.555,
+        "guests_mean": 1.375,
+        "n": 8
+      },
+      "23": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 2.31,
+        "labHrs_mean": 2.25875,
+        "labDol_mean": 19.03125,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "24": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0150000000000001,
+        "labHrs_mean": 1.25375,
+        "labDol_mean": 5.6875,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "25": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.25,
+        "labDol_mean": 5.625,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "26": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.25,
+        "labDol_mean": 5.625,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "27": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1.25,
+        "labDol_mean": 5.625,
+        "guests_mean": 0,
+        "n": 8
+      }
+    },
+    "dates": [
+      "2026-03-13",
+      "2026-03-20",
+      "2026-03-27",
+      "2026-04-03",
+      "2026-04-10",
+      "2026-04-17",
+      "2026-04-24",
+      "2026-05-01"
+    ]
+  },
+  "Sat": {
+    "n_days": 8,
+    "hours": {
+      "4": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "5": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "6": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.08375,
+        "labDol_mean": 1.5,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "7": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.72,
+        "labHrs_mean": 0.68375,
+        "labDol_mean": 9.61625,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "8": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 3.91,
+        "labHrs_mean": 3.8875,
+        "labDol_mean": 50.9475,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "9": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 4.0,
+        "labHrs_mean": 4.07625,
+        "labDol_mean": 53.92125,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "10": {
+        "netSales_med": 0.0,
+        "netSales_mean": 3.18125,
+        "labHrs_med": 3.2,
+        "labHrs_mean": 2.7675,
+        "labDol_mean": 35.31375,
+        "guests_mean": 0.625,
+        "n": 8
+      },
+      "11": {
+        "netSales_med": 325.70000000000005,
+        "netSales_mean": 337.17,
+        "labHrs_med": 5.050000000000001,
+        "labHrs_mean": 5.47375,
+        "labDol_mean": 65.45,
+        "guests_mean": 58.25,
+        "n": 8
+      },
+      "12": {
+        "netSales_med": 388.295,
+        "netSales_mean": 409.13750000000005,
+        "labHrs_med": 5.84,
+        "labHrs_mean": 5.71,
+        "labDol_mean": 67.91625,
+        "guests_mean": 75.375,
+        "n": 8
+      },
+      "13": {
+        "netSales_med": 549.705,
+        "netSales_mean": 509.78125,
+        "labHrs_med": 5.5,
+        "labHrs_mean": 5.74625,
+        "labDol_mean": 66.875,
+        "guests_mean": 90.75,
+        "n": 8
+      },
+      "14": {
+        "netSales_med": 362.365,
+        "netSales_mean": 359.54875,
+        "labHrs_med": 5.3100000000000005,
+        "labHrs_mean": 5.1575,
+        "labDol_mean": 60.07,
+        "guests_mean": 70.625,
+        "n": 8
+      },
+      "15": {
+        "netSales_med": 323.945,
+        "netSales_mean": 347.4475,
+        "labHrs_med": 7.074999999999999,
+        "labHrs_mean": 7.28625,
+        "labDol_mean": 86.9325,
+        "guests_mean": 64.125,
+        "n": 8
+      },
+      "16": {
+        "netSales_med": 568.085,
+        "netSales_mean": 525.17875,
+        "labHrs_med": 6.31,
+        "labHrs_mean": 5.9399999999999995,
+        "labDol_mean": 65.6825,
+        "guests_mean": 96.75,
+        "n": 8
+      },
+      "17": {
+        "netSales_med": 639.8,
+        "netSales_mean": 626.745,
+        "labHrs_med": 6.7,
+        "labHrs_mean": 6.6725,
+        "labDol_mean": 71.46375,
+        "guests_mean": 114.625,
+        "n": 8
+      },
+      "18": {
+        "netSales_med": 623.405,
+        "netSales_mean": 634.1875,
+        "labHrs_med": 6.99,
+        "labHrs_mean": 7.10375,
+        "labDol_mean": 76.20875,
+        "guests_mean": 115.375,
+        "n": 8
+      },
+      "19": {
+        "netSales_med": 561.905,
+        "netSales_mean": 583.195,
+        "labHrs_med": 6.75,
+        "labHrs_mean": 6.7725,
+        "labDol_mean": 71.88,
+        "guests_mean": 106.625,
+        "n": 8
+      },
+      "20": {
+        "netSales_med": 593.675,
+        "netSales_mean": 573.35125,
+        "labHrs_med": 6.8,
+        "labHrs_mean": 6.9525,
+        "labDol_mean": 73.1225,
+        "guests_mean": 105.5,
+        "n": 8
+      },
+      "21": {
+        "netSales_med": 297.09000000000003,
+        "netSales_mean": 297.05,
+        "labHrs_med": 6.515000000000001,
+        "labHrs_mean": 6.6975,
+        "labDol_mean": 70.75874999999999,
+        "guests_mean": 63.375,
+        "n": 8
+      },
+      "22": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 6.46,
+        "labHrs_mean": 6.45,
+        "labDol_mean": 70.90125,
+        "guests_mean": 4.5,
+        "n": 8
+      },
+      "23": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 4.08,
+        "labHrs_mean": 3.86125,
+        "labDol_mean": 39.511250000000004,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "24": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.04,
+        "labHrs_mean": 1.05875,
+        "labDol_mean": 2.2,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "25": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1,
+        "labDol_mean": 1.375,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "26": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1,
+        "labDol_mean": 1.375,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "27": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 1.0,
+        "labHrs_mean": 1,
+        "labDol_mean": 1.375,
+        "guests_mean": 0,
+        "n": 8
+      }
+    },
+    "dates": [
+      "2026-03-14",
+      "2026-03-21",
+      "2026-03-28",
+      "2026-04-04",
+      "2026-04-11",
+      "2026-04-18",
+      "2026-04-25",
+      "2026-05-02"
+    ]
+  },
+  "Sun": {
+    "n_days": 8,
+    "hours": {
+      "4": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "5": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0,
+        "labDol_mean": 0,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "6": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.053750000000000006,
+        "labDol_mean": 0.975,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "7": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.975,
+        "labHrs_mean": 0.87625,
+        "labDol_mean": 16.259999999999998,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "8": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 2.885,
+        "labHrs_mean": 2.43125,
+        "labDol_mean": 34.98125,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "9": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 3.835,
+        "labHrs_mean": 3.4575,
+        "labDol_mean": 48.43625,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "10": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 2.6849999999999996,
+        "labHrs_mean": 2.4575,
+        "labDol_mean": 35.652499999999996,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "11": {
+        "netSales_med": 296.995,
+        "netSales_mean": 277.83625,
+        "labHrs_med": 4.01,
+        "labHrs_mean": 4.12625,
+        "labDol_mean": 56.97125,
+        "guests_mean": 48.375,
+        "n": 8
+      },
+      "12": {
+        "netSales_med": 556.765,
+        "netSales_mean": 462.8225,
+        "labHrs_med": 5.359999999999999,
+        "labHrs_mean": 5.08625,
+        "labDol_mean": 68.655,
+        "guests_mean": 84.5,
+        "n": 8
+      },
+      "13": {
+        "netSales_med": 459.85,
+        "netSales_mean": 421.28375,
+        "labHrs_med": 4.865,
+        "labHrs_mean": 4.63875,
+        "labDol_mean": 63.9125,
+        "guests_mean": 75.5,
+        "n": 8
+      },
+      "14": {
+        "netSales_med": 425.07,
+        "netSales_mean": 430.38125,
+        "labHrs_med": 5.16,
+        "labHrs_mean": 4.8025,
+        "labDol_mean": 66.7425,
+        "guests_mean": 83.375,
+        "n": 8
+      },
+      "15": {
+        "netSales_med": 437.79499999999996,
+        "netSales_mean": 387.385,
+        "labHrs_med": 7.035,
+        "labHrs_mean": 6.4425,
+        "labDol_mean": 87.60125000000001,
+        "guests_mean": 69,
+        "n": 8
+      },
+      "16": {
+        "netSales_med": 398.075,
+        "netSales_mean": 370.40749999999997,
+        "labHrs_med": 4.855,
+        "labHrs_mean": 4.5925,
+        "labDol_mean": 63.525,
+        "guests_mean": 65.75,
+        "n": 8
+      },
+      "17": {
+        "netSales_med": 621.2750000000001,
+        "netSales_mean": 571.3775,
+        "labHrs_med": 6.075,
+        "labHrs_mean": 5.42125,
+        "labDol_mean": 74.0,
+        "guests_mean": 104.875,
+        "n": 8
+      },
+      "18": {
+        "netSales_med": 606.0,
+        "netSales_mean": 569.125,
+        "labHrs_med": 6.175,
+        "labHrs_mean": 5.575,
+        "labDol_mean": 75.78125,
+        "guests_mean": 105.25,
+        "n": 8
+      },
+      "19": {
+        "netSales_med": 578.4100000000001,
+        "netSales_mean": 522.4612500000001,
+        "labHrs_med": 6.025,
+        "labHrs_mean": 5.42875,
+        "labDol_mean": 74.66499999999999,
+        "guests_mean": 94.375,
+        "n": 8
+      },
+      "20": {
+        "netSales_med": 514.455,
+        "netSales_mean": 461.94875,
+        "labHrs_med": 5.6850000000000005,
+        "labHrs_mean": 5.0325,
+        "labDol_mean": 71.2825,
+        "guests_mean": 86.75,
+        "n": 8
+      },
+      "21": {
+        "netSales_med": 249.96999999999997,
+        "netSales_mean": 246.19,
+        "labHrs_med": 5.925,
+        "labHrs_mean": 5.04125,
+        "labDol_mean": 72.53625,
+        "guests_mean": 51.875,
+        "n": 8
+      },
+      "22": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 5.59,
+        "labHrs_mean": 5.0225,
+        "labDol_mean": 75.36375,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "23": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 2.605,
+        "labHrs_mean": 2.4587499999999998,
+        "labDol_mean": 39.19375,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "24": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.265,
+        "labDol_mean": 4.34375,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "25": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.25,
+        "labDol_mean": 4.328749999999999,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "26": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.25,
+        "labDol_mean": 5.15625,
+        "guests_mean": 0,
+        "n": 8
+      },
+      "27": {
+        "netSales_med": 0.0,
+        "netSales_mean": 0,
+        "labHrs_med": 0.0,
+        "labHrs_mean": 0.25,
+        "labDol_mean": 6.1875,
+        "guests_mean": 0,
+        "n": 8
+      }
+    },
+    "dates": [
+      "2026-03-15",
+      "2026-03-22",
+      "2026-03-29",
+      "2026-04-05",
+      "2026-04-12",
+      "2026-04-19",
+      "2026-04-26",
+      "2026-05-03"
+    ]
+  }
+}
