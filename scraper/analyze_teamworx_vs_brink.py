@@ -23,6 +23,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 WORKSPACE = Path("C:/Users/bobby/OneDrive/BobbyWorkspace")
 CASE_STUDY = WORKSPACE / "projects" / "scg" / "case-studies" / "teamworx-forecast-accuracy"
+# Repo-local output (works on Linux GH runner + Windows local)
+REPO_OUT = ROOT / "data" / "case-studies" / "teamworx-forecast-accuracy"
 
 LABELS = ["6AM","7AM","8AM","9AM","10AM","11AM","12PM","1PM","2PM","3PM","4PM","5PM","6PM","7PM","8PM","9PM","10PM","11PM"]
 HOUR_24 = [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
@@ -229,10 +231,17 @@ def build_workbook(store: str):
         ws.cell(row=row, column=9, value=worst).font = Font(color="DA291C", bold=abs(worst_pct) > 20)
         row += 1
 
-    out = CASE_STUDY / f"Teamworx_Forecast_vs_Brink_Actual_{store}.xlsx"
-    out.parent.mkdir(parents=True, exist_ok=True)
-    wb.save(out)
-    print(f"Wrote {out}")
+    # Write to repo-local path (always works); also try workspace path for local convenience
+    fname = f"Teamworx_Forecast_vs_Brink_Actual_{store}.xlsx"
+    repo_out = REPO_OUT / fname
+    repo_out.parent.mkdir(parents=True, exist_ok=True)
+    wb.save(repo_out)
+    print(f"Wrote {repo_out}")
+    if WORKSPACE.exists():
+        ws_out = CASE_STUDY / fname
+        ws_out.parent.mkdir(parents=True, exist_ok=True)
+        wb.save(ws_out)
+        print(f"Also wrote {ws_out}")
     print(f"Tabs: Summary + {len(overlap_dates)} day-detail tabs")
 
 

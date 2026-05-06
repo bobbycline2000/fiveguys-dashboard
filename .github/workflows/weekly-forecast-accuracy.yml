@@ -49,8 +49,7 @@ jobs:
         run: |
           git config user.email "noreply@savior-consulting.com"
           git config user.name "SCG Forecast Bot"
-          git add data/raw/parbrink/ || true
-          git add ../BobbyWorkspace/projects/scg/case-studies/teamworx-forecast-accuracy/ 2>/dev/null || true
+          git add data/raw/parbrink/ data/case-studies/ || true
           git diff --cached --quiet || git commit -m "weekly: Brink ${{ github.event.inputs.days || 7 }}-day pull + forecast accuracy refresh"
           git push || echo "Nothing to push"
 
