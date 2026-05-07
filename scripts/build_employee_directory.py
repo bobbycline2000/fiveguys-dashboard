@@ -29,7 +29,7 @@ EMPLOYEES = [
     ("Mike",      "(502) 281-8177", "Active"),
     ("Nathan",    "(502) 693-8371", "Active"),
     ("Nyatiek",   "(PHONE PENDING)", "Active"),
-    ("Richard",   "(270) 874-0655", "Active"),
+    ("Richard Gibbs", "(270) 874-0688", "Active"),
     ("Samuel",    "(502) 724-2384", "Active"),
     ("Vicki",     "(502) 701-9597", "Active"),
     ("Zach",      "(502) 422-9066", "Active"),
