@@ -14,12 +14,12 @@ AM Pre-Shift Check
 100% | 100%
 PM Pre-Shift Check
 100% | 100%
-Tuesday Milkshake Cleaning Check
+Milkshake Pump Cleaning Check
 100% | 100%
 Closing Checklist
 100% | 100%
 Pre Open
-100% | 97%
+0% | 0%
 Shift Change
 100% | 100%
 Closing
