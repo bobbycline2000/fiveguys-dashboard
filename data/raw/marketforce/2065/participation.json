@@ -129,7 +129,505 @@
     ],
     "20648457_note": "CT timecard history unavailable for 2026-01-05 \u00e2\u20ac\u201d API returns no data past ~90 days",
     "20650977_note": "CT timecard history unavailable for 2026-01-09 \u00e2\u20ac\u201d API returns no data past ~90 days",
-    "20649453_note": "CT timecard history unavailable for 2026-01-10 \u00e2\u20ac\u201d API returns no data past ~90 days"
+    "20649453_note": "CT timecard history unavailable for 2026-01-10 \u00e2\u20ac\u201d API returns no data past ~90 days",
+    "20673321": [
+      "Francisco",
+      "Jeremiah",
+      "Lidy",
+      "Madison",
+      "Mike"
+    ],
+    "20681743": [
+      "Autumn",
+      "Madison",
+      "Maylin",
+      "Mike",
+      "Samuel"
+    ],
+    "20680431": [
+      "Ash",
+      "Autumn",
+      "Bri",
+      "Madison",
+      "Samuel"
+    ],
+    "20659897": [
+      "Francisco",
+      "Jeremiah",
+      "Lidy",
+      "Madison",
+      "Maylin",
+      "Vicki"
+    ],
+    "20650374": [
+      "Francisco",
+      "Jeremiah",
+      "Madison",
+      "Maylin",
+      "Mike",
+      "Samuel"
+    ],
+    "20649453": [
+      "Ash",
+      "Jeremiah",
+      "Lidy",
+      "Mike"
+    ],
+    "20650977": [
+      "Francisco",
+      "Jada",
+      "Kasey",
+      "Madison",
+      "Maylin",
+      "Samuel"
+    ],
+    "20648457": [
+      "Ash",
+      "Francisco",
+      "Mike"
+    ],
+    "20632726": [
+      "Autumn",
+      "Francisco",
+      "Jeremiah",
+      "Kasey",
+      "Madison",
+      "Maylin",
+      "Mike"
+    ],
+    "20631741": [
+      "Francisco",
+      "Jada",
+      "Kasey",
+      "Maylin",
+      "Samuel"
+    ],
+    "20622298": [
+      "Autumn",
+      "Francisco",
+      "Jada",
+      "Samuel"
+    ],
+    "20610416": [
+      "Autumn",
+      "Jada",
+      "Madison",
+      "Maylin",
+      "Samuel"
+    ],
+    "20608334": [
+      "Lidy",
+      "Vicki"
+    ],
+    "20606137": [
+      "Francisco",
+      "Jeremiah",
+      "Lidy",
+      "Madison"
+    ],
+    "20603974": [
+      "Francisco",
+      "Jeremiah",
+      "Mike",
+      "Vicki"
+    ],
+    "20588186": [
+      "Autumn",
+      "Jeremiah",
+      "Kasey",
+      "Maylin"
+    ],
+    "20598027": [
+      "Jeremiah",
+      "Lidy",
+      "Vicki"
+    ],
+    "20591751": [
+      "Autumn",
+      "Bri",
+      "Jeremiah",
+      "Kasey",
+      "Samuel"
+    ],
+    "20579720": [
+      "Jeremiah",
+      "Lidy",
+      "Madison"
+    ],
+    "20577794": [
+      "Autumn",
+      "Bri",
+      "Jeremiah",
+      "Kasey",
+      "Samuel"
+    ],
+    "20578610": [
+      "Jeremiah",
+      "Lidy",
+      "Madison",
+      "Vicki"
+    ],
+    "20561049": [
+      "Autumn",
+      "Jeremiah",
+      "Kasey"
+    ],
+    "20568855": [
+      "Jeremiah",
+      "Kasey",
+      "Samuel"
+    ],
+    "20547170": [
+      "Bri",
+      "Madison",
+      "Vicki"
+    ],
+    "20560367": [
+      "Bri",
+      "Maylin",
+      "Samuel"
+    ],
+    "20554224": [
+      "Madison",
+      "Vicki"
+    ],
+    "20550060": [
+      "Maylin",
+      "Samuel"
+    ],
+    "20545610": [
+      "Francisco",
+      "Lidy",
+      "Madison",
+      "Vicki"
+    ],
+    "20520885": [
+      "Francisco",
+      "Madison"
+    ],
+    "20518092": [
+      "Jeremiah",
+      "Kasey",
+      "Samuel"
+    ],
+    "20531181": [
+      "Bri",
+      "Francisco",
+      "Madison",
+      "Vicki"
+    ],
+    "20526353": [
+      "Bri",
+      "Kasey",
+      "Maylin",
+      "Samuel"
+    ],
+    "20523712": [
+      "Jeremiah",
+      "Madison",
+      "Maylin",
+      "Samuel"
+    ],
+    "20518777": [
+      "Madison"
+    ],
+    "20504055": [
+      "Autumn",
+      "Jeremiah",
+      "Lidy",
+      "Madison"
+    ],
+    "20474705": [
+      "Jeremiah",
+      "Samuel",
+      "Vicki"
+    ],
+    "20499876": [
+      "Bri",
+      "Francisco",
+      "Madison",
+      "Maylin",
+      "Samuel"
+    ],
+    "20497591": [
+      "Francisco",
+      "Lidy",
+      "Vicki"
+    ],
+    "20485880": [
+      "Madison",
+      "Vicki"
+    ],
+    "20483352": [
+      "Bri",
+      "Francisco",
+      "Jeremiah",
+      "Madison",
+      "Samuel"
+    ],
+    "20483399": [
+      "Bri",
+      "Francisco",
+      "Madison"
+    ],
+    "20478419": [
+      "Lidy",
+      "Madison"
+    ],
+    "20472469": [
+      "Francisco",
+      "Jeremiah",
+      "Vicki"
+    ],
+    "20474403": [
+      "Bri",
+      "Francisco"
+    ],
+    "20464238": [
+      "Francisco",
+      "Jeremiah",
+      "Maylin"
+    ],
+    "20451418": [
+      "Francisco",
+      "Lidy"
+    ],
+    "20453655": [
+      "Francisco",
+      "Madison",
+      "Samuel"
+    ],
+    "20421310": [
+      "Francisco",
+      "Jeremiah",
+      "Madison",
+      "Maylin",
+      "Samuel"
+    ],
+    "20443057": [
+      "Lidy",
+      "Madison",
+      "Vicki"
+    ],
+    "20442487": [
+      "Jeremiah",
+      "Samuel"
+    ],
+    "20440372": [
+      "Lidy",
+      "Madison",
+      "Vicki"
+    ],
+    "20436941": [
+      "Madison",
+      "Samuel"
+    ],
+    "20432474": [
+      "Lidy",
+      "Madison"
+    ],
+    "20430078": [
+      "Autumn",
+      "Francisco"
+    ],
+    "20424850": [
+      "Lidy",
+      "Maylin",
+      "Vicki"
+    ],
+    "20418154": [
+      "Jeremiah",
+      "Maylin",
+      "Samuel"
+    ],
+    "20418374": [
+      "Jeremiah",
+      "Lidy",
+      "Madison"
+    ],
+    "20412396": [
+      "Jeremiah",
+      "Samuel"
+    ],
+    "20406817": [
+      "Autumn",
+      "Jeremiah",
+      "Madison"
+    ],
+    "20400536": [
+      "Autumn",
+      "Jeremiah",
+      "Madison"
+    ],
+    "20388231": [
+      "Jeremiah",
+      "Madison"
+    ],
+    "20378321": [
+      "Francisco",
+      "Jeremiah",
+      "Madison",
+      "Samuel"
+    ],
+    "20380475": [
+      "Jeremiah",
+      "Lidy",
+      "Madison",
+      "Maylin"
+    ],
+    "20372156": [
+      "Samuel"
+    ],
+    "20378520": [
+      "Jeremiah",
+      "Lidy",
+      "Madison",
+      "Maylin"
+    ],
+    "20364613": [
+      "Autumn",
+      "Jeremiah",
+      "Madison",
+      "Samuel"
+    ],
+    "20364457": [
+      "Autumn",
+      "Jeremiah",
+      "Madison",
+      "Samuel"
+    ],
+    "20361029": [
+      "Lidy",
+      "Maylin"
+    ],
+    "20337620": [
+      "Madison",
+      "Samuel"
+    ],
+    "20345722": [
+      "Francisco",
+      "Jeremiah",
+      "Madison"
+    ],
+    "20342144": [
+      "Francisco",
+      "Lidy",
+      "Madison"
+    ],
+    "20341557": [
+      "Autumn",
+      "Madison"
+    ],
+    "20338634": [
+      "Lidy",
+      "Maylin"
+    ],
+    "20332309": [
+      "Francisco",
+      "Madison"
+    ],
+    "20330072": [
+      "Francisco",
+      "Madison",
+      "Samuel"
+    ],
+    "20324905": [
+      "Jeremiah",
+      "Madison"
+    ],
+    "20318781": [
+      "Jeremiah",
+      "Lidy",
+      "Madison",
+      "Maylin"
+    ],
+    "20314730": [
+      "Lidy"
+    ],
+    "20304610": [
+      "Francisco",
+      "Madison",
+      "Samuel"
+    ],
+    "20301331": [
+      "Francisco",
+      "Madison"
+    ],
+    "20301567": [
+      "Francisco",
+      "Madison",
+      "Samuel"
+    ],
+    "20295968": [
+      "Samuel"
+    ],
+    "20284929": [
+      "Francisco",
+      "Madison",
+      "Maylin"
+    ],
+    "20287477": [
+      "Maylin",
+      "Samuel"
+    ],
+    "20278278": [
+      "Lidy"
+    ],
+    "20280457": [
+      "Francisco",
+      "Madison"
+    ],
+    "20259330": [
+      "Madison",
+      "Samuel"
+    ],
+    "20249301": [
+      "Lidy",
+      "Madison",
+      "Maylin"
+    ],
+    "20263188": [
+      "Francisco",
+      "Lidy",
+      "Madison",
+      "Samuel"
+    ],
+    "20258781": [
+      "Francisco",
+      "Lidy",
+      "Maylin"
+    ],
+    "20260581": [
+      "Madison"
+    ],
+    "20256866": [
+      "Lidy",
+      "Madison",
+      "Samuel"
+    ],
+    "20241588": [
+      "Francisco",
+      "Lidy",
+      "Madison"
+    ],
+    "20242963": [
+      "Francisco",
+      "Lidy"
+    ],
+    "20227707": [
+      "Francisco",
+      "Lidy",
+      "Maylin"
+    ],
+    "20215687": [
+      "Lidy",
+      "Madison",
+      "Samuel"
+    ],
+    "20225744": [
+      "Lidy",
+      "Madison"
+    ]
   },
-  "updated": "2026-05-07T14:06:10-04:00"
+  "updated": "2026-05-07T23:26:06-04:00"
 }
