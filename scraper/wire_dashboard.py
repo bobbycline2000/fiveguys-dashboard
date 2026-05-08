@@ -356,6 +356,48 @@ if hourly_labor and hourly_labor.get("hours"):
         "hourly labor bars",
         flags=DOTALL)
 
+# ── Today's Hourly Labor Forecast (Teamworx graph screenshot) ─────────
+# Find the most recent data/raw/teamworx/<store>/<YYYY-MM-DD>/graph.png
+twx_graph_dir = ROOT / "data" / "raw" / "teamworx" / STORE_ID
+twx_graph_rel = None
+twx_graph_date = None
+if twx_graph_dir.exists():
+    dated = sorted(
+        [d for d in twx_graph_dir.iterdir() if d.is_dir() and (d / "graph.png").exists()],
+        key=lambda p: p.name,
+        reverse=True,
+    )
+    if dated:
+        latest = dated[0]
+        twx_graph_rel = f"data/raw/teamworx/{STORE_ID}/{latest.name}/graph.png"
+        twx_graph_date = latest.name
+
+if twx_graph_rel:
+    try:
+        from datetime import date as _date
+        d = _date.fromisoformat(twx_graph_date)
+        pill_label = d.strftime("%a %b %d").replace(" 0", " ")
+    except Exception:
+        pill_label = "Today"
+
+    new_block = (
+        '<!-- TEAMWORX-GRAPH-IMG-START -->\n'
+        '        <div style="margin-top:6px;background:#fff;border-radius:8px;padding:8px;min-height:240px;display:flex;align-items:center;justify-content:center;">\n'
+        f'          <img id="twx-graph-img" src="{twx_graph_rel}?v={twx_graph_date}" alt="Teamworx hourly labor forecast" style="max-width:100%;max-height:340px;">\n'
+        '        </div>\n'
+        '        <!-- TEAMWORX-GRAPH-IMG-END -->'
+    )
+    rep(r'<!-- TEAMWORX-GRAPH-IMG-START -->.*?<!-- TEAMWORX-GRAPH-IMG-END -->',
+        new_block.replace('\\', '\\\\'),
+        "teamworx graph image",
+        flags=DOTALL)
+
+    # Update pill label
+    rep(r'<div class="pill pill-white" id="twx-graph-pill">[^<]*</div>',
+        f'<div class="pill pill-white" id="twx-graph-pill">{pill_label}</div>',
+        "teamworx graph pill",
+        flags=DOTALL)
+
 # ── Ideal vs Scheduled Hours (Teamworx weekly forecast) ───────────────
 if ideal_vs_actual and ideal_vs_actual.get("days"):
     days = ideal_vs_actual["days"]

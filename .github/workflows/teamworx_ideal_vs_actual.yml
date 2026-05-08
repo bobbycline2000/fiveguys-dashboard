@@ -59,7 +59,15 @@ jobs:
         run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_teamworx_roster.py --store 2065
 
       - name: Scrape Teamworx Ideal vs Scheduled Hours
+        continue-on-error: true
         run: python scraper/scrape_teamworx_ideal_vs_actual.py --store 2065
+
+      - name: Screenshot Teamworx hourly labor graph
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: xvfb-run --server-args="-screen 0 1600x1000x24" python scraper/scrape_teamworx_graph_screenshot.py --store 2065
 
       - name: Wire data into dashboard.html
         run: python scraper/wire_dashboard.py
