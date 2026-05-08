@@ -194,6 +194,67 @@ Returns `data.dayForecast` (single day) + `data.weekForecast` (full week).
 
 **Replaces** the per-day looping needed via Daily Roster — one call returns the week.
 
+**Dashboard use — "Ideal vs Actual Hours" chart (added 2026-05-07):**
+
+This is the primary data source for the weekly bar/line chart Bobby wants on the dashboard
+next to the Today's Schedule card. One call, one week of data.
+
+```python
+# Derive weekEndingDate (always Sunday in Teamworx)
+from datetime import date, timedelta
+today = date.today()
+days_until_sunday = (6 - today.weekday()) % 7  # weekday(): Mon=0..Sun=6
+week_end = (today + timedelta(days=days_until_sunday)).strftime("%Y-%m-%d")
+
+body = {"laborDate": None, "weekEndingDate": week_end}
+# POST /json/mn/laborSchedule/getWbForecastData
+```
+
+**Response fields used by the chart (per `salesForecastDays[]` entry):**
+```json
+{
+  "date":               "2026-05-05",   // ISO date — x-axis label
+  "totalSales":         1842.15,        // actual day sales (dollars)
+  "idealHours":         69.86,          // ideal labor hours for that day
+  "scheduledHours":     68.5,           // hours scheduled in Teamworx
+  "idealLaborPct":      0.2012,         // ideal labor % (decimal)
+  "scheduledLaborPct":  0.1974,
+  "scheduledVariance":  -1.36           // scheduled minus ideal (negative = under-staffed)
+}
+```
+
+**Output file:** `data/teamworx_ideal_vs_actual.json`
+
+**Schema:**
+```json
+{
+  "source":        "teamworx_api",
+  "week_ending":   "2026-05-10",
+  "fetched_at":    "2026-05-07T08:05:00-04:00",
+  "store":         "2065",
+  "days": [
+    {
+      "date":             "2026-05-04",
+      "day_label":        "Mon",
+      "ideal_hours":      71.0,
+      "scheduled_hours":  68.5,
+      "variance_hours":   -2.5,
+      "sales":            1842.15,
+      "ideal_labor_pct":  0.2012,
+      "sched_labor_pct":  0.1974
+    }
+  ]
+}
+```
+
+**Wiring:** `wire_dashboard.py` reads `data/teamworx_ideal_vs_actual.json` and injects
+7 pairs of values into the `<canvas id="ideal-vs-actual-chart">` element in `dashboard.html`
+via a `<script>` block. Chart.js (already loaded on the page) renders the grouped bar chart.
+
+**Week-start note:** Teamworx week runs Mon–Sun. `weekEndingDate` is always the Sunday
+of the current week. Confirmed from `getLocationWeekStartDay` endpoint (returns `"MONDAY"`
+for KY-2065). Always compute dynamically — never hardcode.
+
 ### `POST /json/mn/dailyRoster/getForecastData`
 
 ```http
