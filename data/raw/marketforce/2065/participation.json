@@ -165,8 +165,11 @@
       "Vicki"
     ],
     "20648457": [],
+    "20648457_note": "CT timecard history unavailable for 2026-01-05 — API returns no data past ~90 days",
     "20650977": [],
-    "20649453": []
+    "20650977_note": "CT timecard history unavailable for 2026-01-09 — API returns no data past ~90 days",
+    "20649453": [],
+    "20649453_note": "CT timecard history unavailable for 2026-01-10 — API returns no data past ~90 days"
   },
   "updated": "2026-05-07T14:06:10-04:00"
 }
