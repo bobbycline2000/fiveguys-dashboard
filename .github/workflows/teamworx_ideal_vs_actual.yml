@@ -1,0 +1,78 @@
+name: Teamworx Ideal vs Actual (focused refresh)
+
+# Tiny ~3-minute workflow that ONLY refreshes the Ideal vs Scheduled Hours
+# card. Use this to test/iterate on the card without re-running the full
+# 15-minute daily pipeline. The full pipeline still refreshes this card
+# every morning at 5:00 AM ET.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dashboard-update
+  cancel-in-progress: false
+
+jobs:
+  refresh-ideal-vs-actual:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r scraper/requirements.txt
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('scraper/requirements.txt') }}
+          restore-keys: playwright-chromium-${{ runner.os }}-
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install chromium --with-deps
+
+      - name: Install Xvfb
+        run: sudo apt-get install -y xvfb
+
+      # Roster step is what mints the Teamworx cookie file. We don't care
+      # about its JSON output here — we just need data/twx_cookies.json to
+      # exist for the next step.
+      - name: Mint Teamworx cookies (via roster login)
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_teamworx_roster.py --store 2065
+
+      - name: Scrape Teamworx Ideal vs Scheduled Hours
+        run: python scraper/scrape_teamworx_ideal_vs_actual.py --store 2065
+
+      - name: Wire data into dashboard.html
+        run: python scraper/wire_dashboard.py
+
+      - name: Commit and push dashboard
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dashboard.html data/raw/teamworx
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "teamworx: refresh ideal-vs-scheduled card (focused run)"
+            git pull --rebase origin main
+            git push origin main
+          fi
