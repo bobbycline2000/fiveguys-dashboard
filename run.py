@@ -68,14 +68,14 @@ async def run_store(store_id: str):
 
     # ── KnowledgeForce (Secret Shops) ──────────────────────────────────────────
     log.info("\n--- KnowledgeForce (Secret Shops) ---")
-    try:
-        from scraper.scrape_knowledgeforce import scrape as ss_scrape
-        ss_data = await ss_scrape()
-        out = DATA_DIR / "secret_shops.json"
-        out.write_text(json.dumps(ss_data, indent=2))
-        log.info(f"Secret Shops: {ss_data['meta']['status']} — {ss_data['meta']['shops_total']} shops")
-    except Exception as e:
-        log.error(f"KnowledgeForce scrape failed: {e}")
+    import subprocess
+    ss_rc = subprocess.run(
+        [sys.executable, str(ROOT / "scraper" / "scrape_knowledgeforce_api.py"),
+         "--store", store_id],
+        cwd=ROOT,
+    ).returncode
+    if ss_rc != 0:
+        log.error(f"KnowledgeForce scrape exited {ss_rc}")
 
     # ── Par Brink emailed reports (reads Gmail inbox) ──────────────────────────
     log.info("\n--- Par Brink (Gmail) ---")

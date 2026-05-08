@@ -239,7 +239,7 @@ jobs:
           KNOWLEDGEFORCE_USERNAME: ${{ secrets.KNOWLEDGEFORCE_USERNAME }}
           KNOWLEDGEFORCE_PASSWORD: ${{ secrets.KNOWLEDGEFORCE_PASSWORD }}
           STORE_ID: "2065"
-        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_knowledgeforce.py --store 2065
+        run: python scraper/scrape_knowledgeforce_api.py --store 2065
 
       # ── 5b3a. Pull visit-time bucket for each shop (KnowledgeForce Q.04) ──
       # Reads latest shops.json, fills `visit_window` from .04 Time In bucket
