@@ -975,4 +975,11 @@ if critical_missed:
     sys.exit(1)
 
 if sched:
-    print(f"\nToday: {len(am_shifts)} AM / {len(pm_shifts)} PM shifts, {sched['today']['scheduled_hours']:.1f} hrs scheduled")
+    try:
+        _today_node = sched.get('today')
+        if isinstance(_today_node, dict):
+            print(f"\nToday: {len(am_shifts)} AM / {len(pm_shifts)} PM shifts, {_today_node.get('scheduled_hours', 0):.1f} hrs scheduled")
+        else:
+            print(f"\nToday: {len(am_shifts)} AM / {len(pm_shifts)} PM shifts (sched['today'] not a dict)")
+    except Exception as _e:
+        print(f"\nToday: print failed ({_e})")

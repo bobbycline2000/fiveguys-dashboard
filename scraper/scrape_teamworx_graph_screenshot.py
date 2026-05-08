@@ -21,7 +21,7 @@ from pathlib import Path
 
 ROOT     = Path(__file__).resolve().parents[1]
 RAW      = ROOT / "data" / "raw" / "teamworx"
-LOGIN_URL = "https://fiveguysfr77.ct-teamworx.com/views/login.jsp"
+LOGIN_URL = "https://fiveguysfr77.ct-teamworx.com/views/auth.jsp"
 
 
 def run(store: str, target_date: date_cls) -> int:
