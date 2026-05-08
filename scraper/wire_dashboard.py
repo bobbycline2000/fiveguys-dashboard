@@ -78,6 +78,7 @@ if cogs is None:
 discounts, _ = load_latest("parbrink", "discount_summary.json")
 sales_summary, _ = load_latest("parbrink", "sales_summary.json")
 hourly_labor, _ = load_latest("parbrink", "hourly_sales_labor.json")
+ideal_vs_actual, _ = load_latest("teamworx", "ideal_vs_actual.json")
 
 # CrunchTime staleness check — Par Brink is the authoritative source.
 # If CrunchTime report_date is more than 1 day behind today, treat its
@@ -353,6 +354,50 @@ if hourly_labor and hourly_labor.get("hours"):
     rep(r'const laborData = \[[^\]]*\];',
         new_array.replace('\\', '\\\\'),
         "hourly labor bars",
+        flags=DOTALL)
+
+# ── Ideal vs Scheduled Hours (Teamworx weekly forecast) ───────────────
+if ideal_vs_actual and ideal_vs_actual.get("days"):
+    days = ideal_vs_actual["days"]
+    totals = ideal_vs_actual.get("totals", {})
+    meta = ideal_vs_actual.get("meta", {})
+
+    labels   = [d["day_label"] for d in days]
+    ideal    = [d["ideal_hours"] for d in days]
+    sched    = [d["scheduled_hours"] for d in days]
+
+    ideal_total    = f'{totals.get("ideal_hours", 0):.1f} hrs'
+    sched_total    = f'{totals.get("scheduled_hours", 0):.1f} hrs'
+    var_total_num  = totals.get("variance_hours", 0)
+    var_total      = f'{"+" if var_total_num > 0 else ""}{var_total_num:.1f} hrs'
+
+    # Pretty week pill: "Apr 27 – May 3"
+    try:
+        from datetime import date as _date
+        ws = _date.fromisoformat(meta.get("week_start"))
+        we = _date.fromisoformat(meta.get("week_end"))
+        week_pill = f'{ws.strftime("%b %d").replace(" 0"," ")} – {we.strftime("%b %d").replace(" 0"," ")}'
+    except Exception:
+        week_pill = "This Week"
+
+    new_block = (
+        '<!-- IDEAL-VS-ACTUAL-DATA-START -->\n'
+        '        <script>\n'
+        '          window.__idealVsActual = {\n'
+        f'            labels: {json.dumps(labels)},\n'
+        f'            ideal: {json.dumps(ideal)},\n'
+        f'            scheduled: {json.dumps(sched)},\n'
+        f'            ideal_total: {json.dumps(ideal_total)},\n'
+        f'            sched_total: {json.dumps(sched_total)},\n'
+        f'            variance_total: {json.dumps(var_total)},\n'
+        f'            week_pill: {json.dumps(week_pill)}\n'
+        '          };\n'
+        '        </script>\n'
+        '        <!-- IDEAL-VS-ACTUAL-DATA-END -->'
+    )
+    rep(r'<!-- IDEAL-VS-ACTUAL-DATA-START -->.*?<!-- IDEAL-VS-ACTUAL-DATA-END -->',
+        new_block.replace('\\', '\\\\'),
+        "ideal vs actual hours data",
         flags=DOTALL)
 
 # ── Food Cost Big % (cogs_pct_week from CrunchTime) ────────────────────
