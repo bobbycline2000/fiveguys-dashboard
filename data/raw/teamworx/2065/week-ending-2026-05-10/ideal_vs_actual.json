@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "store": "2065",
+    "week_start": "2026-05-04",
+    "week_end": "2026-05-10",
+    "scraped_at": "2026-05-08T04:17:12",
+    "today": "2026-05-08",
+    "source": "teamworx getWbForecastData"
+  },
+  "days": [],
+  "totals": {
+    "ideal_hours": 0,
+    "scheduled_hours": 0,
+    "variance_hours": 0
+  }
+}
