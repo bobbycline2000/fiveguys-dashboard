@@ -150,6 +150,16 @@ def run(store_id: str, target_date: date) -> int:
             page.get_by_role("cell", name=f"KY-{store_id}").first.click()
             page.wait_for_load_state("networkidle", timeout=20000)
 
+        # 2b. Dump cookies for the pure-HTTP API clients (e.g. scrape_teamworx_ideal_vs_actual.py)
+        try:
+            cookies = ctx.cookies()
+            cookie_file = ROOT / "data" / "twx_cookies.json"
+            cookie_file.parent.mkdir(parents=True, exist_ok=True)
+            cookie_file.write_text(json.dumps(cookies, indent=2), encoding="utf-8")
+            print(f"[teamworx-roster] saved {len(cookies)} cookies to {cookie_file}")
+        except Exception as e:
+            print(f"[teamworx-roster] cookie dump failed (non-fatal): {e}", file=sys.stderr)
+
         # 3. Click Daily Roster nav item (SPA — stays on home.jsp, loads roster content)
         page.get_by_text("Daily Roster", exact=True).first.click()
         # Wait for the roster table to render (employee rows have 6 cells)
