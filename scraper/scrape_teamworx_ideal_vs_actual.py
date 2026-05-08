@@ -38,6 +38,21 @@ def fetch_forecast(store: str) -> dict:
     week_end = week_ending_sunday(today)
     body = {"laborDate": None, "weekEndingDate": week_end.isoformat()}
     data = _post_json(s, "/json/mn/laborSchedule/getWbForecastData", body)
+    # Diagnostic dump (non-fatal): show response shape so we can debug zeros.
+    try:
+        debug_path = ROOT / "data" / "twx_ideal_vs_actual_debug.json"
+        debug_path.parent.mkdir(parents=True, exist_ok=True)
+        debug_path.write_text(json.dumps(data, indent=2)[:8000], encoding="utf-8")
+        print(f"[debug] top-level keys: {list(data.keys())}")
+        if "salesForecastDays" in data:
+            n = len(data["salesForecastDays"])
+            print(f"[debug] salesForecastDays len={n}")
+            if n:
+                print(f"[debug] day[0] keys: {list(data['salesForecastDays'][0].keys())}")
+        else:
+            print(f"[debug] no salesForecastDays — wrote sample to {debug_path}")
+    except Exception as e:
+        print(f"[debug] dump failed: {e}")
     return data, week_end, today
 
 
