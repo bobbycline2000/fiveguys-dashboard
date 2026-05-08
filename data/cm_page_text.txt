@@ -14,14 +14,12 @@ AM Pre-Shift Check
 100% | 100%
 PM Pre-Shift Check
 100% | 100%
-Milkshake Pump Cleaning Check
-100% | 100%
 Closing Checklist
 100% | 100%
 Pre Open
 0% | 0%
 Shift Change
-100% | 100%
+100% | 97%
 Closing
 100% | 100%
 Weekly Store Inspection
