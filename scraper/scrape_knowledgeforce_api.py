@@ -240,7 +240,21 @@ def build_payload(store_id: str, rows: list[dict]) -> dict:
                 d = None
         e = dict(h); e["_date"] = d
         merged[jid] = e
-    merged.update(scraped)
+    # Merge scraped data — preserve historical SQC fields when the API returns null
+    # (the API client skips per-shop detail pages; SQC comes from the Playwright path or
+    # Marketforce email PDFs stored in prior runs).
+    SQC_FIELDS = ("service", "quality", "cleanliness", "customer_satisfaction")
+    for jid, new in scraped.items():
+        if jid in merged:
+            old = merged[jid]
+            for field in SQC_FIELDS:
+                if new.get(field) is None and old.get(field) is not None:
+                    new[field] = old[field]
+            # Also preserve visit_window from historical
+            if new.get("visit_window") is None and old.get("visit_window") is not None:
+                new["visit_window"] = old["visit_window"]
+                new["visit_window_source"] = old.get("visit_window_source")
+        merged[jid] = new
     shops = sorted(merged.values(), key=lambda s: s.get("_date") or date.min, reverse=True)
     averages = compute_averages(shops)
     latest = None

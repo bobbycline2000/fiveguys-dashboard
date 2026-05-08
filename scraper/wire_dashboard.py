@@ -196,10 +196,19 @@ if ss:
     ss_quarter = f"{ss['averages']['quarter']['score']:.0f}%"
     ss_latest = f"{ss['latest']['score']:.0f}%"
     ss_date = datetime.strptime(ss['latest']['date'], "%Y-%m-%d").strftime("%b %d").replace(" 0", " ")
-    ss_service = f"{ss['latest']['service']}%"
-    ss_quality = f"{ss['latest']['quality']}%"
-    ss_cleanliness = f"{ss['latest']['cleanliness']}%"
-    ss_csat = f"{ss['latest']['customer_satisfaction']}%"
+    # SQC fields may be None when the API path skipped per-shop detail pages;
+    # fall back to the score itself for the latest shop, or "—" if unavailable.
+    def _sqc_pct(val, fallback=None):
+        if val is not None:
+            return f"{val}%"
+        if fallback is not None:
+            return f"{fallback}%"
+        return "—%"
+    _ls = ss['latest']
+    ss_service     = _sqc_pct(_ls.get('service'))
+    ss_quality     = _sqc_pct(_ls.get('quality'))
+    ss_cleanliness = _sqc_pct(_ls.get('cleanliness'))
+    ss_csat        = _sqc_pct(_ls.get('customer_satisfaction'))
 
 # ── schedule classification ─────────────────────────────────────────────
 def end_hour(t):
@@ -629,7 +638,15 @@ if ss:
 
     # SS KPI bars — rewrite the full ss-kpi-list block
     def ss_kpi_html(name, pct_str):
-        pct_num = int(round(float(pct_str.rstrip('%'))))
+        # pct_str may be "77%", "77.0%", or "—%" when SQC is unavailable
+        raw = pct_str.rstrip('%')
+        if raw == '—' or raw == '':
+            return (f'          <div class="ss-kpi">\n'
+                    f'            <span class="ss-kpi-name">{name}</span>\n'
+                    f'            <span class="ss-kpi-bar-bg"><span class="ss-kpi-bar-fill" style="width:0%"></span></span>\n'
+                    f'            <span class="ss-kpi-pct">—</span>\n'
+                    f'          </div>')
+        pct_num = int(round(float(raw)))
         under = ' under' if pct_num < 88 else ''
         # Re-render the displayed string as integer % so we don't show "77.0%"
         return (f'          <div class="ss-kpi">\n'
