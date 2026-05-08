@@ -1,34 +1,48 @@
 {
-  "date": "2026-05-07",
-  "new_count": 4,
+  "date": "2026-05-08",
+  "new_count": 6,
   "notes": [
     {
       "from": "Brad Davis (Director)",
       "role": "director",
       "role_label": "Director's Corner",
       "time": "Thu 1:28 PM",
-      "body": "Congratulations on the 100% shop last week at Dixie. Keep them coming. (Standing: Halo Effect & Suggestive Sales signed forms due to Crystal Friday 5/8 by 5 PM. FGU 0% overdue by 5/15.)"
+      "body": "Bobby & Team Dixie, Congratulations on your 100% shop last week! Keep them coming! — Brad Davis, Director of Operations."
+    },
+    {
+      "from": "Brad Davis (Director · 5/5 directive)",
+      "role": "director",
+      "role_label": "Director's Corner — Standing",
+      "time": "Mon 1:31 AM",
+      "body": "Halo Effect & Suggestive Sales Policy — ALL employees sign by FRIDAY 5/8/26 5:00 PM. Email signed forms to Crystal (chess@estep-co.com). Orientation Checklist begins with ALL new hires now. FGU Overdue Rate — Dixie at 13%, push to 0% by 5/15."
     },
     {
       "from": "Crystal Hess (DM)",
       "role": "dm",
       "role_label": "DM Communication",
       "time": "Thu 1:11 PM",
-      "body": "New Weekly Synopsis.xlsx attached. Review for Monday 3 PM call. Standing: print 2065 Shopper Dashboard & K.P.I., post on comm board, be ready to discuss in-store this week."
+      "body": "New synopsis — Weekly Synopsis.xlsx attached. Pull it and review the week's KPIs before her in-store visit this week. Standing: print 2065 Shopper Dashboard & K.P.I., post on comm board, be ready to discuss in-store."
     },
     {
       "from": "Marketforce",
       "role": "alert",
       "role_label": "Win — Secret Shop",
       "time": "Thu 4:41 AM",
-      "body": "Dixie Highway scored 100.0% on 5/01 shop. Brad called it out in writing this morning."
+      "body": "Dixie Highway scored 100.0% on 5/01 shop. On shift: Bobby Cline, Francisco Llorente Mejias, Lidy Henry, Madison Cureton, Vicki Lucey. Brad called it out in writing this morning. Shop tracker refreshed."
     },
     {
       "from": "FoodLogiQ",
       "role": "alert",
       "role_label": "Alert — Action Required",
-      "time": "Wed 9:40 PM",
-      "body": "Incident #26-10106 (Jalapeno) returned to store — Five Guys Enterprises asking for DC case label image. 7-day auto-resolve clock from the 5/4 incident — respond before 5/11."
+      "time": "Fri 1:39 AM",
+      "body": "REMINDER: Store Action Request — Additional Info Needed: Produce – Jalapeno (incident #26-1). Open the ticket and respond today."
+    },
+    {
+      "from": "Estep Hub Zendesk",
+      "role": "alert",
+      "role_label": "Alert — Estep Hub",
+      "time": "Thu 4:41 PM",
+      "body": "Three system messages on Request #9489 / 2065 Dixie Highway, opened by Naomi Collins (Estep & Co.) on your behalf. Read the thread for context."
     }
   ]
 }
