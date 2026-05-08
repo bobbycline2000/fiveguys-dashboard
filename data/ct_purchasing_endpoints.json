@@ -1,0 +1,344 @@
+{
+  "https://fiveguysfr77.net-chef.com/resource/recommended-actions/status": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"amountOfMessages\":0}",
+    "response_full_length": 22,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/dashboard/setCurrentDashboard/default": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"success\":true,\"contentMap\":{}}",
+    "response_full_length": 32,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/corporate/purchasingPanel/default": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"items\":[{\"itemType\":\"auto\",\"userId\":null,\"dashboardName\":\"purchasingPanel\",\"widgetName\":\"vendorOrderGridPanel\",\"widgetType\":\"vendorOrderGridPanel\",\"layout\":\"NONE\",\"verticalOrder\":1,\"horizontalOrder\":1,\"corporate\":true,\"removable\":false,\"reorderable\":true,\"collapsed\":false,\"collapsible\":true},{\"itemType\":\"auto\",\"userId\":null,\"dashboardName\":\"purchasingPanel\",\"widgetName\":\"purchasesByInvoiceGrid\",\"widgetType\":\"purchasesByInvoiceGrid\",\"layout\":\"NONE\",\"verticalOrder\":3,\"horizontalOrder\":1,\"corporate\":true,\"removable\":false,\"reorderable\":true,\"collapsed\":false,\"collapsible\":true},{\"itemType\":\"auto\",\"userId\":null,\"dashboardName\":\"purchasingPanel\",\"widgetName\":\"commissaryOrdersGrid\",\"widgetType\":\"commissaryOrdersGrid\",\"layout\":\"NONE\",\"verticalOrder\":4,\"horizontalOrder\":1,\"corporate\":true,\"removable\":false,\"reorderable\":true,\"collapsed\":true,\"collapsible\":true}]}",
+    "response_full_length": 869,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/ui-settings/navigationMenu": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"pinned\":false,\"expanded\":false}",
+    "response_truncated": "{\"success\":true,\"contentMap\":{}}",
+    "response_full_length": 32,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/configuration/purchasingVendorOrderSummaryAll": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"widgetName\":\"purchasingVendorOrderSummaryAll\",\"userId\":10018327,\"columns\":[{\"columnName\":\"vendor\",\"columnIndex\":0,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"referenceNumber\",\"columnIndex\":1,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"purchaseOrderNumber\",\"columnIndex\":2,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"vendorInvoice\",\"columnIndex\":3,\"columnSize\":18,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"orderDate\",\"columnIndex\":4,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"expectedDeliveryDate\",\"columnIndex\":5,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"actualDeliveryDate\",\"columnIndex\":6,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"displayedOrderType\",\"columnIndex\":7,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"inventoryTypeStatus\",\"columnIndex\":8,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"actions\",\"columnIndex\":9,\"columnSize\":13,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"invoiceTotal\",\"columnIndex\":10,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"pushInvoice\",\"columnIndex\":11,\"columnSize\":4,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"submitUser\",\"columnIndex\":12,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"vendorInvoiceDate\",\"columnIndex\":13,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"currencyCode\",\"columnIndex\":14,\"columnSize\":null,\"visible\":false,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"appBath\",\"columnIndex\":15,\"columnSize\":null,\"visible\":false,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"submitDate\",\"columnIndex\":16,\"columnSize\":null,\"visible\":false,\"locked\":false,\"lockedRegion\":nu",
+    "response_full_length": 3673,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/configuration/purchasesByInvoiceGrid": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"widgetName\":\"purchasesByInvoiceGrid\",\"userId\":10018327,\"columns\":[{\"columnName\":\"vendor\",\"columnIndex\":0,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"invoiceNumber\",\"columnIndex\":1,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"invoiceTotal\",\"columnIndex\":2,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"invoiceDate\",\"columnIndex\":3,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"deliveryDate\",\"columnIndex\":4,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"invoiceEntered\",\"columnIndex\":5,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"entryUser\",\"columnIndex\":6,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"status\",\"columnIndex\":7,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"process\",\"columnIndex\":8,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"reconcileDate\",\"columnIndex\":9,\"columnSize\":null,\"visible\":false,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"reconcileUser\",\"columnIndex\":10,\"columnSize\":null,\"visible\":false,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"accural\",\"columnIndex\":11,\"columnSize\":null,\"visible\":false,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"payment\",\"columnIndex\":12,\"columnSize\":null,\"visible\":false,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"files\",\"columnIndex\":13,\"columnSize\":null,\"visible\":false,\"locked\":false,\"lockedRegion\":null}],\"inactiveColumns\":null,\"rowPerPage\":null,\"bufferSize\":null,\"displayName\":null,\"fitColumns\":null,\"lockedPartWidth\":null}",
+    "response_full_length": 1760,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/configuration/commissaryOrdersGrid": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"widgetName\":\"commissaryOrdersGrid\",\"userId\":10018327,\"columns\":[{\"columnName\":\"referenceNumber\",\"columnIndex\":0,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"orderDate\",\"columnIndex\":1,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"expectedDeliveryDate\",\"columnIndex\":2,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"postDate\",\"columnIndex\":3,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"inventoryValueStatus\",\"columnIndex\":4,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"processLinks\",\"columnIndex\":5,\"columnSize\":null,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"transactionNumber\",\"columnIndex\":6,\"columnSize\":null,\"visible\":false,\"locked\":false,\"lockedRegion\":null}],\"inactiveColumns\":null,\"rowPerPage\":null,\"bufferSize\":null,\"displayName\":null,\"fitColumns\":null,\"lockedPartWidth\":null}",
+    "response_full_length": 1002,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/purchasing/purchases/invoice/statuses": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"page\":1,\"start\":0,\"limit\":25}",
+    "response_truncated": "[{\"statusId\":12,\"status\":\"Awaiting Allocation\"},{\"statusId\":4,\"status\":\"Canceled\"},{\"statusId\":3,\"status\":\"Reconciled\"}]",
+    "response_full_length": 120,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/dashboard/dailynews/corporatemessages/status": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"newMessagesAppeared\":true,\"amountOfMessages\":0}",
+    "response_full_length": 49,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/purchasing/vendor/order/statuses/totals/widget/purchasingVendorOrderSummaryAll": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"success\":true,\"contentMap\":{\"statuses\":[{\"key\":\"All\",\"totalOrders\":79,\"alertFlag\":null},{\"key\":\"ready_for_submit\",\"totalOrders\":0,\"alertFlag\":null},{\"key\":\"ready_for_invoice\",\"totalOrders\":0,\"alertFlag\":null},{\"key\":\"ready_for_reconcile\",\"totalOrders\":0,\"alertFlag\":null},{\"key\":\"Canceled\",\"totalOrders\":0,\"alertFlag\":null},{\"key\":\"closed\",\"totalOrders\":79,\"alertFlag\":null}],\"widgetConfig\":null}}",
+    "response_full_length": 399,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/purchasing/purchases/invoice": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"page\":1,\"start\":0,\"limit\":75}",
+    "response_truncated": "{\"rows\":[],\"total\":0}",
+    "response_full_length": 21,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/purchasing/commissary/order": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"pagingInfo\":{\"page\":1,\"start\":0,\"limit\":75}}",
+    "response_truncated": "{\"listSummary\":[],\"total\":0}",
+    "response_full_length": 28,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/configuration/column/size": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"widgetName\":\"purchasingVendorOrderSummaryAll\",\"columns\":[{\"columnName\":\"vendor\",\"columnSize\":8},{\"columnName\":\"referenceNumber\",\"columnSize\":6},{\"columnName\":\"purchaseOrderNumber\",\"columnSize\":6},{\"columnName\":\"vendorInvoice\",\"columnSize\":17},{\"columnName\":\"orderDate\",\"columnSize\":6},{\"columnName\":\"expectedDeliveryDate\",\"columnSize\":6},{\"columnName\":\"actualDeliveryDate\",\"columnSize\":6},{\"columnName\":\"displayedOrderType\",\"columnSize\":6},{\"columnName\":\"inventoryTypeStatus\",\"columnSize\":6},{\"columnName\":\"actions\",\"columnSize\":13},{\"columnName\":\"invoiceTotal\",\"columnSize\":6},{\"columnName\":\"pushInvoice\",\"columnSize\":4},{\"columnName\":\"submitUser\",\"columnSize\":6},{\"columnName\":\"vendorInvoiceDate\",\"columnSize\":6}]}",
+    "response_truncated": "{\"success\":true,\"contentMap\":{}}",
+    "response_full_length": 32,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/purchasing/vendor/order": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"extraCriteriaMap\":{\"statusFilter\":\"All\"},\"pagingInfo\":{\"page\":1,\"start\":0,\"limit\":275},\"sortInfo\":{\"sortList\":[{\"property\":\"inventoryStatusValue\",\"direction\":\"ASC\"}]}}",
+    "response_truncated": "{\"rows\":[{\"vendorOrderId\":4578108,\"extractApId\":null,\"expectedDeliveryDate\":\"02/09/2026 00:00:00\",\"purchaseOrderNumber\":\"VO-4576054\",\"inventoryTypeStatus\":3,\"orderUnitSelected\":\"I\",\"vendor\":\"Performance Fdsvce\",\"orderDate\":\"02/07/2026 00:00:00\",\"referenceNumber\":\"2065020726\",\"vendorInvoice\":\"255700\",\"vendorInvoiceTotal\":3617.54,\"postInventoryScheduledDate\":\"02/15/2026 00:00:00\",\"returnFlag\":false,\"orderType\":\"VO\",\"displayedOrderType\":\"VO\",\"awaitingInvoice\":true,\"confirmTermsFlag\":false,\"confirmTermsAlert\":false,\"invoiceReceivedFlag\":true,\"electronicInvoiceDate\":\"02/09/2026 06:36:22\",\"invitationAcceptDate\":null,\"ctxSubmitAlert\":null,\"actualDeliveryDate\":\"02/09/2026 00:00:00\",\"finalReconDate\":null,\"finalReconUser\":null,\"doNotTransmitFlag\":false,\"confirmReceiptFlag\":true,\"vpInvoiceFlag\":false,\"ftpLogFlag\":false,\"hasPayments\":false,\"remediation\":null,\"electronicInvoice\":null,\"disputeDate\":null,\"attachmentsNum\":0,\"inventoryStatusValue\":\"Reconciled\",\"inventoryStatuses\":[\"Reconciled\"],\"urls\":[{\"linkType\":\"VIEW\",\"linkLabel\":\"View\",\"linkClass\":null,\"pk\":\"4578108\",\"status\":\"3\",\"process\":null,\"invoiceReceivedAtLink\":null,\"locationId\":\"13969\",\"orderType\":\"VO\"}],\"submitUser\":\"BOBBY.CLINE\",\"currencyCode\":\"USD\",\"appBath\":null,\"invoiceTotal\":3617.54,\"submitDate\":\"02/07/2026 13:12:31\",\"pushInvoice\":false,\"mopStatusName\":null,\"receiptDate\":\"02/07/2026 00:00:00\",\"receiptUser\":\"HOSTEDCDP_\",\"termsDate\":\"02/07/2026 00:00:00\",\"termsUser\":\"BOBBY.CLINE\",\"consolidationDate\":null,\"consolidationUser\":null,\"entryDate\":\"02/07/2026 13:12:30\",\"entryUser\":\"BOBBY.CLINE\",\"reconcileDate\":\"02/14/2026 17:12:48\",\"reconcileUser\":\"BOBBY.CLINE\",\"reconcileTotal\":3617.54,\"deliveryLocation\":null,\"consolidationCode\":null,\"backOrderNumber\":null,\"creatorLocationId\":13969,\"vendorLocationId\":null,\"voyageAlertFlag\":false,\"profileId\":null,\"deliveryLocationSupplyId\":null,\"controlFlag\":0,\"weight\":0.0,\"cruiseNumber\":null,\"portName\":null,\"locationId\":13969,\"location\":\"KY-2065-Dixie Highway\",\"directVendorOrderFlag\":false,",
+    "response_full_length": 190024,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/dashboard/dailynews/all/status": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"newMessagesAppeared\":true,\"amountOfMessages\":0}",
+    "response_full_length": 49,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/dashboard-layout/personal/ncMain&page=1&start=0&limit=25": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"success\":true,\"contentMap\":{\"allPeriods\":[{\"start\":\"05/04/2026 00:00:00\",\"end\":\"05/10/2026 00:00:00\",\"current\":true},{\"start\":\"04/27/2026 00:00:00\",\"end\":\"05/03/2026 00:00:00\",\"current\":false}],\"data\":[{\"id\":95128,\"userId\":null,\"dashboardName\":\"ncMain\",\"widgetName\":\"dashboard-widget-today-tasks_95128\",\"widgetType\":\"dashboard-widget-today-tasks\",\"title\":null,\"x\":0,\"y\":0,\"width\":3,\"height\":4,\"removable\":true,\"reorderable\":false,\"collapsed\":false,\"collapsible\":false,\"extraParams\":\"{\\\"groupBy\\\":\\\"task\\\",\\\"id\\\":95128}\"},{\"id\":94858,\"userId\":null,\"dashboardName\":\"ncMain\",\"widgetName\":\"dashboard-widget-daily-sales-trend_94858\",\"widgetType\":\"dashboard-widget-daily-sales-trend\",\"title\":null,\"x\":3,\"y\":0,\"width\":3,\"height\":3,\"removable\":true,\"reorderable\":false,\"collapsed\":false,\"collapsible\":false,\"extraParams\":null},{\"id\":91642,\"userId\":null,\"dashboardName\":\"ncMain\",\"widgetName\":\"dashboard-widget-performance-metrics_91642\",\"widgetType\":\"dashboard-widget-performance-metrics\",\"title\":null,\"x\":0,\"y\":4,\"width\":6,\"height\":4,\"removable\":true,\"reorderable\":false,\"collapsed\":false,\"collapsible\":false,\"extraParams\":null},{\"id\":94859,\"userId\":null,\"dashboardName\":\"ncMain\",\"widgetName\":\"dashboard-widget-inventory-value-trend_94859\",\"widgetType\":\"dashboard-widget-inventory-value-trend\",\"title\":null,\"x\":0,\"y\":8,\"width\":3,\"height\":3,\"removable\":true,\"reorderable\":false,\"collapsed\":false,\"collapsible\":false,\"extraParams\":null},{\"id\":94863,\"userId\":null,\"dashboardName\":\"ncMain\",\"widgetName\":\"dashboard-widget-snapshot-today-sales_94863\",\"widgetType\":\"dashboard-widget-snapshot-today-sales\",\"title\":null,\"x\":3,\"y\":8,\"width\":1,\"height\":5,\"removable\":true,\"reorderable\":false,\"collapsed\":false,\"collapsible\":false,\"extraParams\":null},{\"id\":94864,\"userId\":null,\"dashboardName\":\"ncMain\",\"widgetName\":\"dashboard-widget-snapshot-week-sales_94864\",\"widgetType\":\"dashboard-widget-snapshot-week-sales\",\"title\":null,\"x\":4,\"y\":8,\"width\":1,\"height\":5,\"removable\":true,\"reorderable\":false,\"collapsed\":false,\"coll",
+    "response_full_length": 4437,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/dashboard-layout/personal/ncMain/config": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"widgetName\":\"dashboard-widget-today-operating-metrics_94861\",\"extraParams\":\"{\\\"showCurrentTime\\\":true,\\\"operatingMetricsPeriod\\\":15,\\\"id\\\":94861}\"}",
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/purchase-journal-report/retrieveResources": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"success\":true,\"contentMap\":{\"data\":{\"daypartRequired\":false,\"categoryLabelKey\":\"Category_Subcategory\",\"categories\":[\"Food COGS\",\"Supplies\"],\"locationCurrentDate\":\"05/07/2026\"}}}",
+    "response_full_length": 179,
+    "first_seen_screen": "PurchaseJournal"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/configuration/purchasejournalreport-grid": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"widgetName\":\"purchasejournalreport-grid\",\"userId\":10018327,\"columns\":[{\"columnName\":\"vendorInvoiceNumber\",\"columnIndex\":0,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"transactionType\",\"columnIndex\":1,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"invoiceDate\",\"columnIndex\":2,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"actualDeliveryDate\",\"columnIndex\":3,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"reconcileDate\",\"columnIndex\":4,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"supplyName\",\"columnIndex\":5,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"invoiceTotal\",\"columnIndex\":6,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"actualTotal\",\"columnIndex\":7,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"actualVariance\",\"columnIndex\":8,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"sum_category_0\",\"columnIndex\":9,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"misc\",\"columnIndex\":10,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"sum_category_1\",\"columnIndex\":11,\"columnSize\":9,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"transactionNumber\",\"columnIndex\":12,\"columnSize\":8,\"visible\":true,\"locked\":false,\"lockedRegion\":null}],\"inactiveColumns\":null,\"rowPerPage\":null,\"bufferSize\":null,\"displayName\":null,\"fitColumns\":true,\"lockedPartWidth\":0}",
+    "response_full_length": 1651,
+    "first_seen_screen": "PurchaseJournal"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/purchase-journal-report/suppliers&page=1&start=0&limit=25": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"success\":true,\"contentMap\":{\"suppliers\":[]}}",
+    "response_full_length": 46,
+    "first_seen_screen": "PurchaseJournal"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/tilereports/snapshot/today/sales": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"extraCriteriaMap\":{\"singleStatus\":false}}",
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/dashboard/performance/metrics/kpi/list/count": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/dashboard/widget/chart/daily/sales/trend/false": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"id\":\"NCDashboard.view.widgets.dailysalestrend.model.DailySalesTrend-1\"}",
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/tilereports/snapshot/week/sales": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"extraCriteriaMap\":{\"singleStatus\":false}}",
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/dashboard/menu/mix": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"singleStatus\":false}",
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/labor/hours": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"extraCriteriaMap\":{}}",
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "CreatePurchaseByInvoice"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/dashboard/performance/metrics": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"allLocations\":false,\"pagingInfo\":{\"infinite\":false}}",
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "PurchasingOverview2"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/configuration/dashboard-widget-labor-hours-list": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "CreatePurchaseByInvoice"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/nc/purchasebyinvoice/summary/header/-1?mode=create": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"success\":true,\"contentMap\":{\"data\":null}}",
+    "response_full_length": 43,
+    "first_seen_screen": "CreatePurchaseByInvoice"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/nc/purchasebyinvoice/validatepostdate": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"success\":true,\"contentMap\":{}}",
+    "response_full_length": 32,
+    "first_seen_screen": "CreatePurchaseByInvoice"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/nc/purchasebyinvoice/vendors": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"pagingInfo\":{\"page\":1,\"start\":0,\"limit\":25}}",
+    "response_truncated": "{\"success\":true,\"contentMap\":{\"data\":[{\"vendorId\":10000210,\"vendorName\":\"A-1 Restaurant Service\",\"vendorCode\":\"A1RS\",\"cityName\":\"Odessa\",\"stateName\":\"TX\",\"invoiceNumber\":null,\"transactionStatus\":null,\"displayVendorCurrencyInfo\":null,\"displayAccrual\":null,\"displayCheckNumber\":null,\"currencySymbol\":null,\"currencyCode\":null,\"currencyRatio\":null,\"hasPaymentInfo\":null,\"hasRecentProducts\":null},{\"vendorId\":10000191,\"vendorName\":\"AB Inbev\",\"vendorCode\":\"ABEV\",\"cityName\":\"Antwerp\",\"stateName\":null,\"invoiceNumber\":null,\"transactionStatus\":null,\"displayVendorCurrencyInfo\":null,\"displayAccrual\":null,\"displayCheckNumber\":null,\"currencySymbol\":null,\"currencyCode\":null,\"currencyRatio\":null,\"hasPaymentInfo\":null,\"hasRecentProducts\":null},{\"vendorId\":10000094,\"vendorName\":\"ABUDAWOOD TRADING COMPANY\",\"vendorCode\":\"LS0007\",\"cityName\":\"Riyadh\",\"stateName\":null,\"invoiceNumber\":null,\"transactionStatus\":null,\"displayVendorCurrencyInfo\":null,\"displayAccrual\":null,\"displayCheckNumber\":null,\"currencySymbol\":null,\"currencyCode\":null,\"currencyRatio\":null,\"hasPaymentInfo\":null,\"hasRecentProducts\":null},{\"vendorId\":10000386,\"vendorName\":\"ACORN AUSTRALIA\",\"vendorCode\":\"S00054\",\"cityName\":\"Campbellfield\",\"stateName\":\"VIC\",\"invoiceNumber\":null,\"transactionStatus\":null,\"displayVendorCurrencyInfo\":null,\"displayAccrual\":null,\"displayCheckNumber\":null,\"currencySymbol\":null,\"currencyCode\":null,\"currencyRatio\":null,\"hasPaymentInfo\":null,\"hasRecentProducts\":null},{\"vendorId\":10000075,\"vendorName\":\"Air Products\",\"vendorCode\":\"100003\",\"cityName\":\"Worcester\",\"stateName\":null,\"invoiceNumber\":null,\"transactionStatus\":null,\"displayVendorCurrencyInfo\":null,\"displayAccrual\":null,\"displayCheckNumber\":null,\"currencySymbol\":null,\"currencyCode\":null,\"currencyRatio\":null,\"hasPaymentInfo\":null,\"hasRecentProducts\":null},{\"vendorId\":10000140,\"vendorName\":\"Al Yasra Foods\",\"vendorCode\":\"AYF002\",\"cityName\":\"Kuwait City\",\"stateName\":null,\"invoiceNumber\":null,\"transactionStatus\":null,\"displayVendorCurrencyInfo\":null,\"display",
+    "response_full_length": 37741,
+    "first_seen_screen": "CreatePurchaseByInvoice"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/configuration/purchasesByGLLocationDetails": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"widgetName\":\"purchasesByGLLocationDetails\",\"userId\":10018327,\"columns\":[{\"columnName\":\"glCode\",\"columnIndex\":0,\"columnSize\":20,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"glDescription\",\"columnIndex\":1,\"columnSize\":40,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"amount\",\"columnIndex\":2,\"columnSize\":40,\"visible\":true,\"locked\":false,\"lockedRegion\":null}],\"inactiveColumns\":null,\"rowPerPage\":null,\"bufferSize\":null,\"displayName\":null,\"fitColumns\":null,\"lockedPartWidth\":null}",
+    "response_full_length": 519,
+    "first_seen_screen": "PurchasesByGL"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/purchasesbygl/location/details": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"extraCriteriaMap\":{\"startDate\":\"\",\"endDate\":\"\",\"locationId\":13969,\"hierarchyId\":null,\"isConsolidated\":false},\"pagingInfo\":{\"page\":1,\"start\":0,\"limit\":1000000}}",
+    "response_truncated": "{\"rows\":[],\"groupSummaries\":[],\"grandTotal\":{\"grandTotalDataList\":[],\"grandTotalSummary\":[{\"locationName\":null,\"locationCode\":null,\"amount\":0,\"glCode\":null,\"glId\":null,\"glDescription\":\"Grand Total: \"}]},\"total\":0,\"startDate\":null,\"endDate\":null,\"hierarchyId\":null,\"currencyInfo\":\"$\"}",
+    "response_full_length": 283,
+    "first_seen_screen": "PurchasesByGL"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/configuration/dashboard-widget-today-operating-metrics-list-94861": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "CostAnalysis"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/ReportingTableStatus?dataStatusId=1": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"dataStatusId\":1,\"dataAvailable\":true,\"currentlyProcessing\":0,\"estimatedMinutesToCompletion\":0,\"totalToProcess\":0}",
+    "response_full_length": 115,
+    "first_seen_screen": "CostAnalysis"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/costanalysis/single/dates": {
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": "{\"pagingInfo\":{\"page\":1,\"start\":0,\"limit\":25}}",
+    "response_truncated": "[{\"startDate\":\"05/04/2026 00:00:00\",\"endDate\":\"05/10/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"05/01/2026 00:00:00\",\"endDate\":\"05/03/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"04/27/2026 00:00:00\",\"endDate\":\"04/30/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"04/20/2026 00:00:00\",\"endDate\":\"04/26/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"04/13/2026 00:00:00\",\"endDate\":\"04/19/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"04/06/2026 00:00:00\",\"endDate\":\"04/12/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"04/01/2026 00:00:00\",\"endDate\":\"04/05/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"03/30/2026 00:00:00\",\"endDate\":\"03/31/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"03/23/2026 00:00:00\",\"endDate\":\"03/29/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"03/16/2026 00:00:00\",\"endDate\":\"03/22/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"03/09/2026 00:00:00\",\"endDate\":\"03/15/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"03/02/2026 00:00:00\",\"endDate\":\"03/08/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"03/01/2026 00:00:00\",\"endDate\":\"03/01/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"02/23/2026 00:00:00\",\"endDate\":\"02/28/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"02/16/2026 00:00:00\",\"endDate\":\"02/22/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"02/09/2026 00:00:00\",\"endDate\":\"02/15/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"02/02/2026 00:00:00\",\"endDate\":\"02/08/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"02/01/2026 00:00:00\",\"endDate\":\"02/01/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"01/26/2026 00:00:00\",\"endDate\":\"01/31/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"01/19/2026 00:00:00\",\"endDate\":\"01/25/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"01/12/2026 00:00:00\",\"endDate\":\"01/18/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"01/05/2026 00:00:00\",\"endDate\":\"01/11/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"01/01/2026 00:00:00\",\"endDate\":\"01/04/2026 00:00:00\",\"initObject\":true},{\"startDate\":\"12/29/2",
+    "response_full_length": 15567,
+    "first_seen_screen": "CostAnalysis"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/configuration/singleCostAnalysis": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "{\"widgetName\":\"singleCostAnalysis\",\"userId\":10018327,\"columns\":[{\"columnName\":\"plSubstructure\",\"columnIndex\":0,\"columnSize\":18,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"glCode\",\"columnIndex\":1,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"glDescription\",\"columnIndex\":2,\"columnSize\":18,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"sales\",\"columnIndex\":3,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"beginningInventory\",\"columnIndex\":4,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"purchases\",\"columnIndex\":5,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"production\",\"columnIndex\":6,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"costAdjustment\",\"columnIndex\":7,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"productionConsumption\",\"columnIndex\":8,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"endingInventory\",\"columnIndex\":9,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"costOfGoods\",\"columnIndex\":10,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"costPercent\",\"columnIndex\":11,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null},{\"columnName\":\"costPerGuest\",\"columnIndex\":12,\"columnSize\":6,\"visible\":true,\"locked\":false,\"lockedRegion\":null}],\"inactiveColumns\":null,\"rowPerPage\":null,\"bufferSize\":null,\"displayName\":null,\"fitColumns\":null,\"lockedPartWidth\":null}",
+    "response_full_length": 1635,
+    "first_seen_screen": "CostAnalysis"
+  },
+  "https://fiveguysfr77.net-chef.com/resource/layout/configuration/dashboard-widget-performance-metrics-grid": {
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "request_body": null,
+    "response_truncated": "<no body>",
+    "response_full_length": 9,
+    "first_seen_screen": "PurchasingOverview2"
+  }
+}

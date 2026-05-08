@@ -1,0 +1,23 @@
+{
+  "https://fiveguysfr77.net-chef.com/resource/ceslogin/resources": {
+    "method": "GET",
+    "status": 200,
+    "request_body": null,
+    "response_truncated": "{\"success\":true,\"contentMap\":{\"showSsoLink\":false,\"languages\":[\"eng\",\"spa\",\"schi\"],\"passwordUseSecurityQuestions\":false,\"useComplexPasswords\":true,\"appShortVersion\":\"20.26.04.23\",\"contactUsUrl\":\"https://crunchtime.zendesk.com\"}}",
+    "response_full_length": 228
+  },
+  "https://fiveguysfr77.net-chef.com/resource/ceslogin/auth": {
+    "method": "POST",
+    "status": 200,
+    "request_body": "{\"username\":\"BOBBY.CLINE\",\"password\":\"Muscle426$\",\"language\":null}",
+    "response_truncated": "{\"success\":true,\"contentMap\":{}}",
+    "response_full_length": 32
+  },
+  "https://fiveguysfr77.net-chef.com/resource/ceslogin/locations&page=1&start=0&limit=25": {
+    "method": "GET",
+    "status": 200,
+    "request_body": null,
+    "response_truncated": "{\"success\":true,\"contentMap\":{\"locations\":[{\"locationName\":\"IN-0384-New Albany\",\"locationId\":12384,\"customer\":false,\"location\":true,\"locationCode\":\"0384\",\"isLocation\":true,\"isCustomer\":false},{\"locationName\":\"IN-1616-Kokomo\",\"locationId\":12385,\"customer\":false,\"location\":true,\"locationCode\":\"1616\",\"isLocation\":true,\"isCustomer\":false},{\"locationName\":\"IN-1910-Muncie\",\"locationId\":12786,\"customer\":false,\"location\":true,\"locationCode\":\"1910\",\"isLocation\":true,\"isCustomer\":false},{\"locationName\":\"IN-1954-Jeffersonville\",\"locationId\":13038,\"customer\":false,\"location\":true,\"locationCode\":\"1954\",\"isLocation\":true,\"isCustomer\":false},{\"locationName\":\"IN-1959-Lafayette\",\"locationId\":12948,\"customer\":false,\"location\":true,\"locationCode\":\"1959\",\"isLocation\":true,\"isCustomer\":false},{\"locationName\":\"KY-0475-Summit Plaza\",\"locationId\":12386,\"customer\":false,\"location\":true,\"locationCode\":\"0475\",\"isLocation\":true,\"isCustomer\":false},{\"locationName\":\"KY-1704-Shelbyville\",\"locationId\":12387,\"customer\":false,\"location\":true,\"locationCode\":\"1704\",\"isLocation\":true,\"isCustomer\":false},{\"locationName\":\"KY-1731-Jefferson Commons\",\"locationId\":11346,\"customer\":false,\"location\":true,\"locationCode\":\"1731\",\"isLocation\":true,\"isCustomer\":false},{\"locationName\":\"KY-1788-Middleton\",\"locationId\":11504,\"customer\":false,\"location\":true,\"locationCode\":\"1788\",\"isLocation\":true,\"isCustomer\":false},{\"locationName\":\"KY-2065-Dixie Highway\",\"locationId\":13969,\"customer\":false,\"location\":true,\"locationCode\":\"2065\",\"isLocation\":true,\"isCustomer\":false},{\"locationName\":\"KY-2079-Elizabethtown\",\"locationId\":13044,\"customer\":false,\"location\":true,\"locationCode\":\"2079\",\"isLocation\":true,\"isCustomer\":false}]}}",
+    "response_full_length": 1694
+  }
+}

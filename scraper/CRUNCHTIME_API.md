@@ -435,6 +435,19 @@ Cookie auth has no rate limit visible to us; keep runs under 1/min as courtesy.
 
 ---
 
+## Section 1.6 — Purchasing Module (Partially Discovered — 2026-05-07)
+
+The Purchasing menu exists in `ct_menu_inventory.json`: Purchasing Overview, Create Vendor Order, Recent Vendor Orders, Create Purchase by Invoice, Recent Purchase by Invoices, Vendor Returns, Vendor Information, Purchase Journal, Purchases by GL, Cost Analysis. None were captured in the initial 119-endpoint sweep.
+
+| Method | Path | Notes |
+|---|---|---|
+| POST | `/resource/nc/purchasebyinvoice/summary` | Returns HTTP 200 but `{"rows":[],"total":0}` for all date-filter bodies tested. Needs Playwright navigation to the Purchasing screen first to establish page context. |
+| POST | `/resource/nc/purchasebyinvoice/resources` | Returns config: `{"deliveryMinDate":"05/04/2026","deliveryMaxDate":"05/10/2026","invoiceMinDate":"05/07/2016","invoiceMaxDate":"05/07/2036","isPbiReconcileRequired":false,"glLinkToCategory":"S"}`. Confirms data exists back to 2016. |
+
+**Status:** BLOCKED. Direct API POST returns empty. Fix path: add "PurchasingOverview", "RecentPurchaseByInvoices", "PurchaseJournal" to `api_discover_targeted.py` TARGETS dict, run discovery, capture the real POST body and date-range field names that fire with real data. Update this section when done.
+
+---
+
 ## Section 5 — Known constraints / gotchas
 
 - **DO NOT navigate to `/ncext/index.ct` (classic UI)** — logs out the modern.ct session. (Confirmed 2026-04-20.)
