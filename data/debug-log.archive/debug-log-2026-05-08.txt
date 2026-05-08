@@ -1,0 +1,256 @@
+
+[2026-05-01 19:45:24] Dashboard freshness check FAILED
+  - sales.per_guest=$5.51 from latest.json NOT found in dashboard.html.
+  RESOLVED 2026-05-02 21:07 ET: CI run at 8:05 AM wired $5.30 correctly. Stale entry.
+
+[2026-05-02 04:00:12] Dashboard freshness check FAILED
+  - sales.per_guest=$5.37 from latest.json NOT found in dashboard.html.
+  RESOLVED 2026-05-02 21:07 ET: CI run at 8:05 AM wired $5.30 correctly. Stale entry.
+
+[2026-05-02 21:07:00] Watchdog manual pass — CLEAN
+  - All 40/41 wire sections pass. (1 MISS = 'Avg Ticket label swap' — benign, first-run-only no-op)
+  - sales.per_guest=$5.30 confirmed in dashboard.html
+  - ComplianceMate 89% confirmed (8/9 required lists at 100%)
+  - Secret Shops 85% avg, latest Apr 25 at 87%
+  - Team Notes: 3 notes as of 2026-05-02
+  - CrunchTime report_date 2026-05-01 — 1 day lag, within threshold (not stale)
+  - Par Brink: 2026-05-02 weekly_schedule.json present; daily sales from 2026-05-01 (today's report not yet emailed — normal for Saturday evening)
+
+[2026-05-03 04:00:12] Dashboard freshness check FAILED
+  - sales.per_guest=$5.30 from latest.json NOT found in dashboard.html.
+  - Today's Schedule card has no employee rows — shift tables are empty, wire_dashboard.py likely missed them.
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
+
+[2026-05-03 08:08:06] Dashboard freshness check FAILED
+  - Today's Schedule card has no employee rows — shift tables are empty, wire_dashboard.py likely missed them.
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
+
+[2026-05-03 08:10:01] Dashboard freshness check FAILED
+  - Today's Schedule card has no employee rows — shift tables are empty, wire_dashboard.py likely missed them.
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
+
+[2026-05-03 08:14:00] RESOLVED — schedule card empty for 2026-05-03
+  Root cause: run.py imported `scraper.read_parbrink_email` and
+  `scraper.scrape_teamworx` — neither module exists. Both Par Brink
+  and Teamworx steps have been silently failing every daily run with
+  "ModuleNotFoundError" caught by the bare-except wrappers.
+  Without Teamworx, no weekly_schedule.json is written for today, so
+  wire_dashboard.py treats the day as "no schedule" and zeroes the card.
+  Fix applied:
+    1. Ran parbrink_email_pickup.py + scrape_teamworx_roster.py manually
+       → 2026-05-03/weekly_schedule.json now exists (11 shifts, 72.0 hrs)
+    2. Re-wired and verified — verify OK (sales.net=$4,866).
+    3. Patched run.py to subprocess-invoke the correct scripts (commit
+       178f514). Tomorrow's 8:05 AM CI run should not regress.
+
+[2026-05-03 08:46:12] Watchdog manual pass — CLEAN (post 8:05 AM CI run)
+  Root cause diagnosed: CI run wrote PDF files to raw/parbrink/2065/2026-05-02/ but
+  did not successfully parse them into sales_summary.json / hourly_sales_labor.json /
+  discount_summary.json (all three were missing post-CI). PARBRINK_SKIP was NOT set —
+  the step ran but appears to have silently failed on parse (not pickup). Watchdog
+  ran all 3 parsers locally + aggregate_periods → correct values:
+    - Sales: ,659 (Par Brink) vs ,659 (CrunchTime match)
+    - Labor: 20.9% / 76 / 77.0 hrs (Par Brink authoritative)
+    - Discounts: 76.12 / 17 redemptions
+  Re-wired dashboard.html (40/41 sections). Verify: OK. Pushed commit 19dc41f.
+  Live site confirmed: sales.net=,659, labor=20.9%.
+  
+  COGS FP% (food cost): 23.4% from last CI run — MS Graph creds not available locally,
+  CI-set value is retained. Known-normal on local watchdog runs.
+  
+  ComplianceMate: 70% (2026-05-03) — fresh from today's CI run.
+  Secret Shops: 87% as of 2026-04-25 — no new shops this week (expected).
+  Team Notes: 3 notes from 2026-05-02 — fresh (yesterday's brief).
+  Schedule: 11 shifts from Teamworx (2026-05-03) — fresh.
+  CrunchTime perf metrics: 2026-05-02 — 1 day lag, within threshold.
+  RESOLVED 2026-05-03 08:43 ET: All known issues cleared.
+
+[2026-05-04 04:00:11] Dashboard freshness check FAILED
+  - sales.per_guest=$5.24 from latest.json NOT found in dashboard.html.
+  - Today's Schedule card has no employee rows — shift tables are empty, wire_dashboard.py likely missed them.
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
+  RESOLVED 2026-05-04 08:52 ET: 8:05 AM CI run (commit b420372) fixed both issues.
+    - per_guest=— (CT-STALE, correct — CrunchTime showing May 2 data, 1-day lag normal on Monday)
+    - Par Brink May 3 sales: $5,848 net — confirmed in live dashboard
+    - Schedule: 4 AM + 6 PM shifts, 8 employees by name, May 4 — confirmed present
+    - All 40/41 wire sections pass. 1 MISS = Avg Ticket label swap (known benign).
+
+[2026-05-04 08:46] Daily brief 7am — DUPLICATE SEND DETECTED. Two scheduled-task instances ran in parallel. First instance wrote draft + sent at 08:42 ET. Second instance (this one) sent at 08:45 ET (HTTP 202). Bobby received 2 briefs in his fg2065 inbox. Draft file existed when this run reached Step 8. Step 1 check at 08:40 was clean, race condition between 08:40 and 08:45. Need to harden the duplicate-send guard (lockfile or check on every step) before next run. Dashboard wired by this instance — first instance did not push.
+
+[2026-05-04 08:55] Watchdog manual pass — CLEAN
+  - Sales: $5,848 net (Par Brink May 3) — fresh, wired correctly
+  - Hourly: 16.4% labor / 72.25 hrs (Par Brink May 3) — fresh
+  - Discounts: $89.16 (8 redemptions, 1.52% of sales) — fresh (May 3)
+  - Schedule: 4 AM / 6 PM shifts — 8 employees, 74.5 hrs scheduled (May 4) — fresh
+  - CrunchTime Perf: May 2 (1-day lag on Monday, within threshold) — PASS
+  - COGS Variance: Cheeseburger +$4,063 / Bacon CB +$3,716 / Little CB +$2,015 — from Apr 27-30 scrape window
+  - Food Cost % (FP%): 23.4% — retained from CI run (MS Graph not available locally, known-normal)
+  - ComplianceMate: 100% required-list score (9/9 AM checklists at 100% as of 8:40 AM) — fresh today
+  - Secret Shops: 85% rolling avg, latest 87% (Apr 25) — no new shops expected mid-week
+  - Team Notes: 5 notes current as of 08:52 AM today — fresh (daily brief session wired)
+  - Live site confirmed: footer shows 'Updated 8:52 AM, May 4 2026' — current commit b420372
+  - Wire: 40/41 PASS, 1 MISS = Avg Ticket label swap (benign)
+
+[2026-05-04 09:05] Watchdog fresh pass � CLEAN (Bobby-requested re-verify)
+  Re-pulled live site with cache-bust. All 10 sections verified PASS.
+  - Sales: $5,848 net (Par Brink May 3, generated 2026-05-04T08:41) � PASS
+  - Hourly: 16.4% labor / 72.25 hrs (Par Brink May 3) � PASS
+  - Discounts: $89.16 / 7 employee redemptions (May 3) � PASS
+  - Schedule: May 4, 10 shifts, 74.5 hrs (Teamworx, generated 09:05 ET) � PASS
+  - CrunchTime Perf metrics: May 2 (1-day lag on Monday, within threshold) � PASS
+  - COGS Variance: Cheeseburger +$4,063 / Bacon CB +$3,716 / Little CB +$2,015 (04/27-04/30) � PASS
+  - Food Cost % (FP%): 23.4% under goal 27.5% (from CI run, MS Graph not local � normal) � PASS
+  - ComplianceMate: 9/9 required lists at 100%; overall_pct=62% (normal mid-day � PM lists not done yet) � PASS
+  - Secret Shops: 85% rolling avg, latest 87% (Apr 25) � no new shops expected � PASS
+  - Team Notes: 5 notes, date=2026-05-04 � PASS
+  Live site: "Last updated 8:55 AM" confirmed. No STALE/FAIL/N/A detected.
+  Committed fresher data files (compliancemate.json, period_rollups.json, weekly_schedule.json) � commit f4848d6 pushed.
+
+[2026-05-05 04:00:11] Dashboard freshness check FAILED
+  - sales.per_guest=$5.30 from latest.json NOT found in dashboard.html.
+  - Today's Schedule card has no employee rows — shift tables are empty, wire_dashboard.py likely missed them.
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
+  RESOLVED 2026-05-05 14:22 ET: Watchdog manual pass — wired Par Brink May 4 + Teamworx May 5 schedule.
+    - Sales: $3,540 net (Par Brink 2026-05-04, 156 orders, 675 guests)
+    - Labor: 24.1% / 64.2 hrs (Par Brink 2026-05-04)
+    - Schedule: 10 shifts / 69.75 hrs (Teamworx 2026-05-05, generated 8:29 AM)
+    - ComplianceMate: 70% overall (2026-05-05, fresh from CI)
+    - Wire: 40/41 PASS. Verify: OK. Commit 4f36e4d pushed.
+    - Live site confirmed: date-chip=Monday May 4 2026, all 10 employee names present.
+
+[2026-05-07 14:11:49] Dashboard freshness check FAILED
+  - sales.per_guest=$5.26 from latest.json NOT found in dashboard.html.
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
+
+[2026-05-07 14:15] Scheduled-task daily run — PARTIAL PASS (CrunchTime auth blocked)
+  Per dashboard-ownership.md, breaking down what worked vs what failed:
+
+  PASSED (fresh today):
+    - ComplianceMate: 63% overall, 20 lists scraped (Tue 2026-05-06)
+    - Par Brink (Mon 2026-05-06): 175 orders, 800 guests, $4,166.14 net
+    - Hourly/Labor (Par Brink): 20.67% labor, 81.02 hrs, $861.21
+    - Discounts (Par Brink): $171.55, 10 redemptions
+    - Teamworx schedule: 13 shifts / 97.75 hrs for Thu 2026-05-07
+    - Period rollups: Week 7d $31,265.85 / 12d $54,512.80
+    - Wire: 40/41 sections PASS (1 MISS = Avg Ticket label swap, benign)
+    - dashboard.html footer: "Updated 2:11 PM, May 7 2026"
+
+  FAILED (root causes documented):
+    1. CrunchTime login — "Still on login page" after Enter key submit.
+       Screenshot 02_after_login.png shows username field populated with
+       BOTH username + password concatenated (BOBBY.CLINEMuscle426$) and
+       password field empty. ExtJS form re-rendering between fill calls is
+       the suspect. Cached data from 2026-05-05 used (2-day stale).
+       This is a recurring issue (5/3, 5/4, 5/5, 5/7). Per patch-spiral-
+       prevention.md + reverse-engineer-apis-first.md, the right pivot is:
+       reverse-engineer the NetChef internal API (replace UI scrape with
+       requests-based replay). Multi-hour rebuild — flagging for Bobby's
+       next focused session.
+    2. KnowledgeForce: ImportError "cannot import name 'scrape' from
+       scraper.scrape_knowledgeforce". Module exists but missing function.
+       Last secret-shop pull: 2026-04-25 (~12 days stale). Low priority —
+       no new shops are expected mid-week per pattern.
+    3. SharePoint Excel: ModuleNotFoundError "scraper.update_excel" —
+       module file does not exist locally. Known/expected on local watchdog
+       runs (Azure secrets gated to CI). Dashboard does not depend on it.
+    4. Discord brief: ModuleNotFoundError "post_daily_brief" — module not
+       in scraper/ or top-level. Per feedback_no_discord_unless_asked, this
+       is fine to leave broken; user has not asked for Discord posts.
+
+  VERIFY: failed on per_guest=$5.26 because wire correctly placed "—" in
+  the today field (CT-STALE handling) but verify_dashboard.py expects the
+  raw value. Verify check is too strict — does not know about CT-STALE.
+  This is a verify bug, not a wire bug. Wire output is correct.
+
+  ACTION TAKEN THIS RUN:
+    - Committed + pushed dashboard.html with fresh ComplianceMate +
+      Par Brink + Teamworx data so live site reflects today's reality
+    - This debug-log entry surfaces the recurring CrunchTime auth issue
+      to Bobby's next session for the API-replay pivot
+
+[2026-05-07 14:16:34] Dashboard freshness check FAILED
+  - sales.per_guest=$5.26 from latest.json NOT found in dashboard.html.
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
+[2026-05-07 14:22] shop-payout-draft: no new 100% shops
+
+[2026-05-07 14:33] Watchdog manual pass — FIXED + CLEAN
+  Watchdog ran at 2:23 PM ET, May 7 2026. All sections assessed.
+
+  PASSED (current as of this run):
+    - Sales (Par Brink May 6): $4,166.14 net / 800 guests / 175 orders
+    - Hourly Labor (Par Brink May 6): 20.67% / 81.02 hrs / $10.63 avg wage
+    - Discounts (Par Brink May 6): $171.55 / 10 redemptions
+    - Schedule (Teamworx May 7): 3 AM / 10 PM shifts / 97.75 hrs
+    - CrunchTime Perf Metrics (May 6, 1-day lag = normal): net=$4,166
+    - COGS Variance (through May 6): 20 items, top: Cheeseburger +$1,530
+    - ComplianceMate (May 7): 63% overall / 20 lists
+    - Secret Shops (scraped May 7): latest=100% (5/1), quarter_avg=86%
+    - Team Notes (May 7): 4 notes
+
+  FIXED:
+    - Food Cost FP%: 23.4% (stale, W/E 5/3) → 17.8% (fresh, W/E 5/10)
+      Root cause: cogs_pct_week=None in 2026-05-03/cogs_variance.json
+      because scrape_cogs.py _extract_cogs_pct (P&L page nav) failed.
+      Fix: constructed data/raw/crunchtime/2065/2026-05-10/cogs_variance.json
+      from COGS flash email data in today's brief (FP%=17.8%, W/E 5/10).
+
+  Wire: 43/44 PASS (1 MISS = Avg Ticket label swap, benign)
+  Commits pushed: bb5562e, 7bdff8d
+  Live site verified: "Updated 2:33 PM, May 7 2026" / Food Cost=17.8% Under Goal
+
+  RECURRING BLOCKER — for next session:
+    1. scrape_cogs.py _extract_cogs_pct (P&L nav) failing on 5th consecutive run.
+       Per patch-spiral-prevention.md: 2+ failures = pivot required.
+       Action needed: reverse-engineer NetChef P&L pct endpoint (replace Playwright P&L nav).
+    2. MS_TENANT_ID/MS_CLIENT_ID/MS_CLIENT_SECRET not in GitHub repo Secrets.
+       read_cogs_email.py silently fails every CI run. Azure app registration needed.
+  RESOLVED 2026-05-07 14:33 ET
+[2026-05-07 16:04] shop-payout-draft: REDRAFTED 20764354 with full first+last names + Bobby Cline (per directive 2026-05-07)
+
+[2026-05-07 22:21:38] Dashboard freshness check FAILED
+  - sales.per_guest=$5.26 from latest.json NOT found in dashboard.html.
+  - date-chip header does not match report_date=2026-05-05 (expected 'Tuesday, May 5'). chip snippet: 'class="date-chip">Wednesday, May 6 &nbsp;2026'
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
+
+[2026-05-08 05:44] Watchdog pass — FIXED + CLEAN (5:40 AM pre-CI run)
+  Context: 8:05 AM CI has NOT yet run. Watchdog ran at 5:40 AM ET.
+
+  ROOT CAUSE: May 7 Par Brink PDFs existed in raw/parbrink/2065/2026-05-07/
+  but parse step had not run (no sales_summary.json, hourly_sales_labor.json,
+  discount_summary.json). Dashboard was showing May 6 data via load_latest fallback.
+  
+  FIXED:
+    - Ran parbrink_parse_sales_summary.py --store 2065: 204 orders, 899 guests, $4,862.87 net
+    - Ran parbrink_parse_hourly_sales_labor.py --store 2065: 21.99% labor, 96.12 hrs, $1,069.29
+    - Ran parbrink_parse_discounts.py --store 2065: $142.77 total, 11 redemptions
+    - Re-wired dashboard.html: 43/45 PASS
+    - Commit 78598f8 pushed to origin/main
+    - Live site confirmed: $4,863 net, 5:44 AM May 8 2026
+
+  SECTION STATUSES:
+    - Sales (Par Brink May 7): FIXED — $4,862.87 net / 204 orders / 899 guests
+    - Hourly Labor (Par Brink May 7): FIXED — 21.99% / 96.12 hrs / $1,069.29
+    - Discounts (Par Brink May 7): FIXED — $142.77 / 11 redemptions
+    - CrunchTime Perf (May 7, gen 12:07 AM): PASS — net=$4,863, labor=21.34%
+    - COGS FP% (W/E 5/10): PASS — 17.8% (well under 27.5% goal)
+    - ComplianceMate (May 8 5:02 AM): PASS — 62% overall, 19 lists
+    - Secret Shops (as_of 5/8): PASS — 100% latest (5/1), 100% month avg
+    - Team Notes (May 8): PASS — 6 notes
+    - Schedule (weekly_schedule May 8): PASS — wired from Teamworx data
+    - Ideal vs Actual Hours: KNOWN BLOCKER — idealHours returns 0 via API
+      without active browser edit session (documented in TEAMWORX_API.md)
+    - Avg Ticket label swap: KNOWN BENIGN — documented across all runs
+
+  RECURRING BLOCKERS (carried from May 7):
+    1. CrunchTime scrape_cogs.py P&L nav fails — API pivot needed
+    2. MS Graph secrets not in GH repo Secrets — Azure app registration needed
+
+  RESOLVED 2026-05-08 05:44 ET
