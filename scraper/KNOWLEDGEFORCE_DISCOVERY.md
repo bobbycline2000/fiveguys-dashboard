@@ -2,6 +2,8 @@
 
 **Verified live 2026-04-27** by walking the site via Claude in Chrome. The recurring scraper can be built directly from this — no further discovery needed.
 
+**Updated 2026-05-07:** Pure `requests` API scraper (`scrape_knowledgeforce_api.py`) shipped and confirmed working. Bug fixed: merge logic now preserves historical SQC fields (service/quality/cleanliness/customer_satisfaction) when API returns null. build_shop_tracker.py extended to cover Jan–May (was Jan–Apr). wire_dashboard.py patched to handle null SQC gracefully.
+
 ## Login
 - **URL:** `https://www.knowledgeforce.com/`
 - **Username:** `fg2065@estep-co.com`
