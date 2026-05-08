@@ -1,15 +1,16 @@
-name: Daily Dashboard Update (Backup 8:45 AM)
+name: Daily Dashboard Update (Backup 5:40 AM)
 
-# Contingency run — 40 minutes after the primary 8:05 AM run.
-# If the 8:05 AM run failed or any data was stale, this run picks up
+# Contingency run — 40 minutes after the primary 5:00 AM run.
+# If the 5:00 AM run failed or any data was stale, this run picks up
 # fresh emails (since Par Brink can be delayed) and re-wires the
 # dashboard. Uses the same scripts; only the schedule and run label
-# differ.
+# differ. Moved from 8:45 AM 2026-05-07 per Bobby.
 
 on:
   schedule:
-    # 8:45 AM Eastern (12:45 UTC summer / 13:45 UTC winter)
-    - cron: "45 12 * * *"
+    # 5:40 AM Eastern (09:40 UTC EDT / 10:40 UTC EST).
+    # DST FLIP: when EST returns ~Nov 2 2026, change to "40 10 * * *".
+    - cron: "40 9 * * *"
   workflow_dispatch:  # allow manual trigger from GitHub Actions tab
 
 permissions:

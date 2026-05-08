@@ -2,8 +2,9 @@ name: Daily Dashboard Update
 
 on:
   schedule:
-    # 8:05 AM Eastern (12:05 UTC summer / 13:05 UTC winter)
-    - cron: "5 12 * * *"
+    # 5:00 AM Eastern (09:00 UTC EDT / 10:00 UTC EST). Moved from 8:05 AM 2026-05-07 per Bobby.
+    # DST FLIP: when EST returns ~Nov 2 2026, change to "0 10 * * *".
+    - cron: "0 9 * * *"
   workflow_dispatch:  # allow manual trigger from GitHub Actions tab
 
 permissions:
