@@ -59,7 +59,9 @@ def fetch_forecast(store: str) -> dict:
 
 
 def normalize(data: dict, week_end: date_cls, today: date_cls, store: str) -> dict:
-    days_in = data.get("salesForecastDays") or data.get("forecastDays") or []
+    # Real response shape: { dayForecast, weekForecast: { salesForecastDays: [...], weeklyIdealsHours, weeklyScheduledHours, ... } }
+    week = data.get("weekForecast") or {}
+    days_in = week.get("salesForecastDays") or data.get("salesForecastDays") or []
     week_start = week_end - timedelta(days=6)
 
     out_days = []
@@ -90,9 +92,15 @@ def normalize(data: dict, week_end: date_cls, today: date_cls, store: str) -> di
         },
         "days": out_days,
         "totals": {
-            "ideal_hours": round(sum(d["ideal_hours"] for d in out_days), 2),
-            "scheduled_hours": round(sum(d["scheduled_hours"] for d in out_days), 2),
-            "variance_hours": round(sum(d["variance_hours"] for d in out_days), 2),
+            "ideal_hours":     round(float(week.get("weeklyIdealsHours") or sum(d["ideal_hours"] for d in out_days)), 2),
+            "scheduled_hours": round(float(week.get("weeklyScheduledHours") or sum(d["scheduled_hours"] for d in out_days)), 2),
+            "variance_hours":  round(float(week.get("scheduledVariance") or sum(d["variance_hours"] for d in out_days)), 2),
+        },
+        "week_totals_raw": {
+            "weeklyIdealsHours": week.get("weeklyIdealsHours"),
+            "weeklyScheduledHours": week.get("weeklyScheduledHours"),
+            "scheduledVariance": week.get("scheduledVariance"),
+            "totalSales": week.get("totalSales"),
         },
     }
 
