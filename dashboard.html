@@ -1204,12 +1204,36 @@ body {
             document.getElementById('iva-week-pill').textContent = d.week_pill;
             var ctx = document.getElementById('ideal-vs-actual-chart').getContext('2d');
             new Chart(ctx, {
-              type: 'bar',
+              type: 'line',
               data: {
                 labels: d.labels,
                 datasets: [
-                  { label: 'Ideal', data: d.ideal, backgroundColor: '#DA291C', borderRadius: 4 },
-                  { label: 'Scheduled', data: d.scheduled, backgroundColor: 'rgba(255,255,255,.65)', borderRadius: 4 }
+                  {
+                    label: 'Ideal',
+                    data: d.ideal,
+                    borderColor: '#DA291C',
+                    backgroundColor: 'rgba(218,41,28,.18)',
+                    borderWidth: 2.5,
+                    tension: 0.35,
+                    fill: true,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#DA291C',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 1.5
+                  },
+                  {
+                    label: 'Scheduled',
+                    data: d.scheduled,
+                    borderColor: '#ffffff',
+                    backgroundColor: 'rgba(255,255,255,.10)',
+                    borderWidth: 2.5,
+                    tension: 0.35,
+                    fill: true,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#DA291C',
+                    pointBorderWidth: 1.5
+                  }
                 ]
               },
               options: {
