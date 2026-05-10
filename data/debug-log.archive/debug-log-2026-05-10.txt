@@ -1,1 +1,6 @@
-[2026-05-09 10:35:28] outlook-daily-pull-7am: auth failure: could not locate runnable browser
+[2026-05-10 10:04:56] outlook-daily-pull-7am: auth failure: could not locate runnable browser
+
+[2026-05-10 10:12:20] Dashboard freshness check FAILED
+  - sales.net=$4,895 from latest.json (CrunchTime) NOT found in dashboard.html — the Daily Sales KPI is stale or wire_dashboard.py failed to update it.
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
