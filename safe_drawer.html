@@ -228,6 +228,33 @@
   }
   .reminder b { color: #92400E; }
 
+  /* ── Deposit-status banner (yesterday + day before) ────────── */
+  .dep-status { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  @media (max-width: 720px) { .dep-status { grid-template-columns: 1fr; } }
+  .dep-card {
+    padding: 12px 14px; border-radius: 8px;
+    border-left: 5px solid #ccc; background: white;
+    border: 1px solid var(--line); border-left-width: 5px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .dep-card.entered { border-left-color: var(--green); background: #ECFDF5; }
+  .dep-card.missing { border-left-color: var(--red); background: #FEF2F2; }
+  .dep-card .ico { font-size: 22px; line-height: 1; }
+  .dep-card .body { flex: 1; }
+  .dep-card .label { font-size: 11px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 1px; }
+  .dep-card .val { font-size: 16px; font-weight: 700; margin-top: 2px; color: var(--ink); }
+  .dep-card .small { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .dep-card.missing .val { color: var(--red); }
+  .dep-card.missing .dot {
+    width: 10px; height: 10px; border-radius: 50%; background: var(--red);
+    animation: pulse 1.4s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(200,16,46,0.6); }
+    70%  { box-shadow: 0 0 0 10px rgba(200,16,46,0); }
+    100% { box-shadow: 0 0 0 0 rgba(200,16,46,0); }
+  }
+
   .footer { font-size: 11px; color: var(--ink-soft); text-align: center; padding: 18px; }
   .footer a { color: var(--navy); }
 
@@ -262,6 +289,9 @@
       <b>★ Nightly counts must be completed before the closing manager leaves.</b>
       Mid-shift count is the lunch / afternoon reconciliation.
     </div>
+
+    <!-- Deposit-entered status banner — auto-rendered by JS -->
+    <div id="dep-status" class="dep-status"></div>
 
     <div class="card">
       <h2>Manager on Duty</h2>
@@ -527,6 +557,57 @@ async function loadCtHistory() {
   } catch (_) {}
 }
 
+function renderDepStatus() {
+  // Yesterday + day-before status. By 10–11 AM ET both should be entered
+  // in CT. Highlight what's missing so the manager knows to enter it.
+  const el = $('dep-status');
+  const today = new Date();
+  const y = new Date(today); y.setDate(today.getDate() - 1);
+  const d2 = new Date(today); d2.setDate(today.getDate() - 2);
+  const days = [y, d2];
+
+  el.innerHTML = days.map(dt => {
+    const iso = dt.toISOString().slice(0, 10);
+    const row = (CT_HISTORY || []).find(r => r.business_date === iso);
+    const dateLabel = dt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    const sales = row ? row.gross_sales : 0;
+    const dep = row ? row.deposit : 0;
+    const hasSales = sales > 1; // some sales happened
+    const hasDeposit = dep > 0.005;
+
+    // Only flag "missing" if there were real sales that day but no deposit
+    if (!hasSales) {
+      return `<div class="dep-card">
+        <span class="ico">⏳</span>
+        <div class="body">
+          <div class="label">${dateLabel} deposit</div>
+          <div class="val">awaiting CT data</div>
+          <div class="small">No sales record yet for this date.</div>
+        </div>
+      </div>`;
+    }
+    if (hasDeposit) {
+      return `<div class="dep-card entered">
+        <span class="ico">✅</span>
+        <div class="body">
+          <div class="label">${dateLabel} deposit — entered in CT</div>
+          <div class="val">${fmt(dep)}</div>
+          <div class="small">Gross sales ${fmt(sales)}</div>
+        </div>
+      </div>`;
+    }
+    return `<div class="dep-card missing">
+      <span class="ico">⚠️</span>
+      <div class="body">
+        <div class="label">${dateLabel} deposit — NOT YET in CT</div>
+        <div class="val">action needed</div>
+        <div class="small">Gross sales ${fmt(sales)} — deposit slip needs to be entered.</div>
+      </div>
+      <span class="dot"></span>
+    </div>`;
+  }).join('');
+}
+
 function renderDeposits() {
   const el = $('dep-list');
   if (!CT_HISTORY || !CT_HISTORY.length) {
@@ -650,6 +731,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadForDate($('f-date').value);
   renderHistory();
   renderDeposits();
+  renderDepStatus();
 });
 </script>
 </body>

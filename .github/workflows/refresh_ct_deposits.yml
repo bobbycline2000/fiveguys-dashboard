@@ -1,0 +1,78 @@
+name: Refresh CT Deposits (hourly during entry window)
+
+# Closing managers enter the prior-day deposit into CrunchTime between
+# ~9:30 AM and 11 AM ET (sometimes later). The 5 AM daily run captures the
+# pre-entry snapshot. This workflow re-pulls CT during the entry window so
+# the safe_drawer page reflects the deposit within an hour of entry —
+# without anyone touching a laptop.
+#
+# Cron uses UTC. ET is UTC-4 (EDT). When EST returns ~Nov 2 2026, bump
+# each hour by +1.
+
+on:
+  schedule:
+    - cron: "0 13,14,15,16,17 * * *"   # 9, 10, 11 AM, noon, 1 PM ET
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Don't race with the main daily workflow on git push.
+concurrency:
+  group: dashboard-update
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: pip install -r scraper/requirements.txt
+
+      - name: Cache Playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('scraper/requirements.txt') }}
+          restore-keys: playwright-chromium-${{ runner.os }}-
+
+      - name: Install Chromium
+        run: python -m playwright install chromium --with-deps
+
+      - name: Install Xvfb
+        run: sudo apt-get install -y xvfb
+
+      - name: Pull CT Sales Summary (deposits + over/short)
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scripts/track_ct_sales_summary.py
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ct_sales_summary_history.json data/ct_cookies.json data/ct_sales_summary_sample.json || true
+          if git diff --cached --quiet; then
+            echo "No changes — deposit still not entered in CT."
+          else
+            DATE=$(date -u +"%Y-%m-%d %H:%M UTC")
+            git commit -m "chore: hourly CT deposit refresh — ${DATE}"
+            git pull --rebase -X theirs --autostash origin main
+            git push origin main
+            echo "CT deposit history updated."
+          fi
