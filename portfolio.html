@@ -147,7 +147,7 @@
   <div class="role">Operations Systems &amp; Strategic Consulting</div>
   <div class="rule"></div>
   <p class="lede">Eleven years building and running franchise restaurants. Now building the operational systems — dashboards, briefs, automations, schedules — that owner-operators wish corporate had given them. Based in Louisville, Kentucky.</p>
-  <div class="meta">Portfolio · v4 · May 2026</div>
+  <div class="meta">Portfolio · v5 · May 2026</div>
 </header>
 
 <!-- ─── PROFILE ─── -->
@@ -349,6 +349,42 @@
               <dd>GitHub Pages</dd>
               <dt>Status</dt>
               <dd>Production · 20 active</dd>
+            </dl>
+          </div>
+        </div>
+      </article>
+
+      <!-- SAFE & DRAWER LOG + DEPOSIT AGENT -->
+      <article class="case">
+        <div class="hd">
+          <span class="cat">Lights-Out Cash Flow</span>
+          <span class="status shipped">▪ Live · Daily</span>
+        </div>
+        <h3 class="title">Safe &amp; Drawer Log + CT Deposit Agent</h3>
+        <p class="tagline">Manager taps a button on their phone. The deposit lands in CrunchTime inside an hour. Bobby never opened a laptop.</p>
+        <div class="body">
+          <div class="lhs">
+            <strong class="lbl">The Problem</strong>
+            <p>Three independent gaps every closing shift: (1) safe and drawer counts lived on a paper log nobody could verify shift-over-shift; (2) the nightly deposit got entered into CrunchTime by whichever manager opened the next day — sometimes 9:30 AM, sometimes never; (3) Bobby was the only person who actually knew if last night's deposit had been logged. None of that scales past one store.</p>
+            <strong class="lbl">What I Built</strong>
+            <p>A shared manager form at <code>safe_drawer.html</code> with three count phases (opening, mid-shift, nightly required) backed by a Cloudflare worker that writes directly to the GitHub repo. Same write surface for every device, every manager, every shift. CrunchTime's <code>registerSales/summary</code> API auto-fills yesterday's over/short and shows a red banner when yesterday's deposit hasn't been entered. Manager taps "Enter in CT" — Cloudflare worker queues the request, the hourly GitHub Actions cron picks it up, opens the next.ct edit form via Playwright (fires CT's form-prep chain), replays <code>/bankdeposits/save</code> + <code>/submit</code>. Deposit lands in CT within the hour. Status flips to green automatically.</p>
+            <strong class="lbl">Why It Matters</strong>
+            <p>This is the consulting-product proof: a closing manager can hand off financial data into a corporate system from their phone, lights-out, no laptop, no spreadsheet, no Bobby in the loop. The same pattern templates to every store and every client.</p>
+          </div>
+          <div class="rhs">
+            <dl>
+              <dt>Surface</dt>
+              <dd>Phone-first PWA</dd>
+              <dt>Backend</dt>
+              <dd>Cloudflare Worker + GH Actions</dd>
+              <dt>CT API</dt>
+              <dd>3 endpoints reverse-engineered</dd>
+              <dt>Refresh</dt>
+              <dd>Hourly 9 AM–1 PM ET</dd>
+              <dt>Marginal cost</dt>
+              <dd>$0/month at this volume</dd>
+              <dt>Status</dt>
+              <dd>Live · KY-2065</dd>
             </dl>
           </div>
         </div>
@@ -639,7 +675,7 @@
 </section>
 
 <footer class="fin">
-  Bobby Cline · Savior Consulting Group · Built with Claude Code · Portfolio v4 · 2026-05-03
+  Bobby Cline · Savior Consulting Group · Built with Claude Code · Portfolio v5 · 2026-05-11
 </footer>
 
 </body>
