@@ -150,20 +150,6 @@ jobs:
           CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
         run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_teamworx_roster.py --store 2065
 
-      # Weekly ideal-vs-scheduled hours from Teamworx (getWbForecastData).
-      # Pure HTTP, uses cookies minted by the roster step above.
-      - name: Scrape Teamworx Ideal vs Scheduled Hours (store 2065)
-        continue-on-error: true
-        run: python scraper/scrape_teamworx_ideal_vs_actual.py --store 2065
-
-      # Screenshot today's per-day hourly labor graph from Teamworx.
-      - name: Screenshot Teamworx hourly labor graph (store 2065)
-        continue-on-error: true
-        env:
-          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
-          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
-        run: xvfb-run --server-args="-screen 0 1600x1000x24" python scraper/scrape_teamworx_graph_screenshot.py --store 2065
-
       # ── 4h. Roll up daily sales_summary.json into Week/Month/Quarter ──────
       # Reads every data/raw/parbrink/2065/<date>/sales_summary.json and writes
       # data/period_rollups.json. wire_dashboard.py uses this to populate the

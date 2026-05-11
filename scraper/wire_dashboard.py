@@ -78,7 +78,6 @@ if cogs is None:
 discounts, _ = load_latest("parbrink", "discount_summary.json")
 sales_summary, _ = load_latest("parbrink", "sales_summary.json")
 hourly_labor, _ = load_latest("parbrink", "hourly_sales_labor.json")
-ideal_vs_actual, _ = load_latest("teamworx", "ideal_vs_actual.json")
 
 # CrunchTime staleness check — Par Brink is the authoritative source.
 # If CrunchTime report_date is more than 1 day behind today, treat its
@@ -354,92 +353,6 @@ if hourly_labor and hourly_labor.get("hours"):
     rep(r'const laborData = \[[^\]]*\];',
         new_array.replace('\\', '\\\\'),
         "hourly labor bars",
-        flags=DOTALL)
-
-# ── Today's Hourly Labor Forecast (Teamworx graph screenshot) ─────────
-# Find the most recent data/raw/teamworx/<store>/<YYYY-MM-DD>/graph.png
-twx_graph_dir = ROOT / "data" / "raw" / "teamworx" / STORE_ID
-twx_graph_rel = None
-twx_graph_date = None
-if twx_graph_dir.exists():
-    dated = sorted(
-        [d for d in twx_graph_dir.iterdir() if d.is_dir() and (d / "graph.png").exists()],
-        key=lambda p: p.name,
-        reverse=True,
-    )
-    if dated:
-        latest = dated[0]
-        twx_graph_rel = f"data/raw/teamworx/{STORE_ID}/{latest.name}/graph.png"
-        twx_graph_date = latest.name
-
-if twx_graph_rel:
-    try:
-        from datetime import date as _date
-        d = _date.fromisoformat(twx_graph_date)
-        pill_label = d.strftime("%a %b %d").replace(" 0", " ")
-    except Exception:
-        pill_label = "Today"
-
-    new_block = (
-        '<!-- TEAMWORX-GRAPH-IMG-START -->\n'
-        '        <div style="margin-top:6px;background:#fff;border-radius:8px;padding:8px;min-height:240px;display:flex;align-items:center;justify-content:center;">\n'
-        f'          <img id="twx-graph-img" src="{twx_graph_rel}?v={twx_graph_date}" alt="Teamworx hourly labor forecast" style="max-width:100%;max-height:340px;">\n'
-        '        </div>\n'
-        '        <!-- TEAMWORX-GRAPH-IMG-END -->'
-    )
-    rep(r'<!-- TEAMWORX-GRAPH-IMG-START -->.*?<!-- TEAMWORX-GRAPH-IMG-END -->',
-        new_block.replace('\\', '\\\\'),
-        "teamworx graph image",
-        flags=DOTALL)
-
-    # Update pill label
-    rep(r'<div class="pill pill-white" id="twx-graph-pill">[^<]*</div>',
-        f'<div class="pill pill-white" id="twx-graph-pill">{pill_label}</div>',
-        "teamworx graph pill",
-        flags=DOTALL)
-
-# ── Ideal vs Scheduled Hours (Teamworx weekly forecast) ───────────────
-if ideal_vs_actual and ideal_vs_actual.get("days"):
-    days = ideal_vs_actual["days"]
-    totals = ideal_vs_actual.get("totals", {})
-    meta = ideal_vs_actual.get("meta", {})
-
-    labels   = [d["day_label"] for d in days]
-    ideal    = [d["ideal_hours"] for d in days]
-    sched    = [d["scheduled_hours"] for d in days]
-
-    ideal_total    = f'{totals.get("ideal_hours", 0):.1f} hrs'
-    sched_total    = f'{totals.get("scheduled_hours", 0):.1f} hrs'
-    var_total_num  = totals.get("variance_hours", 0)
-    var_total      = f'{"+" if var_total_num > 0 else ""}{var_total_num:.1f} hrs'
-
-    # Pretty week pill: "Apr 27 – May 3"
-    try:
-        from datetime import date as _date
-        ws = _date.fromisoformat(meta.get("week_start"))
-        we = _date.fromisoformat(meta.get("week_end"))
-        week_pill = f'{ws.strftime("%b %d").replace(" 0"," ")} – {we.strftime("%b %d").replace(" 0"," ")}'
-    except Exception:
-        week_pill = "This Week"
-
-    new_block = (
-        '<!-- IDEAL-VS-ACTUAL-DATA-START -->\n'
-        '        <script>\n'
-        '          window.__idealVsActual = {\n'
-        f'            labels: {json.dumps(labels)},\n'
-        f'            ideal: {json.dumps(ideal)},\n'
-        f'            scheduled: {json.dumps(sched)},\n'
-        f'            ideal_total: {json.dumps(ideal_total)},\n'
-        f'            sched_total: {json.dumps(sched_total)},\n'
-        f'            variance_total: {json.dumps(var_total)},\n'
-        f'            week_pill: {json.dumps(week_pill)}\n'
-        '          };\n'
-        '        </script>\n'
-        '        <!-- IDEAL-VS-ACTUAL-DATA-END -->'
-    )
-    rep(r'<!-- IDEAL-VS-ACTUAL-DATA-START -->.*?<!-- IDEAL-VS-ACTUAL-DATA-END -->',
-        new_block.replace('\\', '\\\\'),
-        "ideal vs actual hours data",
         flags=DOTALL)
 
 # ── Food Cost Big % (cogs_pct_week from CrunchTime) ────────────────────
