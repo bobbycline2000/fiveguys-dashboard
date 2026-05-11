@@ -265,6 +265,38 @@ def post_credit_card_tip(jar, mon, sun, employee_id, position_id, lump_sum):
     return res
 
 
+# --- API: commit pending session-queued changes ------------------------------
+# Discovered 2026-05-11: /save POSTs to supplemental-wages queue rows in the
+# user session but DO NOT persist. The disk-save → "Labor Adjustments Alert"
+# dialog → Continue button is what actually commits. That UI flow fires:
+#   1. POST /resource/labor-details/prepare        (returns WIP or summary)
+#   2. (if dialog shows) user clicks Continue
+#   3. POST /resource/labor-details/labor-actuals/validate  (final commit)
+# Without these two calls the /save rows never appear in the labor week.
+def commit_pending(jar, mon, sun):
+    """Call /prepare + /labor-actuals/validate to commit queued /save rows.
+    Returns (committed:bool, detail:dict). Raises only on transport error."""
+    # 1. /prepare — locks the session WIP for commit
+    p = requests.post(f"{NETCHEF}/resource/labor-details/prepare",
+                      json={}, cookies=jar, headers=HDR, timeout=30)
+    p.raise_for_status()
+    prep = p.json() if p.text else {}
+    if not prep.get("success"):
+        # WORK_IN_PROGRESS PREPARE with empty fields means nothing queued.
+        msgs = prep.get("contentMap",{}).get("messageList") or []
+        return False, {"step":"prepare","response":prep,"messages":msgs}
+
+    # 2. /labor-actuals/validate — final commit, equivalent to clicking
+    # "Continue" on the Labor Adjustments Alert. Body shape captured from
+    # browser network log on 2026-05-11 commit (verified live).
+    body = {"weekEndingDate": fmt(sun), "operatingDate": fmt(mon)}
+    v = requests.post(f"{NETCHEF}/resource/labor-details/labor-actuals/validate",
+                      json=body, cookies=jar, headers=HDR, timeout=60)
+    v.raise_for_status()
+    val = v.json() if v.text else {}
+    return bool(val.get("success", True)), {"step":"validate","response":val}
+
+
 # --- Verify ------------------------------------------------------------------
 def verify_saved(jar, sun):
     """Pull supplementals for week-ending and report count + sum of Credit Card Tip rows."""
@@ -392,6 +424,23 @@ def main():
     print(f"\n[write] posted {posted}/{len(payouts)}, failures: {len(failed)}")
     if failed:
         for n, e in failed: print(f"   FAIL: {n} :: {e}")
+
+    # 5b. COMMIT — /save only queues; /prepare + /labor-actuals/validate
+    # is what makes the rows persist. Without this step the entries vanish.
+    print(f"\n[commit] firing /prepare + /labor-actuals/validate to commit session WIP...")
+    try:
+        committed, detail = commit_pending(jar, mon, sun)
+        if committed:
+            print(f"[commit] OK — {detail.get('step')} returned success")
+        else:
+            print(f"[commit] FAILED at {detail.get('step')} — {detail}")
+            print(f"[commit] FALLBACK NEEDED: open browser, navigate to "
+                  f"Labor Summary → Edit WE {fmt(sun)} → Supplemental Wages → "
+                  f"click disk save (top-right) → click Continue on dialog. "
+                  f"Rows are queued server-side; this just triggers the commit.")
+    except Exception as e:
+        print(f"[commit] EXCEPTION: {e}")
+        print(f"[commit] FALLBACK NEEDED: see manual commit steps above.")
 
     # 6. Verify
     count, total, _ = verify_saved(jar, sun)
