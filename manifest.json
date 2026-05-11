@@ -1,0 +1,56 @@
+{
+  "name": "Five Guys 2065 Ops",
+  "short_name": "FG 2065",
+  "description": "Live operations dashboard for Five Guys Store 2065 — sales, labor, food cost, safe & drawer log, secret shops, schedule.",
+  "id": "/fiveguys-dashboard/",
+  "scope": "/fiveguys-dashboard/",
+  "start_url": "/fiveguys-dashboard/dashboard.html",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#C8102E",
+  "background_color": "#F6F5F1",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Safe & Drawer Log",
+      "short_name": "Counts",
+      "description": "Open today's safe and drawer count log",
+      "url": "/fiveguys-dashboard/safe_drawer.html",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Bread Order",
+      "short_name": "Bread",
+      "description": "Open the bread ordering tool",
+      "url": "/fiveguys-dashboard/bread.html",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Synopsis",
+      "short_name": "Synopsis",
+      "description": "Open the weekly synopsis dashboard",
+      "url": "/fiveguys-dashboard/synopsis.html",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
