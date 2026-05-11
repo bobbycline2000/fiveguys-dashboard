@@ -1,51 +1,35 @@
 {
-    "meta":  {
-                 "date":  "2026-05-10",
-                 "generated":  "5/11/2026 at 3:49 AM",
-                 "location":  "2065",
-                 "status":  "ok"
-             },
-    "overall_pct":  100,
-    "overall_all_pct":  100,
-    "lists":  [
-                  {
-                      "name":  "11AM: Time and Temp",
-                      "pct":  100,
-                      "all_pct":  100,
-                      "list_id":  "189006"
-                  },
-                  {
-                      "name":  "1PM: Time and Temp",
-                      "pct":  100,
-                      "all_pct":  100,
-                      "list_id":  "199718"
-                  },
-                  {
-                      "name":  "3PM: Time and Temp",
-                      "pct":  100,
-                      "all_pct":  100,
-                      "list_id":  "192309"
-                  },
-                  {
-                      "name":  "5PM: Time and Temp",
-                      "pct":  100,
-                      "all_pct":  100,
-                      "list_id":  "194748"
-                  },
-                  {
-                      "name":  "7PM: Time and Temp",
-                      "pct":  100,
-                      "all_pct":  100,
-                      "list_id":  "197189"
-                  },
-                  {
-                      "name":  "9PM: Time and Temp",
-                      "pct":  100,
-                      "all_pct":  100,
-                      "list_id":  "200256"
-                  }
-              ],
-    "list_count":  6,
-    "fetched_at":  "2026-05-11T03:48:44.009730-04:00",
-    "source":  "compliancemate_url_replay"
+  "date": "2026-05-11",
+  "location_id": "18170",
+  "list_count": 4,
+  "overall_required_pct": 74,
+  "overall_all_pct": 74,
+  "lists": [
+    {
+      "name": "11AM: Time and Temp",
+      "list_id": "189006",
+      "required_pct": 100,
+      "all_pct": 100
+    },
+    {
+      "name": "1PM: Time and Temp",
+      "list_id": "199718",
+      "required_pct": 100,
+      "all_pct": 100
+    },
+    {
+      "name": "3PM: Time and Temp",
+      "list_id": "192309",
+      "required_pct": 100,
+      "all_pct": 100
+    },
+    {
+      "name": "5PM: Time and Temp",
+      "list_id": "194748",
+      "required_pct": 0,
+      "all_pct": 0
+    }
+  ],
+  "fetched_at": "2026-05-11T16:27:16.925857-04:00",
+  "source": "compliancemate_url_replay"
 }
