@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Safe & Drawer — Design Picker — Five Guys 2065</title>
+<link rel="icon" href="data:," />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Shared base ─────────────────────────────────────────────────── */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: 'Inter', system-ui, sans-serif; color: #111; }
+  body { background: #ecebe6; }
+
+  /* ── Picker bar ──────────────────────────────────────────────────── */
+  .picker {
+    position: sticky; top: 0; z-index: 100;
+    background: #111; color: white; padding: 12px 20px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .picker .title { font-weight: 700; letter-spacing: 0.5px; font-size: 14px; opacity: 0.85; }
+  .picker .btn {
+    background: transparent; color: white; border: 1px solid #444;
+    padding: 8px 16px; border-radius: 999px; cursor: pointer;
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    transition: all 0.15s;
+  }
+  .picker .btn:hover { background: #222; }
+  .picker .btn.active { background: white; color: #111; border-color: white; }
+  .picker .pick-note {
+    margin-left: auto; font-size: 12px; opacity: 0.6;
+  }
+  .picker .pick-note b { color: #FACC15; }
+
+  /* ── Mode containers (only one shown at a time) ──────────────────── */
+  .mode { display: none; }
+  body.mode-A .mode-A,
+  body.mode-B .mode-B,
+  body.mode-C .mode-C { display: block; }
+
+
+  /* ╔══════════════════════════════════════════════════════════════╗
+     ║  DIRECTION A — INK PRESS EDITORIAL                           ║
+     ║  Newspaper masthead, serif headlines, ledger-feel rows.       ║
+     ║  Matches dashboard Ink Press aesthetic.                       ║
+     ╚══════════════════════════════════════════════════════════════╝ */
+  .ink {
+    background: #f4f1e8;
+    color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+  }
+  .ink .masthead {
+    border-bottom: 4px double #111;
+    padding: 28px 32px 18px;
+    background: #f4f1e8;
+  }
+  .ink .masthead .dateline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: #666; margin-bottom: 8px;
+  }
+  .ink .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 52px; margin: 0;
+    letter-spacing: -1.5px; line-height: 1;
+  }
+  .ink .masthead .tagline {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic; font-size: 17px; color: #555;
+    margin-top: 8px; border-top: 1px solid #aaa; padding-top: 8px;
+    max-width: 700px;
+  }
+  .ink main { max-width: 1080px; margin: 0 auto; padding: 28px 32px; }
+  .ink .section-head {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 28px; margin: 26px 0 14px;
+    border-bottom: 2px solid #111; padding-bottom: 6px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .ink .section-head .roman {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: #C8102E; letter-spacing: 2px;
+  }
+  .ink .bank-strip {
+    background: #111; color: #f4f1e8; padding: 14px 18px;
+    display: flex; gap: 32px; flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .ink .bank-strip b { color: #FACC15; }
+  .ink .ledger-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    padding: 14px 0;
+  }
+  @media (max-width: 720px) { .ink .ledger-row { grid-template-columns: 1fr 1fr; } }
+  .ink .field label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; color: #666;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .ink .field input, .ink .field textarea {
+    width: 100%; padding: 10px 12px;
+    border: 0; border-bottom: 1.5px solid #111;
+    background: transparent;
+    font-family: 'DM Serif Display', serif; font-size: 18px;
+    border-radius: 0;
+  }
+  .ink .field input:focus, .ink .field textarea:focus {
+    outline: 0; border-bottom-color: #C8102E; background: rgba(200,16,46,0.04);
+  }
+  .ink .pull-summary {
+    border-top: 4px double #111; border-bottom: 4px double #111;
+    padding: 24px 0; margin: 30px 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  }
+  @media (max-width: 720px) { .ink .pull-summary { grid-template-columns: 1fr; gap: 12px; } }
+  .ink .pull-summary .stat {
+    text-align: center; padding: 0 16px;
+    border-right: 1px solid #aaa;
+  }
+  .ink .pull-summary .stat:last-child { border-right: 0; }
+  .ink .pull-summary .stat .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: #666; margin-bottom: 8px;
+  }
+  .ink .pull-summary .stat .value {
+    font-family: 'Playfair Display', serif; font-size: 42px;
+    font-weight: 900; line-height: 1;
+  }
+  .ink .pull-summary .stat.short .value { color: #C8102E; }
+  .ink .pull-summary .stat.over .value { color: #0E7B3A; }
+  .ink .actions { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+  .ink .actions button {
+    padding: 14px 28px; border: 2px solid #111;
+    background: transparent; cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 700;
+  }
+  .ink .actions .primary { background: #C8102E; color: white; border-color: #C8102E; }
+  .ink .actions button:hover { background: #111; color: #f4f1e8; }
+  .ink .actions .primary:hover { background: #8a0c20; border-color: #8a0c20; }
+  .ink .history h3 {
+    font-family: 'Playfair Display', serif; font-size: 24px; margin: 30px 0 10px;
+  }
+  .ink .history table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .ink .history th {
+    text-align: left; padding: 8px 6px; border-bottom: 2px solid #111;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 1.5px; text-transform: uppercase; color: #666;
+  }
+  .ink .history td {
+    padding: 10px 6px; border-bottom: 1px solid #ddd;
+    font-family: 'DM Serif Display', serif; font-size: 16px;
+  }
+
+
+  /* ╔══════════════════════════════════════════════════════════════╗
+     ║  DIRECTION B — OPERATOR CONSOLE                              ║
+     ║  POS-tile aesthetic, dark, large tap targets, fintech feel.   ║
+     ╚══════════════════════════════════════════════════════════════╝ */
+  .console {
+    background: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+    color: #e6edf3; min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+  }
+  .console .hero {
+    padding: 28px 28px 22px;
+    border-bottom: 1px solid #21262d;
+  }
+  .console .hero .crumb {
+    font-size: 12px; color: #8b949e; letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .console .hero .crumb .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: #3FB950;
+    box-shadow: 0 0 0 0 #3FB950; animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(63,185,80,0.6); }
+    70% { box-shadow: 0 0 0 10px rgba(63,185,80,0); }
+    100% { box-shadow: 0 0 0 0 rgba(63,185,80,0); }
+  }
+  .console .hero h1 {
+    margin: 10px 0 6px; font-size: 36px; font-weight: 700; letter-spacing: -0.5px;
+  }
+  .console .hero .meta { font-size: 14px; color: #8b949e; }
+  .console main { padding: 28px; max-width: 1280px; margin: 0 auto; }
+  .console .bank-tiles {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    margin-bottom: 26px;
+  }
+  @media (max-width: 720px) { .console .bank-tiles { grid-template-columns: 1fr; } }
+  .console .bank-tile {
+    background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+    padding: 18px 20px; position: relative; overflow: hidden;
+  }
+  .console .bank-tile::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: linear-gradient(180deg, #C8102E, #FACC15);
+  }
+  .console .bank-tile .tile-label {
+    font-size: 11px; letter-spacing: 1.5px; color: #8b949e;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .console .bank-tile .tile-bank {
+    font-size: 28px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
+  }
+  .console .bank-tile .tile-sub {
+    font-size: 12px; color: #6e7681; margin-top: 4px;
+  }
+  .console .panel {
+    background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+    padding: 24px; margin-bottom: 18px;
+  }
+  .console .panel h2 {
+    margin: 0 0 18px; font-size: 14px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #FACC15; font-weight: 700;
+  }
+  .console .panel-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  }
+  @media (max-width: 720px) { .console .panel-grid { grid-template-columns: 1fr 1fr; } }
+  .console .field label {
+    display: block; font-size: 11px; color: #8b949e;
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+  }
+  .console .field input, .console .field textarea {
+    width: 100%; padding: 14px 14px; font-size: 16px;
+    background: #0d1117; color: #e6edf3;
+    border: 1.5px solid #30363d; border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .console .field input:focus, .console .field textarea:focus {
+    outline: 0; border-color: #FACC15; background: #161b22;
+    box-shadow: 0 0 0 3px rgba(250,204,21,0.15);
+  }
+  .console .summary-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    background: linear-gradient(135deg, #0d1117, #1f2a44);
+    padding: 22px; border-radius: 12px;
+    border: 1px solid #30363d;
+    margin: 18px 0;
+  }
+  @media (max-width: 720px) { .console .summary-strip { grid-template-columns: 1fr; } }
+  .console .summary-strip .stat { text-align: center; }
+  .console .summary-strip .stat .label {
+    font-size: 11px; color: #8b949e; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .console .summary-strip .stat .value {
+    font-size: 32px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
+    margin-top: 6px;
+  }
+  .console .summary-strip .stat.short .value { color: #F85149; }
+  .console .summary-strip .stat.over .value { color: #3FB950; }
+  .console .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .console .actions button {
+    padding: 14px 24px; border: 0; border-radius: 10px;
+    font-size: 14px; font-weight: 700; cursor: pointer; letter-spacing: 0.3px;
+    font-family: inherit;
+  }
+  .console .actions .primary {
+    background: linear-gradient(135deg, #C8102E, #ff3d3d); color: white;
+    box-shadow: 0 4px 14px rgba(200,16,46,0.4);
+  }
+  .console .actions .secondary {
+    background: #21262d; color: #e6edf3; border: 1px solid #30363d;
+  }
+  .console .actions .ghost {
+    background: transparent; color: #8b949e; border: 1px solid #30363d;
+  }
+  .console .history table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .console .history th {
+    background: #0d1117; color: #FACC15; text-align: left; padding: 10px 12px;
+    font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    border-bottom: 1px solid #30363d;
+  }
+  .console .history td {
+    padding: 10px 12px; border-bottom: 1px solid #21262d;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+
+  /* ╔══════════════════════════════════════════════════════════════╗
+     ║  DIRECTION C — RECEIPT TAPE                                   ║
+     ║  Vertical paper-receipt strip, monospaced, tactile feel.      ║
+     ╚══════════════════════════════════════════════════════════════╝ */
+  .receipt {
+    background: repeating-linear-gradient(45deg, #2a2725, #2a2725 14px, #312d2a 14px, #312d2a 28px);
+    min-height: 100vh;
+    padding: 30px 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .receipt .tape {
+    max-width: 480px; margin: 0 auto;
+    background: #fdfaf3;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.05);
+    position: relative;
+    padding: 30px 30px 40px;
+  }
+  .receipt .tape::before,
+  .receipt .tape::after {
+    content: ''; position: absolute; left: 0; right: 0; height: 12px;
+    background-image: linear-gradient(135deg, transparent 50%, #2a2725 50%),
+                      linear-gradient(45deg, transparent 50%, #2a2725 50%);
+    background-size: 14px 12px;
+    background-repeat: repeat-x;
+  }
+  .receipt .tape::before { top: -12px; }
+  .receipt .tape::after { bottom: -12px; transform: scaleY(-1); }
+  .receipt .receipt-head {
+    text-align: center; padding-bottom: 18px;
+    border-bottom: 1px dashed #888;
+  }
+  .receipt .receipt-head .brand {
+    font-weight: 700; font-size: 22px; letter-spacing: 4px;
+    color: #C8102E;
+  }
+  .receipt .receipt-head .store {
+    font-size: 11px; letter-spacing: 1.5px; margin-top: 4px; color: #555;
+  }
+  .receipt .receipt-head .title {
+    margin-top: 14px; font-size: 13px; letter-spacing: 3px;
+    text-transform: uppercase; font-weight: 700;
+  }
+  .receipt .receipt-head .ts {
+    font-size: 11px; color: #777; margin-top: 4px;
+  }
+  .receipt .bank-line {
+    text-align: center; padding: 12px 0;
+    border-bottom: 1px dashed #888;
+    font-size: 11px; letter-spacing: 1.5px; color: #555;
+  }
+  .receipt .line-block {
+    padding: 18px 0; border-bottom: 1px dashed #888;
+  }
+  .receipt .line-block h3 {
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: #C8102E; margin: 0 0 12px; text-align: center;
+  }
+  .receipt .field {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; gap: 12px;
+  }
+  .receipt .field label {
+    font-size: 13px; flex: 0 0 auto; color: #333;
+  }
+  .receipt .field input, .receipt .field textarea {
+    flex: 1 1 auto; padding: 4px 6px;
+    border: 0; border-bottom: 1px dotted #888;
+    font-family: inherit; font-size: 14px; background: transparent;
+    text-align: right; min-width: 0;
+  }
+  .receipt .field input:focus { outline: 0; border-bottom-color: #C8102E; background: rgba(200,16,46,0.04); }
+  .receipt .totals {
+    padding: 16px 0; border-bottom: 1px dashed #888;
+    border-top: 2px solid #111;
+  }
+  .receipt .totals .row {
+    display: flex; justify-content: space-between; padding: 4px 0;
+    font-size: 14px;
+  }
+  .receipt .totals .row.grand {
+    border-top: 1px dashed #888; margin-top: 8px; padding-top: 10px;
+    font-size: 16px; font-weight: 700;
+  }
+  .receipt .totals .row.short .num { color: #C8102E; }
+  .receipt .totals .row.over .num { color: #0E7B3A; }
+  .receipt .actions {
+    display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .receipt .actions button {
+    padding: 10px 16px; border: 1px dashed #555;
+    background: transparent; cursor: pointer;
+    font-family: inherit; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .receipt .actions .primary {
+    background: #111; color: #fdfaf3; border-style: solid; border-color: #111;
+  }
+  .receipt .actions .primary:hover { background: #C8102E; border-color: #C8102E; }
+  .receipt .foot {
+    text-align: center; font-size: 10px; color: #888; margin-top: 18px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .receipt .history-tape {
+    max-width: 480px; margin: 24px auto 0; background: #fdfaf3;
+    padding: 22px 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+  .receipt .history-tape h3 {
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    margin: 0 0 12px; text-align: center; color: #C8102E;
+  }
+  .receipt .history-tape .hrow {
+    display: flex; justify-content: space-between; padding: 5px 0;
+    border-bottom: 1px dotted #aaa; font-size: 12px;
+  }
+  .receipt .history-tape .hrow:last-child { border-bottom: 0; }
+  .receipt .history-tape .empty { font-size: 11px; color: #888; text-align: center; padding: 14px 0; }
+</style>
+</head>
+
+<body class="mode-A">
+
+<!-- ── Picker bar ─────────────────────────────────────────────── -->
+<div class="picker">
+  <div class="title">SAFE &amp; DRAWER — DESIGN PICKER</div>
+  <button class="btn active" data-mode="A">A · Ink Press</button>
+  <button class="btn" data-mode="B">B · Operator Console</button>
+  <button class="btn" data-mode="C">C · Receipt Tape</button>
+  <div class="pick-note">Tell me which direction → I rebuild <b>safe_drawer.html</b> in that style.</div>
+</div>
+
+
+<!-- ╔════════════════════════════════════════════════════════════╗
+     ║  A · INK PRESS                                              ║
+     ╚════════════════════════════════════════════════════════════╝ -->
+<div class="mode mode-A ink">
+  <div class="masthead">
+    <div class="dateline">VOL · I &nbsp; — &nbsp; Five Guys Store 2065 &nbsp; — &nbsp; Louisville, KY</div>
+    <h1>The Safe Ledger</h1>
+    <div class="tagline">Daily counts, deposits, and over-short reconciliation for the closing manager. Bank reference: Safe $700 · Drawers $200 × 2.</div>
+  </div>
+
+  <div class="bank-strip">
+    <span><b>SAFE</b> · $700.00</span>
+    <span><b>DRAWER 1</b> · $200.00</span>
+    <span><b>DRAWER 2</b> · $200.00</span>
+    <span style="margin-left:auto">DEPOSIT NIGHTLY · ENTER IN CRUNCHTIME</span>
+  </div>
+
+  <main>
+    <div class="section-head"><span class="roman">§ I</span> Today</div>
+    <div class="ledger-row">
+      <div class="field"><label>Business Date</label><input type="date" /></div>
+      <div class="field"><label>Mgr Initials</label><input type="text" placeholder="BC" maxlength="6" /></div>
+      <div class="field"><label>Deposit Bag #</label><input type="text" placeholder="—" /></div>
+      <div class="field"><label>Deposit Amount</label><input type="number" placeholder="0.00" /></div>
+    </div>
+
+    <div class="section-head"><span class="roman">§ II</span> Open Counts</div>
+    <div class="ledger-row">
+      <div class="field"><label>Safe Open</label><input type="number" placeholder="700.00" /></div>
+      <div class="field"><label>Drawer 1 Open</label><input type="number" placeholder="200.00" /></div>
+      <div class="field"><label>Drawer 2 Open</label><input type="number" placeholder="200.00" /></div>
+      <div class="field"><label>Open Variance</label><input type="text" readonly value="—" /></div>
+    </div>
+
+    <div class="section-head"><span class="roman">§ III</span> Close Counts</div>
+    <div class="ledger-row">
+      <div class="field"><label>Safe Close</label><input type="number" placeholder="700.00" /></div>
+      <div class="field"><label>Drawer 1 Close</label><input type="number" placeholder="200.00" /></div>
+      <div class="field"><label>Drawer 2 Close</label><input type="number" placeholder="200.00" /></div>
+      <div class="field"><label>CT Over/Short</label><input type="number" placeholder="from CT" /></div>
+    </div>
+
+    <div class="pull-summary">
+      <div class="stat"><div class="label">Drawer Var</div><div class="value">$0.00</div></div>
+      <div class="stat"><div class="label">Safe Var</div><div class="value">$0.00</div></div>
+      <div class="stat over"><div class="label">Total O/S</div><div class="value">$0.00</div></div>
+    </div>
+
+    <div class="actions">
+      <button class="primary">Save Today</button>
+      <button>Print</button>
+      <button>Export CSV</button>
+    </div>
+
+    <div class="history">
+      <h3>Recent Counts</h3>
+      <table>
+        <thead><tr><th>Date</th><th>Mgr</th><th>Safe</th><th>D1</th><th>D2</th><th>Deposit</th><th>O/S</th></tr></thead>
+        <tbody><tr><td colspan="7" style="text-align:center;color:#888;padding:24px;font-style:italic;">— No entries yet —</td></tr></tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+
+<!-- ╔════════════════════════════════════════════════════════════╗
+     ║  B · OPERATOR CONSOLE                                       ║
+     ╚════════════════════════════════════════════════════════════╝ -->
+<div class="mode mode-B console">
+  <div class="hero">
+    <div class="crumb"><span class="pulse"></span> LIVE · Synced to repo</div>
+    <h1>Safe &amp; Drawer Console</h1>
+    <div class="meta">Five Guys 2065 · Louisville, KY · Closing manager log</div>
+  </div>
+  <main>
+    <div class="bank-tiles">
+      <div class="bank-tile">
+        <div class="tile-label">Safe Bank</div>
+        <div class="tile-bank">$700.00</div>
+        <div class="tile-sub">Reconciles to deposit slip</div>
+      </div>
+      <div class="bank-tile">
+        <div class="tile-label">Drawer 1 Bank</div>
+        <div class="tile-bank">$200.00</div>
+        <div class="tile-sub">Front register</div>
+      </div>
+      <div class="bank-tile">
+        <div class="tile-label">Drawer 2 Bank</div>
+        <div class="tile-bank">$200.00</div>
+        <div class="tile-sub">Drive-thru / overflow</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Today's Entry</h2>
+      <div class="panel-grid">
+        <div class="field"><label>Date</label><input type="date" /></div>
+        <div class="field"><label>Mgr</label><input type="text" placeholder="BC" /></div>
+        <div class="field"><label>Bag #</label><input type="text" /></div>
+        <div class="field"><label>Deposit $</label><input type="number" placeholder="0.00" /></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Open Counts</h2>
+      <div class="panel-grid">
+        <div class="field"><label>Safe Open</label><input type="number" placeholder="700.00" /></div>
+        <div class="field"><label>D1 Open</label><input type="number" placeholder="200.00" /></div>
+        <div class="field"><label>D2 Open</label><input type="number" placeholder="200.00" /></div>
+        <div class="field"><label>Open Variance</label><input type="text" readonly value="$0.00" /></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Close Counts</h2>
+      <div class="panel-grid">
+        <div class="field"><label>Safe Close</label><input type="number" placeholder="700.00" /></div>
+        <div class="field"><label>D1 Close</label><input type="number" placeholder="200.00" /></div>
+        <div class="field"><label>D2 Close</label><input type="number" placeholder="200.00" /></div>
+        <div class="field"><label>CT O/S (EOD)</label><input type="number" placeholder="from CT" /></div>
+      </div>
+    </div>
+
+    <div class="summary-strip">
+      <div class="stat"><div class="label">Drawer Variance</div><div class="value">$0.00</div></div>
+      <div class="stat"><div class="label">Safe Variance</div><div class="value">$0.00</div></div>
+      <div class="stat over"><div class="label">Total Over/Short</div><div class="value">$0.00</div></div>
+    </div>
+
+    <div class="actions">
+      <button class="primary">⚡ Save Today</button>
+      <button class="secondary">Print</button>
+      <button class="ghost">Export CSV</button>
+      <button class="ghost">Clear</button>
+    </div>
+
+    <div class="panel history" style="margin-top:18px">
+      <h2>Recent History</h2>
+      <table>
+        <thead><tr><th>Date</th><th>Mgr</th><th>Safe</th><th>D1</th><th>D2</th><th>Deposit</th><th>CT O/S</th><th>Var</th></tr></thead>
+        <tbody><tr><td colspan="8" style="text-align:center;color:#6e7681;padding:24px">— Waiting for the first save —</td></tr></tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+
+<!-- ╔════════════════════════════════════════════════════════════╗
+     ║  C · RECEIPT TAPE                                           ║
+     ╚════════════════════════════════════════════════════════════╝ -->
+<div class="mode mode-C receipt">
+  <div class="tape">
+    <div class="receipt-head">
+      <div class="brand">FIVE GUYS</div>
+      <div class="store">STORE 2065 · LOUISVILLE KY</div>
+      <div class="title">SAFE &amp; DRAWER LOG</div>
+      <div class="ts">— closing manager strip —</div>
+    </div>
+
+    <div class="bank-line">
+      SAFE $700 · D1 $200 · D2 $200<br>DEPOSIT NIGHTLY · ENTER IN CRUNCHTIME
+    </div>
+
+    <div class="line-block">
+      <h3>Today</h3>
+      <div class="field"><label>DATE</label><input type="date" /></div>
+      <div class="field"><label>MGR</label><input type="text" placeholder="BC" maxlength="6" /></div>
+      <div class="field"><label>BAG #</label><input type="text" placeholder="—" /></div>
+      <div class="field"><label>DEPOSIT $</label><input type="number" placeholder="0.00" /></div>
+    </div>
+
+    <div class="line-block">
+      <h3>Open Counts</h3>
+      <div class="field"><label>SAFE OPEN</label><input type="number" placeholder="700.00" /></div>
+      <div class="field"><label>D1 OPEN</label><input type="number" placeholder="200.00" /></div>
+      <div class="field"><label>D2 OPEN</label><input type="number" placeholder="200.00" /></div>
+    </div>
+
+    <div class="line-block">
+      <h3>Close Counts</h3>
+      <div class="field"><label>SAFE CLOSE</label><input type="number" placeholder="700.00" /></div>
+      <div class="field"><label>D1 CLOSE</label><input type="number" placeholder="200.00" /></div>
+      <div class="field"><label>D2 CLOSE</label><input type="number" placeholder="200.00" /></div>
+      <div class="field"><label>CT O/S</label><input type="number" placeholder="from CT" /></div>
+    </div>
+
+    <div class="line-block">
+      <h3>Notes</h3>
+      <div class="field" style="display:block">
+        <textarea rows="2" style="width:100%;border:1px dotted #aaa;padding:6px;text-align:left;background:transparent;" placeholder="skim slip, miscount cause, change order..."></textarea>
+      </div>
+    </div>
+
+    <div class="totals">
+      <div class="row"><span>DRAWER VAR</span><span class="num">$0.00</span></div>
+      <div class="row"><span>SAFE VAR</span><span class="num">$0.00</span></div>
+      <div class="row grand over"><span>TOTAL O/S</span><span class="num">$0.00</span></div>
+    </div>
+
+    <div class="actions">
+      <button class="primary">SAVE</button>
+      <button>PRINT</button>
+      <button>CSV</button>
+    </div>
+
+    <div class="foot">★ THANK YOU ★ EVERY COUNT MATTERS ★</div>
+  </div>
+
+  <div class="history-tape">
+    <h3>Recent Counts</h3>
+    <div class="empty">— no entries yet —</div>
+  </div>
+</div>
+
+
+<script>
+  document.querySelectorAll('.picker .btn').forEach(b => {
+    b.addEventListener('click', () => {
+      const mode = b.getAttribute('data-mode');
+      document.body.className = 'mode-' + mode;
+      document.querySelectorAll('.picker .btn').forEach(x => x.classList.toggle('active', x === b));
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+  });
+</script>
+</body>
+</html>
