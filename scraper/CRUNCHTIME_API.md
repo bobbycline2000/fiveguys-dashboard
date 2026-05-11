@@ -214,6 +214,27 @@ Captured artifacts:
 | GET | `/resource/layout/configuration/registerSalesGrid` |
 | POST | `/resource/connexui/commands` |
 
+#### Bank Deposits — full CRUD (discovered 2026-05-11)
+
+These three endpoints power the "Enter Sales Transaction" → "Bank Deposits" tab in the `next.ct` edit form. Cookie auth, no CSRF. Verified end-to-end against salesId=6180801 (KY-2065, 05/10/2026).
+
+| Method | Path | Notes |
+|---|---|---|
+| POST | `/resource/salestransactions/bankdeposits?_dc=<ms>` | **Read** — list deposit rows for the open transaction. Body: `{"pagingInfo":{"page":1,"start":0,"limit":75},"sortInfo":{"sortList":[{"property":"amount","direction":"ASC"}]}}`. Session context (the open transaction's salesId) is implicit from the prior `/prepare` call. |
+| POST | `/resource/salestransactions/bankdeposits/save` | **Write** — create / update / delete deposit row(s). Body: `[{"depositId":-2,"amount":0.01,"memo":""}]`. **Negative `depositId` = new row** (client-assigned temp id, server returns the real positive id). Positive `depositId` = existing row (omit/keep value to delete? — TBD via testing). Returns the saved rows with assigned ids. |
+| POST | `/resource/salestransactions/submit` | **Commit** — persists the whole sales transaction (all sub-grids — bank deposits, paid outs, comps, etc.). Body: `{"extraCriteriaMap":{"salesId":6180801,"viewOnly":false,"posId":2148,"salesDate":"05/10/2026"}}`. `salesId` + `posId` come from `registerSales/summary`. `salesDate` in MM/DD/YYYY. |
+
+**Required form-prep calls before /save will work** (CT binds session to the open transaction):
+1. `POST /resource/salestransactions/retrieveResources`
+2. `POST /resource/salestransactions/currentmode`
+3. `POST /resource/salestransactions/validateedit`
+4. `POST /resource/salestransactions/prepare`
+5. Now `bankdeposits/save` + `submit` are valid.
+
+The shorter path that the agent script uses: navigate the edit URL `https://fiveguysfr77.net-chef.com/ncext/next.ct#SalesTransactions?mode=edit&salesId=<id>` via Playwright (which fires the prep chain implicitly), then replay `/save` + `/submit` with cookies. Pure-`requests` replay without the form-prep chain returns 400.
+
+**Agent-entry script:** `scripts/enter_ct_deposits.py` reads pending entries from `data/deposits_pending.json`, opens each transaction's edit form, posts the deposit row, submits, marks the entry as processed.
+
 #### Sales Journal
 | Method | Path | Notes |
 |---|---|---|

@@ -19,6 +19,7 @@
 const REPO_OWNER = "bobbycline2000";
 const REPO_NAME  = "fiveguys-dashboard";
 const FILE_PATH  = "data/safe_drawer_log.json";
+const PENDING_PATH = "data/deposits_pending.json";
 const BRANCH     = "main";
 
 const CORS = {
@@ -35,8 +36,8 @@ function json(body, status = 200, extra = {}) {
   });
 }
 
-async function ghGetFile(token) {
-  const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}?ref=${BRANCH}`;
+async function ghGetFile(token, path = FILE_PATH, { fallback = [] } = {}) {
+  const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${BRANCH}`;
   const r = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -44,21 +45,20 @@ async function ghGetFile(token) {
       "User-Agent":  "safe-drawer-worker",
     },
   });
-  if (r.status === 404) return { sha: null, rows: [] };
-  if (!r.ok) throw new Error(`GET file failed: ${r.status}`);
-  const data = await r.json();
-  const raw = atob(data.content.replace(/\n/g, ""));
-  let rows;
-  try { rows = JSON.parse(raw); } catch { rows = []; }
-  if (!Array.isArray(rows)) rows = [];
-  return { sha: data.sha, rows };
+  if (r.status === 404) return { sha: null, data: fallback };
+  if (!r.ok) throw new Error(`GET ${path} failed: ${r.status}`);
+  const meta = await r.json();
+  const raw = atob(meta.content.replace(/\n/g, ""));
+  let data;
+  try { data = JSON.parse(raw); } catch { data = fallback; }
+  return { sha: meta.sha, data };
 }
 
-async function ghPutFile(token, sha, rows, manager) {
-  const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+async function ghPutFile(token, path, sha, data, message) {
+  const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`;
   const body = {
-    message: `chore: safe-drawer log update by ${manager || "manager"}`,
-    content: btoa(JSON.stringify(rows, null, 2)),
+    message: message || `chore: ${path} update`,
+    content: btoa(JSON.stringify(data, null, 2)),
     branch:  BRANCH,
     ...(sha ? { sha } : {}),
   };
@@ -74,7 +74,7 @@ async function ghPutFile(token, sha, rows, manager) {
   });
   if (!r.ok) {
     const t = await r.text();
-    throw new Error(`PUT file failed: ${r.status} ${t}`);
+    throw new Error(`PUT ${path} failed: ${r.status} ${t}`);
   }
   return await r.json();
 }
@@ -113,8 +113,18 @@ export default {
 
     if (req.method === "GET" && url.pathname === "/log") {
       try {
-        const { rows } = await ghGetFile(env.GITHUB_TOKEN);
-        return json({ ok: true, rows });
+        const { data } = await ghGetFile(env.GITHUB_TOKEN, FILE_PATH, { fallback: [] });
+        return json({ ok: true, rows: Array.isArray(data) ? data : [] });
+      } catch (e) {
+        return json({ ok: false, error: String(e) }, 500);
+      }
+    }
+
+    if (req.method === "GET" && url.pathname === "/deposits-pending") {
+      try {
+        const { data } = await ghGetFile(env.GITHUB_TOKEN, PENDING_PATH,
+          { fallback: { pending: [], processed: [] } });
+        return json({ ok: true, state: data });
       } catch (e) {
         return json({ ok: false, error: String(e) }, 500);
       }
@@ -133,17 +143,71 @@ export default {
       const clean = sanitize(body.entry);
 
       try {
-        const { sha, rows } = await ghGetFile(env.GITHUB_TOKEN);
+        const { sha, data } = await ghGetFile(env.GITHUB_TOKEN, FILE_PATH, { fallback: [] });
+        const rows = Array.isArray(data) ? data : [];
         // Idempotent per date: any save for the same business date replaces the
         // existing row — so opening / mid / nightly across multiple managers
         // merge into one row per day instead of duplicating.
         const filtered = rows.filter((r) => r.date !== clean.date);
         filtered.push(clean);
         filtered.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
-        // Keep last 400 entries.
         const trimmed = filtered.slice(-400);
-        await ghPutFile(env.GITHUB_TOKEN, sha, trimmed, clean.mgr);
+        await ghPutFile(env.GITHUB_TOKEN, FILE_PATH, sha, trimmed,
+          `chore: safe-drawer log update by ${clean.mgr || "manager"}`);
         return json({ ok: true, entry: clean, total: trimmed.length });
+      } catch (e) {
+        return json({ ok: false, error: String(e) }, 500);
+      }
+    }
+
+    if (req.method === "POST" && url.pathname === "/enter-deposit") {
+      let body;
+      try { body = await req.json(); } catch { return json({ ok: false, error: "bad json" }, 400); }
+      if (!body || body.secret !== env.SHARED_SECRET) {
+        return json({ ok: false, error: "unauthorized" }, 401);
+      }
+      const num = (v) => {
+        const n = parseFloat(v);
+        return Number.isFinite(n) ? Math.round(n * 100) / 100 : NaN;
+      };
+      const str = (v, max = 200) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+      const business_date = str(body.business_date, 12);  // ISO YYYY-MM-DD
+      const amount        = num(body.amount);
+      const mgr           = str(body.mgr, 8);
+      const memo          = str(body.memo, 200);
+
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(business_date)) {
+        return json({ ok: false, error: "business_date must be YYYY-MM-DD" }, 400);
+      }
+      if (!Number.isFinite(amount) || amount <= 0) {
+        return json({ ok: false, error: "amount must be > 0" }, 400);
+      }
+
+      const entry = {
+        id: crypto.randomUUID(),
+        business_date,
+        amount,
+        memo,
+        mgr,
+        requested_at: new Date().toISOString(),
+      };
+
+      try {
+        const { sha, data } = await ghGetFile(env.GITHUB_TOKEN, PENDING_PATH,
+          { fallback: { pending: [], processed: [] } });
+        const state = (data && typeof data === "object") ? data : { pending: [], processed: [] };
+        if (!Array.isArray(state.pending))   state.pending   = [];
+        if (!Array.isArray(state.processed)) state.processed = [];
+
+        // Idempotent per business_date: a second request for the same date
+        // replaces the older pending entry.
+        state.pending = state.pending.filter((p) => p.business_date !== business_date);
+        state.pending.push(entry);
+
+        await ghPutFile(env.GITHUB_TOKEN, PENDING_PATH, sha, state,
+          `chore: deposit entry requested — ${business_date} $${amount} by ${mgr || "?"}`);
+        return json({ ok: true, queued: entry,
+          message: "Deposit queued. Agent will enter in CT within ~1 hour." });
       } catch (e) {
         return json({ ok: false, error: String(e) }, 500);
       }

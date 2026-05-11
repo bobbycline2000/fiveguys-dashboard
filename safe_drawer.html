@@ -254,6 +254,23 @@
     70%  { box-shadow: 0 0 0 10px rgba(200,16,46,0); }
     100% { box-shadow: 0 0 0 0 rgba(200,16,46,0); }
   }
+  .dep-card .enter-row {
+    display: flex; align-items: center; gap: 8px; margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .dep-card .enter-row input {
+    padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px;
+    font-size: 14px; width: 110px; font-family: inherit;
+  }
+  .dep-card .enter-row button {
+    padding: 8px 14px; background: var(--red); color: white;
+    border: 0; border-radius: 6px; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+  }
+  .dep-card .enter-row button:hover { background: #a50d24; }
+  .dep-card .enter-row .help { font-size: 11px; color: var(--ink-soft); }
+  .dep-card.queued { background: #FEF3C7; border-left-color: var(--gold); }
+  .dep-card.queued .val { color: #92400E; }
 
   .footer { font-size: 11px; color: var(--ink-soft); text-align: center; padding: 18px; }
   .footer a { color: var(--navy); }
@@ -392,6 +409,7 @@ const SHARED_LOG_URL = 'https://raw.githubusercontent.com/bobbycline2000/fiveguy
 const CT_HISTORY_URL = 'https://raw.githubusercontent.com/bobbycline2000/fiveguys-dashboard/main/data/ct_sales_summary_history.json';
 let LIVE_ROWS = null;
 let CT_HISTORY = null;
+let DEPOSITS_PENDING = null;
 
 const $ = id => document.getElementById(id);
 const fmt = n => '$' + (Number(n)||0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -572,10 +590,11 @@ function renderDepStatus() {
     const dateLabel = dt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     const sales = row ? row.gross_sales : 0;
     const dep = row ? row.deposit : 0;
-    const hasSales = sales > 1; // some sales happened
+    const bookCash = row ? (row.book_cash || 0) : 0;
+    const hasSales = sales > 1;
     const hasDeposit = dep > 0.005;
+    const queued = (DEPOSITS_PENDING || []).find(p => p.business_date === iso);
 
-    // Only flag "missing" if there were real sales that day but no deposit
     if (!hasSales) {
       return `<div class="dep-card">
         <span class="ico">⏳</span>
@@ -596,16 +615,78 @@ function renderDepStatus() {
         </div>
       </div>`;
     }
+    if (queued) {
+      return `<div class="dep-card queued">
+        <span class="ico">🕓</span>
+        <div class="body">
+          <div class="label">${dateLabel} deposit — queued for agent</div>
+          <div class="val">${fmt(queued.amount)} pending</div>
+          <div class="small">${queued.mgr || '?'} requested ${new Date(queued.requested_at).toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' })}. Agent will enter at next refresh (≤1h).</div>
+        </div>
+      </div>`;
+    }
+    // Missing — show entry form. Prefill the suggested amount from CT's
+    // totBookCash if available (cash the registers say was collected).
+    const suggested = bookCash > 0 ? bookCash.toFixed(2) : '';
     return `<div class="dep-card missing">
       <span class="ico">⚠️</span>
       <div class="body">
         <div class="label">${dateLabel} deposit — NOT YET in CT</div>
         <div class="val">action needed</div>
-        <div class="small">Gross sales ${fmt(sales)} — deposit slip needs to be entered.</div>
+        <div class="small">Gross sales ${fmt(sales)}. CT cash: ${fmt(bookCash)}.</div>
+        <div class="enter-row">
+          <input type="number" step="0.01" placeholder="0.00" value="${suggested}" id="dep-in-${iso}" />
+          <button onclick="enterDeposit('${iso}')">Enter in CT</button>
+          <span class="help">Agent posts to CT, ~1h.</span>
+        </div>
       </div>
       <span class="dot"></span>
     </div>`;
   }).join('');
+}
+
+async function enterDeposit(iso) {
+  const input = document.getElementById('dep-in-' + iso);
+  const amount = parseFloat(input.value);
+  if (!Number.isFinite(amount) || amount <= 0) {
+    alert('Enter a deposit amount greater than zero.');
+    return;
+  }
+  const mgr = ($('f-mgr').value || '').trim() || prompt('Your initials?') || '';
+  if (!confirm(`Queue $${amount.toFixed(2)} for ${iso} to be entered in CrunchTime by the agent?`)) return;
+
+  try {
+    const r = await fetch(WORKER_URL + '/enter-deposit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: WORKER_SECRET, business_date: iso,
+        amount, mgr, memo: ''
+      }),
+    });
+    const data = await r.json();
+    if (data.ok) {
+      // Refresh the pending list and re-render.
+      await loadDepositsPending();
+      renderDepStatus();
+    } else {
+      alert('Queue failed: ' + (data.error || r.status));
+    }
+  } catch (e) {
+    alert('Queue failed: ' + e.message);
+  }
+}
+
+async function loadDepositsPending() {
+  try {
+    const r = await fetch(WORKER_URL + '/deposits-pending');
+    const data = await r.json();
+    if (data.ok && data.state) {
+      DEPOSITS_PENDING = data.state.pending || [];
+    }
+  } catch (_) {
+    DEPOSITS_PENDING = DEPOSITS_PENDING || [];
+  }
 }
 
 function renderDeposits() {
@@ -727,7 +808,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadForDate(today);
   renderHistory();
 
-  await Promise.all([loadLiveLog(), loadCtHistory()]);
+  await Promise.all([loadLiveLog(), loadCtHistory(), loadDepositsPending()]);
   loadForDate($('f-date').value);
   renderHistory();
   renderDeposits();

@@ -62,17 +62,38 @@ jobs:
           CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
         run: xvfb-run --server-args="-screen 0 1440x900x24" python scripts/track_ct_sales_summary.py
 
+      # ── Process any manager-queued deposit entries ───────────────────
+      # Reads data/deposits_pending.json (written by the Cloudflare worker
+      # when a manager taps "Enter Deposit in CT" on safe_drawer.html),
+      # opens each transaction's edit form via Playwright, posts the
+      # deposit row, submits, marks the entry processed.
+      - name: Process pending deposit entries
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scripts/enter_ct_deposits.py
+
+      # ── Re-pull summary after entries so the page reflects them ──────
+      - name: Re-pull CT Sales Summary post-entry
+        if: always()
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scripts/track_ct_sales_summary.py
+
       - name: Commit & push if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ct_sales_summary_history.json data/ct_cookies.json data/ct_sales_summary_sample.json || true
+          git add data/ct_sales_summary_history.json data/ct_cookies.json data/ct_sales_summary_sample.json data/deposits_pending.json || true
           if git diff --cached --quiet; then
-            echo "No changes — deposit still not entered in CT."
+            echo "No changes."
           else
             DATE=$(date -u +"%Y-%m-%d %H:%M UTC")
-            git commit -m "chore: hourly CT deposit refresh — ${DATE}"
+            git commit -m "chore: hourly CT refresh + deposit processing — ${DATE}"
             git pull --rebase -X theirs --autostash origin main
             git push origin main
-            echo "CT deposit history updated."
+            echo "CT data updated."
           fi
