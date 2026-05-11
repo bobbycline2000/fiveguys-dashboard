@@ -319,7 +319,7 @@ const WORKER_SECRET = "sdr-fg2065-2026-9F4xq2KvLm8";
 const KEY = 'fg2065_safe_drawer_v2';
 const SAFE_BANK = 700, DRAWER_BANK = 200;
 const SHARED_LOG_URL = 'https://raw.githubusercontent.com/bobbycline2000/fiveguys-dashboard/main/data/safe_drawer_log.json';
-const CT_HISTORY_URL = 'https://raw.githubusercontent.com/bobbycline2000/fiveguys-dashboard/main/data/cash_overshort_history.json';
+const CT_HISTORY_URL = 'https://raw.githubusercontent.com/bobbycline2000/fiveguys-dashboard/main/data/ct_sales_summary_history.json';
 let LIVE_ROWS = null;
 let CT_HISTORY = null;
 
@@ -487,10 +487,17 @@ async function loadCtHistory() {
   } catch (_) {}
 }
 
-function ctOsFor(date) {
+function ctRowFor(date) {
   if (!CT_HISTORY) return null;
-  const row = CT_HISTORY.find(r => r.business_date === date);
-  return row ? row.over_short : null;
+  return CT_HISTORY.find(r => r.business_date === date) || null;
+}
+function ctOsFor(date) {
+  const r = ctRowFor(date);
+  return r ? r.over_short : null;
+}
+function ctDepositFor(date) {
+  const r = ctRowFor(date);
+  return r ? r.deposit : null;
 }
 
 function loadForDate(d) {
@@ -500,12 +507,32 @@ function loadForDate(d) {
   const row = live || local;
   if (row) setForm(row);
 
-  // Auto-fill CT Over/Short from cash_overshort_history.json if the
+  // Auto-fill CT Over/Short from ct_sales_summary_history.json if the
   // selected date has a captured value (rolled after CT EOD ~4 AM).
   // If the user already typed a value, don't overwrite it.
   const ct = ctOsFor(d);
   if (ct !== null && !$('f-ct-os').value) {
     $('f-ct-os').value = ct;
+  }
+
+  // Show today's CT-pulled bank deposit in the readonly slot.
+  const dep = ctDepositFor(d);
+  const depEl = $('f-deposit-info');
+  if (dep !== null && dep !== undefined) {
+    if (dep === 0) {
+      depEl.value = 'pending — CT EOD not yet posted';
+      depEl.style.color = '#888';
+      depEl.style.fontStyle = 'italic';
+    } else {
+      depEl.value = fmt(dep);
+      depEl.style.color = '#0E7B3A';
+      depEl.style.fontStyle = 'normal';
+      depEl.style.fontWeight = '700';
+    }
+  } else {
+    depEl.value = 'no CT data for this date';
+    depEl.style.color = '#aaa';
+    depEl.style.fontStyle = 'italic';
   }
 
   $('date-display').textContent = prettyDate(d);

@@ -1,0 +1,222 @@
+[
+  {
+    "business_date": "2026-04-20",
+    "deposit": 466.15,
+    "over_short": 0.0,
+    "book_cash": 466.15,
+    "gross_sales": 3642.66,
+    "net_sales": 3436.36,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-04-21",
+    "deposit": 636.61,
+    "over_short": 0.0,
+    "book_cash": 636.61,
+    "gross_sales": 3776.73,
+    "net_sales": 3562.81,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-04-22",
+    "deposit": 599.47,
+    "over_short": 0.0,
+    "book_cash": 599.47,
+    "gross_sales": 3780.09,
+    "net_sales": 3565.96,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-04-23",
+    "deposit": 629.59,
+    "over_short": 0.0,
+    "book_cash": 629.59,
+    "gross_sales": 4035.05,
+    "net_sales": 3806.57,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-04-24",
+    "deposit": 950.31,
+    "over_short": 0.0,
+    "book_cash": 950.31,
+    "gross_sales": 5688.93,
+    "net_sales": 5366.82,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-04-25",
+    "deposit": 856.23,
+    "over_short": -1.0,
+    "book_cash": 857.23,
+    "gross_sales": 5873.57,
+    "net_sales": 5541.0,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-04-26",
+    "deposit": 678.82,
+    "over_short": 0.0,
+    "book_cash": 678.82,
+    "gross_sales": 5369.36,
+    "net_sales": 5065.29,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-04-27",
+    "deposit": 545.55,
+    "over_short": 0.0,
+    "book_cash": 545.55,
+    "gross_sales": 4034.09,
+    "net_sales": 3805.65,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-04-28",
+    "deposit": 467.6,
+    "over_short": 0.0,
+    "book_cash": 467.6,
+    "gross_sales": 3560.29,
+    "net_sales": 3358.73,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-04-29",
+    "deposit": 466.85,
+    "over_short": 37.62,
+    "book_cash": 429.23,
+    "gross_sales": 4916.35,
+    "net_sales": 4637.88,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-04-30",
+    "deposit": 665.86,
+    "over_short": 0.0,
+    "book_cash": 665.86,
+    "gross_sales": 5210.39,
+    "net_sales": 4915.34,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-01",
+    "deposit": 555.61,
+    "over_short": -37.0,
+    "book_cash": 592.61,
+    "gross_sales": 5157.73,
+    "net_sales": 4865.71,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-02",
+    "deposit": 593.76,
+    "over_short": 0.0,
+    "book_cash": 593.76,
+    "gross_sales": 4939.02,
+    "net_sales": 4659.25,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-03",
+    "deposit": 721.94,
+    "over_short": 0.0,
+    "book_cash": 721.94,
+    "gross_sales": 6198.97,
+    "net_sales": 5847.95,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-04",
+    "deposit": 724.92,
+    "over_short": 0.0,
+    "book_cash": 724.92,
+    "gross_sales": 3752.4,
+    "net_sales": 3539.85,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-05",
+    "deposit": 472.34,
+    "over_short": -0.02,
+    "book_cash": 472.36,
+    "gross_sales": 3468.02,
+    "net_sales": 3271.61,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-06",
+    "deposit": 826.29,
+    "over_short": 1.02,
+    "book_cash": 825.27,
+    "gross_sales": 4416.25,
+    "net_sales": 4166.14,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-07",
+    "deposit": 508.95,
+    "over_short": 0.0,
+    "book_cash": 508.95,
+    "gross_sales": 5154.72,
+    "net_sales": 4862.87,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-08",
+    "deposit": 817.83,
+    "over_short": 0.0,
+    "book_cash": 817.83,
+    "gross_sales": 6255.73,
+    "net_sales": 5901.47,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-09",
+    "deposit": 539.23,
+    "over_short": 0.0,
+    "book_cash": 539.23,
+    "gross_sales": 5188.86,
+    "net_sales": 4894.98,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-10",
+    "deposit": 940.74,
+    "over_short": 0.0,
+    "book_cash": 940.74,
+    "gross_sales": 5083.76,
+    "net_sales": 4795.84,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  },
+  {
+    "business_date": "2026-05-11",
+    "deposit": 0.0,
+    "over_short": -424.56,
+    "book_cash": 424.56,
+    "gross_sales": 1875.94,
+    "net_sales": 1769.74,
+    "register_count": 1,
+    "captured_at": "2026-05-11T17:31:29"
+  }
+]
