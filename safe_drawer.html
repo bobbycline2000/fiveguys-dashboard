@@ -179,8 +179,14 @@
 </div>
 
 <script>
+// ── Worker wiring (filled in after Cloudflare deploy, see cloudflare-worker/SETUP.md)
+const WORKER_URL = "";       // e.g. "https://safe-drawer-log.<sub>.workers.dev"
+const WORKER_SECRET = "";    // matches SHARED_SECRET set via wrangler
+
 const KEY = 'fg2065_safe_drawer_v1';
 const SAFE_BANK = 700, DRAWER_BANK = 200;
+const SHARED_LOG_URL = 'https://raw.githubusercontent.com/bobbycline2000/fiveguys-dashboard/main/data/safe_drawer_log.json';
+let LIVE_ROWS = null;  // last fetched shared log, populated on load if available
 
 function fmt(n) { return '$' + (Number(n)||0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 function getEntries() { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } }
@@ -226,7 +232,9 @@ function compute() {
 }
 
 function renderHistory() {
-  const rows = getEntries().slice().sort((a,b) => (b.date||'').localeCompare(a.date||'')).slice(0, 31);
+  // Prefer the live shared log if it loaded; otherwise fall back to this device's localStorage.
+  const source = (LIVE_ROWS && LIVE_ROWS.length) ? LIVE_ROWS : getEntries();
+  const rows = source.slice().sort((a,b) => (b.date||'').localeCompare(a.date||'')).slice(0, 31);
   const tb = document.getElementById('history-body');
   if (!rows.length) {
     tb.innerHTML = '<tr><td colspan="9" style="text-align:center; color: #999; padding: 18px;">No saved counts yet — fill the form above and click Save.</td></tr>';
@@ -246,16 +254,60 @@ function renderHistory() {
   }).join('');
 }
 
-function saveToday() {
+async function saveToday() {
   const f = readForm();
   if (!f.date) { alert('Pick a business date first.'); return; }
+  // Always save locally as a backup (works even if the worker is down).
   const rows = getEntries().filter(r => r.date !== f.date);
   rows.push(f);
   saveEntries(rows);
-  renderHistory();
+
   const flash = document.getElementById('saved-flash');
+  let msg = '✓ Saved (this device)';
+
+  if (WORKER_URL && WORKER_SECRET) {
+    try {
+      const r = await fetch(WORKER_URL + '/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: WORKER_SECRET, entry: f }),
+      });
+      const data = await r.json();
+      if (data.ok) {
+        msg = '✓ Saved to live log';
+        // Refresh shared rows so history table shows the new entry from the live log.
+        await loadLiveLog();
+      } else {
+        msg = '⚠ Saved locally — live log error: ' + (data.error || r.status);
+      }
+    } catch (e) {
+      msg = '⚠ Saved locally — live log unreachable';
+    }
+  }
+
+  renderHistory();
+  flash.textContent = msg;
   flash.classList.add('show');
-  setTimeout(() => flash.classList.remove('show'), 1400);
+  setTimeout(() => flash.classList.remove('show'), 2400);
+}
+
+async function loadLiveLog() {
+  // First try the raw JSON in the repo (works the moment the worker has written it once).
+  try {
+    const r = await fetch(SHARED_LOG_URL, { cache: 'no-store' });
+    if (r.ok) {
+      const rows = await r.json();
+      if (Array.isArray(rows)) { LIVE_ROWS = rows; return; }
+    }
+  } catch (_) { /* fall through */ }
+  // Fallback: ask the worker (catches the case where the file doesn't exist yet).
+  if (WORKER_URL) {
+    try {
+      const r = await fetch(WORKER_URL + '/log');
+      const data = await r.json();
+      if (data.ok && Array.isArray(data.rows)) { LIVE_ROWS = data.rows; return; }
+    } catch (_) { /* leave LIVE_ROWS null → localStorage fallback */ }
+  }
 }
 
 function loadForDate(d) {
@@ -298,7 +350,7 @@ function exportCsv() {
   a.click();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('f-date').value = new Date().toISOString().slice(0,10);
   ['f-safe-open','f-d1-open','f-d2-open','f-safe-close','f-d1-close','f-d2-close','f-deposit','f-ct-os']
     .forEach(id => document.getElementById(id).addEventListener('input', compute));
@@ -309,6 +361,8 @@ document.addEventListener('DOMContentLoaded', () => {
   loadForDate(document.getElementById('f-date').value);
   renderHistory();
   compute();
+  await loadLiveLog();
+  renderHistory();
 });
 </script>
 </body>

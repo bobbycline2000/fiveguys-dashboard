@@ -773,16 +773,20 @@ def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | No
 def _build_cash_section(today: date) -> list[str]:
     """Deposits & Safe/Drawer section for the daily brief.
 
-    Reads data/cash_overshort_history.json (written by
-    scripts/track_cash_overshort.py) and surfaces yesterday's final
-    over/short value plus the running prior 7-day trail.
+    Combines two sources:
+      - data/cash_overshort_history.json — CrunchTime Total Cash Over/Short
+        per business date (written by scripts/track_cash_overshort.py).
+      - data/safe_drawer_log.json — manager-submitted safe + drawer counts
+        from safe_drawer.html (written by the Cloudflare worker on Save).
     """
     import json as _json
+    from datetime import timedelta as _td
     from pathlib import Path as _Path
 
     out: list[str] = []
     repo = _Path(__file__).resolve().parent.parent
-    history_path = repo / "data" / "cash_overshort_history.json"
+    ct_path = repo / "data" / "cash_overshort_history.json"
+    mgr_path = repo / "data" / "safe_drawer_log.json"
 
     out.append("## 💰 Deposits & Cash Counts")
     out.append("")
@@ -797,39 +801,74 @@ def _build_cash_section(today: date) -> list[str]:
     )
     out.append("")
 
-    rows: list[dict] = []
-    if history_path.exists():
+    ct_rows: list[dict] = []
+    if ct_path.exists():
         try:
-            rows = _json.loads(history_path.read_text(encoding="utf-8"))
+            ct_rows = _json.loads(ct_path.read_text(encoding="utf-8"))
         except Exception:
-            rows = []
+            ct_rows = []
 
-    if not rows:
+    mgr_rows: list[dict] = []
+    if mgr_path.exists():
+        try:
+            mgr_rows = _json.loads(mgr_path.read_text(encoding="utf-8"))
+        except Exception:
+            mgr_rows = []
+
+    yesterday = (today - _td(days=1)).isoformat()
+    mgr_yesterday = [r for r in mgr_rows if r.get("date") == yesterday]
+
+    if not ct_rows and not mgr_rows:
         out.append(
-            "_No CrunchTime over/short history captured yet — the daily routine "
-            "will append today's value at 5 AM ET._"
+            "_No data yet — daily CrunchTime capture will append at 5 AM ET, "
+            "and manager-submitted counts will appear once a manager hits Save._"
         )
         out.append("")
         out.append("---")
         out.append("")
         return out
 
-    latest = rows[-1]
-    val = latest.get("over_short", 0.0)
-    bd = latest.get("business_date", "?")
-    label = "OVER" if val > 0.005 else "SHORT" if val < -0.005 else "EVEN"
-    out.append(f"**Yesterday ({bd}) — CrunchTime Total Cash Over/Short:** ${val:,.2f} ({label})")
-    out.append("")
+    if ct_rows:
+        latest = ct_rows[-1]
+        val = latest.get("over_short", 0.0)
+        bd = latest.get("business_date", "?")
+        label = "OVER" if val > 0.005 else "SHORT" if val < -0.005 else "EVEN"
+        out.append(f"**Yesterday ({bd}) — CrunchTime Total Cash Over/Short:** ${val:,.2f} ({label})")
+        out.append("")
 
-    last7 = rows[-7:][::-1]
-    out.append("| Business Date | Over/Short |")
-    out.append("|---|---|")
-    for r in last7:
-        v = r.get("over_short", 0.0)
-        tag = "🟢" if v >= -0.005 else "🔴"
-        out.append(f"| {r.get('business_date','?')} | {tag} ${v:,.2f} |")
-    out.append("")
-    out.append("**Manager action today:**")
+    if mgr_yesterday:
+        out.append(f"**Manager-submitted counts for {yesterday}:**")
+        out.append("")
+        out.append("| Mgr | Safe Close | D1 Close | D2 Close | Deposit | Bag # | Notes |")
+        out.append("|---|---|---|---|---|---|---|")
+        for r in mgr_yesterday:
+            out.append(
+                f"| {r.get('mgr','?')} "
+                f"| ${r.get('safe_close',0):,.2f} "
+                f"| ${r.get('d1_close',0):,.2f} "
+                f"| ${r.get('d2_close',0):,.2f} "
+                f"| ${r.get('deposit',0):,.2f} "
+                f"| {r.get('bag','')} "
+                f"| {(r.get('notes','') or '')[:60]} |"
+            )
+        out.append("")
+    else:
+        out.append(f"⚠ **No manager-submitted counts saved for {yesterday}** — remind the closing mgr to log the counts on the [Safe & Drawer page](https://bobbycline2000.github.io/fiveguys-dashboard/safe_drawer.html).")
+        out.append("")
+
+    if ct_rows:
+        last7 = ct_rows[-7:][::-1]
+        out.append("**Last 7 days — CrunchTime O/S trail:**")
+        out.append("")
+        out.append("| Business Date | Over/Short |")
+        out.append("|---|---|")
+        for r in last7:
+            v = r.get("over_short", 0.0)
+            tag = "🟢" if v >= -0.005 else "🔴"
+            out.append(f"| {r.get('business_date','?')} | {tag} ${v:,.2f} |")
+        out.append("")
+
+    out.append("**Today's manager action:**")
     out.append("- Count safe + both drawers at open (target $700 / $200 / $200)")
     out.append("- Count drawers at close, drop excess to safe, prep deposit")
     out.append("- Log everything in the [Safe & Drawer page](https://bobbycline2000.github.io/fiveguys-dashboard/safe_drawer.html) and enter the deposit in CrunchTime")
