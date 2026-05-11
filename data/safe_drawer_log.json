@@ -1,0 +1,17 @@
+[
+  {
+    "date": "2026-05-11",
+    "mgr": "BC",
+    "bag": "TEST-001",
+    "deposit": 500,
+    "safe_open": 700,
+    "d1_open": 200,
+    "d2_open": 200,
+    "safe_close": 700,
+    "d1_close": 200.5,
+    "d2_close": 199.75,
+    "ct_os": 1515.97,
+    "notes": "smoke test from worker deploy",
+    "submitted_at": "2026-05-11T21:06:35.386Z"
+  }
+]
