@@ -1135,21 +1135,68 @@ body {
         </div>
       </div>
 
-      <!-- Today's Hourly Labor Forecast (Teamworx graph screenshot) -->
-      <div class="card collapsible" data-card-id="teamworx-graph">
+      <!-- Scheduled Hours by Day (Teamworx weekly) -->
+      <div class="card collapsible" data-card-id="ideal-vs-actual">
         <div class="card-hdr">
           <div>
-            <div class="card-title">Today's Hourly Labor Forecast</div>
-            <div class="card-sub">Live screenshot from Teamworx — sales vs labor by hour</div>
+            <div class="card-title">Scheduled Hours by Day</div>
+            <div class="card-sub">This week — Teamworx forecast vs schedule</div>
           </div>
-          <div class="pill pill-white" id="twx-graph-pill">Today</div>
+          <div class="pill pill-white" id="iva-week-pill">This Week</div>
         </div>
-        <!-- TEAMWORX-GRAPH-IMG-START -->
-        <div style="margin-top:6px;background:#fff;border-radius:8px;padding:8px;min-height:240px;display:flex;align-items:center;justify-content:center;">
-          <img id="twx-graph-img" src="" alt="Teamworx hourly labor forecast" style="max-width:100%;max-height:340px;display:none;">
-          <div id="twx-graph-empty" style="color:#666;font-size:13px;">Waiting for tomorrow's 5 AM ET refresh…</div>
+        <div style="position:relative;height:240px;margin-top:6px;">
+          <canvas id="ideal-vs-actual-chart"></canvas>
         </div>
-        <!-- TEAMWORX-GRAPH-IMG-END -->
+        <div style="display:flex;justify-content:space-between;margin-top:14px;font-size:13px;opacity:.92;">
+          <div><strong id="iva-ideal-total">—</strong><div style="font-size:11px;opacity:.7;">Ideal hrs</div></div>
+          <div><strong id="iva-sched-total">—</strong><div style="font-size:11px;opacity:.7;">Scheduled hrs</div></div>
+          <div><strong id="iva-variance-total">—</strong><div style="font-size:11px;opacity:.7;">Variance</div></div>
+        </div>
+        <!-- IDEAL-VS-ACTUAL-DATA-START -->
+        <script>
+          window.__idealVsActual = {
+            labels: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+            ideal: [0,0,0,0,0,0,0],
+            scheduled: [0,0,0,0,0,0,0],
+            ideal_total: "—",
+            sched_total: "—",
+            variance_total: "—",
+            week_pill: "This Week"
+          };
+        </script>
+        <!-- IDEAL-VS-ACTUAL-DATA-END -->
+        <script>
+          (function(){
+            var d = window.__idealVsActual;
+            document.getElementById('iva-ideal-total').textContent = d.ideal_total;
+            document.getElementById('iva-sched-total').textContent = d.sched_total;
+            document.getElementById('iva-variance-total').textContent = d.variance_total;
+            document.getElementById('iva-week-pill').textContent = d.week_pill;
+            var ctx = document.getElementById('ideal-vs-actual-chart').getContext('2d');
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: d.labels,
+                datasets: [
+                  { label: 'Scheduled', data: d.scheduled, backgroundColor: '#fff', borderRadius: 4 },
+                  { label: 'Ideal',     data: d.ideal,     backgroundColor: 'rgba(218,41,28,.85)', borderRadius: 4 }
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: { labels: { color: '#fff', font: { size: 11 } } },
+                  tooltip: { callbacks: { label: function(c){ return c.dataset.label+': '+c.parsed.y.toFixed(1)+' hrs'; } } }
+                },
+                scales: {
+                  x: { ticks: { color: 'rgba(255,255,255,.85)' }, grid: { color: 'rgba(255,255,255,.08)' } },
+                  y: { ticks: { color: 'rgba(255,255,255,.85)' }, grid: { color: 'rgba(255,255,255,.08)' }, beginAtZero: true }
+                }
+              }
+            });
+          })();
+        </script>
       </div>
 
     </div><!-- /ops-row -->
