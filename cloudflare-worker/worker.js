@@ -89,11 +89,13 @@ function sanitize(payload) {
   };
   out.date       = str(payload.date, 12);
   out.mgr        = str(payload.mgr, 8);
-  out.bag        = str(payload.bag, 30);
   out.deposit    = num(payload.deposit);
   out.safe_open  = num(payload.safe_open);
   out.d1_open    = num(payload.d1_open);
   out.d2_open    = num(payload.d2_open);
+  out.safe_mid   = num(payload.safe_mid);
+  out.d1_mid     = num(payload.d1_mid);
+  out.d2_mid     = num(payload.d2_mid);
   out.safe_close = num(payload.safe_close);
   out.d1_close   = num(payload.d1_close);
   out.d2_close   = num(payload.d2_close);
@@ -132,10 +134,10 @@ export default {
 
       try {
         const { sha, rows } = await ghGetFile(env.GITHUB_TOKEN);
-        // Idempotent per (date, mgr): replace any prior row from same manager on same date.
-        const key = (r) => `${r.date}::${(r.mgr || "").toUpperCase()}`;
-        const k = key(clean);
-        const filtered = rows.filter((r) => key(r) !== k);
+        // Idempotent per date: any save for the same business date replaces the
+        // existing row — so opening / mid / nightly across multiple managers
+        // merge into one row per day instead of duplicating.
+        const filtered = rows.filter((r) => r.date !== clean.date);
         filtered.push(clean);
         filtered.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
         // Keep last 400 entries.

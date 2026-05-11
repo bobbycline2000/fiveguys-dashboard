@@ -11,10 +11,12 @@
     --navy: #1F2A44;
     --gold: #D9A93B;
     --ink: #111;
-    --ink-soft: #444;
+    --ink-soft: #555;
     --line: #e3e3e3;
     --bg: #f6f5f1;
     --white: #ffffff;
+    --green: #0E7B3A;
+    --short: #C8102E;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Helvetica Neue', Arial, sans-serif; }
@@ -25,188 +27,345 @@
   }
   header h1 { margin: 0; font-size: 22px; letter-spacing: 0.5px; }
   header .sub { font-size: 12px; opacity: 0.9; margin-top: 4px; }
-  main { max-width: 1080px; margin: 24px auto; padding: 0 16px; }
+  .nav-back { display: inline-block; margin-top: 8px; color: white; opacity: 0.85; font-size: 12px; text-decoration: none; }
+
+  main {
+    max-width: 1280px; margin: 24px auto; padding: 0 16px;
+    display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 22px;
+  }
+  @media (max-width: 980px) { main { grid-template-columns: 1fr; } }
+
+  /* ── Date hero ─────────────────────────────────────────────── */
+  .date-hero {
+    background: var(--navy); color: white;
+    border-radius: 10px; padding: 18px 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; margin-bottom: 18px; flex-wrap: wrap;
+  }
+  .date-hero .label {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7;
+  }
+  .date-hero .big {
+    font-size: 28px; font-weight: 700; margin-top: 2px; letter-spacing: -0.3px;
+  }
+  .date-hero input[type="date"] {
+    background: rgba(255,255,255,0.12); color: white;
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 6px;
+    padding: 8px 10px; font-size: 14px; font-family: inherit;
+    color-scheme: dark;
+  }
+
+  /* ── Cards ─────────────────────────────────────────────────── */
   .card {
     background: var(--white);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 20px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04);
   }
   .card h2 {
     margin: 0 0 14px 0;
     color: var(--navy);
-    font-size: 16px;
+    font-size: 15px;
     border-bottom: 2px solid var(--navy);
     padding-bottom: 6px;
+    display: flex; align-items: center; gap: 10px;
   }
-  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  @media (max-width: 720px) { .row { grid-template-columns: 1fr 1fr; } }
-  .field label { display: block; font-size: 11px; color: var(--ink-soft); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .field input, .field textarea, .field select {
-    width: 100%;
-    padding: 9px 10px;
-    border: 1px solid var(--line);
-    border-radius: 5px;
-    font-size: 14px;
-    background: #fafafa;
+  .card h2 .badge {
+    display: inline-block; padding: 2px 8px;
+    background: var(--gold); color: var(--ink);
+    border-radius: 999px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .card h2 .badge.required { background: var(--red); color: white; }
+
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .row.row-2 { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 720px) { .row, .row.row-2 { grid-template-columns: 1fr 1fr; } }
+
+  .field label {
+    display: block; font-size: 11px; color: var(--ink-soft);
+    margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .field input, .field textarea {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: 6px;
+    font-size: 15px; background: #fafafa; font-family: inherit;
   }
   .field input[readonly] { background: #f0f0f0; color: var(--ink-soft); }
-  .field input:focus, .field textarea:focus { outline: 2px solid var(--gold); background: white; }
-  .bank-pill {
-    display: inline-block; padding: 3px 8px; background: var(--gold); color: var(--ink);
-    border-radius: 999px; font-size: 11px; font-weight: bold; margin-left: 6px;
+  .field input:focus, .field textarea:focus {
+    outline: 2px solid var(--gold); background: white;
   }
+
+  /* ── Summary strip ─────────────────────────────────────────── */
   .summary {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-    background: var(--navy); color: white; padding: 16px; border-radius: 6px; margin-top: 12px;
+    background: var(--navy); color: white; padding: 16px; border-radius: 8px;
+    margin-top: 4px;
   }
   @media (max-width: 720px) { .summary { grid-template-columns: 1fr; } }
   .summary .stat { text-align: center; }
-  .summary .stat .label { font-size: 11px; opacity: 0.7; text-transform: uppercase; }
-  .summary .stat .value { font-size: 22px; font-weight: bold; margin-top: 4px; }
+  .summary .stat .label {
+    font-size: 11px; opacity: 0.7;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .summary .stat .value {
+    font-size: 26px; font-weight: 700; margin-top: 4px;
+  }
   .over { color: #6ee7b7; }
   .short { color: #fda4af; }
-  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+
+  /* ── Actions ───────────────────────────────────────────────── */
+  .actions {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 14px; align-items: center;
+  }
   button {
-    padding: 10px 18px; border: 0; border-radius: 5px; cursor: pointer;
-    font-size: 14px; font-weight: 600;
+    padding: 11px 20px; border: 0; border-radius: 7px; cursor: pointer;
+    font-size: 14px; font-weight: 600; font-family: inherit;
   }
   .btn-primary { background: var(--red); color: white; }
   .btn-primary:hover { background: #a50d24; }
   .btn-secondary { background: var(--navy); color: white; }
   .btn-ghost { background: transparent; color: var(--navy); border: 1px solid var(--navy); }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { background: var(--navy); color: white; padding: 8px; text-align: left; font-weight: 600; font-size: 12px; }
-  td { padding: 7px 8px; border-bottom: 1px solid var(--line); }
-  tr:nth-child(even) td { background: #fafafa; }
+  .saved-flash {
+    color: var(--green); font-size: 13px; font-weight: 600;
+    margin-left: 8px; opacity: 0; transition: opacity 0.3s;
+  }
+  .saved-flash.show { opacity: 1; }
+  .saved-flash.warn { color: #b45309; }
+
+  /* ── Side panel: recent counts ─────────────────────────────── */
+  aside {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    align-self: start;
+    position: sticky; top: 16px;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+  }
+  aside h3 {
+    margin: 0 0 6px; color: var(--navy); font-size: 14px;
+    text-transform: uppercase; letter-spacing: 1.5px;
+  }
+  aside .help {
+    font-size: 11px; color: var(--ink-soft); margin-bottom: 14px;
+    border-bottom: 1px solid var(--line); padding-bottom: 10px;
+  }
+  .hist-row {
+    border-left: 3px solid var(--gold);
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    background: #fafaf6;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+  }
+  .hist-row.over { border-left-color: var(--green); }
+  .hist-row.short { border-left-color: var(--red); }
+  .hist-row .top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .hist-row .date { font-weight: 700; color: var(--navy); }
+  .hist-row .mgr {
+    font-size: 11px; color: var(--ink-soft);
+    background: #eee; padding: 2px 6px; border-radius: 999px;
+  }
+  .hist-row .nums {
+    font-size: 12px; color: var(--ink-soft); line-height: 1.5;
+  }
+  .hist-row .nums b { color: var(--ink); }
+  .hist-row .os {
+    font-weight: 700; font-size: 13px; margin-top: 4px;
+  }
+  .hist-row.over .os { color: var(--green); }
+  .hist-row.short .os { color: var(--red); }
+  .hist-empty {
+    color: #aaa; text-align: center; padding: 20px 0; font-style: italic; font-size: 12px;
+  }
+
+  /* ── Reminder banner ───────────────────────────────────────── */
+  .reminder {
+    background: #FEF3C7; border-left: 4px solid var(--gold);
+    padding: 10px 14px; border-radius: 6px; font-size: 13px;
+    margin-bottom: 16px; color: #78350F;
+  }
+  .reminder b { color: #92400E; }
+
   .footer { font-size: 11px; color: var(--ink-soft); text-align: center; padding: 18px; }
   .footer a { color: var(--navy); }
-  .saved-flash { color: #16a34a; font-size: 12px; margin-left: 12px; opacity: 0; transition: opacity 0.4s; }
-  .saved-flash.show { opacity: 1; }
+
   @media print {
-    header, .actions, .footer, .nav-back, button { display: none !important; }
+    header, .actions, .footer, .nav-back, button, aside, .saved-flash { display: none !important; }
+    main { display: block; }
     .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
     body { background: white; }
   }
-  .nav-back { display: inline-block; margin-top: 8px; color: white; opacity: 0.85; font-size: 12px; text-decoration: none; }
 </style>
 </head>
 <body>
 <header>
   <h1>Safe &amp; Drawer Count Log</h1>
-  <div class="sub">Five Guys 2065 — Louisville, KY &nbsp;|&nbsp; Safe bank $700 &nbsp;|&nbsp; Drawer bank $200 × 2</div>
+  <div class="sub">Five Guys 2065 — Louisville, KY &nbsp;|&nbsp; Safe bank $700 &nbsp;|&nbsp; Drawer bank $200 × 2 &nbsp;|&nbsp; Three counts per day — opening, mid-shift, nightly</div>
   <a class="nav-back" href="dashboard.html">← Back to Dashboard</a>
 </header>
 
 <main>
 
-<div class="card">
-  <h2>Today's Count <span class="bank-pill">Banks: $700 / $200 / $200</span></h2>
-  <div class="row">
-    <div class="field"><label>Business Date</label><input type="date" id="f-date" /></div>
-    <div class="field"><label>Manager Initials</label><input type="text" id="f-mgr" maxlength="6" placeholder="e.g. BC" /></div>
-    <div class="field"><label>Deposit Bag #</label><input type="text" id="f-bag" placeholder="bag #" /></div>
-    <div class="field"><label>Deposit Amount</label><input type="number" step="0.01" id="f-deposit" placeholder="0.00" /></div>
-  </div>
+  <!-- ── LEFT COLUMN — entry form ──────────────────────────────────── -->
+  <section>
+    <div class="date-hero">
+      <div>
+        <div class="label">Business Date</div>
+        <div class="big" id="date-display">—</div>
+      </div>
+      <input type="date" id="f-date" />
+    </div>
 
-  <h2 style="margin-top: 22px;">Open Counts</h2>
-  <div class="row">
-    <div class="field"><label>Safe Open (exp $700)</label><input type="number" step="0.01" id="f-safe-open" placeholder="700.00" /></div>
-    <div class="field"><label>Drawer 1 Open (exp $200)</label><input type="number" step="0.01" id="f-d1-open" placeholder="200.00" /></div>
-    <div class="field"><label>Drawer 2 Open (exp $200)</label><input type="number" step="0.01" id="f-d2-open" placeholder="200.00" /></div>
-    <div class="field"><label>Open Variance</label><input type="text" id="f-open-var" readonly /></div>
-  </div>
+    <div class="reminder">
+      <b>★ Nightly counts must be completed before the closing manager leaves.</b>
+      Mid-shift count is the lunch / afternoon reconciliation.
+    </div>
 
-  <h2 style="margin-top: 22px;">Close Counts</h2>
-  <div class="row">
-    <div class="field"><label>Safe Close</label><input type="number" step="0.01" id="f-safe-close" placeholder="700.00" /></div>
-    <div class="field"><label>Drawer 1 Close</label><input type="number" step="0.01" id="f-d1-close" placeholder="200.00" /></div>
-    <div class="field"><label>Drawer 2 Close</label><input type="number" step="0.01" id="f-d2-close" placeholder="200.00" /></div>
-    <div class="field"><label>CT Over/Short (EOD)</label><input type="number" step="0.01" id="f-ct-os" placeholder="from CrunchTime" /></div>
-  </div>
+    <div class="card">
+      <h2>Manager &amp; Deposit</h2>
+      <div class="row row-2">
+        <div class="field"><label>Manager Initials</label><input type="text" id="f-mgr" maxlength="6" placeholder="e.g. BC" /></div>
+        <div class="field"><label>Deposit Amount (nightly)</label><input type="number" step="0.01" id="f-deposit" placeholder="0.00" /></div>
+      </div>
+    </div>
 
-  <h2 style="margin-top: 22px;">Notes</h2>
-  <div class="field"><textarea id="f-notes" rows="2" placeholder="Anything noteworthy (skim slip, miscount cause, change order, etc.)"></textarea></div>
+    <div class="card">
+      <h2>Opening Counts <span class="badge">Start of day</span></h2>
+      <div class="row">
+        <div class="field"><label>Safe Open (exp $700)</label><input type="number" step="0.01" id="f-safe-open" placeholder="700.00" /></div>
+        <div class="field"><label>Drawer 1 Open (exp $200)</label><input type="number" step="0.01" id="f-d1-open" placeholder="200.00" /></div>
+        <div class="field"><label>Drawer 2 Open (exp $200)</label><input type="number" step="0.01" id="f-d2-open" placeholder="200.00" /></div>
+      </div>
+    </div>
 
-  <div class="summary">
-    <div class="stat"><div class="label">Drawer Variance</div><div class="value" id="s-drawer-var">$0.00</div></div>
-    <div class="stat"><div class="label">Safe Variance</div><div class="value" id="s-safe-var">$0.00</div></div>
-    <div class="stat"><div class="label">Total Over/Short</div><div class="value" id="s-total-os">$0.00</div></div>
-  </div>
+    <div class="card">
+      <h2>Mid-Shift Counts <span class="badge">After lunch rush</span></h2>
+      <div class="row">
+        <div class="field"><label>Safe Mid</label><input type="number" step="0.01" id="f-safe-mid" placeholder="700.00" /></div>
+        <div class="field"><label>Drawer 1 Mid</label><input type="number" step="0.01" id="f-d1-mid" placeholder="200.00" /></div>
+        <div class="field"><label>Drawer 2 Mid</label><input type="number" step="0.01" id="f-d2-mid" placeholder="200.00" /></div>
+      </div>
+    </div>
 
-  <div class="actions" style="margin-top: 16px;">
-    <button class="btn-primary" id="btn-save">Save Today</button>
-    <button class="btn-secondary" onclick="window.print()">Print</button>
-    <button class="btn-ghost" id="btn-clear">Clear Form</button>
-    <button class="btn-ghost" id="btn-export">Export Month CSV</button>
-    <span class="saved-flash" id="saved-flash">✓ Saved</span>
-  </div>
-</div>
+    <div class="card">
+      <h2>Nightly Counts <span class="badge required">Required before close</span></h2>
+      <div class="row">
+        <div class="field"><label>Safe Close</label><input type="number" step="0.01" id="f-safe-close" placeholder="700.00" /></div>
+        <div class="field"><label>Drawer 1 Close</label><input type="number" step="0.01" id="f-d1-close" placeholder="200.00" /></div>
+        <div class="field"><label>Drawer 2 Close</label><input type="number" step="0.01" id="f-d2-close" placeholder="200.00" /></div>
+      </div>
+      <div class="row row-2" style="margin-top: 12px;">
+        <div class="field"><label>CrunchTime Over/Short (EOD)</label><input type="number" step="0.01" id="f-ct-os" placeholder="from CrunchTime after 4 AM" /></div>
+        <div class="field"><label>Total Variance (auto)</label><input type="text" id="f-total-var" readonly /></div>
+      </div>
+    </div>
 
-<div class="card">
-  <h2>Recent History (this device)</h2>
-  <table id="history-table">
-    <thead>
-      <tr>
-        <th>Date</th><th>Mgr</th><th>Safe Close</th><th>D1 Close</th><th>D2 Close</th>
-        <th>Deposit</th><th>CT O/S</th><th>Total Var</th><th>Notes</th>
-      </tr>
-    </thead>
-    <tbody id="history-body">
-      <tr><td colspan="9" style="text-align:center; color: #999; padding: 18px;">No saved counts yet — fill the form above and click Save.</td></tr>
-    </tbody>
-  </table>
-</div>
+    <div class="card">
+      <h2>Notes</h2>
+      <div class="field">
+        <textarea id="f-notes" rows="2" placeholder="Anything noteworthy — skim slip, miscount cause, change order, who counted, etc."></textarea>
+      </div>
+    </div>
 
-<div class="card">
-  <h2>Downloadable Templates</h2>
-  <p style="margin: 4px 0 12px 0; color: var(--ink-soft); font-size: 13px;">
-    Printable monthly logs (auto-regenerated every morning by the daily routine).
-  </p>
-  <ul style="margin: 0; line-height: 1.9;">
-    <li><a href="safe_drawer_log.xlsx">📊 safe_drawer_log.xlsx</a> — Excel template, current month</li>
-    <li><a href="safe_drawer_log.pdf">📄 safe_drawer_log.pdf</a> — Printable PDF, current month</li>
-  </ul>
-</div>
+    <div class="summary">
+      <div class="stat"><div class="label">Drawer Variance</div><div class="value" id="s-drawer-var">$0.00</div></div>
+      <div class="stat"><div class="label">Safe Variance</div><div class="value" id="s-safe-var">$0.00</div></div>
+      <div class="stat"><div class="label">Total Over/Short</div><div class="value" id="s-total-os">$0.00</div></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-primary" id="btn-save">Save</button>
+      <button class="btn-secondary" onclick="window.print()">Print</button>
+      <button class="btn-ghost" id="btn-export">Export CSV</button>
+      <span class="saved-flash" id="saved-flash">✓ Saved</span>
+    </div>
+  </section>
+
+  <!-- ── RIGHT COLUMN — recent counts ──────────────────────────────── -->
+  <aside>
+    <h3>Recent Counts</h3>
+    <div class="help">
+      Last 7 days — reference these if a count looks off. Tap a row to view detail in console.
+    </div>
+    <div id="hist-list">
+      <div class="hist-empty">No counts logged yet.</div>
+    </div>
+  </aside>
 
 </main>
 
 <div class="footer">
-  Counts saved to <em>this device only</em> (localStorage). Printable monthly logs above are regenerated daily.
+  Shared live log — every save is visible to every manager on every device.
   &nbsp;•&nbsp; <a href="dashboard.html">Dashboard</a>
+  &nbsp;•&nbsp; <a href="safe_drawer_log.xlsx">Excel template</a>
+  &nbsp;•&nbsp; <a href="safe_drawer_log.pdf">Printable PDF</a>
 </div>
 
 <script>
-// ── Worker wiring (filled in after Cloudflare deploy, see cloudflare-worker/SETUP.md)
+// ── Worker wiring ─────────────────────────────────────────────────
 const WORKER_URL = "https://safe-drawer-log.bobbycline2000.workers.dev";
 const WORKER_SECRET = "sdr-fg2065-2026-9F4xq2KvLm8";
 
-const KEY = 'fg2065_safe_drawer_v1';
+const KEY = 'fg2065_safe_drawer_v2';
 const SAFE_BANK = 700, DRAWER_BANK = 200;
-const SHARED_LOG_URL = 'https://raw.githubusercontent.com/bobbycline2000/fiveguys-dashboard/main/data/safe_drawer_log.json';
-let LIVE_ROWS = null;  // last fetched shared log, populated on load if available
+const SHARED_LOG_URL = 'https://raw.githubusercontent.com/bobbycline2000/2026-dashboard/main/data/safe_drawer_log.json'.replace('2026-dashboard','fiveguys-dashboard');
+let LIVE_ROWS = null;
 
-function fmt(n) { return '$' + (Number(n)||0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-function getEntries() { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } }
-function saveEntries(arr) { localStorage.setItem(KEY, JSON.stringify(arr)); }
+const $ = id => document.getElementById(id);
+const fmt = n => '$' + (Number(n)||0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const getEntries = () => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } };
+const saveEntries = arr => localStorage.setItem(KEY, JSON.stringify(arr));
+
+function prettyDate(iso) {
+  if (!iso) return '—';
+  const [y,m,d] = iso.split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m-1, d));
+  return dt.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric', timeZone:'UTC' });
+}
 
 function readForm() {
   return {
-    date: document.getElementById('f-date').value,
-    mgr: document.getElementById('f-mgr').value.trim(),
-    bag: document.getElementById('f-bag').value.trim(),
-    deposit: parseFloat(document.getElementById('f-deposit').value) || 0,
-    safe_open: parseFloat(document.getElementById('f-safe-open').value) || 0,
-    d1_open: parseFloat(document.getElementById('f-d1-open').value) || 0,
-    d2_open: parseFloat(document.getElementById('f-d2-open').value) || 0,
-    safe_close: parseFloat(document.getElementById('f-safe-close').value) || 0,
-    d1_close: parseFloat(document.getElementById('f-d1-close').value) || 0,
-    d2_close: parseFloat(document.getElementById('f-d2-close').value) || 0,
-    ct_os: parseFloat(document.getElementById('f-ct-os').value) || 0,
-    notes: document.getElementById('f-notes').value.trim(),
+    date:       $('f-date').value,
+    mgr:        $('f-mgr').value.trim(),
+    deposit:    parseFloat($('f-deposit').value) || 0,
+    safe_open:  parseFloat($('f-safe-open').value) || 0,
+    d1_open:    parseFloat($('f-d1-open').value)   || 0,
+    d2_open:    parseFloat($('f-d2-open').value)   || 0,
+    safe_mid:   parseFloat($('f-safe-mid').value)  || 0,
+    d1_mid:     parseFloat($('f-d1-mid').value)    || 0,
+    d2_mid:     parseFloat($('f-d2-mid').value)    || 0,
+    safe_close: parseFloat($('f-safe-close').value)|| 0,
+    d1_close:   parseFloat($('f-d1-close').value)  || 0,
+    d2_close:   parseFloat($('f-d2-close').value)  || 0,
+    ct_os:      parseFloat($('f-ct-os').value)     || 0,
+    notes:      $('f-notes').value.trim(),
   };
+}
+
+function setForm(r) {
+  $('f-mgr').value        = r.mgr || '';
+  $('f-deposit').value    = r.deposit    || '';
+  $('f-safe-open').value  = r.safe_open  || '';
+  $('f-d1-open').value    = r.d1_open    || '';
+  $('f-d2-open').value    = r.d2_open    || '';
+  $('f-safe-mid').value   = r.safe_mid   || '';
+  $('f-d1-mid').value     = r.d1_mid     || '';
+  $('f-d2-mid').value     = r.d2_mid     || '';
+  $('f-safe-close').value = r.safe_close || '';
+  $('f-d1-close').value   = r.d1_close   || '';
+  $('f-d2-close').value   = r.d2_close   || '';
+  $('f-ct-os').value      = r.ct_os      || '';
+  $('f-notes').value      = r.notes      || '';
 }
 
 function compute() {
@@ -215,55 +374,62 @@ function compute() {
   const d1Var    = (f.d1_close   ? f.d1_close   - DRAWER_BANK : 0);
   const d2Var    = (f.d2_close   ? f.d2_close   - DRAWER_BANK : 0);
   const drawerVar = d1Var + d2Var;
-  const openVar = (f.safe_open ? f.safe_open - SAFE_BANK : 0)
-                + (f.d1_open   ? f.d1_open   - DRAWER_BANK : 0)
-                + (f.d2_open   ? f.d2_open   - DRAWER_BANK : 0);
   const total = safeVar + drawerVar;
 
-  document.getElementById('f-open-var').value = fmt(openVar);
-  document.getElementById('s-safe-var').textContent = fmt(safeVar);
-  document.getElementById('s-drawer-var').textContent = fmt(drawerVar);
-  document.getElementById('s-total-os').textContent = fmt(total);
+  $('s-safe-var').textContent = fmt(safeVar);
+  $('s-drawer-var').textContent = fmt(drawerVar);
+  $('s-total-os').textContent = fmt(total);
+  $('f-total-var').value = fmt(total);
 
-  const t = document.getElementById('s-total-os');
+  const t = $('s-total-os');
   t.classList.remove('over','short');
   if (total > 0.005) t.classList.add('over');
   else if (total < -0.005) t.classList.add('short');
 }
 
 function renderHistory() {
-  // Prefer the live shared log if it loaded; otherwise fall back to this device's localStorage.
   const source = (LIVE_ROWS && LIVE_ROWS.length) ? LIVE_ROWS : getEntries();
-  const rows = source.slice().sort((a,b) => (b.date||'').localeCompare(a.date||'')).slice(0, 31);
-  const tb = document.getElementById('history-body');
+  const rows = source.slice().sort((a,b) => (b.date||'').localeCompare(a.date||'')).slice(0, 7);
+  const list = $('hist-list');
   if (!rows.length) {
-    tb.innerHTML = '<tr><td colspan="9" style="text-align:center; color: #999; padding: 18px;">No saved counts yet — fill the form above and click Save.</td></tr>';
+    list.innerHTML = '<div class="hist-empty">No counts logged yet.</div>';
     return;
   }
-  tb.innerHTML = rows.map(r => {
+  list.innerHTML = rows.map(r => {
     const drawerVar = (r.d1_close ? r.d1_close - DRAWER_BANK : 0) + (r.d2_close ? r.d2_close - DRAWER_BANK : 0);
     const safeVar = (r.safe_close ? r.safe_close - SAFE_BANK : 0);
-    const totalVar = drawerVar + safeVar;
-    return `<tr>
-      <td>${r.date || ''}</td><td>${r.mgr || ''}</td>
-      <td>${fmt(r.safe_close)}</td><td>${fmt(r.d1_close)}</td><td>${fmt(r.d2_close)}</td>
-      <td>${fmt(r.deposit)}</td><td>${fmt(r.ct_os)}</td>
-      <td style="color: ${totalVar>=0?'#16a34a':'#dc2626'}; font-weight: 600;">${fmt(totalVar)}</td>
-      <td style="font-size: 11px; color: #666;">${(r.notes || '').slice(0, 60)}</td>
-    </tr>`;
+    const total = drawerVar + safeVar;
+    const cls = total > 0.005 ? 'over' : total < -0.005 ? 'short' : '';
+    const sign = total > 0 ? '+' : '';
+    const dt = new Date(r.date+'T00:00:00');
+    const dateShort = dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+    return `<div class="hist-row ${cls}" onclick='console.log(${JSON.stringify(JSON.stringify(r))})'>
+      <div class="top">
+        <span class="date">${dateShort}</span>
+        <span class="mgr">${r.mgr || '?'}</span>
+      </div>
+      <div class="nums">
+        Safe close <b>${fmt(r.safe_close)}</b> · D1 <b>${fmt(r.d1_close)}</b> · D2 <b>${fmt(r.d2_close)}</b><br>
+        Deposit <b>${fmt(r.deposit)}</b> · CT O/S <b>${fmt(r.ct_os)}</b>
+      </div>
+      <div class="os">${sign}${fmt(total)} total var</div>
+    </div>`;
   }).join('');
 }
 
 async function saveToday() {
   const f = readForm();
   if (!f.date) { alert('Pick a business date first.'); return; }
-  // Always save locally as a backup (works even if the worker is down).
+  if (!f.mgr)  { alert('Enter your manager initials before saving.'); return; }
+
+  // localStorage backup (this device)
   const rows = getEntries().filter(r => r.date !== f.date);
   rows.push(f);
   saveEntries(rows);
 
-  const flash = document.getElementById('saved-flash');
-  let msg = '✓ Saved (this device)';
+  const flash = $('saved-flash');
+  let msg = '✓ Saved to this device';
+  let warn = false;
 
   if (WORKER_URL && WORKER_SECRET) {
     try {
@@ -274,74 +440,65 @@ async function saveToday() {
       });
       const data = await r.json();
       if (data.ok) {
-        msg = '✓ Saved to live log';
-        // Refresh shared rows so history table shows the new entry from the live log.
+        msg = '✓ Saved to live shared log';
         await loadLiveLog();
       } else {
-        msg = '⚠ Saved locally — live log error: ' + (data.error || r.status);
+        msg = '⚠ Saved locally — live log: ' + (data.error || r.status); warn = true;
       }
     } catch (e) {
-      msg = '⚠ Saved locally — live log unreachable';
+      msg = '⚠ Saved locally — live log unreachable'; warn = true;
     }
   }
 
   renderHistory();
   flash.textContent = msg;
+  flash.classList.toggle('warn', warn);
   flash.classList.add('show');
-  setTimeout(() => flash.classList.remove('show'), 2400);
+  setTimeout(() => flash.classList.remove('show'), 2800);
 }
 
 async function loadLiveLog() {
-  // First try the raw JSON in the repo (works the moment the worker has written it once).
   try {
     const r = await fetch(SHARED_LOG_URL, { cache: 'no-store' });
     if (r.ok) {
       const rows = await r.json();
       if (Array.isArray(rows)) { LIVE_ROWS = rows; return; }
     }
-  } catch (_) { /* fall through */ }
-  // Fallback: ask the worker (catches the case where the file doesn't exist yet).
+  } catch (_) {}
   if (WORKER_URL) {
     try {
       const r = await fetch(WORKER_URL + '/log');
       const data = await r.json();
-      if (data.ok && Array.isArray(data.rows)) { LIVE_ROWS = data.rows; return; }
-    } catch (_) { /* leave LIVE_ROWS null → localStorage fallback */ }
+      if (data.ok && Array.isArray(data.rows)) { LIVE_ROWS = data.rows; }
+    } catch (_) {}
   }
 }
 
 function loadForDate(d) {
-  const row = getEntries().find(r => r.date === d);
-  if (!row) return;
-  document.getElementById('f-mgr').value = row.mgr || '';
-  document.getElementById('f-bag').value = row.bag || '';
-  document.getElementById('f-deposit').value = row.deposit || '';
-  document.getElementById('f-safe-open').value = row.safe_open || '';
-  document.getElementById('f-d1-open').value = row.d1_open || '';
-  document.getElementById('f-d2-open').value = row.d2_open || '';
-  document.getElementById('f-safe-close').value = row.safe_close || '';
-  document.getElementById('f-d1-close').value = row.d1_close || '';
-  document.getElementById('f-d2-close').value = row.d2_close || '';
-  document.getElementById('f-ct-os').value = row.ct_os || '';
-  document.getElementById('f-notes').value = row.notes || '';
-  compute();
-}
-
-function clearForm() {
-  ['f-mgr','f-bag','f-deposit','f-safe-open','f-d1-open','f-d2-open',
-   'f-safe-close','f-d1-close','f-d2-close','f-ct-os','f-notes']
-    .forEach(id => { document.getElementById(id).value = ''; });
+  // Prefer live shared row for the day (any manager); fall back to localStorage.
+  const live = (LIVE_ROWS || []).find(r => r.date === d);
+  const local = getEntries().find(r => r.date === d);
+  const row = live || local;
+  if (row) setForm(row);
+  $('date-display').textContent = prettyDate(d);
   compute();
 }
 
 function exportCsv() {
-  const rows = getEntries().slice().sort((a,b) => (a.date||'').localeCompare(b.date||''));
-  const hdr = ['Date','Mgr','Bag #','Deposit','Safe Open','D1 Open','D2 Open','Safe Close','D1 Close','D2 Close','CT O/S','Notes'];
+  const rows = (LIVE_ROWS && LIVE_ROWS.length ? LIVE_ROWS : getEntries())
+    .slice().sort((a,b) => (a.date||'').localeCompare(b.date||''));
+  const hdr = ['Date','Mgr','Deposit',
+               'Safe Open','D1 Open','D2 Open',
+               'Safe Mid','D1 Mid','D2 Mid',
+               'Safe Close','D1 Close','D2 Close',
+               'CT O/S','Notes'];
   const lines = [hdr.join(',')];
   rows.forEach(r => lines.push([
-    r.date, r.mgr, r.bag, r.deposit, r.safe_open, r.d1_open, r.d2_open,
-    r.safe_close, r.d1_close, r.d2_close, r.ct_os,
-    '"' + (r.notes||'').replace(/"/g,'""') + '"'
+    r.date, r.mgr, r.deposit,
+    r.safe_open, r.d1_open, r.d2_open,
+    r.safe_mid, r.d1_mid, r.d2_mid,
+    r.safe_close, r.d1_close, r.d2_close,
+    r.ct_os, '"' + (r.notes||'').replace(/"/g,'""') + '"'
   ].join(',')));
   const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
   const a = document.createElement('a');
@@ -351,17 +508,24 @@ function exportCsv() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  document.getElementById('f-date').value = new Date().toISOString().slice(0,10);
-  ['f-safe-open','f-d1-open','f-d2-open','f-safe-close','f-d1-close','f-d2-close','f-deposit','f-ct-os']
-    .forEach(id => document.getElementById(id).addEventListener('input', compute));
-  document.getElementById('f-date').addEventListener('change', e => loadForDate(e.target.value));
-  document.getElementById('btn-save').addEventListener('click', saveToday);
-  document.getElementById('btn-clear').addEventListener('click', clearForm);
-  document.getElementById('btn-export').addEventListener('click', exportCsv);
-  loadForDate(document.getElementById('f-date').value);
+  const today = new Date().toISOString().slice(0,10);
+  $('f-date').value = today;
+  $('date-display').textContent = prettyDate(today);
+
+  ['f-safe-open','f-d1-open','f-d2-open',
+   'f-safe-mid','f-d1-mid','f-d2-mid',
+   'f-safe-close','f-d1-close','f-d2-close',
+   'f-deposit','f-ct-os'].forEach(id => $(id).addEventListener('input', compute));
+
+  $('f-date').addEventListener('change', e => loadForDate(e.target.value));
+  $('btn-save').addEventListener('click', saveToday);
+  $('btn-export').addEventListener('click', exportCsv);
+
+  loadForDate(today);
   renderHistory();
-  compute();
+
   await loadLiveLog();
+  loadForDate($('f-date').value);
   renderHistory();
 });
 </script>
