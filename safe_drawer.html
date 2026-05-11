@@ -232,10 +232,10 @@
     </div>
 
     <div class="card">
-      <h2>Manager &amp; Deposit</h2>
+      <h2>Manager on Duty</h2>
       <div class="row row-2">
         <div class="field"><label>Manager Initials</label><input type="text" id="f-mgr" maxlength="6" placeholder="e.g. BC" /></div>
-        <div class="field"><label>Deposit Amount (nightly)</label><input type="number" step="0.01" id="f-deposit" placeholder="0.00" /></div>
+        <div class="field"><label>Deposit (from CrunchTime)</label><input type="text" id="f-deposit-info" readonly value="— pulled from CrunchTime —" style="font-style:italic;color:#888;" /></div>
       </div>
     </div>
 
@@ -318,8 +318,10 @@ const WORKER_SECRET = "sdr-fg2065-2026-9F4xq2KvLm8";
 
 const KEY = 'fg2065_safe_drawer_v2';
 const SAFE_BANK = 700, DRAWER_BANK = 200;
-const SHARED_LOG_URL = 'https://raw.githubusercontent.com/bobbycline2000/2026-dashboard/main/data/safe_drawer_log.json'.replace('2026-dashboard','fiveguys-dashboard');
+const SHARED_LOG_URL = 'https://raw.githubusercontent.com/bobbycline2000/fiveguys-dashboard/main/data/safe_drawer_log.json';
+const CT_HISTORY_URL = 'https://raw.githubusercontent.com/bobbycline2000/fiveguys-dashboard/main/data/cash_overshort_history.json';
 let LIVE_ROWS = null;
+let CT_HISTORY = null;
 
 const $ = id => document.getElementById(id);
 const fmt = n => '$' + (Number(n)||0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -337,7 +339,6 @@ function readForm() {
   return {
     date:       $('f-date').value,
     mgr:        $('f-mgr').value.trim(),
-    deposit:    parseFloat($('f-deposit').value) || 0,
     safe_open:  parseFloat($('f-safe-open').value) || 0,
     d1_open:    parseFloat($('f-d1-open').value)   || 0,
     d2_open:    parseFloat($('f-d2-open').value)   || 0,
@@ -354,7 +355,6 @@ function readForm() {
 
 function setForm(r) {
   $('f-mgr').value        = r.mgr || '';
-  $('f-deposit').value    = r.deposit    || '';
   $('f-safe-open').value  = r.safe_open  || '';
   $('f-d1-open').value    = r.d1_open    || '';
   $('f-d2-open').value    = r.d2_open    || '';
@@ -410,7 +410,7 @@ function renderHistory() {
       </div>
       <div class="nums">
         Safe close <b>${fmt(r.safe_close)}</b> · D1 <b>${fmt(r.d1_close)}</b> · D2 <b>${fmt(r.d2_close)}</b><br>
-        Deposit <b>${fmt(r.deposit)}</b> · CT O/S <b>${fmt(r.ct_os)}</b>
+        CT O/S <b>${fmt(r.ct_os)}</b>
       </div>
       <div class="os">${sign}${fmt(total)} total var</div>
     </div>`;
@@ -474,12 +474,40 @@ async function loadLiveLog() {
   }
 }
 
+async function loadCtHistory() {
+  // data/cash_overshort_history.json — written daily at 5 AM by
+  // scripts/track_cash_overshort.py. Lets us prefill the CT O/S field
+  // for the selected business date when CT's EOD has rolled (~4 AM).
+  try {
+    const r = await fetch(CT_HISTORY_URL, { cache: 'no-store' });
+    if (r.ok) {
+      const rows = await r.json();
+      if (Array.isArray(rows)) { CT_HISTORY = rows; }
+    }
+  } catch (_) {}
+}
+
+function ctOsFor(date) {
+  if (!CT_HISTORY) return null;
+  const row = CT_HISTORY.find(r => r.business_date === date);
+  return row ? row.over_short : null;
+}
+
 function loadForDate(d) {
   // Prefer live shared row for the day (any manager); fall back to localStorage.
   const live = (LIVE_ROWS || []).find(r => r.date === d);
   const local = getEntries().find(r => r.date === d);
   const row = live || local;
   if (row) setForm(row);
+
+  // Auto-fill CT Over/Short from cash_overshort_history.json if the
+  // selected date has a captured value (rolled after CT EOD ~4 AM).
+  // If the user already typed a value, don't overwrite it.
+  const ct = ctOsFor(d);
+  if (ct !== null && !$('f-ct-os').value) {
+    $('f-ct-os').value = ct;
+  }
+
   $('date-display').textContent = prettyDate(d);
   compute();
 }
@@ -487,14 +515,14 @@ function loadForDate(d) {
 function exportCsv() {
   const rows = (LIVE_ROWS && LIVE_ROWS.length ? LIVE_ROWS : getEntries())
     .slice().sort((a,b) => (a.date||'').localeCompare(b.date||''));
-  const hdr = ['Date','Mgr','Deposit',
+  const hdr = ['Date','Mgr',
                'Safe Open','D1 Open','D2 Open',
                'Safe Mid','D1 Mid','D2 Mid',
                'Safe Close','D1 Close','D2 Close',
                'CT O/S','Notes'];
   const lines = [hdr.join(',')];
   rows.forEach(r => lines.push([
-    r.date, r.mgr, r.deposit,
+    r.date, r.mgr,
     r.safe_open, r.d1_open, r.d2_open,
     r.safe_mid, r.d1_mid, r.d2_mid,
     r.safe_close, r.d1_close, r.d2_close,
@@ -515,7 +543,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   ['f-safe-open','f-d1-open','f-d2-open',
    'f-safe-mid','f-d1-mid','f-d2-mid',
    'f-safe-close','f-d1-close','f-d2-close',
-   'f-deposit','f-ct-os'].forEach(id => $(id).addEventListener('input', compute));
+   'f-ct-os'].forEach(id => $(id).addEventListener('input', compute));
 
   $('f-date').addEventListener('change', e => loadForDate(e.target.value));
   $('btn-save').addEventListener('click', saveToday);
@@ -524,7 +552,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadForDate(today);
   renderHistory();
 
-  await loadLiveLog();
+  await Promise.all([loadLiveLog(), loadCtHistory()]);
   loadForDate($('f-date').value);
   renderHistory();
 });
