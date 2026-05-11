@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "store": "2065",
+    "week_start": "2026-05-11",
+    "week_end": "2026-05-17",
+    "scraped_at": "2026-05-11T07:35:25",
+    "today": "2026-05-11",
+    "source": "teamworx getWbForecastData"
+  },
+  "days": [
+    {
+      "date": "2026-05-11",
+      "day_label": "Mon",
+      "ideal_hours": 0.0,
+      "scheduled_hours": 0.0,
+      "variance_hours": 0.0,
+      "sales": 3591.0,
+      "ideal_labor_pct": null,
+      "sched_labor_pct": null
+    },
+    {
+      "date": "2026-05-12",
+      "day_label": "Tue",
+      "ideal_hours": 0.0,
+      "scheduled_hours": 0.0,
+      "variance_hours": 0.0,
+      "sales": 3429.0,
+      "ideal_labor_pct": null,
+      "sched_labor_pct": null
+    },
+    {
+      "date": "2026-05-13",
+      "day_label": "Wed",
+      "ideal_hours": 0.0,
+      "scheduled_hours": 0.0,
+      "variance_hours": 0.0,
+      "sales": 3834.0,
+      "ideal_labor_pct": null,
+      "sched_labor_pct": null
+    },
+    {
+      "date": "2026-05-14",
+      "day_label": "Thu",
+      "ideal_hours": 0.0,
+      "scheduled_hours": 0.0,
+      "variance_hours": 0.0,
+      "sales": 4159.0,
+      "ideal_labor_pct": null,
+      "sched_labor_pct": null
+    },
+    {
+      "date": "2026-05-15",
+      "day_label": "Fri",
+      "ideal_hours": 0.0,
+      "scheduled_hours": 0.0,
+      "variance_hours": 0.0,
+      "sales": 5372.0,
+      "ideal_labor_pct": null,
+      "sched_labor_pct": null
+    },
+    {
+      "date": "2026-05-16",
+      "day_label": "Sat",
+      "ideal_hours": 0.0,
+      "scheduled_hours": 0.0,
+      "variance_hours": 0.0,
+      "sales": 5222.0,
+      "ideal_labor_pct": null,
+      "sched_labor_pct": null
+    },
+    {
+      "date": "2026-05-17",
+      "day_label": "Sun",
+      "ideal_hours": 0.0,
+      "scheduled_hours": 0.0,
+      "variance_hours": 0.0,
+      "sales": 5330.0,
+      "ideal_labor_pct": null,
+      "sched_labor_pct": null
+    }
+  ],
+  "totals": {
+    "ideal_hours": 0.0,
+    "scheduled_hours": 0.0,
+    "variance_hours": 0.0
+  },
+  "week_totals_raw": {
+    "weeklyIdealsHours": 0.0,
+    "weeklyScheduledHours": 0.0,
+    "scheduledVariance": 0.0,
+    "totalSales": 30937.0
+  }
+}
