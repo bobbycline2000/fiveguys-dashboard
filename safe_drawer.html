@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Safe &amp; Drawer Count Log — Five Guys 2065</title>
+<link rel="icon" href="data:," />
+<style>
+  :root {
+    --red: #C8102E;
+    --navy: #1F2A44;
+    --gold: #D9A93B;
+    --ink: #111;
+    --ink-soft: #444;
+    --line: #e3e3e3;
+    --bg: #f6f5f1;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  header {
+    background: var(--red);
+    color: white;
+    padding: 18px 24px;
+  }
+  header h1 { margin: 0; font-size: 22px; letter-spacing: 0.5px; }
+  header .sub { font-size: 12px; opacity: 0.9; margin-top: 4px; }
+  main { max-width: 1080px; margin: 24px auto; padding: 0 16px; }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .card h2 {
+    margin: 0 0 14px 0;
+    color: var(--navy);
+    font-size: 16px;
+    border-bottom: 2px solid var(--navy);
+    padding-bottom: 6px;
+  }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .row { grid-template-columns: 1fr 1fr; } }
+  .field label { display: block; font-size: 11px; color: var(--ink-soft); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    font-size: 14px;
+    background: #fafafa;
+  }
+  .field input[readonly] { background: #f0f0f0; color: var(--ink-soft); }
+  .field input:focus, .field textarea:focus { outline: 2px solid var(--gold); background: white; }
+  .bank-pill {
+    display: inline-block; padding: 3px 8px; background: var(--gold); color: var(--ink);
+    border-radius: 999px; font-size: 11px; font-weight: bold; margin-left: 6px;
+  }
+  .summary {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    background: var(--navy); color: white; padding: 16px; border-radius: 6px; margin-top: 12px;
+  }
+  @media (max-width: 720px) { .summary { grid-template-columns: 1fr; } }
+  .summary .stat { text-align: center; }
+  .summary .stat .label { font-size: 11px; opacity: 0.7; text-transform: uppercase; }
+  .summary .stat .value { font-size: 22px; font-weight: bold; margin-top: 4px; }
+  .over { color: #6ee7b7; }
+  .short { color: #fda4af; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+  button {
+    padding: 10px 18px; border: 0; border-radius: 5px; cursor: pointer;
+    font-size: 14px; font-weight: 600;
+  }
+  .btn-primary { background: var(--red); color: white; }
+  .btn-primary:hover { background: #a50d24; }
+  .btn-secondary { background: var(--navy); color: white; }
+  .btn-ghost { background: transparent; color: var(--navy); border: 1px solid var(--navy); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--navy); color: white; padding: 8px; text-align: left; font-weight: 600; font-size: 12px; }
+  td { padding: 7px 8px; border-bottom: 1px solid var(--line); }
+  tr:nth-child(even) td { background: #fafafa; }
+  .footer { font-size: 11px; color: var(--ink-soft); text-align: center; padding: 18px; }
+  .footer a { color: var(--navy); }
+  .saved-flash { color: #16a34a; font-size: 12px; margin-left: 12px; opacity: 0; transition: opacity 0.4s; }
+  .saved-flash.show { opacity: 1; }
+  @media print {
+    header, .actions, .footer, .nav-back, button { display: none !important; }
+    .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+    body { background: white; }
+  }
+  .nav-back { display: inline-block; margin-top: 8px; color: white; opacity: 0.85; font-size: 12px; text-decoration: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Safe &amp; Drawer Count Log</h1>
+  <div class="sub">Five Guys 2065 — Louisville, KY &nbsp;|&nbsp; Safe bank $700 &nbsp;|&nbsp; Drawer bank $200 × 2</div>
+  <a class="nav-back" href="dashboard.html">← Back to Dashboard</a>
+</header>
+
+<main>
+
+<div class="card">
+  <h2>Today's Count <span class="bank-pill">Banks: $700 / $200 / $200</span></h2>
+  <div class="row">
+    <div class="field"><label>Business Date</label><input type="date" id="f-date" /></div>
+    <div class="field"><label>Manager Initials</label><input type="text" id="f-mgr" maxlength="6" placeholder="e.g. BC" /></div>
+    <div class="field"><label>Deposit Bag #</label><input type="text" id="f-bag" placeholder="bag #" /></div>
+    <div class="field"><label>Deposit Amount</label><input type="number" step="0.01" id="f-deposit" placeholder="0.00" /></div>
+  </div>
+
+  <h2 style="margin-top: 22px;">Open Counts</h2>
+  <div class="row">
+    <div class="field"><label>Safe Open (exp $700)</label><input type="number" step="0.01" id="f-safe-open" placeholder="700.00" /></div>
+    <div class="field"><label>Drawer 1 Open (exp $200)</label><input type="number" step="0.01" id="f-d1-open" placeholder="200.00" /></div>
+    <div class="field"><label>Drawer 2 Open (exp $200)</label><input type="number" step="0.01" id="f-d2-open" placeholder="200.00" /></div>
+    <div class="field"><label>Open Variance</label><input type="text" id="f-open-var" readonly /></div>
+  </div>
+
+  <h2 style="margin-top: 22px;">Close Counts</h2>
+  <div class="row">
+    <div class="field"><label>Safe Close</label><input type="number" step="0.01" id="f-safe-close" placeholder="700.00" /></div>
+    <div class="field"><label>Drawer 1 Close</label><input type="number" step="0.01" id="f-d1-close" placeholder="200.00" /></div>
+    <div class="field"><label>Drawer 2 Close</label><input type="number" step="0.01" id="f-d2-close" placeholder="200.00" /></div>
+    <div class="field"><label>CT Over/Short (EOD)</label><input type="number" step="0.01" id="f-ct-os" placeholder="from CrunchTime" /></div>
+  </div>
+
+  <h2 style="margin-top: 22px;">Notes</h2>
+  <div class="field"><textarea id="f-notes" rows="2" placeholder="Anything noteworthy (skim slip, miscount cause, change order, etc.)"></textarea></div>
+
+  <div class="summary">
+    <div class="stat"><div class="label">Drawer Variance</div><div class="value" id="s-drawer-var">$0.00</div></div>
+    <div class="stat"><div class="label">Safe Variance</div><div class="value" id="s-safe-var">$0.00</div></div>
+    <div class="stat"><div class="label">Total Over/Short</div><div class="value" id="s-total-os">$0.00</div></div>
+  </div>
+
+  <div class="actions" style="margin-top: 16px;">
+    <button class="btn-primary" id="btn-save">Save Today</button>
+    <button class="btn-secondary" onclick="window.print()">Print</button>
+    <button class="btn-ghost" id="btn-clear">Clear Form</button>
+    <button class="btn-ghost" id="btn-export">Export Month CSV</button>
+    <span class="saved-flash" id="saved-flash">✓ Saved</span>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Recent History (this device)</h2>
+  <table id="history-table">
+    <thead>
+      <tr>
+        <th>Date</th><th>Mgr</th><th>Safe Close</th><th>D1 Close</th><th>D2 Close</th>
+        <th>Deposit</th><th>CT O/S</th><th>Total Var</th><th>Notes</th>
+      </tr>
+    </thead>
+    <tbody id="history-body">
+      <tr><td colspan="9" style="text-align:center; color: #999; padding: 18px;">No saved counts yet — fill the form above and click Save.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Downloadable Templates</h2>
+  <p style="margin: 4px 0 12px 0; color: var(--ink-soft); font-size: 13px;">
+    Printable monthly logs (auto-regenerated every morning by the daily routine).
+  </p>
+  <ul style="margin: 0; line-height: 1.9;">
+    <li><a href="safe_drawer_log.xlsx">📊 safe_drawer_log.xlsx</a> — Excel template, current month</li>
+    <li><a href="safe_drawer_log.pdf">📄 safe_drawer_log.pdf</a> — Printable PDF, current month</li>
+  </ul>
+</div>
+
+</main>
+
+<div class="footer">
+  Counts saved to <em>this device only</em> (localStorage). Printable monthly logs above are regenerated daily.
+  &nbsp;•&nbsp; <a href="dashboard.html">Dashboard</a>
+</div>
+
+<script>
+const KEY = 'fg2065_safe_drawer_v1';
+const SAFE_BANK = 700, DRAWER_BANK = 200;
+
+function fmt(n) { return '$' + (Number(n)||0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function getEntries() { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } }
+function saveEntries(arr) { localStorage.setItem(KEY, JSON.stringify(arr)); }
+
+function readForm() {
+  return {
+    date: document.getElementById('f-date').value,
+    mgr: document.getElementById('f-mgr').value.trim(),
+    bag: document.getElementById('f-bag').value.trim(),
+    deposit: parseFloat(document.getElementById('f-deposit').value) || 0,
+    safe_open: parseFloat(document.getElementById('f-safe-open').value) || 0,
+    d1_open: parseFloat(document.getElementById('f-d1-open').value) || 0,
+    d2_open: parseFloat(document.getElementById('f-d2-open').value) || 0,
+    safe_close: parseFloat(document.getElementById('f-safe-close').value) || 0,
+    d1_close: parseFloat(document.getElementById('f-d1-close').value) || 0,
+    d2_close: parseFloat(document.getElementById('f-d2-close').value) || 0,
+    ct_os: parseFloat(document.getElementById('f-ct-os').value) || 0,
+    notes: document.getElementById('f-notes').value.trim(),
+  };
+}
+
+function compute() {
+  const f = readForm();
+  const safeVar  = (f.safe_close ? f.safe_close - SAFE_BANK : 0);
+  const d1Var    = (f.d1_close   ? f.d1_close   - DRAWER_BANK : 0);
+  const d2Var    = (f.d2_close   ? f.d2_close   - DRAWER_BANK : 0);
+  const drawerVar = d1Var + d2Var;
+  const openVar = (f.safe_open ? f.safe_open - SAFE_BANK : 0)
+                + (f.d1_open   ? f.d1_open   - DRAWER_BANK : 0)
+                + (f.d2_open   ? f.d2_open   - DRAWER_BANK : 0);
+  const total = safeVar + drawerVar;
+
+  document.getElementById('f-open-var').value = fmt(openVar);
+  document.getElementById('s-safe-var').textContent = fmt(safeVar);
+  document.getElementById('s-drawer-var').textContent = fmt(drawerVar);
+  document.getElementById('s-total-os').textContent = fmt(total);
+
+  const t = document.getElementById('s-total-os');
+  t.classList.remove('over','short');
+  if (total > 0.005) t.classList.add('over');
+  else if (total < -0.005) t.classList.add('short');
+}
+
+function renderHistory() {
+  const rows = getEntries().slice().sort((a,b) => (b.date||'').localeCompare(a.date||'')).slice(0, 31);
+  const tb = document.getElementById('history-body');
+  if (!rows.length) {
+    tb.innerHTML = '<tr><td colspan="9" style="text-align:center; color: #999; padding: 18px;">No saved counts yet — fill the form above and click Save.</td></tr>';
+    return;
+  }
+  tb.innerHTML = rows.map(r => {
+    const drawerVar = (r.d1_close ? r.d1_close - DRAWER_BANK : 0) + (r.d2_close ? r.d2_close - DRAWER_BANK : 0);
+    const safeVar = (r.safe_close ? r.safe_close - SAFE_BANK : 0);
+    const totalVar = drawerVar + safeVar;
+    return `<tr>
+      <td>${r.date || ''}</td><td>${r.mgr || ''}</td>
+      <td>${fmt(r.safe_close)}</td><td>${fmt(r.d1_close)}</td><td>${fmt(r.d2_close)}</td>
+      <td>${fmt(r.deposit)}</td><td>${fmt(r.ct_os)}</td>
+      <td style="color: ${totalVar>=0?'#16a34a':'#dc2626'}; font-weight: 600;">${fmt(totalVar)}</td>
+      <td style="font-size: 11px; color: #666;">${(r.notes || '').slice(0, 60)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function saveToday() {
+  const f = readForm();
+  if (!f.date) { alert('Pick a business date first.'); return; }
+  const rows = getEntries().filter(r => r.date !== f.date);
+  rows.push(f);
+  saveEntries(rows);
+  renderHistory();
+  const flash = document.getElementById('saved-flash');
+  flash.classList.add('show');
+  setTimeout(() => flash.classList.remove('show'), 1400);
+}
+
+function loadForDate(d) {
+  const row = getEntries().find(r => r.date === d);
+  if (!row) return;
+  document.getElementById('f-mgr').value = row.mgr || '';
+  document.getElementById('f-bag').value = row.bag || '';
+  document.getElementById('f-deposit').value = row.deposit || '';
+  document.getElementById('f-safe-open').value = row.safe_open || '';
+  document.getElementById('f-d1-open').value = row.d1_open || '';
+  document.getElementById('f-d2-open').value = row.d2_open || '';
+  document.getElementById('f-safe-close').value = row.safe_close || '';
+  document.getElementById('f-d1-close').value = row.d1_close || '';
+  document.getElementById('f-d2-close').value = row.d2_close || '';
+  document.getElementById('f-ct-os').value = row.ct_os || '';
+  document.getElementById('f-notes').value = row.notes || '';
+  compute();
+}
+
+function clearForm() {
+  ['f-mgr','f-bag','f-deposit','f-safe-open','f-d1-open','f-d2-open',
+   'f-safe-close','f-d1-close','f-d2-close','f-ct-os','f-notes']
+    .forEach(id => { document.getElementById(id).value = ''; });
+  compute();
+}
+
+function exportCsv() {
+  const rows = getEntries().slice().sort((a,b) => (a.date||'').localeCompare(b.date||''));
+  const hdr = ['Date','Mgr','Bag #','Deposit','Safe Open','D1 Open','D2 Open','Safe Close','D1 Close','D2 Close','CT O/S','Notes'];
+  const lines = [hdr.join(',')];
+  rows.forEach(r => lines.push([
+    r.date, r.mgr, r.bag, r.deposit, r.safe_open, r.d1_open, r.d2_open,
+    r.safe_close, r.d1_close, r.d2_close, r.ct_os,
+    '"' + (r.notes||'').replace(/"/g,'""') + '"'
+  ].join(',')));
+  const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'safe_drawer_log_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('f-date').value = new Date().toISOString().slice(0,10);
+  ['f-safe-open','f-d1-open','f-d2-open','f-safe-close','f-d1-close','f-d2-close','f-deposit','f-ct-os']
+    .forEach(id => document.getElementById(id).addEventListener('input', compute));
+  document.getElementById('f-date').addEventListener('change', e => loadForDate(e.target.value));
+  document.getElementById('btn-save').addEventListener('click', saveToday);
+  document.getElementById('btn-clear').addEventListener('click', clearForm);
+  document.getElementById('btn-export').addEventListener('click', exportCsv);
+  loadForDate(document.getElementById('f-date').value);
+  renderHistory();
+  compute();
+});
+</script>
+</body>
+</html>

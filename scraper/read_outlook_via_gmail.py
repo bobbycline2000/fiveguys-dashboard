@@ -770,6 +770,75 @@ def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | No
     return "\n".join(lines)
 
 
+def _build_cash_section(today: date) -> list[str]:
+    """Deposits & Safe/Drawer section for the daily brief.
+
+    Reads data/cash_overshort_history.json (written by
+    scripts/track_cash_overshort.py) and surfaces yesterday's final
+    over/short value plus the running prior 7-day trail.
+    """
+    import json as _json
+    from pathlib import Path as _Path
+
+    out: list[str] = []
+    repo = _Path(__file__).resolve().parent.parent
+    history_path = repo / "data" / "cash_overshort_history.json"
+
+    out.append("## 💰 Deposits & Cash Counts")
+    out.append("")
+    out.append(
+        "**Banks:** Safe $700 &nbsp;|&nbsp; Drawer 1 $200 &nbsp;|&nbsp; "
+        "Drawer 2 $200 &nbsp;|&nbsp; **Deposit nightly + enter in CrunchTime**"
+    )
+    out.append("")
+    out.append(
+        "Manager log + live form: "
+        "[Safe & Drawer Count Log](https://bobbycline2000.github.io/fiveguys-dashboard/safe_drawer.html)"
+    )
+    out.append("")
+
+    rows: list[dict] = []
+    if history_path.exists():
+        try:
+            rows = _json.loads(history_path.read_text(encoding="utf-8"))
+        except Exception:
+            rows = []
+
+    if not rows:
+        out.append(
+            "_No CrunchTime over/short history captured yet — the daily routine "
+            "will append today's value at 5 AM ET._"
+        )
+        out.append("")
+        out.append("---")
+        out.append("")
+        return out
+
+    latest = rows[-1]
+    val = latest.get("over_short", 0.0)
+    bd = latest.get("business_date", "?")
+    label = "OVER" if val > 0.005 else "SHORT" if val < -0.005 else "EVEN"
+    out.append(f"**Yesterday ({bd}) — CrunchTime Total Cash Over/Short:** ${val:,.2f} ({label})")
+    out.append("")
+
+    last7 = rows[-7:][::-1]
+    out.append("| Business Date | Over/Short |")
+    out.append("|---|---|")
+    for r in last7:
+        v = r.get("over_short", 0.0)
+        tag = "🟢" if v >= -0.005 else "🔴"
+        out.append(f"| {r.get('business_date','?')} | {tag} ${v:,.2f} |")
+    out.append("")
+    out.append("**Manager action today:**")
+    out.append("- Count safe + both drawers at open (target $700 / $200 / $200)")
+    out.append("- Count drawers at close, drop excess to safe, prep deposit")
+    out.append("- Log everything in the [Safe & Drawer page](https://bobbycline2000.github.io/fiveguys-dashboard/safe_drawer.html) and enter the deposit in CrunchTime")
+    out.append("")
+    out.append("---")
+    out.append("")
+    return out
+
+
 def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
     """Builds the daily brief markdown string."""
     lines: list[str] = []
@@ -827,6 +896,9 @@ def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
             lines.append("")
         lines.append("---")
         lines.append("")
+
+    # ── Deposits & Cash Counts ───────────────────────────────────────────────
+    lines.extend(_build_cash_section(today))
 
     # ── Director's Corner ────────────────────────────────────────────────────
     director_emails = categorized.get("Director's Corner", [])

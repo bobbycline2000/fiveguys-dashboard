@@ -83,18 +83,9 @@ jobs:
           printf '%s' "$SCG_OAUTH_CLIENT_JSON"        > secrets/scg_oauth_client.json
           printf '%s' "$SCG_GMAIL_REFRESH_TOKEN_JSON" > secrets/scg_refresh_token.json
 
-      # ── 4d0. Generate daily Outlook email debrief ─────────────────────────
-      # Reads fg2065@estep-co.com inbox directly via MS Graph API (CI path),
-      # generates a structured brief, and sends it to fg2065@estep-co.com.
-      # Falls back to Gmail OAuth on local dev (where MS vars aren't set).
-      # Runs unconditionally — independent of Par Brink OAuth availability.
-      - name: Generate daily email debrief (fg2065 inbox → brief)
-        continue-on-error: true
-        env:
-          MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
-          MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
-          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
-        run: python scraper/read_outlook_via_gmail.py
+      # ── 4d0. (moved later — runs AFTER CrunchTime scrape + cash tracker
+      # so the brief's Deposits & Cash Counts section reflects today's
+      # over/short value.)
 
       # ── 4d. Pull yesterday's Par Brink reports email + attachments ────────
       # Source of truth for sales / labor / discounts. Runs BEFORE CrunchTime
@@ -292,6 +283,33 @@ jobs:
           STORE_ID: "2065"
         run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_shop_payout_email.py --store 2065
 
+      # ── 5b9. Track yesterday's Total Cash Over/Short → history ───────────
+      # CrunchTime EOD runs at ~4 AM ET → at 5 AM scrape we capture the
+      # PREVIOUS business day's final over/short. Appended to
+      # data/cash_overshort_history.json — read by the email brief's
+      # Deposits & Cash Counts section.
+      - name: Track Cash Over/Short history
+        continue-on-error: true
+        run: python scripts/track_cash_overshort.py
+
+      # ── 5b10. Rebuild monthly Safe & Drawer Count Log (xlsx + pdf) ────────
+      # Regenerated daily so the printable monthly template is always current.
+      # Served by safe_drawer.html as downloadable links.
+      - name: Build Safe & Drawer Count Log (xlsx + pdf)
+        continue-on-error: true
+        run: python scripts/build_safe_drawer_log.py
+
+      # ── 5b11. Generate daily Outlook email debrief (MOVED HERE 2026-05-11)
+      # Was step 4d0 — moved to run AFTER the cash tracker so the
+      # Deposits & Cash Counts section in the brief sees today's value.
+      - name: Generate daily email debrief (fg2065 inbox → brief)
+        continue-on-error: true
+        env:
+          MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
+          MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+        run: python scraper/read_outlook_via_gmail.py
+
       # ── 5c. Wire fresh data into dashboard.html (idempotent) ──────────────
       # main.py only updates data/latest.json; wire_dashboard.py is what
       # actually reflects those numbers in the served HTML. Without this step
@@ -363,7 +381,7 @@ jobs:
           # Stage dashboard + JSON snapshots. data/raw/parbrink/ JSONs are
           # critical history for aggregate_periods.py — without committing them,
           # every run starts with empty rollup history.
-          git add dashboard.html Shop_Tracker_2065_2026.xlsx data/latest.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cm_results_source.html data/cm_page_text.txt data/daily-brief/ data/team_notes.json || true
+          git add dashboard.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/cm_results_source.html data/cm_page_text.txt data/daily-brief/ data/team_notes.json || true
           git add data/raw/parbrink/ data/raw/crunchtime/ data/raw/compliancemate/ data/raw/marketforce/ || true
           git add data/drafts/ data/debug-log.txt data/heal-log.txt data/debug-log.archive/ || true
 
