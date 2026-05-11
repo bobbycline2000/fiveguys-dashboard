@@ -407,8 +407,56 @@ Every sidebar section visited with capture on. Endpoints grouped by trigger.
 - `POST /json/mn/message/getManagerShiftNotes` — manager log notes attached to shifts
 
 ### Shift Builder (`Shift Builder` nav)
-- `POST /json/mn/templates/getSchedulingTemplatesData` — list of templates (Active filter applied)
-- `POST /json/mn/templates/getSchedulingTemplate` — body `{templateId}` — full template with staffing distribution per 10/15/30/60-min interval (from URL `shiftBuilderSetup.jsp?templateId=29661`)
+
+**`POST /json/mn/templates/getSchedulingTemplatesData`** — list all templates for this location
+
+```
+Content-Type: application/x-www-form-urlencoded   ← CRITICAL: form-encoded NOT JSON
+Body: showActiveTemplatesOnly=0&showAllLocations=0
+```
+
+Response envelope: `{"status":"success","result":{"schedulingTemplates":[{id, name, status, ...}]}}`.
+Note: Sending JSON body returns 400 — must be form-encoded (jQuery default behavior).
+
+KY-2065 known template IDs (as of 2026-05-11):
+```
+Monday:    29661  (DIXIE LABOR Monday)
+Tuesday:   30994  (DIXIE LABOR Tuesday)
+Wednesday: 31034  (DIXIE LABOR Wednesday)
+Thursday:  31035  (DIXIE LABOR Thursday)
+Friday:    31036  (DIXIE LABOR Friday)
+Sunday:    31037  (DIXIE LABOR Sunday)
+Saturday:  31054  (DIXIE LABOR Saturday — non-sequential, created in a separate push)
+```
+
+**`POST /json/mn/templates/getSchedulingTemplate`** — single template detail (body `{templateId}`) — returns `shiftTemplateDataList` with time slot lists; unreliable from Python (returns empty), works from browser page context.
+
+**`POST /json/mn/templates/updateSchedulingTemplate`** — create or update a template
+
+```
+Content-Type: application/x-www-form-urlencoded   ← CRITICAL: form-encoded NOT JSON
+Body fields (discovered via jQuery $.ajax intercept 2026-05-11):
+  template         = JSON string of metadata object (id, name, statusId, timeSlotValue, locationId, ...)
+  templateData     = JSON string of shift rows array (see shift row structure below)
+  existingTemplateId = template ID string (empty string = create new template)
+```
+
+**Shift row structure** (inside `templateData` JSON array):
+```json
+{
+  "positionId": "1",          ← STRING not int
+  "sequenceNumber": 1,
+  "payRateMin": null,
+  "payRateMax": null,
+  "skills": "[{\"id\":-1,\"recordId\":null,\"name\":\"No Skill Defined\"},{\"id\":1,...}]",  ← double-serialized JSON string
+  "timeSlots": "[{\"startTime\":\"07:00\",\"status\":\"W\",\"endTime\":\"07:10\",\"index\":6}, ...]"  ← double-serialized, ACTIVE SLOTS ONLY
+}
+```
+
+Key `timeSlots` format: only active slots (status="W"), each with `startTime`, `endTime` (+10min), `status: "W"`, `index` (slot index: 0=06:00, 6=07:00).
+Only 6 keys — no `timeSlotList`, no `skillLevelList`, no `stationId`, no `employeeList` in the POST body.
+
+Response: `{"status":"success","result":{}}` on success.
 
 ### Manager Log (`Manager Log` nav)
 - `POST /json/mn/manager-log/log-entries` — daily manager log entries
@@ -489,9 +537,9 @@ shared (`/emn/`), cross-location (`/n/`), and account (`/a/`, `/em/`) namespaces
 - POST `/json/mn/manageSchedules/validate-schedule-before-open`
 
 **Shift Templates (read + WRITE)**
-- POST `/json/mn/templates/getSchedulingTemplatesData` — list templates
+- POST `/json/mn/templates/getSchedulingTemplatesData` — list templates; body: form-encoded `showActiveTemplatesOnly=0&showAllLocations=0` (JSON body returns 400)
 - POST `/json/mn/templates/storeColumnsState` — UI prefs
-- POST `/json/mn/templates/updateSchedulingTemplate` ⚠️ **WRITE** — save template changes
+- POST `/json/mn/templates/updateSchedulingTemplate` ⚠️ **WRITE** — create/update template; body: form-encoded `template=<JSON>&templateData=<JSON>&existingTemplateId=<id|"">` (discovered 2026-05-11 via jQuery intercept)
 - POST `/json/mn/templates/validateSchedulingTemplate` — validate before save
 
 **Open Shifts (read + WRITE)**
