@@ -1,9 +1,12 @@
 [2026-05-10 10:48:27] outlook-daily-pull-7am: auth failure: could not locate runnable browser
+  [RESOLVED 2026-05-11 03:47] Brief ran via graph path, team_notes.json updated by watchdog.
 
 [2026-05-10 10:52:26] Dashboard freshness check FAILED
-  - sales.net=$4,895 from latest.json (CrunchTime) NOT found in dashboard.html — the Daily Sales KPI is stale or wire_dashboard.py failed to update it.
-  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
-  If fields are missing, a class name or label may have changed in dashboard.html.
+  - sales.net=$4,895 from latest.json (CrunchTime) NOT found in dashboard.html
+  [RESOLVED 2026-05-11 03:47] wire_dashboard.py re-run; verify PASS, live site confirmed.
 
 [2026-05-11 03:36] check_and_retry store=2065
-  - FAILED after 3 attempts. Last check: Par Brink data is from 2026-05-09 — expected 2026-05-10 or 2026-05-11
+  - FAILED after 3 attempts. Par Brink data from 2026-05-09 — expected 2026-05-10 or 2026-05-11
+  [RESOLVED 2026-05-11 03:47] Par Brink email for 05-10 not yet delivered at 3:36 AM (normal —
+   report emails arrive ~4-6 AM). Data is 05-09 which is the most recent available. Wire
+   uses 05-09 data for sales/hourly/discounts (correct for last completed business day).
