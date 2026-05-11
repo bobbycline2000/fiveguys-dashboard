@@ -188,6 +188,28 @@
     color: #aaa; text-align: center; padding: 20px 0; font-style: italic; font-size: 12px;
   }
 
+  /* CT deposit rows */
+  .dep-row {
+    display: grid; grid-template-columns: 1fr auto auto; gap: 8px;
+    align-items: baseline;
+    padding: 8px 10px; border-bottom: 1px solid #f0eee5;
+    font-size: 13px;
+  }
+  .dep-row:last-child { border-bottom: 0; }
+  .dep-row.today {
+    background: #FEF3C7; border-left: 3px solid var(--gold);
+    padding-left: 8px;
+  }
+  .dep-row .d { color: var(--ink-soft); font-size: 12px; }
+  .dep-row .dep { font-weight: 700; color: var(--green); font-variant-numeric: tabular-nums; }
+  .dep-row .dep.zero { color: #aaa; font-weight: 400; font-style: italic; font-size: 11px; }
+  .dep-row .os {
+    font-size: 11px; padding: 1px 6px; border-radius: 999px;
+    background: #e8f6ec; color: var(--green); font-variant-numeric: tabular-nums;
+  }
+  .dep-row .os.short { background: #fde2e4; color: var(--red); }
+  .dep-row .os.even  { background: #eee; color: #777; }
+
   /* ── Reminder banner ───────────────────────────────────────── */
   .reminder {
     background: #FEF3C7; border-left: 4px solid var(--gold);
@@ -291,11 +313,19 @@
     </div>
   </section>
 
-  <!-- ── RIGHT COLUMN — recent counts ──────────────────────────────── -->
+  <!-- ── RIGHT COLUMN — recent counts + CT deposits ────────────────── -->
   <aside>
-    <h3>Recent Counts</h3>
+    <h3>CrunchTime Deposits</h3>
     <div class="help">
-      Last 7 days — reference these if a count looks off. Tap a row to view detail in console.
+      Last 14 days — pulled live from CrunchTime each morning. Use to spot trends.
+    </div>
+    <div id="dep-list">
+      <div class="hist-empty">Loading…</div>
+    </div>
+
+    <h3 style="margin-top:22px">Recent Manager Counts</h3>
+    <div class="help">
+      Side-by-side reference if a count looks off.
     </div>
     <div id="hist-list">
       <div class="hist-empty">No counts logged yet.</div>
@@ -475,9 +505,9 @@ async function loadLiveLog() {
 }
 
 async function loadCtHistory() {
-  // data/cash_overshort_history.json — written daily at 5 AM by
-  // scripts/track_cash_overshort.py. Lets us prefill the CT O/S field
-  // for the selected business date when CT's EOD has rolled (~4 AM).
+  // data/ct_sales_summary_history.json — written daily at 5 AM by
+  // scripts/track_ct_sales_summary.py via the registerSales/summary API.
+  // Has deposit + over_short + gross_sales per business date.
   try {
     const r = await fetch(CT_HISTORY_URL, { cache: 'no-store' });
     if (r.ok) {
@@ -485,6 +515,33 @@ async function loadCtHistory() {
       if (Array.isArray(rows)) { CT_HISTORY = rows; }
     }
   } catch (_) {}
+}
+
+function renderDeposits() {
+  const el = $('dep-list');
+  if (!CT_HISTORY || !CT_HISTORY.length) {
+    el.innerHTML = '<div class="hist-empty">No CT data loaded.</div>';
+    return;
+  }
+  const today = new Date().toISOString().slice(0,10);
+  const rows = CT_HISTORY.slice().sort((a,b) => (b.business_date||'').localeCompare(a.business_date||'')).slice(0, 14);
+  el.innerHTML = rows.map(r => {
+    const dt = new Date(r.business_date + 'T00:00:00');
+    const dateShort = dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+    const isToday = r.business_date === today;
+    const depZero = r.deposit === 0;
+    const depCell = depZero
+      ? `<span class="dep zero">pending</span>`
+      : `<span class="dep">${fmt(r.deposit)}</span>`;
+    let osClass = 'even', osSign = '';
+    if (r.over_short > 0.005)  { osClass = 'over';  osSign = '+'; }
+    else if (r.over_short < -0.005) { osClass = 'short'; }
+    return `<div class="dep-row${isToday ? ' today' : ''}">
+      <span class="d">${dateShort}${isToday ? ' • today' : ''}</span>
+      ${depCell}
+      <span class="os ${osClass}">${osSign}${fmt(r.over_short)}</span>
+    </div>`;
+  }).join('');
 }
 
 function ctRowFor(date) {
@@ -582,6 +639,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await Promise.all([loadLiveLog(), loadCtHistory()]);
   loadForDate($('f-date').value);
   renderHistory();
+  renderDeposits();
 });
 </script>
 </body>
