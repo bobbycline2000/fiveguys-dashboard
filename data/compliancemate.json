@@ -1,106 +1,51 @@
 {
-  "meta": {
-    "date": "2026-05-08",
-    "generated": "5/8/2026 at 5:02 AM",
-    "location": "2065",
-    "status": "ok"
-  },
-  "overall_pct": 62,
-  "lists": [
-    {
-      "name": "11AM: Time and Temp",
-      "pct": 100,
-      "raw": "11AM: Time and Temp\n100% | 100%"
-    },
-    {
-      "name": "1PM: Time and Temp",
-      "pct": 100,
-      "raw": "1PM: Time and Temp\n100% | 100%"
-    },
-    {
-      "name": "3PM: Time and Temp",
-      "pct": 100,
-      "raw": "3PM: Time and Temp\n100% | 100%"
-    },
-    {
-      "name": "5PM: Time and Temp",
-      "pct": 100,
-      "raw": "5PM: Time and Temp\n100% | 100%"
-    },
-    {
-      "name": "7PM: Time and Temp",
-      "pct": 100,
-      "raw": "7PM: Time and Temp\n100% | 100%"
-    },
-    {
-      "name": "9PM: Time and Temp",
-      "pct": 100,
-      "raw": "9PM: Time and Temp\n100% | 100%"
-    },
-    {
-      "name": "AM Pre-Shift Check",
-      "pct": 100,
-      "raw": "AM Pre-Shift Check\n100% | 100%"
-    },
-    {
-      "name": "PM Pre-Shift Check",
-      "pct": 100,
-      "raw": "PM Pre-Shift Check\n100% | 100%"
-    },
-    {
-      "name": "Closing Checklist",
-      "pct": 100,
-      "raw": "Closing Checklist\n100% | 100%"
-    },
-    {
-      "name": "Pre Open",
-      "pct": 0,
-      "raw": "Pre Open\n0% | 0%"
-    },
-    {
-      "name": "Shift Change",
-      "pct": 100,
-      "raw": "Shift Change\n100% | 97%"
-    },
-    {
-      "name": "Closing",
-      "pct": 100,
-      "raw": "Closing\n100% | 100%"
-    },
-    {
-      "name": "Weekly Store Inspection",
-      "pct": 0,
-      "raw": "Weekly Store Inspection\n0% | 0%"
-    },
-    {
-      "name": "Delivery Check",
-      "pct": 0,
-      "raw": "Delivery Check\n0% | 0%"
-    },
-    {
-      "name": "Temperature Sample",
-      "pct": 0,
-      "raw": "Temperature Sample\n0% | 0%"
-    },
-    {
-      "name": "Calibration Test",
-      "pct": 0,
-      "raw": "Calibration Test\n0% | 0%"
-    },
-    {
-      "name": "Operational Spot Check",
-      "pct": 0,
-      "raw": "Operational Spot Check\n0% | 0%"
-    },
-    {
-      "name": "Battery Swap Checklist",
-      "pct": 0,
-      "raw": "Battery Swap Checklist\n0% | 0%"
-    },
-    {
-      "name": "MMCCA",
-      "pct": 0,
-      "raw": "MMCCA\n0% | 0%"
-    }
-  ]
+    "meta":  {
+                 "date":  "2026-05-10",
+                 "generated":  "5/11/2026 at 3:49 AM",
+                 "location":  "2065",
+                 "status":  "ok"
+             },
+    "overall_pct":  100,
+    "overall_all_pct":  100,
+    "lists":  [
+                  {
+                      "name":  "11AM: Time and Temp",
+                      "pct":  100,
+                      "all_pct":  100,
+                      "list_id":  "189006"
+                  },
+                  {
+                      "name":  "1PM: Time and Temp",
+                      "pct":  100,
+                      "all_pct":  100,
+                      "list_id":  "199718"
+                  },
+                  {
+                      "name":  "3PM: Time and Temp",
+                      "pct":  100,
+                      "all_pct":  100,
+                      "list_id":  "192309"
+                  },
+                  {
+                      "name":  "5PM: Time and Temp",
+                      "pct":  100,
+                      "all_pct":  100,
+                      "list_id":  "194748"
+                  },
+                  {
+                      "name":  "7PM: Time and Temp",
+                      "pct":  100,
+                      "all_pct":  100,
+                      "list_id":  "197189"
+                  },
+                  {
+                      "name":  "9PM: Time and Temp",
+                      "pct":  100,
+                      "all_pct":  100,
+                      "list_id":  "200256"
+                  }
+              ],
+    "list_count":  6,
+    "fetched_at":  "2026-05-11T03:48:44.009730-04:00",
+    "source":  "compliancemate_url_replay"
 }
