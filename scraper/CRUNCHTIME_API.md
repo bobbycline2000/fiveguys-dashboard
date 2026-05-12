@@ -71,6 +71,7 @@ headers = {
 | `scraper/api_test_cookie.py` | Pure-`requests` POST to `/resource/dashboard/performance/metrics` using captured cookies. Sanity check that cookie auth still works. |
 | `scraper/api_query.py` | Production-shape: cached cookies + session-alive probe + auto re-mint via subprocess. Pulls yesterday's Net Sales + Labor%. Pattern for `api_main.py`. |
 | `scraper/api_discover_one.py` | Single-target run for incremental sweeps when one screen needs re-capture. |
+| `scraper/scrape_labor_ct.py` | **PRODUCTION daily labor pull (shipped 2026-05-12).** POSTs to `/resource/dashboard/performance/metrics` (Labor%, Actual Labor $, Actual/Sched Hours, WTD) and `/resource/labor/todays/operatingMetrics` (15-min intervals → hourly 11A-10P). Writes `data/labor_today.json`. This is the **primary labor source** for `wire_dashboard.py`, replacing Par Brink Hourly Sales And Labor PDF. |
 
 Captured artifacts:
 - `data/ct_api_endpoints_deep.json` — 89 endpoints with method + request body + truncated response (1500 chars) + size + first-seen-screen
@@ -87,7 +88,7 @@ Captured artifacts:
 | Current Brink PDF report | Currently parsed by | NetChef API replacement | Status |
 |---|---|---|---|
 | Sales Summary | `parbrink_parse_sales_summary.py` | `POST /resource/sales/sales/registerSales/summary` (14 KB) — net sales, gross sales, taxable, catering, tips, voids, complimentary, paid outs, bank deposits, **over/short**, guest count, per-register-per-day | ✅ direct replacement; richer fields |
-| Hourly Sales And Labor | `parbrink_parse_hourly_sales_labor.py` | `POST /resource/labor/todays/operatingMetrics` (113 KB) — 15-min intervals with sales, checks, guests, actLab, actHrs, FOH/BOH split, forecasted sales/guests/checks, scheduled labor, variance | ✅ direct replacement; finer granularity (15-min vs hourly) |
+| Hourly Sales And Labor | `parbrink_parse_hourly_sales_labor.py` | `POST /resource/labor/todays/operatingMetrics` (113 KB) — 15-min intervals with sales, checks, guests, actLab, actHrs, FOH/BOH split, forecasted sales/guests/checks, scheduled labor, variance | ✅ **PRODUCTION-WIRED 2026-05-12** via `scrape_labor_ct.py` → `data/labor_today.json`. Par Brink PDF is now fallback. |
 | Discount Summary | `parbrink_parse_discounts.py` | `POST /resource/sales/sales/registerSales/summary` returns `totComplimentary` per day. Per-discount-code drill via `/resource/menumix/...` if needed | ✅ aggregate covered; per-code drill available |
 | Weekly Labor Schedule | `parbrink_parse_weekly_schedule.py` | `POST /resource/nc/scheduleshiftaudit/` (31.5 KB) — every shift change with employeeName, businessDate, timeIn, timeOut, edit history. Schedule itself derivable from this + `/resource/labor/hours` | ✅ data is there; format differs from Brink schedule PDF — needs new parser |
 | Sales By Destination (dine-in/togo) | (not parsed today) | NOT in NetChef API surface visible to this user role. Channel split is a Brink-side concept. | ❌ Brink-only |
