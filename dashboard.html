@@ -665,6 +665,25 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   .card, .ctrl-card { margin-bottom: 12px !important; }
   .footer-bar { flex-direction: column; gap: 4px; text-align: center; padding: 14px; }
 }
+
+/* ══════════════════════════════════════════
+   PORTRAIT PHONES — strip topbar chrome, stack page header
+══════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .topbar { padding: 8px 12px; min-height: 0; gap: 8px; }
+  .topbar .crumb,
+  .topbar .sync-info,
+  .topbar .date-chip,
+  .topbar .btn-black,
+  .topbar .user-ava { display: none !important; }
+  .topbar-right { width: 100%; justify-content: center; }
+  .period-toggle { width: 100%; justify-content: space-between; }
+  .period-btn { flex: 1; text-align: center; padding: 6px 4px; }
+  .content { padding: 14px 12px; }
+  .page-hdr { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 14px; }
+  .page-title { font-size: 1.4rem; }
+  .last-updated { text-align: left; font-size: 0.7rem; }
+}
 </style>
 </head>
 <body>
