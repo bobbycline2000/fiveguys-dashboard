@@ -43,7 +43,16 @@
     max-width: 1280px; margin: 24px auto; padding: 0 16px;
     display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 22px;
   }
-  @media (max-width: 980px) { main { grid-template-columns: 1fr; } }
+  @media (max-width: 980px) {
+    main { grid-template-columns: 1fr; }
+    main > section { order: 2; }
+    main > aside {
+      order: 1;
+      position: static;
+      max-height: none;
+      overflow-y: visible;
+    }
+  }
 
   /* ── Date hero ─────────────────────────────────────────────── */
   .date-hero {
