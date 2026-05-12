@@ -31,8 +31,16 @@ def run(label: str, cmd: list[str], cwd: Path = ROOT, allow_fail: bool = False) 
     return result.returncode
 
 
-def latest_date_folder(store: str) -> Path | None:
-    """Return the most recent dated folder that contains a Sales Summary PDF."""
+def latest_date_folder(store: str, expected_date: date | None = None) -> Path | None:
+    """Return the most recent dated folder that contains a Sales Summary PDF.
+
+    If *expected_date* is supplied, the folder's ISO date must be within 1 day
+    of it.  If no qualifying folder is found the function returns None and the
+    pipeline aborts rather than silently re-parsing a stale day's PDFs.
+
+    Without *expected_date* the old "any folder with Sales Summary.pdf" logic
+    applies — useful for back-fills and manual reruns with --date.
+    """
     base = ROOT / "data" / "raw" / "parbrink" / store
     if not base.exists():
         return None
@@ -40,12 +48,26 @@ def latest_date_folder(store: str) -> Path | None:
         (d for d in base.iterdir() if d.is_dir() and d.name[:4].isdigit()),
         reverse=True,
     )
-    # Prefer a folder that has the core daily PDF
     for folder in folders:
-        if (folder / "Sales Summary.pdf").exists():
-            return folder
-    # Fallback: any dated folder
-    return folders[0] if folders else None
+        if not (folder / "Sales Summary.pdf").exists():
+            continue
+        if expected_date is not None:
+            try:
+                folder_dt = date.fromisoformat(folder.name)
+            except ValueError:
+                continue
+            delta = abs((folder_dt - expected_date).days)
+            if delta > 1:
+                # This folder is too old — don't re-parse stale data.
+                print(
+                    f"[PIPELINE GUARD] Skipping {folder.name}: "
+                    f"{delta} day(s) behind expected {expected_date} — "
+                    "Par Brink email likely hasn't arrived yet. Aborting.",
+                    file=sys.stderr,
+                )
+                return None
+        return folder
+    return None
 
 
 def main() -> int:
@@ -57,6 +79,20 @@ def main() -> int:
 
     python = sys.executable
 
+    # Determine the business date we expect PDFs for.
+    # Par Brink sends yesterday's reports ~2:30 AM, so at 4 AM we expect
+    # yesterday's date.  --date overrides (useful for back-fills).
+    if args.date:
+        try:
+            expected = date.fromisoformat(args.date)
+        except ValueError:
+            print(f"[PIPELINE FAIL] --date {args.date!r} is not a valid ISO date.", file=sys.stderr)
+            return 1
+    else:
+        expected = date.today() - timedelta(days=1)
+
+    print(f"\nExpected business date: {expected}")
+
     # ── Step 1: Gmail pickup ─────────────────────────────────────────────────
     run(
         "Step 1/5 — Gmail pickup (Par Brink daily email)",
@@ -65,9 +101,13 @@ def main() -> int:
     )
 
     # ── Step 2: Locate PDFs ───────────────────────────────────────────────────
-    folder = latest_date_folder(args.store)
+    folder = latest_date_folder(args.store, expected_date=expected)
     if folder is None:
-        print("[PIPELINE FAIL] No Par Brink PDF folder found.", file=sys.stderr)
+        print(
+            f"[PIPELINE ABORT] No Par Brink PDFs found for {expected} "
+            "(email may not have arrived yet — the 9 AM GitHub Actions run will retry).",
+            file=sys.stderr,
+        )
         return 1
     print(f"\nUsing PDF folder: {folder}")
 

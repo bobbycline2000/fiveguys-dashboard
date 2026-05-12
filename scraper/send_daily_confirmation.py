@@ -203,8 +203,40 @@ def kpi_shops(d: dict) -> str:
     return f"{score}" if score is not None else ""
 
 
+def _check_labor_wired() -> dict | None:
+    """Cross-check: verify dashboard.html actually displays the labor % from
+    the most recent hourly_sales_labor.json.  Returns a WARN row if they
+    diverge; returns None if everything matches or files are missing."""
+    dash = ROOT / "dashboard.html"
+    _, hl = find_latest("parbrink", "hourly_sales_labor.json")
+    if not dash.exists() or hl is None:
+        return None
+    totals = hl.get("totals", {}) if isinstance(hl.get("totals"), dict) else hl
+    labor_pct = totals.get("labor_percent")
+    labor_dollars = totals.get("labor_dollars")
+    if labor_pct is None:
+        return None
+    needle_pct = f"{labor_pct:.1f}%"
+    html = dash.read_text(encoding="utf-8")
+    if needle_pct not in html:
+        labor_str = f"${labor_dollars:,.0f}" if labor_dollars else "?"
+        return {
+            "label": "Labor card wired check",
+            "status": WARN,
+            "age_days": None,
+            "message": (
+                f"dashboard.html does NOT contain labor_percent={needle_pct} "
+                f"from hourly_sales_labor.json — "
+                f"the labor card may be showing a different day's data. "
+                f"Expected: {needle_pct} / {labor_str}"
+            ),
+            "kpi": f"expected {needle_pct}",
+        }
+    return None
+
+
 def gather_sections() -> list[dict]:
-    return [
+    rows = [
         section("Sales / Transactions / Per Guest", 2,
                 "parbrink", "sales_summary.json", kpi_sales),
         section("Hourly Sales & Labor",             2,
@@ -222,6 +254,11 @@ def gather_sections() -> list[dict]:
         section("Secret Shops (KnowledgeForce)",   14,
                 "marketforce", "shops.json", kpi_shops),
     ]
+    # Cross-check: labor JSON value must actually be wired into dashboard.html
+    labor_wire = _check_labor_wired()
+    if labor_wire:
+        rows.append(labor_wire)
+    return rows
 
 
 def overall_status(rows: list[dict]) -> str:
