@@ -73,10 +73,13 @@ GitHub Actions (cron 8:05 AM ET)
 
 ## SharePoint Excel File
 
-**File:** "April 2026 FG Daily Report.xlsx" on SharePoint  
+**Current workbook:** "May 2026 FG Daily Report.xlsx" on bdavis's OneDrive (estepcompany-my.sharepoint.com).  
 **Owner:** bdavis@estep-co.com  
-**Item ID:** `B759AD2C-2B91-43AC-AC30-6993207012E7` — update monthly when new workbook created  
-**API:** Microsoft Graph with client credentials OAuth (no user login required)
+**Updater:** `scraper/update_excel.py` (Microsoft Graph workbook API, client-credentials auth via `MS_TENANT_ID` / `MS_CLIENT_ID` / `MS_CLIENT_SECRET`).  
+**Workflow step:** `daily_dashboard.yml` → "Update SharePoint daily report (store 2065)" — runs after `wire_dashboard.py` and `verify_dashboard.py`. `continue-on-error: true` so it doesn't block the dashboard commit.  
+**Required Azure permission:** `Files.ReadWrite.All` (Application). If missing the script exits 0 with a clear log line — verify via `gh workflow run probe_graph_scopes.yml`.  
+**Monthly rollover (1st of each month):** update `SHARE_URL` default in `scraper/update_excel.py` (or set `WORKBOOK_SHARE_URL` env in the workflow) to point at the new month's file. Get the URL from SharePoint's "Copy link" button.  
+**Earlier history:** An Azure/Graph path (`update_excel.py`) existed until 2026-04-22 when it was removed without replacement. A Playwright fallback was planned but never built. The current path rebuilds the Graph approach with cleaner column boundaries (D / F / J formula cells preserved).
 
 ### Column Mapping (sheet tab = store ID + city, e.g. "2065 Dixie")
 | Column | Data | Notes |

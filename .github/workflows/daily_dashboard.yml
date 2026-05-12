@@ -356,9 +356,26 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scraper/verify_dashboard.py
 
-      # ── 6. SharePoint update runs locally via Windows Task Scheduler ──────
-      # (scraper/update_sharepoint_playwright.py, not in CI — needs saved
-      # browser session to avoid MFA). Old Azure/Graph path removed 2026-04-22.
+      # ── 6. Update SharePoint daily report xlsx (bdavis OneDrive) ──────────
+      # Writes yesterday's row into "<MONTH> <YEAR> FG Daily Report.xlsx"
+      # → sheet "2065 Dixie". Microsoft Graph workbook API; same app creds
+      # as the COGS email reader. Requires Files.ReadWrite.All Application
+      # permission consented on the Azure app — without it the script exits
+      # 0 with a clear log line (non-blocking).
+      #
+      # Monthly rollover (1st of each month): override the share URL via
+      # WORKBOOK_SHARE_URL env to point at the new month's file. May 2026
+      # workbook is the script's default.
+      - name: Update SharePoint daily report (store 2065)
+        continue-on-error: true
+        env:
+          MS_TENANT_ID:     ${{ secrets.MS_TENANT_ID }}
+          MS_CLIENT_ID:     ${{ secrets.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+          STORE_ID:         "2065"
+          SHEET_NAME:       "2065 Dixie"
+          # WORKBOOK_SHARE_URL: override per month — defaults to May 2026
+        run: python scraper/update_excel.py
 
       # ── 7. Upload debug artifacts (always, even on failure) ──────────────
       - name: Upload debug artifacts
