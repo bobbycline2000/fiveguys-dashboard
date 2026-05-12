@@ -15,5 +15,22 @@
     "ct_os": -424.56,
     "notes": "",
     "submitted_at": "2026-05-11T23:00:10.981Z"
+  },
+  {
+    "date": "2026-05-12",
+    "mgr": "NWR",
+    "deposit": 0,
+    "safe_open": 726,
+    "d1_open": 200,
+    "d2_open": 200,
+    "safe_mid": 726,
+    "d1_mid": 200,
+    "d2_mid": 200,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
+    "ct_os": 0,
+    "notes": "Opening counts: Extra 26 dollars in safe.",
+    "submitted_at": "2026-05-12T18:21:47.338Z"
   }
 ]
