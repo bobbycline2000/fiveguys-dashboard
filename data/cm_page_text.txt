@@ -15,13 +15,13 @@ AM Pre-Shift Check
 PM Pre-Shift Check
 100% | 100%
 Closing Checklist
-100% | 100%
-Pre Open
 0% | 0%
-Shift Change
-100% | 97%
-Closing
+Pre Open
 100% | 100%
+Shift Change
+100% | 100%
+Closing
+0% | 0%
 Weekly Store Inspection
 0% | 0%
 Delivery Check

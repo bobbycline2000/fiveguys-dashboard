@@ -1,0 +1,72 @@
+[
+  {
+    "name": "_cfuvid",
+    "value": "mjN1chhxTkmZGPFYm_UK4OLhZmDhv5JzlAwlp2yHY.A-1778576604.1611097-1.0.1.1-cEpPWTEh9Rg6THoC1CRiR1zQ_iRlE8tYz7yCtOGFWfs",
+    "domain": ".ct-teamworx.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_cfuvid",
+    "value": "ZspDbSBN80zTY.gILV9DpKFEQ7kuZ5_k09qvB_2mFi8-1778576604.4739952-1.0.1.1-KUea4n_Rgn4wv5JcbcR1uSgw9.hmlhhmt7zDj2GYCLY",
+    "domain": ".net-chef.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "TSID2",
+    "value": "014CF57E277082D087AA85D3A8024407",
+    "domain": "fiveguysfr77.ct-teamworx.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "TSID1",
+    "value": "HZ057290D857434205896034E42D606EE2",
+    "domain": "fiveguysfr77.ct-teamworx.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "TWXLocale",
+    "value": "en-US",
+    "domain": "fiveguysfr77.ct-teamworx.com",
+    "path": "/",
+    "expires": 1810112605.811693,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "eportal.username",
+    "value": "BOBBY.CLINE",
+    "domain": "fiveguysfr77.ct-teamworx.com",
+    "path": "/",
+    "expires": 1810112605,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "pageId",
+    "value": "",
+    "domain": "fiveguysfr77.ct-teamworx.com",
+    "path": "/",
+    "expires": 1810112605,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  }
+]

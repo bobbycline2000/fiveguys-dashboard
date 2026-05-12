@@ -1,0 +1,2102 @@
+[
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Actual Net Sales",
+    "dynamicName": null,
+    "kpiId": 1,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "3539.85",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "3271.61",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "4166.14",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "4862.87",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "15840.47",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "31213.38",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Last Year Same Day Sales",
+    "dynamicName": null,
+    "kpiId": 2,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "3681.33",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "3736.99",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "4228.24",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "4310.8",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": "5830.48",
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": "4495.65",
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": "5317.62",
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "15957.36",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "37882.7",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Forecasted Sales",
+    "dynamicName": null,
+    "kpiId": 3,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "3749",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "3772",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "4385",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "4442",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": "5443",
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": "4957",
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": "5462",
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "16348",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "31762",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Net Sales to Last Year",
+    "dynamicName": null,
+    "kpiId": 5,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "-141",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "-465",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "-62",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "552",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "-117",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "-6670",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Actual Labor",
+    "dynamicName": null,
+    "kpiId": 6,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "817.53",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "803.66",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "746.5",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "1069.2",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "3438.54",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "7167.49",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Actual to Earned Hours Variance",
+    "dynamicName": null,
+    "kpiId": 265,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "6.65",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "8.19",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "-3.39",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "16.93",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "28.54",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "41.51",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Labor % of Net Sales",
+    "dynamicName": null,
+    "kpiId": 7,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "P",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "23.1073",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "24.5721",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "17.9309",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "21.9823",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "21.7109",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "22.9616",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Total Cash Over/Shorts",
+    "dynamicName": null,
+    "kpiId": 17,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "-.02",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "-508.97",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "-545.97",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Cash Over/Shorts by Cash Register",
+    "dynamicName": " POS",
+    "kpiId": 18,
+    "dynamicKpi": 1123083537,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "-.02",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "-508.97",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "-545.97",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Comps and Discounts",
+    "dynamicName": " Burger/Fry Calibration",
+    "kpiId": 22,
+    "dynamicKpi": 546,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "62.62",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "39.85",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "32.26",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "134.73",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "286.54",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Comps and Discounts",
+    "dynamicName": " COGS Less:Employee Meals",
+    "kpiId": 22,
+    "dynamicKpi": 136,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "147.58",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "111.32",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "139.29",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "142.77",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "540.96",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "1074.78",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Comps and Discounts",
+    "dynamicName": " COGS-Manager Meals",
+    "kpiId": 22,
+    "dynamicKpi": 397,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "14.57",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Comps and Discounts",
+    "dynamicName": " Refunds",
+    "kpiId": 22,
+    "dynamicKpi": 144,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "21.7",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Sales / Guest",
+    "dynamicName": null,
+    "kpiId": 24,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "5.2444",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "5.2605",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "5.2075",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "5.4093",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "5.287",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "5.2939",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Labor Productivity",
+    "dynamicName": null,
+    "kpiId": 60,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "50.8256",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "47.9836",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "62.5432",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "53.4807",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "53.5968",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "57.474",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Projected Labor Productivity",
+    "dynamicName": null,
+    "kpiId": 61,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "50.3221",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "54.0789",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "66.4394",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "45.4425",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": "68.4654",
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": "60.4512",
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": "70.4774",
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "53.0779",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "55.7228",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Actual Hours",
+    "dynamicName": null,
+    "kpiId": 62,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "69.65",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "68.19",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "66.61",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "90.93",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "295.54",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "543.08",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Scheduled Hours",
+    "dynamicName": null,
+    "kpiId": 63,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "74.5",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "69.75",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "66",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "97.75",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": "79.5",
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": "82",
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": "77.5",
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "308",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "570",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Hours Variance",
+    "dynamicName": null,
+    "kpiId": 64,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "4.85",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "1.56",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "-.61",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "6.82",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "12.46",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "26.92",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Overtime Hours Scheduled",
+    "dynamicName": null,
+    "kpiId": 65,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": "3",
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": "1",
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": ".75",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Overtime Hours Actual",
+    "dynamicName": null,
+    "kpiId": 66,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "3.97",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Overtime Hours Variance",
+    "dynamicName": null,
+    "kpiId": 67,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "0",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "-3.22",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "BOH Scheduled to Actual Hours Variance",
+    "dynamicName": null,
+    "kpiId": 72,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "BOH Scheduled to Ideal Hours Variance",
+    "dynamicName": null,
+    "kpiId": 73,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "BOH Ideal to Actual Hours Variance",
+    "dynamicName": null,
+    "kpiId": 74,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Net Sales / FOH Hours",
+    "dynamicName": null,
+    "kpiId": 83,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Net Sales / BOH Hours",
+    "dynamicName": null,
+    "kpiId": 84,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "# of Checks SPLY",
+    "dynamicName": null,
+    "kpiId": 136,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "175",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "165",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "182",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "181",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": "249",
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": "200",
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": "199",
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "703",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "1599",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "GPLH BOH",
+    "dynamicName": null,
+    "kpiId": 154,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Actual GPLH",
+    "dynamicName": null,
+    "kpiId": 155,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "9.6913",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "9.1216",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "12.0102",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "9.8867",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "10.1374",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "10.8566",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Total Non-Management Hours Actual",
+    "dynamicName": null,
+    "kpiId": 171,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "N",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "69.65",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "60.33",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "58.71",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "82.48",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "271.33",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "505.97",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Net Sales - Total Value of Payroll",
+    "dynamicName": null,
+    "kpiId": 177,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "2722",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "2468",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "3419",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "3794",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "12401",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "24046",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Value Inventory Variances",
+    "dynamicName": null,
+    "kpiId": 219,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "779.43",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Last Year Average Sales/Guest",
+    "dynamicName": null,
+    "kpiId": 268,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 2,
+    "metric": true,
+    "metrics": [
+      {
+        "value": "5.0287",
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": "5.3539",
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": "5.2327",
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": "5.4432",
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": "5.2334",
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": "5.1797",
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": "5.2968",
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": "5.2663",
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": "5.2375",
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  },
+  {
+    "leaf": true,
+    "children": null,
+    "name": "Budget Sales",
+    "dynamicName": null,
+    "kpiId": 269,
+    "dynamicKpi": 0,
+    "hierarchyId": 13969,
+    "unit": "C",
+    "precision": 0,
+    "metric": true,
+    "metrics": [
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "2"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "3"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "4"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "5"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "6"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "7"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "1"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "WTD"
+      },
+      {
+        "value": null,
+        "isAlert": false,
+        "calcId": "PTD"
+      }
+    ],
+    "subItems": null
+  }
+]
