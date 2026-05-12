@@ -209,7 +209,7 @@
 
   /* CT deposit rows */
   .dep-row {
-    display: grid; grid-template-columns: 1fr auto auto; gap: 8px;
+    display: grid; grid-template-columns: 1fr auto; gap: 8px;
     align-items: baseline;
     padding: 8px 10px; border-bottom: 1px solid #f0eee5;
     font-size: 13px;
@@ -330,27 +330,27 @@
     <div class="card">
       <h2>Opening Counts <span class="badge">Start of day</span></h2>
       <div class="row">
-        <div class="field"><label>Safe Open (exp $700)</label><input type="number" step="0.01" id="f-safe-open" placeholder="700.00" /></div>
-        <div class="field"><label>Drawer 1 Open (exp $200)</label><input type="number" step="0.01" id="f-d1-open" placeholder="200.00" /></div>
-        <div class="field"><label>Drawer 2 Open (exp $200)</label><input type="number" step="0.01" id="f-d2-open" placeholder="200.00" /></div>
+        <div class="field"><label>Safe Open (exp $700)</label><input type="number" step="0.01" id="f-safe-open" /></div>
+        <div class="field"><label>Drawer 1 Open (exp $200)</label><input type="number" step="0.01" id="f-d1-open" /></div>
+        <div class="field"><label>Drawer 2 Open (exp $200)</label><input type="number" step="0.01" id="f-d2-open" /></div>
       </div>
     </div>
 
     <div class="card">
       <h2>Mid-Shift Counts <span class="badge">After lunch rush</span></h2>
       <div class="row">
-        <div class="field"><label>Safe Mid</label><input type="number" step="0.01" id="f-safe-mid" placeholder="700.00" /></div>
-        <div class="field"><label>Drawer 1 Mid</label><input type="number" step="0.01" id="f-d1-mid" placeholder="200.00" /></div>
-        <div class="field"><label>Drawer 2 Mid</label><input type="number" step="0.01" id="f-d2-mid" placeholder="200.00" /></div>
+        <div class="field"><label>Safe Mid</label><input type="number" step="0.01" id="f-safe-mid" /></div>
+        <div class="field"><label>Drawer 1 Mid</label><input type="number" step="0.01" id="f-d1-mid" /></div>
+        <div class="field"><label>Drawer 2 Mid</label><input type="number" step="0.01" id="f-d2-mid" /></div>
       </div>
     </div>
 
     <div class="card">
       <h2>Nightly Counts <span class="badge required">Required before close</span></h2>
       <div class="row">
-        <div class="field"><label>Safe Close</label><input type="number" step="0.01" id="f-safe-close" placeholder="700.00" /></div>
-        <div class="field"><label>Drawer 1 Close</label><input type="number" step="0.01" id="f-d1-close" placeholder="200.00" /></div>
-        <div class="field"><label>Drawer 2 Close</label><input type="number" step="0.01" id="f-d2-close" placeholder="200.00" /></div>
+        <div class="field"><label>Safe Close</label><input type="number" step="0.01" id="f-safe-close" /></div>
+        <div class="field"><label>Drawer 1 Close</label><input type="number" step="0.01" id="f-d1-close" /></div>
+        <div class="field"><label>Drawer 2 Close</label><input type="number" step="0.01" id="f-d2-close" /></div>
       </div>
       <div class="row row-2" style="margin-top: 12px;">
         <div class="field"><label>CrunchTime Over/Short (EOD)</label><input type="number" step="0.01" id="f-ct-os" placeholder="from CrunchTime after 4 AM" /></div>
@@ -714,13 +714,9 @@ function renderDeposits() {
     const depCell = depZero
       ? `<span class="dep zero">pending</span>`
       : `<span class="dep">${fmt(r.deposit)}</span>`;
-    let osClass = 'even', osSign = '';
-    if (r.over_short > 0.005)  { osClass = 'over';  osSign = '+'; }
-    else if (r.over_short < -0.005) { osClass = 'short'; }
     return `<div class="dep-row${isToday ? ' today' : ''}">
       <span class="d">${dateShort}${isToday ? ' • today' : ''}</span>
       ${depCell}
-      <span class="os ${osClass}">${osSign}${fmt(r.over_short)}</span>
     </div>`;
   }).join('');
 }
