@@ -1,48 +1,41 @@
 {
-  "date": "2026-05-11",
-  "new_count": 6,
+  "date": "2026-05-12",
+  "new_count": 4,
   "notes": [
     {
       "from": "Brad Davis (Director)",
       "role": "director",
       "role_label": "Director's Corner",
-      "time": "Sun 8:47 PM",
-      "body": "Training Files link sent — Orientation, Scheduling/Teamworx job aids, Train the Trainer, Food Safety & Sanitation criticals, Mission/Values, Misc job aids (crew huddle + deployment). Use on shift to assign training and back up huddle topics."
+      "time": "Sun 1:38 PM",
+      "body": "Only 30 Cents more for Large! — Large Soda is now 30¢ more than Regular (was 10¢). Every cashier/shift lead must update suggestive-sell language today. Old 'For only 10 cents more...' phrasing is dead. Drill at pre-shift."
     },
     {
-      "from": "Brad Davis (Director · 5/5 directive)",
+      "from": "Brad Davis (Director · standing)",
       "role": "director",
       "role_label": "Director's Corner — Standing",
-      "time": "Mon 1:31 AM",
-      "body": "Halo Effect & Suggestive Sales Policy — ALL employees sign by FRIDAY 5/8/26 5:00 PM. Email signed forms to Crystal. FGU Overdue Rate: get Dixie to 0% overdue by 5/15 (4 days left — sitting at 13%)."
+      "time": "5/5 directive",
+      "body": "Orientation Checklist for ALL new hires. Halo Effect & Suggestive Sales — signed forms were due to Crystal by Friday 5/8 5:00 PM (deadline past — confirm all 20 forms are in her inbox). FGU 0% overdue by Friday 5/15."
     },
     {
       "from": "Crystal Hess (DM)",
       "role": "dm",
       "role_label": "DM Corner",
-      "time": "Fri 1:11 PM",
-      "body": "Shopper Dashboard & K.P.I. — print 2065 Shopper Dashboard & K.P.I.docx, post on comm board, be ready to discuss in-store this week."
-    },
-    {
-      "from": "ComplianceMate",
-      "role": "alert",
-      "role_label": "Alert",
-      "time": "Today 4:02 AM",
-      "body": "Prep Area sensor offline — temp monitoring on prep is DARK. Confirm gateway is plugged in (power + internet) at open. If still offline after 10 min, open a CM support ticket: support@compliancemate.com or 877-425-7800."
-    },
-    {
-      "from": "Estep Hub (Zendesk)",
-      "role": "alert",
-      "role_label": "Maintenance Alert",
-      "time": "Sat 11:58 PM",
-      "body": "Drain clogged — Zendesk ticket [0ZYJW2-NKVM1] opened. Confirm drain status at open. If still clogged at 6 AM, pull a snake; escalate to Estep Maintenance if not cleared by 8 AM."
+      "time": "Standing (5/1)",
+      "body": "Shopper Dashboard & FGX Info — print 2065 Shopper Dashboard & K.P.I. document, post on comm board, be ready to discuss with Crystal in-store this week."
     },
     {
       "from": "CrunchTime",
       "role": "alert",
-      "role_label": "Task Alerts — 9 Open",
-      "time": "Today 3:30 AM",
-      "body": "Post Period Labor Not Posted (5/10) — BLOCKS period close. Inv-Final for Post (5/10). L-Rev overdue: 5/7, 5/8, 5/9, 5/10 (4 days). VO-Rec-BOSS: Alpha-Ohio Valley 5/8 & 5/9. VO-Inv-Performance Fdsvce (5/11)."
+      "role_label": "Task Alert",
+      "time": "Today 3:07 AM",
+      "body": "L-Rev (Labor Review) overdue for 5/11/2026 at KY-2065. Bobby/MOD: log into NetChef and close this task before EOD."
+    },
+    {
+      "from": "Madison Cureton (Manager)",
+      "role": "alert",
+      "role_label": "Manager Heads-up",
+      "time": "Sun 10:54 PM",
+      "body": "Subject 'Anthony' — body empty (Sent from iPhone). Madison flagging something about Anthony. Talk to her in person today — do not wait on email."
     }
   ]
 }
