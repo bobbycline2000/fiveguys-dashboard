@@ -203,44 +203,159 @@ def kpi_shops(d: dict) -> str:
     return f"{score}" if score is not None else ""
 
 
-def _check_labor_wired() -> dict | None:
-    """Cross-check: verify dashboard.html actually displays the labor % from
-    the most recent hourly_sales_labor.json.  Returns a WARN row if they
-    diverge; returns None if everything matches or files are missing."""
+def _load_dash_html() -> str | None:
+    """Return dashboard.html contents, or None if file missing."""
     dash = ROOT / "dashboard.html"
+    if not dash.exists():
+        return None
+    return dash.read_text(encoding="utf-8")
+
+
+def _value_check(label: str, html: str, needle: str, source_desc: str) -> dict | None:
+    """Return a FAIL row if `needle` is not present in `html`, else None."""
+    if not html or not needle:
+        return None
+    if needle not in html:
+        return {
+            "label": f"Value-cross-check: {label}",
+            "status": FAIL,
+            "age_days": None,
+            "message": (
+                f"dashboard.html does NOT contain '{needle}' "
+                f"(source: {source_desc}) — "
+                f"the {label} card may be stale or wiring failed."
+            ),
+            "kpi": f"expected {needle}",
+        }
+    return None
+
+
+def _check_labor_wired() -> dict | None:
+    """Cross-check: verify dashboard.html displays the labor % from
+    data/labor_today.json (CT API).  Falls back to Par Brink hourly PDF
+    if labor_today.json is absent.  Returns a FAIL row on mismatch."""
+    html = _load_dash_html()
+    if not html:
+        return None
+
+    # Primary: CrunchTime API labor_today.json
+    ct_labor_path = ROOT / "data" / "labor_today.json"
+    if ct_labor_path.exists():
+        try:
+            ct_labor = json.loads(ct_labor_path.read_text(encoding="utf-8"))
+            labor_pct = ct_labor.get("labor_percent")
+            labor_dollars = ct_labor.get("labor_dollars")
+            if labor_pct is not None:
+                needle_pct = f"{labor_pct:.1f}%"
+                return _value_check(
+                    "Labor %",
+                    html,
+                    needle_pct,
+                    f"labor_today.json (CT API, dated {ct_labor.get('date', '?')})",
+                )
+        except Exception:
+            pass
+
+    # Fallback: Par Brink hourly_sales_labor.json
     _, hl = find_latest("parbrink", "hourly_sales_labor.json")
-    if not dash.exists() or hl is None:
+    if hl is None:
         return None
     totals = hl.get("totals", {}) if isinstance(hl.get("totals"), dict) else hl
     labor_pct = totals.get("labor_percent")
-    labor_dollars = totals.get("labor_dollars")
     if labor_pct is None:
         return None
     needle_pct = f"{labor_pct:.1f}%"
-    html = dash.read_text(encoding="utf-8")
-    if needle_pct not in html:
-        labor_str = f"${labor_dollars:,.0f}" if labor_dollars else "?"
-        return {
-            "label": "Labor card wired check",
-            "status": WARN,
-            "age_days": None,
-            "message": (
-                f"dashboard.html does NOT contain labor_percent={needle_pct} "
-                f"from hourly_sales_labor.json — "
-                f"the labor card may be showing a different day's data. "
-                f"Expected: {needle_pct} / {labor_str}"
-            ),
-            "kpi": f"expected {needle_pct}",
-        }
-    return None
+    return _value_check(
+        "Labor %",
+        html,
+        needle_pct,
+        "hourly_sales_labor.json (Par Brink PDF fallback)",
+    )
+
+
+def _check_sales_wired() -> dict | None:
+    """Cross-check: verify dashboard.html shows the net sales from sales_summary.json."""
+    html = _load_dash_html()
+    if not html:
+        return None
+    _, ss = find_latest("parbrink", "sales_summary.json")
+    if ss is None:
+        return None
+    net = ss.get("net_sales") or ss.get("totals", {}).get("net_sales")
+    if net is None:
+        return None
+    needle = f"${net:,.0f}"
+    return _value_check("Daily Net Sales", html, needle,
+                        f"sales_summary.json (Par Brink, net_sales={net})")
+
+
+def _check_food_cost_wired() -> dict | None:
+    """Cross-check: verify dashboard.html shows the COGS % from cogs_variance.json."""
+    html = _load_dash_html()
+    if not html:
+        return None
+    _, cogs = find_latest("crunchtime", "cogs_variance.json")
+    if cogs is None:
+        return None
+    pct = cogs.get("cogs_pct_week")
+    if pct is None:
+        return None
+    needle = f"{float(pct):.1f}%"
+    return _value_check("Food Cost %", html, needle,
+                        f"cogs_variance.json (cogs_pct_week={pct})")
+
+
+def _check_compliance_wired() -> dict | None:
+    """Cross-check: verify dashboard.html shows ComplianceMate overall %."""
+    html = _load_dash_html()
+    if not html:
+        return None
+    _, cm = find_latest("compliancemate", "compliance.json")
+    if cm is None:
+        _, cm = find_latest("compliancemate", "lists.json")
+    if cm is None:
+        cm_path = ROOT / "data" / "compliancemate.json"
+        if cm_path.exists():
+            try:
+                cm = json.loads(cm_path.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+    if cm is None:
+        return None
+    pct = cm.get("overall_pct")
+    if pct is None:
+        return None
+    needle = f"{pct}%"
+    return _value_check("ComplianceMate %", html, needle,
+                        f"compliance.json (overall_pct={pct})")
+
+
+def _check_shops_wired() -> dict | None:
+    """Cross-check: verify dashboard.html shows latest secret shop score."""
+    html = _load_dash_html()
+    if not html:
+        return None
+    _, ss = find_latest("marketforce", "shops.json")
+    if ss is None:
+        return None
+    latest_shop = ss.get("latest", {})
+    score = latest_shop.get("score")
+    if score is None:
+        return None
+    needle = f"{score:.0f}%"
+    return _value_check("Secret Shop score", html, needle,
+                        f"shops.json (latest score={score})")
 
 
 def gather_sections() -> list[dict]:
     rows = [
         section("Sales / Transactions / Per Guest", 2,
                 "parbrink", "sales_summary.json", kpi_sales),
-        section("Hourly Sales & Labor",             2,
+        section("Hourly Sales & Labor (Par Brink)",  2,
                 "parbrink", "hourly_sales_labor.json", kpi_hourly),
+        section("CrunchTime Labor API",              2,
+                "crunchtime", "labor_today.json",  # placeholder path; checked directly below
+                None),
         section("Comps & Discounts",                2,
                 "parbrink", "discount_summary.json", kpi_discounts),
         section("Today's Schedule",                 8,
@@ -254,10 +369,59 @@ def gather_sections() -> list[dict]:
         section("Secret Shops (KnowledgeForce)",   14,
                 "marketforce", "shops.json", kpi_shops),
     ]
-    # Cross-check: labor JSON value must actually be wired into dashboard.html
-    labor_wire = _check_labor_wired()
-    if labor_wire:
-        rows.append(labor_wire)
+
+    # ── Replace CrunchTime Labor API row with a direct file check ───────────
+    # data/labor_today.json lives in ROOT/data/, not in data/raw/crunchtime/
+    # so the generic section() helper can't find it. Swap it out.
+    rows = [r for r in rows if r["label"] != "CrunchTime Labor API"]
+    ct_labor_path = ROOT / "data" / "labor_today.json"
+    if ct_labor_path.exists():
+        try:
+            ct_labor = json.loads(ct_labor_path.read_text(encoding="utf-8"))
+            clt_date = ct_labor.get("date")
+            age = days_old(clt_date)
+            labor_pct = ct_labor.get("labor_percent")
+            labor_dol = ct_labor.get("labor_dollars")
+            kpi_str = ""
+            if labor_pct is not None:
+                kpi_str = f"{labor_pct:.1f}%"
+                if labor_dol is not None:
+                    kpi_str += f" / ${labor_dol:,.0f}"
+            if age is None:
+                status = WARN
+                msg = "labor_today.json: date field missing"
+            elif age > 1:
+                status = WARN
+                msg = f"stale: {age} days old (dated {clt_date})"
+            else:
+                status = OK
+                msg = f"fresh ({age}d old, dated {clt_date}) — CT API"
+            rows.insert(1, {"label": "CrunchTime Labor API", "status": status,
+                            "age_days": age, "message": msg, "kpi": kpi_str})
+        except Exception as e:
+            rows.insert(1, {"label": "CrunchTime Labor API", "status": WARN,
+                            "age_days": None,
+                            "message": f"labor_today.json parse error: {e}", "kpi": ""})
+    else:
+        rows.insert(1, {"label": "CrunchTime Labor API", "status": FAIL,
+                        "age_days": None,
+                        "message": "labor_today.json not found — scrape_labor_ct.py may have failed",
+                        "kpi": ""})
+
+    # ── Value cross-checks (Change B) ────────────────────────────────────────
+    # Each check extracts the key metric from the source JSON and greps
+    # dashboard.html for that exact formatted value. If not found → FAIL.
+    for check_fn in (
+        _check_labor_wired,
+        _check_sales_wired,
+        _check_food_cost_wired,
+        _check_compliance_wired,
+        _check_shops_wired,
+    ):
+        result = check_fn()
+        if result:
+            rows.append(result)
+
     return rows
 
 

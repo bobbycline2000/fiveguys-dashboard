@@ -77,7 +77,28 @@ if cogs is None:
 
 discounts, _ = load_latest("parbrink", "discount_summary.json")
 sales_summary, _ = load_latest("parbrink", "sales_summary.json")
+# Par Brink hourly PDF — kept as fallback only; CT API is now the primary labor source
 hourly_labor, _ = load_latest("parbrink", "hourly_sales_labor.json")
+
+# ── CrunchTime Labor API (primary labor source, replaces Par Brink hourly PDF) ──
+# scrape_labor_ct.py writes data/labor_today.json with the same day's business data
+# from /resource/dashboard/performance/metrics + /resource/labor/todays/operatingMetrics.
+# Falls back to hourly_labor (Par Brink) if absent.
+_ct_labor_path = ROOT / "data" / "labor_today.json"
+ct_labor = None
+if _ct_labor_path.exists():
+    try:
+        ct_labor = json.loads(_ct_labor_path.read_text(encoding="utf-8"))
+        # Staleness guard: if labor_today.json is from > 1 day ago, treat as absent
+        _clt_date_str = ct_labor.get("date")
+        if _clt_date_str:
+            _clt_date = date.fromisoformat(_clt_date_str)
+            if (date.today() - _clt_date).days > 1:
+                print(f"  [CT-LABOR-STALE] labor_today.json dated {_clt_date} — falling back to Par Brink")
+                ct_labor = None
+    except Exception as _e:
+        print(f"  [CT-LABOR-WARN] could not load labor_today.json: {_e}")
+        ct_labor = None
 
 # CrunchTime staleness check — Par Brink is the authoritative source.
 # If CrunchTime report_date is more than 1 day behind today, treat its
@@ -136,13 +157,22 @@ if report_date_str:
 else:
     header_date_chip = now.strftime("%A, %B %d &nbsp;%Y").replace(" 0", " ")
 
-# Labor card values — prefer Par Brink Hourly Sales And Labor when available
-if hourly_labor and hourly_labor.get("totals"):
+# Labor card values — primary: CrunchTime API (labor_today.json)
+#                     fallback: Par Brink Hourly PDF (hourly_sales_labor.json)
+#                     last resort: CrunchTime DOM scrape (latest.json)
+if ct_labor and ct_labor.get("labor_percent") is not None:
+    labor_pct         = f"{ct_labor['labor_percent']:.1f}%"
+    labor_dollars_today = f"${ct_labor['labor_dollars']:,.0f}" if ct_labor.get("labor_dollars") is not None else "—"
+    actual_hrs_today  = f"{ct_labor['actual_hours']:.1f}" if ct_labor.get("actual_hours") is not None else "—"
+    avg_hourly_wage   = f"${ct_labor['avg_hourly_wage']:.2f}" if ct_labor.get("avg_hourly_wage") is not None else "—"
+    print("  [wire] labor source: ct_labor (CrunchTime API)")
+elif hourly_labor and hourly_labor.get("totals"):
     _hl_totals = hourly_labor["totals"]
     labor_pct = f"{_hl_totals['labor_percent']:.1f}%"
     labor_dollars_today = f"${_hl_totals['labor_dollars']:,.0f}"
     actual_hrs_today = f"{_hl_totals['labor_hours']:.1f}"
     avg_hourly_wage = f"${_hl_totals['avg_hourly_wage']:.2f}"
+    print("  [wire] labor source: hourly_labor (Par Brink PDF fallback)")
 else:
     labor_pct = f"{latest['labor']['pct']:.1f}%" if latest['labor'].get('pct') is not None else "—"
     _lc = latest['labor'].get('cost')
@@ -150,6 +180,7 @@ else:
     labor_dollars_today = f"${_lc:,.0f}" if _lc is not None else "—"
     actual_hrs_today = f"{_ah:.1f}" if _ah is not None else "—"
     avg_hourly_wage = f"${_lc/_ah:.2f}" if (_lc is not None and _ah) else "—"
+    print("  [wire] labor source: latest.json (CT DOM scrape last resort)")
 sched_hrs_today = f"{sched['today']['scheduled_hours']:.1f}" if sched else "—"
 # Prefer Par Brink Sales Summary for net sales (more reliable than CrunchTime text scrape)
 if sales_summary and sales_summary.get("net_sales"):
@@ -312,11 +343,17 @@ rep(r'(<div class="ctrl-stat-val">)[^<]*(</div>\s*<div class="ctrl-stat-lbl">Avg
     "Avg Hrly Wage",
     flags=DOTALL)
 
-# WTD Labor stats — Par Brink rollups are primary; CrunchTime is enrichment only.
-# If CrunchTime is stale, skip its WTD values and go straight to Par Brink rollups.
-_ct_wp = None if _ct_stale else latest['labor'].get('pct_week')
-_ct_wc = None if _ct_stale else latest['labor'].get('cost_week')
-_ct_wh = None if _ct_stale else latest['labor'].get('actual_hours_week')
+# WTD Labor stats — prefer CrunchTime API WTD from labor_today.json,
+# then CT DOM scrape WTD, then Par Brink rollups.
+_ct_wp = ct_labor.get("labor_percent_wtd") if ct_labor else None
+_ct_wc = ct_labor.get("labor_dollars_wtd") if ct_labor else None
+_ct_wh = ct_labor.get("actual_hours_wtd") if ct_labor else None
+# Also pull CT DOM scrape WTD as secondary fallback (not stale-gated — only used
+# if the API data is completely absent)
+if _ct_wp is None and not _ct_stale:
+    _ct_wp = latest['labor'].get('pct_week')
+    _ct_wc = latest['labor'].get('cost_week')
+    _ct_wh = latest['labor'].get('actual_hours_week')
 if _ct_wp is not None and _ct_wc is not None:
     wtd_pct       = f"{_ct_wp:.1f}%"
     wtd_labor_dol = f"${_ct_wc:,.0f}"
@@ -343,8 +380,16 @@ rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">WTD Hours
     flags=DOTALL)
 
 # Hourly labor bars — replace the hardcoded laborData JS array (11A–10P)
-if hourly_labor and hourly_labor.get("hours"):
-    display_hours = [h for h in hourly_labor["hours"] if 11 <= h["hour_24"] <= 22]
+# Primary: CT API hourly_breakdown from labor_today.json
+# Fallback: Par Brink hourly PDF hours list
+_hourly_source = None
+if ct_labor and ct_labor.get("hourly_breakdown"):
+    _hourly_source = ct_labor["hourly_breakdown"]
+elif hourly_labor and hourly_labor.get("hours"):
+    _hourly_source = [h for h in hourly_labor["hours"] if 11 <= h["hour_24"] <= 22]
+
+if _hourly_source:
+    display_hours = [h for h in _hourly_source if 11 <= h["hour_24"] <= 22]
     js_rows = ",\n  ".join(
         f'{{ hr: \'{h["label"]}\', pct: {h["labor_percent"]:.1f} }}'
         for h in display_hours

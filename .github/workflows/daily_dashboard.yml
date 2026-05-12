@@ -171,6 +171,21 @@ jobs:
         # NOTE: When scaling to all 11 stores, add additional steps here
         # with the store-specific env vars and a STORE_ID env variable.
 
+      # ── 5b0. Pull CrunchTime labor data via API (primary labor source) ──────
+      # Calls /resource/dashboard/performance/metrics for Labor%, Actual Labor $,
+      # Actual Hours, Scheduled Hours (yesterday's calcId row + WTD).
+      # Calls /resource/labor/todays/operatingMetrics for 15-min intervals
+      # collapsed into hourly buckets (11A-10P) for the bar chart.
+      # Output: data/labor_today.json — read by wire_dashboard.py as primary
+      # labor source, replacing the Par Brink Hourly Sales And Labor PDF.
+      # Reuses cookies minted by main.py (step 5b) — no fresh Playwright needed.
+      - name: Pull CrunchTime Labor (API) for store 2065
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: python scraper/scrape_labor_ct.py --store 2065
+
       # ── 5b1. Pull this-week + next-week per-day forecasts (bread tool)
       # Uses the same cached cookies as main.py (just-minted in step 5b).
       # Hits /resource/sales/sales/forecast for forecasts (Mon-Sun, by weekEnding)
@@ -394,7 +409,7 @@ jobs:
           # Stage dashboard + JSON snapshots. data/raw/parbrink/ JSONs are
           # critical history for aggregate_periods.py — without committing them,
           # every run starts with empty rollup history.
-          git add dashboard.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/daily-brief/ data/team_notes.json || true
+          git add dashboard.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/daily-brief/ data/team_notes.json || true
           git add data/raw/parbrink/ data/raw/crunchtime/ data/raw/compliancemate/ data/raw/marketforce/ || true
           git add data/drafts/ data/debug-log.txt data/heal-log.txt data/debug-log.archive/ || true
 
