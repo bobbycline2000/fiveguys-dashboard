@@ -261,6 +261,9 @@ def build_template_body(name: str, shifts: list[tuple[int, str, str]]) -> dict:
 #
 # SHIFT STRUCTURE PER BOBBY'S RULES:
 # - Shift Leader (posId=5): 2 per day minimum (AM 7-3, PM 3-11 pattern)
+# - OPENER RULE (confirmed 2026-05-11):
+#     Tue/Wed/Thu/Fri: 1 MANAGER opens at 7:00 AM, 1 CREW comes in at 8:00 AM, then trickle
+#     Sat/Sun: 2 CREW at 8:00 AM (managers handled per existing weekend pattern)
 # - Crew (posId=1): staggered starts to hit peaks (lunch 11a-1p, dinner 5p-7p)
 # - Max 2 crew before 11am on regular days, 3+ on truck days (Mon/Thu)
 # - Truck day opener + strong-back at 8AM for truck put-away
@@ -366,13 +369,14 @@ FRIDAY_SHIFTS = [
 # Forecast: $5,222 → budget $1,044 → 80.3h at 20%
 # Target ~76h scheduled. Robert Cline works floor Sat.
 SATURDAY_SHIFTS = [
-    # Robert Cline (GM-Salary) opens Saturday
+    # Robert Cline (GM-Salary) opens Saturday (manager handled per existing weekend pattern)
     (POS_GM_SALARY, "07:00", "17:00"),   # 10h (Bobby's Sat pattern)
     # Shift Leader PM (Kasey 3p close)
     (POS_SL_HOURLY, "15:00", "23:15"),   # 8.25h SL closer
-    # Day Crew AM (Lidy)
-    (POS_CREW,      "07:30", "15:30"),   # 8h (Sat: Lidy preferred opener)
-    # Day Crew AM 2 (Noel/Francisco)
+    # OPENER RULE: 2 crew at 8:00 AM Saturday
+    # Day Crew AM 1 (Lidy) — moved to 08:00 per opener rule (was 07:30)
+    (POS_CREW,      "08:00", "16:00"),   # 8h (Sat: Lidy opener)
+    # Day Crew AM 2 (Noel/Francisco) — 2nd 8AM opener per rule
     (POS_CREW,      "08:00", "14:00"),   # 6h
     # Lunch surge (10a-4p)
     (POS_CREW,      "10:00", "16:00"),   # 6h
@@ -388,6 +392,7 @@ SATURDAY_SHIFTS = [
     (POS_CREW,      "17:00", "23:15"),   # 6.25h
 ]
 # Sat total raw: 10+8.25+8+6+6+8+6+8.25+5.75+6.25 = 72.5h
+# (Lidy shift was 07:30-15:30=8h, now 08:00-16:00=8h — same raw hours, opener time changed)
 # Paid (7+ hr shifts): 10+8.25+8+8+8.25 = 5 shifts -> -2.5h breaks
 # Sat paid: 72.5 - 2.5 = 70.0h paid
 # Sat labor $: 70.0 * 13 = $910. Labor%: 910/5222 = 17.4%
