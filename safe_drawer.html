@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="FG 2065" />
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
-<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});}</script>
+<script>if("serviceWorker" in navigator){let refreshing=false;navigator.serviceWorker.addEventListener("controllerchange",function(){if(refreshing)return;refreshing=true;window.location.reload();});window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").then(function(reg){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")reg.update().catch(function(){});});}).catch(function(){});});}</script>
 <title>Safe &amp; Drawer Count Log — Five Guys 2065</title>
 <link rel="icon" href="data:," />
 <style>
