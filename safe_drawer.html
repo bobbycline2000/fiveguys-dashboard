@@ -228,6 +228,16 @@
   }
   .dep-row .os.short { background: #fde2e4; color: var(--red); }
   .dep-row .os.even  { background: #eee; color: #777; }
+  .dep-row .safe-meta {
+    grid-column: 1 / -1;
+    display: flex; gap: 8px; align-items: center;
+    margin-top: 4px; font-size: 11px; color: var(--ink-soft);
+  }
+  .dep-row .safe-meta .mgr {
+    font-weight: 700; color: var(--ink); text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .dep-row .safe-meta .no-log { color: #aaa; font-style: italic; }
 
   /* ── Reminder banner ───────────────────────────────────────── */
   .reminder {
@@ -383,7 +393,7 @@
   <aside>
     <h3>CrunchTime Deposits</h3>
     <div class="help">
-      Last 14 days — pulled live from CrunchTime each morning. Use to spot trends.
+      Last 14 days — CT deposit + safe-log manager initials and over/short per day.
     </div>
     <div id="dep-list">
       <div class="hist-empty">Loading…</div>
@@ -706,6 +716,8 @@ function renderDeposits() {
   }
   const today = new Date().toISOString().slice(0,10);
   const rows = CT_HISTORY.slice().sort((a,b) => (b.business_date||'').localeCompare(a.business_date||'')).slice(0, 14);
+  const logByDate = {};
+  (LIVE_ROWS || []).forEach(r => { if (r && r.date) logByDate[r.date] = r; });
   el.innerHTML = rows.map(r => {
     const dt = new Date(r.business_date + 'T00:00:00');
     const dateShort = dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
@@ -714,9 +726,30 @@ function renderDeposits() {
     const depCell = depZero
       ? `<span class="dep zero">pending</span>`
       : `<span class="dep">${fmt(r.deposit)}</span>`;
+    const log = logByDate[r.business_date];
+    let metaHtml = '';
+    if (log) {
+      const mgr = (log.mgr || '?').toUpperCase();
+      const os = (typeof log.ct_os === 'number') ? log.ct_os : null;
+      let osHtml = '';
+      if (os !== null) {
+        const abs = Math.abs(os);
+        if (abs < 0.005) {
+          osHtml = `<span class="os even">even</span>`;
+        } else if (os < 0) {
+          osHtml = `<span class="os short">short ${fmt(abs)}</span>`;
+        } else {
+          osHtml = `<span class="os">over ${fmt(abs)}</span>`;
+        }
+      }
+      metaHtml = `<div class="safe-meta"><span class="mgr">${mgr}</span>${osHtml}</div>`;
+    } else {
+      metaHtml = `<div class="safe-meta"><span class="no-log">no safe log entry</span></div>`;
+    }
     return `<div class="dep-row${isToday ? ' today' : ''}">
       <span class="d">${dateShort}${isToday ? ' • today' : ''}</span>
       ${depCell}
+      ${metaHtml}
     </div>`;
   }).join('');
 }
