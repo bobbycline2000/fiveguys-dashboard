@@ -27,10 +27,10 @@
     "d1_mid": 200,
     "d2_mid": 200,
     "safe_close": 726,
-    "d1_close": 200.01,
-    "d2_close": 0,
+    "d1_close": 200,
+    "d2_close": 200,
     "ct_os": 0,
     "notes": "Opening counts: Extra 26 dollars in safe.",
-    "submitted_at": "2026-05-13T02:10:01.636Z"
+    "submitted_at": "2026-05-13T02:54:03.372Z"
   }
 ]
