@@ -209,7 +209,7 @@
 
   /* CT deposit rows — 3 cols: Date | Safe Log counts | Deposit $ */
   .dep-row {
-    display: grid; grid-template-columns: 1fr 1.1fr auto; gap: 10px;
+    display: grid; grid-template-columns: 1fr auto 1.1fr; gap: 10px;
     align-items: baseline;
     padding: 8px 10px; border-bottom: 1px solid #f0eee5;
     font-size: 13px;
@@ -729,7 +729,7 @@ function renderDeposits() {
     return `<span class="slog">${fmtCount(picked[0])}/${fmtCount(picked[1])}/${fmtCount(picked[2])}</span>`;
   };
   const header = `<div class="dep-row head">
-    <span>Date</span><span>Safe Log</span><span>Deposit</span>
+    <span>Date</span><span>Deposit</span><span>Safe Log</span>
   </div>`;
   el.innerHTML = header + rows.map(r => {
     const dt = new Date(r.business_date + 'T00:00:00');
@@ -742,8 +742,8 @@ function renderDeposits() {
     const log = logByDate[r.business_date];
     return `<div class="dep-row${isToday ? ' today' : ''}">
       <span class="d">${dateShort}${isToday ? ' • today' : ''}</span>
-      ${safeLogCell(log)}
       ${depCell}
+      ${safeLogCell(log)}
     </div>`;
   }).join('');
 }
