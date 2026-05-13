@@ -207,9 +207,9 @@
     color: #aaa; text-align: center; padding: 20px 0; font-style: italic; font-size: 12px;
   }
 
-  /* CT deposit rows */
+  /* CT deposit rows — 3 cols: Date | Safe Log counts | Deposit $ */
   .dep-row {
-    display: grid; grid-template-columns: 1fr auto; gap: 8px;
+    display: grid; grid-template-columns: 1fr 1.1fr auto; gap: 10px;
     align-items: baseline;
     padding: 8px 10px; border-bottom: 1px solid #f0eee5;
     font-size: 13px;
@@ -219,25 +219,19 @@
     background: #FEF3C7; border-left: 3px solid var(--gold);
     padding-left: 8px;
   }
+  .dep-row.head {
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-soft); padding-top: 4px; padding-bottom: 4px;
+    border-bottom: 1px solid #ddd; background: #faf7ee;
+  }
   .dep-row .d { color: var(--ink-soft); font-size: 12px; }
+  .dep-row .slog {
+    font-variant-numeric: tabular-nums; color: var(--ink);
+    font-size: 12px; letter-spacing: 0.01em;
+  }
+  .dep-row .slog.missing { color: #c0c0c0; font-style: italic; font-size: 11px; }
   .dep-row .dep { font-weight: 700; color: var(--green); font-variant-numeric: tabular-nums; }
   .dep-row .dep.zero { color: #aaa; font-weight: 400; font-style: italic; font-size: 11px; }
-  .dep-row .os {
-    font-size: 11px; padding: 1px 6px; border-radius: 999px;
-    background: #e8f6ec; color: var(--green); font-variant-numeric: tabular-nums;
-  }
-  .dep-row .os.short { background: #fde2e4; color: var(--red); }
-  .dep-row .os.even  { background: #eee; color: #777; }
-  .dep-row .safe-meta {
-    grid-column: 1 / -1;
-    display: flex; gap: 8px; align-items: center;
-    margin-top: 4px; font-size: 11px; color: var(--ink-soft);
-  }
-  .dep-row .safe-meta .mgr {
-    font-weight: 700; color: var(--ink); text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .dep-row .safe-meta .no-log { color: #aaa; font-style: italic; }
 
   /* ── Reminder banner ───────────────────────────────────────── */
   .reminder {
@@ -393,7 +387,7 @@
   <aside>
     <h3>CrunchTime Deposits</h3>
     <div class="help">
-      Last 14 days — CT deposit + safe-log manager initials and over/short per day.
+      Last 14 days — safe log close counts (safe / d1 / d2) and CT deposit per day.
     </div>
     <div id="dep-list">
       <div class="hist-empty">Loading…</div>
@@ -718,7 +712,26 @@ function renderDeposits() {
   const rows = CT_HISTORY.slice().sort((a,b) => (b.business_date||'').localeCompare(a.business_date||'')).slice(0, 14);
   const logByDate = {};
   (LIVE_ROWS || []).forEach(r => { if (r && r.date) logByDate[r.date] = r; });
-  el.innerHTML = rows.map(r => {
+  const fmtCount = n => {
+    if (typeof n !== 'number' || !isFinite(n)) return '0';
+    return (Math.round(n)).toString();
+  };
+  const safeLogCell = (log) => {
+    if (!log) return `<span class="slog missing">—</span>`;
+    // Prefer close counts; fall back to mid; then open. Pick the latest filled tier.
+    const tiers = [
+      [log.safe_close, log.d1_close, log.d2_close],
+      [log.safe_mid,   log.d1_mid,   log.d2_mid],
+      [log.safe_open,  log.d1_open,  log.d2_open],
+    ];
+    const picked = tiers.find(t => t.some(v => (typeof v === 'number' && v > 0)));
+    if (!picked) return `<span class="slog missing">—</span>`;
+    return `<span class="slog">${fmtCount(picked[0])}/${fmtCount(picked[1])}/${fmtCount(picked[2])}</span>`;
+  };
+  const header = `<div class="dep-row head">
+    <span>Date</span><span>Safe Log</span><span>Deposit</span>
+  </div>`;
+  el.innerHTML = header + rows.map(r => {
     const dt = new Date(r.business_date + 'T00:00:00');
     const dateShort = dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
     const isToday = r.business_date === today;
@@ -727,29 +740,10 @@ function renderDeposits() {
       ? `<span class="dep zero">pending</span>`
       : `<span class="dep">${fmt(r.deposit)}</span>`;
     const log = logByDate[r.business_date];
-    let metaHtml = '';
-    if (log) {
-      const mgr = (log.mgr || '?').toUpperCase();
-      const os = (typeof log.ct_os === 'number') ? log.ct_os : null;
-      let osHtml = '';
-      if (os !== null) {
-        const abs = Math.abs(os);
-        if (abs < 0.005) {
-          osHtml = `<span class="os even">even</span>`;
-        } else if (os < 0) {
-          osHtml = `<span class="os short">short ${fmt(abs)}</span>`;
-        } else {
-          osHtml = `<span class="os">over ${fmt(abs)}</span>`;
-        }
-      }
-      metaHtml = `<div class="safe-meta"><span class="mgr">${mgr}</span>${osHtml}</div>`;
-    } else {
-      metaHtml = `<div class="safe-meta"><span class="no-log">no safe log entry</span></div>`;
-    }
     return `<div class="dep-row${isToday ? ' today' : ''}">
       <span class="d">${dateShort}${isToday ? ' • today' : ''}</span>
+      ${safeLogCell(log)}
       ${depCell}
-      ${metaHtml}
     </div>`;
   }).join('');
 }
