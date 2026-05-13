@@ -1,41 +1,38 @@
 {
-  "date": "2026-05-12",
+  "date": "2026-05-13",
   "new_count": 4,
   "notes": [
     {
-      "from": "Brad Davis (Director)",
+      "from": "Brad Davis",
       "role": "director",
-      "role_label": "Director's Corner",
-      "time": "Sun 1:38 PM",
-      "body": "Only 30 Cents more for Large! — Large Soda is now 30¢ more than Regular (was 10¢). Every cashier/shift lead must update suggestive-sell language today. Old 'For only 10 cents more...' phrasing is dead. Drill at pre-shift."
+      "role_label": "Director of Operations",
+      "time": "2026-05-12T21:29:10-04:00",
+      "subject": "Best Burger America 2026!",
+      "body": "Let's grow - Best Burger 2026! This is HUGE - Congratulations! Keep up the Standards & Consistency and we'll keep the trend running! BOGO starts tomorrow - exciting times to be with this Brand! Pre-shift the crew on standards under volume — speed cannot break consistency."
     },
     {
-      "from": "Brad Davis (Director · standing)",
-      "role": "director",
-      "role_label": "Director's Corner — Standing",
-      "time": "5/5 directive",
-      "body": "Orientation Checklist for ALL new hires. Halo Effect & Suggestive Sales — signed forms were due to Crystal by Friday 5/8 5:00 PM (deadline past — confirm all 20 forms are in her inbox). FGU 0% overdue by Friday 5/15."
+      "from": "Matthew Przystal (Louisville Metro Public Health)",
+      "role": "alert",
+      "role_label": "Health Inspection",
+      "time": "2026-05-12T16:48:46-04:00",
+      "subject": "Permit #120072 — Inspection 5/12 REGULAR",
+      "body": "Regular health inspection completed 5/12. Report attached to fg2065 inbox. Pull the PDF, photograph any findings, file in the Steritech binder."
     },
     {
-      "from": "Crystal Hess (DM)",
-      "role": "dm",
-      "role_label": "DM Corner",
-      "time": "Standing (5/1)",
-      "body": "Shopper Dashboard & FGX Info — print 2065 Shopper Dashboard & K.P.I. document, post on comm board, be ready to discuss with Crystal in-store this week."
+      "from": "Victoria Barkhimer (Estep & Co Payroll)",
+      "role": "alert",
+      "role_label": "Onboarding",
+      "time": "2026-05-12T10:01:29-04:00",
+      "subject": "RE: fg2065 new hire Anthony Pirtle",
+      "body": "Background check sent for Anthony Pirtle. Anthony added to employee directory today as Anthony — (PHONE PENDING). Active count: 23 → 24. Pull phone from BG-check PDF when it lands."
     },
     {
-      "from": "CrunchTime",
+      "from": "CrunchTime (NetChef)",
       "role": "alert",
       "role_label": "Task Alert",
-      "time": "Today 3:07 AM",
-      "body": "L-Rev (Labor Review) overdue for 5/11/2026 at KY-2065. Bobby/MOD: log into NetChef and close this task before EOD."
-    },
-    {
-      "from": "Madison Cureton (Manager)",
-      "role": "alert",
-      "role_label": "Manager Heads-up",
-      "time": "Sun 10:54 PM",
-      "body": "Subject 'Anthony' — body empty (Sent from iPhone). Madison flagging something about Anthony. Talk to her in person today — do not wait on email."
+      "time": "2026-05-13T02:18:44-04:00",
+      "subject": "L-Rev overdue for 5/11 AND 5/12",
+      "body": "Two Labor Reviews now outstanding at KY-2065-Dixie (5/11 + 5/12). Yesterday's brief flagged the 5/11 task; 5/12 added overnight. Close both in NetChef before Crystal sees the alert chain."
     }
   ]
 }
