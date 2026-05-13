@@ -16,6 +16,7 @@ on:
 permissions:
   contents: write  # needed to commit dashboard.html back to main
   issues: write    # verify_dashboard.py opens an issue if the HTML is stale
+  secrets: write   # needed by self-heal step to push refreshed Gmail token back
 
 # Serialize with the primary workflow so they don't race on git push.
 concurrency:
@@ -106,6 +107,20 @@ jobs:
         if: env.PARBRINK_SKIP != '1'
         continue-on-error: true
         run: python scraper/parbrink_email_pickup.py --store 2065 --mode daily
+
+      # ── 4d-refresh. Self-heal: push refreshed Gmail token back to Secret ──
+      - name: Self-heal — push refreshed Gmail token back to GitHub Secret
+        if: env.PARBRINK_SKIP != '1'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f secrets/scg_refresh_token.json ]; then
+            gh secret set SCG_GMAIL_REFRESH_TOKEN_JSON < secrets/scg_refresh_token.json
+            echo "[token-heal] SCG_GMAIL_REFRESH_TOKEN_JSON updated in GitHub Secrets."
+          else
+            echo "[token-heal] secrets/scg_refresh_token.json not found — skipping."
+          fi
 
       # ── 4e. Parse the Par Brink Discount Summary PDF → JSON ───────────────
       # wire_dashboard.py reads the JSON to populate the Comps & Discounts card.
