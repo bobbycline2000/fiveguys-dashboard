@@ -347,6 +347,50 @@ def _check_shops_wired() -> dict | None:
                         f"shops.json (latest score={score})")
 
 
+def _check_100pct_participation() -> dict | None:
+    """
+    Warn if any 100% shop has zero names in participation.json.
+    A missing name list means the payout email draft has a blank roster —
+    Bobby cannot process the payout without knowing who was on shift.
+    """
+    _, shops_data = find_latest("marketforce", "shops.json")
+    if shops_data is None:
+        return None
+    shops = shops_data.get("shops", [])
+    perfect = [s for s in shops if float(s.get("score", 0)) == 100.0]
+    if not perfect:
+        return None
+
+    # Load participation.json from the marketforce store folder (not date-bucketed)
+    part_path = RAW / "marketforce" / STORE_ID / "participation.json"
+    by_shop: dict = {}
+    if part_path.exists():
+        try:
+            by_shop = json.loads(part_path.read_text(encoding="utf-8")).get("by_shop", {})
+        except Exception:
+            pass
+
+    missing = [
+        s for s in perfect
+        if not by_shop.get(s.get("job_id"), [])
+    ]
+    if not missing:
+        return None
+
+    job_ids = ", ".join(s.get("job_id", "?") for s in missing)
+    return {
+        "label": "100% Shop — participation gap",
+        "status": WARN,
+        "age_days": None,
+        "message": (
+            f"{len(missing)} 100% shop(s) have zero names in participation.json "
+            f"(job_id(s): {job_ids}) — payout draft will have blank roster. "
+            f"Check debug-log.txt for ZERO_NAMES_100PCT_SHOP or PARTICIPATION_RETRY_FAILED."
+        ),
+        "kpi": f"{len(missing)} shop(s) missing names",
+    }
+
+
 def gather_sections() -> list[dict]:
     rows = [
         section("Sales / Transactions / Per Guest", 2,
@@ -417,6 +461,7 @@ def gather_sections() -> list[dict]:
         _check_food_cost_wired,
         _check_compliance_wired,
         _check_shops_wired,
+        _check_100pct_participation,
     ):
         result = check_fn()
         if result:

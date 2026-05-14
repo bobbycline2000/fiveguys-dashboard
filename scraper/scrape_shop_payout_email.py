@@ -33,6 +33,7 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -428,6 +429,88 @@ def append_debug_log(msg: str) -> None:
         f.write(f"[{now}] shop-email: {msg}\n")
 
 
+# ── participation fallback ────────────────────────────────────────────────────
+
+def load_participation_names(store_id: str, job_id: str) -> list[str]:
+    """Return first-names from participation.json for this job_id, or []."""
+    p = DATA_ROOT / store_id / "participation.json"
+    if not p.exists():
+        return []
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+        return data.get("by_shop", {}).get(job_id, [])
+    except Exception:
+        return []
+
+
+def invoke_participation_scraper(store_id: str) -> bool:
+    """
+    Invoke scrape_shop_participation.py via subprocess using the current env
+    (which carries CRUNCHTIME_USERNAME / CRUNCHTIME_PASSWORD in CI).
+    Returns True if the subprocess exited 0, False otherwise.
+    """
+    script = Path(__file__).parent / "scrape_shop_participation.py"
+    cmd = [sys.executable, str(script), "--store", store_id]
+    log(f"Invoking participation scraper: {' '.join(cmd)}")
+    try:
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=300,  # 5 min hard cap
+            env=os.environ,
+        )
+        for line in result.stdout.splitlines():
+            log(f"  [participation] {line}")
+        if result.returncode != 0:
+            log(f"  participation scraper exit {result.returncode}: {result.stderr[:400]}")
+            return False
+        return True
+    except subprocess.TimeoutExpired:
+        log("  participation scraper timed out after 300s")
+        return False
+    except Exception as e:
+        log(f"  participation scraper error: {e}")
+        return False
+
+
+def resolve_employees(shop: dict, store_id: str, ct_employees: list[str]) -> list[str]:
+    """
+    Return the best available name list for a shop.
+
+    Priority:
+      1. CrunchTime CETD result (ct_employees) — if non-empty, use it.
+      2. participation.json cached entry — if present, use it.
+      3. Invoke scrape_shop_participation.py, re-read, use result.
+      4. If all three fail → log PARTICIPATION_RETRY_FAILED and return [].
+    """
+    job_id = shop.get("job_id", "?")
+
+    if ct_employees:
+        log(f"  Using CrunchTime CETD result ({len(ct_employees)} names) for job {job_id}")
+        return ct_employees
+
+    log(f"  CrunchTime returned empty for job {job_id}; checking participation.json")
+    cached = load_participation_names(store_id, job_id)
+    if cached:
+        log(f"  Fell back to participation.json: {cached}")
+        return cached
+
+    log(f"  NO_PARTICIPATION for 100% shop {job_id} — invoking scrape_shop_participation.py")
+    ok = invoke_participation_scraper(store_id)
+    if ok:
+        retried = load_participation_names(store_id, job_id)
+        if retried:
+            log(f"  Retry succeeded: {retried}")
+            return retried
+        log(f"  Retry ran but job {job_id} still missing from participation.json")
+
+    msg = f"PARTICIPATION_RETRY_FAILED job={job_id} ({shop.get('date')} {shop.get('meal_period')})"
+    log(msg)
+    append_debug_log(msg)
+    return []
+
+
 # ── main ─────────────────────────────────────────────────────────────────────
 
 async def run(store_id: str) -> int:
@@ -455,7 +538,9 @@ async def run(store_id: str) -> int:
         job_id = shop["job_id"]
         log(f"Processing shop {job_id} ({shop.get('date')} {shop.get('meal_period')})")
 
-        employees = await pull_employees_for_shop(shop)
+        ct_employees = await pull_employees_for_shop(shop)
+        employees = resolve_employees(shop, store_id, ct_employees)
+
         draft_path = write_draft(shop, employees, store_id)
         log(f"Draft written: {draft_path}")
 

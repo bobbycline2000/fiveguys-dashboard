@@ -32,6 +32,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_ROOT = ROOT / "data" / "raw" / "marketforce"
+DEBUG_LOG = ROOT / "data" / "debug-log.txt"
 
 ET = timezone(timedelta(hours=-4))
 
@@ -64,6 +65,13 @@ MIN_OVERLAP_HRS = 0.5
 
 def log(msg: str) -> None:
     print(f"[shop-participation] {msg}".encode("ascii", "replace").decode("ascii"), flush=True)
+
+
+def append_debug_log(msg: str) -> None:
+    now = datetime.now(tz=ET).strftime("%Y-%m-%d %H:%M:%S")
+    DEBUG_LOG.parent.mkdir(parents=True, exist_ok=True)
+    with DEBUG_LOG.open("a", encoding="utf-8") as f:
+        f.write(f"[{now}] shop-participation: {msg}\n")
 
 
 def find_latest_shops_json(store_id: str) -> Path | None:
@@ -243,6 +251,10 @@ async def run(store_id: str, do_all: bool) -> int:
                 names = filter_to_roster(records, window)
                 by_shop[job_id] = names
                 log(f"    window {window[0]:.1f}-{window[1]:.1f}: {len(names)} matched: {names}")
+                if not names and float(shop.get("score", 0)) == 100.0:
+                    msg = f"ZERO_NAMES_100PCT_SHOP job_id={job_id} ({shop.get('date')} {shop.get('meal_period')})"
+                    log(f"    WARNING: {msg}")
+                    append_debug_log(msg)
 
         finally:
             await browser.close()
