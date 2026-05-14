@@ -131,7 +131,7 @@ The dashboard view shows SQC averages for the date range. Per-shop SQC values (S
 ## Open items
 
 1. ~~Login POST URL + field names~~ — **CAPTURED 2026-05-07.** See "Auth — verified replay" below.
-2. Per-shop detail endpoint for SQC drilldown — TBD; not blocking (Marketforce PDF covers SQC). Detail URL pattern is `/reporting/assignment/view?dataset={...}` from each row's href.
+2. ~~Per-shop detail endpoint for SQC drilldown~~ — **CAPTURED 2026-05-14.** See "Per-shop Assignment View" section below. Visit time is available at this endpoint via pure requests.
 3. After cutover: drop `playwright` + `xvfb-run` from the workflow's secret-shop step; cut CI runtime accordingly.
 
 ---
@@ -218,6 +218,49 @@ The all-periods query embeds the FULL period list into every row's href, so per-
 - Old: ~5–10 min (Playwright + Xvfb + per-shop drilldown navigation)
 - New: ~15s (login + filter + per-period × 71 + write)
 
+
+---
+
+## Per-shop Assignment View (Visit Time) — discovered 2026-05-14
+
+**Endpoint:**
+```
+GET /reporting/assignment/view?dataset={"jid":<job_id_int>,"period2":[<period2_int>]}
+```
+(URL-encode the dataset value with `urllib.parse.quote(json.dumps({...}))`)
+
+**Auth:** same session cookies from login — no extra auth.
+
+**Response:** Full HTML page containing the answered shop questionnaire. The "Time In" bucket is in a `<li class="question-answer">` element immediately following the "Time In: (Mark one only:)" label div.
+
+**HTML structure:**
+```html
+Time In: (Mark one only:) ...</div>
+<div class="question-choices">
+  <ul class="fa-ul">
+    <li class="question-answer"><i class="fa-li fa fa-check-circle fa-md"></i>4 pm-6:59 pm</li>
+  </ul>
+</div>
+```
+
+**Parser (regex):**
+```python
+idx = txt.find("Time In:")
+chunk = txt[idx:idx + 2000]
+m = re.search(
+    r'class="question-answer"[^>]*>.*?<i[^>]*></i>([^<]+)</li>',
+    chunk, re.IGNORECASE | re.DOTALL
+)
+bucket_raw = m.group(1).strip()  # e.g. "4 pm-6:59 pm"
+```
+
+**Bucket → [start_hour, end_hour]:** Parse the time range string. "4 pm-6:59 pm" → [16.0, 18.98] (end :59 rounds up to next hour). See `scrape_visit_time.py:parse_bucket()`.
+
+**Confirmed for:** job 20770900 (May 11, 2026 Dinner) → "4 pm-6:59 pm" = [16.0, 18.98]. Prior hand-entered override was wrong [17.0, 21.0].
+
+**Production usage:** `scrape_visit_time.py` (fully rewritten 2026-05-14 to use this endpoint via pure requests — no Playwright).
+
+**Note on Question Results page:** `GET /reporting/reports/report?id=questionresults&dataset={cqid,jid,period2,scheme}` does NOT return bucket text via requests (content is JS-rendered). The assignment view page above is the correct lights-out path.
 
 ---
 
