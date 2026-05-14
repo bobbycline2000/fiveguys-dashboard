@@ -87,7 +87,9 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ct_sales_summary_history.json data/ct_cookies.json data/ct_sales_summary_sample.json data/deposits_pending.json || true
+          for f in data/ct_sales_summary_history.json data/ct_cookies.json data/ct_sales_summary_sample.json data/deposits_pending.json; do
+            git add "$f" 2>/dev/null || true
+          done
           if git diff --cached --quiet; then
             echo "No changes."
           else
