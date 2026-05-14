@@ -42,12 +42,12 @@
     "d2_open": 200,
     "safe_mid": 700,
     "d1_mid": 200,
-    "d2_mid": 0,
-    "safe_close": 0,
-    "d1_close": 0,
-    "d2_close": 0,
+    "d2_mid": 170.08,
+    "safe_close": 700,
+    "d1_close": 200,
+    "d2_close": 170.08,
     "ct_os": 0,
-    "notes": "",
-    "submitted_at": "2026-05-13T19:46:46.176Z"
+    "notes": "Rlove's drawer was 29.92 short, she was told she would have to pay it back",
+    "submitted_at": "2026-05-14T03:04:29.369Z"
   }
 ]
