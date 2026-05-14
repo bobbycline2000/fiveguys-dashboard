@@ -4,6 +4,8 @@
 
 **Updated 2026-05-07:** Pure `requests` API scraper (`scrape_knowledgeforce_api.py`) shipped and confirmed working. Bug fixed: merge logic now preserves historical SQC fields (service/quality/cleanliness/customer_satisfaction) when API returns null. build_shop_tracker.py extended to cover Jan–May (was Jan–Apr). wire_dashboard.py patched to handle null SQC gracefully.
 
+**Updated 2026-05-14:** Root cause of payout draft failures identified. `scrape_shop_participation.py` (Playwright/CrunchTime) runs in GH Actions CI with `continue-on-error: true`. When it silently fails for a new 100% shop, participation.json lacks that job_id. The `shop-payout-draft-daily` local task then hits NO_PARTICIPATION and blocks. Fix: the payout task now re-runs `scrape_shop_participation.py` locally when NO_PARTICIPATION is detected, using `.env` credentials. Also fixed: Windows cp1252 encoding crash in `scrape_shop_participation.py` when printing arrow characters on Windows console.
+
 ## Login
 - **URL:** `https://www.knowledgeforce.com/`
 - **Username:** `fg2065@estep-co.com`
