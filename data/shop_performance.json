@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-05-13",
+  "as_of": "2026-05-14",
   "current_month": "2026-05",
   "current_month_label": "May 2026",
   "store_avg_month": 100.0,
-  "store_avg_ytd": 83.0,
-  "shop_count_month": 1,
-  "shop_count_ytd": 26,
+  "store_avg_ytd": 83.7,
+  "shop_count_month": 2,
+  "shop_count_ytd": 27,
   "managers": [
     {
       "first": "Madison",
@@ -148,6 +148,12 @@
   ],
   "latest_shops": [
     {
+      "date": "2026-05-11",
+      "score": 100.0,
+      "meal_period": "Dinner",
+      "on_shift": []
+    },
+    {
       "date": "2026-05-01",
       "score": 100.0,
       "meal_period": "Lunch",
@@ -191,16 +197,6 @@
         "Lidy Henry",
         "Richard Gibbs",
         "Vicki Lucey"
-      ]
-    },
-    {
-      "date": "2026-04-11",
-      "score": 95.0,
-      "meal_period": "Dinner",
-      "on_shift": [
-        "Jeremiah Matthews",
-        "Nathan Roberts",
-        "Richard Gibbs"
       ]
     }
   ]

@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "source": "Teamworx Daily Roster (Playwright scrape)",
+    "store_id": "2065",
+    "report_date": "2026-05-14",
+    "week_start": "2026-05-11",
+    "week_end": "2026-05-17",
+    "generated": "2026-05-14T05:04:59-04:00",
+    "source_url": "https://fiveguysfr77.ct-teamworx.com/views/manager/tablet/home.jsp"
+  },
+  "totals_by_day": {
+    "2026-05-14": 90.0
+  },
+  "schedule": {
+    "2026-05-14": {
+      "date": "2026-05-14",
+      "day_of_week": "Thursday",
+      "scheduled_hours": 90.0,
+      "shifts": [
+        {
+          "name": "Lidy H.",
+          "role": "Crew",
+          "start": "07:30 AM",
+          "end": "02:00 PM"
+        },
+        {
+          "name": "Zack W.",
+          "role": "Crew",
+          "start": "11:00 AM",
+          "end": "03:00 PM"
+        },
+        {
+          "name": "Jeremiah M.",
+          "role": "Crew",
+          "start": "10:00 AM",
+          "end": "08:00 PM"
+        },
+        {
+          "name": "Richard G.",
+          "role": "Crew",
+          "start": "10:00 AM",
+          "end": "09:00 PM"
+        },
+        {
+          "name": "Emanuela K.",
+          "role": "Crew",
+          "start": "05:15 PM",
+          "end": "10:00 PM"
+        },
+        {
+          "name": "DaKayla D.",
+          "role": "Crew",
+          "start": "05:30 PM",
+          "end": "10:30 PM"
+        },
+        {
+          "name": "Ailen C.",
+          "role": "Crew",
+          "start": "05:45 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Maylin R.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Autumn H.",
+          "role": "Crew",
+          "start": "05:30 PM",
+          "end": "11:30 PM"
+        },
+        {
+          "name": "Madison C.",
+          "role": "Shift Lead",
+          "start": "07:30 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Vicki L.",
+          "role": "Shift Lead",
+          "start": "11:00 AM",
+          "end": "05:00 PM"
+        },
+        {
+          "name": "Nathan R.",
+          "role": "Shift Lead",
+          "start": "12:00 PM",
+          "end": "08:00 PM"
+        },
+        {
+          "name": "Kasey W.",
+          "role": "Shift Lead",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        }
+      ]
+    }
+  },
+  "today": {
+    "date": "2026-05-14",
+    "day_of_week": "Thursday",
+    "scheduled_hours": 90.0,
+    "shifts": [
+      {
+        "name": "Lidy H.",
+        "role": "Crew",
+        "start": "07:30 AM",
+        "end": "02:00 PM"
+      },
+      {
+        "name": "Zack W.",
+        "role": "Crew",
+        "start": "11:00 AM",
+        "end": "03:00 PM"
+      },
+      {
+        "name": "Jeremiah M.",
+        "role": "Crew",
+        "start": "10:00 AM",
+        "end": "08:00 PM"
+      },
+      {
+        "name": "Richard G.",
+        "role": "Crew",
+        "start": "10:00 AM",
+        "end": "09:00 PM"
+      },
+      {
+        "name": "Emanuela K.",
+        "role": "Crew",
+        "start": "05:15 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "DaKayla D.",
+        "role": "Crew",
+        "start": "05:30 PM",
+        "end": "10:30 PM"
+      },
+      {
+        "name": "Ailen C.",
+        "role": "Crew",
+        "start": "05:45 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Maylin R.",
+        "role": "Crew",
+        "start": "03:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Autumn H.",
+        "role": "Crew",
+        "start": "05:30 PM",
+        "end": "11:30 PM"
+      },
+      {
+        "name": "Madison C.",
+        "role": "Shift Lead",
+        "start": "07:30 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Vicki L.",
+        "role": "Shift Lead",
+        "start": "11:00 AM",
+        "end": "05:00 PM"
+      },
+      {
+        "name": "Nathan R.",
+        "role": "Shift Lead",
+        "start": "12:00 PM",
+        "end": "08:00 PM"
+      },
+      {
+        "name": "Kasey W.",
+        "role": "Shift Lead",
+        "start": "04:00 PM",
+        "end": "11:00 PM"
+      }
+    ]
+  }
+}
