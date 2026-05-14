@@ -46,12 +46,13 @@ from scrape_shop_payout_email import (
 
 # ── Roster (matches build_shop_tracker) ────────────────────────────────────
 ROSTER = [
-    "Alen", "Ash", "Autumn", "Bri", "Dakayla", "Divan", "Francisco", "Grace",
+    "Alen", "Ash", "Autumn", "Bobby", "Bri", "Dakayla", "Divan", "Francisco", "Grace",
     "Jada", "Jeremiah", "Kable", "Kasey", "Kayla", "Kenzie", "Lidy", "Madison",
     "Maylin", "Mike", "Nathan", "Richard", "Samuel", "Vicki", "Zach",
 ]
+# Robert → Bobby: CrunchTime stores Bobby as "Cline, Robert" but roster uses "Bobby".
 NICK = {"Michael": "Mike", "Mickey": "Mike", "Ashton": "Ash", "Ashley": "Ash",
-        "Brianna": "Bri"}
+        "Brianna": "Bri", "Robert": "Bobby"}
 
 # Default windows by meal_period when visit_window is absent.
 # These must stay in sync with MEAL_WINDOWS in scrape_shop_payout_email.py.

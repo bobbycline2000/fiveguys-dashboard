@@ -40,7 +40,12 @@
       "service": null,
       "quality": null,
       "cleanliness": null,
-      "customer_satisfaction": null
+      "customer_satisfaction": null,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20764354",
