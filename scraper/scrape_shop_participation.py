@@ -63,7 +63,7 @@ MIN_OVERLAP_HRS = 0.5
 
 
 def log(msg: str) -> None:
-    print(f"[shop-participation] {msg}", flush=True)
+    print(f"[shop-participation] {msg}".encode("ascii", "replace").decode("ascii"), flush=True)
 
 
 def find_latest_shops_json(store_id: str) -> Path | None:
