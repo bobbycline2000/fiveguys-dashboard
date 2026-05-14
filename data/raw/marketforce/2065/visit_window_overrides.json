@@ -1,9 +1,31 @@
 {
   "_comment": "Manual overrides for shop visit_window when KnowledgeForce Question Results returns ambiguous buckets (multiple shops in same week + same meal period). Scrape_visit_time.py reads this AFTER its own scrape and applies overrides on top. Format: { job_id: [start_hour, end_hour] }. Confirmed by Bobby from Marketforce email.",
-  "20747008": [19.0, 22.0],
-  "20744756": [11.0, 13.5],
-  "20752330": [19.5, 22.0],
-  "20763859": [11.0, 13.5],
-  "20758995": [16.0, 19.0],
-  "20770564": [13.5, 16.0]
+  "20747008": [
+    19.0,
+    22.0
+  ],
+  "20744756": [
+    11.0,
+    13.5
+  ],
+  "20752330": [
+    19.5,
+    22.0
+  ],
+  "20763859": [
+    11.0,
+    13.5
+  ],
+  "20758995": [
+    16.0,
+    19.0
+  ],
+  "20770564": [
+    13.5,
+    16.0
+  ],
+  "20770900": [
+    17.0,
+    21.0
+  ]
 }

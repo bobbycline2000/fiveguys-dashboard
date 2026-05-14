@@ -8,11 +8,10 @@ Store 2065 (Dixie Highway) received a perfect 100% score on the secret shop cond
 
 The following employees were on shift during that time and should receive recognition:
 
-  - Brianna Gatewood
+  - Ailen Gonzalez Cardero
   - DaKayla Dorsey
-  - Kaisha Brewer
   - Madison Cureton
-  - Nathan Roberts
+  - Maylin Hernandez Rodriguez
   - Robert Cline
   - Zack Whitten
 
@@ -23,4 +22,5 @@ Bobby Cline
 General Manager — Store 2065
 
 ---
-PUSHED TO OUTLOOK DRAFTS: 2026-05-14 (HTTP 201)
+CORRECTED: 2026-05-14 — original draft had wrong names (Nathan Roberts, Kaisha Brewer, Brianna Gatewood included incorrectly; morning crew who left before dinner)
+CORRECTED DRAFT PUSHED TO OUTLOOK: 2026-05-14 (HTTP 201) — wrong draft deleted (HTTP 204) and replaced

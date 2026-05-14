@@ -51,12 +51,13 @@ ET = timezone(timedelta(hours=-4))
 TO_EMAIL  = "secretshop@estep-co.com"
 CC_EMAIL  = "chess@estep-co.com"
 
-# Meal period → (start_hour, end_hour) inclusive — used to filter CT time detail
+# Meal period → (start_hour, end_hour) inclusive — used to filter CT time detail.
+# MUST stay in sync with DEFAULT_WIN in scrape_shop_participation.py.
 MEAL_WINDOWS: dict[str, tuple[int, int]] = {
-    "breakfast":   (5,  10),
-    "lunch":       (11, 14),
-    "dinner":      (15, 21),
-    "late dinner": (20, 23),
+    "breakfast":   (5,  11),
+    "lunch":       (11, 15),
+    "dinner":      (15, 22),
+    "late dinner": (19, 23),
 }
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -474,26 +475,24 @@ def invoke_participation_scraper(store_id: str) -> bool:
         return False
 
 
-def resolve_employees(shop: dict, store_id: str, ct_employees: list[str]) -> list[str]:
+def resolve_employees(shop: dict, store_id: str, _ct_employees_unused: list[str]) -> list[str]:
     """
-    Return the best available name list for a shop.
+    Return the authoritative name list for a shop.
+
+    Single source of truth: participation.json (written by scrape_shop_participation.py).
+    This function never re-derives names from CETD independently — doing so produced
+    disagreements between the two scripts (fixed 2026-05-14).
 
     Priority:
-      1. CrunchTime CETD result (ct_employees) — if non-empty, use it.
-      2. participation.json cached entry — if present, use it.
-      3. Invoke scrape_shop_participation.py, re-read, use result.
-      4. If all three fail → log PARTICIPATION_RETRY_FAILED and return [].
+      1. participation.json cached entry — if present, use it.
+      2. Invoke scrape_shop_participation.py to populate it, then re-read.
+      3. If all paths fail → log PARTICIPATION_RETRY_FAILED and return [].
     """
     job_id = shop.get("job_id", "?")
 
-    if ct_employees:
-        log(f"  Using CrunchTime CETD result ({len(ct_employees)} names) for job {job_id}")
-        return ct_employees
-
-    log(f"  CrunchTime returned empty for job {job_id}; checking participation.json")
     cached = load_participation_names(store_id, job_id)
     if cached:
-        log(f"  Fell back to participation.json: {cached}")
+        log(f"  Using participation.json ({len(cached)} names) for job {job_id}: {cached}")
         return cached
 
     log(f"  NO_PARTICIPATION for 100% shop {job_id} — invoking scrape_shop_participation.py")
@@ -538,8 +537,12 @@ async def run(store_id: str) -> int:
         job_id = shop["job_id"]
         log(f"Processing shop {job_id} ({shop.get('date')} {shop.get('meal_period')})")
 
-        ct_employees = await pull_employees_for_shop(shop)
-        employees = resolve_employees(shop, store_id, ct_employees)
+        # participation.json is the single source of truth for names.
+        # We no longer call pull_employees_for_shop() directly — that path produced
+        # names that disagreed with scrape_shop_participation.py due to differing
+        # meal-period windows. resolve_employees() reads participation.json first,
+        # then invokes scrape_shop_participation.py if the entry is missing.
+        employees = resolve_employees(shop, store_id, [])
 
         draft_path = write_draft(shop, employees, store_id)
         log(f"Draft written: {draft_path}")

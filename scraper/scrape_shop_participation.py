@@ -53,12 +53,16 @@ ROSTER = [
 NICK = {"Michael": "Mike", "Mickey": "Mike", "Ashton": "Ash", "Ashley": "Ash",
         "Brianna": "Bri"}
 
-# Default windows by meal_period when visit_window is absent
+# Default windows by meal_period when visit_window is absent.
+# These must stay in sync with MEAL_WINDOWS in scrape_shop_payout_email.py.
+# Dinner = 15:00-22:00 covers 3pm-open Shift Lead through close crew.
+# Lunch  = 11:00-15:00 covers lunch rush through mid-afternoon.
+# Using float hours for overlap math (e.g. 15.5 = 3:30 PM).
 DEFAULT_WIN = {
-    "lunch":       (11.0, 16.0),
-    "dinner":      (16.0, 19.0),
-    "late dinner": (19.0, 22.0),
-    "breakfast":   (7.0, 10.0),
+    "breakfast":   (5.0,  11.0),
+    "lunch":       (11.0, 15.0),
+    "dinner":      (15.0, 22.0),
+    "late dinner": (19.0, 23.0),
 }
 MIN_OVERLAP_HRS = 0.5
 
