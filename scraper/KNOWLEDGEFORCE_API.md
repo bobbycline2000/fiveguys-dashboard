@@ -264,6 +264,65 @@ bucket_raw = m.group(1).strip()  # e.g. "4 pm-6:59 pm"
 
 ---
 
+---
+
+## Case Management — discovered 2026-05-14
+
+### Case detail endpoint
+
+```
+GET /casemanagement/casemanagement/details?id=<CASE_ID>
+```
+
+**Auth:** same session cookies from login — no extra auth.
+
+**Response:** Full HTML page. Fields are spread across multiple `<table class="ticket-table">` elements (not a single table). Iterate all of them.
+
+### Field → table mapping (verified against case 5NFRW2)
+
+| Field | Label in `<th>` | Table index |
+|---|---|---|
+| `customer_name` | `Customer Name` | 0 |
+| `email` | `Email` | 0 |
+| `phone` | `Phone` | 1 |
+| `visit_date` | `Occurred` | 2 |
+| `order_type` | `Customer Type` | 2 |
+| `location_id` | `Location ID` | 3 |
+| `issue_category` | `Complaint Category` | 3 |
+
+### Complaint comment
+
+```python
+soup.select_one("div.complaint-details-text").get_text(strip=True)
+```
+
+### Post-processing required
+
+- **Phone:** KF stores raw digits (`5024927879`); format to `(NXX) NXX-XXXX`.
+- **visit_date:** KF stores `"Wed, May 13 2026 00:00:00"`; extract to `MM/DD/YYYY`.
+- **customer_name:** KF stores lowercase (`"rebecca pelt"`); apply `.title()`.
+
+### Verified fixture (case 5NFRW2)
+
+```json
+{
+  "case_id": "5NFRW2",
+  "customer_name": "Rebecca Pelt",
+  "phone": "(502) 492-7879",
+  "email": "rebeccapelt12@gmail.com",
+  "visit_date": "05/13/2026",
+  "order_type": "Online Ordering Pick-up",
+  "issue_category": "L3 - Accuracy of Order",
+  "location_id": "002065",
+  "comment": "we are missing a large fry from our order"
+}
+```
+
+**Production script:** `scraper/scrape_kf_case.py` — CLI: `python scraper/scrape_kf_case.py <CASE_ID>`.
+Prints JSON to stdout; on failure prints `{"error": "...", "case_id": "..."}` and exits 1.
+
+---
+
 ## Pattern source
 
 Discovery 2026-04-27 (live walkthrough via Claude in Chrome). Promoted to `_API.md` 2026-05-07 after confirming the production scraper is already calling the JSON endpoints directly inside Playwright — meaning all that's left is auth replay, which is the one architectural blocker most likely to *not* hold (no MFA observed). Pairs with `~/.claude/rules/reverse-engineer-apis-first.md`.
