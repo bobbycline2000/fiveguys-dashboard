@@ -125,6 +125,101 @@ try:
 except FileNotFoundError:
     cm_rollups = None
 
+# ── Food Cost % period aggregation (Week / Month / Quarter) ────────────
+# Aggregates cogs_variance.json snapshots from data/raw/crunchtime/2065/<date>/
+# Each snapshot has cogs_pct_week (FP% for that week's date range) and
+# meta.week_end (YYYY-MM-DD). We weight-average by net_sales from period_rollups
+# for a rough M/Q estimate. Falls back to "—" gracefully if data is absent.
+def _load_cogs_snapshots() -> list[dict]:
+    """Load all weekly cogs_variance snapshots that have a valid cogs_pct_week."""
+    base = RAW / "crunchtime" / STORE_ID
+    snaps = []
+    if not base.exists():
+        return snaps
+    for d in sorted(base.iterdir()):
+        if not d.is_dir():
+            continue
+        cv = d / "cogs_variance.json"
+        if not cv.exists():
+            continue
+        try:
+            snap = json.loads(cv.read_text(encoding="utf-8"))
+            pct = snap.get("cogs_pct_week")
+            week_end_str = snap.get("meta", {}).get("week_end")
+            if pct is not None and week_end_str:
+                week_end = date.fromisoformat(week_end_str)
+                snaps.append({"week_end": week_end, "pct": float(pct)})
+        except Exception:
+            continue
+    return snaps
+
+def _weighted_avg_cogs(snaps: list[dict], anchor: date, window_days: int) -> float | None:
+    """Simple average (equal-weight per week) of cogs_pct_week for weeks within window."""
+    cutoff = anchor - timedelta(days=window_days)
+    in_window = [s for s in snaps if cutoff <= s["week_end"] <= anchor]
+    if not in_window:
+        return None
+    return round(sum(s["pct"] for s in in_window) / len(in_window), 1)
+
+from datetime import timedelta
+_cogs_snaps = _load_cogs_snapshots()
+_anchor_date = date.today()
+if rollups:
+    try:
+        _anchor_date = date.fromisoformat(rollups["meta"]["anchor_date"])
+    except Exception:
+        pass
+
+# Food cost % for each period
+fc_pct_week    = None
+fc_pct_month   = None
+fc_pct_quarter = None
+
+# Week: prefer the most recent snapshot's cogs_pct_week directly
+if _cogs_snaps:
+    # Most recent snapshot within 10 days = this week's reading
+    recent = [s for s in _cogs_snaps if (_anchor_date - s["week_end"]).days <= 10]
+    if recent:
+        fc_pct_week = recent[-1]["pct"]
+
+# Month: average of all snapshots within last 30 days
+fc_pct_month   = _weighted_avg_cogs(_cogs_snaps, _anchor_date, 30)
+# Quarter: average of all snapshots within last 90 days
+fc_pct_quarter = _weighted_avg_cogs(_cogs_snaps, _anchor_date, 90)
+
+# If cogs_variance.json (most recent) already has cogs_pct_month, prefer it
+if cogs:
+    if cogs.get("cogs_pct_week") is not None:
+        fc_pct_week = float(cogs["cogs_pct_week"])
+    if cogs.get("cogs_pct_month") is not None:
+        fc_pct_month = float(cogs["cogs_pct_month"])
+
+print(f"  [wire] food cost %: week={fc_pct_week} month={fc_pct_month} quarter={fc_pct_quarter}")
+
+# ── Labor % period rollups (Week / Month / Quarter) ────────────────────
+# Source: data/period_rollups.json — already computed by aggregate_periods.py
+# from raw daily snapshots in data/raw/crunchtime/2065/<date>/.
+def _fmt_pct(v):
+    return f"{v:.1f}%" if isinstance(v, (int, float)) else "—"
+
+labor_pct_week    = None
+labor_pct_month   = None
+labor_pct_quarter = None
+if rollups:
+    labor_pct_week    = rollups.get("week",    {}).get("labor_percent")
+    labor_pct_month   = rollups.get("month",   {}).get("labor_percent")
+    labor_pct_quarter = rollups.get("quarter", {}).get("labor_percent")
+
+labor_wmq_week    = _fmt_pct(labor_pct_week)
+labor_wmq_month   = _fmt_pct(labor_pct_month)
+labor_wmq_quarter = _fmt_pct(labor_pct_quarter)
+
+fc_wmq_week    = _fmt_pct(fc_pct_week)
+fc_wmq_month   = _fmt_pct(fc_pct_month)
+fc_wmq_quarter = _fmt_pct(fc_pct_quarter)
+
+print(f"  [wire] labor %: week={labor_wmq_week} month={labor_wmq_month} quarter={labor_wmq_quarter}")
+
 sched, sched_path = load_latest("parbrink", "weekly_schedule.json")
 if sched is None:
     legacy = sorted((ROOT / "data" / "parbrink").glob("*/weekly_schedule_2065.json"))
@@ -377,6 +472,37 @@ rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">WTD Labor
 rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">WTD Hours</div>)',
     rf'\g<1>{wtd_hours}\g<2>',
     "WTD Hours value",
+    flags=DOTALL)
+
+# ── Labor % by Period (Week / Month / Quarter) ──────────────────────────
+# New section added 2026-05-15 — sources from period_rollups.json.
+rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">Labor % Week</div>)',
+    rf'\g<1>{labor_wmq_week}\g<2>',
+    "Labor % Week value",
+    flags=DOTALL)
+rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">Labor % Month</div>)',
+    rf'\g<1>{labor_wmq_month}\g<2>',
+    "Labor % Month value",
+    flags=DOTALL)
+rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">Labor % Quarter</div>)',
+    rf'\g<1>{labor_wmq_quarter}\g<2>',
+    "Labor % Quarter value",
+    flags=DOTALL)
+
+# ── Food Cost % by Period (Week / Month / Quarter) ──────────────────────
+# New section added 2026-05-15 — sources from cogs_variance.json snapshots.
+# Falls back to "—" cleanly when snapshots aren't yet populated.
+rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">Food Cost % Week</div>)',
+    rf'\g<1>{fc_wmq_week}\g<2>',
+    "Food Cost % Week value",
+    flags=DOTALL)
+rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">Food Cost % Month</div>)',
+    rf'\g<1>{fc_wmq_month}\g<2>',
+    "Food Cost % Month value",
+    flags=DOTALL)
+rep(r'(<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">Food Cost % Quarter</div>)',
+    rf'\g<1>{fc_wmq_quarter}\g<2>',
+    "Food Cost % Quarter value",
     flags=DOTALL)
 
 # Hourly labor bars — replace the hardcoded laborData JS array (11A–10P)
