@@ -66,5 +66,22 @@
     "ct_os": -98.76,
     "notes": "R'Love had a drawer shortage of 30 $ yesterday. This is where the notes go everyone about the money.",
     "submitted_at": "2026-05-15T11:06:57.807Z"
+  },
+  {
+    "date": "2026-05-15",
+    "mgr": "NR",
+    "deposit": 0,
+    "safe_open": 700,
+    "d1_open": 200,
+    "d2_open": 170,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
+    "ct_os": 0,
+    "notes": "",
+    "submitted_at": "2026-05-15T14:04:30.958Z"
   }
 ]
