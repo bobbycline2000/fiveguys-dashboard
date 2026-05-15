@@ -1,47 +1,47 @@
 {
   "meta": {
     "store_id": "2065",
-    "anchor_date": "2026-05-13",
-    "generated": "2026-05-14T05:04:36",
-    "days_seen_total": 18,
+    "anchor_date": "2026-05-14",
+    "generated": "2026-05-15T15:00:13",
+    "days_seen_total": 19,
     "days_in_week": 6,
-    "days_in_month": 18,
-    "days_in_quarter": 18
+    "days_in_month": 19,
+    "days_in_quarter": 19
   },
   "week": {
-    "net_sales": 26812.12,
-    "gross_sales": 27621.58,
-    "order_count": 1078,
-    "guest_count": 4961,
-    "labor_cost": 5604.97,
-    "labor_hours": 476.73,
-    "labor_percent": 20.9,
+    "net_sales": 26597.05,
+    "gross_sales": 27549.34,
+    "order_count": 1075,
+    "guest_count": 4924,
+    "labor_cost": 5729.86,
+    "labor_hours": 486.71,
+    "labor_percent": 21.54,
     "sales_per_guest": 5.4,
-    "avg_ticket": 24.87,
+    "avg_ticket": 24.74,
     "days": 6
   },
   "month": {
-    "net_sales": 81324.92,
-    "gross_sales": 83902.34,
-    "order_count": 3254,
-    "guest_count": 15113,
-    "labor_cost": 16710.53,
-    "labor_hours": 1392.62,
-    "labor_percent": 20.55,
+    "net_sales": 85972.72,
+    "gross_sales": 88835.74,
+    "order_count": 3455,
+    "guest_count": 15975,
+    "labor_cost": 17904.71,
+    "labor_hours": 1498.72,
+    "labor_percent": 20.83,
     "sales_per_guest": 5.38,
-    "avg_ticket": 24.99,
-    "days": 18
+    "avg_ticket": 24.88,
+    "days": 19
   },
   "quarter": {
-    "net_sales": 81324.92,
-    "gross_sales": 83902.34,
-    "order_count": 3254,
-    "guest_count": 15113,
-    "labor_cost": 16710.53,
-    "labor_hours": 1392.62,
-    "labor_percent": 20.55,
+    "net_sales": 85972.72,
+    "gross_sales": 88835.74,
+    "order_count": 3455,
+    "guest_count": 15975,
+    "labor_cost": 17904.71,
+    "labor_hours": 1498.72,
+    "labor_percent": 20.83,
     "sales_per_guest": 5.38,
-    "avg_ticket": 24.99,
-    "days": 18
+    "avg_ticket": 24.88,
+    "days": 19
   }
 }
