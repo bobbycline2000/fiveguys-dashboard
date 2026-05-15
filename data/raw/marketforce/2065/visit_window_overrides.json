@@ -1,5 +1,5 @@
 {
-  "_comment": "Auto-populated cache: visit_window for shops where KnowledgeForce assignment view returned ambiguous or unavailable Time In answer. Written by scrape_visit_time.py. The pipeline populates this from KF data automatically.",
+  "_comment": "Auto-populated cache: visit_window for shops where KnowledgeForce assignment view returned no Time In answer. Written by scrape_visit_time.py. DO NOT hand-edit \u2014 the pipeline populates this from KF data automatically.",
   "20747008": [
     19.0,
     22.0
