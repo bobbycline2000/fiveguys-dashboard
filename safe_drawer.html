@@ -588,6 +588,14 @@ async function loadCtHistory() {
   } catch (_) {}
 }
 
+function isoLocal(dt) {
+  // Local-time YYYY-MM-DD. Never use toISOString() for date keys — it's UTC
+  // and rolls over ~8 PM ET, shifting every label/lookup a day forward.
+  const m = String(dt.getMonth() + 1).padStart(2, '0');
+  const d = String(dt.getDate()).padStart(2, '0');
+  return `${dt.getFullYear()}-${m}-${d}`;
+}
+
 function renderDepStatus() {
   // Yesterday + day-before status. By 10–11 AM ET both should be entered
   // in CT. Highlight what's missing so the manager knows to enter it.
@@ -598,7 +606,7 @@ function renderDepStatus() {
   const days = [y, d2];
 
   el.innerHTML = days.map(dt => {
-    const iso = dt.toISOString().slice(0, 10);
+    const iso = isoLocal(dt);
     const row = (CT_HISTORY || []).find(r => r.business_date === iso);
     const dateLabel = dt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     const sales = row ? row.gross_sales : 0;
@@ -708,7 +716,7 @@ function renderDeposits() {
     el.innerHTML = '<div class="hist-empty">No CT data loaded.</div>';
     return;
   }
-  const today = new Date().toISOString().slice(0,10);
+  const today = isoLocal(new Date());
   const rows = CT_HISTORY.slice().sort((a,b) => (b.business_date||'').localeCompare(a.business_date||'')).slice(0, 14);
   const logByDate = {};
   (LIVE_ROWS || []).forEach(r => { if (r && r.date) logByDate[r.date] = r; });
@@ -819,12 +827,12 @@ function exportCsv() {
   const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'safe_drawer_log_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.download = 'safe_drawer_log_' + isoLocal(new Date()) + '.csv';
   a.click();
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const today = new Date().toISOString().slice(0,10);
+  const today = isoLocal(new Date());
   $('f-date').value = today;
   $('date-display').textContent = prettyDate(today);
 
