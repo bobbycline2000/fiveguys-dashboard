@@ -1,0 +1,133 @@
+name: Overnight CrunchTime API Discovery
+
+# Nightly endpoint discovery against CrunchTime / NetChef.
+# Runs api_discover_targeted.py headless in CI, commits any new endpoints
+# captured to the discovery JSON catalogues. The morning daily-brief in
+# Bobby's session reviews the diff and updates CRUNCHTIME_API.md + the
+# crunchtime-professor agent file.
+#
+# This is part of Bobby's 2026-05-15 push to scour the websites overnight
+# so agents wake up smarter than the day before. CrunchTime is priority #1.
+# CM and KF clones to follow.
+
+on:
+  schedule:
+    # 03:00 UTC = 11:00 PM ET (EDT, May–Nov). DST flip Nov 2026: change to "0 4 * * *".
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+    inputs:
+      script:
+        description: "Which discovery script to run (default: api_discover_targeted.py)"
+        required: false
+        default: "api_discover_targeted.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: overnight-ct-discovery
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r scraper/requirements.txt
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('scraper/requirements.txt') }}
+          restore-keys: playwright-chromium-${{ runner.os }}-
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install chromium --with-deps
+
+      - name: Snapshot pre-discovery endpoint counts
+        id: pre
+        run: |
+          ct_deep=0; ct_screens=0
+          [ -f data/ct_api_endpoints_deep.json ] && ct_deep=$(python -c "import json; d=json.load(open('data/ct_api_endpoints_deep.json')); print(len(d) if isinstance(d, list) else len(d.get('endpoints', [])))" 2>/dev/null || echo 0)
+          [ -f data/ct_endpoints_by_screen.json ] && ct_screens=$(python -c "import json; d=json.load(open('data/ct_endpoints_by_screen.json')); print(len(d))" 2>/dev/null || echo 0)
+          echo "deep_before=$ct_deep" >> "$GITHUB_OUTPUT"
+          echo "screens_before=$ct_screens" >> "$GITHUB_OUTPUT"
+          echo "Pre-discovery: deep=$ct_deep endpoints, screens=$ct_screens"
+
+      - name: Run targeted discovery
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+          STORE_ID: "2065"
+        run: |
+          SCRIPT="${{ github.event.inputs.script || 'api_discover_targeted.py' }}"
+          echo "Running scraper/$SCRIPT"
+          python "scraper/$SCRIPT" || echo "::warning::Discovery script exited non-zero — see logs"
+
+      - name: Snapshot post-discovery + write summary
+        id: post
+        run: |
+          ct_deep=0; ct_screens=0
+          [ -f data/ct_api_endpoints_deep.json ] && ct_deep=$(python -c "import json; d=json.load(open('data/ct_api_endpoints_deep.json')); print(len(d) if isinstance(d, list) else len(d.get('endpoints', [])))" 2>/dev/null || echo 0)
+          [ -f data/ct_endpoints_by_screen.json ] && ct_screens=$(python -c "import json; d=json.load(open('data/ct_endpoints_by_screen.json')); print(len(d))" 2>/dev/null || echo 0)
+          before_deep="${{ steps.pre.outputs.deep_before }}"
+          before_screens="${{ steps.pre.outputs.screens_before }}"
+          new_deep=$((ct_deep - before_deep))
+          new_screens=$((ct_screens - before_screens))
+          DATE=$(date -u '+%Y-%m-%d')
+          mkdir -p data/overnight
+          {
+            echo "## Overnight CrunchTime Discovery — $DATE (UTC)"
+            echo ""
+            echo "- Endpoints (deep catalog): $before_deep -> $ct_deep (+$new_deep new)"
+            echo "- Screens covered:           $before_screens -> $ct_screens (+$new_screens new)"
+            echo ""
+            echo "Run: \`scraper/${{ github.event.inputs.script || 'api_discover_targeted.py' }}\`"
+            echo "Workflow: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          } > "data/overnight/ct_$DATE.md"
+          echo "new_deep=$new_deep" >> "$GITHUB_OUTPUT"
+          echo "new_screens=$new_screens" >> "$GITHUB_OUTPUT"
+          cat "data/overnight/ct_$DATE.md"
+
+      - name: Append to overnight discovery log
+        run: |
+          DATE=$(date -u '+%Y-%m-%d')
+          mkdir -p ../_memory 2>/dev/null || true
+          # Log is in BobbyWorkspace/_memory/, not in the repo. Append to a repo-local
+          # mirror so the morning brief can pick it up.
+          mkdir -p data/overnight
+          LOG="data/overnight/discovery_log.md"
+          [ -f "$LOG" ] || echo "# Overnight Discovery Log" > "$LOG"
+          echo "" >> "$LOG"
+          echo "## $DATE — CrunchTime" >> "$LOG"
+          echo "+${{ steps.post.outputs.new_deep }} new endpoints, +${{ steps.post.outputs.new_screens }} new screens" >> "$LOG"
+
+      - name: Commit + push discovery results
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add data/ct_api_endpoints_deep.json data/ct_endpoints_by_screen.json data/overnight/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No new endpoints captured tonight — nothing to commit."
+            exit 0
+          fi
+          DATE=$(date -u '+%Y-%m-%d')
+          git commit -m "ct discovery: overnight run $DATE (+${{ steps.post.outputs.new_deep }} endpoints, +${{ steps.post.outputs.new_screens }} screens)"
+          git push origin main
