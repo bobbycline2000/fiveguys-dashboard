@@ -16,7 +16,6 @@ on:
 permissions:
   contents: write  # needed to commit dashboard.html back to main
   issues: write    # verify_dashboard.py opens an issue if the HTML is stale
-  secrets: write   # needed by self-heal step to push refreshed Gmail token back
 
 # Serialize with the primary workflow so they don't race on git push.
 concurrency:
