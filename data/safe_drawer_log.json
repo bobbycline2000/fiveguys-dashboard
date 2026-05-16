@@ -91,14 +91,14 @@
     "safe_open": 700,
     "d1_open": 200,
     "d2_open": 200,
-    "safe_mid": 0,
-    "d1_mid": 0,
+    "safe_mid": 700,
+    "d1_mid": 201.1,
     "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
-    "ct_os": 0,
+    "ct_os": -63.71,
     "notes": "both Drawers @200 9:50AM",
-    "submitted_at": "2026-05-16T13:34:25.910Z"
+    "submitted_at": "2026-05-16T19:14:55.664Z"
   }
 ]
