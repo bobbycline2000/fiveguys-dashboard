@@ -1,0 +1,66 @@
+name: Overnight ComplianceMate API Discovery
+
+on:
+  schedule:
+    # 05:30 UTC = 01:30 AM ET (EDT). DST flip Nov 2026: change to "30 6 * * *".
+    - cron: "30 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: overnight-cm-discovery
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r scraper/requirements.txt
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('scraper/requirements.txt') }}
+          restore-keys: playwright-chromium-${{ runner.os }}-
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install chromium --with-deps
+
+      - name: Run ComplianceMate overnight capture
+        continue-on-error: true
+        env:
+          COMPLIANCEMATE_USERNAME: ${{ secrets.COMPLIANCEMATE_USERNAME }}
+          COMPLIANCEMATE_PASSWORD: ${{ secrets.COMPLIANCEMATE_PASSWORD }}
+        run: python scraper/overnight_cm_capture.py
+
+      - name: Commit + push capture results
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add data/overnight/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No new capture data to commit."
+            exit 0
+          fi
+          DATE=$(date -u '+%Y-%m-%d')
+          git commit -m "cm discovery: overnight capture $DATE"
+          git push origin main
