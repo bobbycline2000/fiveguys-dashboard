@@ -1,46 +1,46 @@
 {
-  "date": "2026-05-14",
+  "date": "2026-05-16",
   "new_count": 5,
   "notes": [
     {
       "from": "Today's Focus",
       "role": "critical",
-      "role_label": "Guest Complaint L3 #5NFRW2",
-      "time": "2026-05-14T05:09:00-04:00",
-      "subject": "Order accuracy — missing large fry. Call the order back at handoff.",
-      "body": "Marketforce L3 logged for the 5/13 visit: guest missing a large fry. Sent to Sam Biery, Crystal, Brad, JP Five + corporate. Every shift leader calls the full order back at handoff and bag-checks before the window. This is today's service drill in real life."
-    },
-    {
-      "from": "Today's Focus",
-      "role": "critical",
-      "role_label": "CrunchTime L-Rev — 3 OVERDUE",
-      "time": "2026-05-14T05:09:00-04:00",
-      "subject": "Close Labor Reviews 5/11, 5/12, 5/13 + receive PFGC order in NetChef",
-      "body": "Labor Review overdue for 05/11, 05/12, 05/13 — still not closed. Also VO-Rec BOSS Alpha-Ohio Valley due 05/13 and VO-Inv Performance Foodservice due 05/14 (PFGC order posted yesterday). Log into NetChef this morning and clear all of it."
-    },
-    {
-      "from": "Today's Focus",
-      "role": "alert",
-      "role_label": "FGU Deadline — Friday 5/15 (TOMORROW)",
-      "time": "2026-05-14T05:09:00-04:00",
-      "subject": "Customer Service at the Register + Blackberry Shake LTO — hit 0% overdue",
-      "body": "Both FGU courses due tomorrow. Dixie was at 13% overdue — Brad wants 0%. Pull FGU at huddle, name who hasn't finished, push completion today."
-    },
-    {
-      "from": "Today's Focus",
-      "role": "huddle",
-      "role_label": "Thursday Huddle Pillars",
-      "time": "2026-05-14T05:09:00-04:00",
-      "subject": "COGS · Shops · Steritech · Labor",
-      "body": "COGS: portion fries with the scoop, toppings measured, watch waste. Shops: GREET door + register, upsell every order, ticket times under 6 min, order callback at handoff. Steritech: manager walk signed before open, lids on mushrooms/onions, critical checklist owned. Labor: hourly checks, 30-MIN breaks, employee meals rung in at break time."
+      "role_label": "CrunchTime Tasks OVERDUE",
+      "time": "2026-05-16T12:22:00-04:00",
+      "subject": "L-Rev 5/14 + VO-Rec-BOSS Alpha-Ohio Valley 5/15 + L-Rev 5/15 — all open",
+      "body": "Three CrunchTime tasks overdue as of Saturday: L-Rev 5/14, VO-Rec-BOSS Alpha-Ohio Valley 5/15, L-Rev 5/15. Log into NetChef and clear today."
     },
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
-      "time": "2026-05-11T13:38:00-04:00",
-      "subject": "Only 30 Cents more for Large!",
-      "body": "Large Soda is now 30 cents more than Regular, not 10. Review with the whole team — the old 'only 10 cents more' phrasing is dead. Standing: Orientation Checklist with all new hires; FGU to 0% overdue by 5/15. Best Burger America 2026 thread — Kevin Goyke (FGE FBM) replied 5/13, corporate excited about the Uber BOGO offer."
+      "time": "2026-05-16T16:02:00+00:00",
+      "subject": "L3 Courtesy Complaint RESOLVED",
+      "body": "Brad replied 'Got it, appreciate the update!' — L3 courtesy/friendliness of staff complaint for Louisville KY (Dixie Highway) is closed. Good resolution."
+    },
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "2026-05-16T12:00:00+00:00",
+      "subject": "Five Guys Games Crowns 2026 World Champion",
+      "body": "Celebrating John's achievement — Five Guys Games 2026 World Champion. Brad hopes to see our team bring home the money next time!"
+    },
+    {
+      "from": "Today's Focus",
+      "role": "huddle",
+      "role_label": "Saturday Huddle Pillars",
+      "time": "2026-05-16T12:22:00-04:00",
+      "subject": "Volume + Steritech Walk + Blackberry Countdown (2 days to POS activation)",
+      "body": "Big Saturday volume. Steritech walk: hand sinks handwashing ONLY, DayMark dates correct, potato cutter/slicer blades chip-free, restroom hourly named owner. Blackberry POS activates Monday 5/18 — confirm team is trained, mix on bottom row, coffee pumps live, comm-board guide posted. Sales +10.2% vs LY this week."
+    },
+    {
+      "from": "Sam Biery",
+      "role": "alert",
+      "role_label": "DM Update",
+      "time": "2026-05-15T17:46:00+00:00",
+      "subject": "Steritechs at 475 — 100 food safety, 4 MMCCA",
+      "body": "Store 475 acing their Steritech — 100 food safety, 4 on MMCCA. JP Estep: 'Who dat rising in the FG national Store Rankings.' Reminder of what's possible — Dixie has been making similar moves."
     }
   ]
 }
