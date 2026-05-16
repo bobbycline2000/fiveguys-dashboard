@@ -378,6 +378,36 @@ async def pull_employees_for_shop(shop: dict) -> list[str]:
 
 # ── email draft ───────────────────────────────────────────────────────────────
 
+def _load_name_map() -> dict:
+    """Load employee_name_map.json — maps first names to Full First Last."""
+    p = ROOT / "data" / "employee_name_map.json"
+    if p.exists():
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {}
+
+
+def _resolve_full_names(raw_first_names: list[str]) -> tuple[list[str], list[str]]:
+    """
+    Map first-name-only entries from participation.json to Full First Last via
+    employee_name_map.json.  Returns (resolved_full_names, unresolved_first_names).
+    Sorted alphabetically by resolved full name (or raw name if unresolved).
+    """
+    name_map = _load_name_map()
+    resolved = []
+    unresolved = []
+    for n in raw_first_names:
+        full = name_map.get(n)
+        if full:
+            resolved.append(full)
+        else:
+            unresolved.append(n)
+    resolved.sort()
+    return resolved, unresolved
+
+
 def build_email_draft(shop: dict, employees: list[str], store_id: str) -> str:
     job_id      = shop.get("job_id", "?")
     shop_date   = shop.get("date", "?")
@@ -391,7 +421,15 @@ def build_email_draft(shop: dict, employees: list[str], store_id: str) -> str:
         friendly_date = shop_date
 
     if employees:
-        emp_list = "\n".join(f"  - {e}" for e in employees)
+        # Resolve first-name-only entries from participation.json to Full First Last.
+        # This is the mandatory gate per Bobby's directive 2026-05-07 and the May 14 fix.
+        resolved, unresolved = _resolve_full_names(employees)
+        lines = [f"  - {full}" for full in resolved]
+        if unresolved:
+            for u in unresolved:
+                lines.append(f"  - NAME_UNRESOLVED ({u}) — resolve before sending")
+                append_debug_log(f"NAME_UNRESOLVED {u} for job {job_id} in build_email_draft")
+        emp_list = "\n".join(lines)
     else:
         emp_list = "  (Could not retrieve employee list from CrunchTime — please look up manually)"
 
