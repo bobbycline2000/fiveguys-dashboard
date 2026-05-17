@@ -100,5 +100,22 @@
     "ct_os": -63.71,
     "notes": "both Drawers @200 9:50AM",
     "submitted_at": "2026-05-17T03:06:29.458Z"
+  },
+  {
+    "date": "2026-05-17",
+    "mgr": "kw",
+    "deposit": 0,
+    "safe_open": 700,
+    "d1_open": 200,
+    "d2_open": 200,
+    "safe_mid": 700,
+    "d1_mid": 200,
+    "d2_mid": 200,
+    "safe_close": 200,
+    "d1_close": 200,
+    "d2_close": 0,
+    "ct_os": -197.83,
+    "notes": "",
+    "submitted_at": "2026-05-17T21:58:06.016Z"
   }
 ]
