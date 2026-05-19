@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-05-19T17:48:40",
+    "generated": "2026-05-19T17:49:55",
     "alerts_count": 1
   },
   "alerts": [
@@ -13,15 +13,32 @@
       "skipped_forecast_sales": 3594,
       "delivery_day_recommendations": [
         {
+          "date": "2026-05-26",
+          "weekday": "TUE",
+          "current_hb": 5,
+          "current_hd": 1,
+          "forecast_own": 3398,
+          "redistributed_from_skip": 681,
+          "raw_window_sales": 4079,
+          "buffer_applied": 5000,
+          "window_sales": 9079,
+          "recommended_hb": 10,
+          "recommended_hd": 1,
+          "delta_hb": 5,
+          "delta_hd": 0,
+          "is_holiday_cell": true,
+          "is_locked": false
+        },
+        {
           "date": "2026-05-27",
           "weekday": "WED",
           "current_hb": 8,
           "current_hd": 0,
           "forecast_own": 4123,
-          "redistributed_from_skip": 1020,
-          "raw_window_sales": 5143,
+          "redistributed_from_skip": 826,
+          "raw_window_sales": 4949,
           "buffer_applied": 5000,
-          "window_sales": 10143,
+          "window_sales": 9949,
           "recommended_hb": 11,
           "recommended_hd": 1,
           "delta_hb": 3,
@@ -35,10 +52,10 @@
           "current_hb": 7,
           "current_hd": 1,
           "forecast_own": 5378,
-          "redistributed_from_skip": 1330,
-          "raw_window_sales": 6708,
+          "redistributed_from_skip": 1078,
+          "raw_window_sales": 6456,
           "buffer_applied": 5000,
-          "window_sales": 11708,
+          "window_sales": 11456,
           "recommended_hb": 12,
           "recommended_hd": 1,
           "delta_hb": 5,
@@ -52,10 +69,10 @@
           "current_hb": 11,
           "current_hd": 0,
           "forecast_own": 5032,
-          "redistributed_from_skip": 1244,
-          "raw_window_sales": 6276,
+          "redistributed_from_skip": 1009,
+          "raw_window_sales": 6041,
           "buffer_applied": 5000,
-          "window_sales": 11276,
+          "window_sales": 11041,
           "recommended_hb": 12,
           "recommended_hd": 1,
           "delta_hb": 1,
@@ -64,7 +81,7 @@
           "is_locked": false
         }
       ],
-      "headline": "Memorial Day week (2026-05-25) \u2014 skipped: 2026-05-25 \u2014 bumps: WED 2026-05-27 \u2192 11 HB / 1 HD  (\u0394 +3 HB); FRI 2026-05-29 \u2192 12 HB / 1 HD  (\u0394 +5 HB); SAT 2026-05-30 \u2192 12 HB / 1 HD  (\u0394 +1 HB)"
+      "headline": "Memorial Day week (2026-05-25) \u2014 skipped: 2026-05-25 \u2014 bumps: TUE 2026-05-26 \u2192 10 HB / 1 HD  (\u0394 +5 HB); WED 2026-05-27 \u2192 11 HB / 1 HD  (\u0394 +3 HB); FRI 2026-05-29 \u2192 12 HB / 1 HD  (\u0394 +5 HB); SAT 2026-05-30 \u2192 12 HB / 1 HD  (\u0394 +1 HB)"
     }
   ]
 }
