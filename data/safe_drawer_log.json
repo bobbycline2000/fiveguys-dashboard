@@ -134,5 +134,22 @@
     "ct_os": -211.31,
     "notes": "We need to recount at shift changfe today",
     "submitted_at": "2026-05-19T02:42:37.371Z"
+  },
+  {
+    "date": "2026-05-19",
+    "mgr": "NR",
+    "deposit": 0,
+    "safe_open": 700,
+    "d1_open": 196.83,
+    "d2_open": 199.96,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
+    "ct_os": 0,
+    "notes": "",
+    "submitted_at": "2026-05-19T13:49:37.740Z"
   }
 ]
