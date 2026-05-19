@@ -29,11 +29,11 @@ HD_DOLLARS_PER_TRAY = 19974.0
 HB_BAGS_PER_TRAY = 5
 HD_BAGS_PER_TRAY = 6
 
-# Holiday cushion — CrunchTime's per-day forecast averages prior weeks and does
-# NOT bump for holidays. Memorial Day weekend, July 4 week, Labor Day weekend
-# etc. all run hotter than the avg week the forecast was built from. We bump
-# the window-sales by this factor before computing trays.
-HOLIDAY_CUSHION = 1.10  # +10%
+# Sales buffer — matches bread.html ($3K cushion on every delivery window).
+# Holiday weeks lift the buffer because CT's forecast averages prior weeks
+# and doesn't bump for Memorial Day / July 4 / Labor Day cookout traffic.
+SALES_BUFFER_BASE = 3000.0
+SALES_BUFFER_HOLIDAY = 5000.0
 
 DELIVERY_WEEKDAYS = {"MON", "WED", "FRI", "SAT"}
 
@@ -89,8 +89,10 @@ def main():
         for d, own_fcast in delivery_forecasts:
             share = (own_fcast / total_delivery_forecast) * skipped_sales
             raw_window = own_fcast + share
-            # CT forecasts don't bump for holidays — add a cushion on top.
-            window_sales = raw_window * HOLIDAY_CUSHION
+            # Apply the $3K base buffer (matches bread.html), bumped to $5K
+            # on holiday-flagged delivery days.
+            buffer = SALES_BUFFER_HOLIDAY if d.get("is_holiday_cell") else SALES_BUFFER_BASE
+            window_sales = raw_window + buffer
             rec = build_to(window_sales)
             day_recs.append({
                 "date": d["date"],
@@ -100,7 +102,7 @@ def main():
                 "forecast_own": round(own_fcast),
                 "redistributed_from_skip": round(share),
                 "raw_window_sales": round(raw_window),
-                "holiday_cushion_pct": int((HOLIDAY_CUSHION - 1) * 100),
+                "buffer_applied": int(buffer),
                 "window_sales": round(window_sales),
                 "recommended_hb": rec["hb_trays"],
                 "recommended_hd": rec["hd_trays"],
