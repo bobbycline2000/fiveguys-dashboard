@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "generated": "2026-05-19T17:48:40",
+    "alerts_count": 1
+  },
+  "alerts": [
+    {
+      "week_start_mon": "2026-05-25",
+      "holiday_name": "Memorial Day",
+      "skipped_delivery_days": [
+        "2026-05-25"
+      ],
+      "skipped_forecast_sales": 3594,
+      "delivery_day_recommendations": [
+        {
+          "date": "2026-05-27",
+          "weekday": "WED",
+          "current_hb": 8,
+          "current_hd": 0,
+          "forecast_own": 4123,
+          "redistributed_from_skip": 1020,
+          "raw_window_sales": 5143,
+          "buffer_applied": 5000,
+          "window_sales": 10143,
+          "recommended_hb": 11,
+          "recommended_hd": 1,
+          "delta_hb": 3,
+          "delta_hd": 1,
+          "is_holiday_cell": true,
+          "is_locked": false
+        },
+        {
+          "date": "2026-05-29",
+          "weekday": "FRI",
+          "current_hb": 7,
+          "current_hd": 1,
+          "forecast_own": 5378,
+          "redistributed_from_skip": 1330,
+          "raw_window_sales": 6708,
+          "buffer_applied": 5000,
+          "window_sales": 11708,
+          "recommended_hb": 12,
+          "recommended_hd": 1,
+          "delta_hb": 5,
+          "delta_hd": 0,
+          "is_holiday_cell": true,
+          "is_locked": false
+        },
+        {
+          "date": "2026-05-30",
+          "weekday": "SAT",
+          "current_hb": 11,
+          "current_hd": 0,
+          "forecast_own": 5032,
+          "redistributed_from_skip": 1244,
+          "raw_window_sales": 6276,
+          "buffer_applied": 5000,
+          "window_sales": 11276,
+          "recommended_hb": 12,
+          "recommended_hd": 1,
+          "delta_hb": 1,
+          "delta_hd": 1,
+          "is_holiday_cell": true,
+          "is_locked": false
+        }
+      ],
+      "headline": "Memorial Day week (2026-05-25) \u2014 skipped: 2026-05-25 \u2014 bumps: WED 2026-05-27 \u2192 11 HB / 1 HD  (\u0394 +3 HB); FRI 2026-05-29 \u2192 12 HB / 1 HD  (\u0394 +5 HB); SAT 2026-05-30 \u2192 12 HB / 1 HD  (\u0394 +1 HB)"
+    }
+  ]
+}
