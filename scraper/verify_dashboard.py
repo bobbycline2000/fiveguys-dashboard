@@ -146,11 +146,29 @@ def main():
     # Check 4: dashboard.html was modified today (local timezone)
     mtime = datetime.fromtimestamp(DASH.stat().st_mtime)
     now = datetime.now()
-    if mtime.date() != now.date():
+    _dash_updated_today = (mtime.date() == now.date())
+    if not _dash_updated_today:
+        # Dashboard HTML is from a prior run — wire_dashboard.py hasn't fired yet
+        # on this CI run (or ran but didn't change anything). Don't also flag
+        # per_guest / schedule as missing — those would be false positives against
+        # yesterday's committed HTML. Log just the mtime failure and stop.
         failures.append(
             f"dashboard.html mtime is {mtime.isoformat()} — not today. "
-            f"The HTML was not regenerated on this run."
+            f"The HTML was not regenerated on this run. "
+            f"(Checks 1/2/6 skipped — HTML is from a prior run, value mismatches are expected.)"
         )
+        write_debug(failures)
+        print("DASHBOARD STALE — 1 check(s) failed (mtime only):\n")
+        for f in failures:
+            print("  ✗ " + f)
+        title = f"Dashboard stale — {now.strftime('%Y-%m-%d')}"
+        body = (
+            "Automated freshness check failed (mtime only — HTML not updated today).\n\n"
+            + "\n".join(f"- {f}" for f in failures)
+            + "\n\nDiagnosis written to `data/debug-log.txt`."
+        )
+        try_open_github_issue(title, body)
+        return 1
 
     # Check 5: <div> open/close balance.
     # Catches structural breaks like the 2026-05-02 missing-</div> bug
