@@ -150,6 +150,12 @@
 <p class="lede">Count what's in the store right now. We project forward using CrunchTime sales forecasts and tell you how many trays to order for every upcoming delivery this week.</p>
 <div class="source-tag" id="source-tag">Loading projections…</div>
 
+<!-- HOLIDAY ALERT (hidden until BOSS scrape finds a shifted week) -->
+<div id="holiday-alerts" style="display:none; margin-top:14px; background:#1a1a1a; border:2px solid #FFC72C; border-radius:6px; padding:14px 16px; color:#fff;">
+  <div style="font-family:'Barlow Condensed',Inter,sans-serif; font-weight:900; font-size:18px; letter-spacing:.05em; color:#FFC72C; text-transform:uppercase;">⚠ Holiday week ahead</div>
+  <div id="holiday-alerts-body" style="margin-top:8px; font-size:14px; line-height:1.5;"></div>
+</div>
+
 <!-- STEP 1: COUNT -->
 <div class="count-panel">
   <div class="count-step">Step 1 · Count what's in the store today</div>
@@ -523,7 +529,39 @@
     } catch { return null; }
   }
 
+  async function loadHolidayAlerts() {
+    try {
+      const r = await fetch('data/boss_holiday_alerts.json', { cache: 'no-store' });
+      if (!r.ok) return;
+      const j = await r.json();
+      if (!j.alerts || j.alerts.length === 0) return;
+      const today = new Date().toISOString().slice(0,10);
+      // Only show alerts that haven't passed yet.
+      const upcoming = j.alerts.filter(a => {
+        const days = (a.delivery_day_recommendations || []).map(r=>r.date);
+        return days.some(d => d >= today) || (a.skipped_delivery_days||[]).some(d=>d>=today);
+      });
+      if (upcoming.length === 0) return;
+      const body = document.getElementById('holiday-alerts-body');
+      body.innerHTML = upcoming.map(a => {
+        const skipTxt = (a.skipped_delivery_days||[]).length
+          ? `<div><b>Skipped:</b> ${a.skipped_delivery_days.join(', ')}</div>` : '';
+        const bumps = (a.delivery_day_recommendations||[])
+          .filter(r => (r.delta_hb||0) > 0 || (r.delta_hd||0) > 0)
+          .map(r => `<li><b>${r.weekday} ${r.date}</b> — current ${r.current_hb??0} HB / ${r.current_hd??0} HD &rarr; suggest <b>${r.recommended_hb} HB${r.recommended_hd?` / ${r.recommended_hd} HD`:''}</b> (window $${(r.window_sales||0).toLocaleString()})${r.is_locked?' <span style="color:#FFC72C;">[locked]</span>':''}</li>`)
+          .join('');
+        return `<div style="margin-bottom:10px;">
+          <div style="font-weight:700; font-size:15px;">${a.holiday_name} — week of ${a.week_start_mon}</div>
+          ${skipTxt}
+          ${bumps ? `<ul style="margin:6px 0 0 18px; padding:0;">${bumps}</ul>` : '<div style="opacity:.7;">No bumps recommended yet.</div>'}
+        </div>`;
+      }).join('');
+      document.getElementById('holiday-alerts').style.display = 'block';
+    } catch(e) {}
+  }
+
   async function load() {
+    loadHolidayAlerts();
     let payload = null;
     try {
       const r = await fetch('data/forecast_by_day.json', { cache: 'no-store' });

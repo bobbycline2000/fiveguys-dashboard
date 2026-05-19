@@ -1,0 +1,70 @@
+name: BOSS Bread Calendar Check
+
+on:
+  schedule:
+    # Monday 7:00 AM Eastern (11:00 UTC EDT / 12:00 UTC EST)
+    # Runs once a week — catches the ~6 holiday-shifted weeks of the year
+    # 10+ days before they hit so Bobby can adjust the order.
+    # DST FLIP: when EST returns ~Nov 2 2026, change to "0 12 * * 1".
+    - cron: "0 11 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: boss-check
+  cancel-in-progress: false
+
+jobs:
+  boss-check:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r scraper/requirements.txt
+
+      # ── Scrape BOSS calendar (bread2.fiveguys.com) ────────────────────────
+      # Logs in with BOSS_USERNAME / BOSS_PASSWORD, parses the 6-week calendar,
+      # writes data/boss_calendar.json. Holiday-week detection is built in.
+      - name: Scrape BOSS calendar
+        env:
+          BOSS_USERNAME: ${{ secrets.BOSS_USERNAME }}
+          BOSS_PASSWORD: ${{ secrets.BOSS_PASSWORD }}
+        run: python scraper/scrape_boss_calendar.py
+
+      # ── Build holiday-week recommendations ────────────────────────────────
+      # Combines BOSS calendar + forecast_by_day.json to compute Build_To
+      # numbers for the bumped delivery days that absorb the skipped Mon.
+      - name: Build holiday recommendations
+        run: python scraper/boss_holiday_recommender.py
+
+      # ── Commit BOSS data + alerts ─────────────────────────────────────────
+      - name: Commit BOSS calendar snapshot
+        env:
+          DATE: $(date -u +%Y-%m-%d)
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/boss_calendar.json data/boss_holiday_alerts.json data/boss_calendar.raw.html || true
+          if git diff --cached --quiet; then
+            echo "No BOSS changes to commit."
+          else
+            git commit -m "boss: weekly calendar snapshot + holiday-week scan ${DATE}"
+            git pull --rebase -X theirs --autostash origin main
+            git push origin main
+          fi
