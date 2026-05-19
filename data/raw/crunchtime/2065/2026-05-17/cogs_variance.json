@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-05-11",
+    "week_end": "2026-05-17",
+    "month_start": "2026-05-01",
+    "last_month_start": "2026-04-01",
+    "last_month_end": "2026-04-30",
+    "through": "2026-05-18",
+    "pulled": "2026-05-19 08:16 ET",
+    "method": "api+playwright"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": null,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": null,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {
+      "name": "Cheeseburger",
+      "actual": 967.0,
+      "theoretical": 214.0,
+      "over_dollars": 753.0,
+      "variance_pct": null,
+      "rank": 1
+    },
+    {
+      "name": "Bacon Cheeseburger",
+      "actual": 549.0,
+      "theoretical": 128.0,
+      "over_dollars": 421.0,
+      "variance_pct": null,
+      "rank": 2
+    },
+    {
+      "name": "Little Cheeseburger",
+      "actual": 298.0,
+      "theoretical": 54.0,
+      "over_dollars": 244.0,
+      "variance_pct": null,
+      "rank": 3
+    },
+    {
+      "name": "Little Fry",
+      "actual": 248.0,
+      "theoretical": 50.0,
+      "over_dollars": 198.0,
+      "variance_pct": null,
+      "rank": 4
+    },
+    {
+      "name": "Little Bacon Cheeseburger",
+      "actual": 186.0,
+      "theoretical": 38.0,
+      "over_dollars": 148.0,
+      "variance_pct": null,
+      "rank": 5
+    },
+    {
+      "name": "Regular Fry",
+      "actual": 190.0,
+      "theoretical": 47.0,
+      "over_dollars": 143.0,
+      "variance_pct": null,
+      "rank": 6
+    },
+    {
+      "name": "Milkshake",
+      "actual": 153.0,
+      "theoretical": 26.0,
+      "over_dollars": 127.0,
+      "variance_pct": null,
+      "rank": 7
+    },
+    {
+      "name": "Large Fry",
+      "actual": 165.0,
+      "theoretical": 43.0,
+      "over_dollars": 122.0,
+      "variance_pct": null,
+      "rank": 8
+    },
+    {
+      "name": "Little Hamburger",
+      "actual": 150.0,
+      "theoretical": 29.0,
+      "over_dollars": 121.0,
+      "variance_pct": null,
+      "rank": 9
+    },
+    {
+      "name": "Little Cajun Fry",
+      "actual": 151.0,
+      "theoretical": 34.0,
+      "over_dollars": 117.0,
+      "variance_pct": null,
+      "rank": 10
+    },
+    {
+      "name": "Peanut Butter inv",
+      "actual": 109.0,
+      "theoretical": 14.0,
+      "over_dollars": 95.0,
+      "variance_pct": -694.0,
+      "rank": 11
+    },
+    {
+      "name": "Topping, Peppermint Chopped Pieces",
+      "actual": 58.0,
+      "theoretical": 0.0,
+      "over_dollars": 58.0,
+      "variance_pct": 0.0,
+      "rank": 12
+    },
+    {
+      "name": "Cheese",
+      "actual": 367.0,
+      "theoretical": 316.0,
+      "over_dollars": 51.0,
+      "variance_pct": -16.0,
+      "rank": 13
+    },
+    {
+      "name": "Topping, Oreo Pieces",
+      "actual": 56.0,
+      "theoretical": 13.0,
+      "over_dollars": 43.0,
+      "variance_pct": -345.0,
+      "rank": 14
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 251.0,
+      "theoretical": 292.0,
+      "over_dollars": -41.0,
+      "variance_pct": 14.0,
+      "rank": 15
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": -22.0,
+      "theoretical": 24.0,
+      "over_dollars": -46.0,
+      "variance_pct": 193.0,
+      "rank": 16
+    },
+    {
+      "name": "Cup, Shake",
+      "actual": -5.0,
+      "theoretical": 41.0,
+      "over_dollars": -46.0,
+      "variance_pct": 113.0,
+      "rank": 17
+    },
+    {
+      "name": "Topping, Oreo Cream",
+      "actual": -36.0,
+      "theoretical": 19.0,
+      "over_dollars": -55.0,
+      "variance_pct": 285.0,
+      "rank": 18
+    },
+    {
+      "name": "Hot Dog",
+      "actual": -10.0,
+      "theoretical": 77.0,
+      "over_dollars": -87.0,
+      "variance_pct": 113.0,
+      "rank": 19
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 868.0,
+      "theoretical": 972.0,
+      "over_dollars": -104.0,
+      "variance_pct": 11.0,
+      "rank": 20
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
