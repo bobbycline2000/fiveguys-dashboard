@@ -53,9 +53,15 @@ def login(username: str, password: str) -> requests.Session:
     r = s.post(ORDERS, data=payload, timeout=30, allow_redirects=True)
     r.raise_for_status()
     if "Log Out" not in r.text:
+        # Surface the actual error returned by BOSS so we can debug.
+        snippet = BeautifulSoup(r.text, "html.parser").get_text(" ", strip=True)
+        snippet = re.sub(r"\s+", " ", snippet)[:600]
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        (DATA_DIR / "boss_login_debug.html").write_text(r.text, encoding="utf-8")
         raise RuntimeError(
-            f"BOSS login failed. Landing URL: {r.url}. "
-            "Check BOSS_USERNAME / BOSS_PASSWORD secrets."
+            f"BOSS login failed. Landing URL: {r.url}\n"
+            f"Page snippet: {snippet}\n"
+            "Saved full response to data/boss_login_debug.html"
         )
     return s
 
