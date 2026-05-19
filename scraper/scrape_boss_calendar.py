@@ -22,7 +22,7 @@ import requests
 from bs4 import BeautifulSoup
 
 BASE = "https://bread2.fiveguys.com"
-INDEX = f"{BASE}/index.php"
+LOGIN = f"{BASE}/login.php"
 ORDERS = f"{BASE}/orders.php"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -37,35 +37,25 @@ DAY_NAMES = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
 
 
 def login(username: str, password: str) -> requests.Session:
-    """POST credentials to index.php, return an authenticated session."""
+    """POST credentials to orders.php (the login form action), return an authenticated session.
+    Real BOSS login form (discovered 2026-05-19): action=orders.php, fields = User / Password / Remember / Submit."""
     s = requests.Session()
     s.headers.update(HEADERS)
 
-    # GET first to pick up any CSRF/form tokens
-    r = s.get(INDEX, timeout=30)
-    r.raise_for_status()
-    soup = BeautifulSoup(r.text, "html.parser")
-    form = soup.find("form")
-    payload = {}
-    if form:
-        for inp in form.find_all("input"):
-            name = inp.get("name")
-            if not name:
-                continue
-            payload[name] = inp.get("value", "")
-    # Fill credentials — try common PHP field names
-    for k in list(payload.keys()) + ["username", "password"]:
-        pass
-    # Standard names; if the form uses different names we'll see it on first run
-    payload["username"] = username
-    payload["password"] = password
+    # GET the login page first to establish a session cookie
+    s.get(LOGIN, timeout=30)
 
-    r = s.post(INDEX, data=payload, timeout=30, allow_redirects=True)
+    payload = {
+        "User": username,
+        "Password": password,
+        "Submit": "",
+    }
+    r = s.post(ORDERS, data=payload, timeout=30, allow_redirects=True)
     r.raise_for_status()
-    if "Log Out" not in r.text and "orders.php" not in r.url:
+    if "Log Out" not in r.text:
         raise RuntimeError(
             f"BOSS login failed. Landing URL: {r.url}. "
-            "Check BOSS_USERNAME / BOSS_PASSWORD and the field names in index.php."
+            "Check BOSS_USERNAME / BOSS_PASSWORD secrets."
         )
     return s
 
