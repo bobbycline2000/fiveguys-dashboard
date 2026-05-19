@@ -48,9 +48,10 @@ def login(username: str, password: str) -> requests.Session:
     payload = {
         "User": username,
         "Password": password,
-        "Submit": "",
+        "Submit": "Log In",
     }
-    r = s.post(ORDERS, data=payload, timeout=30, allow_redirects=True)
+    r = s.post(LOGIN, data=payload, timeout=30, allow_redirects=True,
+               headers={"Referer": LOGIN})
     r.raise_for_status()
     if "Log Out" not in r.text:
         # Surface the actual error returned by BOSS so we can debug.
