@@ -29,6 +29,12 @@ HD_DOLLARS_PER_TRAY = 19974.0
 HB_BAGS_PER_TRAY = 5
 HD_BAGS_PER_TRAY = 6
 
+# Holiday cushion — CrunchTime's per-day forecast averages prior weeks and does
+# NOT bump for holidays. Memorial Day weekend, July 4 week, Labor Day weekend
+# etc. all run hotter than the avg week the forecast was built from. We bump
+# the window-sales by this factor before computing trays.
+HOLIDAY_CUSHION = 1.10  # +10%
+
 DELIVERY_WEEKDAYS = {"MON", "WED", "FRI", "SAT"}
 
 
@@ -82,7 +88,9 @@ def main():
 
         for d, own_fcast in delivery_forecasts:
             share = (own_fcast / total_delivery_forecast) * skipped_sales
-            window_sales = own_fcast + share
+            raw_window = own_fcast + share
+            # CT forecasts don't bump for holidays — add a cushion on top.
+            window_sales = raw_window * HOLIDAY_CUSHION
             rec = build_to(window_sales)
             day_recs.append({
                 "date": d["date"],
@@ -91,6 +99,8 @@ def main():
                 "current_hd": d.get("hd_trays"),
                 "forecast_own": round(own_fcast),
                 "redistributed_from_skip": round(share),
+                "raw_window_sales": round(raw_window),
+                "holiday_cushion_pct": int((HOLIDAY_CUSHION - 1) * 100),
                 "window_sales": round(window_sales),
                 "recommended_hb": rec["hb_trays"],
                 "recommended_hd": rec["hd_trays"],

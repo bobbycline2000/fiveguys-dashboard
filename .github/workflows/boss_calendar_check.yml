@@ -2,11 +2,11 @@ name: BOSS Bread Calendar Check
 
 on:
   schedule:
-    # Monday 7:00 AM Eastern (11:00 UTC EDT / 12:00 UTC EST)
+    # Monday 5:30 AM Eastern (09:30 UTC EDT / 10:30 UTC EST)
     # Runs once a week — catches the ~6 holiday-shifted weeks of the year
     # 10+ days before they hit so Bobby can adjust the order.
-    # DST FLIP: when EST returns ~Nov 2 2026, change to "0 12 * * 1".
-    - cron: "0 11 * * 1"
+    # DST FLIP: when EST returns ~Nov 2 2026, change to "30 10 * * 1".
+    - cron: "30 9 * * 1"
   workflow_dispatch: {}
 
 permissions:
