@@ -76,8 +76,10 @@ def main():
         )
 
         # For each delivery day in this week, compute current order vs recommended.
+        # Include any day BOSS shows an order on — holiday weeks often shift the
+        # skipped Mon delivery onto Tue (not a normal delivery weekday).
         day_recs = []
-        delivery_days_in_week = [d for d in week_days if d["weekday"] in DELIVERY_WEEKDAYS and d.get("is_delivery_day")]
+        delivery_days_in_week = [d for d in week_days if d.get("is_delivery_day")]
 
         # Spread the skipped volume across delivery days in the week (weighted by their own forecast).
         delivery_forecasts = []
