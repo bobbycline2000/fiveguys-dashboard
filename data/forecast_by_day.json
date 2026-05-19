@@ -1,107 +1,107 @@
 {
   "meta": {
-    "generated": "2026-05-06T13:05:07",
-    "today": "2026-05-06",
-    "this_week_mon": "2026-05-04",
-    "next_week_mon": "2026-05-11",
+    "generated": "2026-05-19T17:03:12",
+    "today": "2026-05-19",
+    "this_week_mon": "2026-05-18",
+    "next_week_mon": "2026-05-25",
     "week_convention": "Mon-Sun"
   },
   "days": [
     {
-      "date": "2026-05-04",
+      "date": "2026-05-18",
       "name": "MON",
-      "forecast": 3749.0,
-      "actual": 3539.85,
+      "forecast": 3593.0,
+      "actual": 3633.79,
       "is_next_week": false
     },
     {
-      "date": "2026-05-05",
+      "date": "2026-05-19",
       "name": "TUE",
-      "forecast": 3772.0,
-      "actual": 3271.61,
+      "forecast": 3394.0,
+      "actual": 110.86,
       "is_next_week": false
     },
     {
-      "date": "2026-05-06",
+      "date": "2026-05-20",
       "name": "WED",
-      "forecast": 4385.0,
-      "actual": 102.55,
+      "forecast": 4009.0,
+      "actual": null,
       "is_next_week": false
     },
     {
-      "date": "2026-05-07",
+      "date": "2026-05-21",
       "name": "THU",
-      "forecast": 4442.0,
+      "forecast": 4366.0,
       "actual": null,
       "is_next_week": false
     },
     {
-      "date": "2026-05-08",
+      "date": "2026-05-22",
       "name": "FRI",
-      "forecast": 5443.0,
+      "forecast": 5257.0,
       "actual": null,
       "is_next_week": false
     },
     {
-      "date": "2026-05-09",
+      "date": "2026-05-23",
       "name": "SAT",
-      "forecast": 4957.0,
+      "forecast": 4845.0,
       "actual": null,
       "is_next_week": false
     },
     {
-      "date": "2026-05-10",
+      "date": "2026-05-24",
       "name": "SUN",
-      "forecast": 5462.0,
+      "forecast": 5678.0,
       "actual": null,
       "is_next_week": false
     },
     {
-      "date": "2026-05-11",
+      "date": "2026-05-25",
       "name": "MON",
-      "forecast": 3591.0,
+      "forecast": 3594.0,
       "actual": null,
       "is_next_week": true
     },
     {
-      "date": "2026-05-12",
+      "date": "2026-05-26",
       "name": "TUE",
-      "forecast": 3429.0,
+      "forecast": 3398.0,
       "actual": null,
       "is_next_week": true
     },
     {
-      "date": "2026-05-13",
+      "date": "2026-05-27",
       "name": "WED",
-      "forecast": 3834.0,
+      "forecast": 4123.0,
       "actual": null,
       "is_next_week": true
     },
     {
-      "date": "2026-05-14",
+      "date": "2026-05-28",
       "name": "THU",
-      "forecast": 4159.0,
+      "forecast": 4528.0,
       "actual": null,
       "is_next_week": true
     },
     {
-      "date": "2026-05-15",
+      "date": "2026-05-29",
       "name": "FRI",
-      "forecast": 5372.0,
+      "forecast": 5378.0,
       "actual": null,
       "is_next_week": true
     },
     {
-      "date": "2026-05-16",
+      "date": "2026-05-30",
       "name": "SAT",
-      "forecast": 5222.0,
+      "forecast": 5032.0,
       "actual": null,
       "is_next_week": true
     },
     {
-      "date": "2026-05-17",
+      "date": "2026-05-31",
       "name": "SUN",
-      "forecast": 5330.0,
+      "forecast": 5236.0,
       "actual": null,
       "is_next_week": true
     }
