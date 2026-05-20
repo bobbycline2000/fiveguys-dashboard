@@ -143,13 +143,13 @@
     "d1_open": 196.83,
     "d2_open": 199.96,
     "safe_mid": 700,
-    "d1_mid": 0,
+    "d1_mid": 200,
     "d2_mid": 200.06,
-    "safe_close": 0,
-    "d1_close": 0,
-    "d2_close": 0,
+    "safe_close": 700,
+    "d1_close": 200,
+    "d2_close": 200,
     "ct_os": -37.9,
     "notes": "",
-    "submitted_at": "2026-05-19T19:15:45.605Z"
+    "submitted_at": "2026-05-20T02:55:16.483Z"
   }
 ]
