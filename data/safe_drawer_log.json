@@ -168,5 +168,22 @@
     "ct_os": 0,
     "notes": "",
     "submitted_at": "2026-05-20T14:31:10.176Z"
+  },
+  {
+    "date": "2026-05-21",
+    "mgr": "vll",
+    "deposit": 0,
+    "safe_open": 700,
+    "d1_open": 200,
+    "d2_open": 200,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
+    "ct_os": 0,
+    "notes": "",
+    "submitted_at": "2026-05-21T14:16:29.044Z"
   }
 ]
