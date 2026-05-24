@@ -1,0 +1,20 @@
+{
+  "store_id": "1788",
+  "store_name": "FG-1788 Middletown",
+  "generated": null,
+  "_status": "scaffold placeholder — no live data wired yet (awaiting CrunchTime discovery pass)",
+  "kpis": {
+    "net_sales":   { "value": null, "label": "Net Sales",     "source": "Par Brink",  "status": "pending" },
+    "labor_pct":   { "value": null, "label": "Labor %",        "source": "Par Brink",  "status": "pending" },
+    "food_pct":    { "value": null, "label": "Food Cost %",    "source": "CrunchTime", "status": "pending" },
+    "transactions":{ "value": null, "label": "Transactions",   "source": "Par Brink",  "status": "pending" }
+  },
+  "sections": {
+    "sales":          { "status": "pending", "source": "Par Brink" },
+    "labor":          { "status": "pending", "source": "Par Brink" },
+    "food_cost":      { "status": "pending", "source": "CrunchTime" },
+    "steritech":      { "status": "pending", "source": "Steritech" },
+    "secret_shops":   { "status": "no-creds", "source": "KnowledgeForce" },
+    "compliancemate": { "status": "no-creds", "source": "ComplianceMate" }
+  }
+}
