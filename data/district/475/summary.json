@@ -1,20 +1,78 @@
 {
   "store_id": "475",
   "store_name": "FG-475 Paddock Shops",
-  "generated": null,
-  "_status": "scaffold placeholder — no live data wired yet (awaiting CrunchTime discovery pass)",
+  "generated": "2026-05-24 19:04 ET",
+  "_status": "live CrunchTime KPIs (WTD); Brink/Steritech pending",
   "kpis": {
-    "net_sales":   { "value": null, "label": "Net Sales",     "source": "Par Brink",  "status": "pending" },
-    "labor_pct":   { "value": null, "label": "Labor %",        "source": "Par Brink",  "status": "pending" },
-    "food_pct":    { "value": null, "label": "Food Cost %",    "source": "CrunchTime", "status": "pending" },
-    "transactions":{ "value": null, "label": "Transactions",   "source": "Par Brink",  "status": "pending" }
+    "net_sales": {
+      "value": "$31,784",
+      "raw": 31784.36,
+      "label": "Net Sales",
+      "source": "CrunchTime",
+      "status": "live",
+      "window": "WTD"
+    },
+    "labor_pct": {
+      "value": "26.8%",
+      "raw": 26.7713,
+      "label": "Labor %",
+      "source": "CrunchTime",
+      "status": "live",
+      "window": "WTD"
+    },
+    "food_pct": {
+      "value": null,
+      "label": "Food Cost %",
+      "source": "CrunchTime",
+      "status": "pending"
+    },
+    "transactions": {
+      "value": null,
+      "label": "Transactions",
+      "source": "Par Brink",
+      "status": "pending"
+    },
+    "cash_os": {
+      "value": "$0",
+      "raw": 0.0,
+      "label": "Cash O/S",
+      "source": "CrunchTime",
+      "status": "live",
+      "window": "WTD"
+    },
+    "sales_guest": {
+      "value": "$5.28",
+      "raw": 5.2806,
+      "label": "Sales / Guest",
+      "source": "CrunchTime",
+      "status": "live",
+      "window": "WTD"
+    }
   },
   "sections": {
-    "sales":          { "status": "pending", "source": "Par Brink" },
-    "labor":          { "status": "pending", "source": "Par Brink" },
-    "food_cost":      { "status": "pending", "source": "CrunchTime" },
-    "steritech":      { "status": "pending", "source": "Steritech" },
-    "secret_shops":   { "status": "no-creds", "source": "KnowledgeForce" },
-    "compliancemate": { "status": "no-creds", "source": "ComplianceMate" }
+    "sales": {
+      "status": "live",
+      "source": "Par Brink"
+    },
+    "labor": {
+      "status": "live",
+      "source": "Par Brink"
+    },
+    "food_cost": {
+      "status": "pending",
+      "source": "CrunchTime"
+    },
+    "steritech": {
+      "status": "pending",
+      "source": "Steritech"
+    },
+    "secret_shops": {
+      "status": "no-creds",
+      "source": "KnowledgeForce"
+    },
+    "compliancemate": {
+      "status": "no-creds",
+      "source": "ComplianceMate"
+    }
   }
 }

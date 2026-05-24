@@ -6,8 +6,10 @@
 
   "crunchtime": {
     "base_url": "https://fiveguysfr77.net-chef.com",
-    "location_id": "1788",
-    "_status": "pending-verify — confirm base_url + location_id via CrunchTime discovery pass"
+    "location_id": 11504,
+    "location_code": "1788",
+    "ct_name": "KY-1788-Middleton",
+    "_status": "verified 2026-05-24 via api_remint_and_locations.py"
   },
 
   "compliancemate": {

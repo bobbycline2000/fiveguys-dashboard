@@ -6,8 +6,10 @@
 
   "crunchtime": {
     "base_url": "https://fiveguysfr77.net-chef.com",
-    "location_id": "475",
-    "_status": "pending-verify — confirm base_url + location_id via CrunchTime discovery pass"
+    "location_id": 12386,
+    "location_code": "0475",
+    "ct_name": "KY-0475-Summit Plaza",
+    "_status": "verified 2026-05-24 via api_remint_and_locations.py"
   },
 
   "compliancemate": {

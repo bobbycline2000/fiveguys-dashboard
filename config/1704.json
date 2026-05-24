@@ -6,8 +6,10 @@
 
   "crunchtime": {
     "base_url": "https://fiveguysfr77.net-chef.com",
-    "location_id": "1704",
-    "_status": "pending-verify — confirm base_url + location_id via CrunchTime discovery pass"
+    "location_id": 12387,
+    "location_code": "1704",
+    "ct_name": "KY-1704-Shelbyville",
+    "_status": "verified 2026-05-24 via api_remint_and_locations.py"
   },
 
   "compliancemate": {

@@ -7,25 +7,25 @@
       "store_id": "1788",
       "store_name": "Middletown",
       "short": "FG-1788 Middletown",
-      "data_status": { "crunchtime": "pending-verify", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
+      "data_status": { "crunchtime": "verified", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     },
     {
       "store_id": "1704",
       "store_name": "Shelbyville Road",
       "short": "FG-1704 Shelbyville Rd",
-      "data_status": { "crunchtime": "pending-verify", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
+      "data_status": { "crunchtime": "verified", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     },
     {
       "store_id": "475",
       "store_name": "Paddock Shops",
       "short": "FG-475 Paddock Shops",
-      "data_status": { "crunchtime": "pending-verify", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
+      "data_status": { "crunchtime": "verified", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     },
     {
       "store_id": "1731",
       "store_name": "Outer Loop",
       "short": "FG-1731 Outer Loop",
-      "data_status": { "crunchtime": "pending-verify", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
+      "data_status": { "crunchtime": "verified", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     }
   ]
 }

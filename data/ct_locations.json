@@ -1,0 +1,101 @@
+[
+  {
+    "locationName": "IN-0384-New Albany",
+    "locationId": 12384,
+    "customer": false,
+    "location": true,
+    "locationCode": "0384",
+    "isCustomer": false,
+    "isLocation": true
+  },
+  {
+    "locationName": "IN-1616-Kokomo",
+    "locationId": 12385,
+    "customer": false,
+    "location": true,
+    "locationCode": "1616",
+    "isCustomer": false,
+    "isLocation": true
+  },
+  {
+    "locationName": "IN-1910-Muncie",
+    "locationId": 12786,
+    "customer": false,
+    "location": true,
+    "locationCode": "1910",
+    "isCustomer": false,
+    "isLocation": true
+  },
+  {
+    "locationName": "IN-1954-Jeffersonville",
+    "locationId": 13038,
+    "customer": false,
+    "location": true,
+    "locationCode": "1954",
+    "isCustomer": false,
+    "isLocation": true
+  },
+  {
+    "locationName": "IN-1959-Lafayette",
+    "locationId": 12948,
+    "customer": false,
+    "location": true,
+    "locationCode": "1959",
+    "isCustomer": false,
+    "isLocation": true
+  },
+  {
+    "locationName": "KY-0475-Summit Plaza",
+    "locationId": 12386,
+    "customer": false,
+    "location": true,
+    "locationCode": "0475",
+    "isCustomer": false,
+    "isLocation": true
+  },
+  {
+    "locationName": "KY-1704-Shelbyville",
+    "locationId": 12387,
+    "customer": false,
+    "location": true,
+    "locationCode": "1704",
+    "isCustomer": false,
+    "isLocation": true
+  },
+  {
+    "locationName": "KY-1731-Jefferson Commons",
+    "locationId": 11346,
+    "customer": false,
+    "location": true,
+    "locationCode": "1731",
+    "isCustomer": false,
+    "isLocation": true
+  },
+  {
+    "locationName": "KY-1788-Middleton",
+    "locationId": 11504,
+    "customer": false,
+    "location": true,
+    "locationCode": "1788",
+    "isCustomer": false,
+    "isLocation": true
+  },
+  {
+    "locationName": "KY-2065-Dixie Highway",
+    "locationId": 13969,
+    "customer": false,
+    "location": true,
+    "locationCode": "2065",
+    "isCustomer": false,
+    "isLocation": true
+  },
+  {
+    "locationName": "KY-2079-Elizabethtown",
+    "locationId": 13044,
+    "customer": false,
+    "location": true,
+    "locationCode": "2079",
+    "isCustomer": false,
+    "isLocation": true
+  }
+]

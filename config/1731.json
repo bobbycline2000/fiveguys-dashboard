@@ -6,8 +6,10 @@
 
   "crunchtime": {
     "base_url": "https://fiveguysfr77.net-chef.com",
-    "location_id": "1731",
-    "_status": "pending-verify — confirm base_url + location_id via CrunchTime discovery pass"
+    "location_id": 11346,
+    "location_code": "1731",
+    "ct_name": "KY-1731-Jefferson Commons",
+    "_status": "verified 2026-05-24 via api_remint_and_locations.py"
   },
 
   "compliancemate": {
