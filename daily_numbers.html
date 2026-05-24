@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daily Numbers | Five Guys KY-2065</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--red:#CE1726;--red-deep:#a81120;--ink:#16181d;--line:rgba(255,255,255,.10);--w60:rgba(255,255,255,.6);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--red);color:#fff;min-height:100vh;padding-bottom:60px;}
+  .top{background:var(--red-deep);padding:18px 26px;border-bottom:3px solid rgba(0,0,0,.25);}
+  .top-row{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .ttl{display:flex;align-items:center;gap:13px;}
+  .mark{width:42px;height:42px;border-radius:9px;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.45rem;}
+  h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.5px;line-height:1;}
+  .sub{font-size:.72rem;color:var(--w60);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-top:3px;}
+  .back{color:#fff;text-decoration:none;font-size:.78rem;font-weight:700;background:rgba(255,255,255,.14);padding:8px 14px;border-radius:8px;border:1px solid var(--line);}
+  .back:hover{background:rgba(255,255,255,.24);}
+  .wrap{max-width:1180px;margin:22px auto 0;padding:0 26px;}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px;}
+  .card{background:var(--red-deep);border:1px solid var(--line);border-radius:12px;padding:15px;}
+  .card .l{font-size:.66rem;text-transform:uppercase;letter-spacing:.6px;color:var(--w60);font-weight:700;}
+  .card .v{font-family:'Barlow Condensed',sans-serif;font-size:1.85rem;font-weight:800;line-height:1.1;margin-top:5px;letter-spacing:-.5px;}
+  .tbl-wrap{background:var(--red-deep);border:1px solid var(--line);border-radius:13px;overflow:hidden;}
+  table{width:100%;border-collapse:collapse;font-size:.84rem;}
+  thead th{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.4px;text-transform:uppercase;color:var(--w60);
+    text-align:right;padding:12px 14px;border-bottom:1px solid var(--line);background:rgba(0,0,0,.18);position:sticky;top:0;}
+  thead th:first-child,tbody td:first-child{text-align:left;}
+  tbody td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.05);text-align:right;font-variant-numeric:tabular-nums;}
+  tbody tr:hover{background:rgba(255,255,255,.05);}
+  tbody tr.empty td{color:rgba(255,255,255,.28);}
+  .day{font-family:'Barlow Condensed',sans-serif;font-weight:700;}
+  .neg{color:#ff9ca6;} .pos{color:#7fdca0;}
+  tfoot td{padding:13px 14px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;border-top:2px solid var(--line);text-align:right;background:rgba(0,0,0,.2);}
+  tfoot td:first-child{text-align:left;letter-spacing:.5px;}
+  .foot{max-width:1180px;margin:14px auto 0;padding:0 26px;font-size:.72rem;color:var(--w60);}
+  @media(max-width:760px){.cards{grid-template-columns:repeat(2,1fr);} table{font-size:.76rem;} thead th,tbody td{padding:7px 8px;}}
+</style>
+</head>
+<body>
+  <div class="top"><div class="top-row">
+    <div class="ttl"><div class="mark">FG</div>
+      <div><h1 id="title">Daily Numbers</h1><div class="sub">KY-2065 Dixie Highway</div></div>
+    </div>
+    <a class="back" href="dashboard.html">&larr; Dashboard</a>
+  </div></div>
+
+  <div class="wrap">
+    <div class="cards" id="cards"></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Day</th><th>Net Sales</th><th>Labor %</th><th>Labor Hrs</th>
+          <th>Guests</th><th>$/Guest</th><th>Discounts</th><th>Cash O/S</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+        <tfoot id="foot"></tfoot>
+      </table>
+    </div>
+    <div class="foot" id="genline"></div>
+  </div>
+
+<script>
+const money=(v,d=0)=>v==null?'&mdash;':'$'+Number(v).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct=v=>v==null?'&mdash;':Number(v).toFixed(1)+'%';
+const osCell=v=>{if(v==null)return '&mdash;';const n=Number(v);const c=n<0?'neg':(n>0?'pos':'');const s=(n<0?'-$':'$')+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});return `<span class="${c}">${s}</span>`;};
+
+(async()=>{
+  const d = await (await fetch('data/daily_numbers.json?cb='+Date.now())).json();
+  document.getElementById('title').textContent = 'Daily Numbers — ' + d.month;
+  const t = d.totals||{};
+  document.getElementById('cards').innerHTML =
+    `<div class="card"><div class="l">MTD Net Sales</div><div class="v">${money(t.net_sales)}</div></div>
+     <div class="card"><div class="l">Avg Labor %</div><div class="v">${pct(t.avg_labor_pct)}</div></div>
+     <div class="card"><div class="l">MTD Discounts</div><div class="v">${money(t.discounts)}</div></div>
+     <div class="card"><div class="l">MTD Cash O/S</div><div class="v">${osCell(t.cash_os)}</div></div>`;
+  const tb=document.getElementById('rows');
+  d.rows.forEach(r=>{
+    if(r.empty){ tb.innerHTML+=`<tr class="empty"><td class="day">${r.day}</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>`; return; }
+    tb.innerHTML+=`<tr>
+      <td class="day">${r.day}</td>
+      <td>${money(r.net_sales)}</td>
+      <td>${pct(r.labor_pct)}</td>
+      <td>${r.labor_hours==null?'&mdash;':Number(r.labor_hours).toFixed(1)}</td>
+      <td>${r.guests==null?'&mdash;':r.guests}</td>
+      <td>${money(r.sales_guest,2)}</td>
+      <td>${money(r.discounts,2)}</td>
+      <td>${osCell(r.cash_os)}</td></tr>`;
+  });
+  document.getElementById('foot').innerHTML =
+    `<tr><td>MTD (${t.days_with_data} days)</td><td>${money(t.net_sales)}</td><td>${pct(t.avg_labor_pct)}</td>
+     <td>${t.labor_hours==null?'&mdash;':Number(t.labor_hours).toFixed(1)}</td><td>&mdash;</td><td>&mdash;</td>
+     <td>${money(t.discounts,2)}</td><td>${osCell(t.cash_os)}</td></tr>`;
+  document.getElementById('genline').textContent =
+    'Built from Par Brink + CrunchTime daily data • Updated ' + d.generated;
+})();
+</script>
+</body>
+</html>
