@@ -2,12 +2,12 @@
   "store": "2065",
   "week_start": "2026-05-11",
   "week_end": "2026-05-17",
-  "variance_week_start": null,
-  "variance_week_end": null,
+  "variance_week_start": "2026-05-11",
+  "variance_week_end": "2026-05-17",
   "cogs_pct_week": null,
   "cogs_goal_pct": 27.5,
   "total_over": 18096.0,
-  "generated": "2026-05-24 19:31 ET",
+  "generated": "2026-05-24 19:35 ET",
   "items": [
     {
       "rank": 1,
