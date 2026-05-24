@@ -7,7 +7,7 @@
   "cogs_pct_week": null,
   "cogs_goal_pct": 27.5,
   "total_over": 18096.0,
-  "generated": "2026-05-24 19:35 ET",
+  "generated": "2026-05-24 19:50 ET",
   "items": [
     {
       "rank": 1,
@@ -16,10 +16,11 @@
       "actual": 6580.0,
       "theoretical": 1454.0,
       "variance_pct": null,
+      "big_six": true,
       "actions": [
-        "Re-weigh patties on a calibrated scale \u2014 confirm 3.2 oz per patty, no double-stacking.",
-        "Count cheese slices per build; one extra slice per burger across a week is real money.",
-        "Audit comps & employee meals for this item \u2014 verify every free build is logged."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
@@ -29,10 +30,11 @@
       "actual": 4525.0,
       "theoretical": 1064.0,
       "variance_pct": null,
+      "big_six": true,
       "actions": [
-        "Re-weigh patties on a calibrated scale \u2014 confirm 3.2 oz per patty, no double-stacking.",
-        "Count cheese slices per build; one extra slice per burger across a week is real money.",
-        "Audit comps & employee meals for this item \u2014 verify every free build is logged."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
@@ -42,10 +44,11 @@
       "actual": 2540.0,
       "theoretical": 463.0,
       "variance_pct": null,
+      "big_six": true,
       "actions": [
-        "Re-weigh patties on a calibrated scale \u2014 confirm 3.2 oz per patty, no double-stacking.",
-        "Count cheese slices per build; one extra slice per burger across a week is real money.",
-        "Audit comps & employee meals for this item \u2014 verify every free build is logged."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
@@ -55,10 +58,11 @@
       "actual": 1800.0,
       "theoretical": 358.0,
       "variance_pct": null,
+      "big_six": false,
       "actions": [
-        "Re-check fry scoop weight \u2014 level the scoop, no heaping; overfilling cups is the #1 fry leak.",
-        "Log dropped/dumped fry batches and end-of-night waste.",
-        "Confirm potato case count on receiving vs invoice."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     },
     {
@@ -68,10 +72,11 @@
       "actual": 1497.0,
       "theoretical": 249.0,
       "variance_pct": null,
+      "big_six": false,
       "actions": [
-        "Measure shake mix portion per cup against spec.",
-        "Count topping/mix-in scoops \u2014 extra scoops drive cost.",
-        "Track wasted/remade shakes in the waste log."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     },
     {
@@ -81,10 +86,11 @@
       "actual": 1502.0,
       "theoretical": 299.0,
       "variance_pct": null,
+      "big_six": true,
       "actions": [
-        "Re-weigh patties on a calibrated scale \u2014 confirm 3.2 oz per patty, no double-stacking.",
-        "Count cheese slices per build; one extra slice per burger across a week is real money.",
-        "Audit comps & employee meals for this item \u2014 verify every free build is logged."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
@@ -94,10 +100,11 @@
       "actual": 1211.0,
       "theoretical": 296.0,
       "variance_pct": null,
+      "big_six": false,
       "actions": [
-        "Re-check fry scoop weight \u2014 level the scoop, no heaping; overfilling cups is the #1 fry leak.",
-        "Log dropped/dumped fry batches and end-of-night waste.",
-        "Confirm potato case count on receiving vs invoice."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     },
     {
@@ -107,10 +114,11 @@
       "actual": 1151.0,
       "theoretical": 303.0,
       "variance_pct": null,
+      "big_six": false,
       "actions": [
-        "Re-check fry scoop weight \u2014 level the scoop, no heaping; overfilling cups is the #1 fry leak.",
-        "Log dropped/dumped fry batches and end-of-night waste.",
-        "Confirm potato case count on receiving vs invoice."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     },
     {
@@ -120,9 +128,9 @@
       "actual": 855.0,
       "theoretical": 20.0,
       "variance_pct": null,
+      "big_six": false,
       "actions": [
-        "Watch for oversized/extra cups and un-rung refills.",
-        "Reconcile cup inventory count vs cups rung at POS."
+        "This is a miscount \u2014 the inventory wasn't counted correctly. Recount it."
       ]
     },
     {
@@ -132,10 +140,11 @@
       "actual": 896.0,
       "theoretical": 202.0,
       "variance_pct": null,
+      "big_six": false,
       "actions": [
-        "Re-check fry scoop weight \u2014 level the scoop, no heaping; overfilling cups is the #1 fry leak.",
-        "Log dropped/dumped fry batches and end-of-night waste.",
-        "Confirm potato case count on receiving vs invoice."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     },
     {
@@ -145,10 +154,11 @@
       "actual": 109.0,
       "theoretical": 14.0,
       "variance_pct": -694.0,
+      "big_six": false,
       "actions": [
-        "Recount this item \u2014 a count/receiving error is the most likely cause of a big swing.",
-        "Verify the last receiving matched the invoice and was entered correctly.",
-        "Check prep waste and over-portioning on builds that use it."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     },
     {
@@ -158,10 +168,12 @@
       "actual": 58.0,
       "theoretical": 0.0,
       "variance_pct": 0.0,
+      "big_six": false,
       "actions": [
-        "Recount this item \u2014 a count/receiving error is the most likely cause of a big swing.",
-        "Verify the last receiving matched the invoice and was entered correctly.",
-        "Check prep waste and over-portioning on builds that use it."
+        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
+        "Confirm prep specs are correct.",
+        "Submit a Product Issue form for yield loss from bad quality off the truck.",
+        "Account for waste."
       ]
     },
     {
@@ -171,10 +183,10 @@
       "actual": 367.0,
       "theoretical": 316.0,
       "variance_pct": -16.0,
+      "big_six": true,
       "actions": [
-        "Recount this item \u2014 a count/receiving error is the most likely cause of a big swing.",
-        "Verify the last receiving matched the invoice and was entered correctly.",
-        "Check prep waste and over-portioning on builds that use it."
+        "Big Six item \u2014 watch it. Count cheese slices per build; verify receiving count vs invoice.",
+        "Recount on-hand \u2014 a miscount is the usual cause of a big swing."
       ]
     },
     {
@@ -184,10 +196,11 @@
       "actual": 56.0,
       "theoretical": 13.0,
       "variance_pct": -345.0,
+      "big_six": false,
       "actions": [
-        "Recount this item \u2014 a count/receiving error is the most likely cause of a big swing.",
-        "Verify the last receiving matched the invoice and was entered correctly.",
-        "Check prep waste and over-portioning on builds that use it."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     }
   ]
