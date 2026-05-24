@@ -61,6 +61,33 @@ headers = {
 
 **No CSRF, no signed query params, no second handshake.** Verified 2026-05-03 against `/resource/dashboard/performance/metrics`.
 
+### 1.1b Multi-store / district (discovered 2026-05-24)
+
+`GET /resource/ceslogin/locations?page=1&start=0&limit=100` (called right after login, BEFORE choose-location) returns every store the login can see: `contentMap.locations[] = {locationName, locationCode, locationId}`. **`locationId` is an internal id, NOT the store number.** Bobby's fg2065 login sees all 11 Estep stores under the single `fiveguysfr77` instance:
+
+| locationCode | locationId | locationName |
+|---|---|---|
+| 0384 | 12384 | IN-0384-New Albany |
+| 1616 | 12385 | IN-1616-Kokomo |
+| 1910 | 12786 | IN-1910-Muncie |
+| 1954 | 13038 | IN-1954-Jeffersonville |
+| 1959 | 12948 | IN-1959-Lafayette |
+| 0475 | 12386 | KY-0475-Summit Plaza (Bobby: "Paddock Shops") |
+| 1704 | 12387 | KY-1704-Shelbyville |
+| 1731 | 11346 | KY-1731-Jefferson Commons (Bobby: "Outer Loop") |
+| 1788 | 11504 | KY-1788-Middleton |
+| 2065 | 13969 | KY-2065-Dixie Highway |
+| 2079 | 13044 | KY-2079-Elizabethtown |
+
+Bobby's DM district = the 4 KY stores 0475, 1704, 1731, 1788.
+
+**GOTCHA — session is bound to ONE location at login.** Calling `/resource/ceslogin/choose-location` again mid-session returns `{"success":true}` but does NOT re-bind — subsequent `/resource/*` calls keep returning the FIRST-chosen store's data. `allLocations:true` on `performance/metrics` also returns only the bound store. **To pull N stores you must do N fresh logins**, each choosing its target location. See `district_pull_ct.py` (fresh Playwright context per store).
+
+New scripts:
+- `scraper/api_remint_and_locations.py` — Playwright login → GET locations → dump `data/ct_locations.json` + refresh `data/ct_cookies.json`.
+- `scraper/api_discover_locations.py` — pure-requests locations enumerate using saved cookies (fast path when session alive).
+- `scraper/district_pull_ct.py` — loops `config/stores.json`, fresh login per store, pulls `performance/metrics` WTD KPIs → `data/district/<code>/summary.json`. Powers `district.html` (live at /district.html).
+
 ### 1.2 Discovery + replay scripts (this repo)
 
 | Script | Purpose |
