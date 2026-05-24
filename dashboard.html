@@ -181,6 +181,8 @@ body {
 }
 .btn-black svg { width: 12px; height: 12px; stroke-width: 2.2; }
 .btn-black:hover { background: var(--black-3); }
+.btn-black.spinning svg { animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* Period toggle (Today / Week / Month / Quarter) */
 .period-toggle {
@@ -810,7 +812,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
       </div>
       <div class="status-bar" id="statusBar" title="Data health — click for detail"></div>
       <div class="date-chip">Saturday, May 23 &nbsp;2026</div>
-      <button class="btn-black"><i data-lucide="refresh-cw"></i> Refresh</button>
+      <button class="btn-black" id="refreshBtn" onclick="refreshDash()"><i data-lucide="refresh-cw"></i> Refresh</button>
       <div class="user-ava">BC</div>
     </div>
   </div>
@@ -1378,6 +1380,15 @@ body.sidebar-open .sidebar-backdrop { display: block; }
 <!-- ══════════ JS ══════════ -->
 <script>
 lucide.createIcons();
+
+// ── Refresh button: hard-reload to pull latest committed data + status ──
+function refreshDash(){
+  const b = document.getElementById('refreshBtn');
+  if (b){ b.classList.add('spinning'); b.disabled = true; }
+  const u = new URL(window.location.href);
+  u.searchParams.set('r', Date.now());
+  window.location.replace(u.toString());
+}
 
 // ── Data health status bar ──
 (async function(){
