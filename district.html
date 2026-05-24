@@ -24,7 +24,9 @@
   .brand .mark{width:44px;height:44px;border-radius:9px;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;}
   .brand h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.5px;line-height:1;}
   .brand .sub{font-size:.72rem;color:var(--white-60);font-weight:600;letter-spacing:.4px;text-transform:uppercase;margin-top:3px;}
-  .updated{font-size:.7rem;color:var(--white-60);font-weight:600;}
+  .updated{font-size:.7rem;color:var(--white-60);font-weight:600;display:flex;align-items:center;gap:7px;justify-content:flex-end;}
+  .hdot{width:10px;height:10px;border-radius:50%;box-shadow:0 0 7px currentColor;}
+  .hg{color:#34d17a;background:#34d17a;} .hy{color:#f0c64a;background:#f0c64a;} .hr{color:#ff5a67;background:#ff5a67;}
 
   /* Store switcher */
   .switch{max-width:1280px;margin:18px auto 0;padding:0 26px;display:flex;gap:10px;flex-wrap:wrap;}
@@ -145,8 +147,10 @@ async function load(id){
     </div>`;
   });
 
-  document.getElementById('updated').textContent =
-    d.generated ? ('Updated ' + d.generated) : 'Scaffold preview';
+  let cls = 'hr', age = 99;
+  if (d.generated) { const gd = new Date(d.generated.replace(' ET','')); age = Math.floor((Date.now()-gd)/86400000); cls = age<=1?'hg':(age<=3?'hy':'hr'); }
+  document.getElementById('updated').innerHTML =
+    `<span class="hdot ${cls}"></span>` + (d.generated ? ('Updated ' + d.generated) : 'No data');
 
   document.getElementById('statusNote').innerHTML =
     `<b>Live CrunchTime data</b> (week-to-date) across all ${registry.stores.length} district stores — Net Sales, Labor %, Sales/Guest, Cash O/S. `+

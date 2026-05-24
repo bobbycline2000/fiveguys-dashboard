@@ -212,6 +212,19 @@ body {
 .page-sub   { font-size: 0.73rem; color: var(--white-60); margin-top: 4px; }
 .last-updated { font-size: 0.68rem; color: var(--white-60); text-align: right; }
 .last-updated b { color: white; }
+/* Data health status bar */
+.status-bar { display:flex; align-items:center; gap:7px; cursor:pointer; position:relative;
+  background:rgba(0,0,0,.22); border:1px solid rgba(255,255,255,.14); border-radius:20px; padding:5px 11px; }
+.status-bar .big { width:11px; height:11px; border-radius:50%; box-shadow:0 0 7px currentColor; }
+.status-bar .lbl { font-size:.66rem; font-weight:800; letter-spacing:.5px; text-transform:uppercase; color:#fff; }
+.s-green { color:#34d17a; background:#34d17a; } .s-yellow { color:#f0c64a; background:#f0c64a; } .s-red { color:#ff5a67; background:#ff5a67; }
+.status-pop { display:none; position:absolute; top:130%; right:0; z-index:50; min-width:230px;
+  background:#1c1f26; border:1px solid rgba(255,255,255,.16); border-radius:12px; padding:11px 13px; box-shadow:0 12px 30px rgba(0,0,0,.5); }
+.status-bar.open .status-pop { display:block; }
+.status-pop .row { display:flex; align-items:center; gap:9px; padding:5px 0; font-size:.74rem; color:#fff; }
+.status-pop .row .d { width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
+.status-pop .row small { color:rgba(255,255,255,.55); margin-left:auto; font-size:.66rem; }
+.status-pop .gen { font-size:.62rem; color:rgba(255,255,255,.45); margin-top:7px; padding-top:7px; border-top:1px solid rgba(255,255,255,.1); }
 
 /* ── CARD base ── */
 .card {
@@ -795,7 +808,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <button class="period-btn" data-period="month">Month</button>
         <button class="period-btn" data-period="quarter">Quarter</button>
       </div>
-      <div class="sync-info"><div class="dot"></div>Updated daily</div>
+      <div class="status-bar" id="statusBar" title="Data health — click for detail"></div>
       <div class="date-chip">Saturday, May 23 &nbsp;2026</div>
       <button class="btn-black"><i data-lucide="refresh-cw"></i> Refresh</button>
       <div class="user-ava">BC</div>
@@ -1365,6 +1378,23 @@ body.sidebar-open .sidebar-backdrop { display: block; }
 <!-- ══════════ JS ══════════ -->
 <script>
 lucide.createIcons();
+
+// ── Data health status bar ──
+(async function(){
+  const bar = document.getElementById('statusBar'); if(!bar) return;
+  const L = {green:'s-green',yellow:'s-yellow',red:'s-red'};
+  const TXT = {green:'All Current',yellow:'Check',red:'Action Needed'};
+  try{
+    const s = await (await fetch('data/status.json?cb='+Date.now())).json();
+    const rows = s.sources.map(x=>
+      `<div class="row"><span class="d ${L[x.status]}"></span>${x.label}<small>${x.detail||''}</small></div>`).join('');
+    bar.innerHTML =
+      `<span class="big ${L[s.overall]}"></span><span class="lbl">${TXT[s.overall]}</span>`+
+      `<div class="status-pop">${rows}<div class="gen">Updated ${s.generated}</div></div>`;
+    bar.onclick = e=>{ e.stopPropagation(); bar.classList.toggle('open'); };
+    document.addEventListener('click', ()=>bar.classList.remove('open'));
+  }catch(e){ bar.innerHTML = '<span class="big s-red"></span><span class="lbl">No Status</span>'; }
+})();
 
 // ── Period toggle (Today / Week / Month / Quarter) ──
 function applyPeriod(period) {

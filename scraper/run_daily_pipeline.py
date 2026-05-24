@@ -159,6 +159,13 @@ def main() -> int:
         allow_fail=True,
     )
 
+    # ── Step 4a3: Build data-health status (R/Y/G) ────────────────────────────
+    run(
+        "Step 4a3/5 — Build data-health status",
+        [python, str(SCRAPER / "build_status.py")],
+        allow_fail=True,
+    )
+
     # ── Step 4b: Wire dashboard ───────────────────────────────────────────────
     run(
         "Step 4b/5 — Wire dashboard",
