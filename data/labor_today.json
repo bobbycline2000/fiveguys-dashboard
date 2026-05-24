@@ -8,10 +8,56 @@
   "labor_percent_wtd": 18.704,
   "labor_dollars_wtd": 5010.57,
   "actual_hours_wtd": 407.95,
-  "hourly_breakdown": [],
+  "hourly_breakdown": [
+    {
+      "label": "11A",
+      "hour_24": 11,
+      "labor_percent": 30.9
+    },
+    {
+      "label": "12P",
+      "hour_24": 12,
+      "labor_percent": 15.6
+    },
+    {
+      "label": "1P",
+      "hour_24": 13,
+      "labor_percent": 10.6
+    },
+    {
+      "label": "2P",
+      "hour_24": 14,
+      "labor_percent": 18.4
+    },
+    {
+      "label": "3P",
+      "hour_24": 15,
+      "labor_percent": 18.0
+    },
+    {
+      "label": "4P",
+      "hour_24": 16,
+      "labor_percent": 15.7
+    },
+    {
+      "label": "5P",
+      "hour_24": 17,
+      "labor_percent": 19.1
+    },
+    {
+      "label": "6P",
+      "hour_24": 18,
+      "labor_percent": 15.1
+    },
+    {
+      "label": "7P",
+      "hour_24": 19,
+      "labor_percent": 28.0
+    }
+  ],
   "meta": {
     "source": "crunchtime_api",
-    "pulled_at": "2026-05-24T10:45:01",
+    "pulled_at": "2026-05-24T23:54:12",
     "calc_id_yesterday": 7
   }
 }

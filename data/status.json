@@ -1,6 +1,6 @@
 {
-  "generated": "2026-05-24 19:50 ET",
-  "overall": "yellow",
+  "generated": "2026-05-24 23:56 ET",
+  "overall": "red",
   "sources": [
     {
       "key": "sales",
@@ -19,9 +19,9 @@
     {
       "key": "foodcost",
       "label": "Food Cost %",
-      "status": "yellow",
-      "as_of": "2026-05-22",
-      "detail": "file updated (2d ago)"
+      "status": "red",
+      "as_of": null,
+      "detail": "file missing"
     },
     {
       "key": "shops",

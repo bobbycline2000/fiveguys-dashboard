@@ -1,7 +1,7 @@
 {
   "store_id": "2065",
   "month": "May 2026",
-  "generated": "2026-05-24 19:50 ET",
+  "generated": "2026-05-24 23:56 ET",
   "rows": [
     {
       "day": 1,
@@ -289,7 +289,7 @@
       "guests": null,
       "sales_guest": null,
       "discounts": null,
-      "cash_os": -22.33
+      "cash_os": -289.71
     },
     {
       "day": 25,
