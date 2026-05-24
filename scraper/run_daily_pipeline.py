@@ -152,6 +152,13 @@ def main() -> int:
         allow_fail=True,
     )
 
+    # ── Step 4a2: Build Daily Numbers sheet (monthly) ─────────────────────────
+    run(
+        "Step 4a2/5 — Build Daily Numbers sheet",
+        [python, str(SCRAPER / "build_daily_numbers.py")],
+        allow_fail=True,
+    )
+
     # ── Step 4b: Wire dashboard ───────────────────────────────────────────────
     run(
         "Step 4b/5 — Wire dashboard",
