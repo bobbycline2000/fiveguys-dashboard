@@ -45,7 +45,7 @@ def num(v):
 def fmt(v, kind):
     n = num(v)
     if n is None: return None
-    if kind=="money":  return f"${n:,.0f}"
+    if kind=="money":  return (f"-${abs(n):,.0f}" if n < 0 else f"${n:,.0f}")
     if kind=="money2": return f"${n:,.2f}"
     if kind=="pct":    return f"{n:.1f}%"
     return n

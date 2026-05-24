@@ -138,16 +138,20 @@ async function load(id){
     secs.innerHTML += `<div class="sec">
       <h3><i class="fa-solid ${m.icon}"></i> ${m.title}<span class="badge ${st.cls}">${st.txt}</span></h3>
       <div class="src">${s.source}</div>
-      <div class="body">${s.status==='no-creds'
-        ? 'Awaiting login credentials — will go live once wired.'
-        : 'Awaiting CrunchTime / Par Brink discovery pass — placeholder until data is connected.'}</div>
+      <div class="body">${
+        s.status==='live'    ? 'Live — week-to-date from CrunchTime.' :
+        s.status==='no-creds'? 'Awaiting login credentials — will go live once wired.' :
+        'Pending — data source not yet wired.'}</div>
     </div>`;
   });
 
+  document.getElementById('updated').textContent =
+    d.generated ? ('Updated ' + d.generated) : 'Scaffold preview';
+
   document.getElementById('statusNote').innerHTML =
-    `<b>Scaffold v1.</b> Store switcher + ${registry.stores.length}-store district shell are live. `+
-    `CrunchTime, Par Brink &amp; Steritech tiles show <b>Data Pending</b> until the location-ID discovery pass wires real numbers. `+
-    `KnowledgeForce (secret shops) &amp; ComplianceMate show <b>Creds Pending</b> until Bobby sends those logins. `+
+    `<b>Live CrunchTime data</b> (week-to-date) across all ${registry.stores.length} district stores — Net Sales, Labor %, Sales/Guest, Cash O/S. `+
+    `Food Cost, Transactions &amp; Steritech wire in next. `+
+    `Secret Shops &amp; ComplianceMate show <b>Creds Pending</b> until those logins are wired. `+
     `2065 stays on its own app — this is the district view only.`;
 }
 boot();
