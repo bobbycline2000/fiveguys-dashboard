@@ -27,6 +27,7 @@
   .item-hd{display:flex;align-items:center;gap:12px;}
   .rk{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;color:var(--w60);min-width:26px;}
   .nm{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:.3px;}
+  .bigsix{font-family:'Inter',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.5px;background:#c79a3b;color:#16181d;padding:3px 7px;border-radius:20px;}
   .over{margin-left:auto;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;color:#ff9ca6;}
   .acts{list-style:none;margin:12px 0 0;padding:0;}
   .acts li{display:flex;align-items:flex-start;gap:10px;padding:6px 0;font-size:.86rem;color:#fff;line-height:1.45;}
@@ -71,6 +72,7 @@ function saveChecks(c){localStorage.setItem(KEY,JSON.stringify(c));}
     }).join('');
     wrap.innerHTML += `<div class="item">
       <div class="item-hd"><span class="rk">${it.rank}</span><span class="nm">${it.name}</span>
+        ${it.big_six?'<span class="bigsix">BIG SIX</span>':''}
         <span class="over">+${money(it.over_dollars)}</span></div>
       <ul class="acts">${acts}</ul></div>`;
   });

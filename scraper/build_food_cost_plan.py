@@ -27,52 +27,64 @@ def latest_variance():
                 return json.loads(c.read_text())
     return None
 
-# keyword -> action steps (checked in order; first match wins)
+# Bobby's Big Six focus items (where the money is) + bread
+BIG_SIX = ("meat","beef","cheese","bacon","hot dog bun","hamburger bun","bun","hot dog","hotdog")
+
+# keyword -> action steps (Bobby's playbook, 2026-05-24). First match wins.
 ACTIONS = [
-    (("cheeseburger","hamburger","burger"), [
-        "Re-weigh patties on a calibrated scale — confirm 3.2 oz per patty, no double-stacking.",
-        "Count cheese slices per build; one extra slice per burger across a week is real money.",
-        "Audit comps & employee meals for this item — verify every free build is logged.",
-        "Watch the line build it during a rush — over-portioning lettuce/sauce/bacon adds up.",
+    # Ground beef / patties / burgers
+    (("cheeseburger","hamburger","burger","beef","patty","patties","ground beef"), [
+        "Spot-check patty weight — patties must be rolled at 3.5 oz.",
+        "Reduce waste — drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals — every free build has to be rung.",
     ]),
+    # Bacon
     (("bacon",), [
-        "Verify bacon strip count per build matches spec — weigh a sample.",
-        "Check bacon waste/over-cook in the kitchen; log dropped or burnt strips.",
-        "Confirm receiving count vs invoice on the last bacon delivery.",
+        "Variance = over-cooking. Too much cooked and wasted at close, or someone's eating it.",
+        "Cook in smaller batches through the day — aim to run out around 8 PM, not over-cook in the morning.",
+        "Lock down end-of-night bacon waste and account for it.",
     ]),
-    (("fry","fries","potato","idaho"), [
-        "Re-check fry scoop weight — level the scoop, no heaping; overfilling cups is the #1 fry leak.",
-        "Log dropped/dumped fry batches and end-of-night waste.",
-        "Confirm potato case count on receiving vs invoice.",
-        "Spot-check 'Little vs Regular vs Large' ring accuracy at the register.",
+    # Produce / toppings
+    (("lettuce","tomato","tomatoes","green pepper","pepper","jalapeno","jalapenos","onion","pickle","mushroom","relish"), [
+        "Employee meals aren't being rung right and product is being over-portioned — watch portioning.",
+        "Confirm prep specs are correct.",
+        "Submit a Product Issue form for yield loss from bad quality off the truck.",
+        "Account for waste.",
     ]),
-    (("milkshake","shake","cup, shake"), [
-        "Measure shake mix portion per cup against spec.",
-        "Count topping/mix-in scoops — extra scoops drive cost.",
-        "Track wasted/remade shakes in the waste log.",
+    # Drinks / cups / straws
+    (("soda","drink","bottle","cup","straw","beverage","coke","tea","lid"), [
+        "This is a miscount — the inventory wasn't counted correctly. Recount it.",
     ]),
-    (("soda","drink"), [
-        "Watch for oversized/extra cups and un-rung refills.",
-        "Reconcile cup inventory count vs cups rung at POS.",
+    # Bread / buns
+    (("bread","bun","buns"), [
+        "Variance is employee meals not being entered, waste, or a miscount.",
+        "Verify every employee meal is rung and recount on-hand.",
     ]),
-    (("peanut butter","oreo","peppermint","topping","cheese"), [
-        "Recount this item — a count/receiving error is the most likely cause of a big swing.",
-        "Verify the last receiving matched the invoice and was entered correctly.",
-        "Check prep waste and over-portioning on builds that use it.",
+    # Cheese / hot dog (Big Six, miscount/portion)
+    (("cheese",), [
+        "Big Six item — watch it. Count cheese slices per build; verify receiving count vs invoice.",
+        "Recount on-hand — a miscount is the usual cause of a big swing.",
+    ]),
+    (("hot dog","hotdog"), [
+        "Big Six item. Variance = employee meals not rung, waste, or miscount. Recount and check comps.",
     ]),
 ]
 DEFAULT = [
-    "Recount on-hand and verify the last receiving was entered correctly.",
-    "Check portioning/build spec for this item with the line.",
-    "Review waste log and comps for this item this week.",
+    "Watch portioning and confirm the build/prep spec.",
+    "Verify employee meals are being rung and review waste.",
+    "Recount on-hand — check for a miscount or receiving error.",
 ]
 
 def actions_for(name):
     n = (name or "").lower()
     for keys, steps in ACTIONS:
         if any(k in n for k in keys):
-            return steps[:3]
+            return steps
     return DEFAULT
+
+def is_big_six(name):
+    n = (name or "").lower()
+    return any(k in n for k in BIG_SIX)
 
 def main():
     d = latest_variance()
@@ -86,6 +98,7 @@ def main():
         "over_dollars": it.get("over_dollars"),
         "actual": it.get("actual"), "theoretical": it.get("theoretical"),
         "variance_pct": it.get("variance_pct"),
+        "big_six": is_big_six(it.get("name")),
         "actions": actions_for(it.get("name")),
     } for i, it in enumerate(over)]
     out = {
