@@ -210,6 +210,14 @@ def _ct_date_str(d: date) -> str:
     return f"{d.month}/{d.day}/{d.year}"
 
 
+def _last_week_mon_sun(today: date) -> tuple[date, date]:
+    """Last fully-completed week, Monday–Sunday (Bobby's food-cost window)."""
+    this_monday = today - timedelta(days=today.weekday())   # Mon of current week
+    last_monday = this_monday - timedelta(days=7)
+    last_sunday = last_monday + timedelta(days=6)
+    return last_monday, last_sunday
+
+
 def _period_dates(today: date) -> dict:
     """Return start dates for week, month, and QTD periods."""
     # Week: last completed Mon–Sun
@@ -486,9 +494,16 @@ async def run():
         today = datetime.now(tz=ET).date()
         periods = _period_dates(today)
 
-        # Use API-derived week dates (authoritative); month/QTD use calendar math
-        week_s  = _ct_date_str(week_start)
-        week_e  = _ct_date_str(week_end)
+        # Food-cost week = last fully-completed Mon–Sun (Bobby's spec 2026-05-24).
+        # The AVT widget's week (week_start/week_end) is CrunchTime's in-progress
+        # week — keep it only to label the variance items' window.
+        variance_week_start, variance_week_end = week_start, week_end
+        fc_start, fc_end = _last_week_mon_sun(today)
+        week_start, week_end = fc_start, fc_end
+        week_s  = _ct_date_str(fc_start)
+        week_e  = _ct_date_str(fc_end)
+        log.info(f"Food-cost week (Mon–Sun) = {fc_start} → {fc_end}; "
+                 f"variance items week = {variance_week_start} → {variance_week_end}")
         month_s = _ct_date_str(periods["month_start"])
         through = _ct_date_str(periods["through"])
 
@@ -512,6 +527,8 @@ async def run():
             "store": STORE_ID,
             "week_start":    week_start.strftime("%Y-%m-%d"),
             "week_end":      week_end.strftime("%Y-%m-%d"),
+            "variance_week_start": variance_week_start.strftime("%Y-%m-%d") if variance_week_start else None,
+            "variance_week_end":   variance_week_end.strftime("%Y-%m-%d") if variance_week_end else None,
             "month_start":      periods["month_start"].strftime("%Y-%m-%d"),
             "last_month_start": periods["last_month_start"].strftime("%Y-%m-%d"),
             "last_month_end":   periods["last_month_end"].strftime("%Y-%m-%d"),

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Food Cost Plan of Action | Five Guys KY-2065</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--red:#CE1726;--red-deep:#a81120;--line:rgba(255,255,255,.10);--w60:rgba(255,255,255,.6);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--red);color:#fff;min-height:100vh;padding-bottom:60px;}
+  .top{background:var(--red-deep);padding:18px 26px;border-bottom:3px solid rgba(0,0,0,.25);}
+  .top-row{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .ttl{display:flex;align-items:center;gap:13px;}
+  .mark{width:42px;height:42px;border-radius:9px;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.45rem;}
+  h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:.5px;line-height:1;}
+  .sub{font-size:.72rem;color:var(--w60);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-top:3px;}
+  .back{color:#fff;text-decoration:none;font-size:.78rem;font-weight:700;background:rgba(255,255,255,.14);padding:8px 14px;border-radius:8px;border:1px solid var(--line);}
+  .back:hover{background:rgba(255,255,255,.24);}
+  .wrap{max-width:1080px;margin:22px auto 0;padding:0 26px;}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:22px;}
+  .card{background:var(--red-deep);border:1px solid var(--line);border-radius:12px;padding:15px;}
+  .card .l{font-size:.66rem;text-transform:uppercase;letter-spacing:.6px;color:var(--w60);font-weight:700;}
+  .card .v{font-family:'Barlow Condensed',sans-serif;font-size:1.85rem;font-weight:800;line-height:1.1;margin-top:5px;letter-spacing:-.5px;}
+  .item{background:var(--red-deep);border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin-bottom:12px;}
+  .item-hd{display:flex;align-items:center;gap:12px;}
+  .rk{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;color:var(--w60);min-width:26px;}
+  .nm{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:.3px;}
+  .over{margin-left:auto;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;color:#ff9ca6;}
+  .acts{list-style:none;margin:12px 0 0;padding:0;}
+  .acts li{display:flex;align-items:flex-start;gap:10px;padding:6px 0;font-size:.86rem;color:#fff;line-height:1.45;}
+  .acts li input{margin-top:3px;width:15px;height:15px;accent-color:#34d17a;flex:0 0 auto;cursor:pointer;}
+  .acts li.done span{text-decoration:line-through;color:var(--w60);}
+  .foot{max-width:1080px;margin:14px auto 0;padding:0 26px;font-size:.72rem;color:var(--w60);}
+  @media(max-width:720px){.cards{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+  <div class="top"><div class="top-row">
+    <div class="ttl"><div class="mark">FG</div>
+      <div><h1>Food Cost — Plan of Action</h1><div class="sub" id="weekSub">KY-2065 Dixie Highway</div></div>
+    </div>
+    <a class="back" href="dashboard.html">&larr; Dashboard</a>
+  </div></div>
+  <div class="wrap">
+    <div class="cards" id="cards"></div>
+    <div id="items"></div>
+    <div class="foot" id="genline"></div>
+  </div>
+<script>
+const money=(v,d=0)=>v==null?'&mdash;':'$'+Number(v).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const KEY='fcplan_checks';
+function loadChecks(){try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};}}
+function saveChecks(c){localStorage.setItem(KEY,JSON.stringify(c));}
+(async()=>{
+  const d = await (await fetch('data/food_cost_plan.json?cb='+Date.now())).json();
+  const wk = d.week_start && d.week_end ? `${d.week_start} → ${d.week_end}` : 'last week';
+  document.getElementById('weekSub').textContent = `KY-2065 · Variance week ${wk}`;
+  const cogs = d.cogs_pct_week==null ? '&mdash;' : d.cogs_pct_week.toFixed(1)+'%';
+  document.getElementById('cards').innerHTML =
+    `<div class="card"><div class="l">Food Cost % (week)</div><div class="v">${cogs}</div></div>
+     <div class="card"><div class="l">Goal</div><div class="v">${d.cogs_goal_pct?d.cogs_goal_pct.toFixed(1)+'%':'&mdash;'}</div></div>
+     <div class="card"><div class="l">Total Over Theoretical</div><div class="v" style="color:#ff9ca6">${money(d.total_over)}</div></div>`;
+  const checks = loadChecks();
+  const wrap = document.getElementById('items');
+  d.items.forEach(it=>{
+    const acts = it.actions.map((a,i)=>{
+      const id = `${it.name}__${i}`; const on = checks[id];
+      return `<li class="${on?'done':''}"><input type="checkbox" data-id="${id}" ${on?'checked':''}><span>${a}</span></li>`;
+    }).join('');
+    wrap.innerHTML += `<div class="item">
+      <div class="item-hd"><span class="rk">${it.rank}</span><span class="nm">${it.name}</span>
+        <span class="over">+${money(it.over_dollars)}</span></div>
+      <ul class="acts">${acts}</ul></div>`;
+  });
+  wrap.addEventListener('change', e=>{
+    if(e.target.type!=='checkbox')return;
+    const c=loadChecks(); c[e.target.dataset.id]=e.target.checked; saveChecks(c);
+    e.target.closest('li').classList.toggle('done', e.target.checked);
+  });
+  document.getElementById('genline').textContent =
+    'Variance items from CrunchTime Actual-vs-Theoretical • Updated weekly • ' + d.generated;
+})();
+</script>
+</body>
+</html>

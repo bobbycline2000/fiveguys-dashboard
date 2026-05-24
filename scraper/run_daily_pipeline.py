@@ -159,6 +159,13 @@ def main() -> int:
         allow_fail=True,
     )
 
+    # ── Step 4a2b: Build weekly Food Cost Plan of Action ──────────────────────
+    run(
+        "Step 4a2b/5 — Build Food Cost Plan of Action",
+        [python, str(SCRAPER / "build_food_cost_plan.py")],
+        allow_fail=True,
+    )
+
     # ── Step 4a3: Build data-health status (R/Y/G) ────────────────────────────
     run(
         "Step 4a3/5 — Build data-health status",
