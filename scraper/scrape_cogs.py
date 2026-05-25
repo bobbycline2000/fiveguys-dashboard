@@ -547,6 +547,24 @@ async def run():
         "ranking":               "over_dollars_desc",
     }
 
+    # PRESERVE the food cost % from read_cogs_email.py (daily COGS Flash email).
+    # read_cogs_email runs BEFORE this script and writes cogs_pct_week (FP%) into
+    # cogs_variance.json. The P&L page-scrape above is unreliable and often returns
+    # None — when it does, DO NOT clobber the email's good FP%. (Bug fixed 2026-05-24.)
+    existing_pf = DATA_DIR / "cogs_variance.json"
+    if existing_pf.exists():
+        try:
+            prev = json.loads(existing_pf.read_text(encoding="utf-8"))
+            if out["cogs_pct_week"] is None and prev.get("cogs_pct_week") is not None:
+                out["cogs_pct_week"] = prev["cogs_pct_week"]
+                out["variance_to_goal_week"] = _vtg(out["cogs_pct_week"])
+                log.info(f"Preserved FP% from email source: {out['cogs_pct_week']}%")
+            if out["cogs_pct_month"] is None and prev.get("cogs_pct_month") is not None:
+                out["cogs_pct_month"] = prev["cogs_pct_month"]
+                out["variance_to_goal_month"] = _vtg(out["cogs_pct_month"])
+        except Exception:
+            pass
+
     raw_dir = DATA_DIR / "raw" / "crunchtime" / STORE_ID / out["meta"]["week_end"]
     raw_dir.mkdir(parents=True, exist_ok=True)
     out_path = raw_dir / "cogs_variance.json"

@@ -91,6 +91,24 @@ def main():
     if not d:
         print("no cogs_variance.json found — nothing to build"); return
     m = d.get("meta", {})
+    # Food cost %: prefer this week's; else fall back to the most recent non-null
+    # snapshot (the FP% from the daily COGS email).
+    cogs_pct = d.get("cogs_pct_week")
+    pct_week_label = m.get("week_end")
+    if cogs_pct is None:
+        base = DATA / "raw" / "crunchtime" / "2065"
+        if base.exists():
+            for dd in sorted([x for x in base.iterdir() if x.is_dir()], reverse=True):
+                c = dd / "cogs_variance.json"
+                if c.exists():
+                    try:
+                        snap = json.loads(c.read_text())
+                        if snap.get("cogs_pct_week") is not None:
+                            cogs_pct = snap["cogs_pct_week"]
+                            pct_week_label = snap.get("meta", {}).get("week_end")
+                            break
+                    except Exception:
+                        continue
     over = [it for it in d.get("items", []) if (it.get("over_dollars") or 0) > 0]
     over.sort(key=lambda x: x.get("over_dollars", 0), reverse=True)
     plan = [{
@@ -106,8 +124,9 @@ def main():
         "week_start": m.get("week_start"), "week_end": m.get("week_end"),
         "variance_week_start": m.get("variance_week_start"),
         "variance_week_end": m.get("variance_week_end"),
-        "cogs_pct_week": d.get("cogs_pct_week"),
-        "cogs_goal_pct": d.get("cogs_goal_pct"),
+        "cogs_pct_week": cogs_pct,
+        "cogs_pct_week_label": pct_week_label,
+        "cogs_goal_pct": d.get("cogs_goal_pct") or 27.5,
         "total_over": round(sum(it["over_dollars"] for it in plan), 2),
         "generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M ET"),
         "items": plan,
