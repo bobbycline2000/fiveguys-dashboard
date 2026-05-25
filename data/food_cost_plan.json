@@ -1,154 +1,17 @@
 {
   "store": "2065",
-  "week_start": "2026-05-11",
-  "week_end": "2026-05-17",
+  "week_start": "2026-05-18",
+  "week_end": "2026-05-24",
   "variance_week_start": "2026-05-11",
   "variance_week_end": "2026-05-17",
-  "cogs_pct_week": null,
+  "cogs_pct_week": 23.4,
+  "cogs_pct_week_label": "2026-05-03",
   "cogs_goal_pct": 27.5,
-  "total_over": 18096.0,
-  "generated": "2026-05-24 23:56 ET",
+  "total_over": 204.0,
+  "generated": "2026-05-25 12:37 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Cheeseburger",
-      "over_dollars": 5126.0,
-      "actual": 6580.0,
-      "theoretical": 1454.0,
-      "variance_pct": null,
-      "big_six": true,
-      "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
-      ]
-    },
-    {
-      "rank": 2,
-      "name": "Bacon Cheeseburger",
-      "over_dollars": 3461.0,
-      "actual": 4525.0,
-      "theoretical": 1064.0,
-      "variance_pct": null,
-      "big_six": true,
-      "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
-      ]
-    },
-    {
-      "rank": 3,
-      "name": "Little Cheeseburger",
-      "over_dollars": 2077.0,
-      "actual": 2540.0,
-      "theoretical": 463.0,
-      "variance_pct": null,
-      "big_six": true,
-      "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
-      ]
-    },
-    {
-      "rank": 4,
-      "name": "Little Fry",
-      "over_dollars": 1442.0,
-      "actual": 1800.0,
-      "theoretical": 358.0,
-      "variance_pct": null,
-      "big_six": false,
-      "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
-      ]
-    },
-    {
-      "rank": 5,
-      "name": "Milkshake",
-      "over_dollars": 1248.0,
-      "actual": 1497.0,
-      "theoretical": 249.0,
-      "variance_pct": null,
-      "big_six": false,
-      "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
-      ]
-    },
-    {
-      "rank": 6,
-      "name": "Little Bacon Cheeseburger",
-      "over_dollars": 1203.0,
-      "actual": 1502.0,
-      "theoretical": 299.0,
-      "variance_pct": null,
-      "big_six": true,
-      "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
-      ]
-    },
-    {
-      "rank": 7,
-      "name": "Regular Fry",
-      "over_dollars": 915.0,
-      "actual": 1211.0,
-      "theoretical": 296.0,
-      "variance_pct": null,
-      "big_six": false,
-      "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
-      ]
-    },
-    {
-      "rank": 8,
-      "name": "Large Fry",
-      "over_dollars": 848.0,
-      "actual": 1151.0,
-      "theoretical": 303.0,
-      "variance_pct": null,
-      "big_six": false,
-      "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
-      ]
-    },
-    {
-      "rank": 9,
-      "name": "Regular Soda",
-      "over_dollars": 835.0,
-      "actual": 855.0,
-      "theoretical": 20.0,
-      "variance_pct": null,
-      "big_six": false,
-      "actions": [
-        "This is a miscount \u2014 the inventory wasn't counted correctly. Recount it."
-      ]
-    },
-    {
-      "rank": 10,
-      "name": "Little Cajun Fry",
-      "over_dollars": 694.0,
-      "actual": 896.0,
-      "theoretical": 202.0,
-      "variance_pct": null,
-      "big_six": false,
-      "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
-      ]
-    },
-    {
-      "rank": 11,
       "name": "Peanut Butter inv",
       "over_dollars": 95.0,
       "actual": 109.0,
@@ -162,7 +25,7 @@
       ]
     },
     {
-      "rank": 12,
+      "rank": 2,
       "name": "Topping, Peppermint Chopped Pieces",
       "over_dollars": 58.0,
       "actual": 58.0,
@@ -177,7 +40,7 @@
       ]
     },
     {
-      "rank": 13,
+      "rank": 3,
       "name": "Cheese",
       "over_dollars": 51.0,
       "actual": 367.0,
@@ -187,20 +50,6 @@
       "actions": [
         "Big Six item \u2014 watch it. Count cheese slices per build; verify receiving count vs invoice.",
         "Recount on-hand \u2014 a miscount is the usual cause of a big swing."
-      ]
-    },
-    {
-      "rank": 14,
-      "name": "Topping, Oreo Pieces",
-      "over_dollars": 43.0,
-      "actual": 56.0,
-      "theoretical": 13.0,
-      "variance_pct": -345.0,
-      "big_six": false,
-      "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     }
   ]
