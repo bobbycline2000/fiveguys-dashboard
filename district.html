@@ -1,164 +1,1538 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Louisville District | Five Guys Operations</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- PWA: installable as Five Guys 2065 app -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#C8102E" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="FG 2065" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+<script>if("serviceWorker" in navigator){let refreshing=false;navigator.serviceWorker.addEventListener("controllerchange",function(){if(refreshing)return;refreshing=true;window.location.reload();});window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").then(function(reg){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")reg.update().catch(function(){});});}).catch(function(){});});}</script>
+<title>Five Guys — Louisville District Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
 <style>
-  :root{
-    --red:#CE1726; --red-deep:#a81120; --red-bright:#e8394a;
-    --navy:#1b2a4a; --gold:#c79a3b; --green:#2e7d4f;
-    --white:#fff; --white-60:rgba(255,255,255,.6); --white-12:rgba(255,255,255,.12);
-    --ink:#16181d; --card:#1f2937; --card-line:rgba(255,255,255,.10);
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red:        #CE1726;
+  --red-deep:   #a81120;
+  --red-bright: #e8394a;
+  --black:      #0d0d0d;
+  --black-2:    #1a1a1a;
+  --black-3:    #222222;
+  --white:      #ffffff;
+  --white-90:   rgba(255,255,255,0.90);
+  --white-60:   rgba(255,255,255,0.60);
+  --white-30:   rgba(255,255,255,0.30);
+  --white-12:   rgba(255,255,255,0.12);
+  --white-06:   rgba(255,255,255,0.06);
+  --card:       rgba(0,0,0,0.28);
+  --card-hover: rgba(0,0,0,0.38);
+  --green:      #22c55e;
+  --green-dim:  rgba(34,197,94,0.15);
+  --yellow:     #F5A800;
+  --yellow-dim: rgba(245,168,0,0.15);
+  --alert-red:  #ff4d4d;
+  --alert-dim:  rgba(255,77,77,0.15);
+  --sidebar-w:  220px;
+  --radius:     10px;
+}
+
+html, body { height: 100%; overflow-x: hidden; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--red);
+  color: var(--white);
+  display: flex;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  max-width: 100vw;
+}
+.main, .content, .ops-row, .controllables-row, .kpi-row, .bottom-row, .col-stack, .ss-row { min-width: 0; }
+.card, .ctrl-card { min-width: 0; max-width: 100%; overflow: hidden; }
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 60;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.sidebar-logo {
+  padding: 20px 16px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.logo-row { display: flex; align-items: center; gap: 10px; }
+.logo-box {
+  width: 36px; height: 36px;
+  background: var(--red);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem; font-weight: 900;
+  color: white; flex-shrink: 0;
+}
+.logo-name { color: white; font-size: 0.85rem; font-weight: 700; line-height: 1.15; }
+.logo-sub  { color: rgba(255,255,255,0.28); font-size: 0.6rem; letter-spacing: 1.8px; text-transform: uppercase; }
+
+.nav-section { padding: 14px 8px 4px; }
+.nav-label {
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.22);
+  padding: 0 8px; margin-bottom: 3px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 9px;
+  width: 100%; padding: 8px 10px; margin-bottom: 1px;
+  border-radius: 7px; border: none; background: transparent;
+  cursor: pointer; color: rgba(255,255,255,0.42);
+  font-family: 'Inter', sans-serif; font-size: 0.79rem; font-weight: 500;
+  text-align: left; transition: all 0.15s;
+  text-decoration: none;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); }
+.nav-item.active {
+  background: var(--red);
+  color: white;
+  font-weight: 600;
+}
+.nav-ico { width: 15px; display: flex; align-items: center; flex-shrink: 0; }
+.nav-ico svg { width: 14px; height: 14px; stroke-width: 1.8; }
+.nav-badge {
+  margin-left: auto; font-size: 0.56rem; font-weight: 700;
+  padding: 1px 6px; border-radius: 20px; line-height: 1.5;
+}
+.badge-yellow { background: var(--yellow); color: var(--black); }
+.badge-red    { background: var(--alert-red); color: white; }
+
+.sidebar-footer {
+  margin-top: auto; padding: 12px 8px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.store-chip {
+  display: flex; align-items: center; gap: 9px; padding: 10px 10px;
+  background: rgba(255,255,255,0.05); border-radius: 8px;
+}
+.store-ava {
+  width: 30px; height: 30px; border-radius: 7px; flex-shrink: 0;
+  background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.66rem; font-weight: 700; color: white;
+}
+.store-name { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.85); }
+.store-loc  { font-size: 0.61rem; color: rgba(255,255,255,0.28); margin-top: 1px; }
+.live-dot   { width: 7px; height: 7px; background: var(--green); border-radius: 50%; margin-left: auto; flex-shrink: 0; box-shadow: 0 0 6px var(--green); }
+
+/* ══════════════════════════════════════════
+   MAIN
+══════════════════════════════════════════ */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1; display: flex; flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Topbar */
+.topbar {
+  background: rgba(0,0,0,0.25);
+  border-bottom: 1px solid var(--white-12);
+  min-height: 54px; padding: 8px 18px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; flex-wrap: wrap;
+  position: sticky; top: 0; z-index: 40;
+  backdrop-filter: blur(6px);
+}
+.crumb { font-size: 0.75rem; color: var(--white-60); flex-shrink: 0; }
+.crumb b { color: white; font-weight: 600; }
+.topbar-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.date-chip {
+  background: rgba(0,0,0,0.3); border: 1px solid var(--white-12);
+  padding: 5px 12px; border-radius: 6px;
+  font-size: 0.71rem; color: var(--white-90); font-weight: 500;
+}
+.sync-info { display: flex; align-items: center; gap: 5px; font-size: 0.68rem; color: var(--white-60); }
+.sync-info .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; box-shadow: 0 0 5px var(--green); }
+.btn-black {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--black); color: white; border: none;
+  padding: 7px 16px; border-radius: 7px;
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+  cursor: pointer; transition: background 0.15s; letter-spacing: 0.2px;
+}
+.btn-black svg { width: 12px; height: 12px; stroke-width: 2.2; }
+.btn-black:hover { background: var(--black-3); }
+.btn-black.spinning svg { animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Period toggle (Today / Week / Month / Quarter) */
+.period-toggle {
+  display: inline-flex; background: var(--black); border: 1px solid var(--white-12);
+  border-radius: 7px; padding: 3px; gap: 2px;
+}
+.period-btn {
+  background: transparent; border: none;
+  color: var(--white-60); font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3px;
+  padding: 5px 12px; border-radius: 5px; cursor: pointer;
+  transition: all 0.15s;
+}
+.period-btn:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+.period-btn.active { background: var(--red); color: var(--white); }
+.user-ava {
+  width: 32px; height: 32px; background: var(--black);
+  border: 2px solid var(--white-30);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.67rem; font-weight: 700; color: white; cursor: pointer;
+}
+
+/* Content */
+.content { padding: 18px 20px; flex: 1; min-width: 0; max-width: 100%; }
+
+/* Page header */
+.page-hdr { margin-bottom: 20px; display: flex; align-items: flex-end; justify-content: space-between; }
+.page-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.7rem; font-weight: 800; color: white; letter-spacing: 0.5px; line-height: 1; }
+.page-sub   { font-size: 0.73rem; color: var(--white-60); margin-top: 4px; }
+.last-updated { font-size: 0.68rem; color: var(--white-60); text-align: right; }
+.last-updated b { color: white; }
+/* Data health status bar */
+.status-bar { display:flex; align-items:center; gap:7px; cursor:pointer; position:relative;
+  background:rgba(0,0,0,.22); border:1px solid rgba(255,255,255,.14); border-radius:20px; padding:5px 11px; }
+.status-bar .big { width:11px; height:11px; border-radius:50%; box-shadow:0 0 7px currentColor; }
+.status-bar .lbl { font-size:.66rem; font-weight:800; letter-spacing:.5px; text-transform:uppercase; color:#fff; }
+.s-green { color:#34d17a; background:#34d17a; } .s-yellow { color:#f0c64a; background:#f0c64a; } .s-red { color:#ff5a67; background:#ff5a67; }
+.status-pop { display:none; position:absolute; top:130%; right:0; z-index:50; min-width:230px;
+  background:#1c1f26; border:1px solid rgba(255,255,255,.16); border-radius:12px; padding:11px 13px; box-shadow:0 12px 30px rgba(0,0,0,.5); }
+.status-bar.open .status-pop, .status-bar:hover .status-pop { display:block; }
+.status-pop .row { display:flex; align-items:center; gap:9px; padding:5px 0; font-size:.74rem; color:#fff; }
+.status-pop .row .d { width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
+.status-pop .row small { color:rgba(255,255,255,.55); margin-left:auto; font-size:.66rem; }
+.status-pop .gen { font-size:.62rem; color:rgba(255,255,255,.45); margin-top:7px; padding-top:7px; border-top:1px solid rgba(255,255,255,.1); }
+
+/* ── CARD base ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--white-12);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  transition: background 0.15s;
+}
+.card:hover { background: var(--card-hover); }
+.card-hdr { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
+.card-title { font-size: 0.8rem; font-weight: 700; color: var(--white-90); letter-spacing: 0.3px; text-transform: uppercase; }
+.card-sub   { font-size: 0.67rem; color: var(--white-60); margin-top: 2px; font-weight: 400; text-transform: none; }
+.pill {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px;
+  padding: 3px 9px; border-radius: 20px;
+}
+.pill-white  { background: rgba(255,255,255,0.15); color: white; }
+.pill-green  { background: var(--green-dim); color: var(--green); }
+.pill-yellow { background: var(--yellow-dim); color: var(--yellow); }
+.pill-red    { background: var(--alert-dim); color: var(--alert-red); }
+
+/* ── Collapsible cards ── */
+.card.collapsible { position: relative; }
+.card.collapsible > *:first-child { cursor: pointer; user-select: none; padding-right: 26px; }
+.card.collapsible::after {
+  content: "▾"; color: var(--white-60); font-size: 0.85rem;
+  position: absolute; top: 18px; right: 18px;
+  transition: transform 0.2s; pointer-events: none;
+}
+.card.collapsible.collapsed::after { transform: rotate(-90deg); }
+.card.collapsible.collapsed > *:not(:first-child) { display: none; }
+.card.collapsible.collapsed { padding-bottom: 14px; }
+.card.collapsible.collapsed > *:first-child { margin-bottom: 0; }
+
+/* ══════════════════════════════════════════
+   THE CONTROLLABLES (hero section)
+══════════════════════════════════════════ */
+.controllables-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-bottom: 14px;
+}
+.ctrl-card {
+  background: var(--black);
+  border: 1px solid var(--white-12);
+  border-radius: var(--radius);
+  padding: 14px 16px 12px;
+  position: relative; overflow: hidden;
+}
+
+.ctrl-eyebrow {
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--white-60); margin-bottom: 6px;
+}
+.ctrl-main { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 4px; }
+.ctrl-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3.1rem; font-weight: 900; line-height: 1;
+  color: white; letter-spacing: -1.5px;
+}
+
+.ctrl-meta { padding-bottom: 4px; }
+.ctrl-goal { font-size: 0.7rem; color: var(--white-60); }
+.ctrl-goal b { color: white; }
+
+/* Inline flag under the % value — only shown when over goal */
+.ctrl-flag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.56rem; font-weight: 700;
+  padding: 2px 7px; border-radius: 20px;
+  background: var(--alert-dim); color: var(--alert-red);
+  border: 1px solid rgba(255,77,77,0.35);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-top: 4px;
+}
+.ctrl-flag svg { width: 9px; height: 9px; stroke-width: 2.5; }
+
+.ctrl-divider { height: 1px; background: var(--white-12); margin: 10px 0; }
+
+.ctrl-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ctrl-stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; color: white; }
+.ctrl-stat-lbl { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--white-60); margin-top: 1px; }
+
+/* Hourly bar mini-chart */
+.ctrl-section-lbl { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white-60); margin-bottom: 6px; display: flex; justify-content: space-between; }
+.ctrl-hours-lbl { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white-60); margin-bottom: 6px; display: flex; justify-content: space-between; }
+
+/* Top variance items */
+.var-list { display: flex; flex-direction: column; gap: 4px; }
+.var-item {
+  display: grid; grid-template-columns: 14px 1fr auto;
+  align-items: center; gap: 8px;
+  padding: 5px 8px; border-radius: 5px;
+  background: rgba(255,255,255,0.05);
+  font-size: 0.72rem;
+}
+.var-rank { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: var(--white-60); font-size: 0.85rem; }
+.var-name { color: var(--white); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.var-pct  { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--white); font-size: 0.85rem; }
+
+/* Period variance grid (week / month / QTD) */
+.period-var { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.period-box {
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px; padding: 8px 10px;
+  text-align: center;
+}
+.period-val { font-family: 'Barlow Condensed', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--white); line-height: 1; }
+.period-lbl { font-size: 0.52rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--white-60); margin-top: 3px; }
+.ctrl-hours-lbl .goal-tag { color: var(--white-90); font-weight: 700; }
+.ctrl-bar-row { display: flex; gap: 3px; align-items: flex-end; height: 40px; position: relative; padding-top: 2px; }
+.ctrl-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ctrl-bar {
+  width: 100%; border-radius: 2px 2px 0 0;
+  background: var(--white);
+  transition: height 0.4s;
+}
+.ctrl-bar.under { background: var(--white-30); }
+.ctrl-goal-line {
+  position: absolute; left: 0; right: 0;
+  border-top: 1px dashed var(--white-60);
+  pointer-events: none;
+}
+.ctrl-bar-hr { font-size: 0.46rem; color: var(--white-30); }
+
+/* ══════════════════════════════════════════
+   SECONDARY KPIs
+══════════════════════════════════════════ */
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+.kpi-card {
+  background: var(--card);
+  border: 1px solid var(--white-12);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.kpi-top  { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.kpi-ico  { width: 32px; height: 32px; border-radius: 8px; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
+.kpi-ico svg { width: 15px; height: 15px; stroke-width: 1.8; color: white; }
+.kpi-delta { display: flex; align-items: center; gap: 3px; font-size: 0.66rem; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+.kpi-delta svg { width: 9px; height: 9px; stroke-width: 2.5; }
+.d-up   { background: var(--green-dim);  color: var(--green); }
+.d-down { background: var(--alert-dim);  color: var(--alert-red); }
+.d-flat { background: rgba(255,255,255,0.1); color: var(--white-60); }
+.kpi-val { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 800; color: white; letter-spacing: -0.5px; line-height: 1; }
+.kpi-lbl { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--white-60); margin-top: 3px; }
+.kpi-sub { font-size: 0.67rem; color: var(--white-60); margin-top: 5px; }
+
+/* ══════════════════════════════════════════
+   SCHEDULING + HOURLY LABOR + COMPLIANCE
+══════════════════════════════════════════ */
+.ops-row { display: grid; grid-template-columns: 1.35fr 1fr; gap: 14px; margin-bottom: 14px; align-items: start; }
+.col-stack { display: flex; flex-direction: column; gap: 14px; }
+
+/* Secret Shop / Steritech / Notes 3-column row */
+.ss-row { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 14px; margin-bottom: 14px; align-items: stretch; }
+.ss-row > .card { padding: 14px 16px; background: var(--black); border: 1px solid var(--white-12); }
+.ss-row > .card:hover { background: var(--black-2); }
+
+/* Steritech card */
+.st-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--white-12); margin-bottom: 10px; }
+.st-score { font-family: 'Barlow Condensed', sans-serif; font-size: 2.4rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -1px; }
+.st-goal  { font-size: 0.66rem; color: var(--white-60); margin-top: 2px; }
+.st-goal b { color: white; }
+.st-meta  { font-size: 0.58rem; color: var(--white-60); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; text-align: right; }
+.st-meta b { color: white; display: block; font-size: 0.75rem; letter-spacing: 0; text-transform: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; margin-top: 2px; }
+
+.st-metric { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; font-size: 0.72rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.st-metric:last-child { border-bottom: none; }
+.st-metric-label { color: var(--white-90); }
+.st-metric-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--white); font-size: 0.88rem; }
+.st-status { display: inline-flex; align-items: center; gap: 5px; font-size: 0.62rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.8px; }
+.st-status.pass { background: var(--green-dim); color: var(--green); }
+.st-status.warn { background: var(--yellow-dim); color: var(--yellow); }
+.st-status.fail { background: var(--alert-dim); color: var(--alert-red); }
+
+/* Team Notes card */
+.notes-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--white-12); }
+.notes-list { display: flex; flex-direction: column; gap: 8px; max-height: 260px; overflow-y: auto; padding-right: 4px; }
+.note-item {
+  background: rgba(255,255,255,0.05);
+  border-left: 3px solid var(--white-30);
+  border-radius: 6px; padding: 10px 12px;
+}
+.note-item.from-dm       { border-left-color: var(--yellow); }
+.note-item.from-director { border-left-color: var(--alert-red); }
+.note-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.note-from {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.88rem; font-weight: 800; color: var(--white);
+  letter-spacing: 0.3px; text-transform: uppercase;
+}
+.note-role {
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 2px 7px; border-radius: 20px;
+  background: rgba(255,255,255,0.1); color: var(--white-60);
+  margin-left: 4px;
+}
+.note-role.dm       { background: var(--yellow-dim); color: var(--yellow); }
+.note-role.director { background: var(--alert-dim); color: var(--alert-red); }
+.note-time { font-size: 0.6rem; color: var(--white-60); margin-left: auto; }
+.note-body { font-size: 0.74rem; color: var(--white-90); line-height: 1.45; }
+.note-input-row { margin-top: 10px; display: flex; gap: 6px; }
+.note-input {
+  flex: 1; background: rgba(0,0,0,0.35); border: 1px solid var(--white-12);
+  border-radius: 6px; padding: 7px 10px; color: var(--white);
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+}
+.note-input::placeholder { color: var(--white-30); }
+.note-post {
+  background: var(--red); color: var(--white); border: none;
+  padding: 7px 14px; border-radius: 6px; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.7rem;
+  letter-spacing: 0.3px;
+}
+.note-post:hover { background: var(--red-bright); }
+
+/* Secret Shop card */
+.ss-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--white-12); margin-bottom: 10px; }
+.ss-score-wrap { display: flex; align-items: flex-end; gap: 8px; }
+.ss-score { font-family: 'Barlow Condensed', sans-serif; font-size: 2.1rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -1px; }
+.ss-goal  { font-size: 0.64rem; color: var(--white-60); padding-bottom: 3px; }
+.ss-goal b { color: white; }
+.ss-meta  { font-size: 0.55rem; color: var(--white-60); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; text-align: right; }
+.ss-meta b { color: white; display: block; font-size: 0.7rem; letter-spacing: 0; text-transform: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; margin-top: 2px; }
+
+.ss-kpi-list { display: flex; flex-direction: column; gap: 4px; }
+.ss-kpi {
+  display: grid; grid-template-columns: 1fr 40px auto;
+  align-items: center; gap: 8px;
+  padding: 5px 8px; border-radius: 5px;
+  background: rgba(255,255,255,0.05);
+  font-size: 0.68rem;
+}
+.ss-kpi-name { color: var(--white); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ss-kpi-bar-bg { height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; }
+.ss-kpi-bar-fill { height: 100%; background: var(--white); border-radius: 2px; }
+.ss-kpi-bar-fill.under { background: var(--white-30); }
+.ss-kpi-pct { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--white); font-size: 0.85rem; min-width: 36px; text-align: right; }
+
+/* Compliance checklist card */
+.cm-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--white-12); }
+.cm-overall-val { font-family: 'Barlow Condensed', sans-serif; font-size: 2.4rem; font-weight: 900; line-height: 1; color: var(--green); letter-spacing: -1px; }
+.cm-overall-lbl { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white-60); margin-top: 3px; }
+.cm-badge { font-size: 0.62rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+
+.cm-list { display: flex; flex-direction: column; gap: 6px; }
+.cm-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 10px; border-radius: 6px;
+  background: rgba(0,0,0,0.2); border: 1px solid transparent;
+}
+.cm-item:hover { background: rgba(0,0,0,0.3); }
+.cm-label { font-size: 0.72rem; font-weight: 500; color: var(--white-90); }
+.cm-pct   { font-size: 0.76rem; font-weight: 700; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.3px; }
+.cm-pct.good { color: var(--green); }
+.cm-pct.warn { color: var(--yellow); }
+.cm-pct.over { color: var(--alert-red); }
+.cm-pct.tbd  { color: var(--white-30); font-style: italic; font-size: 0.66rem; }
+.cm-item.shift-change { background: rgba(0,0,0,0.35); border-color: var(--white-12); }
+.cm-item.shift-change .cm-label { font-weight: 700; text-transform: uppercase; font-size: 0.65rem; letter-spacing: 1px; color: var(--white-60); }
+
+/* Schedule */
+.schedule-tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+.sched-tab {
+  padding: 5px 14px; border-radius: 6px; border: 1px solid var(--white-12);
+  background: transparent; color: var(--white-60);
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; letter-spacing: 0.3px;
+}
+.sched-tab.active { background: var(--black); color: white; border-color: var(--white-30); }
+
+.sched-table { width: 100%; border-collapse: collapse; }
+.sched-table thead th {
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--white-30); padding: 0 0 8px; text-align: left; border-bottom: 1px solid var(--white-12);
+}
+.sched-table thead th:not(:first-child) { text-align: right; }
+.sched-table tbody tr:hover td { background: rgba(255,255,255,0.04); }
+.sched-table tbody td {
+  padding: 8px 0; font-size: 0.76rem; color: var(--white-90);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.sched-table tbody td:not(:first-child) { text-align: right; }
+.sched-table tbody tr:last-child td { border-bottom: none; }
+.sched-table .total-row td { color: white; font-weight: 700; border-top: 1px solid var(--white-12); padding-top: 10px; }
+
+.emp-name  { font-weight: 600; }
+.emp-role  { font-size: 0.62rem; color: var(--white-30); margin-top: 1px; }
+.var-over  { color: var(--alert-red); font-weight: 700; }
+.var-under { color: var(--green); font-weight: 700; }
+.var-ok    { color: var(--white-60); }
+.pending   { color: var(--white-30); font-style: italic; font-size: 0.7rem; }
+
+/* Hourly labor alerts */
+.hourly-grid { display: flex; flex-direction: column; gap: 5px; }
+.hour-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 10px; border-radius: 7px;
+  border: 1px solid transparent;
+}
+.hour-row.hr-green  { background: var(--green-dim);  border-color: rgba(34,197,94,0.2); }
+.hour-row.hr-yellow { background: var(--yellow-dim); border-color: rgba(245,168,0,0.2); }
+.hour-row.hr-red    { background: var(--alert-dim);  border-color: rgba(255,77,77,0.2); }
+.hour-row.hr-future { background: rgba(255,255,255,0.04); border-color: transparent; }
+
+.hr-time { font-size: 0.7rem; font-weight: 600; color: var(--white-60); width: 42px; flex-shrink: 0; }
+.hr-bar-bg { flex: 1; height: 6px; background: rgba(0,0,0,0.3); border-radius: 99px; overflow: hidden; }
+.hr-bar-fill { height: 100%; border-radius: 99px; }
+.hr-bar-fill.green  { background: var(--green); }
+.hr-bar-fill.yellow { background: var(--yellow); }
+.hr-bar-fill.red    { background: var(--alert-red); }
+.hr-bar-fill.future { background: rgba(255,255,255,0.15); }
+.hr-pct { font-size: 0.73rem; font-weight: 700; width: 40px; text-align: right; flex-shrink: 0; }
+.hr-pct.green  { color: var(--green); }
+.hr-pct.yellow { color: var(--yellow); }
+.hr-pct.red    { color: var(--alert-red); }
+.hr-pct.future { color: var(--white-30); }
+.hr-flag { font-size: 0.6rem; font-weight: 700; padding: 1px 6px; border-radius: 4px; flex-shrink: 0; width: 48px; text-align: center; }
+.flag-good { background: var(--green-dim); color: var(--green); }
+.flag-warn { background: var(--yellow-dim); color: var(--yellow); }
+.flag-over { background: var(--alert-dim); color: var(--alert-red); }
+.flag-tbd  { background: rgba(255,255,255,0.06); color: var(--white-30); }
+
+/* ══════════════════════════════════════════
+   BOTTOM ROW (trend chart + activity)
+══════════════════════════════════════════ */
+.bottom-row { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+/* Discounts & Refunds card */
+.dr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 14px; }
+.dr-box {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px; padding: 12px 14px;
+  border: 1px solid var(--white-12);
+}
+.dr-lbl { font-size: 0.56rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white-60); margin-bottom: 6px; }
+.dr-val { font-family: 'Barlow Condensed', sans-serif; font-size: 1.7rem; font-weight: 800; color: var(--white); line-height: 1; letter-spacing: -0.5px; }
+.dr-sub { font-size: 0.64rem; color: var(--white-60); margin-top: 4px; }
+.dr-sub b { color: var(--white); font-weight: 700; }
+
+.dr-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
+.dr-table th {
+  text-align: left; padding: 8px 10px;
+  font-size: 0.56rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--white-60); border-bottom: 1px solid var(--white-12);
+}
+.dr-table th.num { text-align: right; }
+.dr-table td {
+  padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: var(--white-90);
+}
+.dr-table td.num { text-align: right; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--white); }
+.dr-table tbody tr:hover { background: rgba(255,255,255,0.04); }
+
+/* Slim horizontal alert strip */
+.alerts-strip {
+  display: flex; align-items: center; gap: 10px;
+  flex-wrap: wrap;
+  background: var(--card); border: 1px solid var(--white-12);
+  border-radius: var(--radius); padding: 10px 14px;
+  margin-top: 14px; max-width: 100%;
+}
+.alerts-strip-lbl {
+  flex-shrink: 0; font-size: 0.58rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px; color: var(--white-60);
+  padding-right: 12px; border-right: 1px solid var(--white-12);
+  display: flex; align-items: center; gap: 6px;
+}
+.alerts-strip-lbl svg { width: 12px; height: 12px; stroke-width: 2.4; }
+.alerts-strip-items { display: flex; gap: 6px; flex: 1 1 auto; flex-wrap: wrap; min-width: 0; }
+.alert-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 9px; border-radius: 20px;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--white-12);
+  font-size: 0.68rem; color: var(--white-90);
+}
+.alert-chip .alert-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+.alert-chip .alert-dot.red    { background: var(--alert-red); box-shadow: 0 0 5px var(--alert-red); }
+.alert-chip .alert-dot.yellow { background: var(--yellow); }
+.alert-chip .alert-dot.green  { background: var(--green); }
+.alert-chip .alert-time { color: var(--white-60); font-size: 0.62rem; }
+
+/* Activity */
+.activity-list { display: flex; flex-direction: column; }
+.act-item {
+  display: flex; gap: 10px; padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  align-items: flex-start;
+}
+.act-item:last-child { border-bottom: none; }
+.act-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.act-dot.red    { background: var(--alert-red); box-shadow: 0 0 5px var(--alert-red); }
+.act-dot.green  { background: var(--green); box-shadow: 0 0 5px var(--green); }
+.act-dot.yellow { background: var(--yellow); box-shadow: 0 0 5px var(--yellow); }
+.act-dot.gray   { background: var(--white-30); }
+.act-text { font-size: 0.74rem; color: var(--white-90); font-weight: 500; line-height: 1.4; }
+.act-time { font-size: 0.64rem; color: var(--white-30); margin-top: 2px; }
+
+/* Footer */
+.footer-bar {
+  background: var(--black); padding: 10px 26px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.67rem; color: rgba(255,255,255,0.25); letter-spacing: 0.3px;
+  border-top: 1px solid rgba(255,255,255,0.06); flex-shrink: 0;
+}
+.footer-bar span { color: rgba(255,255,255,0.45); }
+
+/* ══════════════════════════════════════════
+   MOBILE — sidebar slides off-screen, hamburger toggles
+══════════════════════════════════════════ */
+.mobile-topbar {
+  display: none;
+  position: sticky; top: 0; z-index: 70;
+  background: var(--black); color: white;
+  padding: 10px 14px;
+  align-items: center; gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.mobile-topbar .hamb {
+  width: 38px; height: 38px; flex-shrink: 0;
+  background: var(--red); border: none; border-radius: 8px;
+  color: white; font-size: 20px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.mobile-topbar .brand { display: flex; align-items: center; gap: 8px; }
+.mobile-topbar .brand-name { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.3px; }
+.mobile-topbar .brand-sub { font-size: 0.65rem; color: rgba(255,255,255,0.5); letter-spacing: 1.5px; text-transform: uppercase; }
+.sidebar-backdrop {
+  display: none;
+  position: fixed; inset: 0; z-index: 55;
+  background: rgba(0,0,0,0.55);
+}
+body.sidebar-open .sidebar-backdrop { display: block; }
+
+@media (max-width: 900px) {
+  body { flex-direction: column; }
+  .mobile-topbar { display: flex; }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    width: 260px; max-width: 85vw;
   }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Inter',sans-serif;background:var(--red);color:#fff;min-height:100vh;padding-bottom:48px;}
+  body.sidebar-open .sidebar { transform: translateX(0); }
+  .main { margin-left: 0 !important; }
+  .ops-row, .controllables-row, .kpi-row, .bottom-row, .ss-row {
+    grid-template-columns: 1fr !important;
+    display: block !important;
+  }
+  .card, .ctrl-card { margin-bottom: 12px !important; }
+  .footer-bar { flex-direction: column; gap: 4px; text-align: center; padding: 14px; }
+}
 
-  /* Header */
-  .top{background:var(--red-deep);border-bottom:3px solid rgba(0,0,0,.25);padding:18px 26px;}
-  .top-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;max-width:1280px;margin:0 auto;}
-  .brand{display:flex;align-items:center;gap:14px;}
-  .brand .mark{width:44px;height:44px;border-radius:9px;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;}
-  .brand h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.5px;line-height:1;}
-  .brand .sub{font-size:.72rem;color:var(--white-60);font-weight:600;letter-spacing:.4px;text-transform:uppercase;margin-top:3px;}
-  .updated{font-size:.7rem;color:var(--white-60);font-weight:600;display:flex;align-items:center;gap:7px;justify-content:flex-end;}
-  .hdot{width:10px;height:10px;border-radius:50%;box-shadow:0 0 7px currentColor;}
-  .hg{color:#34d17a;background:#34d17a;} .hy{color:#f0c64a;background:#f0c64a;} .hr{color:#ff5a67;background:#ff5a67;}
-
-  /* Store switcher */
-  .switch{max-width:1280px;margin:18px auto 0;padding:0 26px;display:flex;gap:10px;flex-wrap:wrap;}
-  .store-btn{background:var(--white-12);border:1px solid var(--card-line);color:#fff;padding:11px 18px;border-radius:10px;cursor:pointer;
-    font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.02rem;letter-spacing:.4px;transition:.15s;display:flex;flex-direction:column;align-items:flex-start;line-height:1.1;}
-  .store-btn small{font-family:'Inter',sans-serif;font-weight:600;font-size:.62rem;color:var(--white-60);letter-spacing:.3px;text-transform:uppercase;margin-top:3px;}
-  .store-btn:hover{background:rgba(255,255,255,.2);}
-  .store-btn.active{background:#fff;color:var(--red);}
-  .store-btn.active small{color:var(--red-deep);}
-
-  .wrap{max-width:1280px;margin:0 auto;padding:24px 26px 0;}
-
-  /* KPI row */
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
-  .kpi{background:var(--red-deep);border:1px solid var(--card-line);border-radius:13px;padding:18px;}
-  .kpi .lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.6px;color:var(--white-60);font-weight:700;}
-  .kpi .val{font-family:'Barlow Condensed',sans-serif;font-size:2.1rem;font-weight:800;letter-spacing:-.5px;line-height:1.1;margin-top:6px;}
-  .kpi .src{font-size:.64rem;color:var(--white-60);margin-top:6px;font-weight:600;}
-
-  /* Sections */
-  .sec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-  .sec{background:var(--red-deep);border:1px solid var(--card-line);border-radius:13px;padding:18px;min-height:120px;}
-  .sec h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.12rem;letter-spacing:.4px;display:flex;align-items:center;gap:9px;}
-  .sec .src{font-size:.64rem;color:var(--white-60);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
-  .sec .body{margin-top:14px;color:var(--white-60);font-size:.86rem;line-height:1.5;}
-
-  /* status badge */
-  .badge{font-family:'Inter',sans-serif;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:3px 8px;border-radius:20px;margin-left:auto;}
-  .badge.pending{background:rgba(199,154,59,.22);color:#f0cd7e;border:1px solid rgba(199,154,59,.4);}
-  .badge.nocreds{background:rgba(0,0,0,.3);color:var(--white-60);border:1px solid var(--card-line);}
-  .badge.live{background:rgba(46,125,79,.25);color:#7fdca0;border:1px solid rgba(46,125,79,.5);}
-
-  .note{max-width:1280px;margin:22px auto 0;padding:0 26px;}
-  .note .card{background:rgba(0,0,0,.22);border:1px dashed var(--card-line);border-radius:11px;padding:14px 18px;font-size:.78rem;color:var(--white-60);line-height:1.5;}
-  .note b{color:#fff;}
-  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr);}.sec-grid{grid-template-columns:1fr;}}
+/* ══════════════════════════════════════════
+   PORTRAIT PHONES — strip topbar chrome, stack page header
+══════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .topbar { padding: 8px 12px; min-height: 0; gap: 8px; }
+  .topbar .crumb,
+  .topbar .sync-info,
+  .topbar .date-chip,
+  .topbar .btn-black,
+  .topbar .user-ava { display: none !important; }
+  .topbar-right { width: 100%; justify-content: center; }
+  .period-toggle { width: 100%; justify-content: space-between; }
+  .period-btn { flex: 1; text-align: center; padding: 6px 4px; }
+  .content { padding: 14px 12px; }
+  .page-hdr { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 14px; }
+  .page-title { font-size: 1.4rem; }
+  .last-updated { text-align: left; font-size: 0.7rem; }
+}
 </style>
 </head>
 <body>
-  <div class="top">
-    <div class="top-row">
-      <div class="brand">
-        <div class="mark">FG</div>
-        <div>
-          <h1 id="districtName">Louisville District</h1>
-          <div class="sub">Operations Dashboard &bull; DM: Bobby Cline</div>
-        </div>
+
+<!-- ══════════ MOBILE TOP BAR (phones only) ══════════ -->
+<div class="mobile-topbar">
+  <button class="hamb" aria-label="Open menu" onclick="document.body.classList.toggle('sidebar-open')">☰</button>
+  <div class="brand">
+    <div>
+      <div class="brand-name">Louisville District</div>
+      <div class="brand-sub">Operations Hub</div>
+    </div>
+  </div>
+</div>
+<div class="sidebar-backdrop" onclick="document.body.classList.remove('sidebar-open')"></div>
+<script>
+  // Close sidebar when any nav item (link or button) is tapped on mobile.
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('.sidebar .nav-item');
+    if (a && window.innerWidth <= 900) document.body.classList.remove('sidebar-open');
+  });
+</script>
+
+<!-- ══════════ SIDEBAR ══════════ -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-row">
+      <div class="logo-box">FG</div>
+      <div>
+        <div class="logo-name">Five Guys Ops</div>
+        <div class="logo-sub">Operations Hub</div>
       </div>
-      <div class="updated" id="updated">Scaffold preview — no live data wired yet</div>
     </div>
   </div>
 
-  <div class="switch" id="switch"></div>
-
-  <div class="wrap">
-    <div class="kpis" id="kpis"></div>
-    <div class="sec-grid" id="sections"></div>
+  <div class="nav-section">
+    <div class="nav-label">Main</div>
+    <button class="nav-item active">
+      <span class="nav-ico"><i data-lucide="layout-dashboard"></i></span>Overview
+    </button>
   </div>
 
-  <div class="note">
-    <div class="card" id="statusNote"></div>
+  <div class="nav-section">
+    <div class="nav-label">Operations Hub</div>
+    <a class="nav-item" href="daily_numbers.html">
+      <span class="nav-ico"><i data-lucide="calendar-days"></i></span>Daily Numbers
+    </a>
+    <a class="nav-item" href="food_cost_plan.html">
+      <span class="nav-ico"><i data-lucide="clipboard-list"></i></span>Food Cost Plan
+    </a>
+    <a class="nav-item" href="employee_directory.pdf" download>
+      <span class="nav-ico"><i data-lucide="file-text"></i></span>Phone Directory (PDF)
+    </a>
+    <a class="nav-item" href="Steritech-Morning-Manager-Walk.pdf" target="_blank">
+      <span class="nav-ico"><i data-lucide="clipboard-check"></i></span>Steritech Walk
+    </a>
+    <a class="nav-item" href="Steritech-Missed-Items-Training-Tracker-2065.xlsx" download>
+      <span class="nav-ico"><i data-lucide="list-checks"></i></span>Steritech Tracker
+    </a>
+    <a class="nav-item" href="Shop_Tracker_2065_2026.xlsx" download>
+      <span class="nav-ico"><i data-lucide="trophy"></i></span>Shop Tracker
+    </a>
+    <a class="nav-item" href="Shop_Performance_Report_2065_Q1_April2026.docx" download>
+      <span class="nav-ico"><i data-lucide="file-bar-chart"></i></span>Shop Report (Q1+Apr)
+    </a>
+    <a class="nav-item" href="bread.html">
+      <span class="nav-ico"><i data-lucide="wheat"></i></span>Bread Order
+    </a>
+    <a class="nav-item" href="safe_drawer.html">
+      <span class="nav-ico"><i data-lucide="banknote"></i></span>Safe &amp; Drawer Log
+    </a>
+    <a class="nav-item" href="manager-test.html">
+      <span class="nav-ico"><i data-lucide="graduation-cap"></i></span>Manager Test
+    </a>
+    <a class="nav-item" href="https://estepcompany-my.sharepoint.com/:f:/g/personal/bdavis_estep-co_com/IgDfx-Ojw7h6RoCzzi4piyycAaduNJ5ZaukANEGveXNgsSQ?e=rs65de" target="_blank" rel="noopener">
+      <span class="nav-ico"><i data-lucide="folder-open"></i></span>Estep &amp; Co Documents
+    </a>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="map-pin"></i></span>Locations
+    </button>
   </div>
 
+  <div class="nav-section">
+    <div class="nav-label">System</div>
+    <button class="nav-item">
+      <span class="nav-ico"><i data-lucide="settings"></i></span>Settings
+    </button>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="store-chip">
+      <div class="store-ava">BC</div>
+      <div>
+        <div class="store-name">Store 2065</div>
+        <div class="store-loc">Louisville, KY</div>
+      </div>
+      <div class="live-dot"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ MAIN ══════════ -->
+<div class="main">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="crumb">Operations &nbsp;&rsaquo;&nbsp; <b>Overview</b></div>
+    <div class="topbar-right">
+      <div class="period-toggle" id="storeSwitch"></div>
+      <div class="status-bar" id="statusBar" title="Data health — click for detail"></div>
+      <div class="date-chip">Saturday, May 23 &nbsp;2026</div>
+      <button class="btn-black" id="refreshBtn" onclick="refreshDash()"><i data-lucide="refresh-cw"></i> Refresh</button>
+      <div class="user-ava">BC</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Page header -->
+    <div class="page-hdr">
+      <div>
+        <div class="page-title" id="storeTitle">Louisville District</div>
+        <div class="page-sub" id="storeSub">4-store district &middot; DM: Bobby Cline</div>
+      </div>
+      <div class="last-updated">Last updated <b>6:28 PM</b><br>Source: CrunchTime Net Chef</div>
+    </div>
+
+    <!-- ══ THE CONTROLLABLES ══ -->
+    <div class="controllables-row">
+
+      <!-- Food Cost -->
+      <div class="ctrl-card food-cost">
+        <div class="ctrl-eyebrow">The Controllables &nbsp;&mdash;&nbsp; Food Cost</div>
+        <div class="ctrl-main">
+          <div>
+            <div class="ctrl-value">20.7%</div>
+            <div class="ctrl-flag"><i data-lucide="flag"></i> Under Goal</div>
+          </div>
+          <div class="ctrl-meta">
+            <div class="ctrl-goal">Goal: <b>27.5%</b></div>
+          </div>
+        </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-section-lbl"><span>Top 3 Variance Items</span><span class="goal-tag">05/11–05/17</span></div>
+        <div class="var-list">
+          <div class="var-item">
+            <span class="var-rank">1</span>
+            <span class="var-name">Cheeseburger</span>
+            <span class="var-pct">+$5126</span>
+          </div>
+          <div class="var-item">
+            <span class="var-rank">2</span>
+            <span class="var-name">Bacon Cheeseburger</span>
+            <span class="var-pct">+$3461</span>
+          </div>
+          <div class="var-item">
+            <span class="var-rank">3</span>
+            <span class="var-name">Little Cheeseburger</span>
+            <span class="var-pct">+$2077</span>
+          </div>
+        </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-section-lbl"><span>Food Cost % by Period</span><span class="goal-tag">Goal 27.5%</span></div>
+        <div class="period-var">
+          <div class="period-box">
+            <div class="period-val">—</div>
+            <div class="period-lbl">Food Cost % Week</div>
+          </div>
+          <div class="period-box">
+            <div class="period-val">23.4%</div>
+            <div class="period-lbl">Food Cost % Month</div>
+          </div>
+          <div class="period-box">
+            <div class="period-val">23.4%</div>
+            <div class="period-lbl">Food Cost % Quarter</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Labor -->
+      <div class="ctrl-card labor">
+        <div class="ctrl-eyebrow">The Controllables &nbsp;&mdash;&nbsp; Labor</div>
+        <div class="ctrl-main">
+          <div>
+            <div class="ctrl-value">18.6%</div>
+            <div class="ctrl-flag"><i data-lucide="flag"></i> Over Goal</div>
+          </div>
+          <div class="ctrl-meta">
+            <div class="ctrl-goal">Goal: <b>18.5%</b></div>
+          </div>
+        </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-stats" style="grid-template-columns: repeat(4, 1fr);">
+          <div>
+            <div class="ctrl-stat-val">$991</div>
+            <div class="ctrl-stat-lbl">Labor $ Today</div>
+          </div>
+          <div>
+            <div class="ctrl-stat-val">82.6</div>
+            <div class="ctrl-stat-lbl">Actual Hrs</div>
+          </div>
+          <div>
+            <div class="ctrl-stat-val">89.0</div>
+            <div class="ctrl-stat-lbl">Sched Hrs</div>
+          </div>
+          <div>
+            <div class="ctrl-stat-val">$12.00</div>
+            <div class="ctrl-stat-lbl">Avg Hrly Wage</div>
+          </div>
+        </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-section-lbl"><span>Week-to-Date Running Labor</span><span class="goal-tag">Goal 18.5%</span></div>
+        <div class="period-var">
+          <div class="period-box">
+            <div class="period-val">18.7%</div>
+            <div class="period-lbl">WTD %</div>
+          </div>
+          <div class="period-box">
+            <div class="period-val">$5,011</div>
+            <div class="period-lbl">WTD Labor $</div>
+          </div>
+          <div class="period-box">
+            <div class="period-val">407.9</div>
+            <div class="period-lbl">WTD Hours</div>
+          </div>
+        </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-section-lbl"><span>Labor % by Period</span><span class="goal-tag">Goal 18.5%</span></div>
+        <div class="period-var">
+          <div class="period-box">
+            <div class="period-val">18.1%</div>
+            <div class="period-lbl">Labor % Week</div>
+          </div>
+          <div class="period-box">
+            <div class="period-val">20.1%</div>
+            <div class="period-lbl">Labor % Month</div>
+          </div>
+          <div class="period-box">
+            <div class="period-val">20.0%</div>
+            <div class="period-lbl">Labor % Quarter</div>
+          </div>
+        </div>
+        <div class="ctrl-divider"></div>
+        <div class="ctrl-hours-lbl">
+          <span>Labor % by Hour &middot; 11A&ndash;10P</span>
+          <span class="goal-tag">Goal 18.5%</span>
+        </div>
+        <div class="ctrl-bar-row" id="laborBars"></div>
+      </div>
+
+    </div><!-- /controllables-row -->
+
+    <!-- ══ SECONDARY KPIs ══ -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-ico"><i data-lucide="dollar-sign"></i></div>
+          <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;4.2%</div>
+        </div>
+        <div class="kpi-val data-swap" data-today="$5,321" data-week="$26,791" data-month="$124,046" data-quarter="$128,691">$5,321</div>
+        <div class="kpi-lbl data-swap" data-today="Daily Sales" data-week="Week Sales (WTD)" data-month="Month Sales (MTD)" data-quarter="Quarter Sales (QTD)">Daily Sales</div>
+        <div class="kpi-sub data-swap" data-today="LY $4,347 &nbsp;&middot;&nbsp; Fcst $4,845" data-week="LY $24,965 &nbsp;&middot;&nbsp; Fcst $25,464" data-month="27d &middot; $4,594/day" data-quarter="28d &middot; $4,596/day">LY $4,347 &nbsp;&middot;&nbsp; Fcst $4,845</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-ico"><i data-lucide="receipt"></i></div>
+          <div class="kpi-delta">&nbsp;</div>
+        </div>
+        <div class="kpi-val data-swap" data-today="205" data-week="1,311" data-month="4,983" data-quarter="5,170">205</div>
+        <div class="kpi-lbl data-swap" data-today="Transactions" data-week="Transactions (WTD)" data-month="Transactions (MTD)" data-quarter="Transactions (QTD)">Transactions</div>
+        <div class="kpi-sub data-swap" data-today="980 guests &middot; $25.95 avg ticket" data-week="6,073 guests &middot; $25.00 avg" data-month="23,038 guests &middot; $24.89 avg" data-quarter="23,906 guests &middot; $24.89 avg">980 guests &middot; $25.95 avg ticket</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-ico"><i data-lucide="tag"></i></div>
+          <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;$0.60</div>
+        </div>
+        <div class="kpi-val data-swap" data-today="$5.43" data-week="$5.38" data-month="$5.38" data-quarter="$5.38">$5.43</div>
+        <div class="kpi-lbl data-swap" data-today="Sales / Guest" data-week="Sales / Guest (WTD)" data-month="Sales / Guest (MTD)" data-quarter="Sales / Guest (QTD)">Sales / Guest</div>
+        <div class="kpi-sub data-swap" data-today="Week avg $5.38" data-week="Day avg $5.43" data-month="27d avg" data-quarter="28d avg">Week avg $5.38</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <div class="kpi-ico"><i data-lucide="shield-check"></i></div>
+          <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;+0pts</div>
+        </div>
+        <div class="kpi-val data-swap" data-today="73%" data-week="93%" data-month="96%" data-quarter="96%">73%</div>
+        <div class="kpi-lbl data-swap" data-today="Compliance" data-week="Compliance (WTD)" data-month="Compliance (MTD)" data-quarter="Compliance (QTD)">Compliance</div>
+        <div class="kpi-sub data-swap" data-today="6/9 required lists" data-week="7d avg" data-month="28d avg" data-quarter="28d avg">6/9 required lists</div>
+      </div>
+    </div>
+
+    <!-- ══ COMPLIANCE CHECKLISTS ══ -->
+    <div class="card collapsible collapsed" data-card-id="compliancemate">
+      <div class="cm-header-row">
+        <div>
+          <div class="card-title"><i data-lucide="clipboard-check"></i> ComplianceMate &mdash; Required Checklists</div>
+          <div class="card-sub">Store 2065 &middot; Today</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="text-align:right;">
+            <div class="cm-overall-val">73%</div>
+            <div class="cm-overall-lbl">Overall</div>
+          </div>
+          <span class="cm-badge pill pill-red">Behind</span>
+        </div>
+      </div>
+      <div class="cm-list">
+        <div class="cm-item shift-change"><span class="cm-label">AM Pre-Shift Check</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">11 AM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item shift-change"><span class="cm-label">Shift Change</span><span class="cm-pct over">57%</span></div>
+        <div class="cm-item"><span class="cm-label">3 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">5 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item shift-change"><span class="cm-label">PM Pre-Shift Check</span><span class="cm-pct over">0%</span></div>
+        <div class="cm-item"><span class="cm-label">7 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">9 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">11 PM &middot; Closing Time and Temp</span><span class="cm-pct over">0%</span></div>
+        <div class="cm-item" id="cm-milkshake-row" style="display:none;"><span class="cm-label">Milkshake Cleaning Checklist <span style="color:var(--white-60); font-weight:500;">&middot; Tue/Fri AM only</span></span><span class="cm-pct tbd">Not Today</span></div>
+      </div>
+    </div>
+
+    <!-- ══ SECRET SHOP + STERITECH + NOTES ══ -->
+    <div class="ss-row">
+
+      <!-- Secret Shop (condensed) -->
+      <div class="card collapsible" data-card-id="secret-shop">
+        <div class="card-hdr">
+          <div>
+            <div class="card-title"><i data-lucide="eye"></i> Secret Shop</div>
+            <div class="card-sub">Rolling avg vs 88% goal</div>
+          </div>
+        </div>
+        <div class="ss-top">
+          <div class="ss-score-wrap">
+            <div class="ss-score">85%</div>
+            <div class="ss-goal">Latest: <b>75%</b></div>
+          </div>
+          <div class="ss-meta">Last<b>May 16</b></div>
+        </div>
+        <div class="ss-kpi-list">
+          <div class="ss-kpi">
+            <span class="ss-kpi-name">Service</span>
+            <span class="ss-kpi-bar-bg"><span class="ss-kpi-bar-fill" style="width:0%"></span></span>
+            <span class="ss-kpi-pct">—</span>
+          </div>
+          <div class="ss-kpi">
+            <span class="ss-kpi-name">Quality</span>
+            <span class="ss-kpi-bar-bg"><span class="ss-kpi-bar-fill" style="width:0%"></span></span>
+            <span class="ss-kpi-pct">—</span>
+          </div>
+          <div class="ss-kpi">
+            <span class="ss-kpi-name">Cleanliness</span>
+            <span class="ss-kpi-bar-bg"><span class="ss-kpi-bar-fill" style="width:0%"></span></span>
+            <span class="ss-kpi-pct">—</span>
+          </div>
+          <div class="ss-kpi">
+            <span class="ss-kpi-name">Customer Satisfaction</span>
+            <span class="ss-kpi-bar-bg"><span class="ss-kpi-bar-fill" style="width:0%"></span></span>
+            <span class="ss-kpi-pct">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steritech (food safety) -->
+      <div class="card collapsible" data-card-id="steritech">
+        <div class="card-hdr">
+          <div>
+            <div class="card-title"><i data-lucide="shield-check"></i> Steritech</div>
+            <div class="card-sub">Food Safety &middot; Last Audit</div>
+          </div>
+        </div>
+        <div class="st-top">
+          <div>
+            <div class="st-score">100</div>
+            <div class="st-goal">Goal: <b>90+ Pass</b></div>
+          </div>
+          <div class="st-meta">Last Audit<b>Mar 28</b></div>
+        </div>
+        <div>
+          <div class="st-metric">
+            <span class="st-metric-label">Overall Status</span>
+            <span class="st-status pass">Pass</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Critical Violations</span>
+            <span class="st-metric-val">0</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Non-Critical</span>
+            <span class="st-metric-val">0</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Hand Wash Stations</span>
+            <span class="st-status pass">OK</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Cooler Temps</span>
+            <span class="st-status pass">OK</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Grill Hold Temps</span>
+            <span class="st-status warn">Watch</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Date Labels</span>
+            <span class="st-status pass">OK</span>
+          </div>
+          <div class="st-metric">
+            <span class="st-metric-label">Next Audit Due</span>
+            <span class="st-metric-val">May 28</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Notes -->
+      <div class="card collapsible" data-card-id="team-notes">
+        <div class="notes-head">
+          <div>
+            <div class="card-title"><i data-lucide="message-square"></i> Team Notes</div>
+            <div class="card-sub">Messages from GM / DM / Director</div>
+          </div>
+          <div class="pill pill-white">5 new</div>
+        </div>
+        <!-- TEAM-NOTES-START -->
+        <div class="notes-list">
+          <div class="note-item from-director">
+            <div class="note-head">
+              <span>
+                <span class="note-from">Brad Davis</span>
+                <span class="note-role director">Director of Operations</span>
+              </span>
+              <span class="note-time">2026-05-18T17:39:00+00:00</span>
+            </div>
+            <div class="note-body">Way to go Bobby & Crystal! Steritech STRONG! — Brad Davis. FGE FBM Kevin Goyke also sent congratulations: 'Congrats on the now 99% food safety audit result here! Excellent work!' Score: 98 base, challenged to 99. Zero criticals. Low risk.</div>
+          </div>
+          <div class="note-item from-director">
+            <div class="note-head">
+              <span>
+                <span class="note-from">Brad Davis</span>
+                <span class="note-role director">Director of Operations</span>
+              </span>
+              <span class="note-time">2026-05-18T22:17:00+00:00</span>
+            </div>
+            <div class="note-body">4 locations still remaining for Steritech this quarter (Muncie, Kokomo, New Albany, Outerloop). District average 97.71%. 100% is the goal. 2065 is ahead — keep the standards up every shift.</div>
+          </div>
+          <div class="note-item ">
+            <div class="note-head">
+              <span>
+                <span class="note-from">Today's Focus</span>
+                <span class="note-role">Supply Alert — Memorial Day</span>
+              </span>
+              <span class="note-time">2026-05-19T08:45:00-04:00</span>
+            </div>
+            <div class="note-body">Monday May 25 Memorial Day — no delivery. Mon + Tue deliveries combined on Tuesday May 26. Order early this week to cover the long weekend. Frozen proteins and buns are the risk items.</div>
+          </div>
+          <div class="note-item ">
+            <div class="note-head">
+              <span>
+                <span class="note-from">Today's Focus</span>
+                <span class="note-role">Tuesday Huddle Pillars</span>
+              </span>
+              <span class="note-time">2026-05-19T08:45:00-04:00</span>
+            </div>
+            <div class="note-body">99% on Steritech — zero criticals. Brad and FGE both acknowledged 2065 by name. Crystal is visiting locations this week — have the Shopper Dashboard on the comm board and be ready to walk KPI rankings. Blackberry LTO POS is LIVE (activated May 18). Mix on bottom row, confirm price point is set, FGU complete for all shift leads.</div>
+          </div>
+          <div class="note-item ">
+            <div class="note-head">
+              <span>
+                <span class="note-from">Today's Focus</span>
+                <span class="note-role">Cash Variance</span>
+              </span>
+              <span class="note-time">2026-05-19T08:45:00-04:00</span>
+            </div>
+            <div class="note-body">CrunchTime shows $40.00 over on 5/17. Verify with closing manager — confirm deposit was correct and no re-ring situations. 5/18 came back even. Follow up before banking today.</div>
+          </div>
+        </div>
+        <!-- TEAM-NOTES-END -->
+        <div class="note-input-row">
+          <input class="note-input" placeholder="Leave a note for the team…">
+          <button class="note-post">Post</button>
+        </div>
+      </div>
+
+    </div><!-- /ss-row -->
+
+    <!-- ══ SCHEDULE + HOURLY LABOR ══ -->
+    <div class="ops-row">
+
+      <!-- Schedule card -->
+      <div class="card collapsible" data-card-id="schedule">
+        <div class="card-hdr">
+          <div>
+            <div class="card-title">Today's Schedule</div>
+            <div class="card-sub">Scheduled vs actual hours by employee</div>
+          </div>
+          <div class="pill pill-white">May 24</div>
+        </div>
+        <div class="schedule-tabs">
+          <button class="sched-tab active" onclick="showShift('am', this)">AM Shift &nbsp;8AM&ndash;4PM</button>
+          <button class="sched-tab" onclick="showShift('pm', this)">PM Shift &nbsp;4PM&ndash;Close</button>
+        </div>
+
+        <!-- AM Shift -->
+        <div id="shift-am">
+          <table class="sched-table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Sched Hrs</th>
+                <th>Actual Hrs</th>
+                <th>Variance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="emp-name">Francisco M.</div><div class="emp-role">Crew</div></td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Brianna G.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Emanuela K.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Vicki L.</div><div class="emp-role">Shift Lead</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td>AM Total</td>
+                <td>31.0 hrs</td>
+                <td class="pending">Pending</td>
+                <td class="pending">—</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- PM Shift -->
+        <div id="shift-pm" style="display:none">
+          <table class="sched-table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Sched Hrs</th>
+                <th>Actual Hrs</th>
+                <th>Variance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="emp-name">Anthony P.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">DJuan J.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Zack W.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Autumn H.</div><div class="emp-role">Crew</div></td>
+                <td>5.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Jeremiah M.</div><div class="emp-role">Crew</div></td>
+                <td>6.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Maylin R.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Richard G.</div><div class="emp-role">Crew</div></td>
+                <td>6.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Kasey W.</div><div class="emp-role">Shift Lead</div></td>
+                <td>7.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td>PM Total</td>
+                <td>58.0 hrs</td>
+                <td class="pending">Pending close</td>
+                <td class="pending">—</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /ops-row -->
+
+    <!-- ══ DISCOUNTS & COMPS ══ -->
+    <div class="card collapsible" data-card-id="discounts">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title"><i data-lucide="ticket-percent"></i> Discounts &amp; Comps</div>
+          <div class="card-sub">Today &middot; Store 2065</div>
+        </div>
+        <div class="pill pill-white" id="dc-day-pill">Today</div>
+      </div>
+
+      <div class="dr-grid" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="dr-box">
+          <div class="dr-lbl">Total Discounts</div>
+          <div class="dr-val" id="dc-discounts-val">$168.35</div>
+          <div class="dr-sub" id="dc-discounts-sub">14 redemptions &middot; 3.16% of sales</div>
+        </div>
+        <div class="dr-box">
+          <div class="dr-lbl">Total Comps</div>
+          <div class="dr-val" id="dc-comps-val">$47.25</div>
+          <div class="dr-sub" id="dc-comps-sub">1 types</div>
+        </div>
+      </div>
+
+      <table class="dr-table">
+        <thead>
+          <tr>
+            <th>Reason</th>
+            <th>Type</th>
+            <th class="num">Count</th>
+            <th class="num">Amount</th>
+            <th class="num">% of Sales</th>
+          </tr>
+        </thead>
+        <tbody id="dc-tbody">
+          <tr>
+            <td>100% Mrg/PR</td>
+            <td>Comp</td>
+            <td class="num">2</td>
+            <td class="num">$47.25</td>
+            <td class="num">0.89%</td>
+          </tr>
+          <tr>
+            <td>UE Promo</td>
+            <td>Discount</td>
+            <td class="num">12</td>
+            <td class="num">$168.35</td>
+            <td class="num">3.16%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ══ SLIM ALERT STRIP ══ -->
+    <div class="alerts-strip">
+      <div class="alerts-strip-lbl"><i data-lucide="bell"></i> Today's Alerts</div>
+      <div class="alerts-strip-items">
+        <span class="alert-chip"><span class="alert-dot red"></span>Labor 21.4% at 1 PM <span class="alert-time">1:04p</span></span>
+        <span class="alert-chip"><span class="alert-dot red"></span>Labor 23.4% at 6 PM <span class="alert-time">6:08p</span></span>
+        <span class="alert-chip"><span class="alert-dot yellow"></span>Food cost +0.7pts over <span class="alert-time">8:12a</span></span>
+        <span class="alert-chip"><span class="alert-dot yellow"></span>AM shift +1.5 hrs over sched <span class="alert-time">4:05p</span></span>
+        <span class="alert-chip"><span class="alert-dot green"></span>Sales goal hit $8,200 <span class="alert-time">12:58p</span></span>
+        <span class="alert-chip"><span class="alert-dot green"></span>Compliance 96% <span class="alert-time">8:09a</span></span>
+      </div>
+    </div>
+  </div><!-- /content -->
+
+  <!-- Footer -->
+  <div class="footer-bar">
+    <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>6:28 PM</span> &nbsp;&middot;&nbsp; May 24 2026</span>
+  </div>
+
+</div><!-- /main -->
+
+<!-- ══════════ JS ══════════ -->
 <script>
-const STATUS = {
-  pending:  { cls:'pending',  txt:'Data Pending' },
-  'no-creds':{ cls:'nocreds', txt:'Creds Pending' },
-  live:     { cls:'live',     txt:'Live' }
-};
-const SEC_META = {
-  sales:          { title:'Sales',          icon:'fa-dollar-sign' },
-  labor:          { title:'Labor',          icon:'fa-users' },
-  food_cost:      { title:'Food Cost',      icon:'fa-burger' },
-  steritech:      { title:'Steritech',      icon:'fa-shield-halved' },
-  secret_shops:   { title:'Secret Shops',   icon:'fa-user-secret' },
-  compliancemate: { title:'Temps & Times',  icon:'fa-temperature-half' }
-};
-let registry = null;
+lucide.createIcons();
 
-async function boot(){
-  registry = await (await fetch('config/stores.json?cb='+Date.now())).json();
-  document.getElementById('districtName').textContent = registry.district_name || 'District';
-  const sw = document.getElementById('switch');
-  registry.stores.forEach((st,i)=>{
+// ── District multi-store loader ──
+(async function(){
+  const sw=document.getElementById('storeSwitch'); if(!sw) return;
+  let reg;
+  try{ reg=await (await fetch('config/stores.json?cb='+Date.now())).json(); }catch(e){ return; }
+  async function load(id,name){
+    let d={}; try{ d=await (await fetch(`data/district/${id}/summary.json?cb=`+Date.now())).json(); }catch(e){}
+    const k=d.kpis||{};
+    const set=(sel,val)=>{const el=document.querySelector(sel); if(el){el.textContent=val; el.removeAttribute('data-today');}};
+    document.getElementById('storeTitle').textContent=name;
+    document.getElementById('storeSub').innerHTML=`FG-${id} &middot; Week-to-date`;
+    set('.ctrl-card.labor .ctrl-value', k.labor_pct?.value || '—');
+    set('.ctrl-card.food-cost .ctrl-value', k.food_pct?.value || '—');
+    const vals=document.querySelectorAll('.kpi-row .kpi-card .kpi-val');
+    if(vals[0]) vals[0].textContent=k.net_sales?.value||'—';
+    if(vals[1]) vals[1].textContent='—';
+    if(vals[2]) vals[2].textContent=k.sales_guest?.value||'—';
+    if(vals[3]) vals[3].textContent='—';
+    document.querySelectorAll('.kpi-row .kpi-val').forEach(el=>el.removeAttribute('data-today'));
+    document.querySelectorAll('.cm-overall-val,.ss-score').forEach(el=>el.textContent='—');
+  }
+  reg.stores.forEach((st,i)=>{
     const b=document.createElement('button');
-    b.className='store-btn'+(i===0?' active':'');
-    b.innerHTML = `${st.store_name}<small>FG-${st.store_id}</small>`;
-    b.onclick = ()=>{ document.querySelectorAll('.store-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); load(st.store_id); };
+    b.className='period-btn'+(i===0?' active':'');
+    b.textContent=st.store_name;
+    b.onclick=()=>{sw.querySelectorAll('.period-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');load(st.store_id,st.store_name);};
     sw.appendChild(b);
   });
-  load(registry.stores[0].store_id);
+  load(reg.stores[0].store_id, reg.stores[0].store_name);
+})();
+
+// ── Refresh button: hard-reload to pull latest committed data + status ──
+function refreshDash(){
+  const b = document.getElementById('refreshBtn');
+  if (b){ b.classList.add('spinning'); b.disabled = true; }
+  const u = new URL(window.location.href);
+  u.searchParams.set('r', Date.now());
+  window.location.replace(u.toString());
 }
 
-async function load(id){
-  let d;
-  try { d = await (await fetch(`data/district/${id}/summary.json?cb=`+Date.now())).json(); }
-  catch(e){ d = null; }
-  const kpis=document.getElementById('kpis'); kpis.innerHTML='';
-  const secs=document.getElementById('sections'); secs.innerHTML='';
-  if(!d){ kpis.innerHTML='<div class="kpi"><div class="lbl">No data file</div></div>'; return; }
+// ── Data health status bar ──
+(async function(){
+  const bar = document.getElementById('statusBar'); if(!bar) return;
+  const L = {green:'s-green',yellow:'s-yellow',red:'s-red'};
+  const TXT = {green:'All Current',yellow:'Check',red:'Action Needed'};
+  try{
+    const s = await (await fetch('data/status.json?cb='+Date.now())).json();
+    const rows = s.sources.map(x=>
+      `<div class="row"><span class="d ${L[x.status]}"></span>${x.label}<small>${x.detail||''}</small></div>`).join('');
+    bar.innerHTML =
+      `<span class="big ${L[s.overall]}"></span><span class="lbl">${TXT[s.overall]}</span>`+
+      `<div class="status-pop">${rows}<div class="gen">Updated ${s.generated}</div></div>`;
+    bar.onclick = e=>{ e.stopPropagation(); bar.classList.toggle('open'); };
+    document.addEventListener('click', ()=>bar.classList.remove('open'));
+  }catch(e){ bar.innerHTML = '<span class="big s-red"></span><span class="lbl">No Status</span>'; }
+})();
 
-  Object.values(d.kpis||{}).forEach(k=>{
-    kpis.innerHTML += `<div class="kpi"><div class="lbl">${k.label}</div>
-      <div class="val">${k.value==null?'&mdash;':k.value}</div>
-      <div class="src">${k.source}</div></div>`;
+// ── Period toggle (Today / Week / Month / Quarter) ──
+function applyPeriod(period) {
+  document.querySelectorAll('.data-swap').forEach(el => {
+    const v = el.getAttribute('data-' + period);
+    if (v !== null) el.innerHTML = v;
   });
+}
+document.querySelectorAll('#periodToggle .period-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#periodToggle .period-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyPeriod(btn.dataset.period);
+  });
+});
 
-  Object.entries(d.sections||{}).forEach(([key,s])=>{
-    const m=SEC_META[key]||{title:key,icon:'fa-circle'};
-    const st=STATUS[s.status]||STATUS.pending;
-    secs.innerHTML += `<div class="sec">
-      <h3><i class="fa-solid ${m.icon}"></i> ${m.title}<span class="badge ${st.cls}">${st.txt}</span></h3>
-      <div class="src">${s.source}</div>
-      <div class="body">${
-        s.status==='live'    ? 'Live — week-to-date from CrunchTime.' :
-        s.status==='no-creds'? 'Awaiting login credentials — will go live once wired.' :
-        'Pending — data source not yet wired.'}</div>
+// ── Collapsible cards: persist state in localStorage ──
+(function () {
+  document.querySelectorAll('.card.collapsible').forEach(card => {
+    const id = card.dataset.cardId || card.querySelector('.card-title')?.textContent?.trim() || '';
+    if (!id) return;
+    const key = 'card-collapsed:' + id;
+    const saved = localStorage.getItem(key);
+    if (saved === '1') card.classList.add('collapsed');
+    else if (saved === '0') card.classList.remove('collapsed');
+    const trigger = card.firstElementChild;
+    if (!trigger) return;
+    trigger.addEventListener('click', (e) => {
+      // don't toggle if user clicked an actual link/button inside the header
+      if (e.target.closest('a, button')) return;
+      card.classList.toggle('collapsed');
+      localStorage.setItem(key, card.classList.contains('collapsed') ? '1' : '0');
+    });
+  });
+})();
+
+// ── Milkshake checklist: only show on Tue/Fri AM ──
+(function () {
+  const dow = new Date().getDay(); // 0=Sun ... 2=Tue, 5=Fri
+  if (dow === 2 || dow === 5) {
+    const row = document.getElementById('cm-milkshake-row');
+    if (row) row.style.display = '';
+  }
+})();
+
+// ── Shift tab toggle ──
+function showShift(shift, btn) {
+  document.getElementById('shift-am').style.display = shift === 'am' ? '' : 'none';
+  document.getElementById('shift-pm').style.display = shift === 'pm' ? '' : 'none';
+  document.querySelectorAll('.sched-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── Labor % mini bars (11 AM – 10 PM, goal 18.5%) ──
+const LABOR_GOAL = 18.5;
+const laborData = [
+  { hr: '11A', pct: 26.4 },
+  { hr: '12P', pct: 25.1 },
+  { hr: '1P', pct: 12.3 },
+  { hr: '2P', pct: 12.3 },
+  { hr: '3P', pct: 10.4 },
+  { hr: '4P', pct: 17.8 },
+  { hr: '5P', pct: 11.9 },
+  { hr: '6P', pct: 12.4 },
+  { hr: '7P', pct: 13.7 },
+  { hr: '8P', pct: 15.7 },
+  { hr: '9P', pct: 14.5 },
+  { hr: '10P', pct: 100.0 }
+];
+const realPcts = laborData.filter(d => d.pct !== null).map(d => d.pct);
+const maxPct = Math.max(...realPcts, LABOR_GOAL) * 1.1;
+const barsEl = document.getElementById('laborBars');
+laborData.forEach(d => {
+  if (d.pct === null) {
+    barsEl.innerHTML += `
+      <div class="ctrl-bar-wrap">
+        <div class="ctrl-bar under" style="height:4px;opacity:0.25"></div>
+        <div class="ctrl-bar-hr">${d.hr}</div>
+      </div>`;
+    return;
+  }
+  const over = d.pct > LABOR_GOAL;
+  const h = Math.max(2, Math.round((d.pct / maxPct) * 36));
+  barsEl.innerHTML += `
+    <div class="ctrl-bar-wrap">
+      <div class="ctrl-bar ${over ? '' : 'under'}" style="height:${h}px"></div>
+      <div class="ctrl-bar-hr">${d.hr}</div>
     </div>`;
-  });
+});
+// Overlay the goal line
+const goalLinePct = (LABOR_GOAL / maxPct) * 36;
+const goalLine = document.createElement('div');
+goalLine.className = 'ctrl-goal-line';
+goalLine.style.bottom = `${14 + goalLinePct}px`;
+barsEl.parentElement.style.position = 'relative';
+barsEl.parentElement.appendChild(goalLine);
 
-  let cls = 'hr', age = 99;
-  if (d.generated) { const gd = new Date(d.generated.replace(' ET','')); age = Math.floor((Date.now()-gd)/86400000); cls = age<=1?'hg':(age<=3?'hy':'hr'); }
-  document.getElementById('updated').innerHTML =
-    `<span class="hdot ${cls}"></span>` + (d.generated ? ('Updated ' + d.generated) : 'No data');
-
-  document.getElementById('statusNote').innerHTML =
-    `<b>Live CrunchTime data</b> (week-to-date) across all ${registry.stores.length} district stores — Net Sales, Labor %, Sales/Guest, Cash O/S. `+
-    `Food Cost, Transactions &amp; Steritech wire in next. `+
-    `Secret Shops &amp; ComplianceMate show <b>Creds Pending</b> until those logins are wired. `+
-    `2065 stays on its own app — this is the district view only.`;
-}
-boot();
+// (sales trend line chart removed — will return in a future iteration)
 </script>
 </body>
 </html>
