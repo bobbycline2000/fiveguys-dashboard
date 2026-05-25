@@ -506,3 +506,24 @@ The Purchasing menu exists in `ct_menu_inventory.json`: Purchasing Overview, Cre
 - Cash Over/Short and Bank Deposit drilldowns **may not have a dedicated screen** in this CT instance — the dashboard's "Total Cash Over/Shorts" KPI plus per-register `registerSales/summary` is the highest-resolution data we've found in the internal API. Bank Deposits as a discrete object lives in the Public API's Sales Mix Service (type 7).
 - **`registerSales/summary` does NOT reflect a deposit in real-time after a manager enters it.** `totBankDeposits` stays 0 until CT's EOD batch process runs (typically overnight). If a manager enters a deposit during the day and the portal still shows 0, the value is confirmed correct in CT but won't surface via the API until the next morning. Workaround: patch `ct_sales_summary_history.json` manually with the known amount from the CT screenshot, then re-pull the next morning to let the API catch up. Root cause confirmed 2026-05-12 — salesId=6182682 (05/11/2026), $962.69 entered in CT UI but `totBankDeposits=0` returned by summary API for 6+ hours post-entry.
 - Some menuitems in `ct_menu_inventory.json` have `hasHandler: false` because the click is wired through a controller listener, not a direct handler. The discovery script handles this by trying `c.click()` → `fireEvent('click')` → `el.dom.click()` in fallback order.
+
+---
+
+## Supplemental Wages (Credit Card Tips) — weekly tip entry
+
+Owner script: `scraper/api_enter_tips.py`. Runbook: `BobbyWorkspace/skills/crunchtime-enter-tips.md`.
+
+**Read existing rows** — `POST /resource/labor-details/supplemental-wages`
+Body: `{pagingInfo:{page,start,limit}, sortInfo:{...}, extraCriteriaMap:{extraParams:{labelModules:["labor_actuals.labor_actuals","labor_actuals.labor_details","report.labor_detail"], weekEndingDate:["MM/DD/YYYY"]}}}`. Returns `contentMap.gridList[]`. Filter `swId===12292` (Credit Card Tip). Each row has a composite `id` like `"<empId>_12292_<seq>_<sessionhash>"`.
+⚠️ This query needs the labor page CONTEXT loaded. A cold in-browser `fetch` on a non-LaborDetails page returns an empty grid (false "0"). In pure `requests` with live cookies it returns correctly. Verify via this query OR the loaded DOM grid — never a cold fetch.
+
+**Write a row** — `POST /resource/labor-details/supplemental-wages/save?operatingDate=<Mon MM/DD/YYYY>&weekEndingDate=<Sun MM/DD/YYYY>`
+Body: array of one row object. `swId:12292`, amount in `swLumpSumVal` (NOT the daily Hours cells), `swId/employeeId/employeePositionId` set.
+🔑 **`id:-1` APPENDS a new row. The existing composite `id` UPDATES in place.** Idempotent entry = read existing rows first, then upsert by `employeeId` (echo the full existing row back with `id` intact, only change `swLumpSumVal`). Blind `id:-1` re-runs duplicate every employee (caused the 2026-05-25 42-row double-entry).
+
+**Commit** (queued `/save` rows don't persist until committed):
+1. `POST /resource/labor-details/prepare` (body `{}`). Returns `WORK_IN_PROGRESS`/`PREPARE` if nothing queued **OR if a browser editMode tab holds the lock** — so run pure-API with no browser tab open on the week.
+2. `POST /resource/labor-details/labor-actuals/validate` body `{weekEndingDate, operatingDate}` — final commit (= clicking "Continue" on the Labor Adjustments Alert).
+UI fallback: disk-save icon (top-right of Labor Detail) → "Labor Adjustments Alert" → Continue.
+
+**No delete:** the Supplemental Wages grid has no row-delete (no trash icon, no right-click menu, no Delete key). To remove an unwanted row, upsert it to `swLumpSumVal:0` (a $0 row pays nothing). `pos`/`swId` for Credit Card Tip = 12292 (global SW type id, verified 2026-05-04).

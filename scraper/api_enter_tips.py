@@ -265,6 +265,28 @@ def post_credit_card_tip(jar, mon, sun, employee_id, position_id, lump_sum):
     return res
 
 
+def upsert_existing_row(jar, mon, sun, existing_row, new_value):
+    """UPDATE an already-saved supplemental-wage row in place by echoing the full
+    row object back to /save with a modified swLumpSumVal.
+
+    CRITICAL (lesson 2026-05-25): /save with id:-1 APPENDS a new row; /save with
+    the row's existing composite id (e.g. "870073_12292_9_<hash>") UPDATES in place.
+    Posting the full existing row object verbatim (only swLumpSumVal changed) is the
+    idempotent path — it never creates a duplicate. Use this for every employee that
+    already has a row for the week; use post_credit_card_tip (append) only when no
+    row exists yet."""
+    body = [dict(existing_row, swLumpSumVal=round(float(new_value), 2))]
+    params = {"operatingDate": fmt(mon), "weekEndingDate": fmt(sun)}
+    r = requests.post(f"{NETCHEF}/resource/labor-details/supplemental-wages/save",
+                      params=params, data=json.dumps(body),
+                      cookies=jar, headers=HDR, timeout=30)
+    r.raise_for_status()
+    res = r.json()
+    if not res.get("success"):
+        raise RuntimeError(f"server returned non-success on upsert: {res}")
+    return res
+
+
 # --- API: commit pending session-queued changes ------------------------------
 # Discovered 2026-05-11: /save POSTs to supplemental-wages queue rows in the
 # user session but DO NOT persist. The disk-save → "Labor Adjustments Alert"
@@ -408,20 +430,62 @@ def main():
         print("\n[dry] Skipping POSTs. Re-run without 'dry' to commit.")
         return
 
-    # 5. POST each row
-    print(f"\n[write] Posting {len(payouts)} Credit Card Tip rows...")
-    posted = 0; failed = []
+    # 5. PRE-FLIGHT: read any rows that already exist for this week, keyed by
+    # employeeId. This is what makes the run IDEMPOTENT — re-running (or running
+    # on top of a stale partial entry) UPDATES in place instead of duplicating.
+    # Root-cause of the 2026-05-25 42-row double-entry disaster: blind id:-1 append.
+    _, _, existing_rows = verify_saved(jar, sun)
+    existing_by_emp = defaultdict(list)
+    for r in existing_rows:
+        existing_by_emp[r.get("employeeId")].append(r)
+    print(f"\n[preflight] {len(existing_rows)} existing Credit Card Tip rows "
+          f"across {len(existing_by_emp)} employees already on the week")
+
+    target_emp_ids = {payouts[n]["employeeId"] for n in payouts}
+
+    # 5. UPSERT each target employee — update in place if a row exists, else append.
+    print(f"\n[write] Reconciling {len(payouts)} Credit Card Tip rows (idempotent upsert)...")
+    appended = updated = zeroed = 0; failed = []
     for name in sorted(payouts):
-        p = payouts[name]
+        p = payouts[name]; eid = p["employeeId"]; target = p["payout"]
+        rows = existing_by_emp.get(eid, [])
         try:
-            post_credit_card_tip(jar, mon, sun, p["employeeId"], p["positionCode"], p["payout"])
-            posted += 1
-            print(f"  ✓ {name:<35} ${p['payout']:>8.2f}")
+            if rows:
+                # First existing row carries the payout; any extra duplicate rows -> 0.
+                for i, row in enumerate(rows):
+                    want = target if i == 0 else 0
+                    if abs(float(row.get("swLumpSumVal") or 0) - want) < 0.001:
+                        continue
+                    upsert_existing_row(jar, mon, sun, row, want)
+                    if i == 0: updated += 1
+                    else: zeroed += 1
+                print(f"  ↻ {name:<35} ${target:>8.2f} (updated; {len(rows)-1} dup→$0)")
+            else:
+                post_credit_card_tip(jar, mon, sun, eid, p["positionCode"], target)
+                appended += 1
+                print(f"  + {name:<35} ${target:>8.2f} (new)")
         except Exception as exc:
             failed.append((name, str(exc)))
             print(f"  ✗ {name:<35} {exc}")
 
-    print(f"\n[write] posted {posted}/{len(payouts)}, failures: {len(failed)}")
+    # 5a. Zero any stale rows for employees NOT in this week's pool (e.g. leftover
+    # from a prior wrong-number partial run). Never leave a non-target row paying out.
+    for eid, rows in existing_by_emp.items():
+        if eid in target_emp_ids:
+            continue
+        for row in rows:
+            if abs(float(row.get("swLumpSumVal") or 0)) < 0.001:
+                continue
+            try:
+                upsert_existing_row(jar, mon, sun, row, 0)
+                zeroed += 1
+                print(f"  ⌫ stale empId {eid} → $0")
+            except Exception as exc:
+                failed.append((f"stale-{eid}", str(exc)))
+
+    posted = appended + updated
+    print(f"\n[write] appended {appended}, updated {updated}, zeroed {zeroed}, "
+          f"failures: {len(failed)}")
     if failed:
         for n, e in failed: print(f"   FAIL: {n} :: {e}")
 
@@ -442,10 +506,25 @@ def main():
         print(f"[commit] EXCEPTION: {e}")
         print(f"[commit] FALLBACK NEEDED: see manual commit steps above.")
 
-    # 6. Verify
-    count, total, _ = verify_saved(jar, sun)
-    print(f"\n[verify] CrunchTime now shows {count} Credit Card Tip rows for WE {fmt(sun)}, "
-          f"total ${total:.2f} (charged ${charged:.2f}, delta ${total - charged:+.2f})")
+    # 6. Verify — count UNIQUE paid employees and FAIL LOUD on any duplicate.
+    # (count of all rows is meaningless once $0 dup-rows exist; what matters is
+    # exactly one NON-ZERO row per employee and total == charged.)
+    count, total, all_rows = verify_saved(jar, sun)
+    nonzero = [r for r in all_rows if float(r.get("swLumpSumVal") or 0) > 0]
+    nz_total = round(sum(float(r.get("swLumpSumVal") or 0) for r in nonzero), 2)
+    seen = defaultdict(int)
+    for r in nonzero: seen[r.get("employeeId")] += 1
+    dups = {eid: n for eid, n in seen.items() if n > 1}
+    print(f"\n[verify] WE {fmt(sun)}: {len(nonzero)} paid rows / {len(seen)} unique employees, "
+          f"non-zero total ${nz_total:.2f} (charged ${charged:.2f}, delta ${nz_total - charged:+.2f})")
+    if dups:
+        print(f"[verify] *** DUPLICATE PAID ROWS DETECTED *** {dups} — DO NOT POST. "
+              f"Re-run is idempotent and will collapse to one row per employee.")
+    elif abs(nz_total - charged) > 0.05:
+        print(f"[verify] *** TOTAL MISMATCH *** ${nz_total:.2f} vs charged ${charged:.2f} — review before posting.")
+    else:
+        print(f"[verify] OK — one non-zero row per employee, total ties within rounding.")
+    count, total = len(nonzero), nz_total
 
     # 7. Log
     log = ROOT.parent.parent / "_memory" / "tip-entry-log.md"
