@@ -236,5 +236,22 @@
     "ct_os": 0,
     "notes": "",
     "submitted_at": "2026-05-24T14:24:54.203Z"
+  },
+  {
+    "date": "2026-05-25",
+    "mgr": "bc",
+    "deposit": 0,
+    "safe_open": 0,
+    "d1_open": 0,
+    "d2_open": 0,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
+    "safe_close": 690,
+    "d1_close": 200,
+    "d2_close": 200,
+    "ct_os": 0,
+    "notes": "Rob got 10$ from safe",
+    "submitted_at": "2026-05-25T10:56:13.142Z"
   }
 ]
