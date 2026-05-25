@@ -178,18 +178,22 @@ async def _fetch_variance_api(page) -> dict | None:
     Tries /ncext/ prefix first (correct path from modern.ct context), then
     falls back to the root-relative path in case the routing changes.
     """
+    # Proven endpoint (discovered 2026-05-24): POST returns ingredient-level
+    # listSummary (Bacon Raw Sliced, Cheese, Potato Idaho…) — the real
+    # Actual-vs-Theoretical report. Category 1 = Food.
     paths = [
-        "/ncext/resource/dashboard/top/actual/vs/theoretical",
         "/resource/dashboard/top/actual/vs/theoretical",
-        "/ncext/resource/performance/top/actual/vs/theoretical",
-        "/ncext/resource/inventory/top/actual/vs/theoretical",
-        "/ncext/api/dashboard/top/actual/vs/theoretical",
+        "/ncext/resource/dashboard/top/actual/vs/theoretical",
     ]
     for path in paths:
         result = await page.evaluate(f"""
             async () => {{
                 try {{
-                    const r = await fetch('{path}', {{credentials: 'include'}});
+                    const r = await fetch('{path}', {{
+                        method: 'POST', credentials: 'include',
+                        headers: {{'Accept':'application/json','Content-Type':'application/json;charset=UTF-8','X-Requested-With':'XMLHttpRequest'}},
+                        body: JSON.stringify({{category: 1}})
+                    }});
                     if (!r.ok) return {{error: r.status, path: '{path}'}};
                     return await r.json();
                 }} catch (e) {{
@@ -197,11 +201,10 @@ async def _fetch_variance_api(page) -> dict | None:
                 }}
             }}
         """)
-        if result and "error" not in result:
-            log.info(f"Variance API ({path}): got {len(result.get('listSummary', []))} items, "
-                     f"dateRange={result.get('dateRange')}")
+        if result and "error" not in result and result.get("listSummary"):
+            log.info(f"Variance API ({path}): {len(result.get('listSummary', []))} items")
             return result
-        log.warning(f"Variance API path {path}: {result}")
+        log.warning(f"Variance API path {path}: {str(result)[:120]}")
     return None
 
 
@@ -459,27 +462,29 @@ async def run():
         else:
             log.warning("No matching XHR calls intercepted — Performance dashboard may not fire the variance API on scroll")
 
-        # Step 1a: NCDashboard widget text parse (primary — no extra navigation needed)
-        page_text = await page.inner_text("body")
-        widget_data = _parse_ncdashboard_avt(page_text)
-        if widget_data and widget_data["items"]:
-            log.info(f"NCDashboard AVT widget: {len(widget_data['items'])} items, "
-                     f"week={widget_data['week_start']}–{widget_data['week_end']}")
-            items = widget_data["items"]
-            week_start = widget_data["week_start"]
-            week_end   = widget_data["week_end"]
+        # Step 1: Variance items via the Actual-vs-Theoretical API (PRIMARY).
+        # This returns INGREDIENT-level items (Bacon Raw Sliced, Cheese, Potato
+        # Idaho…) — the real theoretical food-cost report. The NCDashboard text
+        # widget returns MENU items (Cheeseburger…) which are NOT what Bobby wants,
+        # so the API is primary and the widget is fallback only. (Fixed 2026-05-24.)
+        items = []
+        week_start = week_end = None
+        api_data = await _fetch_variance_api(page)
+        if api_data and api_data.get("listSummary"):
+            items = _parse_items(api_data.get("listSummary", []))
+            date_range = api_data.get("dateRange", {})
+            week_start = _parse_ct_date(date_range.get("startDate", ""))
+            week_end   = _parse_ct_date(date_range.get("endDate", ""))
+            log.info(f"AvT API: {len(items)} ingredient-level variance items, "
+                     f"range={week_start}–{week_end}")
         else:
-            log.warning("NCDashboard AVT widget not found — falling back to API")
-            # Step 1b: Variance items via API (fallback)
-            api_data = await _fetch_variance_api(page)
-            if not api_data:
-                log.warning("Variance API unavailable — no items")
-                items = []
-            else:
-                items = _parse_items(api_data.get("listSummary", []))
-                date_range = api_data.get("dateRange", {})
-                week_start = _parse_ct_date(date_range.get("startDate", ""))
-                week_end   = _parse_ct_date(date_range.get("endDate", ""))
+            log.warning("AvT API unavailable — falling back to NCDashboard widget text")
+            page_text = await page.inner_text("body")
+            widget_data = _parse_ncdashboard_avt(page_text)
+            if widget_data and widget_data["items"]:
+                items = widget_data["items"]
+                week_start = widget_data["week_start"]
+                week_end   = widget_data["week_end"]
 
         if not week_start or not week_end:
             today_fb = datetime.now(tz=ET).date()

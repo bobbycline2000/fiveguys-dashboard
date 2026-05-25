@@ -52,7 +52,7 @@ ACTIONS = [
         "Account for waste.",
     ]),
     # Drinks / cups / straws
-    (("soda","drink","bottle","cup","straw","beverage","coke","tea","lid"), [
+    (("soda","drink","bottle"," cup","straw","beverage","coke","iced tea","fountain"), [
         "This is a miscount — the inventory wasn't counted correctly. Recount it.",
     ]),
     # Bread / buns
@@ -109,8 +109,33 @@ def main():
                             break
                     except Exception:
                         continue
-    over = [it for it in d.get("items", []) if (it.get("over_dollars") or 0) > 0]
+    # Variance items: use the INGREDIENT-level Actual-vs-Theoretical report
+    # (cogs_avt_live.json) — the real theoretical food-cost report. Falls back to
+    # cogs_variance.json items only if that file is missing.
+    items_src = []
+    avt = DATA / "cogs_avt_live.json"
+    if avt.exists():
+        try:
+            ls = json.loads(avt.read_text()).get("listSummary", [])
+            for it in ls:
+                a = (it.get("actual") or {}).get("value")
+                t = (it.get("theoretical") or {}).get("value")
+                if a is None or t is None:
+                    continue
+                items_src.append({
+                    "name": it.get("name"),
+                    "actual": round(a, 2), "theoretical": round(t, 2),
+                    "over_dollars": round(a - t, 2),
+                    "variance_pct": (it.get("variancePercentage") or {}).get("value"),
+                })
+        except Exception:
+            items_src = []
+    if not items_src:
+        items_src = d.get("items", [])
+
+    over = [it for it in items_src if (it.get("over_dollars") or 0) > 0]
     over.sort(key=lambda x: x.get("over_dollars", 0), reverse=True)
+    over = over[:3]   # Bobby: top 3 variance items only
     plan = [{
         "rank": i+1, "name": it.get("name"),
         "over_dollars": it.get("over_dollars"),
