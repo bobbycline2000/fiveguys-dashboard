@@ -7,24 +7,32 @@
       "store_id": "1788",
       "store_name": "Middletown",
       "short": "FG-1788 Middletown",
+      "teamworx_location_id": 11504,
+      "labor_target_pct": 20.0,
       "data_status": { "crunchtime": "verified", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     },
     {
       "store_id": "1704",
       "store_name": "Shelbyville Road",
       "short": "FG-1704 Shelbyville Rd",
+      "teamworx_location_id": 12387,
+      "labor_target_pct": 20.0,
       "data_status": { "crunchtime": "verified", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     },
     {
       "store_id": "475",
       "store_name": "Paddock Shops",
       "short": "FG-475 Paddock Shops",
+      "teamworx_location_id": 12386,
+      "labor_target_pct": 20.0,
       "data_status": { "crunchtime": "verified", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     },
     {
       "store_id": "1731",
       "store_name": "Outer Loop",
       "short": "FG-1731 Outer Loop",
+      "teamworx_location_id": 11346,
+      "labor_target_pct": 20.0,
       "data_status": { "crunchtime": "verified", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     }
   ]

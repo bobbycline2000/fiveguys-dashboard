@@ -1,0 +1,86 @@
+name: District Schedule Analysis
+
+# Analyzes the UPCOMING week's schedule each GM built, for every district store,
+# and flags over-target labor / OT / thin coverage. Read-only against Teamworx.
+# Output: data/district/<store>/schedule_analysis.json — rendered by the
+# "Schedule Analysis" panel on district.html.
+
+on:
+  schedule:
+    # 5:30 AM Eastern (09:30 UTC EDT / 10:30 UTC EST).
+    # DST FLIP: when EST returns ~Nov 2 2026, change to "30 10 * * *".
+    - cron: "30 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Separate group from the 2065 dashboard run so the two don't race on git push.
+concurrency:
+  group: district-schedule
+  cancel-in-progress: false
+
+jobs:
+  analyze-schedules:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r scraper/requirements.txt
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('scraper/requirements.txt') }}
+          restore-keys: playwright-chromium-${{ runner.os }}-
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install chromium --with-deps
+
+      - name: Install Xvfb
+        run: sudo apt-get install -y xvfb
+
+      # ── Mint fresh Teamworx cookies via Playwright login ──────────────────
+      # scrape_teamworx_roster.py logs in with the CrunchTime/Teamworx creds and
+      # dumps data/twx_cookies.json as a side effect. The login is location-
+      # agnostic; the resulting session can switch to any store the user can see.
+      # continue-on-error: even if the 2065 roster step errors AFTER login, the
+      # cookies are already written, which is all the analyzer needs.
+      - name: Mint Teamworx session cookies
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_teamworx_roster.py --store 2065
+
+      # ── Analyze upcoming-week schedules for all district stores ───────────
+      - name: Run district schedule analysis
+        run: python scraper/district_schedule_analysis.py
+
+      # ── Commit refreshed analysis JSON back to main ───────────────────────
+      - name: Commit schedule analysis
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/district/*/schedule_analysis.json
+          if git diff --cached --quiet; then
+            echo "No schedule-analysis changes to commit."
+          else
+            git commit -m "district: refresh upcoming-week schedule analysis [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi

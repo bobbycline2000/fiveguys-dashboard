@@ -113,6 +113,62 @@ def get_manager_home(s: requests.Session) -> dict:
     return j.get("data", {})
 
 
+# ─── Multi-store helpers (district schedule analysis) ──────────────────────────
+# A single Teamworx session can read ANY location the logged-in user has access to
+# by switching the "manager console location" mid-session — no per-store re-login
+# needed (verified 2026-05-24 across all 4 Louisville district stores). This is the
+# opposite of CrunchTime, which binds the session to one location at login.
+
+def switch_location(s: requests.Session, location_id: int) -> None:
+    """Rebind the manager-console session to a different Teamworx location."""
+    r = s.post(BASE + "/json/mn/account/changeManagerConsoleLocation",
+               headers=HEADERS_JSON, json={"locationId": location_id}, timeout=30)
+    if r.status_code in (401, 403):
+        raise TeamworxAuthError(f"{r.status_code} on location switch — cookies expired, re-mint")
+    r.raise_for_status()
+    j = r.json()
+    if not j.get("success", False):
+        raise RuntimeError(f"changeManagerConsoleLocation failed: {j.get('messageList')}")
+
+
+def list_locations(s: requests.Session) -> list[dict]:
+    """Return [{locationId, locationName}] the logged-in user can see."""
+    r = s.post(BASE + "/json/mn/account/getLocationSelectPageData",
+               headers=HEADERS_JSON, json={}, timeout=30)
+    r.raise_for_status()
+    return r.json().get("result", {}).get("locations", [])
+
+
+def list_schedules(s: requests.Session, year: int) -> list[dict]:
+    """All weekly labor schedules for the CURRENT console location + year."""
+    return _post_json(s, "/json/mn/laborSchedules/getDataForManageSchedulesPage",
+                      {"year": year}).get("laborSchedules", [])
+
+
+def get_week_forecast(s: requests.Session, week_ending: str) -> dict:
+    """Sales forecast for a week. week_ending: 'YYYY-MM-DD'.
+    Returns weekForecast dict incl. salesForecastDays[] (per-day totalSales).
+    NOTE: scheduled-labor fields here are 0 outside the editor — use
+    get_shift_metrics() for scheduled hours/cost."""
+    d = _post_json(s, "/json/mn/laborSchedule/getWbForecastData",
+                   {"laborDate": None, "weekEndingDate": week_ending})
+    return d.get("weekForecast", {}) or {}
+
+
+def get_shift_metrics(s: requests.Session, week_ending: str) -> list[dict]:
+    """Scheduled labor by position/day for a week (form-encoded body).
+    Returns shiftMetrics[]: {positionName, positionId, laborDate, totalHours,
+    totalOTHours, totalValue, overtimeValue, payType, managerFlag}."""
+    r = s.post(BASE + "/json/mn/dailyRoster/getTDailyShiftMetrics",
+               headers={"Content-Type": "application/x-www-form-urlencoded",
+                        "Accept": "application/json"},
+               data={"weekEndingDate": week_ending}, timeout=30)
+    if r.status_code in (401, 403):
+        raise TeamworxAuthError(f"{r.status_code} on shift metrics — cookies expired, re-mint")
+    r.raise_for_status()
+    return r.json().get("result", {}).get("shiftMetrics", [])
+
+
 # ─── Schema mapping: API response → dashboard weekly_schedule.json ─────────────
 
 def _short_name(full: str) -> str:

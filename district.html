@@ -1353,6 +1353,18 @@ body.sidebar-open .sidebar-backdrop { display: block; }
       </table>
     </div>
 
+    <!-- ══ SCHEDULE ANALYSIS (upcoming week the GM built) ══ -->
+    <div class="card collapsible" data-card-id="schedule-analysis" id="schedAnalysisCard" style="margin-bottom:14px;">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title"><i data-lucide="calendar-clock"></i> Schedule Analysis &mdash; Upcoming Week</div>
+          <div class="card-sub" id="saSub">Next week the GM built &middot; scheduled labor vs target</div>
+        </div>
+        <span class="pill pill-white" id="saWeekPill">&mdash;</span>
+      </div>
+      <div id="saBody"><div class="pending">Loading schedule analysis&hellip;</div></div>
+    </div>
+
     <!-- ══ SLIM ALERT STRIP ══ -->
     <div class="alerts-strip">
       <div class="alerts-strip-lbl"><i data-lucide="bell"></i> Today's Alerts</div>
@@ -1399,6 +1411,47 @@ lucide.createIcons();
     if(vals[3]) vals[3].textContent='—';
     document.querySelectorAll('.kpi-row .kpi-val').forEach(el=>el.removeAttribute('data-today'));
     document.querySelectorAll('.cm-overall-val,.ss-score').forEach(el=>el.textContent='—');
+    renderScheduleAnalysis(id);
+  }
+
+  // ── Schedule Analysis: upcoming week's schedule the GM built, per store ──
+  async function renderScheduleAnalysis(id){
+    const body=document.getElementById('saBody');
+    const sub=document.getElementById('saSub');
+    const pill=document.getElementById('saWeekPill');
+    if(!body) return;
+    let a;
+    try{ a=await (await fetch(`data/district/${id}/schedule_analysis.json?cb=`+Date.now())).json(); }
+    catch(e){ body.innerHTML='<div class="pending">No schedule analysis yet for this store.</div>'; if(pill)pill.textContent='—'; return; }
+    const w=a.week||{}; const tgt=a.target_pct||20;
+    const over=w.over_target_dollars||0;
+    const pctClass = w.labor_pct>tgt+2?'over':(w.labor_pct>tgt?'warn':'good');
+    if(sub) sub.innerHTML=`Week of ${a.week_start} &ndash; ${a.week_ending} &middot; target ${tgt}%`;
+    if(pill){ pill.textContent=`${a.issue_count||0} issue${a.issue_count===1?'':'s'}`; pill.className='pill '+(a.issue_count?(over>0?'pill-red':'pill-yellow'):'pill-green'); }
+    // summary stats
+    const stat=(v,l)=>`<div class="period-box"><div class="period-val">${v}</div><div class="period-lbl">${l}</div></div>`;
+    const summary=`<div class="period-var" style="grid-template-columns:repeat(4,1fr); margin-bottom:14px;">
+      ${stat((w.labor_pct??'—')+'%', 'Sched Labor %')}
+      ${stat((over>0?'+$':'$')+Math.abs(over).toLocaleString(), 'vs '+tgt+'% Target')}
+      ${stat('$'+(w.sched_cost||0).toLocaleString(), 'Sched Labor $')}
+      ${stat((w.ot_hours||0)+'h', 'Overtime')}
+    </div>`;
+    // punch list
+    const issues=(a.issues||[]);
+    const punch = issues.length
+      ? `<div class="var-list" style="margin-bottom:14px;">${issues.map(it=>{
+          const dot=it.sev==='high'?'red':'yellow';
+          return `<div class="var-item"><span class="alert-dot ${dot}" style="width:8px;height:8px;border-radius:50%;"></span><span class="var-name" style="white-space:normal;">${it.msg}</span></div>`;
+        }).join('')}</div>`
+      : `<div class="cm-item" style="margin-bottom:14px;"><span class="cm-label">No flags &mdash; schedule is within target.</span><span class="cm-pct good">OK</span></div>`;
+    // per-day table
+    const rows=(a.per_day||[]).map(d=>{
+      const c=d.pct>tgt+2?'var-over':(d.pct>tgt?'':'var-under');
+      return `<tr><td><span class="emp-name">${d.wd}</span></td><td>$${(d.sales||0).toLocaleString()}</td><td>${d.hrs}</td><td>$${(d.cost||0).toLocaleString()}</td><td class="${c}">${d.pct}%</td></tr>`;
+    }).join('');
+    const table=`<table class="sched-table"><thead><tr><th>Day</th><th>Fcst Sales</th><th>Sched Hrs</th><th>Sched $</th><th>Labor %</th></tr></thead><tbody>${rows}</tbody></table>`;
+    body.innerHTML = summary + punch + table;
+    if(window.lucide) lucide.createIcons();
   }
   reg.stores.forEach((st,i)=>{
     const b=document.createElement('button');

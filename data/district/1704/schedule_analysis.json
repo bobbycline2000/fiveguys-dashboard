@@ -1,0 +1,26 @@
+{
+  "store_id": "1704",
+  "store_name": "Shelbyville Road",
+  "week_ending": "2026-05-31",
+  "week_start": "2026-05-25",
+  "target_pct": 20,
+  "generated_at": "2026-05-24T19:35:00-04:00",
+  "source": "teamworx_live_session",
+  "week": {"fcst_sales": 40880, "sched_cost": 8890, "sched_hours": 619, "labor_pct": 21.7, "over_target_dollars": 714, "ot_hours": 1, "ot_value": 27},
+  "issue_count": 4,
+  "issues": [
+    {"sev": "high", "day": "Tue", "msg": "Tue labor 29.9% — ~$456 over 20% target"},
+    {"sev": "high", "day": "Wed", "msg": "Wed labor 24.8% — ~$251 over 20% target"},
+    {"sev": "med", "day": "Wed", "msg": "Wed overtime 1.0h ($27)"},
+    {"sev": "high", "day": "Sat", "msg": "Sat labor 25.0% — ~$282 over 20% target"}
+  ],
+  "per_day": [
+    {"date": "2026-05-25", "wd": "Mon", "sales": 6500, "hrs": 81, "cost": 1143, "pct": 17.6},
+    {"date": "2026-05-26", "wd": "Tue", "sales": 4615, "hrs": 93, "cost": 1379, "pct": 29.9},
+    {"date": "2026-05-27", "wd": "Wed", "sales": 5221, "hrs": 91.5, "cost": 1295, "pct": 24.8},
+    {"date": "2026-05-28", "wd": "Thu", "sales": 6024, "hrs": 97.5, "cost": 1284, "pct": 21.3},
+    {"date": "2026-05-29", "wd": "Fri", "sales": 6279, "hrs": 81, "cost": 1156, "pct": 18.4},
+    {"date": "2026-05-30", "wd": "Sat", "sales": 5624, "hrs": 99, "cost": 1407, "pct": 25},
+    {"date": "2026-05-31", "wd": "Sun", "sales": 6617, "hrs": 76, "cost": 1226, "pct": 18.5}
+  ]
+}

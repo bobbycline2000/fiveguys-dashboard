@@ -1,0 +1,28 @@
+{
+  "store_id": "1731",
+  "store_name": "Outer Loop",
+  "week_ending": "2026-05-31",
+  "week_start": "2026-05-25",
+  "target_pct": 20,
+  "generated_at": "2026-05-24T19:35:00-04:00",
+  "source": "teamworx_live_session",
+  "week": {"fcst_sales": 28433, "sched_cost": 6785, "sched_hours": 415, "labor_pct": 23.9, "over_target_dollars": 1099, "ot_hours": 10, "ot_value": 345},
+  "issue_count": 6,
+  "issues": [
+    {"sev": "high", "day": "Mon", "msg": "Mon labor 30.8% — ~$338 over 20% target"},
+    {"sev": "high", "day": "Tue", "msg": "Tue labor 27.5% — ~$246 over 20% target"},
+    {"sev": "high", "day": "Wed", "msg": "Wed labor 25.7% — ~$198 over 20% target"},
+    {"sev": "high", "day": "Thu", "msg": "Thu labor 23.6% — ~$133 over 20% target"},
+    {"sev": "high", "day": "Sat", "msg": "Sat labor 23.7% — ~$184 over 20% target"},
+    {"sev": "med", "day": "Sat", "msg": "Sat overtime 10.0h ($345)"}
+  ],
+  "per_day": [
+    {"date": "2026-05-25", "wd": "Mon", "sales": 3120, "hrs": 59.5, "cost": 962, "pct": 30.8},
+    {"date": "2026-05-26", "wd": "Tue", "sales": 3303, "hrs": 55.5, "cost": 907, "pct": 27.5},
+    {"date": "2026-05-27", "wd": "Wed", "sales": 3470, "hrs": 56.5, "cost": 892, "pct": 25.7},
+    {"date": "2026-05-28", "wd": "Thu", "sales": 3722, "hrs": 57.5, "cost": 878, "pct": 23.6},
+    {"date": "2026-05-29", "wd": "Fri", "sales": 4817, "hrs": 61, "cost": 1012, "pct": 21},
+    {"date": "2026-05-30", "wd": "Sat", "sales": 5007, "hrs": 64, "cost": 1186, "pct": 23.7},
+    {"date": "2026-05-31", "wd": "Sun", "sales": 4994, "hrs": 61, "cost": 949, "pct": 19}
+  ]
+}

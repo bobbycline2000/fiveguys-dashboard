@@ -1,0 +1,26 @@
+{
+  "store_id": "475",
+  "store_name": "Paddock Shops",
+  "week_ending": "2026-05-31",
+  "week_start": "2026-05-25",
+  "target_pct": 20,
+  "generated_at": "2026-05-24T19:35:00-04:00",
+  "source": "teamworx_live_session",
+  "week": {"fcst_sales": 38872, "sched_cost": 8506, "sched_hours": 529, "labor_pct": 21.9, "over_target_dollars": 732, "ot_hours": 0, "ot_value": 0},
+  "issue_count": 4,
+  "issues": [
+    {"sev": "high", "day": "Mon", "msg": "Mon labor 29.0% — ~$373 over 20% target"},
+    {"sev": "high", "day": "Tue", "msg": "Tue labor 24.7% — ~$205 over 20% target"},
+    {"sev": "high", "day": "Wed", "msg": "Wed labor 22.5% — ~$123 over 20% target"},
+    {"sev": "high", "day": "Thu", "msg": "Thu labor 23.2% — ~$190 over 20% target"}
+  ],
+  "per_day": [
+    {"date": "2026-05-25", "wd": "Mon", "sales": 4128, "hrs": 74, "cost": 1199, "pct": 29},
+    {"date": "2026-05-26", "wd": "Tue", "sales": 4315, "hrs": 64, "cost": 1068, "pct": 24.7},
+    {"date": "2026-05-27", "wd": "Wed", "sales": 5000, "hrs": 73, "cost": 1123, "pct": 22.5},
+    {"date": "2026-05-28", "wd": "Thu", "sales": 5869, "hrs": 85, "cost": 1364, "pct": 23.2},
+    {"date": "2026-05-29", "wd": "Fri", "sales": 7216, "hrs": 81, "cost": 1361, "pct": 18.9},
+    {"date": "2026-05-30", "wd": "Sat", "sales": 6500, "hrs": 82, "cost": 1288, "pct": 19.8},
+    {"date": "2026-05-31", "wd": "Sun", "sales": 5844, "hrs": 70, "cost": 1104, "pct": 18.9}
+  ]
+}
