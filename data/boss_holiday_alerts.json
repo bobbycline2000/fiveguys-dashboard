@@ -1,16 +1,14 @@
 {
   "meta": {
-    "generated": "2026-05-19T17:49:55",
+    "generated": "2026-05-25T12:50:09",
     "alerts_count": 1
   },
   "alerts": [
     {
       "week_start_mon": "2026-05-25",
-      "holiday_name": "Memorial Day",
-      "skipped_delivery_days": [
-        "2026-05-25"
-      ],
-      "skipped_forecast_sales": 3594,
+      "holiday_name": "Holiday",
+      "skipped_delivery_days": [],
+      "skipped_forecast_sales": 0,
       "delivery_day_recommendations": [
         {
           "date": "2026-05-26",
@@ -18,16 +16,16 @@
           "current_hb": 5,
           "current_hd": 1,
           "forecast_own": 3398,
-          "redistributed_from_skip": 681,
-          "raw_window_sales": 4079,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 3398,
           "buffer_applied": 5000,
-          "window_sales": 9079,
-          "recommended_hb": 10,
+          "window_sales": 8398,
+          "recommended_hb": 9,
           "recommended_hd": 1,
-          "delta_hb": 5,
+          "delta_hb": 4,
           "delta_hd": 0,
           "is_holiday_cell": true,
-          "is_locked": false
+          "is_locked": true
         },
         {
           "date": "2026-05-27",
@@ -35,13 +33,13 @@
           "current_hb": 8,
           "current_hd": 0,
           "forecast_own": 4123,
-          "redistributed_from_skip": 826,
-          "raw_window_sales": 4949,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 4123,
           "buffer_applied": 5000,
-          "window_sales": 9949,
-          "recommended_hb": 11,
+          "window_sales": 9123,
+          "recommended_hb": 10,
           "recommended_hd": 1,
-          "delta_hb": 3,
+          "delta_hb": 2,
           "delta_hd": 1,
           "is_holiday_cell": true,
           "is_locked": false
@@ -52,13 +50,13 @@
           "current_hb": 7,
           "current_hd": 1,
           "forecast_own": 5378,
-          "redistributed_from_skip": 1078,
-          "raw_window_sales": 6456,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 5378,
           "buffer_applied": 5000,
-          "window_sales": 11456,
-          "recommended_hb": 12,
+          "window_sales": 10378,
+          "recommended_hb": 11,
           "recommended_hd": 1,
-          "delta_hb": 5,
+          "delta_hb": 4,
           "delta_hd": 0,
           "is_holiday_cell": true,
           "is_locked": false
@@ -69,19 +67,19 @@
           "current_hb": 11,
           "current_hd": 0,
           "forecast_own": 5032,
-          "redistributed_from_skip": 1009,
-          "raw_window_sales": 6041,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 5032,
           "buffer_applied": 5000,
-          "window_sales": 11041,
-          "recommended_hb": 12,
+          "window_sales": 10032,
+          "recommended_hb": 11,
           "recommended_hd": 1,
-          "delta_hb": 1,
+          "delta_hb": 0,
           "delta_hd": 1,
           "is_holiday_cell": true,
           "is_locked": false
         }
       ],
-      "headline": "Memorial Day week (2026-05-25) \u2014 skipped: 2026-05-25 \u2014 bumps: TUE 2026-05-26 \u2192 10 HB / 1 HD  (\u0394 +5 HB); WED 2026-05-27 \u2192 11 HB / 1 HD  (\u0394 +3 HB); FRI 2026-05-29 \u2192 12 HB / 1 HD  (\u0394 +5 HB); SAT 2026-05-30 \u2192 12 HB / 1 HD  (\u0394 +1 HB)"
+      "headline": "Holiday week (2026-05-25) \u2014 bumps: TUE 2026-05-26 \u2192 9 HB / 1 HD  (\u0394 +4 HB); WED 2026-05-27 \u2192 10 HB / 1 HD  (\u0394 +2 HB); FRI 2026-05-29 \u2192 11 HB / 1 HD  (\u0394 +4 HB); SAT 2026-05-30 \u2192 11 HB / 1 HD"
     }
   ]
 }
