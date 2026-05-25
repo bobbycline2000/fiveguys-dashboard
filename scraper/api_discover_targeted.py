@@ -34,6 +34,9 @@ PASSWORD = os.environ.get("CRUNCHTIME_PASSWORD", "")
 
 # Map screen-name -> exact menu label
 TARGETS = {
+    "ProfitAndLoss":          "Profit & Loss",
+    "ActualTheoreticalCost":  "Actual/Theoretical Cost",
+    "CostAnalysis":           "Cost Analysis",
     "MenuMix":                "Menu Mix",
     "ConsolidatedMenuMix":    "Consolidated Menu Mix",
     "Checks":                 "Checks",
