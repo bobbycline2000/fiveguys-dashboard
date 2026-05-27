@@ -3,25 +3,134 @@
   "store_name": "Middletown",
   "week_ending": "2026-05-31",
   "week_start": "2026-05-25",
-  "target_pct": 20,
-  "generated_at": "2026-05-24T19:35:00-04:00",
-  "source": "teamworx_live_session",
-  "week": {"fcst_sales": 27143, "sched_cost": 6671, "sched_hours": 465, "labor_pct": 24.6, "over_target_dollars": 1242, "ot_hours": 0, "ot_value": 0},
+  "target_pct": 20.0,
+  "generated_at": "2026-05-27T12:38:50.197821-04:00",
+  "week": {
+    "fcst_sales": 27143,
+    "sched_cost": 6659,
+    "sched_hours": 464.0,
+    "labor_pct": 24.5,
+    "over_target_dollars": 1230,
+    "ot_hours": 0.0,
+    "ot_value": 0
+  },
   "issue_count": 5,
   "issues": [
-    {"sev": "high", "day": "Mon", "msg": "Mon labor 38.6% — ~$451 over 20% target"},
-    {"sev": "high", "day": "Tue", "msg": "Tue labor 24.4% — ~$146 over 20% target"},
-    {"sev": "high", "day": "Thu", "msg": "Thu labor 26.3% — ~$250 over 20% target"},
-    {"sev": "high", "day": "Fri", "msg": "Fri labor 22.3% — ~$104 over 20% target"},
-    {"sev": "high", "day": "Sat", "msg": "Sat labor 24.1% — ~$184 over 20% target"}
+    {
+      "sev": "high",
+      "day": "Mon",
+      "msg": "Mon labor 38.6% \u2014 ~$451 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Tue",
+      "msg": "Tue labor 24.4% \u2014 ~$146 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Thu",
+      "msg": "Thu labor 29.4% \u2014 ~$373 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Fri",
+      "msg": "Fri labor 22.3% \u2014 ~$104 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Sat",
+      "msg": "Sat labor 24.1% \u2014 ~$184 over 20% target"
+    }
   ],
   "per_day": [
-    {"date": "2026-05-25", "wd": "Mon", "sales": 2426, "hrs": 62, "cost": 937, "pct": 38.6},
-    {"date": "2026-05-26", "wd": "Tue", "sales": 3339, "hrs": 55, "cost": 814, "pct": 24.4},
-    {"date": "2026-05-27", "wd": "Wed", "sales": 3506, "hrs": 55.5, "cost": 760, "pct": 21.7},
-    {"date": "2026-05-28", "wd": "Thu", "sales": 3956, "hrs": 72, "cost": 1041, "pct": 26.3},
-    {"date": "2026-05-29", "wd": "Fri", "sales": 4499, "hrs": 69, "cost": 1004, "pct": 22.3},
-    {"date": "2026-05-30", "wd": "Sat", "sales": 4527, "hrs": 75.5, "cost": 1089, "pct": 24.1},
-    {"date": "2026-05-31", "wd": "Sun", "sales": 4890, "hrs": 76, "cost": 1026, "pct": 21}
+    {
+      "date": "2026-05-25",
+      "wd": "Mon",
+      "sales": 2426,
+      "hrs": 62.0,
+      "cost": 937,
+      "pct": 38.6,
+      "byPosition": {
+        "2. Crew": 38.5,
+        "General Manager-Salary": 10.0,
+        "Shift Leader-Hourly": 13.5
+      }
+    },
+    {
+      "date": "2026-05-26",
+      "wd": "Tue",
+      "sales": 3339,
+      "hrs": 55.0,
+      "cost": 814,
+      "pct": 24.4,
+      "byPosition": {
+        "2. Crew": 38.0,
+        "Shift Leader-Hourly": 7.0,
+        "General Manager-Salary": 10.0
+      }
+    },
+    {
+      "date": "2026-05-27",
+      "wd": "Wed",
+      "sales": 3506,
+      "hrs": 55.5,
+      "cost": 760,
+      "pct": 21.7,
+      "byPosition": {
+        "2. Crew": 39.5,
+        "Shift Leader-Hourly": 16.0
+      }
+    },
+    {
+      "date": "2026-05-28",
+      "wd": "Thu",
+      "sales": 3956,
+      "hrs": 79.0,
+      "cost": 1164,
+      "pct": 29.4,
+      "byPosition": {
+        "2. Crew": 49.0,
+        "Shift Leader-Hourly": 20.0,
+        "General Manager-Salary": 10.0
+      }
+    },
+    {
+      "date": "2026-05-29",
+      "wd": "Fri",
+      "sales": 4499,
+      "hrs": 69.0,
+      "cost": 1004,
+      "pct": 22.3,
+      "byPosition": {
+        "2. Crew": 44.0,
+        "Shift Leader-Hourly": 15.0,
+        "General Manager-Salary": 10.0
+      }
+    },
+    {
+      "date": "2026-05-30",
+      "wd": "Sat",
+      "sales": 4527,
+      "hrs": 75.5,
+      "cost": 1089,
+      "pct": 24.1,
+      "byPosition": {
+        "2. Crew": 50.5,
+        "Shift Leader-Hourly": 15.0,
+        "General Manager-Salary": 10.0
+      }
+    },
+    {
+      "date": "2026-05-31",
+      "wd": "Sun",
+      "sales": 4890,
+      "hrs": 68.0,
+      "cost": 891,
+      "pct": 18.2,
+      "byPosition": {
+        "Shift Leader-Hourly": 16.0,
+        "2. Crew": 52.0
+      }
+    }
   ]
 }
