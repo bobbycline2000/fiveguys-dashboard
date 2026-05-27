@@ -5,13 +5,13 @@
     "store": "2065",
     "week_start": "2026-05-18",
     "week_end": "2026-05-24",
-    "variance_week_start": "2026-05-11",
-    "variance_week_end": "2026-05-17",
+    "variance_week_start": "2026-05-18",
+    "variance_week_end": "2026-05-24",
     "month_start": "2026-05-01",
     "last_month_start": "2026-04-01",
     "last_month_end": "2026-04-30",
-    "through": "2026-05-24",
-    "pulled": "2026-05-25 08:54 ET",
+    "through": "2026-05-26",
+    "pulled": "2026-05-27 08:25 ET",
     "method": "api+playwright"
   },
   "cogs_goal_pct": 27.5,
@@ -23,84 +23,164 @@
   "variance_to_goal_last_mo": null,
   "items": [
     {
-      "name": "Peanut Butter inv",
-      "actual": 109.0,
-      "theoretical": 14.0,
-      "over_dollars": 95.0,
-      "variance_pct": -694.0,
+      "name": "Cheeseburger",
+      "actual": 2137.0,
+      "theoretical": 469.0,
+      "over_dollars": 1668.0,
+      "variance_pct": null,
       "rank": 1
     },
     {
-      "name": "Topping, Peppermint Chopped Pieces",
-      "actual": 58.0,
-      "theoretical": 0.0,
-      "over_dollars": 58.0,
-      "variance_pct": 0.0,
+      "name": "Bacon Cheeseburger",
+      "actual": 1526.0,
+      "theoretical": 361.0,
+      "over_dollars": 1165.0,
+      "variance_pct": null,
       "rank": 2
     },
     {
-      "name": "Cheese",
-      "actual": 367.0,
-      "theoretical": 316.0,
-      "over_dollars": 51.0,
-      "variance_pct": -16.0,
+      "name": "Little Cheeseburger",
+      "actual": 816.0,
+      "theoretical": 146.0,
+      "over_dollars": 670.0,
+      "variance_pct": null,
       "rank": 3
     },
     {
-      "name": "Topping, Oreo Pieces",
-      "actual": 56.0,
-      "theoretical": 13.0,
-      "over_dollars": 43.0,
-      "variance_pct": -345.0,
+      "name": "Milkshake",
+      "actual": 604.0,
+      "theoretical": 100.0,
+      "over_dollars": 504.0,
+      "variance_pct": null,
       "rank": 4
     },
     {
-      "name": "Tomatoes, Fresh",
-      "actual": 251.0,
-      "theoretical": 292.0,
-      "over_dollars": -41.0,
-      "variance_pct": 14.0,
+      "name": "Little Bacon Cheeseburger",
+      "actual": 579.0,
+      "theoretical": 115.0,
+      "over_dollars": 464.0,
+      "variance_pct": null,
       "rank": 5
     },
     {
-      "name": "Topping, Peanut Butter Cup",
-      "actual": -22.0,
-      "theoretical": 24.0,
-      "over_dollars": -46.0,
-      "variance_pct": 193.0,
+      "name": "Regular Fry",
+      "actual": 536.0,
+      "theoretical": 132.0,
+      "over_dollars": 404.0,
+      "variance_pct": null,
       "rank": 6
     },
     {
-      "name": "Cup, Shake",
-      "actual": -5.0,
-      "theoretical": 41.0,
-      "over_dollars": -46.0,
-      "variance_pct": 113.0,
+      "name": "Little Fry",
+      "actual": 468.0,
+      "theoretical": 94.0,
+      "over_dollars": 374.0,
+      "variance_pct": null,
       "rank": 7
     },
     {
-      "name": "Topping, Oreo Cream",
-      "actual": -36.0,
-      "theoretical": 19.0,
-      "over_dollars": -55.0,
-      "variance_pct": 285.0,
+      "name": "Large Fry",
+      "actual": 399.0,
+      "theoretical": 105.0,
+      "over_dollars": 294.0,
+      "variance_pct": null,
       "rank": 8
     },
     {
-      "name": "Hot Dog",
-      "actual": -10.0,
-      "theoretical": 77.0,
-      "over_dollars": -87.0,
-      "variance_pct": 113.0,
+      "name": "Regular Soda",
+      "actual": 269.0,
+      "theoretical": 6.0,
+      "over_dollars": 263.0,
+      "variance_pct": null,
       "rank": 9
     },
     {
-      "name": "Potato, Idaho",
-      "actual": 868.0,
-      "theoretical": 972.0,
-      "over_dollars": -104.0,
-      "variance_pct": 11.0,
+      "name": "Patty Melt",
+      "actual": 280.0,
+      "theoretical": 55.0,
+      "over_dollars": 225.0,
+      "variance_pct": null,
       "rank": 10
+    },
+    {
+      "name": "Hot Dog",
+      "actual": 160.0,
+      "theoretical": 76.0,
+      "over_dollars": 84.0,
+      "variance_pct": -111.0,
+      "rank": 11
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 966.0,
+      "theoretical": 918.0,
+      "over_dollars": 48.0,
+      "variance_pct": -5.0,
+      "rank": 12
+    },
+    {
+      "name": "Strawberry Marinade",
+      "actual": 55.0,
+      "theoretical": 21.0,
+      "over_dollars": 34.0,
+      "variance_pct": -154.0,
+      "rank": 13
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 309.0,
+      "theoretical": 278.0,
+      "over_dollars": 31.0,
+      "variance_pct": -11.0,
+      "rank": 14
+    },
+    {
+      "name": "Lettuce",
+      "actual": 95.0,
+      "theoretical": 65.0,
+      "over_dollars": 30.0,
+      "variance_pct": -45.0,
+      "rank": 15
+    },
+    {
+      "name": "Cheese",
+      "actual": 340.0,
+      "theoretical": 311.0,
+      "over_dollars": 29.0,
+      "variance_pct": -9.0,
+      "rank": 16
+    },
+    {
+      "name": "Cup, Shake",
+      "actual": 57.0,
+      "theoretical": 35.0,
+      "over_dollars": 22.0,
+      "variance_pct": -62.0,
+      "rank": 17
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": 3.0,
+      "theoretical": 25.0,
+      "over_dollars": -22.0,
+      "variance_pct": 87.0,
+      "rank": 18
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 2900.0,
+      "theoretical": 2953.0,
+      "over_dollars": -53.0,
+      "variance_pct": 2.0,
+      "rank": 19
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 869.0,
+      "theoretical": 944.0,
+      "over_dollars": -75.0,
+      "variance_pct": 8.0,
+      "rank": 20
     }
   ],
   "ranking": "over_dollars_desc"

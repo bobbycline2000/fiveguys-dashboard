@@ -1,47 +1,47 @@
 {
   "meta": {
     "store_id": "2065",
-    "anchor_date": "2026-05-24",
-    "generated": "2026-05-25T12:52:39",
-    "days_seen_total": 29,
-    "days_in_week": 7,
-    "days_in_month": 28,
-    "days_in_quarter": 29
+    "anchor_date": "2026-05-26",
+    "generated": "2026-05-27T12:22:55",
+    "days_seen_total": 30,
+    "days_in_week": 6,
+    "days_in_month": 27,
+    "days_in_quarter": 30
   },
   "week": {
-    "net_sales": 31503.16,
-    "gross_sales": 33204.36,
-    "order_count": 1270,
-    "guest_count": 5855,
-    "labor_cost": 6047.47,
-    "labor_hours": 496.55,
-    "labor_percent": 19.2,
-    "sales_per_guest": 5.38,
-    "avg_ticket": 24.81,
-    "days": 7
+    "net_sales": 28424.44,
+    "gross_sales": 29869.41,
+    "order_count": 1133,
+    "guest_count": 5250,
+    "labor_cost": 5371.13,
+    "labor_hours": 411.71,
+    "labor_percent": 18.9,
+    "sales_per_guest": 5.41,
+    "avg_ticket": 25.09,
+    "days": 6
   },
   "month": {
-    "net_sales": 128758.45,
-    "gross_sales": 134135.92,
-    "order_count": 5158,
-    "guest_count": 23916,
-    "labor_cost": 26010.13,
-    "labor_hours": 2170.33,
-    "labor_percent": 20.2,
-    "sales_per_guest": 5.38,
-    "avg_ticket": 24.96,
-    "days": 28
+    "net_sales": 121710.62,
+    "gross_sales": 127169.3,
+    "order_count": 4905,
+    "guest_count": 22655,
+    "labor_cost": 24754.18,
+    "labor_hours": 2053.33,
+    "labor_percent": 20.34,
+    "sales_per_guest": 5.37,
+    "avg_ticket": 24.81,
+    "days": 27
   },
   "quarter": {
-    "net_sales": 133402.5,
-    "gross_sales": 138888.03,
-    "order_count": 5345,
-    "guest_count": 24784,
-    "labor_cost": 26834.79,
-    "labor_hours": 2240.66,
-    "labor_percent": 20.12,
+    "net_sales": 136960.96,
+    "gross_sales": 142726.69,
+    "order_count": 5503,
+    "guest_count": 25452,
+    "labor_cost": 27718.18,
+    "labor_hours": 2304.74,
+    "labor_percent": 20.24,
     "sales_per_guest": 5.38,
-    "avg_ticket": 24.96,
-    "days": 29
+    "avg_ticket": 24.89,
+    "days": 30
   }
 }
