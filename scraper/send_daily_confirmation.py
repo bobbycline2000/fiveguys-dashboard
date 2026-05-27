@@ -306,7 +306,12 @@ def _check_food_cost_wired() -> dict | None:
 
 
 def _check_compliance_wired() -> dict | None:
-    """Cross-check: verify dashboard.html shows ComplianceMate overall %."""
+    """Cross-check: verify dashboard.html shows ComplianceMate required-list %.
+
+    wire_dashboard.py computes required-only average (not raw overall_pct) using
+    the REQUIRED_SRC set below.  We must match that logic here or we'll always
+    false-alarm when optional checklists (Closing, Weekly Inspection, etc.) are 0%.
+    """
     html = _load_dash_html()
     if not html:
         return None
@@ -322,12 +327,27 @@ def _check_compliance_wired() -> dict | None:
                 pass
     if cm is None:
         return None
-    pct = cm.get("overall_pct")
-    if pct is None:
-        return None
-    needle = f"{pct}%"
-    return _value_check("ComplianceMate %", html, needle,
-                        f"compliance.json (overall_pct={pct})")
+
+    # Mirror the REQUIRED_SRC set from wire_dashboard.py so the check is aligned.
+    _REQUIRED_SRC = {
+        "AM Pre-Shift Check", "11AM: Time and Temp", "Shift Change",
+        "3PM: Time and Temp", "5PM: Time and Temp", "PM Pre-Shift Check",
+        "7PM: Time and Temp", "9PM: Time and Temp", "Closing Checklist",
+    }
+    req_lists = [l for l in cm.get("lists", []) if l.get("name") in _REQUIRED_SRC]
+    if req_lists:
+        computed_pct = round(sum(l["pct"] for l in req_lists) / len(req_lists))
+        needle = f"{computed_pct}%"
+        source_note = f"compliance.json (required-only computed={computed_pct}%, raw overall_pct={cm.get('overall_pct')})"
+    else:
+        # No required lists found — fall back to raw overall_pct
+        pct = cm.get("overall_pct")
+        if pct is None:
+            return None
+        needle = f"{pct}%"
+        source_note = f"compliance.json (overall_pct={pct}, no required lists found)"
+
+    return _value_check("ComplianceMate %", html, needle, source_note)
 
 
 def _check_shops_wired() -> dict | None:
