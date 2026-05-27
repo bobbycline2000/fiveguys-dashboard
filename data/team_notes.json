@@ -1,46 +1,56 @@
 {
-  "date": "2026-05-25",
-  "new_count": 5,
+  "date": "2026-05-27",
+  "brief_sent": true,
+  "brief_pulled": 21,
+  "new_count": 6,
   "notes": [
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
-      "time": "2026-05-11T17:38:00+00:00",
-      "subject": "Only 30 Cents more for Large!",
-      "body": "Large Soda is now only 30 cents more than Regular (was 10 cents). Drill every cashier and shift lead on the new language — the old '10 cents more' line is dead. Standing: FGU 0% overdue (5/15 deadline passed — confirm completion), Orientation Checklist with all new hires."
+      "time": "2026-05-26T10:57:00+00:00",
+      "subject": "Re: 8.5x11 Shake",
+      "body": "See and use the attached Blackberry milkshake counter sign — print the 8.5x11 and post at the register, LTO is live now. Standing (5/11): Large soda is now 30 cents more than Regular (not 10) — drill every cashier on the new line. Orientation Checklist with all new hires; FGU 0% overdue."
     },
     {
       "from": "Crystal Hess",
       "role": "dm",
       "role_label": "District Manager",
-      "time": "2026-05-24T22:37:00+00:00",
-      "subject": "Re: G.O.A.T Trophy",
-      "body": "Elesha and team Etown brought 2 100's and 1 92% — play the video with the team. Also live: review the Recent KPI miss chart and share with the team at pre-shift; swag contest — first two shift leads to text the correct answer win Five Guys swag (812-267-8669, no GMs answer)."
+      "time": "2026-05-26T08:06:00+00:00",
+      "subject": "Re: New H.R. & Payroll",
+      "body": "New H.R./Payroll teammate is Hannah Kaufman (correcting earlier 'Hannah Parker') — new to the team to help Jeni and Victoria. Welcome her. Still live: G.O.A.T Trophy shout-out to Etown (2079, 2x 100% + 92%); review/share the KPI miss chart; swag contest text 812-267-8669, no GMs."
+    },
+    {
+      "from": "Jeni Moffatt",
+      "role": "hr",
+      "role_label": "HR",
+      "time": "2026-05-26T14:12:00+00:00",
+      "subject": "RE: Manager Applicants",
+      "body": "Shift Leader and Assistant Manager ads are posted for location 2065 (Bobby requested 5/25). Watch for applicants."
     },
     {
       "from": "CrunchTime Task Alert",
       "role": "alert",
       "role_label": "Ops Alert",
-      "time": "2026-05-25T06:31:00+00:00",
-      "subject": "Labor Not Posted — 05/24",
-      "body": "KY-2065 Post Period — Labor Not Posted for 05/24, plus open L-Rev 05/24. Post labor in CrunchTime today."
-    },
-    {
-      "from": "Secret Shops",
-      "role": "alert",
-      "role_label": "Shop Result",
-      "time": "2026-05-25T05:03:00-04:00",
-      "subject": "5/16 Dinner shop 75%",
-      "body": "5/16 Dinner shop scored 75% — on shift Francisco, Jada, Jeremiah, Madison. Store month avg 92.5% (4 shops), YTD 83.8% (29 shops). Coaching focus: service + order accuracy on the dinner rush. Action plan owed."
+      "time": "2026-05-27T06:30:00+00:00",
+      "subject": "Task Alert 05/26",
+      "body": "Open for KY-2065: Labor Review (L-Rev) 5/25 AND 5/26 not completed; VO-Rec BOSS Alpha-Ohio Valley (5/26) and VO-Rec Performance Foodservice (5/26) need reconciliation."
     },
     {
       "from": "Performance Foodservice",
       "role": "accounting",
       "role_label": "Vendor",
-      "time": "2026-05-24T13:59:00+00:00",
+      "time": "2026-05-27T13:14:00+00:00",
       "subject": "Order Posted CIN01984",
-      "body": "PFGC order posted for Five Guys 2065. Note: Memorial Day Monday 5/25 — no delivery; Mon+Tue deliveries combine Tuesday 5/26."
+      "body": "Performance Food order posted (CIN01984). Receive the truck and reconcile the voucher against the open VO-Rec task."
+    },
+    {
+      "from": "Trimark / Megan Raymer",
+      "role": "alert",
+      "role_label": "Vendor",
+      "time": "2026-05-26T22:52:00+00:00",
+      "subject": "RE: Order Location 2065",
+      "body": "Order placed — 2x Kleen Cups shipping to location 2065 (Bobby's 5/25 order)."
     }
   ]
 }
