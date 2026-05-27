@@ -15,9 +15,10 @@ on:
 permissions:
   contents: write
 
-# Separate group from the 2065 dashboard run so the two don't race on git push.
+# Share the dashboard-update group so this serializes behind the 2065 dashboard
+# runs instead of racing them on git push.
 concurrency:
-  group: district-schedule
+  group: dashboard-update
   cancel-in-progress: false
 
 jobs:
@@ -81,6 +82,15 @@ jobs:
             echo "No schedule-analysis changes to commit."
           else
             git commit -m "district: refresh upcoming-week schedule analysis [skip ci]"
-            git pull --rebase origin main
-            git push origin main
+            # Retry on transient remote rejections; autostash so a dirty tree
+            # never aborts the rebase.
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase --autostash origin main
+              if git push origin main; then
+                echo "Pushed on attempt $attempt."
+                break
+              fi
+              echo "Push attempt $attempt failed; retrying in 10s..."
+              sleep 10
+            done
           fi
