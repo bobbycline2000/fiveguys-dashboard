@@ -295,14 +295,14 @@
     "safe_open": 702,
     "d1_open": 200,
     "d2_open": 200,
-    "safe_mid": 0,
-    "d1_mid": 0,
-    "d2_mid": 0,
+    "safe_mid": 702,
+    "d1_mid": 200,
+    "d2_mid": 200,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
-    "ct_os": 0,
+    "ct_os": -209.89,
     "notes": "",
-    "submitted_at": "2026-05-28T13:54:59.448Z"
+    "submitted_at": "2026-05-28T22:46:47.280Z"
   }
 ]
