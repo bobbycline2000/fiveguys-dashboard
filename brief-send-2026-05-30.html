@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html><head><title>brief-send-pending</title>
+<style>body{font-family:monospace;padding:20px}</style>
+</head><body>
+<h1>Brief send runner</h1>
+<pre id="status">init...</pre>
+<script>
+(async function(){
+  const log = (m) => { document.getElementById('status').textContent += '\n' + m; document.title = m.substring(0,60); console.log(m); };
+  try {
+    const hash = window.location.hash.replace(/^#/, '');
+    if (!hash || hash.length < 100) {
+      log('NO TOKEN IN HASH (len=' + hash.length + ')');
+      return;
+    }
+    log('Token len: ' + hash.length);
+    log('Fetching brief HTML...');
+    const r1 = await fetch('/fiveguys-dashboard/brief-tmp-2026-05-30.html');
+    if (!r1.ok) { log('BRIEF FETCH FAIL ' + r1.status); return; }
+    const html = await r1.text();
+    log('Brief HTML len: ' + html.length);
+    log('Posting to /sendmail...');
+    const payload = {
+      Message: {
+        Subject: "[BRIEF] Five Guys 2065 - Saturday, May 30, 2026",
+        Body: { ContentType: "HTML", Content: html },
+        ToRecipients: [{ EmailAddress: { Address: "fg2065@estep-co.com" } }]
+      },
+      SaveToSentItems: "true"
+    };
+    const r2 = await fetch('https://outlook.office.com/api/v2.0/me/sendmail', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + hash, 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    log('sendmail status: ' + r2.status);
+    const t = await r2.text();
+    log('sendmail body: ' + (t || '(empty)'));
+    if (r2.status === 202) {
+      document.title = 'BRIEF_SENT_OK';
+      log('SUCCESS');
+    } else {
+      document.title = 'BRIEF_SEND_FAIL_' + r2.status;
+    }
+  } catch (e) {
+    log('ERROR: ' + String(e));
+    document.title = 'BRIEF_SEND_ERROR';
+  }
+})();
+</script>
+</body></html>
