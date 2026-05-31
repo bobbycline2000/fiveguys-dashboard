@@ -321,5 +321,22 @@
     "ct_os": -293.98,
     "notes": "i was asked to move 34 dollars from the safe to the deposit. Jorge M",
     "submitted_at": "2026-05-31T04:16:27.460Z"
+  },
+  {
+    "date": "2026-05-31",
+    "mgr": "vll",
+    "deposit": 0,
+    "safe_open": 706,
+    "d1_open": 200,
+    "d2_open": 200,
+    "safe_mid": 706,
+    "d1_mid": 200,
+    "d2_mid": 200,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
+    "ct_os": -143.41,
+    "notes": "",
+    "submitted_at": "2026-05-31T18:33:37.238Z"
   }
 ]
