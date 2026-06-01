@@ -4,22 +4,22 @@
   "week_ending": "2026-06-07",
   "week_start": "2026-06-01",
   "target_pct": 20.0,
-  "generated_at": "2026-05-31T07:17:45.602187-04:00",
+  "generated_at": "2026-06-01T11:44:59.073598-04:00",
   "week": {
     "fcst_sales": 39853,
-    "sched_cost": 8314,
-    "sched_hours": 584.0,
-    "labor_pct": 20.9,
-    "over_target_dollars": 344,
-    "ot_hours": 0.0,
-    "ot_value": 0
+    "sched_cost": 8522,
+    "sched_hours": 592.0,
+    "labor_pct": 21.4,
+    "over_target_dollars": 551,
+    "ot_hours": 7.0,
+    "ot_value": 189
   },
-  "issue_count": 3,
+  "issue_count": 4,
   "issues": [
     {
       "sev": "high",
       "day": "Mon",
-      "msg": "Mon labor 23.2% \u2014 ~$149 over 20% target"
+      "msg": "Mon labor 26.4% \u2014 ~$293 over 20% target"
     },
     {
       "sev": "high",
@@ -30,6 +30,11 @@
       "sev": "high",
       "day": "Thu",
       "msg": "Thu labor 22.7% \u2014 ~$163 over 20% target"
+    },
+    {
+      "sev": "med",
+      "day": "Sun",
+      "msg": "Sun overtime 7.0h ($189)"
     }
   ],
   "per_day": [
@@ -37,12 +42,12 @@
       "date": "2026-06-01",
       "wd": "Mon",
       "sales": 4599,
-      "hrs": 74.5,
-      "cost": 1068,
-      "pct": 23.2,
+      "hrs": 82.5,
+      "cost": 1212,
+      "pct": 26.4,
       "byPosition": {
         "2. Crew": 57.5,
-        "Shift Leader-Hourly": 7.0,
+        "Shift Leader-Hourly": 15.0,
         "General Manager-Salary": 10.0
       }
     },
@@ -117,12 +122,12 @@
       "wd": "Sun",
       "sales": 6589,
       "hrs": 78.5,
-      "cost": 1130,
-      "pct": 17.1,
+      "cost": 1193,
+      "pct": 18.1,
       "byPosition": {
         "2. Crew": 62.0,
-        "Shift Leader-Hourly": 7.0,
-        "Shift Manager-Hourly": 9.5
+        "Shift Manager-Hourly": 9.5,
+        "Shift Leader-Hourly": 7.0
       }
     }
   ]
