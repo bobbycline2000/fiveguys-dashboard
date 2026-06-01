@@ -1,27 +1,27 @@
 {
-  "as_of": "2026-05-27",
+  "as_of": "2026-05-31",
   "current_month": "2026-05",
   "current_month_label": "May 2026",
-  "store_avg_month": 92.5,
-  "store_avg_ytd": 83.8,
-  "shop_count_month": 4,
-  "shop_count_ytd": 29,
+  "store_avg_month": 86.0,
+  "store_avg_ytd": 83.0,
+  "shop_count_month": 5,
+  "shop_count_ytd": 30,
   "managers": [
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": 92.5,
-      "month_n": 4,
-      "ytd_avg": 84.2,
-      "ytd_n": 19
+      "month_avg": 86.0,
+      "month_n": 5,
+      "ytd_avg": 83.0,
+      "ytd_n": 20
     },
     {
       "first": "Vicki",
       "name": "Vicki Lucey",
-      "month_avg": 97.5,
-      "month_n": 2,
-      "ytd_avg": 85.6,
-      "ytd_n": 9
+      "month_avg": 85.0,
+      "month_n": 3,
+      "ytd_avg": 83.0,
+      "ytd_n": 10
     },
     {
       "first": "Kasey",
@@ -82,14 +82,6 @@
       "ytd_n": 14
     },
     {
-      "first": "Lidy",
-      "name": "Lidy Henry",
-      "month_avg": 97.5,
-      "month_n": 2,
-      "ytd_avg": 86.9,
-      "ytd_n": 13
-    },
-    {
       "first": "Richard",
       "name": "Richard Gibbs",
       "month_avg": 95.0,
@@ -106,6 +98,14 @@
       "ytd_n": 9
     },
     {
+      "first": "Lidy",
+      "name": "Lidy Henry",
+      "month_avg": 85.0,
+      "month_n": 3,
+      "ytd_avg": 85.0,
+      "ytd_n": 14
+    },
+    {
       "first": "Autumn",
       "name": "Autumn Hearn",
       "month_avg": null,
@@ -116,18 +116,18 @@
     {
       "first": "Maylin",
       "name": "Maylin Hernandez Rodriguez",
-      "month_avg": 100.0,
-      "month_n": 1,
-      "ytd_avg": 80.7,
-      "ytd_n": 16
+      "month_avg": 80.0,
+      "month_n": 2,
+      "ytd_avg": 79.5,
+      "ytd_n": 17
     },
     {
       "first": "Francisco",
       "name": "Francisco Llorente Mejias",
-      "month_avg": 91.7,
-      "month_n": 3,
-      "ytd_avg": 79.5,
-      "ytd_n": 17
+      "month_avg": 83.8,
+      "month_n": 4,
+      "ytd_avg": 78.4,
+      "ytd_n": 18
     },
     {
       "first": "Samuel",
@@ -147,6 +147,18 @@
     }
   ],
   "latest_shops": [
+    {
+      "date": "2026-05-26",
+      "score": 60.0,
+      "meal_period": "Lunch",
+      "on_shift": [
+        "Francisco Llorente Mejias",
+        "Lidy Henry",
+        "Madison Cureton",
+        "Maylin Hernandez Rodriguez",
+        "Vicki Lucey"
+      ]
+    },
     {
       "date": "2026-05-16",
       "score": 75.0,
@@ -195,16 +207,6 @@
         "Lidy Henry",
         "Madison Cureton",
         "Vicki Lucey"
-      ]
-    },
-    {
-      "date": "2026-04-25",
-      "score": 87.0,
-      "meal_period": "Lunch",
-      "on_shift": [
-        "DaKayla Dorsey",
-        "Lidy Henry",
-        "Nathan Roberts"
       ]
     }
   ]

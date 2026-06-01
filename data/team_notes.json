@@ -1,56 +1,48 @@
 {
-  "date": "2026-05-27",
+  "date": "2026-05-31",
   "brief_sent": true,
-  "brief_pulled": 21,
-  "new_count": 6,
+  "brief_pulled": 15,
+  "new_count": 4,
   "notes": [
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
+      "time": "2026-05-31T14:26:00+00:00",
+      "subject": "Attached: Daily Report June 2026",
+      "body": "Link to June 2026 FG Daily Report.xlsx. Sales budget calculations are at the bottom of your location sheet. Budgets take into consideration May 2026 sales trends and added DoorDash + UberEats promotions for June. Let's have a terrific June! Action: open the workbook, scroll to the 2065 sheet, read the June budget at the bottom."
+    },
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
       "time": "2026-05-26T10:57:00+00:00",
-      "subject": "Re: 8.5x11 Shake",
-      "body": "See and use the attached Blackberry milkshake counter sign — print the 8.5x11 and post at the register, LTO is live now. Standing (5/11): Large soda is now 30 cents more than Regular (not 10) — drill every cashier on the new line. Orientation Checklist with all new hires; FGU 0% overdue."
+      "subject": "Re: 8.5x11 Shake (standing)",
+      "body": "Print the 8.5x11 Blackberry milkshake counter sign and post at the register — LTO is live (launched 5/27). Standing (5/11): Large soda is now 30 cents more than Regular (not 10) — drill every cashier on the new line. Orientation Checklist with all new hires."
     },
     {
       "from": "Crystal Hess",
       "role": "dm",
       "role_label": "District Manager",
       "time": "2026-05-26T08:06:00+00:00",
-      "subject": "Re: New H.R. & Payroll",
-      "body": "New H.R./Payroll teammate is Hannah Kaufman (correcting earlier 'Hannah Parker') — new to the team to help Jeni and Victoria. Welcome her. Still live: G.O.A.T Trophy shout-out to Etown (2079, 2x 100% + 92%); review/share the KPI miss chart; swag contest text 812-267-8669, no GMs."
-    },
-    {
-      "from": "Jeni Moffatt",
-      "role": "hr",
-      "role_label": "HR",
-      "time": "2026-05-26T14:12:00+00:00",
-      "subject": "RE: Manager Applicants",
-      "body": "Shift Leader and Assistant Manager ads are posted for location 2065 (Bobby requested 5/25). Watch for applicants."
+      "subject": "Re: New H.R. & Payroll (standing)",
+      "body": "Hannah Kaufman is new to the H.R./Payroll team to help Jeni and Victoria — welcome her when she reaches out. Also standing: G.O.A.T Trophy shout-out to Etown (2079, 2x 100% + 92%, watch the video); review/share the 5/23 KPI miss chart; swag contest text 812-267-8669, no GMs answer."
     },
     {
       "from": "CrunchTime Task Alert",
       "role": "alert",
       "role_label": "Ops Alert",
-      "time": "2026-05-27T06:30:00+00:00",
-      "subject": "Task Alert 05/26",
-      "body": "Open for KY-2065: Labor Review (L-Rev) 5/25 AND 5/26 not completed; VO-Rec BOSS Alpha-Ohio Valley (5/26) and VO-Rec Performance Foodservice (5/26) need reconciliation."
+      "time": "2026-05-31T06:26:57+00:00",
+      "subject": "Task Alert 05/30",
+      "body": "KY-2065 open tasks: Post Period — Labor Not Posted (5/31), Inv-Final for Post (5/31), L-Rev backlog 5/25-5/30 (6 days), VO-Rec Performance Foodservice + BOSS Alpha-Ohio Valley pending. Clear in CT today."
     },
     {
-      "from": "Performance Foodservice",
-      "role": "accounting",
-      "role_label": "Vendor",
-      "time": "2026-05-27T13:14:00+00:00",
-      "subject": "Order Posted CIN01984",
-      "body": "Performance Food order posted (CIN01984). Receive the truck and reconcile the voucher against the open VO-Rec task."
-    },
-    {
-      "from": "Trimark / Megan Raymer",
-      "role": "alert",
-      "role_label": "Vendor",
-      "time": "2026-05-26T22:52:00+00:00",
-      "subject": "RE: Order Location 2065",
-      "body": "Order placed — 2x Kleen Cups shipping to location 2065 (Bobby's 5/25 order)."
+      "from": "Indeed",
+      "role": "hr",
+      "role_label": "Hiring",
+      "time": "2026-05-31T15:28:31+00:00",
+      "subject": "New applicants — Shift Leader + AGM Dixie",
+      "body": "Gregory Alvis Jr +6 applied for Shift Leader Dixie Highway. Billy Owens +3 applied for AGM Louisville. Screen the top of stack today, set up interviews."
     }
   ]
 }
