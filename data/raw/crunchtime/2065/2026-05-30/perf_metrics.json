@@ -2,7 +2,7 @@
   "meta": {
     "report_date": "2026-05-30",
     "report_display": "Saturday, May 30, 2026",
-    "generated": "5/31/2026 at 7:19 AM"
+    "generated": "5/31/2026 at 9:15 PM"
   },
   "sales": {
     "net": 5656.0,
@@ -12,7 +12,7 @@
     "forecast": 5032.0,
     "forecast_week": 26053.0,
     "vs_ly": 1127.0,
-    "vs_ly_week": 1127.0,
+    "vs_ly_week": 628.0,
     "vs_forecast": 624.0,
     "per_guest": 5.56,
     "per_guest_week": 5.43
@@ -56,7 +56,7 @@
     },
     "Net Sales to Last Year": {
       "day": "$1,127",
-      "week": "$1,127"
+      "week": "$628"
     },
     "Actual Labor": {
       "day": "",
@@ -72,7 +72,7 @@
     },
     "Total Cash Over/Short": {
       "day": "$34.00",
-      "week": "$34.00"
+      "week": "$0.00"
     },
     "Comps and Discounts": {
       "day": "$6.03",
