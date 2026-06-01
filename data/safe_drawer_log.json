@@ -332,11 +332,11 @@
     "safe_mid": 706,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
-    "d1_close": 0,
-    "d2_close": 0,
+    "safe_close": 706,
+    "d1_close": 200.4,
+    "d2_close": 200,
     "ct_os": -143.41,
     "notes": "",
-    "submitted_at": "2026-05-31T18:33:37.238Z"
+    "submitted_at": "2026-06-01T02:42:13.219Z"
   }
 ]
