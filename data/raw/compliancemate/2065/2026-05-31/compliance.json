@@ -1,106 +1,129 @@
 {
   "meta": {
     "date": "2026-05-31",
-    "generated": "5/31/2026 at 11:19 AM",
+    "generated": "5/31/2026 at 09:08 PM",
     "location": "2065",
     "status": "ok"
   },
-  "overall_pct": 43,
+  "overall_pct": 84,
+  "overall_required_pct": 84,
+  "overall_all_pct": 84,
+  "fetched_at": "2026-05-31T21:08:08.732783-04:00",
+  "source": "compliancemate_url_replay",
   "lists": [
     {
       "name": "11AM: Time and Temp",
       "pct": 100,
-      "raw": "11AM: Time and Temp\n100% | 100%"
+      "required_pct": 100,
+      "all_pct": 100
     },
     {
       "name": "1PM: Time and Temp",
       "pct": 100,
-      "raw": "1PM: Time and Temp\n100% | 100%"
+      "required_pct": 100,
+      "all_pct": 100
     },
     {
       "name": "3PM: Time and Temp",
       "pct": 100,
-      "raw": "3PM: Time and Temp\n100% | 100%"
+      "required_pct": 100,
+      "all_pct": 100
     },
     {
       "name": "5PM: Time and Temp",
       "pct": 100,
-      "raw": "5PM: Time and Temp\n100% | 100%"
+      "required_pct": 100,
+      "all_pct": 100
     },
     {
       "name": "7PM: Time and Temp",
       "pct": 100,
-      "raw": "7PM: Time and Temp\n100% | 100%"
+      "required_pct": 100,
+      "all_pct": 100
     },
     {
       "name": "9PM: Time and Temp",
-      "pct": 100,
-      "raw": "9PM: Time and Temp\n100% | 100%"
+      "pct": 0,
+      "required_pct": 0,
+      "all_pct": 0
     },
     {
       "name": "AM Pre-Shift Check",
       "pct": 100,
-      "raw": "AM Pre-Shift Check\n100% | 100%"
+      "required_pct": 100,
+      "all_pct": 100
     },
     {
       "name": "PM Pre-Shift Check",
       "pct": 100,
-      "raw": "PM Pre-Shift Check\n100% | 100%"
-    },
-    {
-      "name": "Closing Checklist",
-      "pct": 0,
-      "raw": "Closing Checklist\n0% | 0%"
-    },
-    {
-      "name": "Pre Open",
-      "pct": 0,
-      "raw": "Pre Open\n0% | 0%"
+      "required_pct": 100,
+      "all_pct": 100
     },
     {
       "name": "Shift Change",
       "pct": 100,
-      "raw": "Shift Change\n100% | 100%"
+      "required_pct": 100,
+      "all_pct": 100
+    },
+    {
+      "name": "Closing Checklist",
+      "pct": 0,
+      "required_pct": 0,
+      "all_pct": 0
     },
     {
       "name": "Closing",
       "pct": 0,
-      "raw": "Closing\n0% | 0%"
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "name": "Pre Open",
+      "pct": 0,
+      "required_pct": 0,
+      "all_pct": 0
     },
     {
       "name": "Weekly Store Inspection",
       "pct": 0,
-      "raw": "Weekly Store Inspection\n0% | 0%"
+      "required_pct": 0,
+      "all_pct": 0
     },
     {
       "name": "Delivery Check",
       "pct": 0,
-      "raw": "Delivery Check\n0% | 0%"
+      "required_pct": 0,
+      "all_pct": 0
     },
     {
       "name": "Temperature Sample",
       "pct": 0,
-      "raw": "Temperature Sample\n0% | 0%"
+      "required_pct": 0,
+      "all_pct": 0
     },
     {
       "name": "Calibration Test",
       "pct": 0,
-      "raw": "Calibration Test\n0% | 0%"
+      "required_pct": 0,
+      "all_pct": 0
     },
     {
       "name": "Operational Spot Check",
       "pct": 0,
-      "raw": "Operational Spot Check\n0% | 0%"
+      "required_pct": 0,
+      "all_pct": 0
     },
     {
       "name": "Battery Swap Checklist",
       "pct": 0,
-      "raw": "Battery Swap Checklist\n0% | 0%"
+      "required_pct": 0,
+      "all_pct": 0
     },
     {
       "name": "MMCCA",
       "pct": 0,
-      "raw": "MMCCA\n0% | 0%"
+      "required_pct": 0,
+      "all_pct": 0
     }
   ]
 }
