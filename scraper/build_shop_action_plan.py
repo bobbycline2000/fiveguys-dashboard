@@ -186,7 +186,7 @@ def main():
 
     body = build_body(shop, full, job_id)
     audit = DRAFTS / f"shop-action-plan-{job_id}.md"
-    audit.write_text(body)
+    audit.write_text(body, encoding="utf-8")
     print(body)
     print(f"\n# Audit copy saved to: {audit}", file=sys.stderr)
 
