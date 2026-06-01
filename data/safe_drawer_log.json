@@ -346,7 +346,7 @@
     "safe_open": 700,
     "d1_open": 199,
     "d2_open": 200,
-    "safe_mid": 0,
+    "safe_mid": 700,
     "d1_mid": 200,
     "d2_mid": 0,
     "safe_close": 0,
@@ -354,6 +354,6 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-06-01T19:57:22.517Z"
+    "submitted_at": "2026-06-01T19:57:32.025Z"
   }
 ]
