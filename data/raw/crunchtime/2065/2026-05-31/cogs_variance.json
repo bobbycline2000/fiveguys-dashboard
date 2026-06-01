@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-05-25",
+    "week_end": "2026-05-31",
+    "variance_week_start": "2026-05-18",
+    "variance_week_end": "2026-05-24",
+    "month_start": "2026-06-01",
+    "last_month_start": "2026-05-01",
+    "last_month_end": "2026-05-31",
+    "through": "2026-05-31",
+    "pulled": "2026-06-01 11:25 ET",
+    "method": "api+playwright"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": null,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": null,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {
+      "name": "Hot Dog",
+      "actual": 160.0,
+      "theoretical": 76.0,
+      "over_dollars": 84.0,
+      "variance_pct": -111.0,
+      "rank": 1
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 966.0,
+      "theoretical": 918.0,
+      "over_dollars": 48.0,
+      "variance_pct": -5.0,
+      "rank": 2
+    },
+    {
+      "name": "Strawberry Marinade",
+      "actual": 55.0,
+      "theoretical": 21.0,
+      "over_dollars": 34.0,
+      "variance_pct": -154.0,
+      "rank": 3
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 309.0,
+      "theoretical": 278.0,
+      "over_dollars": 31.0,
+      "variance_pct": -11.0,
+      "rank": 4
+    },
+    {
+      "name": "Lettuce",
+      "actual": 95.0,
+      "theoretical": 65.0,
+      "over_dollars": 30.0,
+      "variance_pct": -45.0,
+      "rank": 5
+    },
+    {
+      "name": "Cheese",
+      "actual": 340.0,
+      "theoretical": 311.0,
+      "over_dollars": 29.0,
+      "variance_pct": -9.0,
+      "rank": 6
+    },
+    {
+      "name": "Cup, Shake",
+      "actual": 57.0,
+      "theoretical": 35.0,
+      "over_dollars": 22.0,
+      "variance_pct": -62.0,
+      "rank": 7
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": 3.0,
+      "theoretical": 25.0,
+      "over_dollars": -22.0,
+      "variance_pct": 87.0,
+      "rank": 8
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 2900.0,
+      "theoretical": 2953.0,
+      "over_dollars": -53.0,
+      "variance_pct": 2.0,
+      "rank": 9
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 869.0,
+      "theoretical": 944.0,
+      "over_dollars": -75.0,
+      "variance_pct": 8.0,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}

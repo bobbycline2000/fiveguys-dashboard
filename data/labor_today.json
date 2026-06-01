@@ -8,10 +8,16 @@
   "labor_percent_wtd": null,
   "labor_dollars_wtd": null,
   "actual_hours_wtd": null,
-  "hourly_breakdown": [],
+  "hourly_breakdown": [
+    {
+      "label": "11A",
+      "hour_24": 11,
+      "labor_percent": 0.0
+    }
+  ],
   "meta": {
     "source": "crunchtime_api",
-    "pulled_at": "2026-06-01T09:46:35",
+    "pulled_at": "2026-06-01T15:25:13",
     "calc_id_yesterday": 1
   }
 }
