@@ -599,9 +599,19 @@ KPI_VAL_OPEN = r'<div class="kpi-val[^"]*"[^>]*>'
 KPI_LBL_OPEN = r'<div class="kpi-lbl[^"]*"[^>]*>'
 KPI_SUB_OPEN = r'<div class="kpi-sub[^"]*"[^>]*>'
 
-sales_net_week = f"${latest['sales']['net_week']:,.0f}"
-sales_ly_week = f"${latest['sales']['ly_week']:,.0f}"
-sales_forecast_week = f"${latest['sales']['forecast_week']:,.0f}"
+# Null-safe: CT may return None for these when yesterday's data isn't posted yet.
+# Prefer Par Brink rollups for net_week; "—" for LY/Forecast/per-guest when CT is stale or absent.
+_ct_net_week = latest['sales'].get('net_week')
+if _ct_net_week is not None:
+    sales_net_week = f"${_ct_net_week:,.0f}"
+elif rollups and rollups.get("week", {}).get("net_sales"):
+    sales_net_week = f"${rollups['week']['net_sales']:,.0f}"
+else:
+    sales_net_week = "—"
+_ct_ly_week = latest['sales'].get('ly_week')
+sales_ly_week = "—" if (_ct_stale or _ct_ly_week is None) else f"${_ct_ly_week:,.0f}"
+_ct_fc_week = latest['sales'].get('forecast_week')
+sales_forecast_week = "—" if (_ct_stale or _ct_fc_week is None) else f"${_ct_fc_week:,.0f}"
 _pg_week = latest['sales'].get('per_guest_week')
 per_guest_week = f"${_pg_week:.2f}" if _pg_week is not None else "—"
 

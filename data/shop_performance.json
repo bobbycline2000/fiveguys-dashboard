@@ -1,25 +1,25 @@
 {
-  "as_of": "2026-05-31",
-  "current_month": "2026-05",
-  "current_month_label": "May 2026",
-  "store_avg_month": 86.0,
+  "as_of": "2026-06-01",
+  "current_month": "2026-06",
+  "current_month_label": "June 2026",
+  "store_avg_month": null,
   "store_avg_ytd": 83.0,
-  "shop_count_month": 5,
+  "shop_count_month": 0,
   "shop_count_ytd": 30,
   "managers": [
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": 86.0,
-      "month_n": 5,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 83.0,
       "ytd_n": 20
     },
     {
       "first": "Vicki",
       "name": "Vicki Lucey",
-      "month_avg": 85.0,
-      "month_n": 3,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 83.0,
       "ytd_n": 10
     },
@@ -34,8 +34,8 @@
     {
       "first": "Nathan",
       "name": "Nathan Roberts",
-      "month_avg": 95.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 95.4,
       "ytd_n": 5
     }
@@ -44,24 +44,24 @@
     {
       "first": "Bobby",
       "name": "Robert Cline",
-      "month_avg": 98.3,
-      "month_n": 3,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 98.3,
       "ytd_n": 3
     },
     {
       "first": "Dakayla",
       "name": "DaKayla Dorsey",
-      "month_avg": 100.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 93.5,
       "ytd_n": 2
     },
     {
       "first": "Bri",
       "name": "Brianna Gatewood",
-      "month_avg": 100.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 93.0,
       "ytd_n": 4
     },
@@ -76,16 +76,16 @@
     {
       "first": "Jeremiah",
       "name": "Jeremiah Matthews",
-      "month_avg": 85.0,
-      "month_n": 2,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 89.5,
       "ytd_n": 14
     },
     {
       "first": "Richard",
       "name": "Richard Gibbs",
-      "month_avg": 95.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 86.8,
       "ytd_n": 5
     },
@@ -100,8 +100,8 @@
     {
       "first": "Lidy",
       "name": "Lidy Henry",
-      "month_avg": 85.0,
-      "month_n": 3,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 85.0,
       "ytd_n": 14
     },
@@ -116,16 +116,16 @@
     {
       "first": "Maylin",
       "name": "Maylin Hernandez Rodriguez",
-      "month_avg": 80.0,
-      "month_n": 2,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 79.5,
       "ytd_n": 17
     },
     {
       "first": "Francisco",
       "name": "Francisco Llorente Mejias",
-      "month_avg": 83.8,
-      "month_n": 4,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 78.4,
       "ytd_n": 18
     },
@@ -140,8 +140,8 @@
     {
       "first": "Jada",
       "name": "Jada Cox",
-      "month_avg": 75.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 69.7,
       "ytd_n": 7
     }
