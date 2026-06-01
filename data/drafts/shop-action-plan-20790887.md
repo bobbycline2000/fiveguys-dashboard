@@ -1,4 +1,4 @@
-KY-2065 Secret Shop — Action Plan
+KY-2065 Secret Shop â€” Action Plan
 Shop date: 2026-05-16 (Dinner)
 Final score: 75.0%   Points lost: 25.0
 Job #: 20790887
@@ -9,16 +9,16 @@ On shift during the meal period:
   - Jeremiah Matthews
   - Madison Cureton
 
-Sub-score breakdown not yet available — plan covers the most-common loss area.
+Sub-score breakdown not yet available â€” plan covers the most-common loss area.
 
 ========================================================
 S.M.A.R.T. ACTION PLAN
 ========================================================
 
---- CUSTOMER SATISFACTION — points lost on overall guest experience or recovery ---
+--- CUSTOMER SATISFACTION â€” points lost on overall guest experience or recovery ---
 Specific:    When a guest looks unhappy, the MOD goes to the table within 60 seconds. Train every crew member to flag the MOD on any visible guest concern. Comp policy review at next shift huddle.
 Measurable:  MOD logs every table-touch on the back-of-house clipboard. Target: 5 proactive table-touches per shift. Zero unaddressed complaint emails for 14 days.
-Achievable:  Just discipline — table-touching is already part of the GM/MOD role. Crew flagging is a 30-second huddle teach.
+Achievable:  Just discipline â€” table-touching is already part of the GM/MOD role. Crew flagging is a 30-second huddle teach.
 Relevant:    Customer Satisfaction directly drives shop scores AND repeat business. The scoring rubric weighs recovery heavily.
 Time-bound:  Starting tomorrow's lunch shift. Review proactive-touch counts at end-of-week huddle.
 
@@ -30,5 +30,5 @@ ACCOUNTABILITY:
 
 This is a coaching opportunity, not a punishment. Hit the plan, win the next shop.
 
-— Bobby Cline
-General Manager — Store 2065
+â€” Bobby Cline
+General Manager â€” Store 2065
