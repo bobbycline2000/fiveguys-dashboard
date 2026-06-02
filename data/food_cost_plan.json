@@ -2,33 +2,35 @@
   "store": "2065",
   "week_start": "2026-05-25",
   "week_end": "2026-05-31",
-  "variance_week_start": "2026-05-18",
-  "variance_week_end": "2026-05-24",
+  "variance_week_start": "2026-05-25",
+  "variance_week_end": "2026-05-31",
   "cogs_pct_week": 23.4,
   "cogs_pct_week_label": "2026-05-03",
   "cogs_goal_pct": 27.5,
-  "total_over": 166.0,
-  "generated": "2026-06-01 15:27 ET",
+  "total_over": 1667.0,
+  "generated": "2026-06-02 12:49 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Hot Dog",
-      "over_dollars": 84.0,
-      "actual": 160.0,
-      "theoretical": 76.0,
-      "variance_pct": -111.0,
+      "name": "Cheeseburger",
+      "over_dollars": 803.0,
+      "actual": 1027.0,
+      "theoretical": 224.0,
+      "variance_pct": null,
       "big_six": true,
       "actions": [
-        "Big Six item. Variance = employee meals not rung, waste, or miscount. Recount and check comps."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
       "rank": 2,
-      "name": "Bun, Burger",
-      "over_dollars": 48.0,
-      "actual": 966.0,
-      "theoretical": 918.0,
-      "variance_pct": -5.0,
+      "name": "Bacon Cheeseburger",
+      "over_dollars": 487.0,
+      "actual": 636.0,
+      "theoretical": 149.0,
+      "variance_pct": null,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
@@ -38,14 +40,16 @@
     },
     {
       "rank": 3,
-      "name": "Strawberry Marinade",
-      "over_dollars": 34.0,
-      "actual": 55.0,
-      "theoretical": 21.0,
-      "variance_pct": -154.0,
-      "big_six": false,
+      "name": "Little Cheeseburger",
+      "over_dollars": 377.0,
+      "actual": 461.0,
+      "theoretical": 84.0,
+      "variance_pct": null,
+      "big_six": true,
       "actions": [
-        "This is a miscount \u2014 the inventory wasn't counted correctly. Recount it."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     }
   ]
