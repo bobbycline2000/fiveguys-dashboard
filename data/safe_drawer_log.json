@@ -397,14 +397,14 @@
     "safe_open": 700,
     "d1_open": 200,
     "d2_open": 200,
-    "safe_mid": 0,
-    "d1_mid": 0,
-    "d2_mid": 0,
-    "safe_close": 0,
-    "d1_close": 0,
-    "d2_close": 0,
-    "ct_os": 0,
-    "notes": "",
-    "submitted_at": "2026-06-05T13:34:23.420Z"
+    "safe_mid": 700,
+    "d1_mid": 200,
+    "d2_mid": 200,
+    "safe_close": 700,
+    "d1_close": 200,
+    "d2_close": 200,
+    "ct_os": -111.97,
+    "notes": "867.11 is deposite",
+    "submitted_at": "2026-06-06T03:11:53.855Z"
   }
 ]
