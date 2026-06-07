@@ -426,19 +426,19 @@
   },
   {
     "date": "2026-06-07",
-    "mgr": "JM",
+    "mgr": "vll",
     "deposit": 0,
-    "safe_open": 0,
-    "d1_open": 0,
-    "d2_open": 0,
-    "safe_mid": 0,
-    "d1_mid": 0,
-    "d2_mid": 0,
-    "safe_close": 701,
-    "d1_close": 200,
-    "d2_close": 173,
+    "safe_open": 701,
+    "d1_open": 200,
+    "d2_open": 174,
+    "safe_mid": 701,
+    "d1_mid": 200,
+    "d2_mid": 174,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
     "ct_os": -174.14,
     "notes": "one of the drawers was at $173 at the end of the night",
-    "submitted_at": "2026-06-07T19:21:27.045Z"
+    "submitted_at": "2026-06-07T19:23:01.922Z"
   }
 ]
