@@ -423,5 +423,22 @@
     "ct_os": 0,
     "notes": "",
     "submitted_at": "2026-06-06T19:15:29.916Z"
+  },
+  {
+    "date": "2026-06-07",
+    "mgr": "JM",
+    "deposit": 0,
+    "safe_open": 0,
+    "d1_open": 0,
+    "d2_open": 0,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
+    "safe_close": 701,
+    "d1_close": 200,
+    "d2_close": 173,
+    "ct_os": 0,
+    "notes": "one of the drawers was at $173 at the end of the night",
+    "submitted_at": "2026-06-07T04:19:53.291Z"
   }
 ]
