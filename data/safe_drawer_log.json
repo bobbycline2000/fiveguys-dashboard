@@ -434,11 +434,11 @@
     "safe_mid": 701,
     "d1_mid": 200,
     "d2_mid": 174,
-    "safe_close": 0,
-    "d1_close": 0,
-    "d2_close": 0,
+    "safe_close": 701,
+    "d1_close": 200,
+    "d2_close": 175,
     "ct_os": -174.14,
-    "notes": "one of the drawers was at $173 at the end of the night",
-    "submitted_at": "2026-06-07T19:23:14.032Z"
+    "notes": "wifi is not working. one drawer short 24 dollars from yesterday. ~nr",
+    "submitted_at": "2026-06-08T02:06:44.319Z"
   }
 ]
