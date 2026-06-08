@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-06-01",
+    "week_end": "2026-06-07",
+    "variance_week_start": "2026-05-25",
+    "variance_week_end": "2026-05-31",
+    "month_start": "2026-06-01",
+    "last_month_start": "2026-05-01",
+    "last_month_end": "2026-05-31",
+    "through": "2026-06-07",
+    "pulled": "2026-06-08 09:12 ET",
+    "method": "api+playwright"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": null,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": null,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {
+      "name": "Shake Mix",
+      "actual": 459.0,
+      "theoretical": 310.0,
+      "over_dollars": 149.0,
+      "variance_pct": -48.0,
+      "rank": 1
+    },
+    {
+      "name": "Hot Dog",
+      "actual": 118.0,
+      "theoretical": 55.0,
+      "over_dollars": 63.0,
+      "variance_pct": -113.0,
+      "rank": 2
+    },
+    {
+      "name": "Pickles",
+      "actual": 139.0,
+      "theoretical": 108.0,
+      "over_dollars": 31.0,
+      "variance_pct": -28.0,
+      "rank": 3
+    },
+    {
+      "name": "Strawberry Marinade",
+      "actual": 55.0,
+      "theoretical": 32.0,
+      "over_dollars": 23.0,
+      "variance_pct": -72.0,
+      "rank": 4
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": 14.0,
+      "theoretical": 41.0,
+      "over_dollars": -27.0,
+      "variance_pct": 65.0,
+      "rank": 5
+    },
+    {
+      "name": "Cup, Shake",
+      "actual": 19.0,
+      "theoretical": 46.0,
+      "over_dollars": -27.0,
+      "variance_pct": 60.0,
+      "rank": 6
+    },
+    {
+      "name": "Cheese",
+      "actual": 320.0,
+      "theoretical": 349.0,
+      "over_dollars": -29.0,
+      "variance_pct": 8.0,
+      "rank": 7
+    },
+    {
+      "name": "Cajun Season",
+      "actual": 57.0,
+      "theoretical": 89.0,
+      "over_dollars": -32.0,
+      "variance_pct": 36.0,
+      "rank": 8
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 234.0,
+      "theoretical": 315.0,
+      "over_dollars": -81.0,
+      "variance_pct": 26.0,
+      "rank": 9
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 978.0,
+      "theoretical": 1093.0,
+      "over_dollars": -115.0,
+      "variance_pct": 11.0,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}

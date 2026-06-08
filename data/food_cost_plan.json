@@ -1,55 +1,54 @@
 {
   "store": "2065",
-  "week_start": "2026-05-25",
-  "week_end": "2026-05-31",
+  "week_start": "2026-06-01",
+  "week_end": "2026-06-07",
   "variance_week_start": "2026-05-25",
   "variance_week_end": "2026-05-31",
   "cogs_pct_week": 23.4,
   "cogs_pct_week_label": "2026-05-03",
   "cogs_goal_pct": 27.5,
-  "total_over": 11004.0,
-  "generated": "2026-06-07 11:14 ET",
+  "total_over": 243.0,
+  "generated": "2026-06-08 13:12 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Cheeseburger",
-      "over_dollars": 5243.0,
-      "actual": 6714.0,
-      "theoretical": 1471.0,
-      "variance_pct": null,
-      "big_six": true,
+      "name": "Shake Mix",
+      "over_dollars": 149.0,
+      "actual": 459.0,
+      "theoretical": 310.0,
+      "variance_pct": -48.0,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     },
     {
       "rank": 2,
-      "name": "Bacon Cheeseburger",
-      "over_dollars": 3627.0,
-      "actual": 4730.0,
-      "theoretical": 1103.0,
-      "variance_pct": null,
+      "name": "Hot Dog",
+      "over_dollars": 63.0,
+      "actual": 118.0,
+      "theoretical": 55.0,
+      "variance_pct": -113.0,
       "big_six": true,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Big Six item. Variance = employee meals not rung, waste, or miscount. Recount and check comps."
       ]
     },
     {
       "rank": 3,
-      "name": "Little Cheeseburger",
-      "over_dollars": 2134.0,
-      "actual": 2608.0,
-      "theoretical": 474.0,
-      "variance_pct": null,
-      "big_six": true,
+      "name": "Pickles",
+      "over_dollars": 31.0,
+      "actual": 139.0,
+      "theoretical": 108.0,
+      "variance_pct": -28.0,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
+        "Confirm prep specs are correct.",
+        "Submit a Product Issue form for yield loss from bad quality off the truck.",
+        "Account for waste."
       ]
     }
   ]
