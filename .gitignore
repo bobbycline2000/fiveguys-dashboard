@@ -52,3 +52,6 @@ data/timedetail_*.json
 data/tips_we_*_raw.json
 data/tip_we_*_employees.json
 data/supwage_*.json
+
+# Indeed employer session tokens (session-scoped, never commit)
+data/indeed_session.json
