@@ -440,5 +440,22 @@
     "ct_os": -174.14,
     "notes": "wifi is not working. one drawer short 24 dollars from yesterday. ~nr",
     "submitted_at": "2026-06-08T02:06:45.355Z"
+  },
+  {
+    "date": "2026-06-09",
+    "mgr": "mc",
+    "deposit": 0,
+    "safe_open": 0,
+    "d1_open": 0,
+    "d2_open": 0,
+    "safe_mid": 697,
+    "d1_mid": 185.2,
+    "d2_mid": 181.99,
+    "safe_close": 697,
+    "d1_close": 185.54,
+    "d2_close": 181.99,
+    "ct_os": -185.48,
+    "notes": "",
+    "submitted_at": "2026-06-10T02:28:55.701Z"
   }
 ]
