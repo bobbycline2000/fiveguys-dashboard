@@ -620,61 +620,63 @@ def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | No
     iso_week = today.isocalendar()[1]
     biweek_flag = iso_week % 2  # alternates 0/1 each week
     rotating_ideas = {
-        0: ("Monday — New Month, New June Sales Budget on the Board",
-            "Brad's June 2026 FG Daily Report workbook is live (sent 5/31). Open it, find the 2065 "
-            "sheet, scroll to the bottom — that's your June sales budget. DoorDash + UberEats promos "
-            "are baked into the budget, so the number assumes we run the promos cleanly. Name today's "
-            "daily target out loud at huddle. Last week landed $30,051 W/W (+19.6% vs LY) and crushed "
-            "the district average of +4.6% — that's the rhythm to beat, not match. Open with the "
-            "number, close with the number."),
-        1: ("Tuesday — Crystal's KPI Miss Chart + Welcome Hannah Kaufman",
-            "Pull Crystal's 5/23 KPI miss chart at huddle — she condensed our biggest misses, walk "
-            "the team through them. New H.R./Payroll: Hannah **Kaufman** is joining to help Jeni & "
-            "Victoria (Crystal 5/26) — when she reaches out, show her who Estep is. And Crystal's "
-            "swag contest from 5/23 is still on the board: the question is the gap from the potatoes "
-            "to the top of the sink AND the why behind it (food safety / cross-contamination "
-            "prevention). First two shift leads to text the right answer to 812-267-8669 win swag — "
-            "NO GMs answer. Drop it on the comm board today."),
-        2: ("Wednesday — DoorDash Promo LIVE Today + Service Recovery Drill",
-            "DoorDash $30 / Save $6 promo activates TODAY (Wed June 3 — Brad 5/29). Expect ~20 extra "
-            "orders/day on top of base. Stock paper goods, stage the pickup shelf, brief drivers, "
-            "keep the trigger ($30 → $6 off) in your back pocket so we don't get caught wondering "
-            "why drivers are showing up steady. AND service recovery: the 5/26 Lunch shop was 60% "
-            "— the most recent reading. Every shift leader watches one full transaction today "
-            "(greet → register → handoff → window) and gives the cashier or runner ONE specific "
-            "piece of feedback. Greet inside 5 seconds + call-back the order at handoff."),
-        3: ("Thursday — Power Outage Checklist + Manager Steritech Walk",
-            "Kayla Valenzuela (#1954) sent the Food Safety Power Outage Checklist via Patty Press "
-            "5/29 — pull it from her email, post in BOH, review at huddle. Thermometers up, DayMark "
-            "labels current, refrigeration temps logged at each visit. Combined with the manager "
-            "walk: walk the store before doors open. Hand sinks for handwashing ONLY (4/28 1704 "
-            "MAJOR), DayMark discard dates correct (4/23 system bug), potato cutter teeth + slicer "
-            "blades chip-free (1704 CRITICAL), restroom hourly named owner with signed sheet "
-            "(4/17 0/20). Find it before the inspector does."),
+        0: ("Monday — June Budget Pacing: Where Are We vs the Number",
+            "We're two weeks into June — pull up Brad's June 2026 FG Daily Report workbook, find the "
+            "2065 sheet, and check month-to-date pace against the budget at the bottom. DoorDash + "
+            "UberEats promos are baked into that number, so the budget ASSUMES we run them clean. "
+            "Name today's daily target out loud at huddle and say where MTD sits vs goal. We've been "
+            "running +17–19% W/W vs LY and beating the district by 4x — that's the rhythm to hold, "
+            "not coast on. Open with the number, close with the number."),
+        1: ("Tuesday — KPI Miss Chart + Customer Complaints Is the Heaviest KPI",
+            "Pull Crystal's KPI miss chart at huddle and walk the team through our biggest misses. "
+            "Customer Complaints carries the heaviest corporate KPI weight (25%) — and that's the "
+            "same muscle our shop scores measure, so every greet and every order read-back pays "
+            "twice. New H.R./Payroll: Hannah **Kaufman** is on the team helping Jeni & Victoria "
+            "(Crystal 5/26) — when she reaches out, show her who Estep is. Crystal's swag contest is "
+            "still on the board: the gap from the potatoes to the top of the sink AND the why "
+            "(cross-contamination / food safety). First two shift leads to text the right answer to "
+            "812-267-8669 win swag — NO GMs answer."),
+        2: ("Wednesday — DoorDash/UberEats Promo Running + Service Recovery Drill",
+            "The DoorDash $30 / Save $6 promo has been running since June 3 (Brad 5/29) — it's "
+            "steady volume now, not a launch. Keep the pickup shelf staged, paper goods stocked, "
+            "drivers briefed, and the trigger ($30 → $6 off) in your back pocket so the flow stays "
+            "tight at peak. AND service recovery: the 5/26 Lunch shop (60%) is still our most recent "
+            "reading and the drag is the Lunch daypart. Every shift leader watches one full "
+            "transaction today (greet → register → handoff → window) and gives the cashier or runner "
+            "ONE specific piece of feedback. Greet inside 5 seconds + call-back the order at handoff."),
+        3: ("Thursday — Steritech Manager Walk + Power Outage Checklist",
+            "Walk the store before doors open and sign off. Hand sinks for handwashing ONLY "
+            "(4/28 1704 MAJOR), DayMark discard dates correct (4/23 system bug), potato cutter teeth "
+            "+ slicer blades chip-free (1704 CRITICAL), restroom hourly named owner with signed sheet "
+            "(4/17 0/20), lids on mushrooms and onions. Pair it with the Food Safety Power Outage "
+            "Checklist Kayla Valenzuela (#1954) sent via Patty Press 5/29 — keep it posted in BOH, "
+            "thermometers up, refrigeration temps logged at each visit. Find the gap before the "
+            "inspector does."),
         4: ("Friday — Shop Review: Lunch Daypart Drag + 100% Recognition",
-            "Pull the May shop board at huddle. May ran 100% (5/1) → 100% (5/11) → 95% (5/14) → "
+            "Pull the shop board at huddle. Recent run: 100% (5/1) → 100% (5/11) → 95% (5/14) → "
             "75% (5/16) → 60% (5/26). The drag is **Lunch daypart**: 5/26 Lunch 60% and 5/14 Lunch "
             "95% both came off the lunch crew. Coach the 5/26 Lunch shift — Francisco, Lidy, "
             "Madison, Maylin, Vicki — on the 5-second greet and order read-back at handoff. AND "
             "recognize the 5/1 + 5/11 100% winners by name: Bobby, Francisco, Lidy, Madison, Vicki "
             "(5/1) and Bobby, Brianna, DaKayla, Francisco, Madison, Maylin (5/11). They proved the "
             "standard is reachable — protect it through the weekend."),
-        5: ("Saturday — Volume + Blackberry Attach + Steritech Walk",
-            "Big Saturday — DoorDash promo running (started Wed), Blackberry LTO live since 5/27 "
-            "with the counter sign posted at register (Brad 5/26). Drill the attach play: suggestive "
-            "sell Blackberry shake on every Bacon Cheeseburger pickup. Make cuts as labor allows, "
-            "breaks are 30 MINUTES, employee meals rung in at break time. Meat on the grill BEFORE "
-            "the order at peak. AND walk the store like Steritech is here today: hand sinks "
-            "handwashing only, DayMark dates correct, potato cutter teeth + slicer blades chip-free, "
-            "lids on mushrooms and onions, wet dishes stacked clean."),
+        5: ("Saturday — Volume + Blackberry Attach + Father's Day Prep",
+            "Big Saturday — DoorDash promo running, Blackberry LTO live since 5/27 with the counter "
+            "sign posted at register (Brad 5/26). Drill the attach play: suggestive-sell the "
+            "Blackberry shake on every Bacon Cheeseburger pickup. Father's Day is next Sunday "
+            "(June 21) — start the coverage and prep mindset now so we're not scrambling. Make cuts "
+            "as labor allows, breaks are 30 MINUTES, employee meals rung in at break time, meat on "
+            "the grill BEFORE the order at peak. Walk the store like Steritech is here today: hand "
+            "sinks handwashing only, DayMark dates correct, cutter teeth + slicer chip-free, lids on "
+            "mushrooms and onions, wet dishes stacked clean."),
         6: ("Sunday — Reset + Week Recap + Monday-Ready Handoff",
             "Closing manager hands off a Monday-ready store: restrooms checked hourly with signed "
             "sheet, lobby clean, prep stocked, DayMark labels current, drawer counts squared. Recap "
             "the week's shops with the crew — recognize the 5/1 + 5/11 100% wins, walk the action "
             "plans on 5/16 (75% Dinner) and 5/26 (60% Lunch) so the same crew doesn't repeat the "
-            "miss. Last Friday landed 16.73% labor on $5,656 sales — that's the cleanest day on the "
-            "board and the rhythm to lock in. Family-hour Sunday: greet warm, ticket times under 6, "
-            "treat every order like it's someone's only meal out this weekend."),
+            "miss. Father's Day (June 21) is one week out — confirm next weekend's coverage tonight. "
+            "Family-hour Sunday: greet warm, ticket times under 6, treat every order like it's "
+            "someone's only meal out this weekend."),
     }
     biweekly_themes = [
         ("Even Weeks — Lunch Daypart Recovery Sprint",
@@ -687,14 +689,14 @@ def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | No
          "(Bobby/Brianna/DaKayla/Francisco/Madison/Maylin) 100% wins prove the standard is "
          "reachable. Customer Complaints is the heaviest corporate KPI weight (25%) — every shop "
          "point pays."),
-        ("Odd Weeks — June Budget + DoorDash Promo + Blackberry Attach",
+        ("Odd Weeks — June Budget + Promos Running + Blackberry Attach",
          "Three concurrent pushes this June: (1) June sales budget is set at the bottom of the "
-         "2065 sheet in Brad's June workbook (5/31) — name today's daily target at huddle, run "
-         "toward it. (2) DoorDash $30 / Save $6 promo activates Wed June 3 — ~20 extra "
-         "orders/day expected; stock paper goods, stage pickup, brief drivers. (3) Blackberry LTO "
-         "live since 5/27 with the counter sign posted at register — suggestive sell on every "
-         "Bacon Cheeseburger pickup. Last week's proof: $30,051 W/W +19.6%, 16.73% labor day. The "
-         "rhythm is there — June is about repeating it on a bigger top line."),
+         "2065 sheet in Brad's June workbook (5/31) — name today's daily target at huddle and check "
+         "MTD pace against it. (2) DoorDash $30 / Save $6 + UberEats promos have been running since "
+         "June 3 — steady extra orders now; keep paper goods stocked, pickup shelf staged, drivers "
+         "briefed. (3) Blackberry LTO live since 5/27 with the counter sign posted at register — "
+         "suggestive-sell on every Bacon Cheeseburger pickup. The +17–19% W/W rhythm is there — "
+         "June is about repeating it on a bigger top line."),
     ]
     rot_title, rot_body = rotating_ideas[dow]
     bi_title, bi_body = biweekly_themes[biweek_flag]
