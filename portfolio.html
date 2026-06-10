@@ -147,7 +147,7 @@
   <div class="role">Operations Systems &amp; Strategic Consulting</div>
   <div class="rule"></div>
   <p class="lede">Eleven years building and running franchise restaurants. Now building the operational systems — dashboards, briefs, automations, schedules — that owner-operators wish corporate had given them. Based in Louisville, Kentucky.</p>
-  <div class="meta">Portfolio · v5 · May 2026</div>
+  <div class="meta">Portfolio · v6 · June 2026</div>
 </header>
 
 <!-- ─── PROFILE ─── -->
@@ -201,6 +201,40 @@
     <p class="section-sub">Live, in production, used daily at Five Guys Store 2065.</p>
 
     <div class="cases">
+
+      <!-- INDEED HIRING PIPELINE -->
+      <article class="case">
+        <div class="hd">
+          <span class="cat">Lights-Out Hiring</span>
+          <span class="status live">● Live · Mon/Thu</span>
+        </div>
+        <h3 class="title">Indeed Hiring Pipeline + Auto Interview Invites</h3>
+        <p class="tagline">From 3,295 raw applicants to 16 vetted managers interviewed — without a single manual click through Indeed.</p>
+        <div class="body">
+          <div class="lhs">
+            <strong class="lbl">The Problem</strong>
+            <p>A high-volume Five Guys store gets thousands of Indeed applicants across multiple ads. Finding the few with real management experience means clicking through profiles one at a time, copying phone numbers by hand, and messaging each candidate individually to set up interviews — hours of work that never gets done consistently, so good applicants go cold.</p>
+            <strong class="lbl">What I Built</strong>
+            <p>I reverse-engineered Indeed for Employers' internal GraphQL API — both the read path (one batched call returns every applicant's name, phone, and full work history) and the write path (the <code>sendConversationEvent</code> mutation). The pipeline pulls management applicants (AGM + Shift Leader) from the last five days, vets each by their actual job history, surfaces a phone-number shortlist on a dashboard Hiring page, and batch-sends personalized interview invites through Indeed's own messaging — keyed on the candidate's id and applied-job id, fully lights-out.</p>
+            <strong class="lbl">Proof</strong>
+            <p><strong>2026-06-10</strong> — pulled 49 vetted management applicants with phones, sent 16 interview invites for the next interview block. Nine of them went out via pure API, zero browser clicks, 100% delivered.</p>
+          </div>
+          <div class="rhs">
+            <dl>
+              <dt>Stack</dt>
+              <dd>Reverse-engineered GraphQL · Python (requests) · GitHub Pages</dd>
+              <dt>Read path</dt>
+              <dd>Name + phone + work history, batched</dd>
+              <dt>Write path</dt>
+              <dd>Interview invites via Indeed message API</dd>
+              <dt>Cadence</dt>
+              <dd>Mondays + Thursdays</dd>
+              <dt>Live URL</dt>
+              <dd><a href="hiring.html">View Hiring page →</a></dd>
+            </dl>
+          </div>
+        </div>
+      </article>
 
       <!-- DASHBOARD -->
       <article class="case">
@@ -675,7 +709,7 @@
 </section>
 
 <footer class="fin">
-  Bobby Cline · Savior Consulting Group · Built with Claude Code · Portfolio v5 · 2026-05-11
+  Bobby Cline · Savior Consulting Group · Built with Claude Code · Portfolio v6 · 2026-06-10
 </footer>
 
 </body>
