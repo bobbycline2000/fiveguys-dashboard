@@ -65,7 +65,7 @@ Published safe-drawer-log
 ```
 
 **Copy that URL — that's the worker endpoint.** Looks like
-`https://safe-drawer-log.bobbycline2000.workers.dev` (the subdomain is set
+`https://safe-drawer-log.bobcline2000.workers.dev` (the subdomain is set
 the first time you deploy a worker — Cloudflare will prompt you to pick one
 if it's your first time).
 
