@@ -106,7 +106,7 @@ jobs:
         if: env.PARBRINK_SKIP != '1'
         continue-on-error: true
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           if [ -f secrets/scg_refresh_token.json ]; then
             gh secret set SCG_GMAIL_REFRESH_TOKEN_JSON < secrets/scg_refresh_token.json
