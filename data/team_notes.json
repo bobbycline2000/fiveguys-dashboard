@@ -1,56 +1,27 @@
 {
-  "date": "2026-06-01",
-  "brief_sent": true,
-  "brief_pulled": 25,
-  "new_count": 5,
-  "notes": [
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "2026-05-31T14:26:00+00:00",
-      "subject": "Attached: Daily Report June 2026",
-      "body": "Link to June 2026 FG Daily Report.xlsx. Sales budget calculations are at the bottom of your location sheet. Budgets take into consideration May 2026 sales trends and added DoorDash + UberEats promotions for June. Let's have a terrific June! Action: open workbook, find 2065 sheet, scroll to bottom to read June sales budget. Kevin (475) acknowledged at 10:05 AM Sunday."
-    },
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "2026-05-26T10:57:00+00:00",
-      "subject": "Re: 8.5x11 Shake (standing)",
-      "body": "Print the 8.5x11 Blackberry milkshake counter sign and post at the register — LTO is live (launched 5/27). Standing (5/11): Large soda is now 30 cents more than Regular (not 10) — drill every cashier on the new line. Orientation Checklist with all new hires."
-    },
-    {
-      "from": "Crystal Hess",
-      "role": "dm",
-      "role_label": "District Manager",
-      "time": "2026-05-26T08:06:00+00:00",
-      "subject": "Re: New H.R. & Payroll (standing)",
-      "body": "Hannah Kaufman is new to the H.R./Payroll team to help Jeni and Victoria — welcome her when she reaches out. Also standing: G.O.A.T Trophy shout-out to Etown (2079, 2x 100% + 92%, watch the video); review/share the 5/23 KPI miss chart; swag contest text 812-267-8669, no GMs answer."
-    },
-    {
-      "from": "CrunchTime Task Alert",
-      "role": "alert",
-      "role_label": "Ops Alert",
-      "time": "2026-06-01T06:26:57+00:00",
-      "subject": "Task Alert 5/31",
-      "body": "KY-2065 open tasks: L-Rev 5/31, Post Period — Labor Not Posted 5/31, Inv-Final for Post 5/31, VO-Inv-Performance Fdsvce 6/1. Clear all four in one CT pass."
-    },
-    {
-      "from": "Auto-Schedule",
-      "role": "alert",
-      "role_label": "Schedule Trainer",
-      "time": "2026-06-01T08:11:00+00:00",
-      "subject": "Schedule Draft Week of June 15-21 (Training Run 4 of 4-5)",
-      "body": "Forecast $30,000. Hourly hours 486.5. Projected labor 18.91% (target 18.5%; if June lands $31k → 18.30%). Trimmed -22.5h vs Run 3 (DJuan removed, Muncy Mon-only, Zack Mon-only, Richard Wed+Fri only, Nathan exact 40h). Father's Day is Sun 6/21 — Richard 4:30p-11p is easy +6.5h add-back if PM thins. Review + post to Teamworx today."
-    },
-    {
-      "from": "Indeed",
-      "role": "hr",
-      "role_label": "Hiring",
-      "time": "2026-05-31T15:28:31+00:00",
-      "subject": "11 new applicants — Shift Leader + AGM",
-      "body": "Gregory Alvis Jr +6 applied for Shift Leader Dixie Highway. Billy Owens +3 applied for AGM Louisville. Screen AGM stack first — AGM is the priority hire."
-    }
-  ]
+ "date": "2026-06-11",
+ "new_count": 3,
+ "notes": [
+  {
+   "from": "Brad Davis",
+   "role": "director",
+   "role_label": "Director of Operations",
+   "time": "Jun 10 4:50 PM",
+   "body": "Congrats! It is great to see Estep & Co back to #1 on Incidence Sales - keep it up! Milkshakes, Drinks, & Fries for Everyone!"
+  },
+  {
+   "from": "CrunchTime",
+   "role": "alert",
+   "role_label": "Task Alert",
+   "time": "Jun 11 2:29 AM",
+   "body": "KY-2065 open tasks: L-Rev (6/08, 6/09, 6/10), VO-Rec BOSS Alpha Ohio Valley (6/08, 6/10), VO-Rec Performance Fdsvce (6/09). Close these to clear the alert."
+  },
+  {
+   "from": "Marketforce",
+   "role": "alert",
+   "role_label": "Secret Shop",
+   "time": "Jun 11 4:09 AM",
+   "body": "New shop: 6/04 Lunch scored 100.0%. On shift: Bobby Cline, Jada Cox, DaKayla Dorsey, Lidy Henry, Nathan Roberts, Kasey Wilson. Store June avg 97.5%, YTD 84.1%."
+  }
+ ]
 }
