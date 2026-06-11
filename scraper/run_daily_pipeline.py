@@ -173,6 +173,22 @@ def main() -> int:
         allow_fail=True,
     )
 
+    # ── Step 4ax: Pull today's Teamworx roster via API (pure-requests) ──────────
+    # teamworx_api.py reads cookies from data/twx_cookies.json minted by the
+    # prior CI Playwright run. If cookies are still valid this produces
+    # data/raw/parbrink/<store>/<today>/weekly_schedule.json so that the next
+    # step (wire_dashboard.py) can show today's shift table instead of the
+    # "no data" placeholder. allow_fail=True: if cookies expired the step is
+    # skipped silently; the 5 AM GitHub Actions CI run will fix it via Playwright.
+    import datetime as _dt
+    _today_str = _dt.date.today().isoformat()
+    run(
+        "Step 4ax/5 — Pull Teamworx daily roster (API cookie replay)",
+        [python, str(SCRAPER / "teamworx_api.py"), "daily-roster",
+         "--date", _today_str, "--store", args.store],
+        allow_fail=True,
+    )
+
     # ── Step 4b: Wire dashboard ───────────────────────────────────────────────
     run(
         "Step 4b/5 — Wire dashboard",
