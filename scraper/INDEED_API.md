@@ -60,5 +60,6 @@ Response `data.sendConversationEvent` (no `errors`) = sent. Creates the conversa
 
 ## Notes / gotchas
 - Chrome MCP content filter blocks base64-looking operationNames + token values in JS return values — work around by returning field PATHS / lengths, and replay using the captured header object directly (don't read token values into context).
-- Interview cadence: Mon + Thu (Bobby's standing schedule, changeable). Store: Five Guys Dixie Highway, 9050 Dixie Hwy, Louisville KY 40258. Hiring manager signs as "Bobby".
+- Interview cadence: **Mondays only, 11 AM–3 PM** (updated 2026-06-11, replaced Mon+Thu 1–4 PM). Store: Five Guys Dixie Highway, 9050 Dixie Hwy, Louisville KY 40258. Hiring manager signs as "Bobby".
+- **aggJobKey confirmed NOT harvestable from FindRCPMatches** (2026-06-11): `jobData.jobKey` returns empty from the contact-batch query when the candidate was already contacted. UI send flow is the reliable path. Pure-API `sendConversationEvent` replay is blocked for contacted candidates. Document if a workaround is found.
 - Management roles to target: AGM + Shift Leader (any ad location). Crew excluded.

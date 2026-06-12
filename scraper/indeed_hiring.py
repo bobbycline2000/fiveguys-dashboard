@@ -40,7 +40,7 @@ ADDRESS = "9050 Dixie Hwy, Louisville, KY 40258"
 HIRING_MANAGER = "Bobby"
 TARGET_ROLES = ("Assistant General Manager", "AGM", "General Manager", "Shift Leader", "Shift Manager")
 EXCLUDE_ROLES = ("Crew Member",)
-INTERVIEW_CADENCE = "Mondays + Thursdays"
+INTERVIEW_CADENCE = "Mondays only"
 
 MGMT_TITLE_RE = ("manager", "supervisor", "lead", "agm", "assistant manager",
                  "general manager", "shift", "director", "owner", "foreman")
