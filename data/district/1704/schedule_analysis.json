@@ -4,13 +4,13 @@
   "week_ending": "2026-06-14",
   "week_start": "2026-06-08",
   "target_pct": 20.0,
-  "generated_at": "2026-06-11T09:03:37.757109-04:00",
+  "generated_at": "2026-06-12T08:43:05.145039-04:00",
   "week": {
     "fcst_sales": 37935,
-    "sched_cost": 8762,
-    "sched_hours": 613.0,
-    "labor_pct": 23.1,
-    "over_target_dollars": 1175,
+    "sched_cost": 9167,
+    "sched_hours": 642.0,
+    "labor_pct": 24.2,
+    "over_target_dollars": 1580,
     "ot_hours": 1.0,
     "ot_value": 27
   },
@@ -29,12 +29,12 @@
     {
       "sev": "high",
       "day": "Fri",
-      "msg": "Fri labor 24.3% \u2014 ~$283 over 20% target"
+      "msg": "Fri labor 25.9% \u2014 ~$386 over 20% target"
     },
     {
       "sev": "high",
       "day": "Sat",
-      "msg": "Sat labor 35.3% \u2014 ~$705 over 20% target"
+      "msg": "Sat labor 39.9% \u2014 ~$916 over 20% target"
     },
     {
       "sev": "med",
@@ -85,11 +85,11 @@
       "date": "2026-06-11",
       "wd": "Thu",
       "sales": 5877,
-      "hrs": 82.5,
-      "cost": 1175,
-      "pct": 20.0,
+      "hrs": 89.5,
+      "cost": 1266,
+      "pct": 21.5,
       "byPosition": {
-        "2. Crew": 64.5,
+        "2. Crew": 71.5,
         "Shift Leader-Hourly": 8.0,
         "General Manager-Salary": 10.0
       }
@@ -98,11 +98,11 @@
       "date": "2026-06-12",
       "wd": "Fri",
       "sales": 6586,
-      "hrs": 113.0,
-      "cost": 1600,
-      "pct": 24.3,
+      "hrs": 120.0,
+      "cost": 1703,
+      "pct": 25.9,
       "byPosition": {
-        "2. Crew": 88.0,
+        "2. Crew": 95.0,
         "Shift Leader-Hourly": 15.0,
         "General Manager-Salary": 10.0
       }
@@ -111,12 +111,12 @@
       "date": "2026-06-13",
       "wd": "Sat",
       "sales": 4610,
-      "hrs": 111.5,
-      "cost": 1627,
-      "pct": 35.3,
+      "hrs": 126.5,
+      "cost": 1838,
+      "pct": 39.9,
       "byPosition": {
         "Shift Manager-Hourly": 6.0,
-        "2. Crew": 86.5,
+        "2. Crew": 101.5,
         "General Manager-Salary": 10.0,
         "Shift Leader-Hourly": 9.0
       }
