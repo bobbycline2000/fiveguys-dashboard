@@ -54,7 +54,7 @@ CREW = [
     "Richard","Samuel","Zach"
 ]
 
-MONTHS = {1:"January", 2:"February", 3:"March", 4:"April", 5:"May"}
+MONTHS = {1:"January", 2:"February", 3:"March", 4:"April", 5:"May", 6:"June"}
 
 def _b(c=MID_GREY):
     s = Side(border_style="thin", color=c)
@@ -314,7 +314,7 @@ def build():
 
     wb = Workbook()
     wb.remove(wb.active)
-    for m in [1,2,3,4,5]:
+    for m in [1,2,3,4,5,6]:
         shops = by_month.get(m, [])
         if not shops: continue
         build_sheet(wb, m, MONTHS[m], shops, by_shop)
