@@ -41,17 +41,16 @@ def _find_latest_shops_json() -> Path:
 SHOPS_JSON = _find_latest_shops_json()
 PART_JSON = DATA_ROOT / STORE_ID / "participation.json"
 
-MANAGERS = ["Madison", "Vicki", "Kasey", "Nathan"]
+MANAGERS = ["Vicki", "Kasey", "Nathan"]
 MGR_DISPLAY = {
-    "Madison": "Madison C.",
     "Vicki":   "Vicki L.",
     "Kasey":   "Kasey W.",
     "Nathan":  "Nathan R.",
 }
 CREW = [
-    "Alen","Ash","Autumn","Bri","Dakayla","Divan","Francisco","Grace",
-    "Jada","Jeremiah","Kaisha","Kable","Kayla","Kenzie","Lidy","Maylin","Mike",
-    "Richard","Samuel","Zach"
+    "Alen","Anthony","Ash","Autumn","Bri","Dakayla","Damon","Divan","Francisco","Grace",
+    "Jada","Jeremiah","Kable","Kayla","Kenzie","Lidy","Maylin","Mike",
+    "Nyatiek","Richard","Ryan","Samuel","Zach"
 ]
 
 MONTHS = {1:"January", 2:"February", 3:"March", 4:"April", 5:"May", 6:"June"}
