@@ -1,211 +1,219 @@
 {
- "as_of": "2026-06-11",
- "current_month": "2026-06",
- "current_month_label": "June 2026",
- "store_avg_month": 97.5,
- "store_avg_ytd": 84.1,
- "shop_count_month": 2,
- "shop_count_ytd": 33,
- "managers": [
-  {
-   "first": "Madison",
-   "name": "Madison Cureton",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 83.0,
-   "ytd_n": 20
-  },
-  {
-   "first": "Vicki",
-   "name": "Vicki Lucey",
-   "month_avg": 95.0,
-   "month_n": 1,
-   "ytd_avg": 84.1,
-   "ytd_n": 11
-  },
-  {
-   "first": "Kasey",
-   "name": "Kasey Wilson",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 75.1,
-   "ytd_n": 7
-  },
-  {
-   "first": "Nathan",
-   "name": "Nathan Roberts",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 94.8,
-   "ytd_n": 6
-  }
- ],
- "crew": [
-  {
-   "first": "Bobby",
-   "name": "Robert Cline",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 96.8,
-   "ytd_n": 4
-  },
-  {
-   "first": "Dakayla",
-   "name": "DaKayla Dorsey",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 93.5,
-   "ytd_n": 2
-  },
-  {
-   "first": "Bri",
-   "name": "Brianna Gatewood",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 93.0,
-   "ytd_n": 4
-  },
-  {
-   "first": "Ash",
-   "name": "NAME_UNRESOLVED (Ash)",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 90.7,
-   "ytd_n": 3
-  },
-  {
-   "first": "Jeremiah",
-   "name": "Jeremiah Matthews",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 89.7,
-   "ytd_n": 15
-  },
-  {
-   "first": "Richard",
-   "name": "Richard Gibbs",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 86.8,
-   "ytd_n": 5
-  },
-  {
-   "first": "Mike",
-   "name": "NAME_UNRESOLVED (Mike)",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 85.9,
-   "ytd_n": 9
-  },
-  {
-   "first": "Lidy",
-   "name": "Lidy Henry",
-   "month_avg": 95.0,
-   "month_n": 1,
-   "ytd_avg": 85.7,
-   "ytd_n": 15
-  },
-  {
-   "first": "Autumn",
-   "name": "Autumn Hearn",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 85.6,
-   "ytd_n": 8
-  },
-  {
-   "first": "Maylin",
-   "name": "Maylin Hernandez Rodriguez",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 80.2,
-   "ytd_n": 18
-  },
-  {
-   "first": "Francisco",
-   "name": "Francisco Llorente Mejias",
-   "month_avg": 95.0,
-   "month_n": 1,
-   "ytd_avg": 79.9,
-   "ytd_n": 20
-  },
-  {
-   "first": "Samuel",
-   "name": "Samuel Galban Rocha",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 77.6,
-   "ytd_n": 8
-  },
-  {
-   "first": "Jada",
-   "name": "Jada Cox",
-   "month_avg": null,
-   "month_n": 0,
-   "ytd_avg": 72.5,
-   "ytd_n": 8
-  }
- ],
- "latest_shops": [
-  {
-   "date": "2026-06-04",
-   "score": 100.0,
-   "meal_period": "Lunch",
-   "on_shift": [
-    "Bobby Cline",
-    "Jada Cox",
-    "DaKayla Dorsey",
-    "Lidy Henry",
-    "Nathan Roberts",
-    "Kasey Wilson"
-   ]
-  },
-  {
-   "date": "2026-06-02",
-   "score": 95.0,
-   "meal_period": "Lunch",
-   "on_shift": [
-    "Francisco Llorente Mejias",
-    "Lidy Henry",
-    "Vicki Lucey"
-   ]
-  },
-  {
-   "date": "2026-05-31",
-   "score": 92.0,
-   "meal_period": "Dinner",
-   "on_shift": [
-    "Autumn Hearn",
-    "Robert Cline",
-    "Francisco Llorente Mejias",
-    "Jada Cox",
-    "Jeremiah Matthews",
-    "Maylin Hernandez Rodriguez",
-    "Nathan Roberts"
-   ]
-  },
-  {
-   "date": "2026-05-26",
-   "score": 60.0,
-   "meal_period": "Lunch",
-   "on_shift": [
-    "Francisco Llorente Mejias",
-    "Lidy Henry",
-    "Madison Cureton",
-    "Maylin Hernandez Rodriguez",
-    "Vicki Lucey"
-   ]
-  },
-  {
-   "date": "2026-05-16",
-   "score": 75.0,
-   "meal_period": "Dinner",
-   "on_shift": [
-    "Francisco Llorente Mejias",
-    "Jada Cox",
-    "Jeremiah Matthews",
-    "Madison Cureton"
-   ]
-  }
- ]
+  "as_of": "2026-06-12",
+  "current_month": "2026-06",
+  "current_month_label": "June 2026",
+  "store_avg_month": 97.5,
+  "store_avg_ytd": 84.1,
+  "shop_count_month": 2,
+  "shop_count_ytd": 33,
+  "managers": [
+    {
+      "first": "Madison",
+      "name": "Madison Cureton",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 83.0,
+      "ytd_n": 20
+    },
+    {
+      "first": "Vicki",
+      "name": "Vicki Lucey",
+      "month_avg": 95.0,
+      "month_n": 1,
+      "ytd_avg": 84.1,
+      "ytd_n": 11
+    },
+    {
+      "first": "Kasey",
+      "name": "Kasey Wilson",
+      "month_avg": 100.0,
+      "month_n": 1,
+      "ytd_avg": 78.2,
+      "ytd_n": 8
+    },
+    {
+      "first": "Nathan",
+      "name": "Nathan Roberts",
+      "month_avg": 100.0,
+      "month_n": 1,
+      "ytd_avg": 95.6,
+      "ytd_n": 7
+    }
+  ],
+  "crew": [
+    {
+      "first": "DaKayla",
+      "name": "DaKayla Dorsey",
+      "month_avg": 100.0,
+      "month_n": 1,
+      "ytd_avg": 100.0,
+      "ytd_n": 1
+    },
+    {
+      "first": "Bobby",
+      "name": "Robert Cline",
+      "month_avg": 100.0,
+      "month_n": 1,
+      "ytd_avg": 97.4,
+      "ytd_n": 5
+    },
+    {
+      "first": "Dakayla",
+      "name": "DaKayla Dorsey",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 93.5,
+      "ytd_n": 2
+    },
+    {
+      "first": "Bri",
+      "name": "Brianna Gatewood",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 93.0,
+      "ytd_n": 4
+    },
+    {
+      "first": "Ash",
+      "name": "NAME_UNRESOLVED (Ash)",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 90.7,
+      "ytd_n": 3
+    },
+    {
+      "first": "Jeremiah",
+      "name": "Jeremiah Matthews",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 89.7,
+      "ytd_n": 15
+    },
+    {
+      "first": "Richard",
+      "name": "Richard Gibbs",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 86.8,
+      "ytd_n": 5
+    },
+    {
+      "first": "Lidy",
+      "name": "Lidy Henry",
+      "month_avg": 97.5,
+      "month_n": 2,
+      "ytd_avg": 86.6,
+      "ytd_n": 16
+    },
+    {
+      "first": "Mike",
+      "name": "NAME_UNRESOLVED (Mike)",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 85.9,
+      "ytd_n": 9
+    },
+    {
+      "first": "Autumn",
+      "name": "Autumn Hearn",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 85.6,
+      "ytd_n": 8
+    },
+    {
+      "first": "Maylin",
+      "name": "Maylin Hernandez Rodriguez",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 80.2,
+      "ytd_n": 18
+    },
+    {
+      "first": "Francisco",
+      "name": "Francisco Llorente Mejias",
+      "month_avg": 95.0,
+      "month_n": 1,
+      "ytd_avg": 79.9,
+      "ytd_n": 20
+    },
+    {
+      "first": "Samuel",
+      "name": "Samuel Galban Rocha",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 77.6,
+      "ytd_n": 8
+    },
+    {
+      "first": "Jada",
+      "name": "Jada Cox",
+      "month_avg": 100.0,
+      "month_n": 1,
+      "ytd_avg": 75.6,
+      "ytd_n": 9
+    }
+  ],
+  "latest_shops": [
+    {
+      "date": "2026-06-04",
+      "score": 100.0,
+      "meal_period": "Lunch",
+      "on_shift": [
+        "Robert Cline",
+        "DaKayla Dorsey",
+        "Lidy Henry",
+        "Nathan Roberts",
+        "Kasey Wilson",
+        "Jada Cox"
+      ]
+    },
+    {
+      "date": "2026-06-02",
+      "score": 95.0,
+      "meal_period": "Lunch",
+      "on_shift": [
+        "Francisco Llorente Mejias",
+        "Lidy Henry",
+        "Vicki Lucey"
+      ]
+    },
+    {
+      "date": "2026-05-31",
+      "score": 92.0,
+      "meal_period": "Dinner",
+      "on_shift": [
+        "Autumn Hearn",
+        "Robert Cline",
+        "Francisco Llorente Mejias",
+        "Jada Cox",
+        "Jeremiah Matthews",
+        "Maylin Hernandez Rodriguez",
+        "Nathan Roberts"
+      ]
+    },
+    {
+      "date": "2026-05-26",
+      "score": 60.0,
+      "meal_period": "Lunch",
+      "on_shift": [
+        "Francisco Llorente Mejias",
+        "Lidy Henry",
+        "Madison Cureton",
+        "Maylin Hernandez Rodriguez",
+        "Vicki Lucey"
+      ]
+    },
+    {
+      "date": "2026-05-16",
+      "score": 75.0,
+      "meal_period": "Dinner",
+      "on_shift": [
+        "Francisco Llorente Mejias",
+        "Jada Cox",
+        "Jeremiah Matthews",
+        "Madison Cureton"
+      ]
+    }
+  ]
 }

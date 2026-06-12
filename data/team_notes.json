@@ -1,27 +1,48 @@
 {
- "date": "2026-06-11",
- "new_count": 3,
+ "date": "2026-06-12",
+ "new_count": 6,
  "notes": [
   {
-   "from": "Brad Davis",
-   "role": "director",
-   "role_label": "Director of Operations",
-   "time": "Jun 10 4:50 PM",
-   "body": "Congrats! It is great to see Estep & Co back to #1 on Incidence Sales - keep it up! Milkshakes, Drinks, & Fries for Everyone!"
+   "from": "Tonya Tucker",
+   "role": "accounting",
+   "role_label": "Estep Accounting",
+   "time": "Jun 11 2:46 PM",
+   "body": "Deposit receipt issue: 2065 missing 6/8. Locate/submit the 6/8 deposit receipt and reply to Tonya (812) 378-7157."
   },
   {
    "from": "CrunchTime",
    "role": "alert",
    "role_label": "Task Alert",
-   "time": "Jun 11 2:29 AM",
-   "body": "KY-2065 open tasks: L-Rev (6/08, 6/09, 6/10), VO-Rec BOSS Alpha Ohio Valley (6/08, 6/10), VO-Rec Performance Fdsvce (6/09). Close these to clear the alert."
+   "time": "Jun 12 2:29 AM",
+   "body": "KY-2065 open tasks aging: L-Rev (6/08, 6/09, 6/10, 6/11), VO-Rec Performance Fdsvce (6/09), VO-Rec BOSS Alpha Ohio Valley (6/08, 6/10), VO-Inv Performance Fdsvce (6/12 new). Close today."
+  },
+  {
+   "from": "Brad Davis",
+   "role": "director",
+   "role_label": "Director of Operations",
+   "time": "Jun 10 4:50 PM",
+   "body": "Estep & Co back to #1 on Incidence Sales - keep it up! Milkshakes, Drinks, & Fries for Everyone! J.P. Estep added: Impressive! Great Job leading & driving your teams to success!"
+  },
+  {
+   "from": "Crystal Hess",
+   "role": "dm",
+   "role_label": "District Manager",
+   "time": "standing",
+   "body": "Welcome Hannah Kaufman (new H.R./Payroll). G.O.A.T trophy to Etown (2079) - two 100s + 92%. Review KPI miss chart with teams. Swag contest: shift leads text 812-267-8669, no GMs."
+  },
+  {
+   "from": "Onboarding",
+   "role": "alert",
+   "role_label": "New Hires",
+   "time": "Jun 11",
+   "body": "Ryan Vititoe (BG check requested) + Damon (last name pending) added to directory as PHONE PENDING. Active count 24 to 26."
   },
   {
    "from": "Marketforce",
    "role": "alert",
    "role_label": "Secret Shop",
    "time": "Jun 11 4:09 AM",
-   "body": "New shop: 6/04 Lunch scored 100.0%. On shift: Bobby Cline, Jada Cox, DaKayla Dorsey, Lidy Henry, Nathan Roberts, Kasey Wilson. Store June avg 97.5%, YTD 84.1%."
+   "body": "Latest shop: 6/04 Lunch 100.0%. On shift: Bobby Cline, Jada Cox, DaKayla Dorsey, Lidy Henry, Nathan Roberts, Kasey Wilson. Store June 97.5%, YTD 84.1%."
   }
  ]
 }
