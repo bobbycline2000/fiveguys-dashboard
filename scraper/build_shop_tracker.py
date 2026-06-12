@@ -50,7 +50,7 @@ MGR_DISPLAY = {
 }
 CREW = [
     "Alen","Ash","Autumn","Bri","Dakayla","Divan","Francisco","Grace",
-    "Jada","Jeremiah","Kable","Kayla","Kenzie","Lidy","Maylin","Mike",
+    "Jada","Jeremiah","Kaisha","Kable","Kayla","Kenzie","Lidy","Maylin","Mike",
     "Richard","Samuel","Zach"
 ]
 
