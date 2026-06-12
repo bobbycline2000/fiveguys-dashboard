@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- PWA: installable as Five Guys 2065 app -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#C8102E" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="FG 2065" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+<script>if("serviceWorker" in navigator){let refreshing=false;navigator.serviceWorker.addEventListener("controllerchange",function(){if(refreshing)return;refreshing=true;window.location.reload();});window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").then(function(reg){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")reg.update().catch(function(){});});}).catch(function(){});});}</script>
+<title>Crew Deployment — KY-2065</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #CE1726;
+    --red-dim: #a81120;
+    --red-soft: #e8394a;
+    --bg: #CE1726;
+    --panel: #0d0d0d;
+    --panel-2: #1a1a1a;
+    --line: #2a2a2a;
+    --white: #ffffff;
+    --w80: rgba(255,255,255,.85);
+    --w60: rgba(255,255,255,.65);
+    --w40: rgba(255,255,255,.45);
+    --w20: rgba(255,255,255,.18);
+    --gold: #F5A800;
+    --green: #22c55e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; min-height: 100vh; }
+  body { padding: 18px 4vw 60px; }
+
+  .top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid rgba(0,0,0,.3); margin-bottom: 18px; }
+  .brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; }
+  .brand .a { color: #0d0d0d; }
+  .crumb { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--w80); }
+  .crumb a { color: var(--white); text-decoration: none; }
+
+  h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 38px; line-height: .95; letter-spacing: -.01em; text-transform: uppercase; }
+  h1 .a { color: #0d0d0d; }
+  .lede { color: var(--w80); font-size: 12px; max-width: 80ch; margin-top: 6px; }
+
+  .top-actions { margin: 14px 0 4px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .btn { font-weight: 700; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; padding: 10px 18px; border-radius: 3px; cursor: pointer; border: none; text-decoration: none; display: inline-block; color: var(--white); }
+  .btn-primary { background: #0d0d0d; }
+  .btn-ghost { background: transparent; border: 1px solid rgba(0,0,0,.4); }
+  .save-note { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(0,0,0,.55); font-weight: 700; }
+
+  .sec-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18px; letter-spacing: .18em; text-transform: uppercase; color: var(--white); margin: 26px 0 12px; padding-left: 10px; border-left: 4px solid #0d0d0d; }
+
+  /* ── Shift plan ── */
+  .meta-grid { display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 12px; }
+  @media (max-width: 700px) { .meta-grid { grid-template-columns: 1fr; } }
+  .field { background: var(--panel); border: 1px solid rgba(0,0,0,.45); border-radius: 4px; padding: 10px 14px; }
+  .field label { display: block; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--w60); font-weight: 700; margin-bottom: 4px; }
+  .field input, .field textarea { background: transparent; border: none; color: var(--white); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px; width: 100%; padding: 0; resize: none; }
+  .field input:focus, .field textarea:focus { outline: none; }
+  .field input::placeholder, .field textarea::placeholder { color: var(--w20); }
+
+  .shifts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 880px) { .shifts { grid-template-columns: 1fr; } }
+  .shift-card { background: var(--panel); border: 1px solid rgba(0,0,0,.45); border-radius: 4px; padding: 16px 18px 20px; box-shadow: 0 6px 18px rgba(0,0,0,.3); }
+  .shift-hdr { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: .14em; text-transform: uppercase; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 2px solid var(--red-soft); display: flex; justify-content: space-between; align-items: baseline; }
+  .shift-hdr .sub { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 10px; letter-spacing: .1em; color: var(--w40); }
+  .shift-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .mini-field { background: var(--panel-2); border: 1px solid var(--line); border-radius: 3px; padding: 8px 10px; }
+  .mini-field label { display: block; font-size: 8px; letter-spacing: .16em; text-transform: uppercase; color: var(--w60); font-weight: 700; margin-bottom: 2px; }
+  .mini-field input { background: transparent; border: none; color: var(--white); font-weight: 700; font-size: 14px; width: 100%; }
+  .mini-field input:focus { outline: none; }
+  .mini-field input::placeholder { color: var(--w20); }
+
+  table.pos { width: 100%; border-collapse: collapse; }
+  table.pos th { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--w60); text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  table.pos td { padding: 4px 8px; border-bottom: 1px solid var(--line); }
+  td.pos-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--w80); white-space: nowrap; }
+  table.pos input { background: var(--panel-2); border: 1px solid var(--line); border-radius: 3px; color: var(--white); font-size: 13px; font-weight: 600; width: 100%; padding: 6px 8px; }
+  table.pos input:focus { outline: none; border-color: var(--red-soft); }
+  table.pos input::placeholder { color: var(--w20); }
+
+  /* ── Reference tables ── */
+  .ref-card { background: var(--panel); border: 1px solid rgba(0,0,0,.45); border-radius: 4px; padding: 16px 18px; box-shadow: 0 6px 18px rgba(0,0,0,.3); overflow-x: auto; }
+  table.ref { width: 100%; border-collapse: collapse; min-width: 640px; }
+  table.ref th { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); text-align: left; padding: 8px; border-bottom: 2px solid var(--red-dim); white-space: nowrap; }
+  table.ref td { font-size: 12px; padding: 7px 8px; border-bottom: 1px solid var(--line); color: var(--w80); vertical-align: top; }
+  table.ref td.k { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 15px; letter-spacing: .06em; color: var(--white); white-space: nowrap; }
+  .chip { display: inline-block; background: var(--panel-2); border: 1px solid var(--line); border-radius: 2px; font-size: 10px; font-weight: 700; letter-spacing: .06em; padding: 2px 7px; margin: 1px 2px 1px 0; white-space: nowrap; }
+  .chip.mod { border-color: rgba(245,168,0,.5); color: var(--gold); }
+
+  /* definitions */
+  .defs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 880px) { .defs { grid-template-columns: 1fr; } }
+  .def { background: var(--panel); border: 1px solid rgba(0,0,0,.45); border-radius: 4px; padding: 12px 14px; }
+  .def h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; color: var(--white); margin-bottom: 6px; padding-bottom: 5px; border-bottom: 1px solid var(--line); }
+  .def .t { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--gold); margin: 6px 0 2px; }
+  .def p { font-size: 11.5px; color: var(--w80); line-height: 1.45; }
+
+  /* ── Print: clean black-on-white shift plan only ── */
+  @media print {
+    html, body { background: #fff; color: #000; padding: 0; }
+    .top, .top-actions, #ref-deploy, #ref-sales, #ref-defs, .sec-label.noprint { display: none !important; }
+    .field, .shift-card, .mini-field { background: #fff; border-color: #999; box-shadow: none; }
+    .field input, .field textarea, .mini-field input, table.pos input { color: #000; -webkit-text-fill-color: #000; background: #fff; border-color: #bbb; }
+    .field label, .mini-field label, table.pos th, .shift-hdr .sub { color: #444; }
+    td.pos-name { color: #000; }
+    h1, h1 .a, .shift-hdr { color: #000; border-color: #000; }
+    .lede { color: #333; }
+    .shifts { grid-template-columns: 1fr 1fr; }
+    table.pos td { border-color: #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">FIVE GUYS <span class="a">KY-2065</span></div>
+  <div class="crumb"><a href="dashboard.html">&larr; Back to Dashboard</a></div>
+</div>
+
+<h1>Crew <span class="a">Deployment</span></h1>
+<div class="lede">Daily shift plan &amp; huddle sheet. Assign positions for AM and PM, set the shift focus, and use the suggested deployment tables below to staff the line by forecast. Entries save automatically on this device, per date.</div>
+
+<div class="top-actions">
+  <button class="btn btn-primary" onclick="window.print()">Print Shift Plan</button>
+  <button class="btn btn-ghost" onclick="clearDay()">Clear This Date</button>
+  <a class="btn btn-ghost" href="Deployment-Chart-2025.xlsx" download>Download Original (XLSX)</a>
+  <span class="save-note" id="saveNote">Saved on this device</span>
+</div>
+
+<div class="sec-label noprint">Shift Plan &amp; Huddle</div>
+
+<div class="meta-grid">
+  <div class="field">
+    <label>Date</label>
+    <input type="date" id="planDate" data-meta="date">
+  </div>
+  <div class="field">
+    <label>Today's Shift Focus</label>
+    <input type="text" data-k="focus" placeholder="One focus for the day — speed of service, dress accuracy, lobby checks…">
+  </div>
+</div>
+
+<div class="shifts">
+  <div class="shift-card" data-shift="am">
+    <div class="shift-hdr">AM Shift <span class="sub">Open – 4PM</span></div>
+    <div class="shift-meta">
+      <div class="mini-field"><label>Shift Sales Forecast</label><input type="text" data-k="am-forecast" placeholder="$"></div>
+      <div class="mini-field"><label>Manager In Charge</label><input type="text" data-k="am-mic" placeholder="Name"></div>
+    </div>
+    <table class="pos">
+      <thead><tr><th>Primary Position</th><th>Name</th><th>Backup</th></tr></thead>
+      <tbody id="am-rows"></tbody>
+    </table>
+  </div>
+
+  <div class="shift-card" data-shift="pm">
+    <div class="shift-hdr">PM Shift <span class="sub">4PM – Close</span></div>
+    <div class="shift-meta">
+      <div class="mini-field"><label>Shift Sales Forecast</label><input type="text" data-k="pm-forecast" placeholder="$"></div>
+      <div class="mini-field"><label>Manager In Charge</label><input type="text" data-k="pm-mic" placeholder="Name"></div>
+    </div>
+    <table class="pos">
+      <thead><tr><th>Primary Position</th><th>Name</th><th>Backup</th></tr></thead>
+      <tbody id="pm-rows"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sec-label" id="ref-deploy">Suggested Deployment by Staff Count</div>
+<div class="ref-card">
+  <table class="ref">
+    <thead><tr><th>Staff</th><th colspan="10">Position priority (1 &rarr; 10)</th></tr></thead>
+    <tbody id="deploy-rows"></tbody>
+  </table>
+</div>
+
+<div class="sec-label" id="ref-sales">Staffing by Peak Hourly Sales</div>
+<div class="ref-card">
+  <table class="ref" style="min-width:480px">
+    <thead><tr><th>Peak Hourly Sales</th><th>Staff Needed</th></tr></thead>
+    <tbody>
+      <tr><td class="k">$0 – $500</td><td>4–5</td></tr>
+      <tr><td class="k">$500 – $750</td><td>5–6</td></tr>
+      <tr><td class="k">$750 – $1,000</td><td>7–8</td></tr>
+      <tr><td class="k">$1,000 – $1,500</td><td>8–10</td></tr>
+      <tr><td class="k">$1,500 – $2,000</td><td>10–12</td></tr>
+      <tr><td class="k">$2,000 +</td><td>12+</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sec-label" id="ref-defs">Position Definitions — Primary &amp; Secondary Tasks</div>
+<div class="defs" id="defs"></div>
+
+<script>
+const POSITIONS = ["Cashier","Dressing","Grill","Fries","QC","Expeditor (Expo)","Milkshakes","Lobby","Float/Support","In Training"];
+
+const DEPLOY = [
+  ["4-5",  ["Cash 1/Shake","Grill","Fries","QC/Dress","Dress"]],
+  ["5-6",  ["Cash 1","Grill","Fries","QC","Dress","Expo/Cash2/Shake"]],
+  ["7-8",  ["Cash 1","Grill","Fries","QC","Dress","Cash2/Shake","Expo","Top Dress & Toasting"]],
+  ["8-10", ["Cash 1","Grill","Fries","QC","Bottom Dress","Cash2/Shake","Expo","Top Dress & Toasting","2nd Fry","Grill 2"]],
+  ["10-12",["Cash 1","Grill","Fries","QC","Bottom Dress","Cash 2","Expo","Top Dress & Toasting","2nd Fry","Grill 2"]],
+  ["12+",  ["Cash 1","Grill","Fries","QC","Bottom Dress","Cash 2","Expo","Top Dress & Toasting","2nd Fry","Grill 2"]],
+];
+
+const DEFS = [
+  ["Cashier 1","Greets customers and takes their orders.","Make Shakes, Check Lobby, as directed by MOD."],
+  ["Cashier 2","Greets customers and takes their orders, manages phone orders and the Lobby.","Make Shakes, Check Lobby, as directed by MOD."],
+  ["Top Bun Dresser","Toasts buns and dresses Top Buns according to the toppings calls made by the Bottom Bun Dresser.","Keeps dressing station stocked before rush, during rush, and at the end of shift."],
+  ["Bottom Bun Dresser","Calls toppings to Top Bun Dresser, dresses bottom buns, verifies accuracy and appearance of sandwich before sliding order to QC.","When 5 or less are working, should be assigned to 2nd register."],
+  ["Grill Cook 1","Answers patty counts, places correct amount of patties/dogs on grill. Cooks patties through Section 1, evens out and moves patties to Section 2.","Manages entire Grill process when there is no Grill Cook 2 available."],
+  ["Grill Cook 2","Moves patties from Section 2 to Section 3, ensures patties are cooked Well Done & Juicy, sells burgers/dogs based on QC's calls.","Keeps Chef Base and Cheese stocked before rush, during rush, and at the end of shift."],
+  ["Fry Cook 1","Reloads empty baskets, cooks pre-cooks, keeps raw potato buckets stocked under the fry dump station.","Manages entire Fry process when there is no Fry Cook 2."],
+  ["Fry Cook 2","Cooks Final cooks, seasons fries, bags fries/napkins.","Assists as needed at the Fry Station."],
+  ["Quality Control (QC)","Should always be the MOD. Manages the entire line with their \"head on a swivel\". Provides door calls, patty counts, fry counts, burgers/dogs to be served, calls ticket times. Ensures order accuracy, quality and appearance of sandwiches before wrapping. Numbers the sandwiches.","Manages FlyBuy Tablet — alerts arrivals, clears orders, communicates to Fry and Expo."],
+  ["Expeditor (Expo)","Interacts with all orders (In-Store, Call-in, Online, Delivery). Ensures Drinks & Shakes are accurate, ensures entire order is complete & accurate prior to selling.","When 2 or more managers are working, the 2nd manager should be Expo."],
+  ["Lobby","Responsible for keeping the dining room clean & stocked; tables, chairs, condiment station, floors, soda machines, bathrooms. Interacts with customers and offers assistance when needed (napkins, ketchup, high chairs, drink refills, etc.)","Floats where needed, or as directed by MOD."],
+  ["Shakes","Makes Milkshakes for all orders. Calls Number and Flavor of Shakes and hands out to customers. Keeps station stocked before rush, during rush, and at the end of shift.","Floats where needed, or as directed by MOD."],
+];
+
+// Build shift position rows
+for (const shift of ["am","pm"]) {
+  const tb = document.getElementById(shift + "-rows");
+  tb.innerHTML = POSITIONS.map((p,i) =>
+    `<tr><td class="pos-name">${p}</td>` +
+    `<td><input type="text" data-k="${shift}-name-${i}" placeholder="Name" autocomplete="off"></td>` +
+    `<td><input type="text" data-k="${shift}-backup-${i}" placeholder="Backup" autocomplete="off"></td></tr>`
+  ).join("");
+}
+
+// Build deployment reference rows
+document.getElementById("deploy-rows").innerHTML = DEPLOY.map(([n, roles]) =>
+  `<tr><td class="k">${n}</td><td colspan="10">` +
+  roles.map(r => `<span class="chip${r === "QC" || r.startsWith("QC") ? " mod" : ""}">${r}</span>`).join("") +
+  `</td></tr>`
+).join("");
+
+// Build definitions
+document.getElementById("defs").innerHTML = DEFS.map(([pos, pri, sec]) =>
+  `<div class="def"><h3>${pos}</h3><div class="t">Primary</div><p>${pri}</p><div class="t">Secondary</div><p>${sec}</p></div>`
+).join("");
+
+// ── Persistence: localStorage keyed by date ──
+const dateEl = document.getElementById("planDate");
+const todayISO = new Date(Date.now() - new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
+dateEl.value = todayISO;
+
+function storeKey() { return "fg2065-deployment-" + (dateEl.value || todayISO); }
+
+function loadDay() {
+  let data = {};
+  try { data = JSON.parse(localStorage.getItem(storeKey()) || "{}"); } catch (e) {}
+  document.querySelectorAll("[data-k]").forEach(el => { el.value = data[el.dataset.k] || ""; });
+}
+
+let saveTimer = null;
+function saveDay() {
+  const data = {};
+  document.querySelectorAll("[data-k]").forEach(el => { if (el.value) data[el.dataset.k] = el.value; });
+  localStorage.setItem(storeKey(), JSON.stringify(data));
+  const note = document.getElementById("saveNote");
+  note.textContent = "Saved ✓";
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { note.textContent = "Saved on this device"; }, 1500);
+}
+
+function clearDay() {
+  if (!confirm("Clear all entries for " + dateEl.value + "?")) return;
+  localStorage.removeItem(storeKey());
+  loadDay();
+}
+
+document.addEventListener("input", e => { if (e.target.dataset.k) saveDay(); });
+dateEl.addEventListener("change", loadDay);
+loadDay();
+</script>
+</body>
+</html>
