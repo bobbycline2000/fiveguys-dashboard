@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "source": "Teamworx Daily Roster (Playwright scrape)",
+    "store_id": "2065",
+    "report_date": "2026-06-13",
+    "week_start": "2026-06-08",
+    "week_end": "2026-06-14",
+    "generated": "2026-06-13T05:04:12-04:00",
+    "source_url": "https://fiveguysfr77.ct-teamworx.com/views/manager/tablet/home.jsp"
+  },
+  "totals_by_day": {
+    "2026-06-13": 88.5
+  },
+  "schedule": {
+    "2026-06-13": {
+      "date": "2026-06-13",
+      "day_of_week": "Saturday",
+      "scheduled_hours": 88.5,
+      "shifts": [
+        {
+          "name": "Kaisha B.",
+          "role": "Crew",
+          "start": "09:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Lidy H.",
+          "role": "Crew",
+          "start": "09:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Zack W.",
+          "role": "Crew",
+          "start": "09:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Mykenize M.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "05:00 PM"
+        },
+        {
+          "name": "Anthony P.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "DaKayla D.",
+          "role": "Crew",
+          "start": "05:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "DJuan J.",
+          "role": "Crew",
+          "start": "06:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Emanuela K.",
+          "role": "Crew",
+          "start": "05:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Jeremiah M.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Richard G.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Robert C.",
+          "role": "General Manager",
+          "start": "08:00 AM",
+          "end": "06:00 PM"
+        },
+        {
+          "name": "Madison C.",
+          "role": "Shift Lead",
+          "start": "11:00 AM",
+          "end": "07:00 PM"
+        },
+        {
+          "name": "Jorge M.",
+          "role": "Shift Lead",
+          "start": "04:30 PM",
+          "end": "11:00 PM"
+        }
+      ]
+    }
+  },
+  "today": {
+    "date": "2026-06-13",
+    "day_of_week": "Saturday",
+    "scheduled_hours": 88.5,
+    "shifts": [
+      {
+        "name": "Kaisha B.",
+        "role": "Crew",
+        "start": "09:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Lidy H.",
+        "role": "Crew",
+        "start": "09:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Zack W.",
+        "role": "Crew",
+        "start": "09:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Mykenize M.",
+        "role": "Crew",
+        "start": "12:00 PM",
+        "end": "05:00 PM"
+      },
+      {
+        "name": "Anthony P.",
+        "role": "Crew",
+        "start": "04:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "DaKayla D.",
+        "role": "Crew",
+        "start": "05:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "DJuan J.",
+        "role": "Crew",
+        "start": "06:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Emanuela K.",
+        "role": "Crew",
+        "start": "05:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Jeremiah M.",
+        "role": "Crew",
+        "start": "04:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Richard G.",
+        "role": "Crew",
+        "start": "04:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Robert C.",
+        "role": "General Manager",
+        "start": "08:00 AM",
+        "end": "06:00 PM"
+      },
+      {
+        "name": "Madison C.",
+        "role": "Shift Lead",
+        "start": "11:00 AM",
+        "end": "07:00 PM"
+      },
+      {
+        "name": "Jorge M.",
+        "role": "Shift Lead",
+        "start": "04:30 PM",
+        "end": "11:00 PM"
+      }
+    ]
+  }
+}
