@@ -92,6 +92,7 @@ CREW = [
     ("Jada",      "Jada Cox",                      "CREW"),
     ("Jeremiah",  "Jeremiah Matthews",             "CREW"),
     ("Kable",     "Kable",                         "CREW"),
+    ("Kaisha",    "Kaisha Brewer",                 "CREW"),
     ("Kayla",     "Kayla Valenzuela",              "CREW"),
     ("Kenzie",    "Kenzie",                        "CREW"),
     ("Lidy",      "Lidy Henry",                    "CREW"),
