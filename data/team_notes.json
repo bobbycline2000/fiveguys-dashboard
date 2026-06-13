@@ -1,48 +1,41 @@
 {
- "date": "2026-06-12",
- "new_count": 6,
+ "date": "2026-06-13",
+ "new_count": 3,
  "notes": [
   {
    "from": "Tonya Tucker",
    "role": "accounting",
    "role_label": "Estep Accounting",
-   "time": "Jun 11 2:46 PM",
+   "time": "Jun 12 8:56 AM",
    "body": "Deposit receipt issue: 2065 missing 6/8. Locate/submit the 6/8 deposit receipt and reply to Tonya (812) 378-7157."
   },
   {
    "from": "CrunchTime",
    "role": "alert",
    "role_label": "Task Alert",
-   "time": "Jun 12 2:29 AM",
-   "body": "KY-2065 open tasks aging: L-Rev (6/08, 6/09, 6/10, 6/11), VO-Rec Performance Fdsvce (6/09), VO-Rec BOSS Alpha Ohio Valley (6/08, 6/10), VO-Inv Performance Fdsvce (6/12 new). Close today."
+   "time": "Jun 13 2:30 AM",
+   "body": "KY-2065 open tasks: Fdsvce (6/09), L-Rev (6/10, 6/11, 6/12), VO-Rec BOSS Alpha Ohio Valley (6/12), Fdsvce (6/12). Close today."
   },
   {
    "from": "Brad Davis",
    "role": "director",
    "role_label": "Director of Operations",
-   "time": "Jun 10 4:50 PM",
-   "body": "Estep & Co back to #1 on Incidence Sales - keep it up! Milkshakes, Drinks, & Fries for Everyone! J.P. Estep added: Impressive! Great Job leading & driving your teams to success!"
+   "time": "standing",
+   "body": "June sales budget at bottom of 2065 sheet (DoorDash + UberEats promos baked in). Large Soda now only 30 cents more than Regular - drill cashiers. Orientation Checklist with every new hire. FGU 0% overdue."
   },
   {
    "from": "Crystal Hess",
    "role": "dm",
    "role_label": "District Manager",
    "time": "standing",
-   "body": "Welcome Hannah Kaufman (new H.R./Payroll). G.O.A.T trophy to Etown (2079) - two 100s + 92%. Review KPI miss chart with teams. Swag contest: shift leads text 812-267-8669, no GMs."
+   "body": "Welcome Hannah Kaufman (new H.R./Payroll). G.O.A.T trophy to Etown (2079) - two 100s + 92%, play the video. Review condensed KPI miss chart with teams."
   },
   {
    "from": "Onboarding",
    "role": "alert",
    "role_label": "New Hires",
-   "time": "Jun 11",
-   "body": "Ryan Vititoe (BG check requested) + Damon (last name pending) added to directory as PHONE PENDING. Active count 24 to 26."
-  },
-  {
-   "from": "Marketforce",
-   "role": "alert",
-   "role_label": "Secret Shop",
-   "time": "Jun 11 4:09 AM",
-   "body": "Latest shop: 6/04 Lunch 100.0%. On shift: Bobby Cline, Jada Cox, DaKayla Dorsey, Lidy Henry, Nathan Roberts, Kasey Wilson. Store June 97.5%, YTD 84.1%."
+   "time": "Jun 12",
+   "body": "Serina Gaskins onboarding BLOCKED - DOB entered as 2026, must correct before I-9. Ryan Vititoe BG check pending. Isaiah Lewis failed BG - not moving forward. AM + Shift Leader Indeed ads posted live for Dixie Hwy."
   }
  ]
 }
