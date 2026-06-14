@@ -69,10 +69,47 @@ def src(key, label, as_of, note, creds_pending=False):
             "as_of":as_of.isoformat() if as_of else None,
             "detail":(f"{note} ({(TODAY-as_of).days}d ago)" if as_of else note)}
 
+def newest_cogs():
+    """Return (date, note) for food cost data. Uses food_cost_plan.json (generated daily
+    by build_food_cost_plan.py) as the freshness signal; falls back to scanning
+    data/raw/crunchtime/2065/ for the most recent cogs_variance.json with a valid pct.
+    cogs_avt_live.json is gitignored and never exists in CI — do not check it."""
+    fp = DATA / "food_cost_plan.json"
+    if fp.exists():
+        try:
+            d = json.loads(fp.read_text(encoding="utf-8"))
+            # food_cost_plan.json is regenerated daily; use its mtime as the as-of date.
+            # The underlying pct may be older (see cogs_pct_week_label) but the pipeline ran.
+            return datetime.date.fromtimestamp(fp.stat().st_mtime), "food cost plan updated"
+        except Exception:
+            pass
+    # Fallback: scan raw/crunchtime/2065/ for the most recent cogs_variance.json with pct
+    base = DATA / "raw" / "crunchtime" / "2065"
+    if base.exists():
+        for d in sorted([x for x in base.iterdir() if x.is_dir()],
+                        key=lambda p: p.name, reverse=True):
+            cv = d / "cogs_variance.json"
+            if cv.exists():
+                try:
+                    snap = json.loads(cv.read_text(encoding="utf-8"))
+                    pct = snap.get("cogs_pct_week")
+                    if pct is not None:
+                        week_end = snap.get("meta", {}).get("week_end", d.name)
+                        return datetime.date.fromisoformat(week_end[:10]), f"FP% {pct}% w/e {week_end[:10]}"
+                except Exception:
+                    continue
+        # No snapshot with pct found — return date of most recent file as yellow signal
+        for d in sorted([x for x in base.iterdir() if x.is_dir()],
+                        key=lambda p: p.name, reverse=True):
+            cv = d / "cogs_variance.json"
+            if cv.exists():
+                return datetime.date.fromisoformat(d.name[:10]), "cogs items only (no pct)"
+    return None, "no cogs data"
+
 def main():
     sales_d, sales_n = newest_parbrink("sales_summary.json")
     ct_d, ct_n   = as_of_from("latest.json")
-    food_d, food_n = as_of_from("cogs_avt_live.json", prefer_report_date=False)
+    food_d, food_n = newest_cogs()
     shops_d, shops_n = newest_shops()
     cm_d, cm_n   = as_of_from("compliancemate.json", prefer_report_date=False)
     dn_d, dn_n   = as_of_from("daily_numbers.json", prefer_report_date=False)

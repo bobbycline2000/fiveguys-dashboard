@@ -75,6 +75,19 @@ if cogs is None:
     except FileNotFoundError:
         cogs = None
 
+# ── Food cost plan fallback (when cogs_pct_week is unavailable from cogs scraper) ──
+# data/food_cost_plan.json is generated daily by build_food_cost_plan.py and is
+# committed to git (not gitignored). It preserves the most recent valid cogs_pct_week
+# even when read_cogs_email.py (Graph API) or scrape_cogs.py (Playwright) fail to
+# retrieve a fresh value. Used as a fallback for the ctrl-card big % only.
+_fcp_path = ROOT / "data" / "food_cost_plan.json"
+_food_cost_plan = None
+if _fcp_path.exists():
+    try:
+        _food_cost_plan = json.loads(_fcp_path.read_text(encoding="utf-8"))
+    except Exception:
+        pass
+
 discounts, _ = load_latest("parbrink", "discount_summary.json")
 sales_summary, _ = load_latest("parbrink", "sales_summary.json")
 # Par Brink hourly PDF — kept as fallback only; CT API is now the primary labor source
@@ -528,8 +541,18 @@ if _hourly_source:
 
 # ── Food Cost Big % (cogs_pct_week from CrunchTime) ────────────────────
 FOOD_COST_GOAL = 27.5
-if cogs and cogs.get("cogs_pct_week") is not None:
-    fc_pct = float(cogs["cogs_pct_week"])
+_fc_pct_raw = cogs.get("cogs_pct_week") if cogs else None
+_fc_source  = "live"
+# Fallback to food_cost_plan.json when scraper couldn't get pct
+# (read_cogs_email.py Graph API or scrape_cogs.py Playwright both failed)
+if _fc_pct_raw is None and _food_cost_plan and _food_cost_plan.get("cogs_pct_week") is not None:
+    _fc_pct_raw = _food_cost_plan["cogs_pct_week"]
+    _label_date = _food_cost_plan.get("cogs_pct_week_label", "")
+    _fc_source  = f"last known ({_label_date[:10] if _label_date else 'prior'})"
+    print(f"  [wire] food cost % from food_cost_plan fallback: {_fc_pct_raw}% (as of {_label_date})")
+
+if _fc_pct_raw is not None:
+    fc_pct = float(_fc_pct_raw)
     fc_val = f"{fc_pct:.1f}%"
     if fc_pct > FOOD_COST_GOAL + 0.5:
         fc_flag = "Over Goal"

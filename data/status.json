@@ -1,6 +1,6 @@
 {
-  "generated": "2026-06-14 11:36 ET",
-  "overall": "red",
+  "generated": "2026-06-14 19:33 ET",
+  "overall": "green",
   "sources": [
     {
       "key": "sales",
@@ -19,9 +19,9 @@
     {
       "key": "foodcost",
       "label": "Food Cost %",
-      "status": "red",
-      "as_of": null,
-      "detail": "file missing"
+      "status": "green",
+      "as_of": "2026-06-14",
+      "detail": "food cost plan updated (0d ago)"
     },
     {
       "key": "shops",
