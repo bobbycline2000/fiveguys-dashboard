@@ -1,0 +1,174 @@
+{
+  "meta": {
+    "source": "Teamworx Daily Roster (Playwright scrape)",
+    "store_id": "2065",
+    "report_date": "2026-06-14",
+    "week_start": "2026-06-08",
+    "week_end": "2026-06-14",
+    "generated": "2026-06-14T07:32:33-04:00",
+    "source_url": "https://fiveguysfr77.ct-teamworx.com/views/manager/tablet/home.jsp"
+  },
+  "totals_by_day": {
+    "2026-06-14": 83.75
+  },
+  "schedule": {
+    "2026-06-14": {
+      "date": "2026-06-14",
+      "day_of_week": "Sunday",
+      "scheduled_hours": 83.75,
+      "shifts": [
+        {
+          "name": "Brianna G.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "DJuan J.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Emanuela K.",
+          "role": "Crew",
+          "start": "09:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Francisco M.",
+          "role": "Crew",
+          "start": "10:00 AM",
+          "end": "07:00 PM"
+        },
+        {
+          "name": "Anthony P.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "08:00 PM"
+        },
+        {
+          "name": "Zack W.",
+          "role": "Crew",
+          "start": "04:30 PM",
+          "end": "09:00 PM"
+        },
+        {
+          "name": "Ailen C.",
+          "role": "Crew",
+          "start": "05:45 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Jeremiah M.",
+          "role": "Crew",
+          "start": "04:30 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Maylin R.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Richard G.",
+          "role": "Crew",
+          "start": "04:30 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Vicki L.",
+          "role": "Shift Lead",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Madelynn S.",
+          "role": "Shift Lead",
+          "start": "02:00 PM",
+          "end": "07:00 PM"
+        }
+      ]
+    }
+  },
+  "today": {
+    "date": "2026-06-14",
+    "day_of_week": "Sunday",
+    "scheduled_hours": 83.75,
+    "shifts": [
+      {
+        "name": "Brianna G.",
+        "role": "Crew",
+        "start": "08:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "DJuan J.",
+        "role": "Crew",
+        "start": "08:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Emanuela K.",
+        "role": "Crew",
+        "start": "09:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Francisco M.",
+        "role": "Crew",
+        "start": "10:00 AM",
+        "end": "07:00 PM"
+      },
+      {
+        "name": "Anthony P.",
+        "role": "Crew",
+        "start": "12:00 PM",
+        "end": "08:00 PM"
+      },
+      {
+        "name": "Zack W.",
+        "role": "Crew",
+        "start": "04:30 PM",
+        "end": "09:00 PM"
+      },
+      {
+        "name": "Ailen C.",
+        "role": "Crew",
+        "start": "05:45 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Jeremiah M.",
+        "role": "Crew",
+        "start": "04:30 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Maylin R.",
+        "role": "Crew",
+        "start": "03:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Richard G.",
+        "role": "Crew",
+        "start": "04:30 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Vicki L.",
+        "role": "Shift Lead",
+        "start": "08:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Madelynn S.",
+        "role": "Shift Lead",
+        "start": "02:00 PM",
+        "end": "07:00 PM"
+      }
+    ]
+  }
+}

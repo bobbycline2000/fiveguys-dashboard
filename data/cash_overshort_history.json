@@ -138,5 +138,10 @@
     "business_date": "2026-06-12",
     "over_short": 0.0,
     "captured_at": "2026-06-13T11:19:50"
+  },
+  {
+    "business_date": "2026-06-13",
+    "over_short": 0.0,
+    "captured_at": "2026-06-14T11:36:15"
   }
 ]
