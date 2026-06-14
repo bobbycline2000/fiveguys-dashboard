@@ -1,41 +1,27 @@
 {
- "date": "2026-06-13",
- "new_count": 3,
- "notes": [
-  {
-   "from": "Tonya Tucker",
-   "role": "accounting",
-   "role_label": "Estep Accounting",
-   "time": "Jun 12 8:56 AM",
-   "body": "Deposit receipt issue: 2065 missing 6/8. Locate/submit the 6/8 deposit receipt and reply to Tonya (812) 378-7157."
-  },
-  {
-   "from": "CrunchTime",
-   "role": "alert",
-   "role_label": "Task Alert",
-   "time": "Jun 13 2:30 AM",
-   "body": "KY-2065 open tasks: Fdsvce (6/09), L-Rev (6/10, 6/11, 6/12), VO-Rec BOSS Alpha Ohio Valley (6/12), Fdsvce (6/12). Close today."
-  },
-  {
-   "from": "Brad Davis",
-   "role": "director",
-   "role_label": "Director of Operations",
-   "time": "standing",
-   "body": "June sales budget at bottom of 2065 sheet (DoorDash + UberEats promos baked in). Large Soda now only 30 cents more than Regular - drill cashiers. Orientation Checklist with every new hire. FGU 0% overdue."
-  },
-  {
-   "from": "Crystal Hess",
-   "role": "dm",
-   "role_label": "District Manager",
-   "time": "standing",
-   "body": "Welcome Hannah Kaufman (new H.R./Payroll). G.O.A.T trophy to Etown (2079) - two 100s + 92%, play the video. Review condensed KPI miss chart with teams."
-  },
-  {
-   "from": "Onboarding",
-   "role": "alert",
-   "role_label": "New Hires",
-   "time": "Jun 12",
-   "body": "Serina Gaskins onboarding BLOCKED - DOB entered as 2026, must correct before I-9. Ryan Vititoe BG check pending. Isaiah Lewis failed BG - not moving forward. AM + Shift Leader Indeed ads posted live for Dixie Hwy."
-  }
- ]
+  "date": "2026-06-14",
+  "new_count": 23,
+  "notes": [
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "2026-06-13 22:00 ET",
+      "body": "L5 Customer Compliment \u2014 New Albany (384): \"Matthew & Team, way to make a positive impact OCAT \u2014 One Customer At A Time! Great Job!\" Standing: June budget at bottom of 2065 sheet; Large soda only 30c more; Blackberry counter sign posted."
+    },
+    {
+      "from": "Crystal Hess",
+      "role": "dm",
+      "role_label": "District Manager",
+      "time": "2026-06-13 17:07 ET",
+      "body": "Forwarded the New Albany L5 compliment \u2014 \"Great Job! Thanks Matthew and team New Albany!\" Standing: welcome new H.R./Payroll Hannah Kaufman; review KPI miss chart; swag contest live (812-267-8669, no GMs)."
+    },
+    {
+      "from": "CrunchTime",
+      "role": "alert",
+      "role_label": "Task Alert",
+      "time": "2026-06-14 06:30 ET",
+      "body": "KY-2065 open tasks: Labor Review (L-Rev) for 06/12 needs approval; Vendor Order Receiving (VO-Rec \u2014 Performance Foodservice CIN01984) pending receipt."
+    }
+  ]
 }
