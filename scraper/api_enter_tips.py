@@ -259,7 +259,8 @@ def post_credit_card_tip(jar, mon, sun, employee_id, position_id, lump_sum):
                       params=params, data=json.dumps(body),
                       cookies=jar, headers=HDR, timeout=30)
     r.raise_for_status()
-    res = r.json()
+    # /save returns HTTP 200 with an empty body on success (confirmed 2026-06-15)
+    res = r.json() if r.text.strip() else {"success": True}
     if not res.get("success"):
         raise RuntimeError(f"server returned non-success: {res}")
     return res
@@ -281,7 +282,7 @@ def upsert_existing_row(jar, mon, sun, existing_row, new_value):
                       params=params, data=json.dumps(body),
                       cookies=jar, headers=HDR, timeout=30)
     r.raise_for_status()
-    res = r.json()
+    res = r.json() if r.text.strip() else {"success": True}
     if not res.get("success"):
         raise RuntimeError(f"server returned non-success on upsert: {res}")
     return res
@@ -299,8 +300,17 @@ def commit_pending(jar, mon, sun):
     """Call /prepare + /labor-actuals/validate to commit queued /save rows.
     Returns (committed:bool, detail:dict). Raises only on transport error."""
     # 1. /prepare — locks the session WIP for commit
+    # Body format captured from browser network log 2026-06-15; {} causes 500.
+    prepare_body = {"extraCriteriaMap": {
+        "weekEndingDate": fmt(sun), "editMode": "true",
+        "processWIP": False, "continueWIP": False,
+        "checkAllocateToLocationPosted": True,
+        "checkMissingLaborActuals": False,
+        "checkNonReviewedLaborActuals": False,
+        "taskDate": None, "taskLocationId": None,
+    }}
     p = requests.post(f"{NETCHEF}/resource/labor-details/prepare",
-                      json={}, cookies=jar, headers=HDR, timeout=30)
+                      json=prepare_body, cookies=jar, headers=HDR, timeout=30)
     p.raise_for_status()
     prep = p.json() if p.text else {}
     if not prep.get("success"):
