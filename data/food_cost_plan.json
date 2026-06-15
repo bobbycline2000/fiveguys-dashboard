@@ -1,22 +1,22 @@
 {
   "store": "2065",
-  "week_start": "2026-06-01",
-  "week_end": "2026-06-07",
+  "week_start": "2026-06-08",
+  "week_end": "2026-06-14",
   "variance_week_start": "2026-06-01",
   "variance_week_end": "2026-06-07",
   "cogs_pct_week": 23.4,
   "cogs_pct_week_label": "2026-05-03",
   "cogs_goal_pct": 27.5,
-  "total_over": 10258.0,
-  "generated": "2026-06-14 11:36 ET",
+  "total_over": 352.0,
+  "generated": "2026-06-15 15:21 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Cheeseburger",
-      "over_dollars": 4846.0,
-      "actual": 6237.0,
-      "theoretical": 1391.0,
-      "variance_pct": null,
+      "name": "Ground Beef",
+      "over_dollars": 149.0,
+      "actual": 3053.0,
+      "theoretical": 2904.0,
+      "variance_pct": -5.0,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
@@ -26,11 +26,11 @@
     },
     {
       "rank": 2,
-      "name": "Bacon Cheeseburger",
-      "over_dollars": 3255.0,
-      "actual": 4242.0,
-      "theoretical": 987.0,
-      "variance_pct": null,
+      "name": "Bun, Burger",
+      "over_dollars": 106.0,
+      "actual": 1018.0,
+      "theoretical": 912.0,
+      "variance_pct": -12.0,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
@@ -40,16 +40,16 @@
     },
     {
       "rank": 3,
-      "name": "Little Cheeseburger",
-      "over_dollars": 2157.0,
-      "actual": 2636.0,
-      "theoretical": 479.0,
-      "variance_pct": null,
-      "big_six": true,
+      "name": "Cup, Shake",
+      "over_dollars": 97.0,
+      "actual": 127.0,
+      "theoretical": 30.0,
+      "variance_pct": -325.0,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     }
   ]

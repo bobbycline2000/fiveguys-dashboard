@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-06-08",
+    "week_end": "2026-06-14",
+    "variance_week_start": "2026-06-01",
+    "variance_week_end": "2026-06-07",
+    "month_start": "2026-06-01",
+    "last_month_start": "2026-05-01",
+    "last_month_end": "2026-05-31",
+    "through": "2026-06-14",
+    "pulled": "2026-06-15 11:19 ET",
+    "method": "api+playwright"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": null,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": null,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {
+      "name": "Ground Beef",
+      "actual": 3053.0,
+      "theoretical": 2904.0,
+      "over_dollars": 149.0,
+      "variance_pct": -5.0,
+      "rank": 1
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 1018.0,
+      "theoretical": 912.0,
+      "over_dollars": 106.0,
+      "variance_pct": -12.0,
+      "rank": 2
+    },
+    {
+      "name": "Cup, Shake",
+      "actual": 127.0,
+      "theoretical": 30.0,
+      "over_dollars": 97.0,
+      "variance_pct": -325.0,
+      "rank": 3
+    },
+    {
+      "name": "Lettuce",
+      "actual": 137.0,
+      "theoretical": 72.0,
+      "over_dollars": 65.0,
+      "variance_pct": -91.0,
+      "rank": 4
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 248.0,
+      "theoretical": 202.0,
+      "over_dollars": 46.0,
+      "variance_pct": -23.0,
+      "rank": 5
+    },
+    {
+      "name": "Cheese",
+      "actual": 351.0,
+      "theoretical": 309.0,
+      "over_dollars": 42.0,
+      "variance_pct": -14.0,
+      "rank": 6
+    },
+    {
+      "name": "Bun, Hot Dog",
+      "actual": 64.0,
+      "theoretical": 44.0,
+      "over_dollars": 20.0,
+      "variance_pct": -47.0,
+      "rank": 7
+    },
+    {
+      "name": "Banana Marinade",
+      "actual": 22.0,
+      "theoretical": 7.0,
+      "over_dollars": 15.0,
+      "variance_pct": -226.0,
+      "rank": 8
+    },
+    {
+      "name": "A1 Steak Sauce",
+      "actual": -12.0,
+      "theoretical": 15.0,
+      "over_dollars": -27.0,
+      "variance_pct": 177.0,
+      "rank": 9
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 907.0,
+      "theoretical": 941.0,
+      "over_dollars": -34.0,
+      "variance_pct": 4.0,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
