@@ -1,20 +1,20 @@
 {
-  "generated": "2026-06-14",
+  "generated": "2026-06-15",
   "store": "Five Guys Dixie Highway (KY-2065)",
   "address": "9050 Dixie Hwy, Louisville, KY 40258",
   "window_days": 5,
   "roles_targeted": ["Assistant General Manager (AGM)", "Shift Leader"],
   "interview_cadence": "Mondays only",
-  "next_interviews": "Monday June 15, 2026 — 11:00 AM to 3:00 PM",
+  "next_interviews": "Monday June 22, 2026 — 11:00 AM to 3:00 PM",
   "summary": {
-    "total_mgmt_applicants": 96,
-    "agm": 31,
-    "shift_leader": 65,
-    "invited": 85,
+    "total_mgmt_applicants": 103,
+    "agm": 35,
+    "shift_leader": 68,
+    "invited": 92,
     "invited_today": 7,
-    "invited_today_date": "2026-06-14",
-    "invited_today_interview": "Monday June 15, 2026 — 11:00 AM to 3:00 PM",
-    "notes": "6/14 run: 2 AGM + 5 SL new invites sent. TOP PICKS: Angela Ashby (Asst Mgr @ KFC 4yr, Shift Mgr @ McDonald's) and Miranda Parker (GM @ Papa Murphy's 2yr, McDonald's Mgr+AGM 6yr). Skipped: Heaven Burkhart (HS grad May 2026, zero work history), Kariona Clay (current HS student, 7mo crew), Daylan Percell (16yr old, first job). Elizabeth Middleton SL application skipped — same person already invited June 13 for AGM."
+    "invited_today_date": "2026-06-15",
+    "invited_today_interview": "Monday June 22, 2026 — 11:00 AM to 3:00 PM",
+    "notes": "6/15 run: 3 AGM + 4 SL new invites sent. STRONG: Jeremy Bell (Manager @ Penn Station 6yr4mo), Tasheika Price (Shift Manager @ Wingstop, Shift Lead @ Taco Bell), Courtney Judge (AGM, sent earlier). Robin Johnson (SL Dixie, sent earlier), Charles Long (SL St. Matthews, sent earlier), Aidan Walton (Shift Lead @ Jersey Mike's 1yr). Borderline: Jacob Ballentine (Kitchen Manager @ Papoulis Greek Grill, lean-inclusive AGM). Skipped: Elizabeth Middleton SL Dixie (already invited 6/13 for AGM). Janet Brewer (new, vetted — no mgmt history, crew only, skip)."
   },
   "applicants": [
     {"name": "Angela Ashby", "role": "Shift Leader", "location": "Louisville, KY", "applied": "Today", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-14", "history": "OUTSTANDING — Asst Manager @ KFC/Taco Bell 4yr1mo; Shift Manager @ McDonald's 1yr1mo; Shift Leader @ White Castle 8mo; Front End Supervisor @ Restaurant Depot 1yr1mo; Shift Leader @ Dunkin' 11mo. Multiple management roles in food service. ServSafe certified."},
@@ -110,6 +110,13 @@
     {"name": "Autumn Helton", "role": "Shift Leader", "location": "Clarksville, IN", "applied": "Today", "phone": "+1 502 396 3848", "tier": "mid", "invited": false, "history": "Withdrawn application"},
     {"name": "Tyriana Taylor", "role": "Shift Leader", "location": "Palmyra, IN", "applied": "1d", "phone": "+1 502 240 2710", "tier": "mid", "invited": false, "history": "Withdrawn application"},
     {"name": "Litoni Hayes", "role": "AGM", "location": "Louisville, KY", "applied": "3d", "phone": "+1 502 442 8333", "tier": "mid", "invited": false, "history": "not found in Indeed — all results 3+ months old"},
-    {"name": "Anastasia Costa", "role": "Shift Leader", "location": "Charlestown, IN", "applied": "3d", "phone": "+1 936 553 2619", "tier": "mid", "invited": false, "history": "declined interview"}
+    {"name": "Anastasia Costa", "role": "Shift Leader", "location": "Charlestown, IN", "applied": "3d", "phone": "+1 936 553 2619", "tier": "mid", "invited": false, "history": "declined interview"},
+    {"name": "Courtney Judge", "role": "AGM", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-15", "history": "AGM candidate. Sent 9:48 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Robin Johnson", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 910 1816", "tier": "strong", "invited": true, "invited_date": "2026-06-15", "history": "SL Dixie Highway. Sent 9:51 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Charles Long", "role": "Shift Leader", "location": "St. Matthews", "applied": "2026-06-15", "phone": "+1 219 689 1248", "tier": "mid", "invited": true, "invited_date": "2026-06-15", "history": "SL St. Matthews. New applicant 8 minutes old at time of review. Sent 9:53 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Tasheika Price", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 249 1797", "tier": "strong", "invited": true, "invited_date": "2026-06-15", "history": "STRONG — Shift Manager @ Wingstop 1yr; Shift Lead @ Taco Bell 2yr6mo; Barista @ Starbucks; Line Cook @ Red Lobster. SL Dixie Highway. Sent 9:59 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Aidan Walton", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 812 557 6933", "tier": "mid", "invited": true, "invited_date": "2026-06-15", "history": "Shift Lead @ Jersey Mike's Subs 1yr; Kroger stocker 1yr2mo; Fireside Bar & Grill 5mo. SL Middletown. Sent 10:01 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Jeremy Bell", "role": "AGM", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 644 8401", "tier": "strong", "invited": true, "invited_date": "2026-06-15", "history": "STRONG — Manager @ Penn Station East Coast Subs 6yr4mo (Louisville). Crew @ Taco Bell, Captain D's. Solid long-tenure food service management. Sent 10:03 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Jacob Ballentine", "role": "AGM", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 210 885 0430", "tier": "mid", "invited": true, "invited_date": "2026-06-15", "history": "BORDERLINE — Line Cook and Kitchen Manager @ Papoulis Greek Grill 4yr3mo; Lead Line Cook @ Chili's 1yr3mo; Line Cook @ Sonic 1yr2mo. Kitchen mgmt background, no front-of-house supervisor title. Lean-inclusive AGM invite. Sent 10:04 AM. Interview: Monday June 22, 2026 11 AM-3 PM."}
   ]
 }
