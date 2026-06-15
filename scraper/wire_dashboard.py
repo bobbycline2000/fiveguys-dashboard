@@ -253,6 +253,10 @@ if sched:
     elif _full_schedule:
         # No data for today — treat as missing so we don't show yesterday's wrong crew.
         sched = None
+    elif "today" not in sched:
+        # Schedule file has neither a date-keyed map nor a 'today' entry (e.g. the
+        # newer 'shifts'-only Par Brink format) — unusable here, treat as missing.
+        sched = None
 time_str = now.strftime("%#I:%M %p") if sys.platform == "win32" else now.strftime("%-I:%M %p")
 date_display = now.strftime("%B %d %Y").replace(" 0", " ")
 card_pill = now.strftime("%B %d").replace(" 0", " ")
@@ -289,7 +293,7 @@ else:
     actual_hrs_today = f"{_ah:.1f}" if _ah is not None else "—"
     avg_hourly_wage = f"${_lc/_ah:.2f}" if (_lc is not None and _ah) else "—"
     print("  [wire] labor source: latest.json (CT DOM scrape last resort)")
-sched_hrs_today = f"{sched['today']['scheduled_hours']:.1f}" if sched else "—"
+sched_hrs_today = f"{sched['today']['scheduled_hours']:.1f}" if (sched and sched.get("today")) else "—"
 # Prefer Par Brink Sales Summary for net sales (more reliable than CrunchTime text scrape)
 if sales_summary and sales_summary.get("net_sales"):
     _pb_net = sales_summary["net_sales"]
