@@ -1,34 +1,41 @@
 {
-  "date": "2026-06-15",
-  "new_count": 20,
+  "date": "2026-06-16",
+  "new_count": 22,
   "notes": [
     {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "2026-05-31 10:26 ET",
-      "body": "June Daily Report budgets are live — open the 2065 sheet, scroll to the bottom for your June sales budget. DoorDash + UberEats promos baked in. Standing: Large soda only 30c more than Regular; Blackberry counter sign posted; Orientation Checklist with all new hires."
-    },
-    {
-      "from": "Crystal Hess",
-      "role": "dm",
-      "role_label": "District Manager",
-      "time": "2026-05-26 08:06 ET",
-      "body": "Welcome Hannah Kaufman — new to H.R./Payroll helping Jeni and Victoria; show her who we are. Standing: review the KPI miss chart and share with teams."
+      "from": "Tonya Tucker",
+      "role": "accounting",
+      "role_label": "Estep Accounting",
+      "time": "2026-06-15 18:16 ET",
+      "body": "Upload deposit receipts to the portal — 2065 owes 6/13. (District: 1788 6/13; 1954 6/12+6/13; 2079 6/10-6/12.)"
     },
     {
       "from": "CrunchTime",
       "role": "alert",
       "role_label": "Task Alert",
-      "time": "2026-06-15 06:30 ET",
-      "body": "KY-2065 open: Labor Review 06/12, 06/13, 06/14; Inventory Final for Post 06/14; Post Period — Labor NOT Posted 06/14. Close labor reviews and post the period today."
+      "time": "2026-06-16 06:30 ET",
+      "body": "KY-2065 open tasks: VO-Rec-BOSS: Alpha – Ohio Valley (6/15), L-Rev labor review (6/15), VO-Inv-Performance Fdsvce (6/16). Close these in CT today."
     },
     {
-      "from": "Schedule Auto-Build",
+      "from": "Onboarding (Jeni Moffatt)",
       "role": "alert",
-      "role_label": "Schedule",
-      "time": "2026-06-15 08:22 ET",
-      "body": "July 4 week draft ready (Jun 29–Jul 5): 478.5h paid, 18.60% projected labor. Needs Bobby's call on July 4 early-close / call-off coverage before publishing."
+      "role_label": "New Hire",
+      "time": "2026-06-15 20:41 ET",
+      "body": "Angela Ashby — new hire, BG check requested 6/15, OB + text sent. Added to directory (PHONE PENDING). Active count 27 -> 28."
+    },
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "standing",
+      "body": "June budget at bottom of 2065 sheet (DoorDash + UberEats promos baked in) — name the daily target at huddle. Large Soda now 30c more than Regular. Orientation Checklist with all new hires. FGU 0% overdue."
+    },
+    {
+      "from": "Crystal Hess",
+      "role": "dm",
+      "role_label": "District Manager",
+      "time": "standing",
+      "body": "Welcome Hannah Kaufman (new HR/Payroll, helping Jeni and Victoria). Review KPI miss chart with teams. Swag contest: text potatoes-to-sink gap + the why to 812-267-8669 — no GMs. Play the Etown G.O.A.T video."
     }
   ]
 }
