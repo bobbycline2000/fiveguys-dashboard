@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-15",
+  "generated": "2026-06-16",
   "store": "Five Guys Dixie Highway (KY-2065)",
   "address": "9050 Dixie Hwy, Louisville, KY 40258",
   "window_days": 5,
@@ -7,14 +7,14 @@
   "interview_cadence": "Mondays only",
   "next_interviews": "Monday June 22, 2026 — 11:00 AM to 3:00 PM",
   "summary": {
-    "total_mgmt_applicants": 103,
-    "agm": 35,
-    "shift_leader": 68,
-    "invited": 92,
+    "total_mgmt_applicants": 114,
+    "agm": 38,
+    "shift_leader": 76,
+    "invited": 99,
     "invited_today": 7,
-    "invited_today_date": "2026-06-15",
+    "invited_today_date": "2026-06-16",
     "invited_today_interview": "Monday June 22, 2026 — 11:00 AM to 3:00 PM",
-    "notes": "6/15 run: 3 AGM + 4 SL new invites sent. STRONG: Jeremy Bell (Manager @ Penn Station 6yr4mo), Tasheika Price (Shift Manager @ Wingstop, Shift Lead @ Taco Bell), Courtney Judge (AGM, sent earlier). Robin Johnson (SL Dixie, sent earlier), Charles Long (SL St. Matthews, sent earlier), Aidan Walton (Shift Lead @ Jersey Mike's 1yr). Borderline: Jacob Ballentine (Kitchen Manager @ Papoulis Greek Grill, lean-inclusive AGM). Skipped: Elizabeth Middleton SL Dixie (already invited 6/13 for AGM). Janet Brewer (new, vetted — no mgmt history, crew only, skip)."
+    "notes": "6/16 run: 3 AGM + 4 SL new invites sent. STRONG: Matthew Krieger (GM @ Steak N Shake 4yr+), Cordell Jessie (Asst Store Mgr @ Speedway 3yr), Jaishana Guin (Manager @ CVS/Walgreens/Family Dollar). Megan Kurschner (AGM, Shift Manager @ Taco Bell). Alijah Jefferys (SL, Asst Manager @ Family Dollar). Evelyn Caudill (SL Middletown, Manager @ Spinell's Pizza — borderline lean-inclusive). Tiffany Bott (SL Dixie, Hourly Shift Coordinator @ Burger King — borderline lean-inclusive). Skipped: Marshawn Ford (re-apply AGM, already invited 6/13). Travis Taylor (SL Dixie, high school student, no work history). Tonia Riley (SL applicant but applied to Crew Member role, excluded per rules). Demyia Bartlett (SL Dixie, no work history). Ta'Shyania Gills (Crew applicant despite Asst Store Mgr history, excluded per rules). Cheyenne Rice (Crew applicant despite mgmt history, excluded)."
   },
   "applicants": [
     {"name": "Angela Ashby", "role": "Shift Leader", "location": "Louisville, KY", "applied": "Today", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-14", "history": "OUTSTANDING — Asst Manager @ KFC/Taco Bell 4yr1mo; Shift Manager @ McDonald's 1yr1mo; Shift Leader @ White Castle 8mo; Front End Supervisor @ Restaurant Depot 1yr1mo; Shift Leader @ Dunkin' 11mo. Multiple management roles in food service. ServSafe certified."},
@@ -117,6 +117,17 @@
     {"name": "Tasheika Price", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 249 1797", "tier": "strong", "invited": true, "invited_date": "2026-06-15", "history": "STRONG — Shift Manager @ Wingstop 1yr; Shift Lead @ Taco Bell 2yr6mo; Barista @ Starbucks; Line Cook @ Red Lobster. SL Dixie Highway. Sent 9:59 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
     {"name": "Aidan Walton", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 812 557 6933", "tier": "mid", "invited": true, "invited_date": "2026-06-15", "history": "Shift Lead @ Jersey Mike's Subs 1yr; Kroger stocker 1yr2mo; Fireside Bar & Grill 5mo. SL Middletown. Sent 10:01 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
     {"name": "Jeremy Bell", "role": "AGM", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 644 8401", "tier": "strong", "invited": true, "invited_date": "2026-06-15", "history": "STRONG — Manager @ Penn Station East Coast Subs 6yr4mo (Louisville). Crew @ Taco Bell, Captain D's. Solid long-tenure food service management. Sent 10:03 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
-    {"name": "Jacob Ballentine", "role": "AGM", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 210 885 0430", "tier": "mid", "invited": true, "invited_date": "2026-06-15", "history": "BORDERLINE — Line Cook and Kitchen Manager @ Papoulis Greek Grill 4yr3mo; Lead Line Cook @ Chili's 1yr3mo; Line Cook @ Sonic 1yr2mo. Kitchen mgmt background, no front-of-house supervisor title. Lean-inclusive AGM invite. Sent 10:04 AM. Interview: Monday June 22, 2026 11 AM-3 PM."}
+    {"name": "Jacob Ballentine", "role": "AGM", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 210 885 0430", "tier": "mid", "invited": true, "invited_date": "2026-06-15", "history": "BORDERLINE — Line Cook and Kitchen Manager @ Papoulis Greek Grill 4yr3mo; Lead Line Cook @ Chili's 1yr3mo; Line Cook @ Sonic 1yr2mo. Kitchen mgmt background, no front-of-house supervisor title. Lean-inclusive AGM invite. Sent 10:04 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Megan Kurschner", "role": "AGM", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "mid", "invited": true, "invited_date": "2026-06-16", "history": "Shift Manager @ Taco Bell. AGM applicant. Sent 10:33 AM. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Alijah Jefferys", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "+1 669 609 7684", "tier": "mid", "invited": true, "invited_date": "2026-06-16", "history": "Asst Manager @ Family Dollar. SL Dixie Highway. Sent 10:34 AM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Jaishana Guin", "role": "AGM", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "+1 502 389 0981", "tier": "strong", "invited": true, "invited_date": "2026-06-16", "history": "STRONG — Manager @ CVS Pharmacy; Manager @ Walgreens; Manager @ Family Dollar. Outstanding multi-location management history. AGM applicant. Sent 10:38 AM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Evelyn Caudill", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "502-528-1460", "tier": "mid", "invited": true, "invited_date": "2026-06-16", "history": "BORDERLINE/lean-inclusive — Manager @ Spinell's Pizza. SL Middletown. Sent 10:38 AM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Matthew Krieger", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 593 5222", "tier": "strong", "invited": true, "invited_date": "2026-06-16", "history": "OUTSTANDING — General Manager @ Steak N Shake June 2022-Present (4yr+); Asst Manager @ Sonic 2012-2013; Line Cook @ Huddle House. Strong GM with labor/schedule/money management experience. SL Middletown. Sent 10:42 AM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Cordell Jessie", "role": "AGM", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 775 9313", "tier": "strong", "invited": true, "invited_date": "2026-06-16", "history": "STRONG — Assistant Store Manager @ Speedway LLC Aug 2023-Present (3yr); Dollar General Key Holder (ran store). AGM applicant. Sent 10:46 AM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Tiffany Bott", "role": "Shift Leader", "location": "West Point, KY", "applied": "2026-06-15", "phone": "+1 502 551 8368", "tier": "mid", "invited": true, "invited_date": "2026-06-16", "history": "BORDERLINE/lean-inclusive — Hourly Shift Coordinator @ Burger King June 2026-Present; Cashier @ Racetrac (described Shift manager duties); Server @ Fazoli's; Package Handler @ UPS 15yr. SL Dixie Highway. Sent 10:48 AM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Travis Taylor", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "weak", "invited": false, "history": "High school student (Doss High School). No work history. SL Dixie Highway applicant. Skipped — too junior."},
+    {"name": "Tonia Riley", "role": "Shift Leader", "location": "Sellersburg, IN", "applied": "2026-06-16", "phone": "", "tier": "mid", "invited": false, "history": "Has Shift Leader/Manager @ Rapidly Fired Pizza history but applied to Five Guys Crew Member Jeffersonville role. Excluded per rules: Crew-role applicants not invited regardless of history."},
+    {"name": "Demyia Bartlett", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 651 0210", "tier": "weak", "invited": false, "history": "SL Dixie Highway applicant. No work experience in profile — education only (Valley High School, 10th grade). Skipped."},
+    {"name": "Cheyenne Rice", "role": "Shift Leader", "location": "Las Vegas, NV", "applied": "2026-06-16", "phone": "", "tier": "mid", "invited": false, "history": "Has Associate Manager @ Sonic + Asst Manager @ Capriotti's but applied to Five Guys Crew Member Jeffersonville role. Excluded per rules: Crew-role applicants not invited regardless of history."}
   ]
 }
