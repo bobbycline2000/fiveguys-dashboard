@@ -1,41 +1,34 @@
 {
-  "date": "2026-06-16",
-  "new_count": 22,
+  "date": "2026-06-17",
+  "new_count": 8,
   "notes": [
     {
-      "from": "Tonya Tucker",
-      "role": "accounting",
-      "role_label": "Estep Accounting",
-      "time": "2026-06-15 18:16 ET",
-      "body": "Upload deposit receipts to the portal — 2065 owes 6/13. (District: 1788 6/13; 1954 6/12+6/13; 2079 6/10-6/12.)"
+      "from": "Accounting / Ops",
+      "role": "alert",
+      "role_label": "Action Required",
+      "time": "2026-06-17 06:34 ET",
+      "body": "Labor ran hot 6/16 at 25.86% vs the 18.5% goal — cut on the breaks, hourly checks. Receive the Performance Foodservice order (CT tasks VO-Rec-Performance Fdsvce 6/16 + VO-Rec-BOSS Alpha Ohio Valley 6/15). Close L-Rev labor review for 6/15 AND 6/16."
     },
     {
-      "from": "CrunchTime",
-      "role": "alert",
-      "role_label": "Task Alert",
-      "time": "2026-06-16 06:30 ET",
-      "body": "KY-2065 open tasks: VO-Rec-BOSS: Alpha – Ohio Valley (6/15), L-Rev labor review (6/15), VO-Inv-Performance Fdsvce (6/16). Close these in CT today."
-    },
-    {
-      "from": "Onboarding (Jeni Moffatt)",
-      "role": "alert",
-      "role_label": "New Hire",
-      "time": "2026-06-15 20:41 ET",
-      "body": "Angela Ashby — new hire, BG check requested 6/15, OB + text sent. Added to directory (PHONE PENDING). Active count 27 -> 28."
+      "from": "Crystal Hess",
+      "role": "dm",
+      "role_label": "District Manager",
+      "time": "2026-06-16 13:43 ET",
+      "body": "Leadership: print the attached graphic (IMG_3200.jpeg) and post on the communication board. Standing: welcome Hannah Kaufman (HR/Payroll), review KPI miss chart, swag contest 812-267-8669 (no GMs), play the Etown G.O.A.T video."
     },
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
       "time": "standing",
-      "body": "June budget at bottom of 2065 sheet (DoorDash + UberEats promos baked in) — name the daily target at huddle. Large Soda now 30c more than Regular. Orientation Checklist with all new hires. FGU 0% overdue."
+      "body": "June budget at bottom of 2065 sheet (DoorDash + UberEats promos baked in) — name the daily target at huddle. Large Soda now 30c more than Regular. Blackberry counter sign posted. Orientation Checklist with all new hires."
     },
     {
-      "from": "Crystal Hess",
-      "role": "dm",
-      "role_label": "District Manager",
-      "time": "standing",
-      "body": "Welcome Hannah Kaufman (new HR/Payroll, helping Jeni and Victoria). Review KPI miss chart with teams. Swag contest: text potatoes-to-sink gap + the why to 812-267-8669 — no GMs. Play the Etown G.O.A.T video."
+      "from": "Onboarding / Indeed",
+      "role": "alert",
+      "role_label": "Hiring",
+      "time": "2026-06-16 16:53 ET",
+      "body": "Ryan Vititoe onboarding confirmed (Jeni) — phone still pending for the directory row. 2 new Indeed management applicants waiting: Shift Leader (Dixie Highway) + AGM (Louisville). Review work history and send interview invites."
     }
   ]
 }
