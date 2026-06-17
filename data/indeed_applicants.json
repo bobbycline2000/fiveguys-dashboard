@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-16",
+  "generated": "2026-06-17",
   "store": "Five Guys Dixie Highway (KY-2065)",
   "address": "9050 Dixie Hwy, Louisville, KY 40258",
   "window_days": 5,
@@ -7,14 +7,14 @@
   "interview_cadence": "Mondays only",
   "next_interviews": "Monday June 22, 2026 — 11:00 AM to 3:00 PM",
   "summary": {
-    "total_mgmt_applicants": 114,
+    "total_mgmt_applicants": 123,
     "agm": 38,
-    "shift_leader": 76,
-    "invited": 99,
-    "invited_today": 7,
-    "invited_today_date": "2026-06-16",
+    "shift_leader": 85,
+    "invited": 108,
+    "invited_today": 9,
+    "invited_today_date": "2026-06-17",
     "invited_today_interview": "Monday June 22, 2026 — 11:00 AM to 3:00 PM",
-    "notes": "6/16 run: 3 AGM + 4 SL new invites sent. STRONG: Matthew Krieger (GM @ Steak N Shake 4yr+), Cordell Jessie (Asst Store Mgr @ Speedway 3yr), Jaishana Guin (Manager @ CVS/Walgreens/Family Dollar). Megan Kurschner (AGM, Shift Manager @ Taco Bell). Alijah Jefferys (SL, Asst Manager @ Family Dollar). Evelyn Caudill (SL Middletown, Manager @ Spinell's Pizza — borderline lean-inclusive). Tiffany Bott (SL Dixie, Hourly Shift Coordinator @ Burger King — borderline lean-inclusive). Skipped: Marshawn Ford (re-apply AGM, already invited 6/13). Travis Taylor (SL Dixie, high school student, no work history). Tonia Riley (SL applicant but applied to Crew Member role, excluded per rules). Demyia Bartlett (SL Dixie, no work history). Ta'Shyania Gills (Crew applicant despite Asst Store Mgr history, excluded per rules). Cheyenne Rice (Crew applicant despite mgmt history, excluded)."
+    "notes": "6/17 run: 0 AGM + 9 SL/Shift Manager new invites sent. OUTSTANDING: Anna Coffman (Shift Manager @ Five Guys current — already internal!). STRONG: Vanessa Morris (Asst Manager @ Papa Johns 15yr), Jason Ashby (Manager @ White Castle 9yr), Raymond Rhodes Jr (Night Supervisor @ Caesars), Sarah Smith (Shift Manager @ Dunkin + MIT @ McAlister's), NyShaya Clark (ASM @ Windsor + AGM @ Taco Bell), Cindy Miller (Asst Director of Security 6yr), Cassie Herron (Manager @ Wingstop). LEAN-INCLUSIVE: Sylvia Goosby (Small Business Owner — janitorial contractor). Skipped: Litoni Hayes (no mgmt title, dietary aide/QC), Akela Banks (cashier only), Karmine King (crew/temp), Cecily Diehl (cashier/cook), Marcus Eason (stocker/cook), MOSES WREH (Walmart only), Whitney Woods (server only), Edwin Rodriguez (no work history), Keira Jones Dehaven (16yo, first job, zero experience), Amanda Foley (server only). Multiple re-applicants already in system not re-invited."
   },
   "applicants": [
     {"name": "Angela Ashby", "role": "Shift Leader", "location": "Louisville, KY", "applied": "Today", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-14", "history": "OUTSTANDING — Asst Manager @ KFC/Taco Bell 4yr1mo; Shift Manager @ McDonald's 1yr1mo; Shift Leader @ White Castle 8mo; Front End Supervisor @ Restaurant Depot 1yr1mo; Shift Leader @ Dunkin' 11mo. Multiple management roles in food service. ServSafe certified."},
@@ -128,6 +128,17 @@
     {"name": "Travis Taylor", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "weak", "invited": false, "history": "High school student (Doss High School). No work history. SL Dixie Highway applicant. Skipped — too junior."},
     {"name": "Tonia Riley", "role": "Shift Leader", "location": "Sellersburg, IN", "applied": "2026-06-16", "phone": "", "tier": "mid", "invited": false, "history": "Has Shift Leader/Manager @ Rapidly Fired Pizza history but applied to Five Guys Crew Member Jeffersonville role. Excluded per rules: Crew-role applicants not invited regardless of history."},
     {"name": "Demyia Bartlett", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 651 0210", "tier": "weak", "invited": false, "history": "SL Dixie Highway applicant. No work experience in profile — education only (Valley High School, 10th grade). Skipped."},
-    {"name": "Cheyenne Rice", "role": "Shift Leader", "location": "Las Vegas, NV", "applied": "2026-06-16", "phone": "", "tier": "mid", "invited": false, "history": "Has Associate Manager @ Sonic + Asst Manager @ Capriotti's but applied to Five Guys Crew Member Jeffersonville role. Excluded per rules: Crew-role applicants not invited regardless of history."}
+    {"name": "Cheyenne Rice", "role": "Shift Leader", "location": "Las Vegas, NV", "applied": "2026-06-16", "phone": "", "tier": "mid", "invited": false, "history": "Has Associate Manager @ Sonic + Asst Manager @ Capriotti's but applied to Five Guys Crew Member Jeffersonville role. Excluded per rules: Crew-role applicants not invited regardless of history."},
+    {"name": "Vanessa Morris", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-17", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-17", "history": "STRONG — Assistant Manager @ Papa Johns 2004-2019 (15yr); Bartender @ Applebee's 2009-2017. Shift Manager Outer Loop applicant. Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Anna Coffman", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-17", "history": "OUTSTANDING — Current Shift Manager @ Five Guys (2024-Present). Internal Five Guys candidate! Applied to Shift Leader Dixie Highway (re-applied after prior withdrawal). Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Jason Ashby", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-17", "history": "STRONG — Manager @ White Castle 2017-2026 (9yr). Shift Manager Outer Loop applicant. Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Raymond Rhodes Jr", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-17", "history": "STRONG — Night Supervisor @ Caesars Entertainment 2023-2024; Line Cook @ Caesars 2017-2022. Shift Manager Outer Loop applicant. Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Sarah Smith", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-17", "history": "STRONG — Shift Manager (full-time) @ Dunkin 2025-Present; Manager in Training (MIT) @ McAlister's Deli 2024-Present. Shift Manager Outer Loop applicant. Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "NyShaya Clark", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-17", "history": "STRONG — Assistant Store Manager (ASM) @ Windsor 2025-Present; Assistant General Manager @ Taco Bell 2025. Shift Manager Outer Loop applicant. Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Cindy Miller", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-17", "history": "STRONG — Assistant Director of Security @ St Moritz Security Services 2020-2026 (6yr). Shift Leader Middletown applicant. Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Cassie Herron", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-17", "history": "STRONG — Manager @ Wingstop 2021-2022. Shift Leader Dixie Highway applicant. Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Sylvia Goosby", "role": "Shift Leader", "location": "Muldraugh, KY", "applied": "2026-06-16", "phone": "", "tier": "mid", "invited": true, "invited_date": "2026-06-17", "history": "LEAN-INCLUSIVE — Small Business Owner (Janitorial contractor, God is the Light Finishing Touches); Caregiving/PCA @ Blue Bird Agency 2021-2023. Shift Leader Dixie Highway applicant. Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Keira Jones Dehaven", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 389 9311", "tier": "weak", "invited": false, "history": "16-year-old HS student (Butler Traditional HS, Aug 2025-Present). Zero work experience. Skipped — too junior."},
+    {"name": "Edwin Rodriguez", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-14", "phone": "", "tier": "weak", "invited": false, "history": "Shift Leader Dixie Highway applicant. No work history visible in profile — only certifications (Forklift, Driver's License, Confidential Clearance) and skills. Skipped — insufficient work history."}
   ]
 }
