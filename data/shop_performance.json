@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-06-17",
+  "as_of": "2026-06-18",
   "current_month": "2026-06",
   "current_month_label": "June 2026",
-  "store_avg_month": 97.5,
-  "store_avg_ytd": 84.1,
-  "shop_count_month": 2,
-  "shop_count_ytd": 33,
+  "store_avg_month": 91.7,
+  "store_avg_ytd": 84.0,
+  "shop_count_month": 3,
+  "shop_count_ytd": 34,
   "managers": [
     {
       "first": "Madison",
@@ -164,6 +164,12 @@
   ],
   "latest_shops": [
     {
+      "date": "2026-06-14",
+      "score": 80.0,
+      "meal_period": "Dinner",
+      "on_shift": []
+    },
+    {
       "date": "2026-06-04",
       "score": 100.0,
       "meal_period": "Lunch",
@@ -209,17 +215,6 @@
         "Madison Cureton",
         "Maylin Hernandez Rodriguez",
         "Vicki Lucey"
-      ]
-    },
-    {
-      "date": "2026-05-16",
-      "score": 75.0,
-      "meal_period": "Dinner",
-      "on_shift": [
-        "Francisco Llorente Mejias",
-        "Jada Cox",
-        "Jeremiah Matthews",
-        "Madison Cureton"
       ]
     }
   ]

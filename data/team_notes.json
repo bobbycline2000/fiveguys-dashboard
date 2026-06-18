@@ -1,34 +1,34 @@
 {
-  "date": "2026-06-17",
-  "new_count": 8,
+  "date": "2026-06-18",
+  "new_count": 3,
   "notes": [
     {
-      "from": "Accounting / Ops",
+      "from": "Marketforce / Ops",
       "role": "alert",
       "role_label": "Action Required",
-      "time": "2026-06-17 06:34 ET",
-      "body": "Labor ran hot 6/16 at 25.86% vs the 18.5% goal — cut on the breaks, hourly checks. Receive the Performance Foodservice order (CT tasks VO-Rec-Performance Fdsvce 6/16 + VO-Rec-BOSS Alpha Ohio Valley 6/15). Close L-Rev labor review for 6/15 AND 6/16."
+      "time": "2026-06-18 08:41 ET",
+      "body": "New secret shop 6/14 (Dinner) scored 80% — coaching opportunity, pull the Marketforce PDF for the sub-category breakdown. Father's Day is Sunday 6/21 — confirm Sat + Sun coverage today. Close CT tasks: VO-Rec BOSS Alpha Ohio Valley (6/15, 6/17), VO-Rec Performance Fdsvce (6/16), L-Rev (6/15/6/16/6/17)."
+    },
+    {
+      "from": "Jeni Moffatt",
+      "role": "alert",
+      "role_label": "Hiring",
+      "time": "2026-06-17 14:24 ET",
+      "body": "Serina Gaskins + Ryan Vititoe both processed and good to schedule. Serina added to the directory (phone pending, count 28 -> 29); Ryan already on it since 6/12. 2 Indeed applicants waiting: AGM + Shift Leader (Dixie Highway) — review and send invites."
     },
     {
       "from": "Crystal Hess",
       "role": "dm",
       "role_label": "District Manager",
-      "time": "2026-06-16 13:43 ET",
-      "body": "Leadership: print the attached graphic (IMG_3200.jpeg) and post on the communication board. Standing: welcome Hannah Kaufman (HR/Payroll), review KPI miss chart, swag contest 812-267-8669 (no GMs), play the Etown G.O.A.T video."
+      "time": "2026-05-26 08:06 ET",
+      "body": "Welcome Hannah Kaufman (new HR/Payroll, helping Jeni & Victoria). Review the condensed KPI miss chart and share with teams. Swag contest: first two shift leads text 812-267-8669 with the potatoes-to-sink gap answer (no GMs). Play the Etown G.O.A.T video (2079: two 100s + a 92)."
     },
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
       "time": "standing",
-      "body": "June budget at bottom of 2065 sheet (DoorDash + UberEats promos baked in) — name the daily target at huddle. Large Soda now 30c more than Regular. Blackberry counter sign posted. Orientation Checklist with all new hires."
-    },
-    {
-      "from": "Onboarding / Indeed",
-      "role": "alert",
-      "role_label": "Hiring",
-      "time": "2026-06-16 16:53 ET",
-      "body": "Ryan Vititoe onboarding confirmed (Jeni) — phone still pending for the directory row. 2 new Indeed management applicants waiting: Shift Leader (Dixie Highway) + AGM (Louisville). Review work history and send interview invites."
+      "body": "June budget at bottom of the 2065 sheet (DoorDash + UberEats promos baked in) — name the daily target at huddle. Large Soda now 30c more than Regular (not 10c). Blackberry counter sign posted. Orientation Checklist with all new hires."
     }
   ]
 }
