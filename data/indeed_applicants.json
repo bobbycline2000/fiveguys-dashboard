@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-17",
+  "generated": "2026-06-18",
   "store": "Five Guys Dixie Highway (KY-2065)",
   "address": "9050 Dixie Hwy, Louisville, KY 40258",
   "window_days": 5,
@@ -7,14 +7,14 @@
   "interview_cadence": "Mondays only",
   "next_interviews": "Monday June 22, 2026 — 11:00 AM to 3:00 PM",
   "summary": {
-    "total_mgmt_applicants": 123,
+    "total_mgmt_applicants": 129,
     "agm": 38,
-    "shift_leader": 85,
-    "invited": 108,
-    "invited_today": 9,
-    "invited_today_date": "2026-06-17",
+    "shift_leader": 91,
+    "invited": 114,
+    "invited_today": 6,
+    "invited_today_date": "2026-06-18",
     "invited_today_interview": "Monday June 22, 2026 — 11:00 AM to 3:00 PM",
-    "notes": "6/17 run: 0 AGM + 9 SL/Shift Manager new invites sent. OUTSTANDING: Anna Coffman (Shift Manager @ Five Guys current — already internal!). STRONG: Vanessa Morris (Asst Manager @ Papa Johns 15yr), Jason Ashby (Manager @ White Castle 9yr), Raymond Rhodes Jr (Night Supervisor @ Caesars), Sarah Smith (Shift Manager @ Dunkin + MIT @ McAlister's), NyShaya Clark (ASM @ Windsor + AGM @ Taco Bell), Cindy Miller (Asst Director of Security 6yr), Cassie Herron (Manager @ Wingstop). LEAN-INCLUSIVE: Sylvia Goosby (Small Business Owner — janitorial contractor). Skipped: Litoni Hayes (no mgmt title, dietary aide/QC), Akela Banks (cashier only), Karmine King (crew/temp), Cecily Diehl (cashier/cook), Marcus Eason (stocker/cook), MOSES WREH (Walmart only), Whitney Woods (server only), Edwin Rodriguez (no work history), Keira Jones Dehaven (16yo, first job, zero experience), Amanda Foley (server only). Multiple re-applicants already in system not re-invited."
+    "notes": "6/18 run: 0 AGM + 6 SL/Shift Manager new invites sent. STRONG: Lisa Elrod (Asst Mgr @ Dairy Queen 3yr + Shift Supervisor @ Steak N Shake), Jessica Maddox (Shift Supervisor @ Dollar Tree 2yr, retail mgmt history), Crystal Grant (Crew Supervisor @ Valvoline 3yr, direct supervisor title), Amari Barbour (Key Holder Supervisor @ Dollar General + Shift Manager Raising Cane's, strong multi-site mgmt). LEAN-INCLUSIVE: Kristen Gibson (Assistant Manager @ Great Clips, borderline), Candace Hatfield (Crew Manager @ Burger King 2022-2023). Skipped: Kevin Ellis (driver/general labor, no mgmt), Nevaeh Carruthers (cashier only), Maggie Byrd (Deputy Clerk non-mgmt), Javeh Goodman (crew only), Robert Austin (no mgmt history), Elizabeth Carpenter (H&M/UPS only), Romeo Crawford (cashier only), Jammie Myers (KFC Team Member only). Multiple re-applicants already in system not re-invited."
   },
   "applicants": [
     {"name": "Angela Ashby", "role": "Shift Leader", "location": "Louisville, KY", "applied": "Today", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-14", "history": "OUTSTANDING — Asst Manager @ KFC/Taco Bell 4yr1mo; Shift Manager @ McDonald's 1yr1mo; Shift Leader @ White Castle 8mo; Front End Supervisor @ Restaurant Depot 1yr1mo; Shift Leader @ Dunkin' 11mo. Multiple management roles in food service. ServSafe certified."},
@@ -139,6 +139,12 @@
     {"name": "Cassie Herron", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-16", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-17", "history": "STRONG — Manager @ Wingstop 2021-2022. Shift Leader Dixie Highway applicant. Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
     {"name": "Sylvia Goosby", "role": "Shift Leader", "location": "Muldraugh, KY", "applied": "2026-06-16", "phone": "", "tier": "mid", "invited": true, "invited_date": "2026-06-17", "history": "LEAN-INCLUSIVE — Small Business Owner (Janitorial contractor, God is the Light Finishing Touches); Caregiving/PCA @ Blue Bird Agency 2021-2023. Shift Leader Dixie Highway applicant. Sent today. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
     {"name": "Keira Jones Dehaven", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-15", "phone": "+1 502 389 9311", "tier": "weak", "invited": false, "history": "16-year-old HS student (Butler Traditional HS, Aug 2025-Present). Zero work experience. Skipped — too junior."},
-    {"name": "Edwin Rodriguez", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-14", "phone": "", "tier": "weak", "invited": false, "history": "Shift Leader Dixie Highway applicant. No work history visible in profile — only certifications (Forklift, Driver's License, Confidential Clearance) and skills. Skipped — insufficient work history."}
+    {"name": "Edwin Rodriguez", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-14", "phone": "", "tier": "weak", "invited": false, "history": "Shift Leader Dixie Highway applicant. No work history visible in profile — only certifications (Forklift, Driver's License, Confidential Clearance) and skills. Skipped — insufficient work history."},
+    {"name": "Lisa Elrod", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-18", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-18", "history": "STRONG — Assistant Manager @ Dairy Queen 3yr; Shift Supervisor @ Steak N Shake. SL New Albany applicant. Sent 3:22 PM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Jessica Maddox", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-18", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-18", "history": "STRONG — Shift Supervisor @ Dollar Tree 2yr; retail management history. SL Middletown applicant. Sent 3:23 PM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Crystal Grant", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-18", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-18", "history": "STRONG — Crew Supervisor @ Valvoline 3yr (direct supervisor title, managed crew). Shift Manager Outer Loop applicant. Sent 3:24 PM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Amari Barbour", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-18", "phone": "", "tier": "strong", "invited": true, "invited_date": "2026-06-18", "history": "STRONG — Key Holder Supervisor @ Dollar General; Shift Manager @ Raising Cane's. Strong multi-site management background. SL Middletown applicant. Sent 3:25 PM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Kristen Gibson", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-18", "phone": "", "tier": "mid", "invited": true, "invited_date": "2026-06-18", "history": "LEAN-INCLUSIVE — Assistant Manager @ Great Clips (salon, borderline mgmt). Shift Manager Outer Loop applicant. Sent 3:26 PM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."},
+    {"name": "Candace Hatfield", "role": "Shift Leader", "location": "Louisville, KY", "applied": "2026-06-17", "phone": "", "tier": "mid", "invited": true, "invited_date": "2026-06-18", "history": "LEAN-INCLUSIVE — Crew Manager @ Burger King 2022-2023; Crew Member @ Wendy's. Shift Manager Outer Loop applicant. Sent 3:29 PM. Status: Contacting. Interview: Monday June 22, 2026 11 AM-3 PM."}
   ]
 }
