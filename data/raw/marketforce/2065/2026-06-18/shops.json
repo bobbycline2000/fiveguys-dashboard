@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-06-18 05:06",
+    "generated": "2026-06-18 08:32",
     "location": "2065",
     "status": "ok",
     "shops_total": 123
@@ -40,7 +40,12 @@
       "service": null,
       "quality": null,
       "cleanliness": null,
-      "customer_satisfaction": null
+      "customer_satisfaction": null,
+      "visit_window": [
+        16.0,
+        18.983333333333334
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20808696",

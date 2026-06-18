@@ -1,5 +1,4 @@
-[2026-06-17 13:03:30] outlook-daily-pull-7am: no fg2065 emails found in lookback window
 
-[2026-06-17 13:03:36] parbrink_email_pickup store=2065 mode=weekly business_date=?
+[2026-06-18 12:28:40] parbrink_email_pickup store=2065 mode=weekly business_date=?
   - Could not parse Business Date from email body.
-[2026-06-18 05:22] Daily xlsx fill DEFERRED — workbook tab not open + no saved share URL; staged 6/17 numbers (Sales $5102.74 / Labor 15.83% / Hrs 71.53 / Disc $167.90 / O/S -196.54). Bobby: open FG Daily Report workbook and say "fill yesterday's row".
+[2026-06-18 12:32:50] outlook-daily-pull-7am: no fg2065 emails found in lookback window
