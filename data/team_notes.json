@@ -1,27 +1,27 @@
 {
-  "date": "2026-06-18",
+  "date": "2026-06-19",
   "new_count": 3,
   "notes": [
     {
-      "from": "Marketforce / Ops",
-      "role": "alert",
-      "role_label": "Action Required",
-      "time": "2026-06-18 08:41 ET",
-      "body": "New secret shop 6/14 (Dinner) scored 80% — coaching opportunity, pull the Marketforce PDF for the sub-category breakdown. Father's Day is Sunday 6/21 — confirm Sat + Sun coverage today. Close CT tasks: VO-Rec BOSS Alpha Ohio Valley (6/15, 6/17), VO-Rec Performance Fdsvce (6/16), L-Rev (6/15/6/16/6/17)."
+      "from": "Crystal Hess",
+      "role": "dm",
+      "role_label": "District Manager",
+      "time": "2026-06-18 20:54 ET",
+      "body": "Hub tickets for maintenance — going forward, any time we call out an outsourced company for plumbing, electrical, or any other items, we still submit a hub ticket for tracking and warranty purposes."
+    },
+    {
+      "from": "Victoria Barkhimer",
+      "role": "accounting",
+      "role_label": "Payroll",
+      "time": "2026-06-18 20:19 ET",
+      "body": "Is Naudia Pate Hickey still employed at 2065? Hired 12/31/2025, still active in the system, but has not received a pay stub. Needs an answer from Bobby."
     },
     {
       "from": "Jeni Moffatt",
       "role": "alert",
       "role_label": "Hiring",
-      "time": "2026-06-17 14:24 ET",
-      "body": "Serina Gaskins + Ryan Vititoe both processed and good to schedule. Serina added to the directory (phone pending, count 28 -> 29); Ryan already on it since 6/12. 2 Indeed applicants waiting: AGM + Shift Leader (Dixie Highway) — review and send invites."
-    },
-    {
-      "from": "Crystal Hess",
-      "role": "dm",
-      "role_label": "District Manager",
-      "time": "2026-05-26 08:06 ET",
-      "body": "Welcome Hannah Kaufman (new HR/Payroll, helping Jeni & Victoria). Review the condensed KPI miss chart and share with teams. Swag contest: first two shift leads text 812-267-8669 with the potatoes-to-sink gap answer (no GMs). Play the Etown G.O.A.T video (2079: two 100s + a 92)."
+      "time": "2026-06-18 19:39 ET",
+      "body": "Angela Ashby is processed and good to schedule. In the directory, phone still pending. Rusul Kadhim onboarding + BG check sent (Victoria) — in progress, not cleared yet."
     },
     {
       "from": "Brad Davis",

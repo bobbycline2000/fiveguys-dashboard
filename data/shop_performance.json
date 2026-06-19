@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-06-18",
+  "as_of": "2026-06-19",
   "current_month": "2026-06",
   "current_month_label": "June 2026",
   "store_avg_month": 91.7,
@@ -10,10 +10,10 @@
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 83.0,
-      "ytd_n": 20
+      "month_avg": 80.0,
+      "month_n": 1,
+      "ytd_avg": 82.9,
+      "ytd_n": 21
     },
     {
       "first": "Vicki",
@@ -92,18 +92,10 @@
     {
       "first": "Jeremiah",
       "name": "Jeremiah Matthews",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 89.7,
-      "ytd_n": 15
-    },
-    {
-      "first": "Richard",
-      "name": "Richard Gibbs",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 86.8,
-      "ytd_n": 5
+      "month_avg": 80.0,
+      "month_n": 1,
+      "ytd_avg": 89.1,
+      "ytd_n": 16
     },
     {
       "first": "Lidy",
@@ -122,6 +114,14 @@
       "ytd_n": 9
     },
     {
+      "first": "Richard",
+      "name": "Richard Gibbs",
+      "month_avg": 80.0,
+      "month_n": 1,
+      "ytd_avg": 85.7,
+      "ytd_n": 6
+    },
+    {
       "first": "Autumn",
       "name": "Autumn Hearn",
       "month_avg": null,
@@ -132,18 +132,18 @@
     {
       "first": "Maylin",
       "name": "Maylin Hernandez Rodriguez",
-      "month_avg": null,
-      "month_n": 0,
+      "month_avg": 80.0,
+      "month_n": 1,
       "ytd_avg": 80.2,
-      "ytd_n": 18
+      "ytd_n": 19
     },
     {
       "first": "Francisco",
       "name": "Francisco Llorente Mejias",
-      "month_avg": 95.0,
-      "month_n": 1,
+      "month_avg": 87.5,
+      "month_n": 2,
       "ytd_avg": 79.9,
-      "ytd_n": 20
+      "ytd_n": 21
     },
     {
       "first": "Samuel",
@@ -167,7 +167,13 @@
       "date": "2026-06-14",
       "score": 80.0,
       "meal_period": "Dinner",
-      "on_shift": []
+      "on_shift": [
+        "Francisco Llorente Mejias",
+        "Jeremiah Matthews",
+        "Madison Cureton",
+        "Maylin Hernandez Rodriguez",
+        "Richard Gibbs"
+      ]
     },
     {
       "date": "2026-06-04",
