@@ -1,27 +1,34 @@
 {
-  "date": "2026-06-19",
-  "new_count": 3,
+  "date": "2026-06-20",
+  "new_count": 4,
   "notes": [
+    {
+      "from": "Tonya Tucker",
+      "role": "accounting",
+      "role_label": "Accounting",
+      "time": "2026-06-19 12:23 ET",
+      "body": "Upload deposit receipts to the portal ASAP. 2065 owes the 06/17 receipt (1704 owes 06/15-06/17; 2079 owes 06/10-06/11)."
+    },
+    {
+      "from": "Jeni Moffatt",
+      "role": "alert",
+      "role_label": "Hiring",
+      "time": "2026-06-19 20:04 ET",
+      "body": "Rusul Kadhim is processed and good to schedule. Added to the directory, phone still pending. Active count now 29."
+    },
+    {
+      "from": "Jeni Moffatt",
+      "role": "alert",
+      "role_label": "Hiring",
+      "time": "2026-06-19 18:18 ET",
+      "body": "Daymon Roew Jr did not pass the background check — not moving forward. Removed from the directory."
+    },
     {
       "from": "Crystal Hess",
       "role": "dm",
       "role_label": "District Manager",
       "time": "2026-06-18 20:54 ET",
       "body": "Hub tickets for maintenance — going forward, any time we call out an outsourced company for plumbing, electrical, or any other items, we still submit a hub ticket for tracking and warranty purposes."
-    },
-    {
-      "from": "Victoria Barkhimer",
-      "role": "accounting",
-      "role_label": "Payroll",
-      "time": "2026-06-18 20:19 ET",
-      "body": "Is Naudia Pate Hickey still employed at 2065? Hired 12/31/2025, still active in the system, but has not received a pay stub. Needs an answer from Bobby."
-    },
-    {
-      "from": "Jeni Moffatt",
-      "role": "alert",
-      "role_label": "Hiring",
-      "time": "2026-06-18 19:39 ET",
-      "body": "Angela Ashby is processed and good to schedule. In the directory, phone still pending. Rusul Kadhim onboarding + BG check sent (Victoria) — in progress, not cleared yet."
     },
     {
       "from": "Brad Davis",
