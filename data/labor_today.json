@@ -2,16 +2,16 @@
   "date": "2026-06-20",
   "labor_percent": 19.872,
   "labor_dollars": 1024.72,
-  "actual_hours": 91.36,
+  "actual_hours": 95.34,
   "scheduled_hours": 91.0,
-  "avg_hourly_wage": 11.22,
+  "avg_hourly_wage": 10.75,
   "labor_percent_wtd": 19.5428,
   "labor_dollars_wtd": 5514.0,
   "actual_hours_wtd": 480.23,
   "hourly_breakdown": [],
   "meta": {
     "source": "crunchtime_api",
-    "pulled_at": "2026-06-21T10:01:32",
+    "pulled_at": "2026-06-21T11:49:31",
     "calc_id_yesterday": 7
   }
 }

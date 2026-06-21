@@ -1,4 +1,4 @@
 
-[2026-06-21 09:59:39] parbrink_email_pickup store=2065 mode=weekly business_date=?
+[2026-06-21 11:47:34] parbrink_email_pickup store=2065 mode=weekly business_date=?
   - Could not parse Business Date from email body.
-[2026-06-21 10:03:14] outlook-daily-pull-7am: no fg2065 emails found in lookback window
+[2026-06-21 11:51:14] outlook-daily-pull-7am: no fg2065 emails found in lookback window
