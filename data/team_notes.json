@@ -1,41 +1,41 @@
 {
-  "date": "2026-06-20",
-  "new_count": 4,
+  "date": "2026-06-21",
+  "new_count": 3,
   "notes": [
     {
-      "from": "Tonya Tucker",
-      "role": "accounting",
-      "role_label": "Accounting",
-      "time": "2026-06-19 12:23 ET",
-      "body": "Upload deposit receipts to the portal ASAP. 2065 owes the 06/17 receipt (1704 owes 06/15-06/17; 2079 owes 06/10-06/11)."
+      "from": "CrunchTime",
+      "role": "alert",
+      "role_label": "Open Tasks (KY-2065)",
+      "time": "2026-06-21 06:23 ET",
+      "body": "Labor Review not posted 6/18, 6/19, 6/20; VO-Rec Performance Foodservice 6/19; VO-Rec BOSS Alpha-Ohio Valley 6/19+6/20; LT-Rec KY-1731 Jefferson Commons 6/19; Inv-Final for Post 6/21; Post Period Labor Not Posted 6/21. Deposit receipt 06/17 still owed (Tonya Tucker)."
     },
     {
-      "from": "Jeni Moffatt",
+      "from": "Indeed",
       "role": "alert",
       "role_label": "Hiring",
-      "time": "2026-06-19 20:04 ET",
-      "body": "Rusul Kadhim is processed and good to schedule. Added to the directory, phone still pending. Active count now 29."
+      "time": "2026-06-20 15:48 ET",
+      "body": "New applicants to screen: AGM (Louisville) - Maranda Holcomb and 3 others; Shift Leader (Dixie Highway) - Cortayshia Calvin and 1 other. Applicants only, not cleared - review on Indeed."
     },
     {
-      "from": "Jeni Moffatt",
+      "from": "Kayla Valenzuela",
       "role": "alert",
-      "role_label": "Hiring",
-      "time": "2026-06-19 18:18 ET",
-      "body": "Daymon Roew Jr did not pass the background check — not moving forward. Removed from the directory."
+      "role_label": "Sister Store (1954)",
+      "time": "2026-06-20 21:56 ET",
+      "body": "GM 1954 needs about 8 heads of lettuce for tomorrow - her case came in with small heads. If 2065 can spare it, log as a location transfer."
     },
     {
       "from": "Crystal Hess",
       "role": "dm",
       "role_label": "District Manager",
-      "time": "2026-06-18 20:54 ET",
-      "body": "Hub tickets for maintenance — going forward, any time we call out an outsourced company for plumbing, electrical, or any other items, we still submit a hub ticket for tracking and warranty purposes."
+      "time": "standing",
+      "body": "Any outsourced vendor call-out (plumbing, electrical, etc.) still requires a hub ticket for tracking + warranty. Welcome Hannah Kaufman (new H.R./Payroll). Review KPI miss chart with the team. Swag contest: text 812-267-8669 (no GMs)."
     },
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
       "time": "standing",
-      "body": "June budget at bottom of the 2065 sheet (DoorDash + UberEats promos baked in) — name the daily target at huddle. Large Soda now 30c more than Regular (not 10c). Blackberry counter sign posted. Orientation Checklist with all new hires."
+      "body": "June budget at bottom of the 2065 sheet (DoorDash + UberEats promos baked in) - name the daily target at huddle. Large Soda now 30c more than Regular (not 10c). Blackberry counter sign posted. Orientation Checklist with all new hires."
     }
   ]
 }
