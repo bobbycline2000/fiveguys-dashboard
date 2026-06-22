@@ -1,5 +1,4 @@
-[2026-06-21 12:01:45] outlook-daily-pull-7am: no fg2065 emails found in lookback window
 
-[2026-06-21 12:01:51] parbrink_email_pickup store=2065 mode=weekly business_date=?
+[2026-06-22 14:43:17] parbrink_email_pickup store=2065 mode=weekly business_date=?
   - Could not parse Business Date from email body.
-[2026-06-22 05:55] dashboard-watchdog-daily Step 0: Brief not sent yet (watchdog fired 05:55, before 7:02 AM window). Chrome MCP not connected — rescue could not run. The 7:02 AM outlook-daily-pull task will attempt; if it also cannot reach Chrome/Outlook, next session: open Outlook in Chrome and reply "rerun brief".
+[2026-06-22 14:46:47] outlook-daily-pull-7am: no fg2065 emails found in lookback window

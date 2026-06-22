@@ -2,7 +2,7 @@
   "meta": {
     "store_id": "2065",
     "report_date": "2026-06-21",
-    "generated": "2026-06-22T06:00:50",
+    "generated": "2026-06-22T14:43:13",
     "source_pdf": "data/raw/parbrink/2065/2026-06-21/Discount Summary.pdf"
   },
   "items": [
@@ -238,9 +238,9 @@
       "type": "Discount"
     }
   ],
-  "grand_total": {
-    "count": 18,
-    "total": 225.17,
-    "average": 12.51
-  }
+  "total_count": 18,
+  "total_amount": 225.17,
+  "total_average": 12.51,
+  "comps_total": 0.0,
+  "discounts_total": 225.17
 }

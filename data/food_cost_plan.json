@@ -7,30 +7,31 @@
   "cogs_pct_week": 23.4,
   "cogs_pct_week_label": "2026-05-03",
   "cogs_goal_pct": 27.5,
-  "total_over": 286.03,
-  "generated": "2026-06-22 06:06 ET",
+  "total_over": 142.0,
+  "generated": "2026-06-22 14:46 ET",
   "items": [
     {
       "rank": 1,
-      "name": "A1 Steak Sauce",
-      "over_dollars": 160.94,
-      "actual": 169.02,
-      "theoretical": 8.08,
-      "variance_pct": -19.9183,
+      "name": "Lettuce",
+      "over_dollars": 50.0,
+      "actual": 148.0,
+      "theoretical": 98.0,
+      "variance_pct": -52.0,
       "big_six": false,
       "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
+        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
+        "Confirm prep specs are correct.",
+        "Submit a Product Issue form for yield loss from bad quality off the truck.",
+        "Account for waste."
       ]
     },
     {
       "rank": 2,
-      "name": "Peanut Butter inv",
-      "over_dollars": 71.18,
-      "actual": 79.08,
-      "theoretical": 7.9,
-      "variance_pct": -9.0101,
+      "name": "Shake Mix",
+      "over_dollars": 46.0,
+      "actual": 203.0,
+      "theoretical": 157.0,
+      "variance_pct": -30.0,
       "big_six": false,
       "actions": [
         "Watch portioning and confirm the build/prep spec.",
@@ -40,17 +41,16 @@
     },
     {
       "rank": 3,
-      "name": "Tomatoes, Fresh",
-      "over_dollars": 53.91,
-      "actual": 150.7,
-      "theoretical": 96.79,
-      "variance_pct": -0.557,
-      "big_six": false,
+      "name": "Bun, Burger",
+      "over_dollars": 46.0,
+      "actual": 949.0,
+      "theoretical": 903.0,
+      "variance_pct": -5.0,
+      "big_six": true,
       "actions": [
-        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
-        "Confirm prep specs are correct.",
-        "Submit a Product Issue form for yield loss from bad quality off the truck.",
-        "Account for waste."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     }
   ]
