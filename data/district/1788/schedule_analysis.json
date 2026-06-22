@@ -4,17 +4,17 @@
   "week_ending": "2026-06-28",
   "week_start": "2026-06-22",
   "target_pct": 20.0,
-  "generated_at": "2026-06-21T08:00:50.509016-04:00",
+  "generated_at": "2026-06-22T11:06:14.779799-04:00",
   "week": {
     "fcst_sales": 27136,
-    "sched_cost": 6239,
-    "sched_hours": 442.0,
-    "labor_pct": 23.0,
-    "over_target_dollars": 812,
+    "sched_cost": 6310,
+    "sched_hours": 448.0,
+    "labor_pct": 23.3,
+    "over_target_dollars": 883,
     "ot_hours": 0.0,
     "ot_value": 0
   },
-  "issue_count": 4,
+  "issue_count": 5,
   "issues": [
     {
       "sev": "high",
@@ -30,6 +30,11 @@
       "sev": "high",
       "day": "Wed",
       "msg": "Wed labor 25.5% \u2014 ~$194 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Thu",
+      "msg": "Thu labor 22.6% \u2014 ~$106 over 20% target"
     },
     {
       "sev": "high",
@@ -80,11 +85,11 @@
       "date": "2026-06-25",
       "wd": "Thu",
       "sales": 4141,
-      "hrs": 59.0,
-      "cost": 864,
-      "pct": 20.9,
+      "hrs": 65.0,
+      "cost": 934,
+      "pct": 22.6,
       "byPosition": {
-        "2. Crew": 42.0,
+        "2. Crew": 48.0,
         "Shift Leader-Hourly": 7.0,
         "General Manager-Salary": 10.0
       }
