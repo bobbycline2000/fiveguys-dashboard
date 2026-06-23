@@ -1,41 +1,27 @@
 {
-  "date": "2026-06-21",
-  "new_count": 3,
+  "date": "2026-06-23",
+  "new_count": 18,
   "notes": [
     {
-      "from": "CrunchTime",
-      "role": "alert",
-      "role_label": "Open Tasks (KY-2065)",
-      "time": "2026-06-21 06:23 ET",
-      "body": "Labor Review not posted 6/18, 6/19, 6/20; VO-Rec Performance Foodservice 6/19; VO-Rec BOSS Alpha-Ohio Valley 6/19+6/20; LT-Rec KY-1731 Jefferson Commons 6/19; Inv-Final for Post 6/21; Post Period Labor Not Posted 6/21. Deposit receipt 06/17 still owed (Tonya Tucker)."
-    },
-    {
-      "from": "Indeed",
-      "role": "alert",
-      "role_label": "Hiring",
-      "time": "2026-06-20 15:48 ET",
-      "body": "New applicants to screen: AGM (Louisville) - Maranda Holcomb and 3 others; Shift Leader (Dixie Highway) - Cortayshia Calvin and 1 other. Applicants only, not cleared - review on Indeed."
-    },
-    {
-      "from": "Kayla Valenzuela",
-      "role": "alert",
-      "role_label": "Sister Store (1954)",
-      "time": "2026-06-20 21:56 ET",
-      "body": "GM 1954 needs about 8 heads of lettuce for tomorrow - her case came in with small heads. If 2065 can spare it, log as a location transfer."
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "2026-06-22 5:00 PM ET",
+      "body": "Re: Mia 1704 \u2014 \"Way to GO Mia! It's awesome to see our Value ENTHUSIASM lived out \u2014 Thank you!\" Brad echoing Crystal's company-wide shout-out for Mia at St. Matthews (1704)."
     },
     {
       "from": "Crystal Hess",
       "role": "dm",
       "role_label": "District Manager",
-      "time": "standing",
-      "body": "Any outsourced vendor call-out (plumbing, electrical, etc.) still requires a hub ticket for tracking + warranty. Welcome Hannah Kaufman (new H.R./Payroll). Review KPI miss chart with the team. Swag contest: text 812-267-8669 (no GMs)."
+      "time": "2026-06-23 2:25 PM ET",
+      "body": "Weekly G.M./A.G.M. call CANCELED this week. Also recognized Mia at St. Matthews (1704) company-wide: \"on a path to becoming a wonderful manager.\""
     },
     {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "standing",
-      "body": "June budget at bottom of the 2065 sheet (DoorDash + UberEats promos baked in) - name the daily target at huddle. Large Soda now 30c more than Regular (not 10c). Blackberry counter sign posted. Orientation Checklist with all new hires."
+      "from": "net-chef (CrunchTime)",
+      "role": "alert",
+      "role_label": "Daily Numbers",
+      "time": "2026-06-23 6:23 AM ET",
+      "body": "2065 Mon 6/22 sales $3,900 (+35.9% W/W vs LY). FP% 26.1% (wk ending 6/28, early). DM1 sister comp $8,984 (+6.4%)."
     }
   ]
 }
