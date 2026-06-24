@@ -245,13 +245,21 @@ async def wait_for_sw_grid(page, timeout_ms=20000):
     return False
 
 
-async def enter_via_browser(mon, sun, targets, expected_total):
+async def enter_via_browser(mon, sun, targets, expected_total, storage_state_path):
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=True)
-        ctx = await browser.new_context(viewport={"width": 1680, "height": 950})
+        # Pre-authenticated context from api_discover's saved storage_state — reuse
+        # the PROVEN login/cookie-mint instead of re-implementing sign-in headlessly.
+        ctx = await browser.new_context(viewport={"width": 1680, "height": 950},
+                                        storage_state=storage_state_path)
         page = await ctx.new_page()
         try:
-            await robust_login(page)
+            await page.goto(f"{NETCHEF}/ncext/next.ct", wait_until="domcontentloaded", timeout=30_000)
+            await page.wait_for_timeout(4000)
+            if not await _authed(page):
+                await page.screenshot(path=str(DATA / "api_discover_tipdebug_auth.png"))
+                raise RuntimeError("storage_state did not authenticate the browser context")
+            print("[browser] authenticated via storage_state")
 
             # Route to the week in edit mode WITHIN the live SPA (same effect as
             # clicking the Labor Summary "Edit" link). Two hard-won constraints:
@@ -335,6 +343,12 @@ def main():
 
     # ── READS (cookie-auth requests; these work cold) ──
     jar = T.ensure_session()
+    # The browser write needs a Playwright storage_state (cookies + localStorage).
+    # api_discover writes it alongside ct_cookies.json; mint if missing/stale.
+    state_path = DATA / "ct_storage_state.json"
+    if not state_path.exists():
+        print("[browser] storage_state missing — minting via api_discover")
+        T.remint()
     if not T.labor_reviewed(jar, sun):
         print(f"[prereq] WARNING: WE {T.fmt(sun)} labor not Reviewed — proceeding; validate hours look right.")
     charged, _ = T.pull_charged_tips(jar, mon, sun)
@@ -368,7 +382,7 @@ def main():
         print("[dry] no write performed.")
         return 0
 
-    ok, v, res = asyncio.run(enter_via_browser(mon, sun, targets, sum_payout))
+    ok, v, res = asyncio.run(enter_via_browser(mon, sun, targets, sum_payout, str(state_path)))
 
     # log
     log = ROOT.parent.parent / "_memory" / "tip-entry-log.md"
