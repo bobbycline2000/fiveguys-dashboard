@@ -231,38 +231,22 @@ async def enter_via_browser(mon, sun, targets, expected_total):
         try:
             await robust_login(page)
 
-            # Navigate the PROVEN way: Labor Summary → click the week's "Edit" link.
-            # (A direct goto to next.ct#LaborDetails does not reliably route the SPA
-            # in headless, so the LaborDetails grids never instantiate.)
-            await page.goto(f"{NETCHEF}/ncext/index.ct#laborMenu~laborSummaryGrid",
-                            wait_until="domcontentloaded", timeout=30_000)
-            await page.wait_for_timeout(5000)
-            try:
-                await page.wait_for_function(
-                    "() => /Week Ending/.test(document.body.innerText)", timeout=20_000)
-            except PlaywrightTimeout:
-                pass
+            # Route to the week in edit mode WITHIN the live SPA (same effect as
+            # clicking the Labor Summary "Edit" link). Two hard-won constraints:
+            #   - NEVER page.goto(index.ct...) — it logs the session out (4/20 finding).
+            #   - A full page.goto to next.ct#LaborDetails does NOT route in headless;
+            #     the SPA router only fires on an in-document hashchange. So we land on
+            #     the next.ct shell (where login leaves us) and set location.hash, which
+            #     triggers the LaborDetails controller → /prepare → opens the WIP.
             sundate = T.fmt(sun)
-            clicked_edit = await page.evaluate("""(sundate) => {
-                const rows = [...document.querySelectorAll('[role="row"], tr')];
-                for (const row of rows) {
-                    if (!row.innerText || !row.innerText.includes(sundate)) continue;
-                    const edit = [...row.querySelectorAll('a,span,div,button')]
-                        .find(e => (e.innerText||e.textContent||'').trim() === 'Edit');
-                    if (edit) {
-                        const r = edit.getBoundingClientRect();
-                        ['mouseover','mousedown','mouseup','click'].forEach(t =>
-                            edit.dispatchEvent(new MouseEvent(t,{bubbles:true,cancelable:true,view:window,clientX:r.x+r.width/2,clientY:r.y+r.height/2})));
-                        return true;
-                    }
-                }
-                return false;
-            }""", sundate)
-            print(f"[browser] clicked Edit for WE {sundate}: {clicked_edit}")
-            if not clicked_edit:
-                await page.screenshot(path=str(DATA / "api_discover_tipdebug_summary.png"))
-                raise RuntimeError(f"could not find Edit link for WE {sundate} on Labor Summary")
-            await page.wait_for_timeout(5000)
+            cur = page.url or ""
+            if "next.ct" not in cur:
+                await page.goto(f"{NETCHEF}/ncext/next.ct", wait_until="domcontentloaded", timeout=30_000)
+                await page.wait_for_timeout(4000)
+            await page.evaluate("(h) => { window.location.hash = h; }",
+                                f"LaborDetails?weekEndingDate={sundate}&editMode=true")
+            print(f"[browser] SPA-routed to LaborDetails editMode for WE {sundate}")
+            await page.wait_for_timeout(6000)
 
             # "Net-Chef detected previous Labor Detail data that was not saved" → Continue
             if await click_visible_text(page, "Continue"):
