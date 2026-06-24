@@ -65,7 +65,7 @@ jobs:
 
       # api_enter_tips.py self-mints cookies via api_discover.py if needed.
       # api_discover.py uses headless Chromium (no Xvfb required).
-      - name: Run api_enter_tips.py
+      - name: Run enter_tips_browser.py
         env:
           CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
           CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
@@ -81,7 +81,14 @@ jobs:
           fi
           # On the cron-triggered path (no inputs): default to LIVE — this is
           # the Monday 5:30 AM run Bobby actually wants firing.
-          python scraper/api_enter_tips.py $ARGS
+          #
+          # HEADLESS-BROWSER path (replaces the pure-requests api_enter_tips.py,
+          # which ghosted: /save only persists with a live editMode page holding
+          # the WIP — see scraper/enter_tips_browser.py docstring + lessons 2026-06-24).
+          # Reads/payout math are still the api_enter_tips.py functions; only the
+          # WRITE+commit run through Playwright. Idempotent: re-runs upsert in place,
+          # never duplicate rows.
+          python scraper/enter_tips_browser.py $ARGS
 
       - name: Commit snapshot + log
         if: always()
