@@ -188,23 +188,45 @@ async def click_visible_text(page, text, timeout=4000):
         return False
 
 
+async def _authed(page):
+    """True only when an authenticated API probe returns 200 JSON. Ext being
+    defined is NOT proof of login — Ext loads on the login page too."""
+    try:
+        return await page.evaluate("""async () => {
+            try {
+                const r = await fetch('/resource/recommended-actions/status', {credentials:'include'});
+                return r.status === 200 && /json/i.test(r.headers.get('content-type') || '');
+            } catch (e) { return false; }
+        }""")
+    except Exception:
+        return False
+
+
 async def robust_login(page):
-    """Full sign-in: do_login presses Enter, but this app also needs the Sign In
-    button clicked and time for the ExtJS app to boot. Poll until Ext is defined."""
-    await D.do_login(page)
-    await page.wait_for_timeout(1500)
-    for attempt in range(8):
-        try:
-            ext_ready = await page.evaluate("() => (typeof Ext !== 'undefined') && !!(window.Ext && Ext.ComponentQuery)")
-        except Exception:
-            ext_ready = False
-        on_login = "login" in (page.url or "").lower()
-        if ext_ready and not on_login:
-            print(f"[browser] app booted (Ext ready) after {attempt} extra waits")
+    """Sign in for real. CrunchTime needs the credentials filled AND the Sign In
+    button clicked; Enter alone doesn't submit. Gate on an authenticated API probe,
+    not on Ext presence (Ext is loaded on the login page too — the false-positive
+    that left the headless context unauthenticated)."""
+    await page.goto(D.NETCHEF_BASE, wait_until="domcontentloaded", timeout=30_000)
+    await page.wait_for_timeout(2000)
+    for attempt in range(10):
+        if await _authed(page):
+            print(f"[browser] authenticated (probe OK) after {attempt} attempts")
+            await page.wait_for_timeout(1500)
             return True
+        try:
+            if await page.locator('input[type="password"]').count():
+                await page.fill('input[type="text"]', D.USERNAME)
+                await page.fill('input[type="password"]', D.PASSWORD)
+        except Exception:
+            pass
         await D._click_sign_in(page)
-        await page.wait_for_timeout(2500)
-    raise RuntimeError("login did not reach a booted app (Ext never defined)")
+        try:
+            await page.keyboard.press("Enter")
+        except Exception:
+            pass
+        await page.wait_for_timeout(3500)
+    raise RuntimeError("login failed — authenticated probe never succeeded")
 
 
 async def wait_for_sw_grid(page, timeout_ms=20000):
