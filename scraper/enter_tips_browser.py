@@ -231,10 +231,37 @@ async def enter_via_browser(mon, sun, targets, expected_total):
         try:
             await robust_login(page)
 
-            # Open the week in edit mode — this page load opens the server WIP.
-            url = f"{NETCHEF}/ncext/next.ct#LaborDetails?weekEndingDate={T.fmt(sun)}&editMode=true"
-            print(f"[browser] open editMode: {url}")
-            await page.goto(url, wait_until="domcontentloaded", timeout=30_000)
+            # Navigate the PROVEN way: Labor Summary → click the week's "Edit" link.
+            # (A direct goto to next.ct#LaborDetails does not reliably route the SPA
+            # in headless, so the LaborDetails grids never instantiate.)
+            await page.goto(f"{NETCHEF}/ncext/index.ct#laborMenu~laborSummaryGrid",
+                            wait_until="domcontentloaded", timeout=30_000)
+            await page.wait_for_timeout(5000)
+            try:
+                await page.wait_for_function(
+                    "() => /Week Ending/.test(document.body.innerText)", timeout=20_000)
+            except PlaywrightTimeout:
+                pass
+            sundate = T.fmt(sun)
+            clicked_edit = await page.evaluate("""(sundate) => {
+                const rows = [...document.querySelectorAll('[role="row"], tr')];
+                for (const row of rows) {
+                    if (!row.innerText || !row.innerText.includes(sundate)) continue;
+                    const edit = [...row.querySelectorAll('a,span,div,button')]
+                        .find(e => (e.innerText||e.textContent||'').trim() === 'Edit');
+                    if (edit) {
+                        const r = edit.getBoundingClientRect();
+                        ['mouseover','mousedown','mouseup','click'].forEach(t =>
+                            edit.dispatchEvent(new MouseEvent(t,{bubbles:true,cancelable:true,view:window,clientX:r.x+r.width/2,clientY:r.y+r.height/2})));
+                        return true;
+                    }
+                }
+                return false;
+            }""", sundate)
+            print(f"[browser] clicked Edit for WE {sundate}: {clicked_edit}")
+            if not clicked_edit:
+                await page.screenshot(path=str(DATA / "api_discover_tipdebug_summary.png"))
+                raise RuntimeError(f"could not find Edit link for WE {sundate} on Labor Summary")
             await page.wait_for_timeout(5000)
 
             # "Net-Chef detected previous Labor Detail data that was not saved" → Continue
@@ -246,6 +273,7 @@ async def enter_via_browser(mon, sun, targets, expected_total):
             await click_visible_text(page, "Supplemental Wages")
             await page.wait_for_timeout(2500)
             if not await wait_for_sw_grid(page):
+                await page.screenshot(path=str(DATA / "api_discover_tipdebug_grid.png"))
                 raise RuntimeError("supplemental-wages grid never loaded")
 
             # Idempotent upsert loop (runs inside the live edit session).
