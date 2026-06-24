@@ -832,7 +832,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="page-title">Good afternoon, Bobby.</div>
         <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>12:49 PM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>12:53 PM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -856,17 +856,17 @@ body.sidebar-open .sidebar-backdrop { display: block; }
           <div class="var-item">
             <span class="var-rank">1</span>
             <span class="var-name">Cheeseburger</span>
-            <span class="var-pct">+$902</span>
+            <span class="var-pct">+$1448</span>
           </div>
           <div class="var-item">
             <span class="var-rank">2</span>
             <span class="var-name">Bacon Cheeseburger</span>
-            <span class="var-pct">+$489</span>
+            <span class="var-pct">+$986</span>
           </div>
           <div class="var-item">
             <span class="var-rank">3</span>
             <span class="var-name">Little Cheeseburger</span>
-            <span class="var-pct">+$251</span>
+            <span class="var-pct">+$563</span>
           </div>
         </div>
         <div class="ctrl-divider"></div>
@@ -922,15 +922,15 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="ctrl-section-lbl"><span>Week-to-Date Running Labor</span><span class="goal-tag">Goal 18.5%</span></div>
         <div class="period-var">
           <div class="period-box">
-            <div class="period-val">19.1%</div>
+            <div class="period-val">22.6%</div>
             <div class="period-lbl">WTD %</div>
           </div>
           <div class="period-box">
-            <div class="period-val">$6,407</div>
+            <div class="period-val">$1,658</div>
             <div class="period-lbl">WTD Labor $</div>
           </div>
           <div class="period-box">
-            <div class="period-val">549.1</div>
+            <div class="period-val">140.1</div>
             <div class="period-lbl">WTD Hours</div>
           </div>
         </div>
@@ -1306,7 +1306,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>12:49 PM</span> &nbsp;&middot;&nbsp; June 24 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>12:53 PM</span> &nbsp;&middot;&nbsp; June 24 2026</span>
   </div>
 
 </div><!-- /main -->
@@ -1396,18 +1396,8 @@ function showShift(shift, btn) {
 // ── Labor % mini bars (11 AM – 10 PM, goal 18.5%) ──
 const LABOR_GOAL = 18.5;
 const laborData = [
-  { hr: '11A', pct: 32.3 },
-  { hr: '12P', pct: 18.4 },
-  { hr: '1P', pct: 25.7 },
-  { hr: '2P', pct: 14.2 },
-  { hr: '3P', pct: 24.6 },
-  { hr: '4P', pct: 23.4 },
-  { hr: '5P', pct: 21.4 },
-  { hr: '6P', pct: 10.2 },
-  { hr: '7P', pct: 21.8 },
-  { hr: '8P', pct: 12.6 },
-  { hr: '9P', pct: 22.5 },
-  { hr: '10P', pct: 100.0 }
+  { hr: '11A', pct: 19.9 },
+  { hr: '12P', pct: 18.9 }
 ];
 const realPcts = laborData.filter(d => d.pct !== null).map(d => d.pct);
 const maxPct = Math.max(...realPcts, LABOR_GOAL) * 1.1;
