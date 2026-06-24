@@ -51,22 +51,30 @@ SW_ID = 12292  # Credit Card Tip
 
 
 # ── in-page JS (literal braces — NOT an f-string) ───────────────────────────
+# Reads EXISTING rows from the loaded Ext grid store (reliable; the
+# /supplemental-wages fetch returns the empty edit-session WIP, not committed
+# rows). Returns {error:...} if the store can't be found — caller ABORTS rather
+# than blind-appending (never create duplicates on a read failure).
 JS_UPSERT = r"""
 async (P) => {
   const {mon, sun, sw, targets} = P;
   const H = {"Content-Type":"application/json","X-Requested-With":"XMLHttpRequest","Accept":"application/json"};
-  // 1. read existing Credit Card Tip rows for the week (loaded-page context = reliable)
-  const qBody = {pagingInfo:{page:1,start:0,limit:500},
-    sortInfo:{sortList:[{property:"employeeId",direction:"ASC"}]},
-    extraCriteriaMap:{extraParams:{
-      labelModules:["labor_actuals.labor_actuals","labor_actuals.labor_details","report.labor_detail"],
-      weekEndingDate:[sun]}}};
-  const qr = await fetch("/resource/labor-details/supplemental-wages",
-    {method:"POST",credentials:"include",headers:H,body:JSON.stringify(qBody)});
-  const qd = await qr.json();
-  const rows = ((qd.contentMap && qd.contentMap.gridList) || []).filter(x => x.swId === sw);
+  if (typeof Ext === 'undefined') return {error: 'Ext not loaded'};
+  // locate the supplemental-wages grid store and read full row objects
+  const grids = Ext.ComponentQuery.query('labordetails-supplementalwagesgrid, grid, gridpanel');
+  let store = null;
+  for (const g of grids) {
+    const s = g.getStore && g.getStore();
+    if (!s || !s.each) continue;
+    if (g.xtype === 'labordetails-supplementalwagesgrid') { store = s; break; }
+    let hit = false; s.each(r => { const d = (r.getData ? r.getData() : r.data) || {}; if ('swLumpSumVal' in d) hit = true; });
+    if (hit) { store = s; break; }
+  }
+  if (!store) return {error: 'supplemental-wages grid store not found'};
+  const existing = [];
+  store.each(r => { const d = (r.getData ? r.getData() : r.data) || {}; if (d.swId === sw) existing.push(d); });
   const byEmp = {};
-  rows.forEach(r => { (byEmp[r.employeeId] = byEmp[r.employeeId] || []).push(r); });
+  existing.forEach(r => { (byEmp[r.employeeId] = byEmp[r.employeeId] || []).push(r); });
 
   const saveUrl = `/resource/labor-details/supplemental-wages/save?operatingDate=${encodeURIComponent(mon)}&weekEndingDate=${encodeURIComponent(sun)}`;
   const post = async (body) => {
@@ -113,7 +121,7 @@ async (P) => {
       await new Promise(s => setTimeout(s, 180));
     }
   }
-  return {existing: rows.length, appended, updated, zeroed, failed};
+  return {existing: existing.length, appended, updated, zeroed, failed};
 }
 """
 
@@ -129,17 +137,26 @@ JS_CLICK_SAVE = r"""
 """
 
 JS_VERIFY = r"""
-() => {
-  const rows = [...document.querySelectorAll('[role="row"]')]
-    .map(r => r.innerText.replace(/\t/g,'|').replace(/\n/g,' ').trim())
-    .filter(t => /Credit Card Tip/i.test(t));
-  let total = 0; const seen = {};
-  for (const t of rows) {
-    const name = (t.split('|')[1] || '').trim().split(' - ')[0];
-    const m = t.split('Credit Card Tip')[1] ? t.split('Credit Card Tip')[1].match(/\d+\.\d{2}/) : null;
-    const amt = m ? parseFloat(m[0]) : 0;
-    if (amt > 0) { total += amt; seen[name] = (seen[name]||0)+1; }
+(P) => {
+  const {sw} = P;
+  if (typeof Ext === 'undefined') return {error: 'Ext not loaded'};
+  const grids = Ext.ComponentQuery.query('labordetails-supplementalwagesgrid, grid, gridpanel');
+  let store = null;
+  for (const g of grids) {
+    const s = g.getStore && g.getStore();
+    if (!s || !s.each) continue;
+    if (g.xtype === 'labordetails-supplementalwagesgrid') { store = s; break; }
+    let hit = false; s.each(r => { const d = (r.getData ? r.getData() : r.data) || {}; if ('swLumpSumVal' in d) hit = true; });
+    if (hit) { store = s; break; }
   }
+  if (!store) return {error: 'verify: grid store not found'};
+  let total = 0; const seen = {};
+  store.each(r => {
+    const d = (r.getData ? r.getData() : r.data) || {};
+    if (d.swId !== sw) return;
+    const amt = parseFloat(d.swLumpSumVal) || 0;
+    if (amt > 0) { total += amt; seen[d.employeeId] = (seen[d.employeeId]||0)+1; }
+  });
   const dups = Object.entries(seen).filter(([k,v]) => v > 1);
   return {paidRows: Object.values(seen).reduce((a,b)=>a+b,0), unique: Object.keys(seen).length,
           total: Math.round(total*100)/100, dups};
@@ -171,14 +188,48 @@ async def click_visible_text(page, text, timeout=4000):
         return False
 
 
+async def robust_login(page):
+    """Full sign-in: do_login presses Enter, but this app also needs the Sign In
+    button clicked and time for the ExtJS app to boot. Poll until Ext is defined."""
+    await D.do_login(page)
+    await page.wait_for_timeout(1500)
+    for attempt in range(8):
+        try:
+            ext_ready = await page.evaluate("() => (typeof Ext !== 'undefined') && !!(window.Ext && Ext.ComponentQuery)")
+        except Exception:
+            ext_ready = False
+        on_login = "login" in (page.url or "").lower()
+        if ext_ready and not on_login:
+            print(f"[browser] app booted (Ext ready) after {attempt} extra waits")
+            return True
+        await D._click_sign_in(page)
+        await page.wait_for_timeout(2500)
+    raise RuntimeError("login did not reach a booted app (Ext never defined)")
+
+
+async def wait_for_sw_grid(page, timeout_ms=20000):
+    """Wait until the supplemental-wages Ext grid store exists (rows may be 0)."""
+    step = 0
+    while step < timeout_ms:
+        ready = await page.evaluate("""() => {
+            if (typeof Ext === 'undefined') return false;
+            const gs = Ext.ComponentQuery.query('labordetails-supplementalwagesgrid');
+            return gs.length > 0 && !!gs[0].getStore;
+        }""")
+        if ready:
+            return True
+        await page.wait_for_timeout(1000)
+        step += 1000
+    return False
+
+
 async def enter_via_browser(mon, sun, targets, expected_total):
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=True)
         ctx = await browser.new_context(viewport={"width": 1680, "height": 950})
         page = await ctx.new_page()
         try:
-            await D.do_login(page)
-            await page.wait_for_timeout(3000)
+            await robust_login(page)
 
             # Open the week in edit mode — this page load opens the server WIP.
             url = f"{NETCHEF}/ncext/next.ct#LaborDetails?weekEndingDate={T.fmt(sun)}&editMode=true"
@@ -191,9 +242,17 @@ async def enter_via_browser(mon, sun, targets, expected_total):
                 print("[browser] dismissed unsaved-data alert (Continue)")
                 await page.wait_for_timeout(3000)
 
+            # Make sure the Supplemental Wages grid is loaded before reading it.
+            await click_visible_text(page, "Supplemental Wages")
+            await page.wait_for_timeout(2500)
+            if not await wait_for_sw_grid(page):
+                raise RuntimeError("supplemental-wages grid never loaded")
+
             # Idempotent upsert loop (runs inside the live edit session).
             res = await page.evaluate(JS_UPSERT, {
                 "mon": T.fmt(mon), "sun": T.fmt(sun), "sw": SW_ID, "targets": targets})
+            if res.get("error"):
+                raise RuntimeError(f"upsert read failed: {res['error']} — ABORTED (no write, no dup risk)")
             print(f"[browser] upsert: existing={res['existing']} appended={res['appended']} "
                   f"updated={res['updated']} zeroed={res['zeroed']} failed={res['failed']}")
             await page.wait_for_timeout(1500)
@@ -211,8 +270,11 @@ async def enter_via_browser(mon, sun, targets, expected_total):
             await page.goto(vurl, wait_until="domcontentloaded", timeout=30_000)
             await page.wait_for_timeout(5000)
             await click_visible_text(page, "Supplemental Wages")
-            await page.wait_for_timeout(3500)
-            v = await page.evaluate(JS_VERIFY)
+            await page.wait_for_timeout(2500)
+            await wait_for_sw_grid(page)
+            v = await page.evaluate(JS_VERIFY, {"sw": SW_ID})
+            if v.get("error"):
+                raise RuntimeError(f"verify read failed: {v['error']}")
             print(f"[verify] paidRows={v['paidRows']} unique={v['unique']} "
                   f"total=${v['total']:.2f} (expected ${expected_total:.2f}) dups={v['dups']}")
 
