@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "store_id": "2065",
+    "report_date": "2026-06-23",
+    "generated": "2026-06-24T11:46:48",
+    "source_pdf": "data/raw/parbrink/2065/2026-06-23/Sales Summary.pdf"
+  },
+  "gross_sales": 3645.07,
+  "net_sales": 3451.92,
+  "order_count": 149,
+  "guest_count": 649,
+  "order_average": 23.17,
+  "labor_cost": 849.39,
+  "labor_hours": 59.15,
+  "labor_percent": 24.61
+}
