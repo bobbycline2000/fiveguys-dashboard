@@ -1,34 +1,34 @@
 {
-  "date": "2026-06-24",
-  "new_count": 19,
+  "date": "2026-06-25",
+  "new_count": 4,
   "notes": [
     {
       "from": "bdavis@estep-co.com",
       "role": "director",
       "role_label": "Director Brad Davis",
       "time": "2026-06-24 1:31 PM ET",
-      "body": "#1910 Muncie, IN: Kenneth Smith, GM Store #1910, no longer employed with Estep & Company effective immediately. Direct all questions to Andrew Campbell (DM) or Brad Davis. Recognition: echoing Mia at St. Matthews (1704) for Value ENTHUSIASM."
+      "body": "#1910 Muncie, IN: Kenneth Smith, GM Store #1910, no longer employed with Estep & Company effective immediately. Direct all questions or items for #1910 to Andrew Campbell (DM) or Brad Davis (Director)."
     },
     {
       "from": "chess@estep-co.com",
       "role": "dm",
       "role_label": "Crystal Hess (DM)",
-      "time": "2026-06-23 6:25 PM ET",
-      "body": "Weekly GM/AGM call CANCELED this week. Hub tickets required for all outside vendor calls for tracking + warranty. Hannah Kaufman is new HR/Payroll team member. Swag contest open for shift leads."
+      "time": "2026-06-23 2:25 PM ET",
+      "body": "Weekly GM/AGM call CANCELED this week — watch for a reschedule. Standing: Mia 1704 recognition (bar for Value Enthusiasm); hub tickets required for all outside-vendor maintenance (tracking + warranty)."
     },
     {
-      "from": "noreply@net-chef.com",
-      "role": "alert",
-      "role_label": "CrunchTime Task Alert",
-      "time": "2026-06-24 6:31 AM ET",
-      "body": "OVERDUE tasks KY-2065: L-Rev (06/22 and 06/23 - two consecutive misses), VO-Rec-BOSS: Alpha Ohio Valley (06/22), VO-Rec-Performance Foodservice (06/23). Also: Weekly Sales WTD $7,352 vs LY $6,051 (+21.5%). FP% 25.3%."
+      "from": "Karen Mersman (PFG)",
+      "role": "accounting",
+      "role_label": "Vendor — PFG",
+      "time": "2026-06-24 12:10 PM ET",
+      "body": "Enter next-day delivery orders before 11:00 AM. Miss the window = no next-day delivery."
     },
     {
-      "from": "announcements@fiveguys.com",
+      "from": "Indeed",
       "role": "alert",
-      "role_label": "Corporate",
-      "time": "2026-06-23 1:03 PM ET",
-      "body": "5th Gear & Brand Updates Call today 10 AM EDT. Patty Press Jun 22: National Fry Day promo (mid-July) + July 4 bread delivery schedule adjustment - confirm 2065 bread order now."
+      "role_label": "Hiring",
+      "time": "2026-06-24 12:23 PM ET",
+      "body": "New AGM application: Kea Sanders + 1 other applied (Louisville). Review and respond so we don't lose them."
     }
   ]
 }
