@@ -1,0 +1,6 @@
+
+[2026-06-25 11:41:26] parbrink_email_pickup store=2065 mode=weekly business_date=?
+  - Could not parse Business Date from email body.
+[2026-06-25 07:45:47] shop-email: 100% shop 20836204 (2026-06-24 Late Dinner) — draft email at /home/runner/work/fiveguys-dashboard/fiveguys-dashboard/data/drafts/secret-shop-email-20836204.md. Send to secretshop@estep-co.com CC chess@estep-co.com. Review before sending.
+[2026-06-25 07:45:47] shop-email: 100% shop 20815978 (2026-06-21 Lunch) — draft email at /home/runner/work/fiveguys-dashboard/fiveguys-dashboard/data/drafts/secret-shop-email-20815978.md. Send to secretshop@estep-co.com CC chess@estep-co.com. Review before sending.
+[2026-06-25 11:45:49] outlook-daily-pull-7am: no fg2065 emails found in lookback window
