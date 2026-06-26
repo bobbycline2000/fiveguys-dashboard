@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef — COGS Flash email (fg2065@estep-co.com)",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-06-22",
+    "week_end": "2026-06-28",
+    "variance_week_start": "2026-06-22",
+    "variance_week_end": "2026-06-28",
+    "month_start": "2026-06-01",
+    "last_month_start": "2026-05-01",
+    "last_month_end": "2026-05-31",
+    "through": "2026-06-26",
+    "pulled": "2026-06-26 15:55 ET",
+    "method": "email_manual_inject"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 26.8,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": -0.7,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": []
+}
