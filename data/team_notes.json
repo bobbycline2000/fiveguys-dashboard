@@ -1,34 +1,41 @@
 {
-  "date": "2026-06-25",
-  "new_count": 4,
+  "date": "2026-06-26",
+  "new_count": 5,
   "notes": [
     {
       "from": "bdavis@estep-co.com",
       "role": "director",
       "role_label": "Director Brad Davis",
-      "time": "2026-06-24 1:31 PM ET",
-      "body": "#1910 Muncie, IN: Kenneth Smith, GM Store #1910, no longer employed with Estep & Company effective immediately. Direct all questions or items for #1910 to Andrew Campbell (DM) or Brad Davis (Director)."
+      "time": "2026-06-26 2:24 PM ET",
+      "body": "Power of One / Ops Manual: the updated Operations Manual is our single source of truth — reference it and train consistency. One Brand, One Team, One Family. Each GM controls standards, operations, hiring, and training in their restaurant."
+    },
+    {
+      "from": "bdavis@estep-co.com",
+      "role": "director",
+      "role_label": "Director Brad Davis",
+      "time": "2026-06-26 1:10 PM ET",
+      "body": "GM Call Recap (Louisville Market): live the Values (Servant Leadership, Positive Attitude, Integrity, Confidence, Enthusiasm) — not wall words. Every guest leaves with a 'Wow' — genuine connections at the register, make line, and pickup."
     },
     {
       "from": "chess@estep-co.com",
       "role": "dm",
       "role_label": "Crystal Hess (DM)",
       "time": "2026-06-23 2:25 PM ET",
-      "body": "Weekly GM/AGM call CANCELED this week — watch for a reschedule. Standing: Mia 1704 recognition (bar for Value Enthusiasm); hub tickets required for all outside-vendor maintenance (tracking + warranty)."
+      "body": "This week's GM/AGM call is CANCELED — watch for a reschedule. Standing: any outside-vendor call (plumbing/electrical/etc.) still needs a hub ticket for tracking + warranty."
     },
     {
-      "from": "Karen Mersman (PFG)",
-      "role": "accounting",
-      "role_label": "Vendor — PFG",
-      "time": "2026-06-24 12:10 PM ET",
-      "body": "Enter next-day delivery orders before 11:00 AM. Miss the window = no next-day delivery."
-    },
-    {
-      "from": "Indeed",
+      "from": "noreply@net-chef.com",
       "role": "alert",
-      "role_label": "Hiring",
-      "time": "2026-06-24 12:23 PM ET",
-      "body": "New AGM application: Kea Sanders + 1 other applied (Louisville). Review and respond so we don't lose them."
+      "role_label": "CrunchTime Task Alert (KY-2065)",
+      "time": "2026-06-26 6:31 AM ET",
+      "body": "2 open tasks: L-Rev (due 06/25) and VO-Inv-Performance Fdsvce (due 06/26). Close both today before they age into the report."
+    },
+    {
+      "from": "FG 2065 / HR",
+      "role": "alert",
+      "role_label": "New Hire",
+      "time": "2026-06-26 6:26 PM ET",
+      "body": "New hire Chloe Hatfield — background check requested. Added to employee directory with phone PENDING. Active count 29 -> 30. Pull phone from BG-check PDF or HR (jmoffatt@estep-co.com)."
     }
   ]
 }
