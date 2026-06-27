@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-06-25",
+  "as_of": "2026-06-27",
   "current_month": "2026-06",
   "current_month_label": "June 2026",
   "store_avg_month": 95.0,
@@ -10,18 +10,18 @@
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": 80.0,
-      "month_n": 1,
-      "ytd_avg": 82.9,
-      "ytd_n": 21
+      "month_avg": 93.3,
+      "month_n": 3,
+      "ytd_avg": 84.3,
+      "ytd_n": 23
     },
     {
       "first": "Vicki",
       "name": "Vicki Lucey",
-      "month_avg": 97.5,
-      "month_n": 2,
-      "ytd_avg": 85.4,
-      "ytd_n": 12
+      "month_avg": 98.3,
+      "month_n": 3,
+      "ytd_avg": 86.5,
+      "ytd_n": 13
     },
     {
       "first": "Kasey",
@@ -132,10 +132,10 @@
     {
       "first": "Maylin",
       "name": "Maylin Hernandez Rodriguez",
-      "month_avg": 80.0,
-      "month_n": 1,
-      "ytd_avg": 80.2,
-      "ytd_n": 19
+      "month_avg": 93.3,
+      "month_n": 3,
+      "ytd_avg": 82.0,
+      "ytd_n": 21
     },
     {
       "first": "Francisco",
@@ -167,13 +167,20 @@
       "date": "2026-06-24",
       "score": 100.0,
       "meal_period": "Late Dinner",
-      "on_shift": []
+      "on_shift": [
+        "Madison Cureton",
+        "Maylin Hernandez Rodriguez"
+      ]
     },
     {
       "date": "2026-06-21",
       "score": 100.0,
       "meal_period": "Lunch",
-      "on_shift": []
+      "on_shift": [
+        "Madison Cureton",
+        "Maylin Hernandez Rodriguez",
+        "Vicki Lucey"
+      ]
     },
     {
       "date": "2026-06-14",
