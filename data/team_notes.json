@@ -1,41 +1,41 @@
 {
-  "date": "2026-06-26",
+  "date": "2026-06-27",
   "new_count": 5,
   "notes": [
     {
-      "from": "bdavis@estep-co.com",
+      "from": "Brad Davis",
       "role": "director",
-      "role_label": "Director Brad Davis",
-      "time": "2026-06-26 2:24 PM ET",
-      "body": "Power of One / Ops Manual: the updated Operations Manual is our single source of truth — reference it and train consistency. One Brand, One Team, One Family. Each GM controls standards, operations, hiring, and training in their restaurant."
+      "role_label": "Director of Operations",
+      "time": "6/26 1:10 PM",
+      "body": "GM Call Recap \u2014 The Power of One: One Brand/One Team/One Family. Ops Manual is the single source of truth. Develop 2 future GMs/yr, min 6 Shift Leaders. Shopper scores: many stores hitting 100% \u2014 win the Halo Effect (Wow at register/make line/pickup)."
     },
     {
-      "from": "bdavis@estep-co.com",
+      "from": "Brad Davis",
       "role": "director",
-      "role_label": "Director Brad Davis",
-      "time": "2026-06-26 1:10 PM ET",
-      "body": "GM Call Recap (Louisville Market): live the Values (Servant Leadership, Positive Attitude, Integrity, Confidence, Enthusiasm) — not wall words. Every guest leaves with a 'Wow' — genuine connections at the register, make line, and pickup."
+      "role_label": "Director of Operations",
+      "time": "6/26 2:24 PM",
+      "body": "Ops Manual: The Power of One \u2014 updated Operations Manual sent; reference and train consistency."
     },
     {
-      "from": "chess@estep-co.com",
+      "from": "Crystal Hess",
       "role": "dm",
-      "role_label": "Crystal Hess (DM)",
-      "time": "2026-06-23 2:25 PM ET",
-      "body": "This week's GM/AGM call is CANCELED — watch for a reschedule. Standing: any outside-vendor call (plumbing/electrical/etc.) still needs a hub ticket for tracking + warranty."
+      "role_label": "District Manager",
+      "time": "6/26 7:43 PM",
+      "body": "KPI Ranking \u2014 60% of score = Secret Shops + Customer complaints (CSPs) + Ticket times. Tighten: handle unhappy guests early, spot-check register (fry/drink/shake offered), coach in shift huddles, greet every guest, grill culture (2 patties guys/1 girls), stay rush-ready."
     },
     {
-      "from": "noreply@net-chef.com",
+      "from": "ComplianceMate",
       "role": "alert",
-      "role_label": "CrunchTime Task Alert (KY-2065)",
-      "time": "2026-06-26 6:31 AM ET",
-      "body": "2 open tasks: L-Rev (due 06/25) and VO-Inv-Performance Fdsvce (due 06/26). Close both today before they age into the report."
+      "role_label": "Sensor Alert",
+      "time": "6/26 8:01-10:31 PM",
+      "body": "9 'Sensor Not Reporting In' alerts overnight. Temp sensor offline \u2014 walk the unit, confirm back online, file a hub ticket if hardware fault."
     },
     {
-      "from": "FG 2065 / HR",
+      "from": "CrunchTime",
       "role": "alert",
-      "role_label": "New Hire",
-      "time": "2026-06-26 6:26 PM ET",
-      "body": "New hire Chloe Hatfield — background check requested. Added to employee directory with phone PENDING. Active count 29 -> 30. Pull phone from BG-check PDF or HR (jmoffatt@estep-co.com)."
+      "role_label": "Task Alert",
+      "time": "6/27 6:31 AM",
+      "body": "KY-2065 open tasks: Labor Review 6/25, Labor Review 6/26, VO-Rec Performance Fdsvce 6/26, VO-Rec BOSS Alpha-Ohio Valley 6/26."
     }
   ]
 }
