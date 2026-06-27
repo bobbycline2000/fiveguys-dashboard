@@ -4,7 +4,7 @@
   "week_ending": "2026-06-28",
   "week_start": "2026-06-22",
   "target_pct": 20.0,
-  "generated_at": "2026-06-26T07:59:41.998501-04:00",
+  "generated_at": "2026-06-27T07:12:16.746858-04:00",
   "week": {
     "fcst_sales": 27136,
     "sched_cost": 6310,
@@ -116,8 +116,8 @@
       "pct": 22.3,
       "byPosition": {
         "2. Crew": 44.5,
-        "Shift Leader-Hourly": 13.0,
-        "General Manager-Salary": 10.0
+        "General Manager-Salary": 10.0,
+        "Shift Leader-Hourly": 13.0
       }
     },
     {
