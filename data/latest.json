@@ -2,7 +2,7 @@
   "meta": {
     "report_date": "2026-06-26",
     "report_display": "Friday, June 26, 2026",
-    "generated": "6/27/2026 at 6:59 AM"
+    "generated": "6/27/2026 at 7:13 AM"
   },
   "sales": {
     "net": 5430.0,
@@ -22,7 +22,7 @@
     "cost_week": null,
     "pct": 23.0,
     "pct_week": 22.91,
-    "actual_hours": 45.19,
+    "actual_hours": 17.71,
     "actual_hours_week": 0.0,
     "sched_hours": 121.0,
     "sched_hours_week": 480.0,
@@ -87,7 +87,7 @@
       "week": "$47"
     },
     "Actual Hours": {
-      "day": "45.19",
+      "day": "17.71",
       "week": "0.00"
     },
     "Scheduled Hours": {
