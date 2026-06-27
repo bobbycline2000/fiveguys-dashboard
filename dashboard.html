@@ -832,7 +832,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="page-title">Good morning, Bobby.</div>
         <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>11:40 AM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>11:42 AM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -910,7 +910,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="ctrl-stat-lbl">Actual Hrs</div>
           </div>
           <div>
-            <div class="ctrl-stat-val">—</div>
+            <div class="ctrl-stat-val">108.0</div>
             <div class="ctrl-stat-lbl">Sched Hrs</div>
           </div>
           <div>
@@ -1213,20 +1213,104 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <!-- AM Shift -->
         <div id="shift-am">
           <table class="sched-table">
-            <thead><tr><th>Employee</th><th>Sched Hrs</th><th>Actual Hrs</th><th>Variance</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Sched Hrs</th>
+                <th>Actual Hrs</th>
+                <th>Variance</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td colspan="4" style="text-align:center;color:#aaa;padding:1.2rem;">Schedule not yet available for today</td></tr>
+              <tr>
+                <td><div class="emp-name">Angela A.</div><div class="emp-role">Crew</div></td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Kaisha B.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Ryan V.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Serina G.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Mykenize M.</div><div class="emp-role">Crew</div></td>
+                <td>5.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Robert C.</div><div class="emp-role">GM</div></td>
+                <td>10.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Madelynn S.</div><div class="emp-role">Shift Lead</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
             </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td>AM Total</td>
+                <td>54.0 hrs</td>
+                <td class="pending">Pending</td>
+                <td class="pending">—</td>
+              </tr>
+            </tfoot>
           </table>
         </div>
 
         <!-- PM Shift -->
         <div id="shift-pm" style="display:none">
           <table class="sched-table">
-            <thead><tr><th>Employee</th><th>Sched Hrs</th><th>Actual Hrs</th><th>Variance</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Sched Hrs</th>
+                <th>Actual Hrs</th>
+                <th>Variance</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td colspan="4" style="text-align:center;color:#aaa;padding:1.2rem;">Schedule not yet available for today</td></tr>
+              <tr>
+                <td><div class="emp-name">Francisco M.</div><div class="emp-role">Crew</div></td>
+                <td>11.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Anthony P.</div><div class="emp-role">Crew</div></td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Emanuela K.</div><div class="emp-role">Crew</div></td>
+                <td>6.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Jeremiah M.</div><div class="emp-role">Crew</div></td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Richard G.</div><div class="emp-role">Crew</div></td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Rusul K.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Christopher C.</div><div class="emp-role">Shift Lead</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
             </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td>PM Total</td>
+                <td>54.0 hrs</td>
+                <td class="pending">Pending close</td>
+                <td class="pending">—</td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -1309,7 +1393,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>11:40 AM</span> &nbsp;&middot;&nbsp; June 27 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>11:42 AM</span> &nbsp;&middot;&nbsp; June 27 2026</span>
   </div>
 
 </div><!-- /main -->
