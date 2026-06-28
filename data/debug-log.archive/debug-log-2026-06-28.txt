@@ -1,6 +1,4 @@
-[2026-06-27 11:13:08] outlook-daily-pull-7am: no fg2065 emails found in lookback window
 
-[2026-06-27 11:13:13] parbrink_email_pickup store=2065 mode=weekly business_date=?
+[2026-06-28 11:09:31] parbrink_email_pickup store=2065 mode=weekly business_date=?
   - Could not parse Business Date from email body.
-[2026-06-27 12:06] Daily brief (outlook-daily-pull-7am scheduled run) SENT to fg2065 at 12:04 PM ET (HTTP 202). NOTE: a watchdog-rescue run already sent a brief at 11:52 AM (Chloe PHONE PENDING off stale data); the scheduled run did not see its draft at the 11:40 check (race), rebuilt off verified data, and re-sent corrected (Chloe phone (502) 382-5315 filled). fg2065 got 2 emails today; the 12:04 one is authoritative. No third send.
-[2026-06-27 12:06] xlsx fill (Step 8.6) SKIPPED for 6/26 — ct_sales_summary_history.json does not yet contain 2026-06-26 (CT history not refreshed for yesterday). Not failing the brief per skill gate. Re-run fill-daily-report once history has 6/26.
+[2026-06-28 11:13:15] outlook-daily-pull-7am: no fg2065 emails found in lookback window

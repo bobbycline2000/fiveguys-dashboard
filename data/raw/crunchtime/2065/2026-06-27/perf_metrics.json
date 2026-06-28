@@ -2,7 +2,7 @@
   "meta": {
     "report_date": "2026-06-27",
     "report_display": "Saturday, June 27, 2026",
-    "generated": "6/28/2026 at 7:10 AM"
+    "generated": "6/28/2026 at 7:23 AM"
   },
   "sales": {
     "net": 5036.0,
@@ -20,9 +20,9 @@
   "labor": {
     "cost": null,
     "cost_week": null,
-    "pct": 21.33,
+    "pct": 21.54,
     "pct_week": 22.44,
-    "actual_hours": 7.85,
+    "actual_hours": 21.23,
     "actual_hours_week": 0.0,
     "sched_hours": 108.0,
     "sched_hours_week": 588.0,
@@ -67,7 +67,7 @@
       "week": ""
     },
     "Labor % of Net Sales": {
-      "day": "21.33%",
+      "day": "21.54%",
       "week": "22.44%"
     },
     "Total Cash Over/Short": {
@@ -87,7 +87,7 @@
       "week": "$48"
     },
     "Actual Hours": {
-      "day": "7.85",
+      "day": "21.23",
       "week": "0.00"
     },
     "Scheduled Hours": {
