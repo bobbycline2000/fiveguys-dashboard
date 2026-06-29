@@ -59,20 +59,25 @@ JS_UPSERT = r"""
 async (P) => {
   const {mon, sun, sw, targets} = P;
   const H = {"Content-Type":"application/json","X-Requested-With":"XMLHttpRequest","Accept":"application/json"};
-  if (typeof Ext === 'undefined') return {error: 'Ext not loaded'};
-  // locate the supplemental-wages grid store and read full row objects
-  const grids = Ext.ComponentQuery.query('labordetails-supplementalwagesgrid, grid, gridpanel');
-  let store = null;
-  for (const g of grids) {
-    const s = g.getStore && g.getStore();
-    if (!s || !s.each) continue;
-    if (g.xtype === 'labordetails-supplementalwagesgrid') { store = s; break; }
-    let hit = false; s.each(r => { const d = (r.getData ? r.getData() : r.data) || {}; if ('swLumpSumVal' in d) hit = true; });
-    if (hit) { store = s; break; }
-  }
-  if (!store) return {error: 'supplemental-wages grid store not found'};
-  const existing = [];
-  store.each(r => { const d = (r.getData ? r.getData() : r.data) || {}; if (d.swId === sw) existing.push(d); });
+  // READ existing rows from the /supplemental-wages ENDPOINT, not the Ext grid
+  // store. ROOT CAUSE (2026-06-29): the Ext store getData() row shape 500s when
+  // re-POSTed to /save (every in-place UPDATE failed → wrong amounts left in
+  // place). The endpoint's server-shaped rows (contentMap.gridList) re-post
+  // cleanly with {"success":true}. Append (id:-1) worked either way; only the
+  // UPDATE path was broken. We must be in an editMode session (WIP open) for the
+  // subsequent /save to persist — routing already guarantees that.
+  const listBody = {pagingInfo:{page:1,start:0,limit:500},
+    sortInfo:{sortList:[{property:"employeeId",direction:"ASC"}]},
+    extraCriteriaMap:{extraParams:{labelModules:["labor_actuals.labor_actuals","labor_actuals.labor_details","report.labor_detail"],weekEndingDate:[sun]}}};
+  let existing = [];
+  try {
+    const lr = await fetch('/resource/labor-details/supplemental-wages',
+      {method:"POST",credentials:"include",headers:H,body:JSON.stringify(listBody)});
+    const lt = await lr.text();
+    if (lr.status !== 200) return {error: 'list endpoint status ' + lr.status};
+    const lj = JSON.parse(lt);
+    existing = ((lj.contentMap && lj.contentMap.gridList) || []).filter(r => r.swId === sw);
+  } catch (e) { return {error: 'list fetch failed: ' + e}; }
   const byEmp = {};
   existing.forEach(r => { (byEmp[r.employeeId] = byEmp[r.employeeId] || []).push(r); });
 
