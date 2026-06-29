@@ -253,9 +253,23 @@ if sched:
     elif _full_schedule:
         # No data for today — treat as missing so we don't show yesterday's wrong crew.
         sched = None
+    elif sched.get("shifts") and sched.get("labor_date") == _today_iso:
+        # Newer 'shifts'-only Par Brink format: a top-level `shifts` list for a single
+        # `labor_date`, with each shift carrying in_text/out_text. Normalize it into the
+        # `today` entry the wire code expects (start/end keys + scheduled_hours).
+        _norm = []
+        for _s in sched["shifts"]:
+            _start = _s.get("start") or _s.get("in_text")
+            _end   = _s.get("end")   or _s.get("out_text")
+            if not (_start and _end):
+                continue
+            _norm.append({**_s, "start": _start, "end": _end})
+        sched = {**sched, "today": {
+            "scheduled_hours": sched.get("total_hours", 0.0),
+            "shifts": _norm,
+        }}
     elif "today" not in sched:
-        # Schedule file has neither a date-keyed map nor a 'today' entry (e.g. the
-        # newer 'shifts'-only Par Brink format) — unusable here, treat as missing.
+        # Schedule file has neither a date-keyed map nor a 'today' entry — unusable here.
         sched = None
 time_str = now.strftime("%#I:%M %p") if sys.platform == "win32" else now.strftime("%-I:%M %p")
 date_display = now.strftime("%B %d %Y").replace(" 0", " ")
