@@ -1,7 +1,85 @@
 {
   "meta": {
-    "generated": "2026-06-22T15:05:32",
-    "alerts_count": 0
+    "generated": "2026-06-29T13:52:06",
+    "alerts_count": 1
   },
-  "alerts": []
+  "alerts": [
+    {
+      "week_start_mon": "2026-06-29",
+      "holiday_name": "Holiday",
+      "skipped_delivery_days": [],
+      "skipped_forecast_sales": 0,
+      "delivery_day_recommendations": [
+        {
+          "date": "2026-06-29",
+          "weekday": "MON",
+          "current_hb": 9,
+          "current_hd": 1,
+          "forecast_own": 4229,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 4229,
+          "buffer_applied": 5000,
+          "window_sales": 9229,
+          "recommended_hb": 10,
+          "recommended_hd": 1,
+          "delta_hb": 1,
+          "delta_hd": 0,
+          "is_holiday_cell": true,
+          "is_locked": true
+        },
+        {
+          "date": "2026-07-01",
+          "weekday": "WED",
+          "current_hb": 10,
+          "current_hd": 1,
+          "forecast_own": 4008,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 4008,
+          "buffer_applied": 5000,
+          "window_sales": 9008,
+          "recommended_hb": 10,
+          "recommended_hd": 1,
+          "delta_hb": 0,
+          "delta_hd": 0,
+          "is_holiday_cell": true,
+          "is_locked": false
+        },
+        {
+          "date": "2026-07-03",
+          "weekday": "FRI",
+          "current_hb": 7,
+          "current_hd": 0,
+          "forecast_own": 5451,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 5451,
+          "buffer_applied": 5000,
+          "window_sales": 10451,
+          "recommended_hb": 11,
+          "recommended_hd": 1,
+          "delta_hb": 4,
+          "delta_hd": 1,
+          "is_holiday_cell": true,
+          "is_locked": false
+        },
+        {
+          "date": "2026-07-04",
+          "weekday": "SAT",
+          "current_hb": 14,
+          "current_hd": 1,
+          "forecast_own": 5365,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 5365,
+          "buffer_applied": 3000,
+          "window_sales": 8365,
+          "recommended_hb": 9,
+          "recommended_hd": 1,
+          "delta_hb": -5,
+          "delta_hd": 0,
+          "is_holiday_cell": false,
+          "is_locked": true
+        }
+      ],
+      "headline": "Holiday week (2026-06-29) \u2014 bumps: MON 2026-06-29 \u2192 10 HB / 1 HD  (\u0394 +1 HB); FRI 2026-07-03 \u2192 11 HB / 1 HD  (\u0394 +4 HB)"
+    }
+  ]
 }
