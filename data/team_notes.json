@@ -1,41 +1,10 @@
 {
-  "date": "2026-06-27",
-  "new_count": 5,
+  "date": "2026-06-29",
+  "new_count": 0,
   "notes": [
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "6/26 1:10 PM",
-      "body": "GM Call Recap \u2014 The Power of One: One Brand/One Team/One Family. Ops Manual is the single source of truth. Develop 2 future GMs/yr, min 6 Shift Leaders. Shopper scores: many stores hitting 100% \u2014 win the Halo Effect (Wow at register/make line/pickup)."
-    },
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "6/26 2:24 PM",
-      "body": "Ops Manual: The Power of One \u2014 updated Operations Manual sent; reference and train consistency."
-    },
-    {
-      "from": "Crystal Hess",
-      "role": "dm",
-      "role_label": "District Manager",
-      "time": "6/26 7:43 PM",
-      "body": "KPI Ranking \u2014 60% of score = Secret Shops + Customer complaints (CSPs) + Ticket times. Tighten: handle unhappy guests early, spot-check register (fry/drink/shake offered), coach in shift huddles, greet every guest, grill culture (2 patties guys/1 girls), stay rush-ready."
-    },
-    {
-      "from": "ComplianceMate",
-      "role": "alert",
-      "role_label": "Sensor Alert",
-      "time": "6/26 8:01-10:31 PM",
-      "body": "9 'Sensor Not Reporting In' alerts overnight. Temp sensor offline \u2014 walk the unit, confirm back online, file a hub ticket if hardware fault."
-    },
-    {
-      "from": "CrunchTime",
-      "role": "alert",
-      "role_label": "Task Alert",
-      "time": "6/27 6:31 AM",
-      "body": "KY-2065 open tasks: Labor Review 6/25, Labor Review 6/26, VO-Rec Performance Fdsvce 6/26, VO-Rec BOSS Alpha-Ohio Valley 6/26."
-    }
+    { "from": "Brad Davis", "role": "director", "role_label": "Director of Operations", "time": "6/26", "body": "The Power of One — One Brand, One Team, One Family. The Operations Manual is the single source of truth. Develop two future GMs/year; keep a minimum of six Shift Leaders. Shopper scores: 100% is attainable — Halo Effect, Suggestive Selling, grill culture. June budget at bottom of 2065 sheet (DoorDash + UberEats baked in). Large soda now 30 cents more than Regular." },
+    { "from": "Crystal Hess", "role": "dm", "role_label": "District Manager", "time": "6/26", "body": "KPI Ranking: 60% of score = Secret Shop scores + Customer complaints (CSPs) + Ticket times. Coach early to prevent complaints, spot-check register (fry/drink/shake every time), use huddles to coach, greet every guest, correct grill culture (2 for guys / 1 for girls). File hub tickets for any outside vendor work. GM/AGM call canceled this week. Welcome Hannah Kaufman (HR/Payroll)." },
+    { "from": "CrunchTime", "role": "alert", "role_label": "Period-close tasks", "time": "6/29", "body": "KY-2065 open tasks: Labor Not Posted (6/28), Inv-Final for Post (6/28), L-Rev (6/27). Post labor + finalize inventory to close the period clean." },
+    { "from": "PFG", "role": "alert", "role_label": "Vendor delivery", "time": "6/30", "body": "PFG delivery Tue 6/30 — 91 cases, confirmed with exceptions: Tomato Red Large (21606) market-directed sub JN744; K7468 HACCP cannot be returned. Receiving manager: verify the tomato sub on the truck." }
   ]
 }
