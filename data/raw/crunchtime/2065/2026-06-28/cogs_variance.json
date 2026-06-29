@@ -1,25 +1,107 @@
 {
   "meta": {
-    "source": "CrunchTime Net Chef — COGS Flash email (fg2065@estep-co.com)",
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
     "category": "Food",
     "store": "2065",
     "week_start": "2026-06-22",
     "week_end": "2026-06-28",
-    "variance_week_start": "2026-06-22",
-    "variance_week_end": "2026-06-28",
+    "variance_week_start": "2026-06-15",
+    "variance_week_end": "2026-06-21",
     "month_start": "2026-06-01",
     "last_month_start": "2026-05-01",
     "last_month_end": "2026-05-31",
-    "through": "2026-06-26",
-    "pulled": "2026-06-26 15:55 ET",
-    "method": "email_manual_inject"
+    "through": "2026-06-28",
+    "pulled": "2026-06-29 09:11 ET",
+    "method": "api+playwright"
   },
   "cogs_goal_pct": 27.5,
-  "cogs_pct_week": 26.8,
+  "cogs_pct_week": null,
   "cogs_pct_month": null,
   "cogs_pct_last_month": null,
-  "variance_to_goal_week": -0.7,
+  "variance_to_goal_week": null,
   "variance_to_goal_month": null,
   "variance_to_goal_last_mo": null,
-  "items": []
+  "items": [
+    {
+      "name": "Topping, Oreo Cream",
+      "actual": 75.0,
+      "theoretical": 11.0,
+      "over_dollars": 64.0,
+      "variance_pct": -584.0,
+      "rank": 1
+    },
+    {
+      "name": "Lettuce",
+      "actual": 166.0,
+      "theoretical": 118.0,
+      "over_dollars": 48.0,
+      "variance_pct": -40.0,
+      "rank": 2
+    },
+    {
+      "name": "Topping, Fudge Bittersweet / NEW Chocolate Fudge Sauce",
+      "actual": 57.0,
+      "theoretical": 20.0,
+      "over_dollars": 37.0,
+      "variance_pct": -186.0,
+      "rank": 3
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 1028.0,
+      "theoretical": 992.0,
+      "over_dollars": 36.0,
+      "variance_pct": -4.0,
+      "rank": 4
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 1042.0,
+      "theoretical": 1018.0,
+      "over_dollars": 24.0,
+      "variance_pct": -2.0,
+      "rank": 5
+    },
+    {
+      "name": "Cheese",
+      "actual": 358.0,
+      "theoretical": 335.0,
+      "over_dollars": 23.0,
+      "variance_pct": -7.0,
+      "rank": 6
+    },
+    {
+      "name": "Mushroom Pcs",
+      "actual": 67.0,
+      "theoretical": 100.0,
+      "over_dollars": -33.0,
+      "variance_pct": 33.0,
+      "rank": 7
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 235.0,
+      "theoretical": 268.0,
+      "over_dollars": -33.0,
+      "variance_pct": 12.0,
+      "rank": 8
+    },
+    {
+      "name": "Peanut Butter inv",
+      "actual": -122.0,
+      "theoretical": 9.0,
+      "over_dollars": -131.0,
+      "variance_pct": null,
+      "rank": 9
+    },
+    {
+      "name": "Cajun Season",
+      "actual": -70.0,
+      "theoretical": 93.0,
+      "over_dollars": -163.0,
+      "variance_pct": 176.0,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
 }
