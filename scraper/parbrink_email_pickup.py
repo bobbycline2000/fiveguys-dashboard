@@ -184,15 +184,53 @@ def extract_plain_body(message: dict) -> str:
 
 
 def parse_business_date(body: str) -> date | None:
-    m = re.search(r"Business Date:\s*([\d/\-]+)", body)
-    if not m:
-        return None
-    raw = m.group(1).strip()
-    for fmt in ("%m/%d/%Y", "%Y-%m-%d", "%m-%d-%Y", "%m/%d/%y"):
-        try:
-            return datetime.strptime(raw, fmt).date()
-        except ValueError:
+    """Extract the business date from a Par Brink email body.
+
+    Handles multiple label variants seen in daily vs weekly emails:
+      - "Business Date: 06/22/2026"       (daily, original format)
+      - "Business Date  06/22/2026"        (no colon, extra spaces)
+      - "Business Date:\n06/22/2026"       (value on next line)
+      - "Week Ending: 06/22/2026"          (weekly label variant)
+      - "Week End Date: June 22, 2026"     (written-out month)
+      - "Business Date: June 22, 2026"     (written-out month, daily label)
+    """
+    # Patterns to try in order of specificity
+    # Group 1 captures the raw date string (digits/slashes/hyphens or written month)
+    PATTERNS = [
+        # Original: "Business Date: 06/22/2026" — colon, same line, numeric
+        r"Business Date:\s*([\d/\-]+)",
+        # No-colon or extra-space variant: "Business Date  06/22/2026"
+        r"Business Date\s*:?\s+([\d/\-]+)",
+        # Value on next line: "Business Date:\n06/22/2026"
+        r"Business Date\s*:\s*\n\s*([\d/\-]+)",
+        # Weekly label "Week Ending" / "Week End Date" — numeric
+        r"Week\s+End(?:ing)?\s+(?:Date\s*)?:?\s*([\d/\-]+)",
+        # Written-out month variants: "June 22, 2026" or "Jun 22 2026"
+        r"Business Date\s*:?\s*([A-Za-z]+ \d{1,2},?\s+\d{4})",
+        r"Week\s+End(?:ing)?\s+(?:Date\s*)?:?\s*([A-Za-z]+ \d{1,2},?\s+\d{4})",
+    ]
+
+    NUMERIC_FMTS = ("%m/%d/%Y", "%Y-%m-%d", "%m-%d-%Y", "%m/%d/%y", "%m-%d-%y")
+    WRITTEN_FMTS = ("%B %d, %Y", "%B %d %Y", "%b %d, %Y", "%b %d %Y")
+
+    for pattern in PATTERNS:
+        m = re.search(pattern, body, re.IGNORECASE)
+        if not m:
             continue
+        raw = m.group(1).strip().rstrip(",")
+        # Try numeric formats first
+        for fmt in NUMERIC_FMTS:
+            try:
+                return datetime.strptime(raw, fmt).date()
+            except ValueError:
+                continue
+        # Try written-out month formats
+        for fmt in WRITTEN_FMTS:
+            try:
+                return datetime.strptime(raw, fmt).date()
+            except ValueError:
+                continue
+
     return None
 
 

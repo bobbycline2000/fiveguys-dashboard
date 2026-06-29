@@ -642,8 +642,15 @@ KPI_SUB_OPEN = r'<div class="kpi-sub[^"]*"[^>]*>'
 
 # Null-safe: CT may return None for these when yesterday's data isn't posted yet.
 # Prefer Par Brink rollups for net_week; "—" for LY/Forecast/per-guest when CT is stale or absent.
+# Sanity-check: CT sometimes returns cumulative/garbage net_week (e.g., Sunday 06-28 returned
+# $127,634 instead of ~$32K WTD). If CT net_week > 5x today's Par Brink net, treat as garbage.
 _ct_net_week = latest['sales'].get('net_week')
-if _ct_net_week is not None:
+_ct_net_week_sane = (
+    _ct_net_week is not None
+    and (_pb_net == 0 or _ct_net_week <= _pb_net * 14)  # max ~2 weeks of sales
+    and _ct_net_week < 100_000  # hard cap: no single-store WTD should exceed $100K
+)
+if _ct_net_week_sane:
     sales_net_week = f"${_ct_net_week:,.0f}"
 elif rollups and rollups.get("week", {}).get("net_sales"):
     sales_net_week = f"${rollups['week']['net_sales']:,.0f}"
