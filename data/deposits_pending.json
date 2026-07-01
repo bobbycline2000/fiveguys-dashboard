@@ -1,13 +1,18 @@
 {
-  "pending": [
+  "pending": [],
+  "processed": [
     {
       "id": "b0da1449-23c2-47df-9075-03dfd63bcca4",
       "business_date": "2026-05-29",
       "amount": 744.42,
       "memo": "",
       "mgr": "vll",
-      "requested_at": "2026-06-01T02:48:51.154Z"
+      "requested_at": "2026-06-01T02:48:51.154Z",
+      "processed_at": "2026-07-01T15:52:00.000Z",
+      "sales_id": null,
+      "pos_id": null,
+      "result": "stale",
+      "error": "business_date 2026-05-29 is outside the 22-day ct_sales_summary rolling window; CT EOD sync should have handled this deposit normally via POS. Cleared 2026-07-01."
     }
-  ],
-  "processed": []
+  ]
 }
