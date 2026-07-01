@@ -54,10 +54,20 @@ TOKEN_FILE = SECRETS_DIR / "scg_refresh_token.json"
 CONFIG_DIR = REPO_ROOT / "config"
 DATA_ROOT = REPO_ROOT / "data" / "raw" / "parbrink"
 
-DAILY_SUBJECT = "Promethus Reports"
-WEEKLY_SUBJECT = "Prometheus Weekly reports"
+DAILY_SUBJECT = "dixie sales summary"
+WEEKLY_SUBJECT = "dixie sales summary"   # as of ~2026-06-02, no separate weekly email
 SENDER = "noreply@parpos.com"
 
+# Legacy subject lines — kept as fallback search terms for backfill / format rollback.
+LEGACY_SUBJECTS = [
+    "Promethus Reports",           # original daily (typo intentional on Brink side)
+    "Prometheus Weekly reports",   # original weekly
+]
+
+# Required reports for validation.  Brink's "dixie sales summary" format ships
+# a variable attachment set depending on store config, so these are *soft* —
+# we warn on missing but still write whatever PDFs arrived (no hard exit-2 for
+# missing reports; only true errors like wrong location are hard failures).
 DAILY_REPORTS = {
     "Audit Business Date",
     "Discount Summary",
@@ -137,29 +147,50 @@ def get_credentials(setup_mode: bool = False) -> Credentials:
 def find_latest_email(service, subject: str, target_date: date | None) -> dict | None:
     """Returns the newest matching message metadata, or None.
 
-    Searches across ALL matching emails (read or unread). If target_date is
-    given, returns the newest message whose Business Date matches; otherwise
-    falls back to the absolute most-recent message.
-    """
-    base_query = f'from:{SENDER} subject:"{subject}"'
+    Searches the primary subject first, then legacy subject lines as fallback.
+    If target_date is given, returns the newest message whose Business Date
+    matches; otherwise falls back to the absolute most-recent message.
 
-    try:
-        resp = service.users().messages().list(userId="me", q=base_query, maxResults=15).execute()
-    except HttpError as e:
-        raise SystemExit(f"Gmail list failed: {e}")
-    messages = resp.get("messages", [])
-    if not messages:
+    As of ~2026-06-02, Par Brink changed their email subject from
+    "Promethus Reports" / "Prometheus Weekly reports" to "dixie sales summary".
+    Both daily and weekly modes now use the same subject; mode=weekly identifies
+    the right email by matching the week-ending Sunday business date.
+    """
+    # Build candidate subject list: primary first, then legacy fallbacks.
+    subjects_to_try = [subject] + [s for s in LEGACY_SUBJECTS if s != subject]
+
+    all_messages: list[dict] = []
+    for subj in subjects_to_try:
+        base_query = f'from:{SENDER} subject:"{subj}"'
+        try:
+            resp = service.users().messages().list(
+                userId="me", q=base_query, maxResults=20
+            ).execute()
+        except HttpError as e:
+            raise SystemExit(f"Gmail list failed: {e}")
+        msgs = resp.get("messages", [])
+        if msgs:
+            all_messages.extend(msgs)
+            break  # found messages with this subject; don't also search legacy
+
+    if not all_messages:
         return None
 
     if target_date is not None:
-        for m in messages:
-            full = service.users().messages().get(userId="me", id=m["id"], format="full").execute()
+        for m in all_messages:
+            full = service.users().messages().get(
+                userId="me", id=m["id"], format="full"
+            ).execute()
             body = extract_plain_body(full)
             biz = parse_business_date(body)
             if biz == target_date:
                 return full
+        # No exact date match — fall through to return most recent
+        return None
 
-    return service.users().messages().get(userId="me", id=messages[0]["id"], format="full").execute()
+    return service.users().messages().get(
+        userId="me", id=all_messages[0]["id"], format="full"
+    ).execute()
 
 
 def extract_plain_body(message: dict) -> str:
@@ -186,31 +217,39 @@ def extract_plain_body(message: dict) -> str:
 def parse_business_date(body: str) -> date | None:
     """Extract the business date from a Par Brink email body.
 
-    Handles multiple label variants seen in daily vs weekly emails:
-      - "Business Date: 06/22/2026"       (daily, original format)
-      - "Business Date  06/22/2026"        (no colon, extra spaces)
-      - "Business Date:\n06/22/2026"       (value on next line)
-      - "Week Ending: 06/22/2026"          (weekly label variant)
-      - "Week End Date: June 22, 2026"     (written-out month)
-      - "Business Date: June 22, 2026"     (written-out month, daily label)
+    Handles multiple label variants and date formats:
+      "Business Date: 6/30/2026"    (new "dixie" format — single-digit month/day, NO leading zero)
+      "Business Date: 06/22/2026"   (original zero-padded format)
+      "Business Date  06/22/2026"   (no colon, extra spaces)
+      "Business Date:\n06/22/2026"  (value on next line)
+      "Week Ending: 06/22/2026"     (weekly label variant)
+      "Week End Date: June 22, 2026" (written-out month)
+      "Business Date: June 22, 2026" (written-out month, daily label)
+
+    IMPORTANT: As of ~2026-06-02 Brink sends "Business Date: 6/30/2026" with NO
+    leading zero on month or day.  strptime's %m/%d/%Y is lenient about this on
+    CPython (it accepts "6/30/2026"), but the pre-pad step below handles any
+    platform that is strict, and also normalises hyphen-separated variants.
     """
-    # Patterns to try in order of specificity
-    # Group 1 captures the raw date string (digits/slashes/hyphens or written month)
+    # Patterns to try in order of specificity.
+    # Group 1 captures the raw date string (digits/slashes/hyphens or written month).
     PATTERNS = [
-        # Original: "Business Date: 06/22/2026" — colon, same line, numeric
+        # "dixie" format (current): "Business Date: 6/30/2026" — single-digit month/day
+        r"Business Date:\s*(\d{1,2}/\d{1,2}/\d{4})",
+        # Original: "Business Date: 06/22/2026" — zero-padded, same line
         r"Business Date:\s*([\d/\-]+)",
         # No-colon or extra-space variant: "Business Date  06/22/2026"
         r"Business Date\s*:?\s+([\d/\-]+)",
         # Value on next line: "Business Date:\n06/22/2026"
         r"Business Date\s*:\s*\n\s*([\d/\-]+)",
         # Weekly label "Week Ending" / "Week End Date" — numeric
+        r"Week\s+End(?:ing)?\s+(?:Date\s*)?:?\s*(\d{1,2}/\d{1,2}/\d{4})",
         r"Week\s+End(?:ing)?\s+(?:Date\s*)?:?\s*([\d/\-]+)",
         # Written-out month variants: "June 22, 2026" or "Jun 22 2026"
         r"Business Date\s*:?\s*([A-Za-z]+ \d{1,2},?\s+\d{4})",
         r"Week\s+End(?:ing)?\s+(?:Date\s*)?:?\s*([A-Za-z]+ \d{1,2},?\s+\d{4})",
     ]
 
-    NUMERIC_FMTS = ("%m/%d/%Y", "%Y-%m-%d", "%m-%d-%Y", "%m/%d/%y", "%m-%d-%y")
     WRITTEN_FMTS = ("%B %d, %Y", "%B %d %Y", "%b %d, %Y", "%b %d %Y")
 
     for pattern in PATTERNS:
@@ -218,13 +257,30 @@ def parse_business_date(body: str) -> date | None:
         if not m:
             continue
         raw = m.group(1).strip().rstrip(",")
-        # Try numeric formats first
-        for fmt in NUMERIC_FMTS:
+
+        # ── Numeric formats ───────────────────────────────────────────────────
+        # Normalise separator to "/" so we only need one set of formats.
+        normalised = raw.replace("-", "/")
+        parts = normalised.split("/")
+        if len(parts) == 3:
+            # Zero-pad month and day so strptime %m/%d/%Y always succeeds,
+            # even on platforms that are strict about leading zeros.
             try:
-                return datetime.strptime(raw, fmt).date()
-            except ValueError:
-                continue
-        # Try written-out month formats
+                if len(parts[2]) == 4:
+                    # M/D/YYYY or MM/DD/YYYY → zero-pad to MM/DD/YYYY
+                    padded = f"{int(parts[0]):02d}/{int(parts[1]):02d}/{parts[2]}"
+                else:
+                    # YYYY/MM/DD → zero-pad to YYYY/MM/DD
+                    padded = f"{parts[0]}/{int(parts[1]):02d}/{int(parts[2]):02d}"
+                for fmt in ("%m/%d/%Y", "%Y/%m/%d"):
+                    try:
+                        return datetime.strptime(padded, fmt).date()
+                    except ValueError:
+                        continue
+            except (ValueError, IndexError):
+                pass
+
+        # ── Written-out month formats ─────────────────────────────────────────
         for fmt in WRITTEN_FMTS:
             try:
                 return datetime.strptime(raw, fmt).date()
@@ -235,10 +291,20 @@ def parse_business_date(body: str) -> date | None:
 
 
 def parse_locations(body: str) -> list[str]:
-    m = re.search(r"Locations?:\s*(.+)", body)
+    """Extract the store location(s) from the email body.
+
+    Handles both singular "Location:" (new "dixie" format) and plural
+    "Locations:" (original format), and multi-line location values where
+    the value runs onto the next line.
+    """
+    # Match "Location: KY-2065 Dixie Highway" or "Locations: ..."
+    # Also handles value on next line: "Location:\nKY-2065 ..."
+    m = re.search(r"Locations?\s*:\s*(.+?)(?:\n\n|\Z)", body, re.DOTALL | re.IGNORECASE)
     if not m:
         return []
     raw = m.group(1).strip()
+    # Flatten newlines within the location block (multi-line location values)
+    raw = re.sub(r"\s*\n\s*", " ", raw).strip()
     return [x.strip() for x in re.split(r"[,;]", raw) if x.strip()]
 
 
@@ -287,25 +353,25 @@ def validate(
 
     if not attachments:
         errors.append("No PDF attachments found.")
+        return errors  # no point checking report names without any attachments
 
+    # As of ~2026-06-02 "dixie sales summary" format sends a variable attachment
+    # set (often just Sales Summary.pdf) rather than the full legacy report bundle.
+    # Missing reports are now WARNINGS logged to debug-log but are NOT hard errors
+    # that block writing PDFs.  Only a complete absence of attachments is hard.
     expected = DAILY_REPORTS if mode == "daily" else WEEKLY_REPORTS
     found_names = {report_name_from_filename(fn) for fn, _ in attachments}
-    matched = 0
+    missing = []
     for exp in expected:
-        for got in found_names:
-            if exp.lower().replace(" ", "") in got.lower().replace(" ", ""):
-                matched += 1
-                break
-    if matched < len(expected):
-        missing = []
-        for exp in expected:
-            hit = any(
-                exp.lower().replace(" ", "") in got.lower().replace(" ", "")
-                for got in found_names
-            )
-            if not hit:
-                missing.append(exp)
-        errors.append(f"Missing reports ({len(missing)}/{len(expected)}): {missing}")
+        hit = any(
+            exp.lower().replace(" ", "") in got.lower().replace(" ", "")
+            for got in found_names
+        )
+        if not hit:
+            missing.append(exp)
+    if missing:
+        # Soft warning only — do NOT append to errors so validation still passes
+        log(f"[warn] {len(missing)}/{len(expected)} expected reports absent (store may not send them): {missing}")
 
     return errors
 
@@ -361,11 +427,15 @@ def main() -> int:
     elif args.mode == "daily":
         target_date = date.today() - timedelta(days=1)
     else:
+        # Weekly mode: look for the most recent Sunday (week-ending date).
+        # Par Brink's week runs Mon–Sun; the weekly email reports through Sunday.
+        # weekday(): Mon=0 … Sun=6.  Days since last Sunday = (weekday+1) % 7,
+        # but if today IS Sunday (weekday=6) we want 7 days back (last week's end).
         today = date.today()
-        days_back = (today.weekday() - 0) % 7
-        if days_back == 0:
-            days_back = 7
-        target_date = today - timedelta(days=days_back)
+        days_since_sunday = (today.weekday() + 1) % 7
+        if days_since_sunday == 0:
+            days_since_sunday = 7  # Sunday → go back a full week so we don't pick today
+        target_date = today - timedelta(days=days_since_sunday)
 
     log(f"store={store_id} mode={args.mode} target_business_date={target_date}")
 
