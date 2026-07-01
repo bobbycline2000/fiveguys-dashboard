@@ -1,10 +1,11 @@
 {
-  "date": "2026-06-29",
-  "new_count": 0,
+  "date": "2026-07-01",
+  "new_count": 24,
   "notes": [
-    { "from": "Brad Davis", "role": "director", "role_label": "Director of Operations", "time": "6/26", "body": "The Power of One — One Brand, One Team, One Family. The Operations Manual is the single source of truth. Develop two future GMs/year; keep a minimum of six Shift Leaders. Shopper scores: 100% is attainable — Halo Effect, Suggestive Selling, grill culture. June budget at bottom of 2065 sheet (DoorDash + UberEats baked in). Large soda now 30 cents more than Regular." },
-    { "from": "Crystal Hess", "role": "dm", "role_label": "District Manager", "time": "6/26", "body": "KPI Ranking: 60% of score = Secret Shop scores + Customer complaints (CSPs) + Ticket times. Coach early to prevent complaints, spot-check register (fry/drink/shake every time), use huddles to coach, greet every guest, correct grill culture (2 for guys / 1 for girls). File hub tickets for any outside vendor work. GM/AGM call canceled this week. Welcome Hannah Kaufman (HR/Payroll)." },
-    { "from": "CrunchTime", "role": "alert", "role_label": "Period-close tasks", "time": "6/29", "body": "KY-2065 open tasks: Labor Not Posted (6/28), Inv-Final for Post (6/28), L-Rev (6/27). Post labor + finalize inventory to close the period clean." },
-    { "from": "PFG", "role": "alert", "role_label": "Vendor delivery", "time": "6/30", "body": "PFG delivery Tue 6/30 — 91 cases, confirmed with exceptions: Tomato Red Large (21606) market-directed sub JN744; K7468 HACCP cannot be returned. Receiving manager: verify the tomato sub on the truck." }
+    { "from": "Crystal Hess", "role": "dm", "role_label": "District Manager", "time": "7/1", "body": "Re: Tropical Smoothie dumpster mess at 2065 — reached out to Pam (property mgr); trash is included in the rent, 2065 pays it (not split). Keep documenting daily; send photos if it persists so she can push a resolution. Standing: KPI Ranking — 60% of score = Secret Shop scores + Customer complaints + Ticket times. File hub tickets for any outside vendor work." },
+    { "from": "Brad Davis", "role": "director", "role_label": "Director of Operations", "time": "6/30", "body": "Shared July 2026 FG Daily Report — use it to track performance daily and maximize YOUR BONUS. Open the 2065 sheet; July budget at the bottom. Standing: Power of One — Ops Manual is single source of truth; develop two future GMs/year, min six Shift Leaders; Halo Effect + Suggestive Selling; Large soda 30 cents more." },
+    { "from": "Victoria Barkhimer", "role": "accounting", "role_label": "Payroll", "time": "7/1", "body": "Serina Gaskins pay card has been assigned. Resolved. (Phone still pending in the employee directory.)" },
+    { "from": "Karen Mersman", "role": "alert", "role_label": "PFG Vendor", "time": "7/1", "body": "PFG next-day delivery orders must be entered before 11:00 AM daily. Don't miss the window heading into July 4." },
+    { "from": "CrunchTime", "role": "alert", "role_label": "System / cash", "time": "7/1", "body": "6/30 deposit shows $0.00 with Over/Short -$695.56 (book cash $695.56) — verify the 6/30 bank deposit was made and enter it in CrunchTime. Task Alert (6/30) + Labor/COGS Review (W/E Jul 5) open. COGS Flash W/E Jul 5: 25.8%." }
   ]
 }
