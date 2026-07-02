@@ -4,13 +4,13 @@
   "week_ending": "2026-07-05",
   "week_start": "2026-06-29",
   "target_pct": 20.0,
-  "generated_at": "2026-07-01T08:20:41.486096-04:00",
+  "generated_at": "2026-07-02T07:54:38.569071-04:00",
   "week": {
     "fcst_sales": 38263,
-    "sched_cost": 9811,
-    "sched_hours": 638.5,
-    "labor_pct": 25.6,
-    "over_target_dollars": 2158,
+    "sched_cost": 9872,
+    "sched_hours": 618.0,
+    "labor_pct": 25.8,
+    "over_target_dollars": 2220,
     "ot_hours": 4.0,
     "ot_value": 108
   },
@@ -34,22 +34,22 @@
     {
       "sev": "high",
       "day": "Thu",
-      "msg": "Thu labor 27.1% \u2014 ~$416 over 20% target"
+      "msg": "Thu labor 25.0% \u2014 ~$292 over 20% target"
     },
     {
       "sev": "high",
       "day": "Fri",
-      "msg": "Fri labor 26.2% \u2014 ~$385 over 20% target"
+      "msg": "Fri labor 24.5% \u2014 ~$278 over 20% target"
     },
     {
       "sev": "high",
       "day": "Sat",
-      "msg": "Sat labor 26.2% \u2014 ~$385 over 20% target"
+      "msg": "Sat labor 27.7% \u2014 ~$478 over 20% target"
     },
     {
       "sev": "high",
       "day": "Sun",
-      "msg": "Sun labor 24.2% \u2014 ~$248 over 20% target"
+      "msg": "Sun labor 27.6% \u2014 ~$448 over 20% target"
     },
     {
       "sev": "med",
@@ -100,12 +100,12 @@
       "date": "2026-07-02",
       "wd": "Thu",
       "sales": 5851,
-      "hrs": 101.5,
-      "cost": 1586,
-      "pct": 27.1,
+      "hrs": 94.0,
+      "cost": 1462,
+      "pct": 25.0,
       "byPosition": {
         "Shift Leader-Hourly": 9.0,
-        "2. Crew": 85.5,
+        "2. Crew": 78.0,
         "General Manager-Salary": 7.0
       }
     },
@@ -113,11 +113,11 @@
       "date": "2026-07-03",
       "wd": "Fri",
       "sales": 6224,
-      "hrs": 100.0,
-      "cost": 1630,
-      "pct": 26.2,
+      "hrs": 93.5,
+      "cost": 1523,
+      "pct": 24.5,
       "byPosition": {
-        "2. Crew": 69.5,
+        "2. Crew": 63.0,
         "General Manager-Salary": 15.0,
         "Shift Leader-Hourly": 15.5
       }
@@ -126,13 +126,13 @@
       "date": "2026-07-04",
       "wd": "Sat",
       "sales": 6188,
-      "hrs": 114.0,
-      "cost": 1623,
-      "pct": 26.2,
+      "hrs": 107.5,
+      "cost": 1715,
+      "pct": 27.7,
       "byPosition": {
-        "2. Crew": 83.5,
-        "Shift Leader-Hourly": 15.5,
-        "General Manager-Salary": 15.0
+        "2. Crew": 77.0,
+        "General Manager-Salary": 15.0,
+        "Shift Leader-Hourly": 15.5
       }
     },
     {
@@ -140,12 +140,12 @@
       "wd": "Sun",
       "sales": 5900,
       "hrs": 107.0,
-      "cost": 1428,
-      "pct": 24.2,
+      "cost": 1628,
+      "pct": 27.6,
       "byPosition": {
         "2. Crew": 83.0,
-        "Shift Leader-Hourly": 16.0,
-        "General Manager-Salary": 8.0
+        "General Manager-Salary": 8.0,
+        "Shift Leader-Hourly": 16.0
       }
     }
   ]
