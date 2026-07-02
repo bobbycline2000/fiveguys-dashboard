@@ -496,17 +496,17 @@
     "date": "2026-07-02",
     "mgr": "vll",
     "deposit": 0,
-    "safe_open": 575,
+    "safe_open": 658,
     "d1_open": 200,
     "d2_open": 200,
-    "safe_mid": 0,
-    "d1_mid": 0,
-    "d2_mid": 0,
+    "safe_mid": 658,
+    "d1_mid": 200,
+    "d2_mid": 200,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-07-02T16:18:16.164Z"
+    "submitted_at": "2026-07-02T20:13:43.566Z"
   }
 ]
