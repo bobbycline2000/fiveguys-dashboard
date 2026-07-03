@@ -4,17 +4,17 @@
   "week_ending": "2026-07-05",
   "week_start": "2026-06-29",
   "target_pct": 20.0,
-  "generated_at": "2026-07-02T07:54:38.569071-04:00",
+  "generated_at": "2026-07-03T07:52:31.519527-04:00",
   "week": {
     "fcst_sales": 27976,
-    "sched_cost": 6390,
-    "sched_hours": 453.0,
-    "labor_pct": 22.8,
-    "over_target_dollars": 794,
-    "ot_hours": 0.0,
-    "ot_value": 0
+    "sched_cost": 6524,
+    "sched_hours": 464.0,
+    "labor_pct": 23.3,
+    "over_target_dollars": 929,
+    "ot_hours": 0.5,
+    "ot_value": 9
   },
-  "issue_count": 4,
+  "issue_count": 7,
   "issues": [
     {
       "sev": "high",
@@ -33,8 +33,23 @@
     },
     {
       "sev": "high",
+      "day": "Thu",
+      "msg": "Thu labor 22.8% \u2014 ~$121 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Fri",
+      "msg": "Fri labor 22.1% \u2014 ~$96 over 20% target"
+    },
+    {
+      "sev": "high",
       "day": "Sun",
-      "msg": "Sun labor 23.8% \u2014 ~$163 over 20% target"
+      "msg": "Sun labor 23.8% \u2014 ~$166 over 20% target"
+    },
+    {
+      "sev": "med",
+      "day": "Sun",
+      "msg": "Sun overtime 0.5h ($9)"
     }
   ],
   "per_day": [
@@ -79,11 +94,11 @@
       "date": "2026-07-02",
       "wd": "Thu",
       "sales": 4286,
-      "hrs": 65.0,
-      "cost": 934,
-      "pct": 21.8,
+      "hrs": 69.0,
+      "cost": 978,
+      "pct": 22.8,
       "byPosition": {
-        "2. Crew": 48.0,
+        "2. Crew": 52.0,
         "General Manager-Salary": 10.0,
         "Shift Leader-Hourly": 7.0
       }
@@ -92,11 +107,11 @@
       "date": "2026-07-03",
       "wd": "Fri",
       "sales": 4469,
-      "hrs": 63.0,
-      "cost": 902,
-      "pct": 20.2,
+      "hrs": 70.0,
+      "cost": 990,
+      "pct": 22.1,
       "byPosition": {
-        "2. Crew": 48.0,
+        "2. Crew": 55.0,
         "General Manager-Salary": 9.0,
         "Shift Leader-Hourly": 6.0
       }
@@ -119,7 +134,7 @@
       "wd": "Sun",
       "sales": 4323,
       "hrs": 75.5,
-      "cost": 1028,
+      "cost": 1031,
       "pct": 23.8,
       "byPosition": {
         "2. Crew": 58.5,
