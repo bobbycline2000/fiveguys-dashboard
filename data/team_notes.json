@@ -1,12 +1,11 @@
 {
-  "date": "2026-07-02",
-  "new_count": 6,
+  "date": "2026-07-03",
+  "new_count": 5,
   "notes": [
-    { "from": "Tonya Tucker", "role": "accounting", "role_label": "Estep Accounting", "time": "8:48 AM", "body": "Upload the receipt for 6/30's business to the portal as soon as possible." },
-    { "from": "Brad Davis", "role": "director", "role_label": "Director of Operations", "time": "7/1 4:31 PM", "body": "1954 Shout Out — Big Shout Out to Cooper at Jeffersonville on his first day, crushing the Halo Effect and engaging guests in the dining room. Let's Go! Standing: Power of One — Ops Manual is single source of truth; develop two future GMs/year, min six Shift Leaders; Halo Effect + Suggestive Selling; 100% shops are attainable." },
-    { "from": "Crystal Hess", "role": "dm", "role_label": "District Manager", "time": "10:41 AM", "body": "Calibration for shift leads (Teams meeting) — Anthony Pirtle, Rusul Kadhim, Madilyn Smith. RESOLVED: Reoccurring Issues 2065 — trash removal is included in the rent (confirmed with Pam), no separate bill. Standing KPI Ranking — 60% of score = Secret Shop + Customer complaints + Ticket times." },
-    { "from": "CrunchTime", "role": "alert", "role_label": "Task Alert", "time": "6:33 AM", "body": "KY-2065 open tasks (7/01): L-Rev (Labor Review) and VO-Rec-BOSS: Alpha – Ohio Valley. Clear both in CrunchTime. Weekly sales W/E Jul 5: $12,697 vs LY $11,580 = +9.6%. COGS CP% 33.8%." },
-    { "from": "HR — Jeni Moffatt", "role": "alert", "role_label": "HR", "time": "9:47 AM", "body": "New hire Megan Kurschner processed and good to schedule. Added to employee directory (phone pending). Active count 30 to 31." },
-    { "from": "Secret Shop", "role": "alert", "role_label": "Marketforce", "time": "8:23 AM", "body": "New shop 6/25 (Dinner) scored 100% — third straight perfect shop. On shift: Bobby Cline, Francisco Llorente Mejias, Jeremiah Matthews, Madison Cureton, Maylin Hernandez Rodriguez, Richard Gibbs. Store YTD 85.3% (37 shops)." }
+    { "from": "Tonya Tucker", "role": "accounting", "role_label": "Estep Accounting", "time": "7/2 8:48 AM", "body": "Upload the 6/30 deposit receipt to the portal ASAP." },
+    { "from": "Brad Davis", "role": "director", "role_label": "Director of Operations", "time": "7/2 2:00 PM", "body": "FGU Bonus Effect — sign the attached form and email it back to Crystal or Andrew. Standing: Power of One — Ops Manual is single source of truth; develop two future GMs/year, min six Shift Leaders; Halo Effect + Suggestive Selling; 100% shops attainable. June/July budgets at the bottom of the 2065 sheet, DoorDash + UberEats promos baked in." },
+    { "from": "Crystal Hess", "role": "dm", "role_label": "District Manager", "time": "7/2 2:23 PM", "body": "All-Market Call — Teams meeting invite in the inbox; watch for the time and join. Standing KPI Ranking — 60% of score = Secret Shop + Customer complaints + Ticket times. Any outside vendor call still needs a hub ticket for tracking + warranty." },
+    { "from": "Bakery — Lindsey Kalland", "role": "alert", "role_label": "Bakery Operations", "time": "7/2 8:14 PM", "body": "July 4 bread addition made today's (7/3) truck. BOSS updated to 20 HB / 2 HD for Friday. Covered for the weekend." },
+    { "from": "HR — Jeni Moffatt", "role": "alert", "role_label": "HR", "time": "7/2 1:47 PM", "body": "New hire Megan Kurschner processed and good to schedule. In directory as PHONE PENDING — need her phone to complete the row." }
   ]
 }
