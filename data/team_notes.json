@@ -1,41 +1,9 @@
 {
   "date": "2026-07-05",
-  "new_count": 2,
+  "new_count": 3,
   "notes": [
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "6/26",
-      "body": "The Power of One — Ops Manual is our single source of truth. Every GM develops 2 future GMs/yr, min 6 shift leaders. Win shops on Halo Effect, Suggestive Selling, and grill culture. Standing: June budget workbook (2065 sheet bottom), Large soda 30¢ upsell, FGU 0% overdue."
-    },
-    {
-      "from": "Crystal Hess",
-      "role": "dm",
-      "role_label": "District Manager",
-      "time": "6/26",
-      "body": "K.P.I. Ranking — 60% of score = Secret Shops + Customer Complaints + Ticket times. Spot-check registers unannounced (fry/drink/shake every time), coach in huddles, greet every guest, grill culture (2 for guys / 1 for girls), stay rush-ready. Standing (6/18): file a hub ticket for any outside vendor call."
-    },
-    {
-      "from": "CrunchTime Task Alert",
-      "role": "alert",
-      "role_label": "Ops Alert",
-      "time": "7/5",
-      "body": "Open 2065 tasks: Labor Review 7/1-7/4, Post Period Labor Not Posted 7/5, Inv-Final for Post 7/5, vendor receives (BOSS Alpha 7/1+7/3, Performance Foodservice 7/3), transfer receive KY-1788 Middleton 7/3. Clear in NetChef."
-    },
-    {
-      "from": "Craig Holcomb (Estep Hub)",
-      "role": "alert",
-      "role_label": "Maintenance",
-      "time": "7/4",
-      "body": "Hub ticket #9709 — first faucet on the potato sink stripped out again (the one Naomi repaired last visit). Photo attached. Tracked on the hub until repaired."
-    },
-    {
-      "from": "HR — Jeni Moffatt",
-      "role": "alert",
-      "role_label": "HR / Onboarding",
-      "time": "carryover 7/2",
-      "body": "New hire Megan Kurschner processed and good to schedule. In directory as PHONE PENDING — still need her phone to complete the row. Pull from background-check PDF or ask HR (jmoffatt@estep-co.com)."
-    }
+    { "from": "Brad Davis", "role": "director", "role_label": "Director of Operations", "time": "6/26", "body": "The Power of One — One Brand, One Team, One Family. The Operations Manual is now the single source of truth; execute consistently in Hiring, Training, Leadership, Daily Operations. Staffing is a top priority — every GM develops two future GMs a year and keeps a minimum of six Shift Leaders. 100% shopper scores are attainable via the Halo Effect, Suggestive Selling, and grill culture." },
+    { "from": "Crystal Hess", "role": "dm", "role_label": "District Manager", "time": "6/26", "body": "K.P.I. Ranking: 60% of our score comes from Secret Shop scores, Customer complaints (CSPs), and Ticket times. Coach unhappy guests early, spot-check register (fry/drink/shake every time), correct grill culture, stay rush-ready. Execute the basics every shift. Reminder (6/18): any outside vendor call still needs a Hub ticket." },
+    { "from": "CrunchTime Task Alert", "role": "alert", "role_label": "KY-2065 Action", "time": "7/5", "body": "Open tasks for KY-2065: Post Period Labor Not Posted (7/05), Inv-Final for Post (7/05), four L-Rev labor reviews (7/01-7/04), and receiving to reconcile (VO-Rec, LT-Rec). Facility: Hub #9709 potato-sink first faucet stripped out again (Craig Holcomb 7/4)." }
   ]
 }
