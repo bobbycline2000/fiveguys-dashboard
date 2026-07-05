@@ -278,22 +278,37 @@ async def enter_via_browser(mon, sun, targets, expected_total, storage_state_pat
             if "next.ct" not in cur:
                 await page.goto(f"{NETCHEF}/ncext/next.ct", wait_until="domcontentloaded", timeout=30_000)
                 await page.wait_for_timeout(4000)
-            await page.evaluate("(h) => { window.location.hash = h; }",
-                                f"LaborDetails?weekEndingDate={sundate}&editMode=true")
-            print(f"[browser] SPA-routed to LaborDetails editMode for WE {sundate}")
-            await page.wait_for_timeout(6000)
 
-            # "Net-Chef detected previous Labor Detail data that was not saved" → Continue
-            if await click_visible_text(page, "Continue"):
-                print("[browser] dismissed unsaved-data alert (Continue)")
-                await page.wait_for_timeout(3000)
+            # The grid load is the flaky step (failures 2026-06-24 x5 and 2026-06-29:
+            # "supplemental-wages grid never loaded"). Retry the full route → tab →
+            # grid-wait cycle up to 3 times. Safe to retry: nothing is written until
+            # the grid is confirmed, and the upsert itself is idempotent. Each retry
+            # reloads the next.ct shell so the hash-set fires a real hashchange.
+            grid_ok = False
+            for attempt in range(1, 4):
+                if attempt > 1:
+                    await page.goto(f"{NETCHEF}/ncext/next.ct", wait_until="domcontentloaded", timeout=30_000)
+                    await page.wait_for_timeout(4000)
+                await page.evaluate("(h) => { window.location.hash = h; }",
+                                    f"LaborDetails?weekEndingDate={sundate}&editMode=true")
+                print(f"[browser] SPA-routed to LaborDetails editMode for WE {sundate} (attempt {attempt})")
+                await page.wait_for_timeout(6000)
 
-            # Make sure the Supplemental Wages grid is loaded before reading it.
-            await click_visible_text(page, "Supplemental Wages")
-            await page.wait_for_timeout(2500)
-            if not await wait_for_sw_grid(page):
-                await page.screenshot(path=str(DATA / "api_discover_tipdebug_grid.png"))
-                raise RuntimeError("supplemental-wages grid never loaded")
+                # "Net-Chef detected previous Labor Detail data that was not saved" → Continue
+                if await click_visible_text(page, "Continue"):
+                    print("[browser] dismissed unsaved-data alert (Continue)")
+                    await page.wait_for_timeout(3000)
+
+                # Make sure the Supplemental Wages grid is loaded before reading it.
+                await click_visible_text(page, "Supplemental Wages")
+                await page.wait_for_timeout(2500)
+                if await wait_for_sw_grid(page, timeout_ms=30000):
+                    grid_ok = True
+                    break
+                print(f"[browser] grid not loaded on attempt {attempt} — retrying")
+                await page.screenshot(path=str(DATA / f"api_discover_tipdebug_grid_a{attempt}.png"))
+            if not grid_ok:
+                raise RuntimeError("supplemental-wages grid never loaded (3 attempts)")
 
             # Idempotent upsert loop (runs inside the live edit session).
             res = await page.evaluate(JS_UPSERT, {
