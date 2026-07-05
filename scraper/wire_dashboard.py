@@ -1089,6 +1089,51 @@ if team_notes_path.exists():
     except Exception as exc:
         print(f"  ⚠ team_notes.json parse error: {exc}")
 
+# ── Five Guys University training card ─────────────────────────────────
+_fgu_path = ROOT / "data" / "fgu_training.json"
+if _fgu_path.exists():
+    try:
+        _fgu = json.loads(_fgu_path.read_text(encoding="utf-8"))
+        _learners = _fgu.get("learners", [])
+        _stats = _fgu.get("stats", {})
+        _comp = _stats.get("coursesCompletionRate")
+        _comp_str = f"{_comp:.0f}%" if isinstance(_comp, (int, float)) else "—"
+        _behind = sorted([l for l in _learners if (l.get("completion_rate") or 0) < 100],
+                         key=lambda l: l.get("completion_rate") or 0)
+        _n_behind = len(_behind)
+        _badge_cls = "pill-green" if _n_behind == 0 else "pill-gold" if _n_behind <= 5 else "pill-red"
+        _badge_txt = "All current" if _n_behind == 0 else f"{_n_behind} below 100%"
+
+        rep(r'(<div class="cm-overall-val" id="fgu-overall">)[^<]*(</div>)',
+            rf'\g<1>{_comp_str}\g<2>', "FGU overall")
+        rep(r'(<div class="card-sub" id="fgu-sub">)[^<]*(</div>)',
+            rf'\g<1>Store 2065 &middot; {len(_learners)} crew &middot; {_n_behind} below 100%\g<2>',
+            "FGU sub")
+        rep(r'(<span class="cm-badge pill )[^"]*(" id="fgu-badge">)[^<]*(</span>)',
+            rf'\g<1>{_badge_cls}\g<2>{_badge_txt}\g<3>', "FGU badge")
+
+        # Build the crew rows: lowest completion first; not-started (<=3%) = over,
+        # <80% = over (needs attention), else good.
+        def _pct_cls(v):
+            return "over" if v < 80 else "good"
+        _rows = []
+        for l in _behind:
+            v = l.get("completion_rate") or 0
+            nm = l.get("full_name") or l.get("name") or "—"
+            flag = " &#128681;" if v <= 3 else ""   # 🚩 not started
+            _rows.append(
+                f'<div class="cm-item"><span class="cm-label">{nm}{flag}</span>'
+                f'<span class="cm-pct {_pct_cls(v)}">{v}%</span></div>')
+        if not _rows:
+            _rows.append('<div class="cm-item"><span class="cm-label">'
+                         'All crew at 100% &#127881;</span><span class="cm-pct good">100%</span></div>')
+        _fgu_list_html = "\n        ".join(_rows)
+        rep(r'(<div class="cm-list" id="fgu-list">).*?(</div>\s*</div>\s*<!-- ══ END FGU ══ -->)',
+            rf'\g<1>\n        {_fgu_list_html}\n      \g<2>',
+            "FGU list", flags=DOTALL)
+    except Exception as exc:
+        print(f"  ⚠ fgu_training.json parse error: {exc}")
+
 # ── Footer timestamp ───────────────────────────────────────────────────
 rep(r'(<span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>)[^<]*(</span> &nbsp;&middot;&nbsp; )[^<]*(</span>)',
     rf'\g<1>{time_str}\g<2>{date_display}\g<3>',

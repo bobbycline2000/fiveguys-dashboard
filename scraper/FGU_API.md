@@ -58,8 +58,13 @@ The home dashboard's due-date widgets (these are for the LOGGED-IN user, not tea
 - Past due: `...myTrainingPastDueOverview...` → already overdue.
 - Per-objective progress: `GET /training/progress-per-objective/{onboarding,compliance_training,career_path,job_strength}` → onboarding-specific completion.
 
-### ⚠️ Token is SHORT-LIVED (~30 min) — refresh needed for pure-requests
-The Bearer JWT expired mid-discovery-session (`401 {"code":"401003001","message":"Expired token"}`). The Angular app silently refreshes it from `localStorage['refresh_token']` on activity. Implication for `scrape_fgu.py`: a token captured from Chrome is only good for ~30 min. For a repeatable pull, either (a) capture fresh at run time from a live Chrome tab, or (b) implement the refresh-token exchange (Schoox `/api/v2/auth/refresh`-style — not yet captured). Today's pull runs inside the capture window.
+### ⚠️ Token is SHORT-LIVED (~30 min) — refresh flow (discovered 2026-07-05)
+The Bearer JWT expires (`401 {"code":"401003001","message":"Expired token"}`). The Angular app refreshes it from `localStorage['refresh_token']`. The refresh endpoint:
+- **`POST /api/v2/auth/token/refresh`** — JSON body **`{"token": "<refresh_token>"}`** (⚠️ the field is literally named `token`, but it holds the REFRESH token, not the access token). Cookie-auth, no other headers required.
+- Response `200`: `{tokenType, accessToken, refreshToken, expiresIn}` — a fresh `accessToken` AND a **rotated `refreshToken`** (old one is consumed). `expiresIn` is the access-token lifetime in seconds.
+- Wrong field name → `422 {validationErrors:{token:["The token field is required."]}}`.
+
+**Implication:** a captured refresh token → indefinite fresh access tokens IF you persist the rotated refreshToken each call (self-heal, like the SCG Gmail token). **Intended use is the READ-ONLY completion pull only** (dashboard + brief). This is NOT to be used to log into or act as other people's accounts — that's account takeover + falsified training records; declined 2026-07-05. For the read pull, the supported pattern is capture-at-runtime from Bobby's own logged-in Chrome (like the Indeed professor), OR an in-session refresh when the access token expires mid-run. Do NOT seed a persistent stored master credential.
 
 ## Discovery backlog (not yet mapped)
 - **Team-wide per-learner due dates in ONE call.** Today you must loop `/team-dashboard/learners/<id>/compliance/courses` per learner (34 calls) to get each person's due-date-tracked courses. Fine for a nightly job. A bulk endpoint may exist — look for it if the per-learner loop is too slow.
