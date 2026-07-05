@@ -1,0 +1,4 @@
+{
+  "_comment": "Hire dates for the FGU preventive training flag. Keyed by full_name (matching data/fgu_training.json learners), value = hire date YYYY-MM-DD. When the daily brief detects a new hire (per ~/.claude/rules/new-hire-auto-add.md), add their line here so _build_fgu_section can flag them as their onboarding deadline (hire_date + 30 days) approaches. Existing crew have no hire date recorded — only add going forward as new hires land.",
+  "_schema": {"Full Name": "YYYY-MM-DD"}
+}

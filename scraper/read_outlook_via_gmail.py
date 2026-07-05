@@ -804,6 +804,129 @@ def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | No
     return "\n".join(lines)
 
 
+def _build_fgu_section(today: date) -> list[str]:
+    """Five Guys University (Schoox) training section for the daily brief.
+
+    Reads data/fgu_training.json (written by scraper/scrape_fgu.py — per-employee
+    course completion % + store aggregate). Optionally reads
+    data/employee_hire_dates.json ({first_or_full_name: "YYYY-MM-DD"}) to drive
+    the PREVENTIVE flag Bobby asked for: a new hire is flagged BEFORE they go
+    overdue, when hire_date + ONBOARDING_WINDOW_DAYS is within 7 days AND their
+    completion is < 100%.
+
+    Bobby's policy language ("coming off the schedule if overdue") is surfaced
+    on anyone already past their onboarding deadline who hasn't finished.
+    """
+    import json as _json
+    from datetime import timedelta as _td
+    from pathlib import Path as _Path
+
+    ONBOARDING_WINDOW_DAYS = 30   # FG onboarding-training deadline from hire date
+
+    out: list[str] = []
+    repo = _Path(__file__).resolve().parent.parent
+    fgu_path = repo / "data" / "fgu_training.json"
+    hire_path = repo / "data" / "employee_hire_dates.json"
+
+    if not fgu_path.exists():
+        return out   # no data yet — omit the section rather than show an empty box
+
+    try:
+        fgu = _json.loads(fgu_path.read_text(encoding="utf-8"))
+    except Exception:
+        return out
+
+    learners = fgu.get("learners", [])
+    stats = fgu.get("stats", {})
+    if not learners:
+        return out
+
+    hire_dates: dict = {}
+    if hire_path.exists():
+        try:
+            hire_dates = _json.loads(hire_path.read_text(encoding="utf-8"))
+        except Exception:
+            hire_dates = {}
+
+    def _hire_for(l: dict):
+        for key in (l.get("full_name"), l.get("name")):
+            if key and key in hire_dates:
+                try:
+                    return date.fromisoformat(hire_dates[key])
+                except Exception:
+                    return None
+        return None
+
+    out.append("## 🎓 Five Guys University — Team Training")
+    out.append("")
+    comp = stats.get("coursesCompletionRate")
+    overdue = stats.get("coursesOverdueRate")
+    comp_str = f"{comp:.0f}%" if isinstance(comp, (int, float)) else "—"
+    overdue_str = f"{overdue:.0f}%" if isinstance(overdue, (int, float)) else "—"
+    behind = [l for l in learners if (l.get("completion_rate") or 0) < 100]
+    out.append(
+        f"**Store completion: {comp_str}** &nbsp;|&nbsp; "
+        f"Overdue rate: {overdue_str} &nbsp;|&nbsp; "
+        f"{len(behind)} of {len(learners)} crew below 100%"
+    )
+    out.append("")
+
+    # ── Preventive flags: approaching onboarding deadline / already past it ──
+    approaching: list[str] = []
+    past_deadline: list[str] = []
+    for l in learners:
+        rate = l.get("completion_rate") or 0
+        if rate >= 100:
+            continue
+        hd = _hire_for(l)
+        if not hd:
+            continue
+        deadline = hd + _td(days=ONBOARDING_WINDOW_DAYS)
+        days_left = (deadline - today).days
+        nm = l.get("full_name") or l.get("name")
+        if days_left < 0:
+            past_deadline.append(
+                f"**{nm}** — {rate}% done, onboarding deadline was {deadline.isoformat()} "
+                f"({-days_left}d ago). **Pull from schedule until FGU is complete.**")
+        elif days_left <= 7:
+            approaching.append(
+                f"**{nm}** — {rate}% done, onboarding due {deadline.isoformat()} "
+                f"(**{days_left}d left**). Get them on a tablet this week or they come off the schedule.")
+
+    if past_deadline:
+        out.append("### 🔴 Overdue — off the schedule until complete")
+        out.append("")
+        for x in past_deadline:
+            out.append(f"- {x}")
+        out.append("")
+    if approaching:
+        out.append("### 🟡 Due within 7 days — finish now to stay on the schedule")
+        out.append("")
+        for x in approaching:
+            out.append(f"- {x}")
+        out.append("")
+
+    # ── Everyone below 100%, lowest first (so Bobby knows who to push) ──
+    out.append("### Completion by crew member (lowest first)")
+    out.append("")
+    out.append("| Employee | Completion | Courses |")
+    out.append("|---|---|---|")
+    for l in sorted(behind, key=lambda x: (x.get("completion_rate") or 0)):
+        rate = l.get("completion_rate") or 0
+        nm = l.get("full_name") or l.get("name")
+        tag = " 🚩 not started" if rate <= 3 else (" ⚠️" if rate < 50 else "")
+        out.append(f"| {nm}{tag} | {rate}% | {l.get('total_courses', '—')} |")
+    out.append("")
+    if not hire_dates:
+        out.append(
+            "_Preventive hire-date flags will populate as new hires are logged to "
+            "`data/employee_hire_dates.json`. Until then this shows completion % only._")
+        out.append("")
+    out.append("---")
+    out.append("")
+    return out
+
+
 def _build_cash_section(today: date) -> list[str]:
     """Deposits & Safe/Drawer section for the daily brief.
 
@@ -972,6 +1095,9 @@ def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
 
     # ── Deposits & Cash Counts ───────────────────────────────────────────────
     lines.extend(_build_cash_section(today))
+
+    # ── Five Guys University — Team Training ──────────────────────────────────
+    lines.extend(_build_fgu_section(today))
 
     # ── Director's Corner ────────────────────────────────────────────────────
     director_emails = categorized.get("Director's Corner", [])

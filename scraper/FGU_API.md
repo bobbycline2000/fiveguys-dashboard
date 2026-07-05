@@ -45,9 +45,26 @@ Discovered 2026-07-05 via Chrome MCP network capture while Bobby was logged in.
 - `GET /api/v2/auth/me?fields=...&embed=permissions,...`
 - `GET /api/v2/academies?domain=fiveguys&...` → academy metadata + `academyId`.
 
+### Per-learner drill-down (manager view) — the menu + detail endpoints
+Clicking a learner in the Team Dashboard opens `/team-dashboard/learners/<userId>/summary`. Endpoints seen:
+- `GET /team-dashboard/learners/<userId>/menu` → tabs: **Summary, Training, Compliance, Development**.
+- `GET /team-dashboard/learners/<userId>/summary/{training-insights,compliance-insights,type-completions,completion-graph,training-insights}` → text-summary widgets (e.g. `{name,tooltip,data:[{text:"0% completion rate of all training"}]}`).
+- `GET /team-dashboard/learners/<userId>/compliance/courses?trainingFilterSet=teamDashboardLearnerComplianceCourses&fields=id,title,status&embed=courseUser,courseExtraInfo,steps&size=20&trainingFilters[]=sorting,alphabetically,asc` → **the compliance (due-date-tracked) courses for that learner.** `embed=courseUser` carries the enrollment progress; `courseExtraInfo` carries due-date info. Returns `_embedded.courses[]`. ⚠️ Do NOT add `embed=progress,dueDate,enrollment` — that combo returns 500. Use `embed=courseUser,courseExtraInfo`.
+- **`getFullInfo` (classic PHP):** `GET /academies/panel/organize/actions.php?page=getFullInfo&academyId=1177&userId=<userId>&featureId=teams-dashboard` → `data.sections[]` incl. `external_ids:["CTE2065348215"]` — **the CrunchTime employee ID (`CTE<store><n>`), a clean join key to CrunchTime/directory** — and the assigned job (`"2. Crew"`).
+
+### Due-date signals (self / logged-in user) — `/training/items`
+The home dashboard's due-date widgets (these are for the LOGGED-IN user, not team members):
+- Upcoming due: `GET /training/items?trainingFilterSet=myTrainingUpcomingDueOverview&embed=dueDate,progress,enrollment&trainingFilters[]=sorting,dueDate,asc` → items sorted by soonest due date. **This is the "will be overdue soon" preventive signal.**
+- Past due: `...myTrainingPastDueOverview...` → already overdue.
+- Per-objective progress: `GET /training/progress-per-objective/{onboarding,compliance_training,career_path,job_strength}` → onboarding-specific completion.
+
+### ⚠️ Token is SHORT-LIVED (~30 min) — refresh needed for pure-requests
+The Bearer JWT expired mid-discovery-session (`401 {"code":"401003001","message":"Expired token"}`). The Angular app silently refreshes it from `localStorage['refresh_token']` on activity. Implication for `scrape_fgu.py`: a token captured from Chrome is only good for ~30 min. For a repeatable pull, either (a) capture fresh at run time from a live Chrome tab, or (b) implement the refresh-token exchange (Schoox `/api/v2/auth/refresh`-style — not yet captured). Today's pull runs inside the capture window.
+
 ## Discovery backlog (not yet mapped)
-- **Per-learner course-level detail** (which specific courses employee X is behind on). The obvious guesses all 404'd (`/learners/<id>/courses`, `/users/<id>/training`, etc.). The UI drill-down endpoint wasn't captured — get it by clicking a learner's course list in the Team Dashboard and watching the network. Roster-level `coursesCompletionRate` + `totalCourses` is enough for a v1 Training card and new-hire tracking without it.
-- Assign/enroll a course (WRITE) — not attempted. WRITES require Bobby's explicit go.
+- **Team-wide per-learner due dates in ONE call.** Today you must loop `/team-dashboard/learners/<id>/compliance/courses` per learner (34 calls) to get each person's due-date-tracked courses. Fine for a nightly job. A bulk endpoint may exist — look for it if the per-learner loop is too slow.
+- **NOTE on this store's data:** most KY-2065 crew have **0 compliance (due-date-tracked) courses** — their training is "complete when able," not deadline-enforced. The reliable per-person signal is `coursesCompletionRate`; hard due dates are sparse. Anchor the brief's "overdue in 7 days" flag on **hire_date + onboarding window** (from new-hire detection) rather than assuming Schoox due dates exist for everyone.
+- The refresh-token exchange (for true lights-out). Assign/enroll a course (WRITE) — not attempted; needs Bobby's go.
 
 ## Gotchas
 - Cookie auth is NOT enough — always the Bearer token.
