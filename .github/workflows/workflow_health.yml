@@ -1,0 +1,83 @@
+name: Workflow Health Check
+
+# Daily sweep of ALL workflow runs in the last 24h. If anything failed,
+# email fg2065 a one-table summary with links. Exists because the overnight
+# CT discovery workflow failed silently every day from 2026-05-16 to
+# 2026-06-10 — 26 days — and nothing surfaced it. Per-workflow alerts don't
+# scale; this catches every workflow, including ones added later, forever.
+#
+# Sends NOTHING on a clean day (the daily confirmation email already covers
+# green-path status).
+
+on:
+  schedule:
+    # 7:15 AM Eastern daily — after the 5:40 backup and 7:05 dailies finish.
+    # 11:15 UTC during EDT; fires 6:15 AM ET during EST (harmless).
+    - cron: "15 11 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  actions: read
+
+jobs:
+  health:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    steps:
+      - name: Scan last 24h for failed runs and email if any
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
+          MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+          REPO: ${{ github.repository }}
+        run: |
+          pip -q install requests
+          python - <<'PYEOF'
+          import os, requests
+          from datetime import datetime, timedelta, timezone
+
+          repo = os.environ["REPO"]
+          since = (datetime.now(timezone.utc) - timedelta(hours=24)).strftime("%Y-%m-%dT%H:%M:%SZ")
+          gh = {"Authorization": f"Bearer {os.environ['GH_TOKEN']}",
+                "Accept": "application/vnd.github+json"}
+          fails, page = [], 1
+          while page <= 5:
+              r = requests.get(f"https://api.github.com/repos/{repo}/actions/runs",
+                               headers=gh, params={"created": f">={since}", "per_page": 100,
+                                                   "page": page, "status": "completed"}, timeout=30)
+              runs = r.json().get("workflow_runs", [])
+              if not runs:
+                  break
+              fails += [x for x in runs if x.get("conclusion") == "failure"
+                        and x.get("name") != "pages-build-deployment"]
+              page += 1
+          if not fails:
+              print("All workflows healthy in the last 24h. No email.")
+              raise SystemExit(0)
+
+          rows = "".join(
+              f"<tr><td>{x['name']}</td><td>{x['run_started_at']}</td>"
+              f"<td><a href='{x['html_url']}'>view / re-run</a></td></tr>" for x in fails)
+          html = (f"<p><b>{len(fails)} workflow failure(s) in the last 24h:</b></p>"
+                  f"<table border='1' cellpadding='6' style='border-collapse:collapse'>"
+                  f"<tr><th>Workflow</th><th>Started (UTC)</th><th>Run</th></tr>{rows}</table>"
+                  f"<p>Prometheus can diagnose with: <code>gh run view &lt;id&gt; --log-failed</code></p>")
+
+          tid = os.environ["MS_TENANT_ID"]
+          tok = requests.post(
+              f"https://login.microsoftonline.com/{tid}/oauth2/v2.0/token",
+              data={"client_id": os.environ["MS_CLIENT_ID"],
+                    "client_secret": os.environ["MS_CLIENT_SECRET"],
+                    "scope": "https://graph.microsoft.com/.default",
+                    "grant_type": "client_credentials"}, timeout=30).json()["access_token"]
+          body = {"message": {
+              "subject": f"[HEALTH] {len(fails)} workflow failure(s) — fiveguys-dashboard",
+              "body": {"contentType": "HTML", "content": html},
+              "toRecipients": [{"emailAddress": {"address": "fg2065@estep-co.com"}}]},
+              "saveToSentItems": "false"}
+          r = requests.post("https://graph.microsoft.com/v1.0/users/fg2065@estep-co.com/sendMail",
+                            headers={"Authorization": f"Bearer {tok}"}, json=body, timeout=30)
+          print("health email status:", r.status_code)
+          r.raise_for_status()
+          PYEOF

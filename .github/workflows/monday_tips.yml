@@ -6,8 +6,8 @@ name: Monday Tip Entry (Store 2065)
 #
 # Hard prereq inside the script: Sat + Sun labor actuals must be Reviewed for
 # the prior week. The script logs a warning and proceeds; if hours look wrong
-# the run can be re-run after labor is fixed (idempotency: re-running creates
-# duplicate rows — DO NOT auto-rerun without a delete pass).
+# the run can be re-run after labor is fixed. Re-running is SAFE — the
+# enter_tips_browser.py upsert updates rows in place and never duplicates.
 
 on:
   schedule:
