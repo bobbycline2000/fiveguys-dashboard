@@ -620,104 +620,104 @@ def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | No
     iso_week = today.isocalendar()[1]
     biweek_flag = iso_week % 2  # alternates 0/1 each week
     rotating_ideas = {
-        0: ("Monday — June Close-Out + Win July 4 Week Clean",
-            "Last two days of June, then the biggest week of the summer. Pull Brad's June 2026 FG "
-            "Daily Report workbook, find the 2065 sheet, and check month-to-date pace against the "
-            "budget at the bottom before June books tomorrow (6/30). Both shop dayparts are now "
-            "LOCKED — Lunch 100% (6/21) AND Late Dinner 100% (6/24) — so the floor work is proven; "
-            "this week is about holding it through July 4 volume. Labor ran hot over the weekend "
-            "(Sun 6/28 = 21.73%), and with July 4 traffic coming the lever is opener/mid bodies on "
-            "the slow patches, NOT the closing team — name the daily sales target out loud and trim "
-            "the front when the lull hits. WE 6/28 FP% bumped to 27.4% (CP% 28.1%) — get back on "
-            "the scoop: portion fries and toppings, kill cooked-not-sold. Open with the number, "
-            "close with the number."),
-        1: ("Tuesday — June Books Today + Crystal's KPI Ranking & Hub Tickets",
-            "June closes today (6/30) — make sure 2065's labor is posted, inventory is final, and "
-            "the L-Rev task is clear so we book clean. Pull Crystal's KPI miss chart at huddle: "
-            "Customer Complaints carries the heaviest corporate KPI weight (25%) — the same muscle "
-            "our shop scores measure — and run every ticket to Crystal's hub-ticket standard. Both "
-            "dayparts are scoring (Lunch 100% 6/21, Late Dinner 100% 6/24), so the next points come "
-            "from the 3 systemic killers the shop report named: order speed (fry team), restroom "
-            "cadence, and the milkshake offer. Company win to share — Estep & Co is **#1 on "
-            "Incidence Sales** company-wide; suggestive-sell a shake, a drink, and fries on every "
-            "ticket to hold it. Crystal's swag contest still live: first two shift leads to text "
-            "812-267-8669 win — NO GMs."),
-        2: ("Wednesday — July Kickoff: Attack the Fry-Team Bottleneck",
-            "New month, fresh board. The shop report's #1 systemic killer is ORDER SPEED — 7 of our "
-            "last 17 shops lost points to it, and shoppers named the fry team as the bottleneck "
-            "(over 8 min = -5, over 10 min = -20). With July 4 volume building, this is the make-or-"
-            "break. Today's play: station your strongest fry person at peak, pre-drop into the rush, "
-            "and have a manager call out a target of UNDER 6 MINUTES register-to-window on every "
-            "ticket. Meat on the grill BEFORE the order when 3+ are in line. Both dayparts are "
-            "locked at 100% (6/21 Lunch, 6/24 Late Dinner) — protect that by keeping the fry window "
-            "tight when it gets loud. Keep the pickup shelf staged so delivery doesn't clog the line."),
+        0: ("Monday — Fresh Week, Fresh Board: Carry the 100% Streak into July",
+            "New week after the July 4 push. THREE straight perfect shops are on the board now — "
+            "Lunch (6/21), Late Dinner (6/24) AND Dinner (6/25) — three different dayparts, June "
+            "closed at 95.0%, our best month ever, store YTD up to 85.3%. That's momentum; protect "
+            "it. Pull Brad's July FG Daily Report workbook, find the 2065 sheet, and check "
+            "week-to-date pace against budget before the week gets away. Manager discipline note: CT "
+            "tasks piled up over the holiday — L-Rev open 7/1–7/4, Post-Period labor + Inv-Final "
+            "due — close tasks the DAY they land, don't let them stack again. Labor lever is "
+            "opener/mid bodies on the lulls, never the close. WE pace is +8% over LY — open with the "
+            "number, close with the number, and keep the scoop on fries and toppings to hold FP%."),
+        1: ("Tuesday — Crystal's KPI Math: 60% Is Shops + Complaints + Ticket Times",
+            "Crystal's KPI Ranking (6/26) is the clearest target we've been handed: **60% of our "
+            "whole score comes from three things — Secret Shop scores, Customer complaints (CSPs), "
+            "and Ticket times.** Everything at huddle points at those three. Spot-check the register "
+            "on every transaction (fry, drink, AND shake offered — Crystal's exact words), coach the "
+            "team to handle an unhappy guest EARLY before it becomes a complaint, and watch the "
+            "clock on ticket times. Grill culture the standard way — 2 for guys / 1 for girls. We're "
+            "proving the shop side (three straight 100%); now stack the other two KPIs on top. "
+            "Company win to attach: Estep is **#1 on Incidence Sales** company-wide — suggestive-sell "
+            "a shake, a drink, and fries every ticket to hold it. Large soda is 30¢ more."),
+        2: ("Wednesday — Ticket Times: Attack the Fry-Team Bottleneck (KPI #3)",
+            "Ticket time is one of Crystal's three scored KPIs AND the shop report's #1 systemic "
+            "killer — 7 of our last 17 shops lost points to order speed, and shoppers named the fry "
+            "team as the bottleneck (over 8 min = -5, over 10 min = -20). Today's play: station your "
+            "strongest fry person at peak, pre-drop into the rush, and have a manager call a target "
+            "of UNDER 6 MINUTES register-to-window on every ticket. Meat on the grill BEFORE the "
+            "order when 3+ are in line. Keep the pickup shelf staged so delivery doesn't clog the "
+            "line. Three dayparts are locked at 100% (6/21, 6/24, 6/25) — protect the streak by "
+            "keeping the fry window tight when it gets loud."),
         3: ("Thursday — Steritech Walk + Restroom Cadence (Our #2 Shop Killer)",
             "Walk the store before doors open and sign off. The shop report flagged the RESTROOM as "
             "our #2 systemic miss — two shops at -20 each (Apr 17, Jun 14), same issue both times: "
-            "dirty floor + dirty sink. Fix the cadence today: named owner, hourly check, signed "
-            "sheet, and a real walk-in during the dinner rush, not just the morning. Plus the "
-            "standard walk: hand sinks for handwashing ONLY (1704 MAJOR), DayMark discard dates "
-            "correct, potato cutter teeth + slicer blades chip-free (1704 CRITICAL), lids on "
-            "mushrooms and onions, wet dishes stacked. Pair it with Kayla Valenzuela's Food Safety "
-            "Power Outage Checklist (posted in BOH) — July heat is real, log refrigeration temps. "
-            "July 4 is Saturday; a clean store walks into the big day ready."),
-        4: ("Friday — Shop Review: Both Dayparts Locked, Now Speed + Shake",
-            "Pull the shop board at huddle and celebrate the win: BOTH dayparts now score 100% — "
-            "Lunch (6/21) AND Late Dinner (6/24) — June closed at 95.0%, our best month, 3 perfect "
-            "shops. Recognize the crews who delivered: Madison Cureton, Maylin Hernandez Rodriguez, "
-            "Vicki Lucey. The greet/handoff work is proven, so the remaining points live in two "
-            "places the report named: ORDER SPEED (fry-team bottleneck, under 6 min) and the "
+            "dirty floor + dirty sink. Fix the cadence: named owner, hourly check, signed sheet, and "
+            "a real walk-in during the dinner rush, not just the morning. Standard walk: hand sinks "
+            "for handwashing ONLY, DayMark discard dates correct, potato cutter teeth + slicer "
+            "blades chip-free (1704 CRITICAL), lids on mushrooms and onions, wet dishes stacked. "
+            "Facility note — the potato-sink faucet (Hub ticket #9709) stripped out again; work "
+            "around it and keep the ticket moving. July heat is real — log refrigeration temps per "
+            "Kayla Valenzuela's Food Safety Power Outage Checklist posted in BOH."),
+        4: ("Friday — Shop Review: THREE Straight 100% — Now Hold the Halo",
+            "Pull the shop board at huddle and celebrate: THREE perfect shops in a row across three "
+            "dayparts — Lunch (6/21), Late Dinner (6/24), Dinner (6/25) — June closed at 95.0%, "
+            "store YTD 85.3% and climbing. Recognize the crews: Madison Cureton, Maylin Hernandez "
+            "Rodriguez, Vicki Lucey, Francisco Llorente Mejias, Jeremiah Matthews, Richard Gibbs. "
+            "The greet/handoff work is proven; the remaining points live where Brad and the report "
+            "both point: the HALO EFFECT — every guest leaves with a 'Wow' (warm greet at door and "
+            "register, thank-you, fries-up, a real goodbye) — plus order speed under 6 min and the "
             "MILKSHAKE offer (dropped on 3 shops — fries and drink land, the shake gets skipped). "
-            "Today, every cashier offers the Blackberry shake out loud on every order. Set the "
-            "weekend crew up — July 4 is tomorrow, the biggest volume day of the summer."),
-        5: ("Saturday — JULY 4: Biggest Day of the Summer, Run It Clean",
-            "JULY 4 — expect the heaviest volume of the season. All hands, full prep, par up on "
-            "bread (Patty Press flagged the July 4 bread order) and potatoes early. This is where "
-            "the fry-team bottleneck bites hardest, so station your fastest fry person, pre-drop "
-            "aggressively, and hold ticket times UNDER 6 MINUTES — speed is our #1 shop killer and "
-            "today is the test. Attach hard: we're #1 in Incidence Sales company-wide — Blackberry "
-            "shake, drink, and fries on every burger; Large soda is 30¢ more. Restroom checked "
+            "Today every cashier offers the Blackberry shake out loud on every order. Set the "
+            "weekend crew up."),
+        5: ("Saturday — Weekend Volume: Suggestive Selling Is NOT Optional",
+            "Saturday volume — full prep, par up bread and potatoes early. Brad's directive is "
+            "blunt: **suggestive selling (milkshakes / drinks / fries) is NOT optional**, and every "
+            "guest leaves with a 'Wow' (the Halo Effect). We're #1 in Incidence Sales company-wide "
+            "— earn it: Blackberry shake + drink + fries on every burger, Large soda 30¢ upsell. "
+            "This is where the fry-team bottleneck bites hardest, so station your fastest fry "
+            "person, pre-drop aggressively, hold ticket times UNDER 6 MINUTES. Restroom checked "
             "hourly with a named owner and signed sheet through the dinner rush (our #2 shop miss). "
-            "Labor on a day this big is earned by sales — keep the team that holds speed and "
-            "service; trim only openers/mids if a real lull hits, never the close. Steritech-clean "
-            "all day: lids on mushrooms and onions, DayMark dates current, cutter + slicer "
-            "chip-free."),
-        6: ("Sunday — Post-July-4 Recovery + Week Close Reset",
-            "Day after the big one — restock and reset. Recap the week's shops at huddle: both "
-            "dayparts hit 100% (Lunch 6/21, Late Dinner 6/24) and June closed at 95.0% — recognize "
-            "the crews who carried it. Re-par everything July 4 drained: bread, potatoes, "
-            "condiments, cups. Full floor discipline holds — greet warm at door and register, "
-            "tickets UNDER 6 minutes (our #1 killer), meat on the grill before the order, and "
-            "offer the shake on every ticket (the #3 miss). Bathrooms checked hourly with signed "
-            "sheet, lobby reset between waves. Closing manager hands off a Monday-ready store: "
-            "DayMark labels current, drawer counts squared, waste sheet honest, FP% pulled back "
-            "toward the scoop (27.4% on WE 6/28 — tighten it). Set the openers up to start strong."),
+            "Labor on a big day is earned by sales — trim only openers/mids on a real lull, never "
+            "the close. Steritech-clean all day: lids on mushrooms and onions, DayMark dates "
+            "current, cutter + slicer chip-free."),
+        6: ("Sunday — Week Close Reset + Monday-Ready Handoff",
+            "Close the week clean and reset. Recap at huddle: three straight 100% shops (6/21, "
+            "6/24, 6/25), June closed 95.0%, store YTD 85.3% — recognize the crews who carried it. "
+            "Re-par everything the weekend drained: bread, potatoes, condiments, cups. Full floor "
+            "discipline holds — Halo greet at door and register, tickets UNDER 6 minutes (KPI #3), "
+            "meat on the grill before the order, and offer the shake on every ticket (the #3 miss). "
+            "Bathrooms checked hourly with signed sheet, lobby reset between waves. Closing manager "
+            "hands off a Monday-ready store: DayMark labels current, drawer counts squared, waste "
+            "sheet honest, CT tasks closed (don't let L-Rev stack again), FP% pulled back toward "
+            "the scoop. Set the openers up to start strong."),
     }
     biweekly_themes = [
-        ("Even Weeks — Both Dayparts Locked: Now Kill the 3 Shop Killers",
-         "The daypart fight is WON — Lunch 100% (6/21) AND Late Dinner 100% (6/24), June closed at "
-         "95.0% (our best month, 3 perfect shops). The greet/handoff/transaction-watch work proved "
-         "out, so the next points come from the three systemic killers the shop report named: "
-         "(1) **ORDER SPEED** — 7 of our last 17 shops lost points here, fry team is the bottleneck, "
-         "hold register-to-window UNDER 6 MINUTES; (2) **RESTROOM** — two -20 misses, same dirty "
-         "floor + sink both times, run a named-owner hourly check with a signed sheet through the "
-         "dinner rush; (3) **MILKSHAKE OFFER** — dropped on 3 shops, fries and drink land but the "
-         "shake gets skipped, so offer the Blackberry shake out loud on every ticket (we're #1 in "
-         "Incidence Sales company-wide — earn it). Recognize the crews who locked the dayparts: "
-         "Madison Cureton, Maylin Hernandez Rodriguez, Vicki Lucey."),
-        ("Odd Weeks — July 4 Week: Win the Volume Clean",
-         "Biggest week of the summer — July 4 lands Saturday and June books Tuesday (6/30). Two "
-         "pushes: (1) **Run the volume clean** — par up bread (Patty Press flagged the July 4 bread "
-         "order) and potatoes early, station your fastest fry person at peak, pre-drop into the "
-         "rush, and hold ticket times UNDER 6 MINUTES — order speed is our #1 shop killer and a "
-         "high-volume week is exactly when it bites. (2) **Hold the gains under load** — both "
-         "dayparts are locked at 100% (Lunch 6/21, Late Dinner 6/24); protect that by keeping the "
-         "greet, the handoff call-back, and the shake offer on every ticket even when it's slammed. "
-         "Attach hard — #1 in Incidence Sales, Blackberry shake + drink + fries, Large soda 30¢ "
-         "upsell. Labor: with July 4 traffic the lever is opener/mid bodies on the lulls, NEVER the "
-         "closing team; Sun 6/28 ran 21.73%, so trim the front when the rush breaks, not the close. "
-         "Restroom hourly with a signed sheet (our #2 miss), portion fries and toppings to pull "
-         "FP% back from 27.4%."),
+        ("Even Weeks — The KPI Three: Shops + Complaints + Ticket Times (60% of the Score)",
+         "Crystal handed us the clearest target we've had (6/26 KPI Ranking): **60% of our whole "
+         "score is three things — Secret Shop scores, Customer complaints (CSPs), and Ticket "
+         "times.** We're winning the shop side — THREE straight 100% (Lunch 6/21, Late Dinner 6/24, "
+         "Dinner 6/25), June closed 95.0%, store YTD 85.3%. Now stack the other two: "
+         "(1) **COMPLAINTS** — coach the team to handle an unhappy guest EARLY, before it becomes a "
+         "CSP; a warm recovery kills a bad review. (2) **TICKET TIMES** — the fry-team bottleneck is "
+         "our #1 shop killer too, so hold register-to-window UNDER 6 MINUTES. (3) **SHOPS** — "
+         "protect the streak with the Halo Effect (every guest leaves with a 'Wow'), grill culture "
+         "(2 for guys / 1 for girls), and the milkshake offer on every ticket. Attach hard — #1 in "
+         "Incidence Sales, Blackberry shake + drink + fries, Large soda 30¢. Recognize the crews: "
+         "Madison Cureton, Maylin Hernandez Rodriguez, Vicki Lucey, Francisco Llorente Mejias, "
+         "Jeremiah Matthews, Richard Gibbs."),
+        ("Odd Weeks — The Power of One: Halo Effect + Suggestive Selling on Every Ticket",
+         "Brad's Ops Manual push (6/26) — **One Brand · One Team · One Family.** The manual is our "
+         "single source of truth; execute the documented standard, not 'what someone said.' Two "
+         "operator pushes: (1) **The Halo Effect** — every guest leaves with a 'Wow': warm greet at "
+         "door and register, thank-you, fries-up, a real goodbye. That's how lower-scoring stores "
+         "climb, and it feeds both our shop scores and our complaint KPI. (2) **Suggestive selling "
+         "is NOT optional** — milkshakes, drinks, fries on every ticket; we're #1 in Incidence Sales "
+         "company-wide and hold it by asking every time (Blackberry shake, Large soda 30¢ up). "
+         "People note from Brad: never run short-staffed, keep a minimum of six Shift Leaders, and "
+         "develop your future GMs. Under it all, protect the streak — three straight 100% shops — "
+         "with ticket times under 6 minutes and the restroom checked hourly (our #2 miss), and keep "
+         "the scoop on fries/toppings to hold FP%."),
     ]
     rot_title, rot_body = rotating_ideas[dow]
     bi_title, bi_body = biweekly_themes[biweek_flag]
