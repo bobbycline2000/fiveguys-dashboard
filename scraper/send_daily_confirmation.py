@@ -558,30 +558,38 @@ def build_html(rows: list[dict], overall: str) -> str:
 
 
 def send_mail(html: str, subject: str) -> None:
-    token = get_token()
-    url = f"https://graph.microsoft.com/v1.0/users/{FROM_ADDR}/sendMail"
-    payload = {
-        "message": {
-            "subject": subject,
-            "body": {"contentType": "HTML", "content": html},
-            "toRecipients": [{"emailAddress": {"address": TO_ADDR}}],
-        },
-        "saveToSentItems": True,
-    }
-    resp = requests.post(url, headers={
-        "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json",
-    }, data=json.dumps(payload), timeout=30)
-    if not resp.ok:
-        print(f"sendMail failed: {resp.status_code} {resp.text[:500]}")
-        sys.exit(2)
-    print(f"Sent confirmation to {TO_ADDR} from {FROM_ADDR}")
+    # Graph path only when the Azure app secrets exist (they don't in CI —
+    # Bobby is not tenant admin). Otherwise send via the SCG Gmail token,
+    # which CI restores every run for Par Brink pickup and which carries
+    # gmail.send scope. Before 2026-07-05 the missing secrets meant this
+    # email silently never sent.
+    if TENANT_ID and CLIENT_ID and CLIENT_SECRET:
+        token = get_token()
+        url = f"https://graph.microsoft.com/v1.0/users/{FROM_ADDR}/sendMail"
+        payload = {
+            "message": {
+                "subject": subject,
+                "body": {"contentType": "HTML", "content": html},
+                "toRecipients": [{"emailAddress": {"address": TO_ADDR}}],
+            },
+            "saveToSentItems": True,
+        }
+        resp = requests.post(url, headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+        }, data=json.dumps(payload), timeout=30)
+        if not resp.ok:
+            print(f"sendMail failed: {resp.status_code} {resp.text[:500]}")
+            sys.exit(2)
+        print(f"Sent confirmation to {TO_ADDR} from {FROM_ADDR}")
+        return
+
+    from notify_gmail import send as gmail_send
+    gmail_send(TO_ADDR, subject, html)
+    print(f"Sent confirmation to {TO_ADDR} via SCG Gmail (Graph secrets not set)")
 
 
 def main():
-    if not (TENANT_ID and CLIENT_ID and CLIENT_SECRET):
-        print("MS_TENANT_ID / MS_CLIENT_ID / MS_CLIENT_SECRET not set — skipping confirmation email.")
-        sys.exit(0)
     rows = gather_sections()
     overall = overall_status(rows)
     subject_prefix = {OK: "[OK]", WARN: "[STALE]", FAIL: "[FAIL]"}[overall]

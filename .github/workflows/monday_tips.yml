@@ -106,35 +106,22 @@ jobs:
 
       # Bobby processes tips Monday morning — a silent failure means he walks
       # into CrunchTime with nothing entered. Email fg2065 the moment this fails.
+      # Sends via the SCG Gmail token (Graph is blocked in CI — no Azure app).
       - name: Alert fg2065 on failure
         if: failure()
         continue-on-error: true
         env:
-          MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
-          MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
-          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+          SCG_OAUTH_CLIENT_JSON: ${{ secrets.SCG_OAUTH_CLIENT_JSON }}
+          SCG_GMAIL_REFRESH_TOKEN_JSON: ${{ secrets.SCG_GMAIL_REFRESH_TOKEN_JSON }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          python - <<'PYEOF'
-          import os, requests
-          tid, cid, sec = os.environ["MS_TENANT_ID"], os.environ["MS_CLIENT_ID"], os.environ["MS_CLIENT_SECRET"]
-          tok = requests.post(
-              f"https://login.microsoftonline.com/{tid}/oauth2/v2.0/token",
-              data={"client_id": cid, "client_secret": sec,
-                    "scope": "https://graph.microsoft.com/.default",
-                    "grant_type": "client_credentials"}, timeout=30).json()["access_token"]
-          body = {"message": {
-              "subject": "[FAIL] Monday Tip Entry (2065) — needs a re-run",
-              "body": {"contentType": "HTML", "content":
-                  f"<p>The Monday tip-entry workflow FAILED. Tips are NOT entered.</p>"
-                  f"<p><a href='{os.environ['RUN_URL']}'>View the failed run</a> — "
-                  f"re-run it from the Actions tab (mode=live) or tell Prometheus to re-run it.</p>"},
-              "toRecipients": [{"emailAddress": {"address": "fg2065@estep-co.com"}}]},
-              "saveToSentItems": "false"}
-          r = requests.post("https://graph.microsoft.com/v1.0/users/fg2065@estep-co.com/sendMail",
-                            headers={"Authorization": f"Bearer {tok}"}, json=body, timeout=30)
-          print("alert sendMail status:", r.status_code)
-          PYEOF
+          pip -q install google-auth google-auth-oauthlib google-api-python-client
+          mkdir -p secrets
+          printf '%s' "$SCG_OAUTH_CLIENT_JSON"        > secrets/scg_oauth_client.json
+          printf '%s' "$SCG_GMAIL_REFRESH_TOKEN_JSON" > secrets/scg_refresh_token.json
+          python scraper/notify_gmail.py --to fg2065@estep-co.com \
+            --subject "[FAIL] Monday Tip Entry (2065) - needs a re-run" \
+            --html "<p>The Monday tip-entry workflow FAILED. Tips are NOT entered.</p><p><a href='$RUN_URL'>View the failed run</a> - re-run it from the Actions tab (mode=live) or tell Prometheus to re-run it. Re-running is safe (idempotent upsert).</p>"
 
       - name: Upload debug artifacts
         if: always()

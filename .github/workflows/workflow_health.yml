@@ -6,8 +6,9 @@ name: Workflow Health Check
 # 2026-06-10 — 26 days — and nothing surfaced it. Per-workflow alerts don't
 # scale; this catches every workflow, including ones added later, forever.
 #
-# Sends NOTHING on a clean day (the daily confirmation email already covers
-# green-path status).
+# Sends NOTHING on a clean day. Email goes via the SCG Gmail token —
+# Microsoft Graph is blocked in CI (no Azure app registration; Bobby is
+# not tenant admin; the delegated SPA refresh token hard-expires in 24h).
 
 on:
   schedule:
@@ -24,17 +25,22 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 5
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
       - name: Scan last 24h for failed runs and email if any
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
-          MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
-          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+          SCG_OAUTH_CLIENT_JSON: ${{ secrets.SCG_OAUTH_CLIENT_JSON }}
+          SCG_GMAIL_REFRESH_TOKEN_JSON: ${{ secrets.SCG_GMAIL_REFRESH_TOKEN_JSON }}
           REPO: ${{ github.repository }}
         run: |
-          pip -q install requests
+          pip -q install requests google-auth google-auth-oauthlib google-api-python-client
+          mkdir -p secrets
+          printf '%s' "$SCG_OAUTH_CLIENT_JSON"        > secrets/scg_oauth_client.json
+          printf '%s' "$SCG_GMAIL_REFRESH_TOKEN_JSON" > secrets/scg_refresh_token.json
           python - <<'PYEOF'
-          import os, requests
+          import os, requests, subprocess
           from datetime import datetime, timedelta, timezone
 
           repo = os.environ["REPO"]
@@ -63,21 +69,10 @@ jobs:
                   f"<table border='1' cellpadding='6' style='border-collapse:collapse'>"
                   f"<tr><th>Workflow</th><th>Started (UTC)</th><th>Run</th></tr>{rows}</table>"
                   f"<p>Prometheus can diagnose with: <code>gh run view &lt;id&gt; --log-failed</code></p>")
-
-          tid = os.environ["MS_TENANT_ID"]
-          tok = requests.post(
-              f"https://login.microsoftonline.com/{tid}/oauth2/v2.0/token",
-              data={"client_id": os.environ["MS_CLIENT_ID"],
-                    "client_secret": os.environ["MS_CLIENT_SECRET"],
-                    "scope": "https://graph.microsoft.com/.default",
-                    "grant_type": "client_credentials"}, timeout=30).json()["access_token"]
-          body = {"message": {
-              "subject": f"[HEALTH] {len(fails)} workflow failure(s) — fiveguys-dashboard",
-              "body": {"contentType": "HTML", "content": html},
-              "toRecipients": [{"emailAddress": {"address": "fg2065@estep-co.com"}}]},
-              "saveToSentItems": "false"}
-          r = requests.post("https://graph.microsoft.com/v1.0/users/fg2065@estep-co.com/sendMail",
-                            headers={"Authorization": f"Bearer {tok}"}, json=body, timeout=30)
-          print("health email status:", r.status_code)
-          r.raise_for_status()
+          with open("health_body.html", "w", encoding="utf-8") as f:
+              f.write(html)
+          subprocess.run(["python", "scraper/notify_gmail.py",
+                          "--to", "fg2065@estep-co.com",
+                          "--subject", f"[HEALTH] {len(fails)} workflow failure(s) - fiveguys-dashboard",
+                          "--html-file", "health_body.html"], check=True)
           PYEOF
