@@ -1,2 +1,1 @@
-[2026-07-05 11:18:37] outlook-daily-pull-7am: no fg2065 emails found in lookback window
-[2026-07-06 05:16] Daily brief 5am — xlsx fill SKIPPED: parsed sales_summary.json/discount_summary.json for 7/5 not yet generated (only PDFs present) and 7/5 not in ct_sales_summary_history. CI Par Brink parse runs later; row will fill on next run.
+[2026-07-06 12:52:53] outlook-daily-pull-7am: no actionable work emails after filtering

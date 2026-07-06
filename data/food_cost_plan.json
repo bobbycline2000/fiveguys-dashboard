@@ -1,50 +1,48 @@
 {
   "store": "2065",
-  "week_start": "2026-06-22",
-  "week_end": "2026-06-28",
+  "week_start": "2026-06-29",
+  "week_end": "2026-07-05",
   "variance_week_start": "2026-06-29",
   "variance_week_end": "2026-06-30",
-  "cogs_pct_week": 23.0,
-  "cogs_pct_week_label": "2026-07-05",
+  "cogs_pct_week": 23.4,
+  "cogs_pct_week_label": "2026-05-03",
   "cogs_goal_pct": 27.5,
-  "total_over": 11486.0,
-  "generated": "2026-07-05 11:09 ET",
+  "total_over": 102.0,
+  "generated": "2026-07-06 12:52 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Cheeseburger",
-      "over_dollars": 4961.0,
-      "actual": 6388.0,
-      "theoretical": 1427.0,
+      "name": "Topping, Peanut Butter Cup",
+      "over_dollars": 64.0,
+      "actual": 67.0,
+      "theoretical": 3.0,
       "variance_pct": null,
-      "big_six": true,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "This is a miscount \u2014 the inventory wasn't counted correctly. Recount it."
       ]
     },
     {
       "rank": 2,
-      "name": "Bacon Cheeseburger",
-      "over_dollars": 4367.0,
-      "actual": 5644.0,
-      "theoretical": 1277.0,
-      "variance_pct": null,
-      "big_six": true,
+      "name": "Shake Mix",
+      "over_dollars": 19.0,
+      "actual": 74.0,
+      "theoretical": 55.0,
+      "variance_pct": -35.0,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     },
     {
       "rank": 3,
-      "name": "Little Cheeseburger",
-      "over_dollars": 2158.0,
-      "actual": 2646.0,
-      "theoretical": 488.0,
-      "variance_pct": null,
+      "name": "Ground Beef",
+      "over_dollars": 19.0,
+      "actual": 780.0,
+      "theoretical": 761.0,
+      "variance_pct": -2.0,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
