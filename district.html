@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- PWA: installable as Five Guys 2065 app -->
-<link rel="manifest" href="manifest.json" />
+
 <meta name="theme-color" content="#C8102E" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="FG 2065" />
+<meta name="apple-mobile-web-app-title" content="FG Multi-Unit" />
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
 <script>if("serviceWorker" in navigator){let refreshing=false;navigator.serviceWorker.addEventListener("controllerchange",function(){if(refreshing)return;refreshing=true;window.location.reload();});window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").then(function(reg){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")reg.update().catch(function(){});});}).catch(function(){});});}</script>
-<title>Five Guys — Louisville District Operations</title>
+<title>Five Guys — Multi-Unit Operations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -699,6 +699,53 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   .page-title { font-size: 1.4rem; }
   .last-updated { text-align: left; font-size: 0.7rem; }
 }
+
+/* ── Multi-unit store selector + blocked-card overlays ── */
+.mu-select { position: relative; flex-shrink: 0; }
+.mu-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--black); border: 1px solid var(--white-30); color: #fff;
+  padding: 7px 12px; border-radius: 7px; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2px;
+}
+.mu-btn:hover { border-color: rgba(255,255,255,0.5); }
+.mu-btn svg { width: 13px; height: 13px; stroke-width: 2; }
+.mu-caret { color: var(--white-60); font-size: 0.6rem; transition: transform 0.15s; }
+.mu-select.open .mu-caret { transform: rotate(180deg); }
+.mu-menu {
+  display: none; position: absolute; top: 115%; left: 0; z-index: 90; min-width: 240px;
+  background: #141414; border: 1px solid var(--white-12); border-radius: 10px;
+  padding: 6px; box-shadow: 0 14px 34px rgba(0,0,0,0.55);
+}
+.mu-select.open .mu-menu { display: block; }
+.mu-menu-item {
+  display: flex; gap: 10px; align-items: center; width: 100%;
+  padding: 8px 10px; background: transparent; border: none; border-radius: 7px;
+  color: var(--white-90); cursor: pointer; text-align: left; font-family: 'Inter', sans-serif;
+}
+.mu-menu-item:hover { background: rgba(255,255,255,0.07); }
+.mu-menu-item.active { background: var(--red); color: #fff; }
+.mu-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.95rem; min-width: 40px; color: #fff; }
+.mu-menu-item b { display: block; font-size: 0.75rem; font-weight: 600; }
+.mu-menu-item small { display: block; color: var(--white-60); font-size: 0.62rem; }
+.mu-menu-item.active small { color: rgba(255,255,255,0.75); }
+@media (max-width: 640px) { .topbar .mu-select { display: block !important; } }
+
+.mu-blocked { position: relative; min-height: 150px; }
+.mu-blocked > *:not(.mu-note) { opacity: 0.14; filter: blur(1.5px); pointer-events: none; }
+.card.collapsible.mu-blocked::after { display: none; }
+.mu-note {
+  position: absolute; inset: 0; z-index: 6; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 5px; text-align: center; padding: 18px;
+}
+.mu-note-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: 0.5px; text-transform: uppercase; color: #fff; }
+.mu-note-msg { font-size: 0.68rem; color: var(--white-60); max-width: 280px; line-height: 1.4; }
+.mu-note-pill {
+  font-size: 0.55rem; font-weight: 800; letter-spacing: 1.5px; padding: 3px 10px; border-radius: 20px;
+  background: var(--yellow-dim); color: var(--yellow); border: 1px solid rgba(245,168,0,0.3); margin-top: 3px;
+}
+.mu-hide { display: none !important; }
+
 </style>
 </head>
 <body>
@@ -708,8 +755,8 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   <button class="hamb" aria-label="Open menu" onclick="document.body.classList.toggle('sidebar-open')">☰</button>
   <div class="brand">
     <div>
-      <div class="brand-name">Louisville District</div>
-      <div class="brand-sub">Operations Hub</div>
+      <div class="brand-name">Five Guys Multi-Unit</div>
+      <div class="brand-sub">Multi-Unit Hub</div>
     </div>
   </div>
 </div>
@@ -729,7 +776,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
       <div class="logo-box">FG</div>
       <div>
         <div class="logo-name">Five Guys Ops</div>
-        <div class="logo-sub">Operations Hub</div>
+        <div class="logo-sub">Multi-Unit Hub</div>
       </div>
     </div>
   </div>
@@ -761,6 +808,9 @@ body.sidebar-open .sidebar-backdrop { display: block; }
     <a class="nav-item" href="Shop_Performance_Report_2065_Q1_April2026.docx" download>
       <span class="nav-ico"><i data-lucide="file-bar-chart"></i></span>Shop Report (Q1+Apr)
     </a>
+    <a class="nav-item" href="deployment.html">
+      <span class="nav-ico"><i data-lucide="users"></i></span>Crew Deployment
+    </a>
     <a class="nav-item" href="bread.html">
       <span class="nav-ico"><i data-lucide="wheat"></i></span>Bread Order
     </a>
@@ -769,6 +819,9 @@ body.sidebar-open .sidebar-backdrop { display: block; }
     </a>
     <a class="nav-item" href="manager-test.html">
       <span class="nav-ico"><i data-lucide="graduation-cap"></i></span>Manager Test
+    </a>
+    <a class="nav-item" href="hiring.html">
+      <span class="nav-ico"><i data-lucide="user-plus"></i></span>Hiring
     </a>
     <a class="nav-item" href="https://estepcompany-my.sharepoint.com/:f:/g/personal/bdavis_estep-co_com/IgDfx-Ojw7h6RoCzzi4piyycAaduNJ5ZaukANEGveXNgsSQ?e=rs65de" target="_blank" rel="noopener">
       <span class="nav-ico"><i data-lucide="folder-open"></i></span>Estep &amp; Co Documents
@@ -802,11 +855,30 @@ body.sidebar-open .sidebar-backdrop { display: block; }
 
   <!-- Topbar -->
   <div class="topbar">
-    <div class="crumb">Operations &nbsp;&rsaquo;&nbsp; <b>Overview</b></div>
+    <div class="crumb">Operations &nbsp;&rsaquo;&nbsp; <b>Multi-Unit</b></div>
     <div class="topbar-right">
-      <div class="period-toggle" id="storeSwitch"></div>
+      <div class="mu-select" id="muSelect">
+        <button class="mu-btn" id="muBtn"><i data-lucide="store"></i><span id="muSelName">FG-2065 Dixie Highway</span><span class="mu-caret">&#9662;</span></button>
+        <div class="mu-menu" id="muMenu">
+          <button class="mu-menu-item" data-store="2065"><span class="mu-num">2065</span><span><b>Dixie Highway</b><small>Louisville, KY</small></span></button>
+          <button class="mu-menu-item" data-store="384"><span class="mu-num">384</span><span><b>New Albany</b><small>New Albany, IN</small></span></button>
+          <button class="mu-menu-item" data-store="475"><span class="mu-num">475</span><span><b>Paddock Shops</b><small>Louisville, KY</small></span></button>
+          <button class="mu-menu-item" data-store="1704"><span class="mu-num">1704</span><span><b>Shelbyville Road</b><small>Louisville, KY</small></span></button>
+          <button class="mu-menu-item" data-store="1731"><span class="mu-num">1731</span><span><b>Outer Loop</b><small>Louisville, KY</small></span></button>
+          <button class="mu-menu-item" data-store="1788"><span class="mu-num">1788</span><span><b>Middletown</b><small>Louisville, KY</small></span></button>
+          <button class="mu-menu-item" data-store="1954"><span class="mu-num">1954</span><span><b>Jeffersonville</b><small>Jeffersonville, IN</small></span></button>
+          <button class="mu-menu-item" data-store="2079"><span class="mu-num">2079</span><span><b>Elizabethtown</b><small>Elizabethtown, KY</small></span></button>
+        </div>
+      </div>
+
+      <div class="period-toggle" id="periodToggle">
+        <button class="period-btn active" data-period="today">Today</button>
+        <button class="period-btn" data-period="week">Week</button>
+        <button class="period-btn" data-period="month">Month</button>
+        <button class="period-btn" data-period="quarter">Quarter</button>
+      </div>
       <div class="status-bar" id="statusBar" title="Data health — click for detail"></div>
-      <div class="date-chip">Saturday, May 23 &nbsp;2026</div>
+      <div class="date-chip">Saturday, July 4 &nbsp;2026</div>
       <button class="btn-black" id="refreshBtn" onclick="refreshDash()"><i data-lucide="refresh-cw"></i> Refresh</button>
       <div class="user-ava">BC</div>
     </div>
@@ -818,10 +890,10 @@ body.sidebar-open .sidebar-backdrop { display: block; }
     <!-- Page header -->
     <div class="page-hdr">
       <div>
-        <div class="page-title" id="storeTitle">Louisville District</div>
-        <div class="page-sub" id="storeSub">4-store district &middot; DM: Bobby Cline</div>
+        <div class="page-title">Good evening, Bobby.</div>
+        <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>6:28 PM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>5:59 PM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -832,7 +904,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="ctrl-eyebrow">The Controllables &nbsp;&mdash;&nbsp; Food Cost</div>
         <div class="ctrl-main">
           <div>
-            <div class="ctrl-value">20.7%</div>
+            <div class="ctrl-value">23.4%</div>
             <div class="ctrl-flag"><i data-lucide="flag"></i> Under Goal</div>
           </div>
           <div class="ctrl-meta">
@@ -840,22 +912,22 @@ body.sidebar-open .sidebar-backdrop { display: block; }
           </div>
         </div>
         <div class="ctrl-divider"></div>
-        <div class="ctrl-section-lbl"><span>Top 3 Variance Items</span><span class="goal-tag">05/11–05/17</span></div>
+        <div class="ctrl-section-lbl"><span>Top 3 Variance Items</span><span class="goal-tag">06/22–06/28</span></div>
         <div class="var-list">
           <div class="var-item">
             <span class="var-rank">1</span>
             <span class="var-name">Cheeseburger</span>
-            <span class="var-pct">+$5126</span>
+            <span class="var-pct">+$4961</span>
           </div>
           <div class="var-item">
             <span class="var-rank">2</span>
             <span class="var-name">Bacon Cheeseburger</span>
-            <span class="var-pct">+$3461</span>
+            <span class="var-pct">+$4367</span>
           </div>
           <div class="var-item">
             <span class="var-rank">3</span>
             <span class="var-name">Little Cheeseburger</span>
-            <span class="var-pct">+$2077</span>
+            <span class="var-pct">+$2158</span>
           </div>
         </div>
         <div class="ctrl-divider"></div>
@@ -866,7 +938,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="period-lbl">Food Cost % Week</div>
           </div>
           <div class="period-box">
-            <div class="period-val">23.4%</div>
+            <div class="period-val">—</div>
             <div class="period-lbl">Food Cost % Month</div>
           </div>
           <div class="period-box">
@@ -881,7 +953,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="ctrl-eyebrow">The Controllables &nbsp;&mdash;&nbsp; Labor</div>
         <div class="ctrl-main">
           <div>
-            <div class="ctrl-value">18.6%</div>
+            <div class="ctrl-value">24.9%</div>
             <div class="ctrl-flag"><i data-lucide="flag"></i> Over Goal</div>
           </div>
           <div class="ctrl-meta">
@@ -891,19 +963,19 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="ctrl-divider"></div>
         <div class="ctrl-stats" style="grid-template-columns: repeat(4, 1fr);">
           <div>
-            <div class="ctrl-stat-val">$991</div>
+            <div class="ctrl-stat-val">$1,061</div>
             <div class="ctrl-stat-lbl">Labor $ Today</div>
           </div>
           <div>
-            <div class="ctrl-stat-val">82.6</div>
+            <div class="ctrl-stat-val">80.5</div>
             <div class="ctrl-stat-lbl">Actual Hrs</div>
           </div>
           <div>
-            <div class="ctrl-stat-val">89.0</div>
+            <div class="ctrl-stat-val">81.5</div>
             <div class="ctrl-stat-lbl">Sched Hrs</div>
           </div>
           <div>
-            <div class="ctrl-stat-val">$12.00</div>
+            <div class="ctrl-stat-val">$13.18</div>
             <div class="ctrl-stat-lbl">Avg Hrly Wage</div>
           </div>
         </div>
@@ -911,15 +983,15 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="ctrl-section-lbl"><span>Week-to-Date Running Labor</span><span class="goal-tag">Goal 18.5%</span></div>
         <div class="period-var">
           <div class="period-box">
-            <div class="period-val">18.7%</div>
+            <div class="period-val">23.7%</div>
             <div class="period-lbl">WTD %</div>
           </div>
           <div class="period-box">
-            <div class="period-val">$5,011</div>
+            <div class="period-val">$6,409</div>
             <div class="period-lbl">WTD Labor $</div>
           </div>
           <div class="period-box">
-            <div class="period-val">407.9</div>
+            <div class="period-val">516.5</div>
             <div class="period-lbl">WTD Hours</div>
           </div>
         </div>
@@ -927,15 +999,15 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="ctrl-section-lbl"><span>Labor % by Period</span><span class="goal-tag">Goal 18.5%</span></div>
         <div class="period-var">
           <div class="period-box">
-            <div class="period-val">18.1%</div>
+            <div class="period-val">23.3%</div>
             <div class="period-lbl">Labor % Week</div>
           </div>
           <div class="period-box">
-            <div class="period-val">20.1%</div>
+            <div class="period-val">21.8%</div>
             <div class="period-lbl">Labor % Month</div>
           </div>
           <div class="period-box">
-            <div class="period-val">20.0%</div>
+            <div class="period-val">20.8%</div>
             <div class="period-lbl">Labor % Quarter</div>
           </div>
         </div>
@@ -956,36 +1028,36 @@ body.sidebar-open .sidebar-backdrop { display: block; }
           <div class="kpi-ico"><i data-lucide="dollar-sign"></i></div>
           <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;4.2%</div>
         </div>
-        <div class="kpi-val data-swap" data-today="$5,321" data-week="$26,791" data-month="$124,046" data-quarter="$128,691">$5,321</div>
+        <div class="kpi-val data-swap" data-today="$4,259" data-week="$27,068" data-month="$138,103" data-quarter="$318,306">$4,259</div>
         <div class="kpi-lbl data-swap" data-today="Daily Sales" data-week="Week Sales (WTD)" data-month="Month Sales (MTD)" data-quarter="Quarter Sales (QTD)">Daily Sales</div>
-        <div class="kpi-sub data-swap" data-today="LY $4,347 &nbsp;&middot;&nbsp; Fcst $4,845" data-week="LY $24,965 &nbsp;&middot;&nbsp; Fcst $25,464" data-month="27d &middot; $4,594/day" data-quarter="28d &middot; $4,596/day">LY $4,347 &nbsp;&middot;&nbsp; Fcst $4,845</div>
+        <div class="kpi-sub data-swap" data-today="LY $4,015 &nbsp;&middot;&nbsp; Fcst $5,365" data-week="LY $25,047 &nbsp;&middot;&nbsp; Fcst $27,611" data-month="30d &middot; $4,603/day" data-quarter="69d &middot; $4,613/day">LY $4,015 &nbsp;&middot;&nbsp; Fcst $5,365</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top">
           <div class="kpi-ico"><i data-lucide="receipt"></i></div>
           <div class="kpi-delta">&nbsp;</div>
         </div>
-        <div class="kpi-val data-swap" data-today="205" data-week="1,311" data-month="4,983" data-quarter="5,170">205</div>
+        <div class="kpi-val data-swap" data-today="175" data-week="1,320" data-month="5,689" data-quarter="12,926">175</div>
         <div class="kpi-lbl data-swap" data-today="Transactions" data-week="Transactions (WTD)" data-month="Transactions (MTD)" data-quarter="Transactions (QTD)">Transactions</div>
-        <div class="kpi-sub data-swap" data-today="980 guests &middot; $25.95 avg ticket" data-week="6,073 guests &middot; $25.00 avg" data-month="23,038 guests &middot; $24.89 avg" data-quarter="23,906 guests &middot; $24.89 avg">980 guests &middot; $25.95 avg ticket</div>
+        <div class="kpi-sub data-swap" data-today="801 guests &middot; $24.34 avg ticket" data-week="6,009 guests &middot; $24.29 avg" data-month="25,832 guests &middot; $24.28 avg" data-quarter="59,271 guests &middot; $24.63 avg">801 guests &middot; $24.34 avg ticket</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top">
           <div class="kpi-ico"><i data-lucide="tag"></i></div>
           <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;$0.60</div>
         </div>
-        <div class="kpi-val data-swap" data-today="$5.43" data-week="$5.38" data-month="$5.38" data-quarter="$5.38">$5.43</div>
+        <div class="kpi-val data-swap" data-today="$5.32" data-week="$5.29" data-month="$5.35" data-quarter="$5.37">$5.32</div>
         <div class="kpi-lbl data-swap" data-today="Sales / Guest" data-week="Sales / Guest (WTD)" data-month="Sales / Guest (MTD)" data-quarter="Sales / Guest (QTD)">Sales / Guest</div>
-        <div class="kpi-sub data-swap" data-today="Week avg $5.38" data-week="Day avg $5.43" data-month="27d avg" data-quarter="28d avg">Week avg $5.38</div>
+        <div class="kpi-sub data-swap" data-today="Week avg $5.29" data-week="Day avg $5.32" data-month="30d avg" data-quarter="69d avg">Week avg $5.29</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top">
           <div class="kpi-ico"><i data-lucide="shield-check"></i></div>
           <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;+0pts</div>
         </div>
-        <div class="kpi-val data-swap" data-today="73%" data-week="93%" data-month="96%" data-quarter="96%">73%</div>
+        <div class="kpi-val data-swap" data-today="56%" data-week="84%" data-month="90%" data-quarter="92%">56%</div>
         <div class="kpi-lbl data-swap" data-today="Compliance" data-week="Compliance (WTD)" data-month="Compliance (MTD)" data-quarter="Compliance (QTD)">Compliance</div>
-        <div class="kpi-sub data-swap" data-today="6/9 required lists" data-week="7d avg" data-month="28d avg" data-quarter="28d avg">6/9 required lists</div>
+        <div class="kpi-sub data-swap" data-today="5/9 required lists" data-week="7d avg" data-month="30d avg" data-quarter="69d avg">5/9 required lists</div>
       </div>
     </div>
 
@@ -998,7 +1070,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         </div>
         <div style="display:flex; align-items:center; gap:14px;">
           <div style="text-align:right;">
-            <div class="cm-overall-val">73%</div>
+            <div class="cm-overall-val">56%</div>
             <div class="cm-overall-lbl">Overall</div>
           </div>
           <span class="cm-badge pill pill-red">Behind</span>
@@ -1007,9 +1079,9 @@ body.sidebar-open .sidebar-backdrop { display: block; }
       <div class="cm-list">
         <div class="cm-item shift-change"><span class="cm-label">AM Pre-Shift Check</span><span class="cm-pct good">100%</span></div>
         <div class="cm-item"><span class="cm-label">11 AM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
-        <div class="cm-item shift-change"><span class="cm-label">Shift Change</span><span class="cm-pct over">57%</span></div>
+        <div class="cm-item shift-change"><span class="cm-label">Shift Change</span><span class="cm-pct over">0%</span></div>
         <div class="cm-item"><span class="cm-label">3 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
-        <div class="cm-item"><span class="cm-label">5 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
+        <div class="cm-item"><span class="cm-label">5 PM &middot; Time and Temp</span><span class="cm-pct over">5%</span></div>
         <div class="cm-item shift-change"><span class="cm-label">PM Pre-Shift Check</span><span class="cm-pct over">0%</span></div>
         <div class="cm-item"><span class="cm-label">7 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
         <div class="cm-item"><span class="cm-label">9 PM &middot; Time and Temp</span><span class="cm-pct good">100%</span></div>
@@ -1031,10 +1103,10 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         </div>
         <div class="ss-top">
           <div class="ss-score-wrap">
-            <div class="ss-score">85%</div>
-            <div class="ss-goal">Latest: <b>75%</b></div>
+            <div class="ss-score">89%</div>
+            <div class="ss-goal">Latest: <b>100%</b></div>
           </div>
-          <div class="ss-meta">Last<b>May 16</b></div>
+          <div class="ss-meta">Last<b>Jun 25</b></div>
         </div>
         <div class="ss-kpi-list">
           <div class="ss-kpi">
@@ -1118,7 +1190,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="card-title"><i data-lucide="message-square"></i> Team Notes</div>
             <div class="card-sub">Messages from GM / DM / Director</div>
           </div>
-          <div class="pill pill-white">5 new</div>
+          <div class="pill pill-white">3 new</div>
         </div>
         <!-- TEAM-NOTES-START -->
         <div class="notes-list">
@@ -1128,49 +1200,29 @@ body.sidebar-open .sidebar-backdrop { display: block; }
                 <span class="note-from">Brad Davis</span>
                 <span class="note-role director">Director of Operations</span>
               </span>
-              <span class="note-time">2026-05-18T17:39:00+00:00</span>
+              <span class="note-time">6/26</span>
             </div>
-            <div class="note-body">Way to go Bobby & Crystal! Steritech STRONG! — Brad Davis. FGE FBM Kevin Goyke also sent congratulations: 'Congrats on the now 99% food safety audit result here! Excellent work!' Score: 98 base, challenged to 99. Zero criticals. Low risk.</div>
+            <div class="note-body">The Power of One — One Brand, One Team, One Family. The Operations Manual is now the single source of truth; execute consistently in Hiring, Training, Leadership, Daily Operations. Staffing is a top priority — every GM develops two future GMs a year and keeps a minimum of six Shift Leaders. 100% shopper scores are attainable via the Halo Effect, Suggestive Selling, and grill culture.</div>
           </div>
-          <div class="note-item from-director">
+          <div class="note-item from-dm">
             <div class="note-head">
               <span>
-                <span class="note-from">Brad Davis</span>
-                <span class="note-role director">Director of Operations</span>
+                <span class="note-from">Crystal Hess</span>
+                <span class="note-role dm">District Manager</span>
               </span>
-              <span class="note-time">2026-05-18T22:17:00+00:00</span>
+              <span class="note-time">6/26</span>
             </div>
-            <div class="note-body">4 locations still remaining for Steritech this quarter (Muncie, Kokomo, New Albany, Outerloop). District average 97.71%. 100% is the goal. 2065 is ahead — keep the standards up every shift.</div>
-          </div>
-          <div class="note-item ">
-            <div class="note-head">
-              <span>
-                <span class="note-from">Today's Focus</span>
-                <span class="note-role">Supply Alert — Memorial Day</span>
-              </span>
-              <span class="note-time">2026-05-19T08:45:00-04:00</span>
-            </div>
-            <div class="note-body">Monday May 25 Memorial Day — no delivery. Mon + Tue deliveries combined on Tuesday May 26. Order early this week to cover the long weekend. Frozen proteins and buns are the risk items.</div>
+            <div class="note-body">K.P.I. Ranking: 60% of our score comes from Secret Shop scores, Customer complaints (CSPs), and Ticket times. Coach unhappy guests early, spot-check register (fry/drink/shake every time), correct grill culture, stay rush-ready. Execute the basics every shift. Reminder (6/18): any outside vendor call still needs a Hub ticket.</div>
           </div>
           <div class="note-item ">
             <div class="note-head">
               <span>
-                <span class="note-from">Today's Focus</span>
-                <span class="note-role">Tuesday Huddle Pillars</span>
+                <span class="note-from">CrunchTime Task Alert</span>
+                <span class="note-role">KY-2065 Action</span>
               </span>
-              <span class="note-time">2026-05-19T08:45:00-04:00</span>
+              <span class="note-time">7/5</span>
             </div>
-            <div class="note-body">99% on Steritech — zero criticals. Brad and FGE both acknowledged 2065 by name. Crystal is visiting locations this week — have the Shopper Dashboard on the comm board and be ready to walk KPI rankings. Blackberry LTO POS is LIVE (activated May 18). Mix on bottom row, confirm price point is set, FGU complete for all shift leads.</div>
-          </div>
-          <div class="note-item ">
-            <div class="note-head">
-              <span>
-                <span class="note-from">Today's Focus</span>
-                <span class="note-role">Cash Variance</span>
-              </span>
-              <span class="note-time">2026-05-19T08:45:00-04:00</span>
-            </div>
-            <div class="note-body">CrunchTime shows $40.00 over on 5/17. Verify with closing manager — confirm deposit was correct and no re-ring situations. 5/18 came back even. Follow up before banking today.</div>
+            <div class="note-body">Open tasks for KY-2065: Post Period Labor Not Posted (7/05), Inv-Final for Post (7/05), four L-Rev labor reviews (7/01-7/04), and receiving to reconcile (VO-Rec, LT-Rec). Facility: Hub #9709 potato-sink first faucet stripped out again (Craig Holcomb 7/4).</div>
           </div>
         </div>
         <!-- TEAM-NOTES-END -->
@@ -1192,7 +1244,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="card-title">Today's Schedule</div>
             <div class="card-sub">Scheduled vs actual hours by employee</div>
           </div>
-          <div class="pill pill-white">May 24</div>
+          <div class="pill pill-white">July 5</div>
         </div>
         <div class="schedule-tabs">
           <button class="sched-tab active" onclick="showShift('am', this)">AM Shift &nbsp;8AM&ndash;4PM</button>
@@ -1212,16 +1264,20 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             </thead>
             <tbody>
               <tr>
-                <td><div class="emp-name">Francisco M.</div><div class="emp-role">Crew</div></td>
-                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
+                <td><div class="emp-name">Serina G.</div><div class="emp-role">Crew</div></td>
+                <td>6.0</td><td class="pending">In progress</td><td class="pending">—</td>
               </tr>
               <tr>
                 <td><div class="emp-name">Brianna G.</div><div class="emp-role">Crew</div></td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">DJuan J.</div><div class="emp-role">Crew</div></td>
                 <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
               </tr>
               <tr>
                 <td><div class="emp-name">Emanuela K.</div><div class="emp-role">Crew</div></td>
-                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
               </tr>
               <tr>
                 <td><div class="emp-name">Vicki L.</div><div class="emp-role">Shift Lead</div></td>
@@ -1231,7 +1287,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <tfoot>
               <tr class="total-row">
                 <td>AM Total</td>
-                <td>31.0 hrs</td>
+                <td>36.0 hrs</td>
                 <td class="pending">Pending</td>
                 <td class="pending">—</td>
               </tr>
@@ -1253,19 +1309,11 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <tbody>
               <tr>
                 <td><div class="emp-name">Anthony P.</div><div class="emp-role">Crew</div></td>
-                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
               </tr>
               <tr>
-                <td><div class="emp-name">DJuan J.</div><div class="emp-role">Crew</div></td>
+                <td><div class="emp-name">Francisco M.</div><div class="emp-role">Crew</div></td>
                 <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Zack W.</div><div class="emp-role">Crew</div></td>
-                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Autumn H.</div><div class="emp-role">Crew</div></td>
-                <td>5.5</td><td class="pending">In progress</td><td class="pending">—</td>
               </tr>
               <tr>
                 <td><div class="emp-name">Jeremiah M.</div><div class="emp-role">Crew</div></td>
@@ -1280,14 +1328,18 @@ body.sidebar-open .sidebar-backdrop { display: block; }
                 <td>6.5</td><td class="pending">In progress</td><td class="pending">—</td>
               </tr>
               <tr>
-                <td><div class="emp-name">Kasey W.</div><div class="emp-role">Shift Lead</div></td>
-                <td>7.5</td><td class="pending">In progress</td><td class="pending">—</td>
+                <td><div class="emp-name">Christopher C.</div><div class="emp-role">Shift Lead</div></td>
+                <td>2.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Rusul K.</div><div class="emp-role">Shift Lead</div></td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
               </tr>
             </tbody>
             <tfoot>
               <tr class="total-row">
                 <td>PM Total</td>
-                <td>58.0 hrs</td>
+                <td>45.5 hrs</td>
                 <td class="pending">Pending close</td>
                 <td class="pending">—</td>
               </tr>
@@ -1311,12 +1363,12 @@ body.sidebar-open .sidebar-backdrop { display: block; }
       <div class="dr-grid" style="grid-template-columns: repeat(2, 1fr);">
         <div class="dr-box">
           <div class="dr-lbl">Total Discounts</div>
-          <div class="dr-val" id="dc-discounts-val">$168.35</div>
-          <div class="dr-sub" id="dc-discounts-sub">14 redemptions &middot; 3.16% of sales</div>
+          <div class="dr-val" id="dc-discounts-val">$228.22</div>
+          <div class="dr-sub" id="dc-discounts-sub">23 redemptions &middot; 5.36% of sales</div>
         </div>
         <div class="dr-box">
           <div class="dr-lbl">Total Comps</div>
-          <div class="dr-val" id="dc-comps-val">$47.25</div>
+          <div class="dr-val" id="dc-comps-val">$58.81</div>
           <div class="dr-sub" id="dc-comps-sub">1 types</div>
         </div>
       </div>
@@ -1335,31 +1387,33 @@ body.sidebar-open .sidebar-backdrop { display: block; }
           <tr>
             <td>100% Mrg/PR</td>
             <td>Comp</td>
-            <td class="num">2</td>
-            <td class="num">$47.25</td>
-            <td class="num">0.89%</td>
+            <td class="num">5</td>
+            <td class="num">$58.81</td>
+            <td class="num">1.38%</td>
+          </tr>
+          <tr>
+            <td>DD Promo</td>
+            <td>Discount</td>
+            <td class="num">4</td>
+            <td class="num">$28.07</td>
+            <td class="num">0.66%</td>
+          </tr>
+          <tr>
+            <td>Employee 100%</td>
+            <td>Discount</td>
+            <td class="num">1</td>
+            <td class="num">$7.09</td>
+            <td class="num">0.17%</td>
           </tr>
           <tr>
             <td>UE Promo</td>
             <td>Discount</td>
-            <td class="num">12</td>
-            <td class="num">$168.35</td>
-            <td class="num">3.16%</td>
+            <td class="num">13</td>
+            <td class="num">$193.06</td>
+            <td class="num">4.53%</td>
           </tr>
         </tbody>
       </table>
-    </div>
-
-    <!-- ══ SCHEDULE ANALYSIS (upcoming week the GM built) ══ -->
-    <div class="card collapsible" data-card-id="schedule-analysis" id="schedAnalysisCard" style="margin-bottom:14px;">
-      <div class="card-hdr">
-        <div>
-          <div class="card-title"><i data-lucide="calendar-clock"></i> Schedule Analysis &mdash; Upcoming Week</div>
-          <div class="card-sub" id="saSub">Next week the GM built &middot; scheduled labor vs target</div>
-        </div>
-        <span class="pill pill-white" id="saWeekPill">&mdash;</span>
-      </div>
-      <div id="saBody"><div class="pending">Loading schedule analysis&hellip;</div></div>
     </div>
 
     <!-- ══ SLIM ALERT STRIP ══ -->
@@ -1374,12 +1428,63 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <span class="alert-chip"><span class="alert-dot green"></span>Compliance 96% <span class="alert-time">8:09a</span></span>
       </div>
     </div>
+
+    <!-- ══ FIVE GUYS UNIVERSITY — TRAINING ══ -->
+    <div class="card collapsible collapsed" data-card-id="fgu-training">
+      <div class="cm-header-row">
+        <div>
+          <div class="card-title"><i data-lucide="graduation-cap"></i> Five Guys University &mdash; Team Training</div>
+          <div class="card-sub" id="fgu-sub">Store 2065 &middot; 34 crew &middot; 30 below 100%</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="text-align:right;">
+            <div class="cm-overall-val" id="fgu-overall">75%</div>
+            <div class="cm-overall-lbl">Completion</div>
+          </div>
+          <span class="cm-badge pill pill-red" id="fgu-badge">30 below 100%</span>
+        </div>
+      </div>
+      <div class="cm-list" id="fgu-list">
+        <div class="cm-item"><span class="cm-label">Angela Ashby &#128681;</span><span class="cm-pct over">0%</span></div>
+        <div class="cm-item"><span class="cm-label">Elizabeth Brazell &#128681;</span><span class="cm-pct over">0%</span></div>
+        <div class="cm-item"><span class="cm-label">Megan Kurschner &#128681;</span><span class="cm-pct over">0%</span></div>
+        <div class="cm-item"><span class="cm-label">Ryan Vititoe &#128681;</span><span class="cm-pct over">3%</span></div>
+        <div class="cm-item"><span class="cm-label">Rusul Kadhim</span><span class="cm-pct over">28%</span></div>
+        <div class="cm-item"><span class="cm-label">Madelynn Smith</span><span class="cm-pct over">42%</span></div>
+        <div class="cm-item"><span class="cm-label">Serina Gaskins</span><span class="cm-pct over">64%</span></div>
+        <div class="cm-item"><span class="cm-label">Jada Cox</span><span class="cm-pct over">71%</span></div>
+        <div class="cm-item"><span class="cm-label">Richard Gibbs</span><span class="cm-pct over">72%</span></div>
+        <div class="cm-item"><span class="cm-label">Anthony Pirtle</span><span class="cm-pct over">78%</span></div>
+        <div class="cm-item"><span class="cm-label">Brianna Gatewood</span><span class="cm-pct good">82%</span></div>
+        <div class="cm-item"><span class="cm-label">Francisco Llorente Mejias</span><span class="cm-pct good">82%</span></div>
+        <div class="cm-item"><span class="cm-label">Jeremiah Matthews</span><span class="cm-pct good">82%</span></div>
+        <div class="cm-item"><span class="cm-label">Robert Muncy Jr</span><span class="cm-pct good">82%</span></div>
+        <div class="cm-item"><span class="cm-label">Alissa Baungardner</span><span class="cm-pct good">86%</span></div>
+        <div class="cm-item"><span class="cm-label">Anna Coffman</span><span class="cm-pct good">86%</span></div>
+        <div class="cm-item"><span class="cm-label">Madison Cureton</span><span class="cm-pct good">86%</span></div>
+        <div class="cm-item"><span class="cm-label">Autumn Hearn</span><span class="cm-pct good">86%</span></div>
+        <div class="cm-item"><span class="cm-label">Vicki Lucey</span><span class="cm-pct good">88%</span></div>
+        <div class="cm-item"><span class="cm-label">Lidy Henry</span><span class="cm-pct good">89%</span></div>
+        <div class="cm-item"><span class="cm-label">Maylin Hernandez Rodriguez</span><span class="cm-pct good">89%</span></div>
+        <div class="cm-item"><span class="cm-label">Andrew Brangan</span><span class="cm-pct good">90%</span></div>
+        <div class="cm-item"><span class="cm-label">DJuan Johnson</span><span class="cm-pct good">90%</span></div>
+        <div class="cm-item"><span class="cm-label">R'Love Hall</span><span class="cm-pct good">93%</span></div>
+        <div class="cm-item"><span class="cm-label">Kasey Wilson</span><span class="cm-pct good">94%</span></div>
+        <div class="cm-item"><span class="cm-label">Robert Cline</span><span class="cm-pct good">95%</span></div>
+        <div class="cm-item"><span class="cm-label">Kaisha Brewer</span><span class="cm-pct good">96%</span></div>
+        <div class="cm-item"><span class="cm-label">Ailen Gonzalez Cardero</span><span class="cm-pct good">96%</span></div>
+        <div class="cm-item"><span class="cm-label">Emanuela Kamara</span><span class="cm-pct good">96%</span></div>
+        <div class="cm-item"><span class="cm-label">Mykenize Milledge</span><span class="cm-pct good">96%</span></div>
+      </div>
+    </div>
+    <!-- ══ END FGU ══ -->
+
   </div><!-- /content -->
 
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>6:28 PM</span> &nbsp;&middot;&nbsp; May 24 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>5:59 PM</span> &nbsp;&middot;&nbsp; July 5 2026</span>
   </div>
 
 </div><!-- /main -->
@@ -1387,78 +1492,6 @@ body.sidebar-open .sidebar-backdrop { display: block; }
 <!-- ══════════ JS ══════════ -->
 <script>
 lucide.createIcons();
-
-// ── District multi-store loader ──
-(async function(){
-  const sw=document.getElementById('storeSwitch'); if(!sw) return;
-  let reg;
-  try{ reg=await (await fetch('config/stores.json?cb='+Date.now())).json(); }catch(e){ return; }
-  async function load(id,name){
-    let d={}; try{ d=await (await fetch(`data/district/${id}/summary.json?cb=`+Date.now())).json(); }catch(e){}
-    const k=d.kpis||{};
-    const set=(sel,val)=>{const el=document.querySelector(sel); if(el){el.textContent=val; el.removeAttribute('data-today');}};
-    document.getElementById('storeTitle').textContent=name;
-    document.getElementById('storeSub').innerHTML=`FG-${id} &middot; Week-to-date`;
-    set('.ctrl-card.labor .ctrl-value', k.labor_pct?.value || '—');
-    set('.ctrl-card.food-cost .ctrl-value', k.food_pct?.value || '—');
-    const vals=document.querySelectorAll('.kpi-row .kpi-card .kpi-val');
-    if(vals[0]) vals[0].textContent=k.net_sales?.value||'—';
-    if(vals[1]) vals[1].textContent='—';
-    if(vals[2]) vals[2].textContent=k.sales_guest?.value||'—';
-    if(vals[3]) vals[3].textContent='—';
-    document.querySelectorAll('.kpi-row .kpi-val').forEach(el=>el.removeAttribute('data-today'));
-    document.querySelectorAll('.cm-overall-val,.ss-score').forEach(el=>el.textContent='—');
-    renderScheduleAnalysis(id);
-  }
-
-  // ── Schedule Analysis: upcoming week's schedule the GM built, per store ──
-  async function renderScheduleAnalysis(id){
-    const body=document.getElementById('saBody');
-    const sub=document.getElementById('saSub');
-    const pill=document.getElementById('saWeekPill');
-    if(!body) return;
-    let a;
-    try{ a=await (await fetch(`data/district/${id}/schedule_analysis.json?cb=`+Date.now())).json(); }
-    catch(e){ body.innerHTML='<div class="pending">No schedule analysis yet for this store.</div>'; if(pill)pill.textContent='—'; return; }
-    const w=a.week||{}; const tgt=a.target_pct||20;
-    const over=w.over_target_dollars||0;
-    const pctClass = w.labor_pct>tgt+2?'over':(w.labor_pct>tgt?'warn':'good');
-    if(sub) sub.innerHTML=`Week of ${a.week_start} &ndash; ${a.week_ending} &middot; target ${tgt}%`;
-    if(pill){ pill.textContent=`${a.issue_count||0} issue${a.issue_count===1?'':'s'}`; pill.className='pill '+(a.issue_count?(over>0?'pill-red':'pill-yellow'):'pill-green'); }
-    // summary stats
-    const stat=(v,l)=>`<div class="period-box"><div class="period-val">${v}</div><div class="period-lbl">${l}</div></div>`;
-    const summary=`<div class="period-var" style="grid-template-columns:repeat(4,1fr); margin-bottom:14px;">
-      ${stat((w.labor_pct??'—')+'%', 'Sched Labor %')}
-      ${stat((over>0?'+$':'$')+Math.abs(over).toLocaleString(), 'vs '+tgt+'% Target')}
-      ${stat('$'+(w.sched_cost||0).toLocaleString(), 'Sched Labor $')}
-      ${stat((w.ot_hours||0)+'h', 'Overtime')}
-    </div>`;
-    // punch list
-    const issues=(a.issues||[]);
-    const punch = issues.length
-      ? `<div class="var-list" style="margin-bottom:14px;">${issues.map(it=>{
-          const dot=it.sev==='high'?'red':'yellow';
-          return `<div class="var-item"><span class="alert-dot ${dot}" style="width:8px;height:8px;border-radius:50%;"></span><span class="var-name" style="white-space:normal;">${it.msg}</span></div>`;
-        }).join('')}</div>`
-      : `<div class="cm-item" style="margin-bottom:14px;"><span class="cm-label">No flags &mdash; schedule is within target.</span><span class="cm-pct good">OK</span></div>`;
-    // per-day table
-    const rows=(a.per_day||[]).map(d=>{
-      const c=d.pct>tgt+2?'var-over':(d.pct>tgt?'':'var-under');
-      return `<tr><td><span class="emp-name">${d.wd}</span></td><td>$${(d.sales||0).toLocaleString()}</td><td>${d.hrs}</td><td>$${(d.cost||0).toLocaleString()}</td><td class="${c}">${d.pct}%</td></tr>`;
-    }).join('');
-    const table=`<table class="sched-table"><thead><tr><th>Day</th><th>Fcst Sales</th><th>Sched Hrs</th><th>Sched $</th><th>Labor %</th></tr></thead><tbody>${rows}</tbody></table>`;
-    body.innerHTML = summary + punch + table;
-    if(window.lucide) lucide.createIcons();
-  }
-  reg.stores.forEach((st,i)=>{
-    const b=document.createElement('button');
-    b.className='period-btn'+(i===0?' active':'');
-    b.textContent=st.store_name;
-    b.onclick=()=>{sw.querySelectorAll('.period-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');load(st.store_id,st.store_name);};
-    sw.appendChild(b);
-  });
-  load(reg.stores[0].store_id, reg.stores[0].store_name);
-})();
 
 // ── Refresh button: hard-reload to pull latest committed data + status ──
 function refreshDash(){
@@ -1541,17 +1574,17 @@ function showShift(shift, btn) {
 // ── Labor % mini bars (11 AM – 10 PM, goal 18.5%) ──
 const LABOR_GOAL = 18.5;
 const laborData = [
-  { hr: '11A', pct: 26.4 },
-  { hr: '12P', pct: 25.1 },
-  { hr: '1P', pct: 12.3 },
-  { hr: '2P', pct: 12.3 },
-  { hr: '3P', pct: 10.4 },
-  { hr: '4P', pct: 17.8 },
-  { hr: '5P', pct: 11.9 },
-  { hr: '6P', pct: 12.4 },
-  { hr: '7P', pct: 13.7 },
-  { hr: '8P', pct: 15.7 },
-  { hr: '9P', pct: 14.5 },
+  { hr: '11A', pct: 28.2 },
+  { hr: '12P', pct: 13.7 },
+  { hr: '1P', pct: 14.7 },
+  { hr: '2P', pct: 17.9 },
+  { hr: '3P', pct: 22.9 },
+  { hr: '4P', pct: 27.6 },
+  { hr: '5P', pct: 21.1 },
+  { hr: '6P', pct: 14.2 },
+  { hr: '7P', pct: 20.0 },
+  { hr: '8P', pct: 25.9 },
+  { hr: '9P', pct: 35.5 },
   { hr: '10P', pct: 100.0 }
 ];
 const realPcts = laborData.filter(d => d.pct !== null).map(d => d.pct);
@@ -1584,5 +1617,148 @@ barsEl.parentElement.appendChild(goalLine);
 
 // (sales trend line chart removed — will return in a future iteration)
 </script>
+
+<script>
+/* ── Multi-unit store switcher (injected by build_district_dashboard.py) ── */
+(function(){
+  const MU_STORES = [{"id": "2065", "label": "FG-2065 Dixie Highway", "name": "Dixie Highway", "city": "Louisville, KY", "target": 18.5}, {"id": "384", "label": "FG-384 New Albany", "name": "New Albany", "city": "New Albany, IN", "target": 20.0}, {"id": "475", "label": "FG-475 Paddock Shops", "name": "Paddock Shops", "city": "Louisville, KY", "target": 20.0}, {"id": "1704", "label": "FG-1704 Shelbyville Rd", "name": "Shelbyville Road", "city": "Louisville, KY", "target": 20.0}, {"id": "1731", "label": "FG-1731 Outer Loop", "name": "Outer Loop", "city": "Louisville, KY", "target": 20.0}, {"id": "1788", "label": "FG-1788 Middletown", "name": "Middletown", "city": "Louisville, KY", "target": 20.0}, {"id": "1954", "label": "FG-1954 Jeffersonville", "name": "Jeffersonville", "city": "Jeffersonville, IN", "target": 20.0}, {"id": "2079", "label": "FG-2079 Elizabethtown", "name": "Elizabethtown", "city": "Elizabethtown, KY", "target": 20.0}];
+  const HOME = '2065';
+  const sel = document.getElementById('muSelect'), btn = document.getElementById('muBtn'),
+        nameEl = document.getElementById('muSelName'), menu = document.getElementById('muMenu');
+  btn.addEventListener('click', e => { e.stopPropagation(); sel.classList.toggle('open'); });
+  document.addEventListener('click', () => sel.classList.remove('open'));
+  menu.querySelectorAll('.mu-menu-item').forEach(b =>
+    b.addEventListener('click', () => { sel.classList.remove('open'); muSelect(b.dataset.store); }));
+
+  const q  = s => document.querySelector(s);
+  const qa = s => Array.from(document.querySelectorAll(s));
+  function set(el, html){ if(!el) return; if(el.dataset.muOrig === undefined) el.dataset.muOrig = el.innerHTML; el.innerHTML = html; }
+  function hide(el){ if(el) el.classList.add('mu-hide'); }
+  function block(card, title, msg, pill){
+    if(!card || card.querySelector(':scope > .mu-note')) return;
+    if(card.classList.contains('collapsed')){ card.dataset.muWasCollapsed = '1'; card.classList.remove('collapsed'); }
+    card.classList.add('mu-blocked');
+    const n = document.createElement('div'); n.className = 'mu-note';
+    n.innerHTML = '<div class="mu-note-title">' + title + '</div><div class="mu-note-msg">' + msg + '</div><div class="mu-note-pill">' + (pill || 'WIRED &mdash; AWAITING ACCESS') + '</div>';
+    card.appendChild(n);
+  }
+  function restore(){
+    qa('[data-mu-orig]').forEach(el => { el.innerHTML = el.dataset.muOrig; delete el.dataset.muOrig; });
+    qa('.mu-hide').forEach(el => el.classList.remove('mu-hide'));
+    qa('.mu-blocked').forEach(c => {
+      c.classList.remove('mu-blocked');
+      const n = c.querySelector(':scope > .mu-note'); if(n) n.remove();
+      if(c.dataset.muWasCollapsed){ c.classList.add('collapsed'); delete c.dataset.muWasCollapsed; }
+    });
+  }
+  const V = (sum, k) => (sum && sum.kpis && sum.kpis[k] && sum.kpis[k].value) || '&mdash;';
+
+  async function muSelect(id){
+    try{ localStorage.setItem('mu-store', id); }catch(e){}
+    const st = MU_STORES.find(s => s.id === id) || MU_STORES[0];
+    nameEl.textContent = st.label;
+    qa('.mu-menu-item').forEach(b => b.classList.toggle('active', b.dataset.store === st.id));
+    restore();
+    if (st.id === HOME) return; /* 2065 = the native wired page */
+
+    let sum = null, sched = null;
+    try{ const r = await fetch('data/district/' + st.id + '/summary.json?cb=' + Date.now()); if(r.ok) sum = await r.json(); }catch(e){}
+    try{ const r = await fetch('data/district/' + st.id + '/schedule_analysis.json?cb=' + Date.now()); if(r.ok) sched = await r.json(); }catch(e){}
+
+    /* header */
+    set(q('.page-title'), st.label);
+    set(q('.page-sub'), st.city + ' &nbsp;&middot;&nbsp; Multi-unit view &middot; CrunchTime week-to-date');
+    set(q('.last-updated'), 'Last updated <b>' + ((sum && sum.generated) || '&mdash;') + '</b><br>Source: CrunchTime WTD');
+    set(q('.store-chip .store-name'), 'Store ' + st.id);
+    set(q('.store-chip .store-loc'), st.city);
+    hide(q('#periodToggle'));
+
+    /* controllables — food cost */
+    set(q('.ctrl-card.food-cost .ctrl-value'), V(sum, 'food_pct'));
+    hide(q('.ctrl-card.food-cost .ctrl-flag'));
+    qa('.ctrl-card.food-cost .var-name').forEach(el => set(el, '&mdash;'));
+    qa('.ctrl-card.food-cost .var-pct').forEach(el => set(el, ''));
+    qa('.ctrl-card.food-cost .period-val').forEach(el => set(el, '&mdash;'));
+    qa('.ctrl-card.food-cost .goal-tag').forEach(el => set(el, 'CrunchTime &mdash; pending'));
+
+    /* controllables — labor */
+    set(q('.ctrl-card.labor .ctrl-value'), V(sum, 'labor_pct'));
+    const lraw = sum && sum.kpis && sum.kpis.labor_pct && sum.kpis.labor_pct.raw;
+    const lFlag = q('.ctrl-card.labor .ctrl-flag');
+    if (lFlag){ if (typeof lraw === 'number') set(lFlag, (lraw > st.target ? 'Over' : 'Under') + ' Goal (WTD)'); else hide(lFlag); }
+    set(q('.ctrl-card.labor .ctrl-goal'), 'Goal: <b>' + st.target.toFixed(1) + '%</b>');
+    qa('.ctrl-card.labor .ctrl-stat-val').forEach(el => set(el, '&mdash;'));
+    qa('.ctrl-card.labor .period-val').forEach(el => set(el, '&mdash;'));
+    qa('.ctrl-card.labor .goal-tag').forEach(el => set(el, 'Goal ' + st.target.toFixed(1) + '%'));
+    hide(q('.ctrl-card.labor .ctrl-bar-row'));
+    hide(q('.ctrl-card.labor .ctrl-hours-lbl'));
+
+    /* secondary KPI cards: sales, cash O/S (repurposed), sales/guest, compliance */
+    const cards = qa('.kpi-row .kpi-card');
+    const kpi = (c, val, lbl, sub) => { if(!c) return;
+      set(c.querySelector('.kpi-val'), val); set(c.querySelector('.kpi-lbl'), lbl);
+      set(c.querySelector('.kpi-sub'), sub); set(c.querySelector('.kpi-delta'), '&nbsp;'); };
+    kpi(cards[0], V(sum, 'net_sales'),   'Net Sales (WTD)',        'CrunchTime &middot; week-to-date');
+    kpi(cards[1], V(sum, 'cash_os'),     'Cash Over/Short (WTD)',  'CrunchTime &middot; week-to-date');
+    kpi(cards[2], V(sum, 'sales_guest'), 'Sales / Guest (WTD)',    'CrunchTime &middot; week-to-date');
+    kpi(cards[3], '&mdash;',             'Compliance',             'ComplianceMate &mdash; access pending');
+
+    /* sections wired but awaiting per-store access */
+    block(q('[data-card-id="compliancemate"]'), 'ComplianceMate',
+      'Store ' + st.id + ' checklists are wired to data/district/' + st.id + ' &mdash; waiting on ComplianceMate access for this location.');
+    block(q('[data-card-id="secret-shop"]'), 'Secret Shop',
+      'KnowledgeForce shop scores for store ' + st.id + ' are wired &mdash; waiting on account access.');
+    block(q('[data-card-id="steritech"]'), 'Steritech',
+      'Last-audit feed not yet connected for store ' + st.id + '.');
+    block(q('[data-card-id="team-notes"]'), 'Team Notes',
+      'Notes are 2065-only today. Multi-unit notes land when the daily brief covers all stores.', '2065 ONLY FOR NOW');
+    block(q('[data-card-id="discounts"]'), 'Discounts &amp; Comps',
+      'Par Brink reports for store ' + st.id + ' are not wired yet &mdash; 2065 gets these via email PDF pickup.');
+    block(q('[data-card-id="fgu-training"]'), 'Five Guys University',
+      'Training roster is pulled per-store from Schoox &mdash; store ' + st.id + ' roster not wired yet.');
+    hide(q('.alerts-strip'));
+
+    /* schedule card — real Teamworx analysis when available for this store */
+    const sc = q('[data-card-id="schedule"]');
+    if (sched && sched.week && (sched.per_day || []).length){
+      set(sc.querySelector('.card-title'), 'Upcoming Week Schedule');
+      set(sc.querySelector('.card-sub'), 'Teamworx schedule analysis &middot; week of ' + (sched.week_start || ''));
+      const pill = sc.querySelector('.pill'); if(pill) set(pill, 'Labor ' + (sched.week.labor_pct || 0).toFixed(1) + '%');
+      hide(sc.querySelector('.schedule-tabs')); hide(q('#shift-pm'));
+      const rows = sched.per_day.map(d =>
+        '<tr><td><div class="emp-name">' + (d.day || d.date || '') + '</div></td>' +
+        '<td>' + (d.sched_hours != null ? d.sched_hours.toFixed(1) : '&mdash;') + '</td>' +
+        '<td>$' + Math.round(d.fcst_sales || 0).toLocaleString() + '</td>' +
+        '<td class="' + ((d.labor_pct || 0) > st.target ? 'var-over' : 'var-under') + '">' +
+        (d.labor_pct != null ? d.labor_pct.toFixed(1) + '%' : '&mdash;') + '</td></tr>').join('');
+      set(q('#shift-am'),
+        '<table class="sched-table"><thead><tr><th>Day</th><th>Sched Hrs</th><th>Fcst Sales</th><th>Labor %</th></tr></thead>' +
+        '<tbody>' + rows + '</tbody>' +
+        '<tfoot><tr class="total-row"><td>Week</td><td>' + (sched.week.sched_hours || 0).toFixed(1) + ' hrs</td>' +
+        '<td>$' + Math.round(sched.week.fcst_sales || 0).toLocaleString() + '</td>' +
+        '<td>' + (sched.week.labor_pct || 0).toFixed(1) + '%</td></tr></tfoot></table>' +
+        ((sched.issues || []).length ? '<div style="margin-top:10px;font-size:.7rem;color:var(--yellow)">' + sched.issues.map(i => '&#9888; ' + i).join('<br>') + '</div>' : ''));
+    } else if (sched){
+      set(sc.querySelector('.card-title'), 'Upcoming Week Schedule');
+      set(sc.querySelector('.card-sub'), 'Teamworx schedule analysis');
+      hide(sc.querySelector('.schedule-tabs')); hide(q('#shift-pm'));
+      set(q('#shift-am'), '<div style="padding:14px 0;color:var(--white-60);font-size:.75rem;">No upcoming-week schedule posted in Teamworx yet for store ' + st.id + '.</div>');
+    } else {
+      block(sc, "Schedule", 'Teamworx location ID for store ' + st.id + ' not discovered yet &mdash; schedule analysis lights up once it is added to config/stores.json.');
+    }
+
+    /* footer */
+    const fspans = qa('.footer-bar > span');
+    if (fspans[0]) set(fspans[0], 'Five Guys Operations &mdash; ' + st.label + ' &mdash; Multi-Unit View');
+  }
+
+  /* boot: restore last-selected store */
+  let saved = null; try{ saved = localStorage.getItem('mu-store'); }catch(e){}
+  if (saved && saved !== HOME && MU_STORES.some(s => s.id === saved)) muSelect(saved);
+  else qa('.mu-menu-item').forEach(b => b.classList.toggle('active', b.dataset.store === HOME));
+  lucide.createIcons();
+})();
+</script>
+
 </body>
 </html>

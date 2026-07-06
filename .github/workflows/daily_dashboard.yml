@@ -393,6 +393,15 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scraper/verify_dashboard.py
 
+      # ── 5e. Rebuild the multi-unit dashboard (district.html) ──────────────
+      # district.html is generated FROM the freshly wired dashboard.html so it
+      # stays a pixel-mirror of the 2065 page. It adds the 8-store dropdown;
+      # per-store numbers load at runtime from data/district/<id>/*.json
+      # (refreshed by district_schedule.yml).
+      - name: Rebuild multi-unit district.html
+        continue-on-error: true
+        run: python scraper/build_district_dashboard.py
+
       # ── 6. Update SharePoint daily report xlsx (bdavis OneDrive) ──────────
       # Writes yesterday's row into "<MONTH> <YEAR> FG Daily Report.xlsx"
       # → sheet "2065 Dixie". Microsoft Graph workbook API; same app creds
@@ -463,7 +472,7 @@ jobs:
           # Stage dashboard + JSON snapshots. data/raw/parbrink/ JSONs are
           # critical history for aggregate_periods.py — without committing them,
           # every run starts with empty rollup history.
-          git add dashboard.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/team_notes.json data/forecast_by_day.json briefs/ || true
+          git add dashboard.html district.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/team_notes.json data/forecast_by_day.json briefs/ || true
           git add data/raw/parbrink/ data/raw/crunchtime/ data/raw/compliancemate/ data/raw/marketforce/ || true
           git add data/drafts/ data/debug-log.txt data/heal-log.txt data/debug-log.archive/ || true
           git add data/daily_numbers.json data/food_cost_plan.json data/status.json || true

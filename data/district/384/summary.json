@@ -1,20 +1,20 @@
 {
-  "store_id": "1788",
-  "store_name": "FG-1788 Middletown",
+  "store_id": "384",
+  "store_name": "FG-384 New Albany",
   "generated": "2026-07-05 20:15 ET",
   "_status": "live CrunchTime KPIs (WTD); Brink/Steritech pending",
   "kpis": {
     "net_sales": {
-      "value": "$20,219",
-      "raw": 20219.34,
+      "value": "$25,542",
+      "raw": 25541.82,
       "label": "Net Sales",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "labor_pct": {
-      "value": "26.7%",
-      "raw": 26.7323,
+      "value": "23.8%",
+      "raw": 23.7804,
       "label": "Labor %",
       "source": "CrunchTime",
       "status": "live",
@@ -33,16 +33,16 @@
       "status": "pending"
     },
     "cash_os": {
-      "value": "-$259",
-      "raw": -259.37,
+      "value": "$0",
+      "raw": 0.0,
       "label": "Cash O/S",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "sales_guest": {
-      "value": "$5.20",
-      "raw": 5.2017,
+      "value": "$5.45",
+      "raw": 5.4472,
       "label": "Sales / Guest",
       "source": "CrunchTime",
       "status": "live",
@@ -52,11 +52,11 @@
   "sections": {
     "sales": {
       "status": "live",
-      "source": "Par Brink"
+      "source": "CrunchTime"
     },
     "labor": {
       "status": "live",
-      "source": "Par Brink"
+      "source": "CrunchTime"
     },
     "food_cost": {
       "status": "pending",

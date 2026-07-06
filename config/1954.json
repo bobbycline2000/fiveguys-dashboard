@@ -1,0 +1,39 @@
+{
+  "store_id": "1954",
+  "store_name": "FG-1954 Jeffersonville",
+  "brand": "Five Guys",
+  "district": "Louisville Multi-Unit",
+
+  "crunchtime": {
+    "base_url": "https://fiveguysfr77.net-chef.com",
+    "location_id": 13038,
+    "location_code": "1954",
+    "ct_name": "IN-1954-Jeffersonville",
+    "_status": "locationId from CRUNCHTIME_API.md location table (2026-05-24 discovery); confirm on first district pull"
+  },
+
+  "compliancemate": {
+    "base_url": "https://fg-beta.compliancemate.com",
+    "location_id": "1954",
+    "report": "List Completion ALL",
+    "date_range": "Yesterday",
+    "_status": "no-creds — using placeholder until Bobby wires login"
+  },
+
+  "knowledgeforce": {
+    "_status": "no-creds — using placeholder until Bobby wires login"
+  },
+
+  "excel": { "file_name": "", "item_id": "", "sheet_tab": "1954" },
+  "netlify": { "site_url": "" },
+
+  "links": [
+    { "name": "Net Chef",     "url": "https://fiveguysfr77.net-chef.com",     "icon": "fa-chart-bar" },
+    { "name": "Schedules",    "url": "https://fiveguysfr113-em.net-chef.com", "icon": "fa-calendar-days" },
+    { "name": "TeamWorx",     "url": "https://fiveguysfr77.ct-teamworx.com",  "icon": "fa-users-clock" },
+    { "name": "Brinks",       "url": "https://admin5.parpos.com",             "icon": "fa-vault" },
+    { "name": "Bread Order",  "url": "https://bread2.fiveguys.com",           "icon": "fa-bread-slice" },
+    { "name": "Secret Shops", "url": "https://knowledgeforce.com",            "icon": "fa-user-secret" },
+    { "name": "Temps & Times","url": "https://fg-beta.compliancemate.com",    "icon": "fa-temperature-half" }
+  ]
+}

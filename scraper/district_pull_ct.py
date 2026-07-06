@@ -99,7 +99,19 @@ async def main():
                 await login(page)
                 kpis = await pull_metrics(page, loc)
                 sumf = DATA/"district"/sid/"summary.json"
-                doc = json.loads(sumf.read_text())
+                if sumf.exists():
+                    doc = json.loads(sumf.read_text())
+                else:
+                    # New store with no skeleton yet — start one so the pull never crashes.
+                    sumf.parent.mkdir(parents=True, exist_ok=True)
+                    doc = {"store_id": sid, "store_name": cfg["store_name"], "generated": None,
+                           "_status": "", "kpis": {},
+                           "sections": {"sales": {"status": "pending", "source": "CrunchTime"},
+                                        "labor": {"status": "pending", "source": "CrunchTime"},
+                                        "food_cost": {"status": "pending", "source": "CrunchTime"},
+                                        "steritech": {"status": "pending", "source": "Steritech"},
+                                        "secret_shops": {"status": "no-creds", "source": "KnowledgeForce"},
+                                        "compliancemate": {"status": "no-creds", "source": "ComplianceMate"}}}
                 doc["generated"] = now
                 doc["_status"] = "live CrunchTime KPIs (WTD); Brink/Steritech pending"
                 doc["kpis"].update(kpis)

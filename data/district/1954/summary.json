@@ -1,20 +1,20 @@
 {
-  "store_id": "1788",
-  "store_name": "FG-1788 Middletown",
+  "store_id": "1954",
+  "store_name": "FG-1954 Jeffersonville",
   "generated": "2026-07-05 20:15 ET",
   "_status": "live CrunchTime KPIs (WTD); Brink/Steritech pending",
   "kpis": {
     "net_sales": {
-      "value": "$20,219",
-      "raw": 20219.34,
+      "value": "$26,575",
+      "raw": 26575.04,
       "label": "Net Sales",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "labor_pct": {
-      "value": "26.7%",
-      "raw": 26.7323,
+      "value": "23.1%",
+      "raw": 23.1308,
       "label": "Labor %",
       "source": "CrunchTime",
       "status": "live",
@@ -33,16 +33,16 @@
       "status": "pending"
     },
     "cash_os": {
-      "value": "-$259",
-      "raw": -259.37,
+      "value": "$0",
+      "raw": 0.0,
       "label": "Cash O/S",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "sales_guest": {
-      "value": "$5.20",
-      "raw": 5.2017,
+      "value": "$5.35",
+      "raw": 5.3535,
       "label": "Sales / Guest",
       "source": "CrunchTime",
       "status": "live",
@@ -52,11 +52,11 @@
   "sections": {
     "sales": {
       "status": "live",
-      "source": "Par Brink"
+      "source": "CrunchTime"
     },
     "labor": {
       "status": "live",
-      "source": "Par Brink"
+      "source": "CrunchTime"
     },
     "food_cost": {
       "status": "pending",
