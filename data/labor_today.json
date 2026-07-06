@@ -1,17 +1,18 @@
 {
-  "date": "2026-07-04",
-  "labor_percent": 24.912,
-  "labor_dollars": 1060.91,
-  "actual_hours": 80.51,
+  "date": "2026-07-05",
+  "labor_percent": 24.91,
+  "labor_dollars": null,
+  "actual_hours": null,
   "scheduled_hours": 104.0,
-  "avg_hourly_wage": 13.18,
-  "labor_percent_wtd": 23.6774,
-  "labor_dollars_wtd": 6409.29,
-  "actual_hours_wtd": 516.46,
+  "avg_hourly_wage": null,
+  "labor_percent_wtd": 23.68,
+  "labor_dollars_wtd": null,
+  "actual_hours_wtd": null,
   "hourly_breakdown": [],
   "meta": {
     "source": "crunchtime_api",
-    "pulled_at": "2026-07-05T11:07:34",
-    "calc_id_yesterday": 7
+    "pulled_at": "2026-07-06T05:59:48",
+    "calc_id_yesterday": 1,
+    "note": "Monday week boundary: CT performance/metrics WTD resets on new week (anchored Sun Jul 5). Daily/WTD values all None for new week. Fell back to Saturday Jul 4 perf_metrics.json for labor_percent (24.91%) and labor_percent_wtd (23.68%)."
   }
 }

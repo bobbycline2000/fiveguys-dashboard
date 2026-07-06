@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "source": "food_cost_plan.json (COGS Flash email via Graph API) \u2014 P&L Playwright scrape unavailable locally",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-06-29",
+    "week_end": "2026-07-05",
+    "variance_week_start": "2026-06-29",
+    "variance_week_end": "2026-07-05",
+    "month_start": "2026-07-01",
+    "last_month_start": "2026-06-01",
+    "last_month_end": "2026-06-30",
+    "through": "2026-07-05",
+    "pulled": "2026-07-06 06:00 ET",
+    "method": "email_fallback"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 23.0,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": -4.5,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {
+      "name": "Cheeseburger",
+      "actual": 1858.0,
+      "theoretical": 410.0,
+      "over_dollars": 1448.0,
+      "variance_pct": null,
+      "rank": 1
+    },
+    {
+      "name": "Bacon Cheeseburger",
+      "actual": 1285.0,
+      "theoretical": 299.0,
+      "over_dollars": 986.0,
+      "variance_pct": null,
+      "rank": 2
+    },
+    {
+      "name": "Little Cheeseburger",
+      "actual": 690.0,
+      "theoretical": 127.0,
+      "over_dollars": 563.0,
+      "variance_pct": null,
+      "rank": 3
+    },
+    {
+      "name": "Little Bacon Cheeseburger",
+      "actual": 578.0,
+      "theoretical": 115.0,
+      "over_dollars": 463.0,
+      "variance_pct": null,
+      "rank": 4
+    },
+    {
+      "name": "Little Fry",
+      "actual": 480.0,
+      "theoretical": 97.0,
+      "over_dollars": 383.0,
+      "variance_pct": null,
+      "rank": 5
+    },
+    {
+      "name": "Milkshake",
+      "actual": 341.0,
+      "theoretical": 59.0,
+      "over_dollars": 282.0,
+      "variance_pct": null,
+      "rank": 6
+    },
+    {
+      "name": "Regular Fry",
+      "actual": 369.0,
+      "theoretical": 90.0,
+      "over_dollars": 279.0,
+      "variance_pct": null,
+      "rank": 7
+    },
+    {
+      "name": "Large Fry",
+      "actual": 322.0,
+      "theoretical": 84.0,
+      "over_dollars": 238.0,
+      "variance_pct": null,
+      "rank": 8
+    },
+    {
+      "name": "Little Cajun Fry",
+      "actual": 273.0,
+      "theoretical": 60.0,
+      "over_dollars": 213.0,
+      "variance_pct": null,
+      "rank": 9
+    },
+    {
+      "name": "Hamburger",
+      "actual": 245.0,
+      "theoretical": 57.0,
+      "over_dollars": 188.0,
+      "variance_pct": null,
+      "rank": 10
+    },
+    {
+      "name": "Topping, Oreo Cream",
+      "actual": 75.0,
+      "theoretical": 11.0,
+      "over_dollars": 64.0,
+      "variance_pct": -584.0,
+      "rank": 11
+    },
+    {
+      "name": "Lettuce",
+      "actual": 166.0,
+      "theoretical": 118.0,
+      "over_dollars": 48.0,
+      "variance_pct": -40.0,
+      "rank": 12
+    },
+    {
+      "name": "Topping, Fudge Bittersweet / NEW Chocolate Fudge Sauce",
+      "actual": 57.0,
+      "theoretical": 20.0,
+      "over_dollars": 37.0,
+      "variance_pct": -186.0,
+      "rank": 13
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 1028.0,
+      "theoretical": 992.0,
+      "over_dollars": 36.0,
+      "variance_pct": -4.0,
+      "rank": 14
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 1042.0,
+      "theoretical": 1018.0,
+      "over_dollars": 24.0,
+      "variance_pct": -2.0,
+      "rank": 15
+    },
+    {
+      "name": "Cheese",
+      "actual": 358.0,
+      "theoretical": 335.0,
+      "over_dollars": 23.0,
+      "variance_pct": -7.0,
+      "rank": 16
+    },
+    {
+      "name": "Mushroom Pcs",
+      "actual": 67.0,
+      "theoretical": 100.0,
+      "over_dollars": -33.0,
+      "variance_pct": 33.0,
+      "rank": 17
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 235.0,
+      "theoretical": 268.0,
+      "over_dollars": -33.0,
+      "variance_pct": 12.0,
+      "rank": 18
+    },
+    {
+      "name": "Peanut Butter inv",
+      "actual": -122.0,
+      "theoretical": 9.0,
+      "over_dollars": -131.0,
+      "variance_pct": null,
+      "rank": 19
+    },
+    {
+      "name": "Cajun Season",
+      "actual": -70.0,
+      "theoretical": 93.0,
+      "over_dollars": -163.0,
+      "variance_pct": 176.0,
+      "rank": 20
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
