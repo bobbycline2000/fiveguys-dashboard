@@ -1,17 +1,17 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-06-22",
-    "week_end": "2026-06-28",
-    "week_label": "6/22-6/28",
+    "week_start": "2026-06-29",
+    "week_end": "2026-07-05",
+    "week_label": "6/29-7/5",
     "month": "June",
-    "generated": "2026-07-05T21:59:27",
+    "generated": "2026-07-06T16:20:14",
     "notes": []
   },
   "sales": {
-    "forecast": null,
-    "net_sales": 31609.35,
-    "over_under": null
+    "forecast": 32591,
+    "net_sales": 31479.78,
+    "over_under": -1111.22
   },
   "food_cost": {
     "cogs_pct": 23.4,
@@ -21,23 +21,23 @@
     "var_to_goal": -4.1,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Cheeseburger",
-      "Bacon Cheeseburger",
-      "Little Cheeseburger"
+      "Topping, Peanut Butter Cup",
+      "Shake Mix",
+      "Ground Beef"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 22.42,
+    "hourly_labor_pct": 23.75,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
     "ot_hours": 0.0,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 593.74,
+    "labor_hours": 596.68,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
-    "charged_tips": 617.64
+    "charged_tips": 614.89
   },
   "food_safety": {
     "steritech_pct": null,
