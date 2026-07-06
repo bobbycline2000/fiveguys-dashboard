@@ -7,8 +7,9 @@
       "store_id": "384",
       "store_name": "New Albany",
       "short": "FG-384 New Albany",
+      "teamworx_location_id": 12384,
       "labor_target_pct": 20.0,
-      "data_status": { "crunchtime": "verified", "teamworx": "id-unknown — discover, then add teamworx_location_id", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
+      "data_status": { "crunchtime": "verified", "teamworx": "verified 2026-07-05 via list_locations", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     },
     {
       "store_id": "475",
@@ -46,15 +47,17 @@
       "store_id": "1954",
       "store_name": "Jeffersonville",
       "short": "FG-1954 Jeffersonville",
+      "teamworx_location_id": 13038,
       "labor_target_pct": 20.0,
-      "data_status": { "crunchtime": "verified", "teamworx": "id-unknown — discover, then add teamworx_location_id", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
+      "data_status": { "crunchtime": "verified", "teamworx": "verified 2026-07-05 via list_locations", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     },
     {
       "store_id": "2079",
       "store_name": "Elizabethtown",
       "short": "FG-2079 Elizabethtown",
+      "teamworx_location_id": 13044,
       "labor_target_pct": 20.0,
-      "data_status": { "crunchtime": "verified", "teamworx": "id-unknown — discover, then add teamworx_location_id", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
+      "data_status": { "crunchtime": "verified", "teamworx": "verified 2026-07-05 via list_locations", "brink": "pending-verify", "steritech": "pending-verify", "knowledgeforce": "no-creds", "compliancemate": "no-creds" }
     }
   ]
 }
