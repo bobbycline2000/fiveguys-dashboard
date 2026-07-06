@@ -164,6 +164,24 @@ def main():
     out_path = DATA_DIR / "forecast_by_day.json"
     out_path.write_text(json.dumps(out, indent=2))
     print(f"[ok] wrote {out_path}")
+
+    # ── Append to forecast_history.json so completed weeks survive the
+    # Monday roll (build_synopsis.py reads last week's forecast from here) ──
+    hist_path = DATA_DIR / "forecast_history.json"
+    try:
+        hist = json.loads(hist_path.read_text(encoding="utf-8")) if hist_path.exists() else {}
+    except Exception:
+        hist = {}
+    for d in days:
+        if d["forecast"] is None and d["actual"] is None:
+            continue
+        prev = hist.get(d["date"], {})
+        hist[d["date"]] = {
+            "forecast": d["forecast"] if d["forecast"] is not None else prev.get("forecast"),
+            "actual": d["actual"] if d["actual"] is not None else prev.get("actual"),
+        }
+    hist_path.write_text(json.dumps(dict(sorted(hist.items())), indent=2))
+    print(f"[ok] appended {hist_path} ({len(hist)} dates)")
     for d in days:
         f = f"${d['forecast']:,.0f}" if d['forecast'] is not None else "—"
         a = f"${d['actual']:,.0f}" if d['actual'] is not None else "—"

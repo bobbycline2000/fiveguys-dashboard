@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "store": "2065",
+    "week_start": "2026-06-22",
+    "week_end": "2026-06-28",
+    "week_label": "6/22-6/28",
+    "month": "June",
+    "generated": "2026-07-05T21:59:27",
+    "notes": []
+  },
+  "sales": {
+    "forecast": null,
+    "net_sales": 31609.35,
+    "over_under": null
+  },
+  "food_cost": {
+    "cogs_pct": 23.4,
+    "supplies_pct": null,
+    "total_pct": null,
+    "qtd_cogs_pct": null,
+    "var_to_goal": -4.1,
+    "goal_pct": 27.5,
+    "top_var_items": [
+      "Cheeseburger",
+      "Bacon Cheeseburger",
+      "Little Cheeseburger"
+    ]
+  },
+  "labor": {
+    "hourly_labor_pct": 22.42,
+    "labor_all_in_pct": null,
+    "labor_no_salary_pct": null,
+    "ot_hours": 0.0,
+    "qtd_labor_pct": null,
+    "qtd_labor_no_salary_pct": null,
+    "labor_hours": 593.74,
+    "cogs_labor_all_in_pct": null
+  },
+  "tips": {
+    "charged_tips": 617.64
+  },
+  "food_safety": {
+    "steritech_pct": null,
+    "criticals": null,
+    "shops_month_pct": null,
+    "shops_month_label": "July 2026",
+    "shops_qtd_pct": null,
+    "shops_qtd_count": 0,
+    "shops_ytd_pct": 85.3
+  },
+  "fgu": {
+    "overdue_rate_pct": 50,
+    "completion_rate_pct": 75.22,
+    "behind_learners": [
+      {
+        "name": "Angela Ashby",
+        "completion_pct": 0
+      },
+      {
+        "name": "Elizabeth Brazell",
+        "completion_pct": 0
+      },
+      {
+        "name": "Megan Kurschner",
+        "completion_pct": 0
+      },
+      {
+        "name": "Ryan Vititoe",
+        "completion_pct": 3
+      },
+      {
+        "name": "Rusul Kadhim",
+        "completion_pct": 28
+      },
+      {
+        "name": "Madelynn Smith",
+        "completion_pct": 42
+      },
+      {
+        "name": "Serina Gaskins",
+        "completion_pct": 64
+      },
+      {
+        "name": "Jada Cox",
+        "completion_pct": 71
+      },
+      {
+        "name": "Richard Gibbs",
+        "completion_pct": 72
+      },
+      {
+        "name": "Anthony Pirtle",
+        "completion_pct": 78
+      },
+      {
+        "name": "Brianna Gatewood",
+        "completion_pct": 82
+      },
+      {
+        "name": "Francisco Llorente Mejias",
+        "completion_pct": 82
+      }
+    ],
+    "behind_count": 30
+  },
+  "compliancemate": {
+    "completion_pct": 84.2,
+    "shake_pct": null,
+    "short_completions": null,
+    "am_pm_pct": null,
+    "shift_change_pct": null,
+    "pump_pct": null
+  }
+}

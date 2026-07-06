@@ -1,0 +1,42 @@
+name: Monday Weekly Synopsis (2065 auto-fill)
+
+# Builds data/synopsis_2065.json — the FG2065 column of Crystal's weekly
+# Market Synopsis (synopsis.html) — from data already committed by the
+# daily dashboard run (Brink + food cost + CM + shops + FGU) and the
+# Monday tips run (tips snapshot).
+#
+# Order on Mondays (UTC):
+#   09:00  daily_dashboard.yml   (Brink pickup incl. Sunday, food cost plan, CM, forecast)
+#   09:30  monday_tips.yml       (tips snapshot for week ending Sunday)
+#   13:00  THIS                  (9:00 AM EDT — reads all of the above)
+
+on:
+  schedule:
+    - cron: "0 13 * * 1"   # 9:00 AM EDT / 8:00 AM EST, Mondays
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-synopsis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Build synopsis JSON
+        run: python scraper/build_synopsis.py
+
+      - name: Commit and push
+        run: |
+          git config user.email "noreply@savior-consulting.com"
+          git config user.name "Synopsis Bot"
+          git add data/synopsis_2065.json
+          git diff --cached --quiet || git commit -m "synopsis: weekly 2065 auto-fill"
+          git pull --rebase origin main
+          git push || echo "Nothing to push"
