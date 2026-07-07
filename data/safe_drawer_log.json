@@ -553,11 +553,11 @@
     "safe_mid": 665,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
-    "d1_close": 0,
-    "d2_close": 0,
+    "safe_close": 665,
+    "d1_close": 200,
+    "d2_close": 200,
     "ct_os": -12.67,
     "notes": "",
-    "submitted_at": "2026-07-06T19:35:10.280Z"
+    "submitted_at": "2026-07-07T02:33:11.394Z"
   }
 ]
