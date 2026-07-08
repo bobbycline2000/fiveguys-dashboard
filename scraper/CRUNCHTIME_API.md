@@ -495,6 +495,19 @@ The Purchasing menu exists in `ct_menu_inventory.json`: Purchasing Overview, Cre
 
 **Status:** BLOCKED. Direct API POST returns empty. Fix path: add "PurchasingOverview", "RecentPurchaseByInvoices", "PurchaseJournal" to `api_discover_targeted.py` TARGETS dict, run discovery, capture the real POST body and date-range field names that fire with real data. Update this section when done.
 
+### 1.6b Purchases by GL — WORKING (confirmed 2026-07-06)
+
+`POST /resource/purchasesbygl/location/details` fires with real data via pure cookie-replay — no Playwright page-context needed (unlike `purchasebyinvoice/summary` above).
+
+Body:
+```json
+{"extraCriteriaMap": {"startDate": "06/29/2026", "endDate": "07/05/2026", "locationId": 13969, "hierarchyId": null, "isConsolidated": false},
+ "pagingInfo": {"page": 1, "start": 0, "limit": 2000}}
+```
+Returns per-invoice GL rows with `glDescription` + `amount`. GL categories seen for 2065: Food, Bread, Shakes, Beverage (= COGS bucket), Paper, Supplies (= the CT P&L "Supplies" line — **"Paper" and "Supplies" are separate GL codes; always sum both**), Janitorial (NOT part of the synopsis Supplies %).
+
+Owner script: `scraper/pull_cogs_supplies.py` — weekly COGS % + Supplies % for the DM Weekly Synopsis (Brad Davis's SharePoint workbook, FG2065 tab). **Caveat:** purchase/delivery-date basis, not P&L COGS basis (Beg Inv + Purchases − End Inv) — week-to-week can swing ±2-4 pts on delivery timing; month totals track much closer.
+
 ---
 
 ## Section 5 — Known constraints / gotchas
@@ -506,6 +519,7 @@ The Purchasing menu exists in `ct_menu_inventory.json`: Purchasing Overview, Cre
 - Cash Over/Short and Bank Deposit drilldowns **may not have a dedicated screen** in this CT instance — the dashboard's "Total Cash Over/Shorts" KPI plus per-register `registerSales/summary` is the highest-resolution data we've found in the internal API. Bank Deposits as a discrete object lives in the Public API's Sales Mix Service (type 7).
 - **`registerSales/summary` does NOT reflect a deposit in real-time after a manager enters it.** `totBankDeposits` stays 0 until CT's EOD batch process runs (typically overnight). If a manager enters a deposit during the day and the portal still shows 0, the value is confirmed correct in CT but won't surface via the API until the next morning. Workaround: patch `ct_sales_summary_history.json` manually with the known amount from the CT screenshot, then re-pull the next morning to let the API catch up. Root cause confirmed 2026-05-12 — salesId=6182682 (05/11/2026), $962.69 entered in CT UI but `totBankDeposits=0` returned by summary API for 6+ hours post-entry.
 - Some menuitems in `ct_menu_inventory.json` have `hasHandler: false` because the click is wired through a controller listener, not a direct handler. The discovery script handles this by trying `c.click()` → `fireEvent('click')` → `el.dom.click()` in fallback order.
+- **`registerSales/summary` silently IGNORES `gte`/`lte` comparisons in `extraFilter`** — it returns ALL records as if unfiltered. Only `"gt"` and `"lt"` are applied. For an exact date range, filter `gt` day-before / `lt` day-after and trim to the exact window in Python. (Confirmed 2026-07-06 in `pull_cogs_supplies.py`.)
 
 ---
 
