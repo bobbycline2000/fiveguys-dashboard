@@ -1,20 +1,20 @@
 {
   "store_id": "1954",
   "store_name": "FG-1954 Jeffersonville",
-  "generated": "2026-07-08 11:24 ET",
+  "generated": "2026-07-09 12:25 ET",
   "_status": "live CrunchTime KPIs (WTD); Brink/Steritech pending",
   "kpis": {
     "net_sales": {
-      "value": "$7,304",
-      "raw": 7304.12,
+      "value": "$10,732",
+      "raw": 10731.6,
       "label": "Net Sales",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "labor_pct": {
-      "value": "24.3%",
-      "raw": 24.3291,
+      "value": "26.6%",
+      "raw": 26.5561,
       "label": "Labor %",
       "source": "CrunchTime",
       "status": "live",
@@ -33,16 +33,16 @@
       "status": "pending"
     },
     "cash_os": {
-      "value": "$0",
-      "raw": 0.0,
+      "value": "-$193",
+      "raw": -192.66,
       "label": "Cash O/S",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "sales_guest": {
-      "value": "$5.27",
-      "raw": 5.2736,
+      "value": "$5.31",
+      "raw": 5.3129,
       "label": "Sales / Guest",
       "source": "CrunchTime",
       "status": "live",
