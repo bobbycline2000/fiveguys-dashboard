@@ -948,15 +948,30 @@ async def scrape() -> dict:
 
         # All data is on the first page — scroll to load all rows then extract
         raw = await extract_performance_metrics(page)
-        await browser.close()
 
         if not raw:
+            await _close_browser_safely(browser)
             raise RuntimeError(
                 f"No Performance Metrics data found for {RPT_MMDDYYYY}. "
                 "Check data/03_dashboard.png to see what the page looks like."
             )
 
-        return parse_metrics(raw)
+        # Parse BEFORE closing: browser.close() can hang indefinitely with headed
+        # Chromium on Windows. Capturing the result first means a stuck close can
+        # never cost us the scraped data.
+        result = parse_metrics(raw)
+        await _close_browser_safely(browser)
+        return result
+
+
+async def _close_browser_safely(browser, timeout: float = 20.0) -> None:
+    """browser.close() can hang forever with headed Chromium on Windows.
+    Guard it with a timeout and continue regardless — the async_playwright()
+    context teardown reaps any orphaned browser subprocess when we return."""
+    try:
+        await asyncio.wait_for(browser.close(), timeout=timeout)
+    except Exception as e:  # TimeoutError or any close-time error
+        log.warning(f"browser.close() did not return cleanly ({e!r}); continuing")
 
 
 # ─── HTML Generator ───────────────────────────────────────────────────────────
