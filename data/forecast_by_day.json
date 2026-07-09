@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated": "2026-07-08T11:08:47",
-    "today": "2026-07-08",
+    "generated": "2026-07-09T12:07:05",
+    "today": "2026-07-09",
     "this_week_mon": "2026-07-06",
     "next_week_mon": "2026-07-13",
     "week_convention": "Mon-Sun"
@@ -25,7 +25,7 @@
       "date": "2026-07-08",
       "name": "WED",
       "forecast": 4280.0,
-      "actual": null,
+      "actual": 4241.61,
       "is_next_week": false
     },
     {
@@ -59,14 +59,14 @@
     {
       "date": "2026-07-13",
       "name": "MON",
-      "forecast": 3784.0,
+      "forecast": 4000.0,
       "actual": null,
       "is_next_week": true
     },
     {
       "date": "2026-07-14",
       "name": "TUE",
-      "forecast": 3434.0,
+      "forecast": 3890.0,
       "actual": null,
       "is_next_week": true
     },
@@ -87,21 +87,21 @@
     {
       "date": "2026-07-17",
       "name": "FRI",
-      "forecast": 5186.0,
+      "forecast": 5790.0,
       "actual": null,
       "is_next_week": true
     },
     {
       "date": "2026-07-18",
       "name": "SAT",
-      "forecast": 4935.0,
+      "forecast": 5424.0,
       "actual": null,
       "is_next_week": true
     },
     {
       "date": "2026-07-19",
       "name": "SUN",
-      "forecast": 5312.0,
+      "forecast": 5690.0,
       "actual": null,
       "is_next_week": true
     }

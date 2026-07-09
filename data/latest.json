@@ -1,33 +1,33 @@
 {
   "meta": {
-    "report_date": "2026-07-07",
-    "report_display": "Tuesday, July 7, 2026",
-    "generated": "7/8/2026 at 10:53 AM"
+    "report_date": "2026-07-08",
+    "report_display": "Wednesday, July 8, 2026",
+    "generated": "7/9/2026 at 8:05 AM"
   },
   "sales": {
-    "net": 3078.0,
-    "net_week": 6987.0,
-    "ly": 3519.0,
-    "ly_week": 6713.0,
-    "forecast": 3514.0,
-    "forecast_week": 7367.0,
-    "vs_ly": 441.0,
-    "vs_ly_week": 274.0,
-    "vs_forecast": -436.0,
-    "per_guest": 5.1,
-    "per_guest_week": 5.16
+    "net": 4242.0,
+    "net_week": 11229.0,
+    "ly": 3394.0,
+    "ly_week": 10107.0,
+    "forecast": 4280.0,
+    "forecast_week": 11647.0,
+    "vs_ly": 848.0,
+    "vs_ly_week": 1122.0,
+    "vs_forecast": -38.0,
+    "per_guest": 5.08,
+    "per_guest_week": 5.13
   },
   "labor": {
-    "cost": 25.0,
-    "cost_week": 25.0,
-    "pct": 30.44,
-    "pct_week": 29.3,
+    "cost": null,
+    "cost_week": null,
+    "pct": 32.39,
+    "pct_week": 30.47,
     "actual_hours": 0.0,
-    "actual_hours_week": 18.5,
-    "sched_hours": 70.5,
-    "sched_hours_week": 163.5,
+    "actual_hours_week": 0.0,
+    "sched_hours": 93.75,
+    "sched_hours_week": 257.25,
     "hours_variance": null,
-    "productivity": 50.0,
+    "productivity": 46.0,
     "productivity_week": 45.0,
     "hours_var": null
   },
@@ -37,62 +37,62 @@
   "comps": [
     {
       "name": "Comps and Discounts",
-      "day": "$47.01",
+      "day": "$93.82",
       "week": "$47.01"
     }
   ],
   "raw": {
     "Actual Net Sales": {
-      "day": "$3,078",
-      "week": "$6,987"
+      "day": "$4,242",
+      "week": "$11,229"
     },
     "Last Year Same Day": {
-      "day": "$3,519",
-      "week": "$6,713"
+      "day": "$3,394",
+      "week": "$10,107"
     },
     "Forecasted Sales": {
-      "day": "$3,514",
-      "week": "$7,367"
+      "day": "$4,280",
+      "week": "$11,647"
     },
     "Net Sales to Last Year": {
-      "day": "$441",
-      "week": "$274"
+      "day": "$848",
+      "week": "$1,122"
     },
     "Actual Labor": {
-      "day": "25",
-      "week": "25"
+      "day": "",
+      "week": ""
     },
     "Hours Variance": {
       "day": "",
       "week": ""
     },
     "Labor % of Net Sales": {
-      "day": "30.44%",
-      "week": "29.30%"
+      "day": "32.39%",
+      "week": "30.47%"
     },
     "Total Cash Over/Short": {
       "day": "$0.00",
       "week": "$0.00"
     },
     "Comps and Discounts": {
-      "day": "$47.01",
+      "day": "$93.82",
       "week": "$47.01"
     },
     "Sales / Guest": {
-      "day": "$5.10",
-      "week": "$5.16"
+      "day": "$5.08",
+      "week": "$5.13"
     },
     "Labor Productivity": {
-      "day": "$50",
+      "day": "$46",
       "week": "$45"
     },
     "Actual Hours": {
       "day": "0.00",
-      "week": "18.50"
+      "week": "0.00"
     },
     "Scheduled Hours": {
-      "day": "70.50",
-      "week": "163.50"
+      "day": "93.75",
+      "week": "257.25"
     }
   }
 }
