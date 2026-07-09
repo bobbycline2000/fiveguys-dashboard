@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-07-06",
+  "as_of": "2026-07-09",
   "current_month": "2026-07",
   "current_month_label": "July 2026",
-  "store_avg_month": null,
+  "store_avg_month": 85.0,
   "store_avg_ytd": 85.3,
-  "shop_count_month": 0,
-  "shop_count_ytd": 37,
+  "shop_count_month": 1,
+  "shop_count_ytd": 38,
   "managers": [
     {
       "first": "Madison",
@@ -164,6 +164,12 @@
   ],
   "latest_shops": [
     {
+      "date": "2026-07-03",
+      "score": 85.0,
+      "meal_period": "Lunch",
+      "on_shift": []
+    },
+    {
       "date": "2026-06-25",
       "score": 100.0,
       "meal_period": "Dinner",
@@ -205,18 +211,6 @@
         "Madison Cureton",
         "Maylin Hernandez Rodriguez",
         "Richard Gibbs"
-      ]
-    },
-    {
-      "date": "2026-06-04",
-      "score": 100.0,
-      "meal_period": "Lunch",
-      "on_shift": [
-        "Brianna Gatewood",
-        "Kaisha Brewer",
-        "Lidy Henry",
-        "Vicki Lucey",
-        "Zack Whitten"
       ]
     }
   ]
