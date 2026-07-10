@@ -279,7 +279,10 @@ def _cli_list_completions(args: argparse.Namespace) -> int:
 
     out_dir = DATA_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / "compliancemate.json"
+    # Default filename preserves prior behavior. --out lets same-day preventive
+    # sweeps (compliance-sweep agent, date=today) write to a separate file so
+    # they never clobber the canonical yesterday-based dashboard feed.
+    out_path = out_dir / (args.out or "compliancemate.json")
     out_path.write_text(json.dumps(out, indent=2))
     print(f"OK  {out['list_count']} lists, overall {out['overall_required_pct']}% req / "
           f"{out['overall_all_pct']}% all  ->  {out_path}")
@@ -293,6 +296,10 @@ def main() -> int:
     pr.add_argument("--store", required=True, choices=list(STORES.keys()))
     pr.add_argument("--date",  default="yesterday",
                     help="'today' | 'yesterday' | 'YYYY-MM-DD' (default: yesterday)")
+    pr.add_argument("--out", default=None,
+                    help="Output filename under data/ (default: compliancemate.json). "
+                         "Use e.g. compliancemate_today.json for same-day sweeps so the "
+                         "canonical dashboard feed is never overwritten.")
     pr.set_defaults(fn=_cli_list_completions)
     args = p.parse_args()
     return args.fn(args)
