@@ -472,7 +472,20 @@ jobs:
           # Stage dashboard + JSON snapshots. data/raw/parbrink/ JSONs are
           # critical history for aggregate_periods.py — without committing them,
           # every run starts with empty rollup history.
-          git add dashboard.html district.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/team_notes.json data/forecast_by_day.json briefs/ || true
+          #
+          # NOTE (2026-07-10): each path below is added INDIVIDUALLY, not as one
+          # space-separated `git add` call. `git add a b c` fails ALL-OR-NOTHING —
+          # if even one literal pathspec doesn't exist on disk ("did not match any
+          # files"), git aborts the ENTIRE invocation and stages NOTHING, even the
+          # files that do exist. The trailing `|| true` only hides that failure
+          # from the shell; it does not stage the files. This silently dropped
+          # data/labor_today.json (and everything else on the line) for weeks
+          # whenever data/cm_results_source.html was absent — root cause of the
+          # "Labor % dashboard.html does NOT contain X%" backup-run FAIL emails.
+          for f in dashboard.html district.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/team_notes.json data/forecast_by_day.json; do
+            git add -- "$f" 2>/dev/null || true
+          done
+          git add briefs/ || true
           git add data/raw/parbrink/ data/raw/crunchtime/ data/raw/compliancemate/ data/raw/marketforce/ || true
           git add data/drafts/ data/debug-log.txt data/heal-log.txt data/debug-log.archive/ || true
           git add data/daily_numbers.json data/food_cost_plan.json data/status.json || true
