@@ -2,7 +2,7 @@
   "meta": {
     "report_date": "2026-07-09",
     "report_display": "Thursday, July 9, 2026",
-    "generated": "7/10/2026 at 8:15 AM"
+    "generated": "7/10/2026 at 1:17 PM"
   },
   "sales": {
     "net": 4858.0,
@@ -22,8 +22,8 @@
     "cost_week": null,
     "pct": 21.24,
     "pct_week": 27.68,
-    "actual_hours": 30.77,
-    "actual_hours_week": 0.0,
+    "actual_hours": 0.0,
+    "actual_hours_week": 30.77,
     "sched_hours": 87.25,
     "sched_hours_week": 329.75,
     "hours_variance": null,
@@ -72,7 +72,7 @@
     },
     "Total Cash Over/Short": {
       "day": "$0.00",
-      "week": "$0.00"
+      "week": "$80.64"
     },
     "Comps and Discounts": {
       "day": "$47.01",
@@ -87,8 +87,8 @@
       "week": "$51"
     },
     "Actual Hours": {
-      "day": "30.77",
-      "week": "0.00"
+      "day": "0.00",
+      "week": "30.77"
     },
     "Scheduled Hours": {
       "day": "87.25",

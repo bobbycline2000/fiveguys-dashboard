@@ -5,24 +5,18 @@
     "report_date": "2026-07-10",
     "week_start": "2026-07-06",
     "week_end": "2026-07-12",
-    "generated": "2026-07-10T08:15:36-04:00",
+    "generated": "2026-07-10T13:16:54-04:00",
     "source_url": "https://fiveguysfr77.ct-teamworx.com/views/manager/tablet/home.jsp"
   },
   "totals_by_day": {
-    "2026-07-10": 105.0
+    "2026-07-10": 86.0
   },
   "schedule": {
     "2026-07-10": {
       "date": "2026-07-10",
       "day_of_week": "Friday",
-      "scheduled_hours": 105.0,
+      "scheduled_hours": 86.0,
       "shifts": [
-        {
-          "name": "Zack W.",
-          "role": "Crew",
-          "start": "10:00 AM",
-          "end": "02:00 PM"
-        },
         {
           "name": "Kaisha B.",
           "role": "Crew",
@@ -54,21 +48,9 @@
           "end": "11:00 PM"
         },
         {
-          "name": "Brianna G.",
-          "role": "Crew",
-          "start": "04:00 PM",
-          "end": "11:00 PM"
-        },
-        {
           "name": "Elizabeth B.",
           "role": "Crew",
           "start": "04:00 PM",
-          "end": "11:00 PM"
-        },
-        {
-          "name": "Maylin R.",
-          "role": "Crew",
-          "start": "03:00 PM",
           "end": "11:00 PM"
         },
         {
@@ -113,14 +95,8 @@
   "today": {
     "date": "2026-07-10",
     "day_of_week": "Friday",
-    "scheduled_hours": 105.0,
+    "scheduled_hours": 86.0,
     "shifts": [
-      {
-        "name": "Zack W.",
-        "role": "Crew",
-        "start": "10:00 AM",
-        "end": "02:00 PM"
-      },
       {
         "name": "Kaisha B.",
         "role": "Crew",
@@ -152,21 +128,9 @@
         "end": "11:00 PM"
       },
       {
-        "name": "Brianna G.",
-        "role": "Crew",
-        "start": "04:00 PM",
-        "end": "11:00 PM"
-      },
-      {
         "name": "Elizabeth B.",
         "role": "Crew",
         "start": "04:00 PM",
-        "end": "11:00 PM"
-      },
-      {
-        "name": "Maylin R.",
-        "role": "Crew",
-        "start": "03:00 PM",
         "end": "11:00 PM"
       },
       {
