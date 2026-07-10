@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-07-09",
+  "as_of": "2026-07-10",
   "current_month": "2026-07",
   "current_month_label": "July 2026",
   "store_avg_month": 85.0,
@@ -18,10 +18,10 @@
     {
       "first": "Vicki",
       "name": "Vicki Lucey",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 86.5,
-      "ytd_n": 13
+      "month_avg": 85.0,
+      "month_n": 1,
+      "ytd_avg": 86.4,
+      "ytd_n": 14
     },
     {
       "first": "Kasey",
@@ -60,10 +60,10 @@
     {
       "first": "Bobby",
       "name": "Robert Cline",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 97.4,
-      "ytd_n": 5
+      "month_avg": 85.0,
+      "month_n": 1,
+      "ytd_avg": 95.3,
+      "ytd_n": 6
     },
     {
       "first": "Bri",
@@ -92,10 +92,10 @@
     {
       "first": "Jeremiah",
       "name": "Jeremiah Matthews",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 89.7,
-      "ytd_n": 17
+      "month_avg": 85.0,
+      "month_n": 1,
+      "ytd_avg": 89.4,
+      "ytd_n": 18
     },
     {
       "first": "Richard",
@@ -108,10 +108,10 @@
     {
       "first": "Lidy",
       "name": "Lidy Henry",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 86.6,
-      "ytd_n": 16
+      "month_avg": 85.0,
+      "month_n": 1,
+      "ytd_avg": 86.5,
+      "ytd_n": 17
     },
     {
       "first": "Mike",
@@ -132,18 +132,18 @@
     {
       "first": "Maylin",
       "name": "Maylin Hernandez Rodriguez",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 82.9,
-      "ytd_n": 22
+      "month_avg": 85.0,
+      "month_n": 1,
+      "ytd_avg": 83.0,
+      "ytd_n": 23
     },
     {
       "first": "Francisco",
       "name": "Francisco Llorente Mejias",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 80.8,
-      "ytd_n": 22
+      "month_avg": 85.0,
+      "month_n": 1,
+      "ytd_avg": 81.0,
+      "ytd_n": 23
     },
     {
       "first": "Samuel",
@@ -167,7 +167,14 @@
       "date": "2026-07-03",
       "score": 85.0,
       "meal_period": "Lunch",
-      "on_shift": []
+      "on_shift": [
+        "Robert Cline",
+        "Francisco Llorente Mejias",
+        "Jeremiah Matthews",
+        "Lidy Henry",
+        "Maylin Hernandez Rodriguez",
+        "Vicki Lucey"
+      ]
     },
     {
       "date": "2026-06-25",
