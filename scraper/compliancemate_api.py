@@ -137,6 +137,7 @@ def get_list_completions(
     location_id: str,
     target_date: str,
     csrf: str | None = None,
+    report_type: str = "list_completions",
 ) -> dict:
     """
     target_date: 'YYYY-MM-DD' string (the day to report on).
@@ -162,7 +163,7 @@ def get_list_completions(
         "report_filters_presenter[filter_for]": "reports_form",
         "report_filters_presenter[filter_type]": "lists",
         "report_filters_presenter[name]": "",
-        "report_filters_presenter[report_type]": "list_completions",
+        "report_filters_presenter[report_type]": report_type,
         "report_form_submit": "true",
         "requested_timezone": "America/New_York",
     }
@@ -201,7 +202,7 @@ def get_list_completions(
         "report_filters_presenter[filter_for]": "reports_form",
         "report_filters_presenter[filter_type]": "lists",
         "report_filters_presenter[name]": "",
-        "report_filters_presenter[report_type]": "list_completions",
+        "report_filters_presenter[report_type]": report_type,
     }
     r2 = session.get(f"{BASE}/groups/{group_id}/report/list_completions",
                      params=drill_params,
@@ -251,6 +252,7 @@ def get_list_completions(
         "lists":                lists,
         "fetched_at":           datetime.now(tz=ET).isoformat(),
         "source":               "compliancemate_url_replay",
+        "report_type":          report_type,
     }
 
 

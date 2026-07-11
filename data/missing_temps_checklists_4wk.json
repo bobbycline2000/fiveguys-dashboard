@@ -1,0 +1,383 @@
+{
+  "store": "2065",
+  "window": {
+    "start": "2026-06-14",
+    "end": "2026-07-11"
+  },
+  "pulled_at": "2026-07-11T14:04:43.777432-04:00",
+  "missing_items": [
+    {
+      "date": "2026-06-15",
+      "day_of_week": "Monday",
+      "category": "CHECKLIST",
+      "shift": "AM",
+      "task_name": "AM Pre-Shift Check",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-15",
+      "day_of_week": "Monday",
+      "category": "SHIFT_CHANGE_TEMP",
+      "shift": "SHIFT_CHANGE",
+      "task_name": "1PM: Time and Temp",
+      "status": "INCOMPLETE",
+      "required_pct": 6,
+      "all_pct": 6
+    },
+    {
+      "date": "2026-06-16",
+      "day_of_week": "Tuesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-17",
+      "day_of_week": "Wednesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Milkshake Pump Cleaning Check",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-17",
+      "day_of_week": "Wednesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-19",
+      "day_of_week": "Friday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-20",
+      "day_of_week": "Saturday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-23",
+      "day_of_week": "Tuesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-23",
+      "day_of_week": "Tuesday",
+      "category": "PM_TEMP",
+      "shift": "PM",
+      "task_name": "9PM: Time and Temp",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-24",
+      "day_of_week": "Wednesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Milkshake Pump Cleaning Check",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-25",
+      "day_of_week": "Thursday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-25",
+      "day_of_week": "Thursday",
+      "category": "PM_TEMP",
+      "shift": "PM",
+      "task_name": "9PM: Time and Temp",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-26",
+      "day_of_week": "Friday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "INCOMPLETE",
+      "required_pct": 45,
+      "all_pct": 45
+    },
+    {
+      "date": "2026-06-27",
+      "day_of_week": "Saturday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "INCOMPLETE",
+      "required_pct": 44,
+      "all_pct": 44
+    },
+    {
+      "date": "2026-06-27",
+      "day_of_week": "Saturday",
+      "category": "PM_TEMP",
+      "shift": "PM",
+      "task_name": "5PM: Time and Temp",
+      "status": "INCOMPLETE",
+      "required_pct": 5,
+      "all_pct": 5
+    },
+    {
+      "date": "2026-06-28",
+      "day_of_week": "Sunday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-29",
+      "day_of_week": "Monday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-30",
+      "day_of_week": "Tuesday",
+      "category": "CHECKLIST",
+      "shift": "PM",
+      "task_name": "PM Pre-Shift Check",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-30",
+      "day_of_week": "Tuesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-06-30",
+      "day_of_week": "Tuesday",
+      "category": "PM_TEMP",
+      "shift": "PM",
+      "task_name": "5PM: Time and Temp",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-01",
+      "day_of_week": "Wednesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Milkshake Pump Cleaning Check",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-01",
+      "day_of_week": "Wednesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-04",
+      "day_of_week": "Saturday",
+      "category": "CHECKLIST",
+      "shift": "PM",
+      "task_name": "PM Pre-Shift Check",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-04",
+      "day_of_week": "Saturday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-04",
+      "day_of_week": "Saturday",
+      "category": "PM_TEMP",
+      "shift": "PM",
+      "task_name": "5PM: Time and Temp",
+      "status": "INCOMPLETE",
+      "required_pct": 5,
+      "all_pct": 5
+    },
+    {
+      "date": "2026-07-04",
+      "day_of_week": "Saturday",
+      "category": "SHIFT_CHANGE_TEMP",
+      "shift": "SHIFT_CHANGE",
+      "task_name": "Shift Change",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-05",
+      "day_of_week": "Sunday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-06",
+      "day_of_week": "Monday",
+      "category": "AM_TEMP",
+      "shift": "AM",
+      "task_name": "11AM: Time and Temp",
+      "status": "INCOMPLETE",
+      "required_pct": 95,
+      "all_pct": 95
+    },
+    {
+      "date": "2026-07-06",
+      "day_of_week": "Monday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-08",
+      "day_of_week": "Wednesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Milkshake Pump Cleaning Check",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-08",
+      "day_of_week": "Wednesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "INCOMPLETE",
+      "required_pct": 55,
+      "all_pct": 55
+    },
+    {
+      "date": "2026-07-10",
+      "day_of_week": "Friday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-11",
+      "day_of_week": "Saturday",
+      "category": "CHECKLIST",
+      "shift": "PM",
+      "task_name": "PM Pre-Shift Check",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-11",
+      "day_of_week": "Saturday",
+      "category": "SHIFT_CHANGE_TEMP",
+      "shift": "SHIFT_CHANGE",
+      "task_name": "3PM: Time and Temp",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    },
+    {
+      "date": "2026-07-11",
+      "day_of_week": "Saturday",
+      "category": "SHIFT_CHANGE_TEMP",
+      "shift": "SHIFT_CHANGE",
+      "task_name": "Shift Change",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0
+    }
+  ],
+  "days_fully_compliant": [
+    "2026-06-14",
+    "2026-06-18",
+    "2026-06-21",
+    "2026-06-22",
+    "2026-07-02",
+    "2026-07-03",
+    "2026-07-07",
+    "2026-07-09"
+  ],
+  "flagged_lists_never_active": [
+    "Battery Swap Checklist",
+    "Calibration Test",
+    "Closing",
+    "Delivery Check",
+    "MMCCA",
+    "Operational Spot Check",
+    "Pre Open",
+    "Temperature Sample",
+    "Weekly Store Inspection"
+  ],
+  "notes": "Categorization is our interpretation of ComplianceMate's list names into AM_TEMP / PM_TEMP / SHIFT_CHANGE_TEMP / CHECKLIST -- CM has no native 4-bucket taxonomy. See scraper/COMPLIANCEMATE_API.md for the mapping table. | LATE status is not derivable from the list_completions endpoint (no per-entry timestamps vs due-time) -- only MISSED (0%) and INCOMPLETE (1-99%) are reported. A true LATE distinction would require drilling into each list's /responses?date=...&list_id=... page per entry. | Lists with unconfirmed cadence (Weekly Store Inspection, Delivery Check, Temperature Sample, Calibration Test, Operational Spot Check, Battery Swap Checklist, MMCCA, Pre Open, Closing, Closing Checklist) that sat at 0% on EVERY day of the 4-week window are EXCLUDED from missing_items (see flagged_lists_never_active) -- a constant 0% across 28 straight days is more consistent with an inactive/superseded CM list than a genuine daily miss; if any of these should be daily-required, tell Bobby's CM Professor and they get promoted into missing_items on re-run. Any of these lists that DID show activity somewhere in the window are included as CHECKLIST items on the days they fell short. | 2026-07-11 is TODAY -- that day's checklists are still in progress at pull time, not a final end-of-day snapshot. Re-pull after close for a final read on today. | Unknown list names encountered (not in the known taxonomy, defaulted to CHECKLIST/N/A): Milkshake Pump Cleaning Check",
+  "day_errors": []
+}

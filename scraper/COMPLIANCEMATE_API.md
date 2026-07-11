@@ -79,10 +79,36 @@ Returns the full Rails view (~35 KB HTML). The data lives in repeating
 
 ### `report_type` values
 
+**CORRECTION (2026-07-11):** the "INVALID" value below was wrong — it was a guess, never actually
+tested against the live server. The real second report type, confirmed working by reading
+`scrape_compliancemate.py`'s `navigate_to_list_completion()` (which selects
+`select#report_filters_presenter_report_type` with `value="all_list_completions"`) and replaying
+it via pure `requests`, is `all_list_completions` — one word, no underscore before "list".
+
 | Value | Meaning |
 |---|---|
-| `list_completions`     | Required-only completion (the "Req" column) — what we use today |
-| `list_completions_all` | INVALID — server returns 500. Use `list_completions` and read the second percentage in the "X% \| Y%" pair for "All" |
+| `list_completions`     | **Narrower than the name suggests.** Returns only a subset of lists — observed to include just the `*: Time and Temp` rounds + the day-named Milkshake Cleaning Check. It does **NOT** include `AM Pre-Shift Check`, `PM Pre-Shift Check`, `Shift Change`, or any of the periodic/audit lists, even on days those were completed at 100%. Do not use this report type alone to reason about checklist compliance — it silently omits real, active lists. |
+| `all_list_completions` | The **complete** list roster for the location/date, whether "required" or not — matches what `scrape_compliancemate.py` (Playwright) and the canonical `data/compliancemate.json` dashboard feed show (20 lists for KY-2065: 6× Time and Temp, AM/PM Pre-Shift Check, Shift Change, day-named Milkshake Cleaning Check, plus periodic/audit lists — see taxonomy below). **Use this for any report that needs Pre-Shift Check or Shift Change status**, or for any historical/date-range pull where completeness matters more than a single "required %" headline number. `compliancemate_api.get_list_completions()` takes an optional `report_type=` kwarg (default stays `list_completions` to preserve the existing CI/dashboard pipeline's behavior unchanged) — pass `report_type="all_list_completions"` explicitly to get the full roster. |
+
+### Known list-name taxonomy (store 2065, discovered 2026-07-11 via a 4-week `all_list_completions` pull)
+
+ComplianceMate has no native "AM temp / PM temp / shift-change temp / checklist" bucketing — this
+mapping is our interpretation, used by `scraper/report_missing_temps_checklists.py`:
+
+| Bucket | List names |
+|---|---|
+| `AM_TEMP` | `11AM: Time and Temp` |
+| `SHIFT_CHANGE_TEMP` | `Shift Change`, `1PM: Time and Temp`, `3PM: Time and Temp` |
+| `PM_TEMP` | `5PM: Time and Temp`, `7PM: Time and Temp`, `9PM: Time and Temp` |
+| `CHECKLIST` (confirmed daily-active) | `AM Pre-Shift Check`, `PM Pre-Shift Check`, day-named `<Day> Milkshake Cleaning Check` (e.g. `Tuesday Milkshake Cleaning Check`, `Friday Milkshake Cleaning Check` — NOT Friday-only, appears on multiple weekdays) |
+| `CHECKLIST` (active-but-intermittent, observed 2026-06-14→2026-07-11) | `Closing Checklist` — showed real completion activity (44–55%) on several days, so it's a live list, just chronically under-completed |
+| Unconfirmed cadence — **excluded from missing-item reports unless observed active** | `Weekly Store Inspection`, `Delivery Check`, `Temperature Sample`, `Calibration Test`, `Operational Spot Check`, `Battery Swap Checklist`, `MMCCA`, `Pre Open`, `Closing` — all sat at a flat 0%\|0% on **every single day** of a 28-day window (2026-06-14→2026-07-11). That pattern reads as inactive/superseded CM list config (e.g. `Pre Open`/`Closing` look like legacy names predated by `AM/PM Pre-Shift Check`) rather than a genuine daily miss — flagging 28 straight "MISSED" rows for a list nobody is expected to touch would be a false alarm, not a real compliance gap. If any of these turn out to be genuinely required, promote them into the confirmed-daily set and re-run.
+| Unknown / not yet catalogued | `Milkshake Pump Cleaning Check` — distinct from the day-named milkshake list, cause/cadence not yet confirmed; currently falls back to `CHECKLIST` bucket by default so it isn't silently dropped |
+
+**LATE status is not derivable** from either report type — no per-entry timestamp vs. due-time is
+exposed at this level. Only `MISSED` (0%) and `INCOMPLETE` (1–99%) can be reported. A true `LATE`
+read would require drilling into each list's `/responses?date=...&list_id=...` page per entry —
+not yet attempted; flag as a future discovery pass if Bobby wants LATE granularity.
 
 ### `date_range` values
 
@@ -170,6 +196,26 @@ maybe different paths under `/groups/{GROUP_ID}/`.
 3. Once parity confirmed, swap the dashboard wire and retire `scrape_compliancemate.py`.
 4. Move the daily run from CI Playwright step → lighter CI step (no Playwright = faster, cheaper,
    no headless Chromium install).
+
+## Historical / date-range reporting (added 2026-07-11)
+
+`scraper/report_missing_temps_checklists.py` loops `compliancemate_api.get_list_completions()`
+(with `report_type="all_list_completions"`) over an arbitrary `--start`/`--end` date window and
+produces a single JSON report of every MISSED/INCOMPLETE item, bucketed into
+AM_TEMP/PM_TEMP/SHIFT_CHANGE_TEMP/CHECKLIST per the taxonomy above:
+
+```
+python scraper/report_missing_temps_checklists.py --store 2065 \
+    --start 2026-06-14 --end 2026-07-11 \
+    --out data/missing_temps_checklists_4wk.json
+```
+
+~2 requests/day (summary + drill-down), so a 28-day pull is ~56 requests, well under a minute.
+This is a real API-side capability the URL-replay path unlocks that the legacy Playwright script
+(`scrape_compliancemate.py`) does NOT have — that script is hardcoded to `date_range="yesterday"`
+with no date-range looping (see the "known facts" correction dated 2026-07-11 in the
+compliancemate-professor agent knowledge). For any future "how did we do over period X" ask, this
+script is the answer — don't rebuild it, extend it.
 
 ## Comparison: Playwright vs API
 
