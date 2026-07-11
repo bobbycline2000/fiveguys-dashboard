@@ -1,0 +1,135 @@
+{
+  "generated_at": "2026-07-11T16:35:14.220207+00:00",
+  "fgu_pulled_at": "2026-07-05T21:45:08Z",
+  "active_employee_count": 32,
+  "fgu_learner_count": 34,
+  "note": "fgu_not_in_directory is a REVIEW list, not confirmed-termed: the crew phone directory (build_employee_directory.py) is built incrementally and may lag reality or omit management. Known management (GM Bobby/Robert Cline) is excluded automatically. Confirm each name with Bobby before deactivating in Schoox.",
+  "fgu_not_in_directory": [
+    {
+      "full_name": "Alissa Baungardner",
+      "completion_rate": 86
+    },
+    {
+      "full_name": "Andrew Brangan",
+      "completion_rate": 90
+    },
+    {
+      "full_name": "Anna Coffman",
+      "completion_rate": 86
+    },
+    {
+      "full_name": "DJuan Johnson",
+      "completion_rate": 90
+    },
+    {
+      "full_name": "Elizabeth Brazell",
+      "completion_rate": 0
+    },
+    {
+      "full_name": "Emanuela Kamara",
+      "completion_rate": 96
+    },
+    {
+      "full_name": "Madelynn Smith",
+      "completion_rate": 42
+    },
+    {
+      "full_name": "Madison Cureton",
+      "completion_rate": 86
+    },
+    {
+      "full_name": "Noel Belisle",
+      "completion_rate": 100
+    },
+    {
+      "full_name": "R'Love Hall",
+      "completion_rate": 93
+    },
+    {
+      "full_name": "Robert Muncy Jr",
+      "completion_rate": 82
+    }
+  ],
+  "directory_missing_from_fgu": [
+    {
+      "first_name": "Angela",
+      "full_name": "Angela",
+      "reason": "zero_percent",
+      "completion_rate": 0
+    },
+    {
+      "first_name": "Ash",
+      "full_name": "Ash",
+      "reason": "no_account",
+      "completion_rate": null
+    },
+    {
+      "first_name": "Chloe",
+      "full_name": "Chloe",
+      "reason": "no_account",
+      "completion_rate": null
+    },
+    {
+      "first_name": "Divan",
+      "full_name": "Divan",
+      "reason": "no_account",
+      "completion_rate": null
+    },
+    {
+      "first_name": "Grace",
+      "full_name": "Grace",
+      "reason": "no_account",
+      "completion_rate": null
+    },
+    {
+      "first_name": "Javeh",
+      "full_name": "Javeh",
+      "reason": "no_account",
+      "completion_rate": null
+    },
+    {
+      "first_name": "Kable",
+      "full_name": "Kable",
+      "reason": "no_account",
+      "completion_rate": null
+    },
+    {
+      "first_name": "Kayla",
+      "full_name": "Kayla Valenzuela",
+      "reason": "no_account",
+      "completion_rate": null
+    },
+    {
+      "first_name": "Megan",
+      "full_name": "Megan",
+      "reason": "zero_percent",
+      "completion_rate": 0
+    },
+    {
+      "first_name": "Mike",
+      "full_name": "Mike",
+      "reason": "no_account",
+      "completion_rate": null
+    },
+    {
+      "first_name": "Nyatiek",
+      "full_name": "Nyatiek Keah",
+      "reason": "no_account",
+      "completion_rate": null
+    },
+    {
+      "first_name": "Samuel",
+      "full_name": "Samuel Galban Rocha",
+      "reason": "no_account",
+      "completion_rate": null
+    }
+  ],
+  "suspected_name_mismatches": [
+    {
+      "directory_first_name": "Kenzie",
+      "fgu_full_name": "Mykenize Milledge",
+      "completion_rate": 96,
+      "note": "Probable same person \u2014 add to employee_name_map.json, not a real mismatch."
+    }
+  ]
+}

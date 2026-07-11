@@ -1,12 +1,55 @@
 {
   "date": "2026-07-11",
-  "new_count": 6,
+  "new_count": 7,
   "notes": [
-    { "from": "Brad Davis", "role": "director", "role_label": "Director of Operations", "time": "7/11", "body": "CO2: Check your CO2 levels. If below 25%, call and place an order now — supplier may be short on supply. All locations should have a 50 lb backup tank; if you don't have one, call to order. Standing: hold the schedule under 25% labor." },
-    { "from": "Crystal Hess", "role": "dm", "role_label": "District Manager", "time": "7/10", "body": "Manager Certifications 2065: all three MITs passed — Rusul 100, Anthony 99, Madelynn 98. Temporary certificates issued; training videos fixed. Standing KPI: 60% of score = Secret Shops + Customer complaints + Ticket times." },
-    { "from": "Eric Maxwell", "role": "alert", "role_label": "FG Field Trainer", "time": "7/10", "body": "Opened all three manager exams with a 4-day time limit; temporary certificates issued once scores were in (Rusul 100, Anthony 99, Madelynn 98)." },
-    { "from": "ComplianceMate", "role": "alert", "role_label": "Steritech / CM Support", "time": "7/10", "body": "Temp probe 'connected but not taking reading' ticket open 4 days with no reply — auto-closes in 4 more. Reseat/replace probe, confirm reporting, reply to the ticket." },
-    { "from": "Jeni Moffatt", "role": "alert", "role_label": "HR Manager", "time": "7/10", "body": "New hire Javeh Goodman is processed and good to schedule. In directory (from 7/10). Phone still PENDING." },
-    { "from": "CrunchTime", "role": "alert", "role_label": "KY-2065 Action", "time": "7/11", "body": "Weekly sales +18.4% W/W ($21,666 vs $18,305 LY). COGS Flash (wk ending 7/12): CGS $3,888, CP% 17.9, FP% 20.6. Open CT tasks (7/10): confirm receivings BOSS Alpha–Ohio Valley (bread) + Performance Foodservice; close L-Rev and Location Transfer In." }
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "7/11",
+      "body": "CO2: Check your CO2 levels. If below 25%, call and place an order now \u2014 supplier may be short on supply. All locations should have a 50 lb backup tank; if you don't have one, call to order. Standing: hold the schedule under 25% labor."
+    },
+    {
+      "from": "Crystal Hess",
+      "role": "dm",
+      "role_label": "District Manager",
+      "time": "7/10",
+      "body": "Manager Certifications 2065: all three MITs passed \u2014 Rusul 100, Anthony 99, Madelynn 98. Temporary certificates issued; training videos fixed. Standing KPI: 60% of score = Secret Shops + Customer complaints + Ticket times."
+    },
+    {
+      "from": "Eric Maxwell",
+      "role": "alert",
+      "role_label": "FG Field Trainer",
+      "time": "7/10",
+      "body": "Opened all three manager exams with a 4-day time limit; temporary certificates issued once scores were in (Rusul 100, Anthony 99, Madelynn 98)."
+    },
+    {
+      "from": "ComplianceMate",
+      "role": "alert",
+      "role_label": "Steritech / CM Support",
+      "time": "7/10",
+      "body": "Temp probe 'connected but not taking reading' ticket open 4 days with no reply \u2014 auto-closes in 4 more. Reseat/replace probe, confirm reporting, reply to the ticket."
+    },
+    {
+      "from": "Jeni Moffatt",
+      "role": "alert",
+      "role_label": "HR Manager",
+      "time": "7/10",
+      "body": "New hire Javeh Goodman is processed and good to schedule. In directory (from 7/10). Phone still PENDING."
+    },
+    {
+      "from": "CrunchTime",
+      "role": "alert",
+      "role_label": "KY-2065 Action",
+      "time": "7/11",
+      "body": "Weekly sales +18.4% W/W ($21,666 vs $18,305 LY). COGS Flash (wk ending 7/12): CGS $3,888, CP% 17.9, FP% 20.6. Open CT tasks (7/10): confirm receivings BOSS Alpha\u2013Ohio Valley (bread) + Performance Foodservice; close L-Rev and Location Transfer In."
+    },
+    {
+      "from": "FGU Roster Check",
+      "role": "alert",
+      "role_label": "FGU / Schoox",
+      "time": "Today 12:39 PM",
+      "body": "\ud83e\uddfe Roster check: 11 FGU account(s) not matched to the active directory (review for termed crew); 12 active crew with no FGU account or stuck at 0% (Angela, Ash, Chloe, Divan, Grace, Javeh +6 more). See fgu_reconciliation.json for full detail."
+    }
   ]
 }

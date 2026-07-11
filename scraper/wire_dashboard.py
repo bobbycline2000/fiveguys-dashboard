@@ -894,6 +894,75 @@ if ss:
         "SS KPI list",
         flags=DOTALL)
 
+# ── Steritech (food safety) card ────────────────────────────────────────
+# Reads data/steritech.json, written by scraper/scrape_steritech.py
+# (build_canonical()). Replaces the previously-hardcoded score/dates/metrics.
+_st_path = ROOT / "data" / "steritech.json"
+if _st_path.exists():
+    try:
+        st = json.loads(_st_path.read_text(encoding="utf-8"))
+
+        st_score = st.get("latest_score")
+        st_score_str = str(st_score) if st_score is not None else "—"
+        rep(r'(<div class="st-score" id="st-score">)[^<]*(</div>)',
+            rf'\g<1>{st_score_str}\g<2>', "Steritech score")
+
+        # Goal line: keep the printed goal, but flip color if under goal
+        goal_color = ""
+        if isinstance(st_score, (int, float)):
+            if st_score >= 90:
+                goal_color = ""  # default white, on-goal
+            else:
+                goal_color = ' style="color:var(--alert-red)"'
+        rep(r'(<div class="st-goal" id="st-goal")[^>]*(>Goal: <b>)[^<]*(</b></div>)',
+            rf'\g<1>{goal_color}\g<2>90+ Pass\g<3>', "Steritech goal styling")
+
+        def _fmt_audit_date(iso_date):
+            # Cross-platform "Mon D" formatting (no %-d — unsupported on Windows Python)
+            if not iso_date:
+                return "—"
+            try:
+                d = datetime.strptime(iso_date, "%Y-%m-%d")
+                return f"{d.strftime('%b')} {d.day}"
+            except Exception:
+                return iso_date
+
+        st_last_audit = _fmt_audit_date(st.get("last_audit_date"))
+        rep(r'(<div class="st-meta" id="st-meta">Last Audit<b>)[^<]*(</b></div>)',
+            rf'\g<1>{st_last_audit}\g<2>', "Steritech last audit date")
+
+        st_status = (st.get("status") or "Unknown")
+        st_status_cls = {"Pass": "pass", "Fail": "fail"}.get(st_status, "warn")
+        rep(r'(<span class="st-status )[^"]*(" id="st-status-overall">)[^<]*(</span>)',
+            rf'\g<1>{st_status_cls}\g<2>{st_status}\g<3>', "Steritech overall status")
+
+        st_critical = st.get("critical_violations", 0)
+        st_noncritical = st.get("non_critical", 0)
+        rep(r'(<span class="st-metric-val" id="st-critical-val">)[^<]*(</span>)',
+            rf'\g<1>{st_critical}\g<2>', "Steritech critical count")
+        rep(r'(<span class="st-metric-val" id="st-noncritical-val">)[^<]*(</span>)',
+            rf'\g<1>{st_noncritical}\g<2>', "Steritech non-critical count")
+
+        checks = st.get("line_item_checks", {})
+        _check_ids = {
+            "hand_wash_stations": "st-check-handwash",
+            "cooler_temps": "st-check-cooler",
+            "grill_hold_temps": "st-check-grill",
+            "date_labels": "st-check-datelabels",
+        }
+        for key, dom_id in _check_ids.items():
+            val = checks.get(key, "pass")
+            cls = "pass" if val == "pass" else "warn"
+            label = "OK" if val == "pass" else "Watch"
+            rep(rf'(<span class="st-status )[^"]*(" id="{dom_id}">)[^<]*(</span>)',
+                rf'\g<1>{cls}\g<2>{label}\g<3>', f"Steritech check {key}")
+
+        st_next = st.get("next_audit_window") or "TBD"
+        rep(r'(<span class="st-metric-val" id="st-next-audit">)[^<]*(</span>)',
+            rf'\g<1>{st_next}\g<2>', "Steritech next audit window")
+    except Exception as exc:
+        print(f"  ⚠ steritech.json parse error: {exc}")
+
 # ── ComplianceMate detail card (Bobby's required-only list) ────────────
 # Source-name → display-label mapping. Checklists not in this map are ignored.
 CM_REQUIRED = [
@@ -1128,11 +1197,35 @@ if _fgu_path.exists():
             _rows.append('<div class="cm-item"><span class="cm-label">'
                          'All crew at 100% &#127881;</span><span class="cm-pct good">100%</span></div>')
         _fgu_list_html = "\n        ".join(_rows)
-        rep(r'(<div class="cm-list" id="fgu-list">).*?(</div>\s*</div>\s*<!-- ══ END FGU ══ -->)',
+        # NOTE: bounded by the "END FGU LIST" marker (not two trailing </div>s
+        # before "END FGU") so this replace doesn't swallow the reconciliation
+        # block that sits between the list and the card's closing </div>.
+        rep(r'(<div class="cm-list" id="fgu-list">).*?(</div>\s*<!-- ══ END FGU LIST ══ -->)',
             rf'\g<1>\n        {_fgu_list_html}\n      \g<2>',
             "FGU list", flags=DOTALL)
     except Exception as exc:
         print(f"  ⚠ fgu_training.json parse error: {exc}")
+
+# ── FGU roster reconciliation (termed-but-listed / active-but-missing) ─
+_fgu_recon_path = ROOT / "data" / "fgu_reconciliation.json"
+if _fgu_recon_path.exists():
+    try:
+        _recon = json.loads(_fgu_recon_path.read_text(encoding="utf-8"))
+        _termed = _recon.get("fgu_not_in_directory", [])
+        _missing = _recon.get("directory_missing_from_fgu", [])
+        _n_termed, _n_missing = len(_termed), len(_missing)
+        _recon_text = (f"Roster check: {_n_termed} FGU accounts to review (not in active directory) "
+                       f"&middot; {_n_missing} active crew missing/0% in FGU")
+        rep(r'(<div class="card-sub" id="fgu-reconcile-text">)[^<]*(</div>)',
+            rf'\g<1>{_recon_text}\g<2>', "FGU reconcile text")
+        rep(r'(<span class="cm-badge pill )[^"]*(" id="fgu-reconcile-termed">)[^<]*(</span>)',
+            rf'\g<1>{"pill-gold" if _n_termed else "pill-green"}\g<2>{_n_termed} review\g<3>',
+            "FGU reconcile termed badge")
+        rep(r'(<span class="cm-badge pill )[^"]*(" id="fgu-reconcile-missing">)[^<]*(</span>)',
+            rf'\g<1>{"pill-red" if _n_missing else "pill-green"}\g<2>{_n_missing} no FGU account\g<3>',
+            "FGU reconcile missing badge")
+    except Exception as exc:
+        print(f"  ⚠ fgu_reconciliation.json parse error: {exc}")
 
 # ── Footer timestamp ───────────────────────────────────────────────────
 rep(r'(<span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>)[^<]*(</span> &nbsp;&middot;&nbsp; )[^<]*(</span>)',

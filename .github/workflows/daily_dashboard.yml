@@ -358,6 +358,60 @@ jobs:
           MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
         run: python scraper/read_outlook_via_gmail.py
 
+      # ── 5b11a. Refresh + pull Five Guys University (Schoox) training ─────
+      # FGU auth is a Bearer JWT (short-lived) minted from a refresh token —
+      # Schoox login itself is Google-SSO/MFA gated so this CANNOT run a
+      # fresh browser login in CI (see scraper/FGU_API.md). Instead this
+      # holds a long-lived refresh token as a GitHub Secret and exchanges it
+      # for a fresh access token each run (same self-heal shape as the SCG
+      # Gmail token below): POST /api/v2/auth/token/refresh rotates the
+      # refresh token every call, so the rotated value is pushed back to the
+      # Secret immediately after a successful run.
+      #
+      # FGU_REFRESH_TOKEN must be seeded once by a human: capture
+      # localStorage['refresh_token'] from a logged-in Chrome tab on
+      # app.schoox.com and `gh secret set FGU_REFRESH_TOKEN`. Until that
+      # secret exists, this whole block is a no-op (FGU_SKIP=1) and the
+      # dashboard/brief keep showing the last good data/fgu_training.json.
+      - name: Restore FGU (Schoox) refresh token
+        env:
+          FGU_REFRESH_TOKEN: ${{ secrets.FGU_REFRESH_TOKEN }}
+        run: |
+          if [ -z "$FGU_REFRESH_TOKEN" ]; then
+            echo "FGU_REFRESH_TOKEN not configured — skipping FGU pull (dashboard keeps last good data)."
+            echo "FGU_SKIP=1" >> "$GITHUB_ENV"
+            exit 0
+          fi
+          python scraper/fgu_refresh_token.py
+
+      - name: Pull FGU (Schoox) training completion (store 2065)
+        if: env.FGU_SKIP != '1'
+        continue-on-error: true
+        run: python scraper/scrape_fgu.py
+
+      - name: Reconcile FGU roster vs active employee directory
+        if: env.FGU_SKIP != '1'
+        continue-on-error: true
+        run: python scraper/reconcile_fgu_roster.py
+
+      - name: Build FGU alerts (dashboard Team Notes + brief)
+        if: env.FGU_SKIP != '1'
+        continue-on-error: true
+        run: python scraper/fgu_alerts.py
+
+      - name: Self-heal — push rotated FGU refresh token back to GitHub Secret
+        if: env.FGU_SKIP != '1'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          if [ -f secrets/fgu_refresh_token.txt ]; then
+            gh secret set FGU_REFRESH_TOKEN < secrets/fgu_refresh_token.txt
+            echo "[token-heal] FGU_REFRESH_TOKEN updated in GitHub Secrets."
+          else
+            echo "[token-heal] secrets/fgu_refresh_token.txt not found — skipping (refresh likely failed; see prior step)."
+          fi
+
       # ── 5b12. Daily inspect + auto-fix EVERY section ─────────────────────
       # Inspects every data source; any stale/missing section gets one
       # auto-retry of its scraper in this same run. Always rebuilds the
@@ -482,7 +536,7 @@ jobs:
           # data/labor_today.json (and everything else on the line) for weeks
           # whenever data/cm_results_source.html was absent — root cause of the
           # "Labor % dashboard.html does NOT contain X%" backup-run FAIL emails.
-          for f in dashboard.html district.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/team_notes.json data/forecast_by_day.json; do
+          for f in dashboard.html district.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/team_notes.json data/forecast_by_day.json data/fgu_training.json data/fgu_reconciliation.json data/fgu_overdue_history.json; do
             git add -- "$f" 2>/dev/null || true
           done
           git add briefs/ || true

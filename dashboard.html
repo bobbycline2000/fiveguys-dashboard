@@ -829,10 +829,10 @@ body.sidebar-open .sidebar-backdrop { display: block; }
     <!-- Page header -->
     <div class="page-hdr">
       <div>
-        <div class="page-title">Good morning, Bobby.</div>
+        <div class="page-title">Good afternoon, Bobby.</div>
         <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>10:21 AM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>12:41 PM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -1081,43 +1081,43 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         </div>
         <div class="st-top">
           <div>
-            <div class="st-score">100</div>
-            <div class="st-goal">Goal: <b>90+ Pass</b></div>
+            <div class="st-score" id="st-score">98</div>
+            <div class="st-goal" id="st-goal">Goal: <b>90+ Pass</b></div>
           </div>
-          <div class="st-meta">Last Audit<b>Mar 28</b></div>
+          <div class="st-meta" id="st-meta">Last Audit<b>May 14</b></div>
         </div>
         <div>
           <div class="st-metric">
             <span class="st-metric-label">Overall Status</span>
-            <span class="st-status pass">Pass</span>
+            <span class="st-status pass" id="st-status-overall">Pass</span>
           </div>
           <div class="st-metric">
             <span class="st-metric-label">Critical Violations</span>
-            <span class="st-metric-val">0</span>
+            <span class="st-metric-val" id="st-critical-val">0</span>
           </div>
           <div class="st-metric">
             <span class="st-metric-label">Non-Critical</span>
-            <span class="st-metric-val">0</span>
+            <span class="st-metric-val" id="st-noncritical-val">2</span>
           </div>
           <div class="st-metric">
             <span class="st-metric-label">Hand Wash Stations</span>
-            <span class="st-status pass">OK</span>
+            <span class="st-status pass" id="st-check-handwash">OK</span>
           </div>
           <div class="st-metric">
             <span class="st-metric-label">Cooler Temps</span>
-            <span class="st-status pass">OK</span>
+            <span class="st-status pass" id="st-check-cooler">OK</span>
           </div>
           <div class="st-metric">
             <span class="st-metric-label">Grill Hold Temps</span>
-            <span class="st-status warn">Watch</span>
+            <span class="st-status pass" id="st-check-grill">OK</span>
           </div>
           <div class="st-metric">
             <span class="st-metric-label">Date Labels</span>
-            <span class="st-status pass">OK</span>
+            <span class="st-status pass" id="st-check-datelabels">OK</span>
           </div>
           <div class="st-metric">
             <span class="st-metric-label">Next Audit Due</span>
-            <span class="st-metric-val">May 28</span>
+            <span class="st-metric-val" id="st-next-audit">Q3 2026 (TBD)</span>
           </div>
         </div>
       </div>
@@ -1129,7 +1129,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="card-title"><i data-lucide="message-square"></i> Team Notes</div>
             <div class="card-sub">Messages from GM / DM / Director</div>
           </div>
-          <div class="pill pill-white">6 new</div>
+          <div class="pill pill-white">7 new</div>
         </div>
         <!-- TEAM-NOTES-START -->
         <div class="notes-list">
@@ -1192,6 +1192,16 @@ body.sidebar-open .sidebar-backdrop { display: block; }
               <span class="note-time">7/11</span>
             </div>
             <div class="note-body">Weekly sales +18.4% W/W ($21,666 vs $18,305 LY). COGS Flash (wk ending 7/12): CGS $3,888, CP% 17.9, FP% 20.6. Open CT tasks (7/10): confirm receivings BOSS Alpha–Ohio Valley (bread) + Performance Foodservice; close L-Rev and Location Transfer In.</div>
+          </div>
+          <div class="note-item ">
+            <div class="note-head">
+              <span>
+                <span class="note-from">FGU Roster Check</span>
+                <span class="note-role">FGU / Schoox</span>
+              </span>
+              <span class="note-time">Today 12:39 PM</span>
+            </div>
+            <div class="note-body">🧾 Roster check: 11 FGU account(s) not matched to the active directory (review for termed crew); 12 active crew with no FGU account or stuck at 0% (Angela, Ash, Chloe, Divan, Grace, Javeh +6 more). See fgu_reconciliation.json for full detail.</div>
           </div>
         </div>
         <!-- TEAM-NOTES-END -->
@@ -1470,6 +1480,14 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="cm-item"><span class="cm-label">Emanuela Kamara</span><span class="cm-pct good">96%</span></div>
         <div class="cm-item"><span class="cm-label">Mykenize Milledge</span><span class="cm-pct good">96%</span></div>
       </div>
+      <!-- ══ END FGU LIST ══ -->
+      <div class="cm-header-row" id="fgu-reconcile-wrap" style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(0,0,0,0.08);">
+        <div class="card-sub" id="fgu-reconcile-text">Roster check: 11 FGU accounts to review (not in active directory) &middot; 12 active crew missing/0% in FGU</div>
+        <div style="display:flex; gap:8px;">
+          <span class="cm-badge pill pill-gold" id="fgu-reconcile-termed">11 review</span>
+          <span class="cm-badge pill pill-red" id="fgu-reconcile-missing">12 no FGU account</span>
+        </div>
+      </div>
     </div>
     <!-- ══ END FGU ══ -->
 
@@ -1478,7 +1496,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>10:21 AM</span> &nbsp;&middot;&nbsp; July 11 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>12:41 PM</span> &nbsp;&middot;&nbsp; July 11 2026</span>
   </div>
 
 </div><!-- /main -->
