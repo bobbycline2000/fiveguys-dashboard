@@ -1,0 +1,16 @@
+{
+  "store": "2065",
+  "date": "2026-07-10",
+  "day_of_week": "Friday",
+  "generated_at": "2026-07-11T14:09:23.009079-04:00",
+  "schedule": {
+    "date": "2026-07-10",
+    "day_of_week": "Friday",
+    "am_manager": "Robert Cline",
+    "pm_manager": "Christopher Conder",
+    "shift_change_manager": "Vicki Lucey & Anthony Pirtle & Madelynn Smith"
+  },
+  "missing_count": 0,
+  "missing_items": [],
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Friday 2026-07-10\n\u2705 All temps and checklists complete. Clean day.\n"
+}

@@ -1,0 +1,207 @@
+{
+  "store": "2065",
+  "window": {
+    "start": "2026-06-14",
+    "end": "2026-07-11"
+  },
+  "pulled_at": "2026-07-11T13:58:04.253248-04:00",
+  "schedule": [
+    {
+      "date": "2026-06-14",
+      "day_of_week": "Sunday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Madelynn Smith",
+      "shift_change_manager": null
+    },
+    {
+      "date": "2026-06-15",
+      "day_of_week": "Monday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": "Madelynn Smith"
+    },
+    {
+      "date": "2026-06-16",
+      "day_of_week": "Tuesday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": "Madelynn Smith"
+    },
+    {
+      "date": "2026-06-17",
+      "day_of_week": "Wednesday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Robert Cline",
+      "shift_change_manager": "Madelynn Smith"
+    },
+    {
+      "date": "2026-06-18",
+      "day_of_week": "Thursday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": "Vicki Lucey"
+    },
+    {
+      "date": "2026-06-19",
+      "day_of_week": "Friday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Robert Cline",
+      "shift_change_manager": null
+    },
+    {
+      "date": "2026-06-20",
+      "day_of_week": "Saturday",
+      "am_manager": "Madison Cureton",
+      "pm_manager": "Robert Cline",
+      "shift_change_manager": null
+    },
+    {
+      "date": "2026-06-21",
+      "day_of_week": "Sunday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": null
+    },
+    {
+      "date": "2026-06-22",
+      "day_of_week": "Monday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": "Madelynn Smith"
+    },
+    {
+      "date": "2026-06-23",
+      "day_of_week": "Tuesday",
+      "am_manager": "Madelynn Smith",
+      "pm_manager": "Christopher Conder",
+      "shift_change_manager": "Vicki Lucey"
+    },
+    {
+      "date": "2026-06-24",
+      "day_of_week": "Wednesday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": "Madelynn Smith"
+    },
+    {
+      "date": "2026-06-25",
+      "day_of_week": "Thursday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Christopher Conder",
+      "shift_change_manager": "Vicki Lucey & Madison Cureton"
+    },
+    {
+      "date": "2026-06-26",
+      "day_of_week": "Friday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": "Vicki Lucey & Madelynn Smith"
+    },
+    {
+      "date": "2026-06-27",
+      "day_of_week": "Saturday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Christopher Conder",
+      "shift_change_manager": "Madelynn Smith"
+    },
+    {
+      "date": "2026-06-28",
+      "day_of_week": "Sunday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": null
+    },
+    {
+      "date": "2026-06-29",
+      "day_of_week": "Monday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": "Madelynn Smith & Rusul Kadhim"
+    },
+    {
+      "date": "2026-06-30",
+      "day_of_week": "Tuesday",
+      "am_manager": "Rusul Kadhim",
+      "pm_manager": "Christopher Conder",
+      "shift_change_manager": "Robert Cline & Vicki Lucey & Madelynn Smith"
+    },
+    {
+      "date": "2026-07-01",
+      "day_of_week": "Wednesday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": null
+    },
+    {
+      "date": "2026-07-02",
+      "day_of_week": "Thursday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Robert Cline",
+      "shift_change_manager": "Madelynn Smith & Christopher Conder & Rusul Kadhim & Madison Cureton"
+    },
+    {
+      "date": "2026-07-03",
+      "day_of_week": "Friday",
+      "am_manager": "Madelynn Smith",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": "Robert Cline & Vicki Lucey"
+    },
+    {
+      "date": "2026-07-04",
+      "day_of_week": "Saturday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Christopher Conder",
+      "shift_change_manager": "Madison Cureton & Rusul Kadhim & Madelynn Smith"
+    },
+    {
+      "date": "2026-07-05",
+      "day_of_week": "Sunday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Rusul Kadhim",
+      "shift_change_manager": "Christopher Conder"
+    },
+    {
+      "date": "2026-07-06",
+      "day_of_week": "Monday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Christopher Conder",
+      "shift_change_manager": "Madelynn Smith & Rusul Kadhim"
+    },
+    {
+      "date": "2026-07-07",
+      "day_of_week": "Tuesday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": null
+    },
+    {
+      "date": "2026-07-08",
+      "day_of_week": "Wednesday",
+      "am_manager": "Rusul Kadhim",
+      "pm_manager": "Madison Cureton",
+      "shift_change_manager": "Madelynn Smith & Vicki Lucey"
+    },
+    {
+      "date": "2026-07-09",
+      "day_of_week": "Thursday",
+      "am_manager": "Vicki Lucey",
+      "pm_manager": "Robert Cline",
+      "shift_change_manager": "Madelynn Smith & Anthony Pirtle & Madison Cureton"
+    },
+    {
+      "date": "2026-07-10",
+      "day_of_week": "Friday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Christopher Conder",
+      "shift_change_manager": "Vicki Lucey & Anthony Pirtle & Madelynn Smith"
+    },
+    {
+      "date": "2026-07-11",
+      "day_of_week": "Saturday",
+      "am_manager": "Robert Cline",
+      "pm_manager": "Christopher Conder",
+      "shift_change_manager": "Madelynn Smith & Madison Cureton & Anthony Pirtle"
+    }
+  ],
+  "notes": "Manager/shift-leader positions in scope at 2065: \"General Manager-Salary\" and \"Shift Leader-Hourly\" (the only two non-crew positions Teamworx returns for this store \u2014 crew rows excluded). am_manager = earliest shift start of the day; pm_manager = latest shift end of the day (handles overnight-to-midnight closes). shift_change_manager = any additional manager/shift-leader shift(s) that are neither the AM nor PM shift, joined with \" & \" when more than one \u2014 on high-coverage days (weekends, holiday week 7/2-7/4) this can be 2-4 names since multiple shift leaders overlap for peak coverage rather than a single clean handoff; treat those as \"also on duty,\" not a strict 1-person relay. All 28 days had at least one manager/shift-leader shift scheduled -- no gap days. On days with only 2 manager shifts (most Sun/weekday patterns), shift_change_manager is null (clean AM->PM handoff, no third person). Source: Teamworx POST /json/mn/dailyRoster/getPageData per day, filtered to dayData.shifts[] where positionName contains \"manager\" or \"shift leader\"."
+}
