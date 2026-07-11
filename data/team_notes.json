@@ -1,6 +1,6 @@
 {
   "date": "2026-07-11",
-  "new_count": 7,
+  "new_count": 8,
   "notes": [
     {
       "from": "Brad Davis",
@@ -45,10 +45,17 @@
       "body": "Weekly sales +18.4% W/W ($21,666 vs $18,305 LY). COGS Flash (wk ending 7/12): CGS $3,888, CP% 17.9, FP% 20.6. Open CT tasks (7/10): confirm receivings BOSS Alpha\u2013Ohio Valley (bread) + Performance Foodservice; close L-Rev and Location Transfer In."
     },
     {
+      "from": "FGU Overdue Rate",
+      "role": "alert",
+      "role_label": "FGU / Schoox",
+      "time": "Today 12:58 PM",
+      "body": "\u26a0\ufe0f Overdue rate rose 50% \u2192 54%. Push crew below 100% before it compounds \u2014 see Training card."
+    },
+    {
       "from": "FGU Roster Check",
       "role": "alert",
       "role_label": "FGU / Schoox",
-      "time": "Today 12:39 PM",
+      "time": "Today 12:58 PM",
       "body": "\ud83e\uddfe Roster check: 11 FGU account(s) not matched to the active directory (review for termed crew); 12 active crew with no FGU account or stuck at 0% (Angela, Ash, Chloe, Divan, Grace, Javeh +6 more). See fgu_reconciliation.json for full detail."
     }
   ]

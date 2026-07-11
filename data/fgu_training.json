@@ -2,48 +2,619 @@
   "store": "2065",
   "academy_id": 1177,
   "org_unit": 1291469,
-  "pulled_at": "2026-07-05T21:45:08Z",
+  "pulled_at": "2026-07-11T16:57:05+00:00",
   "stats": {
-    "totalLearners": 34,
-    "coursesCompletionRate": 75.22,
+    "totalLearners": 35,
+    "coursesCompletionRate": 76.07,
     "coursesComplianceRate": 0,
-    "coursesOverdueRate": 50,
-    "calculatedAt": "2026-07-05T21:45:08Z"
+    "coursesOverdueRate": 54.29,
+    "calculatedAt": "2026-07-11T16:57:05Z"
   },
   "learners": [
-    {"learner_id":2024854902,"name":"Angela","surname":"Ashby","full_name":"Angela Ashby","total_courses":28,"completion_rate":0,"compliance_rate":0},
-    {"learner_id":2080872577,"name":"Alissa","surname":"Baungardner","full_name":"Alissa Baungardner","total_courses":36,"completion_rate":86,"compliance_rate":0},
-    {"learner_id":230062831,"name":"Noel","surname":"Belisle","full_name":"Noel Belisle","total_courses":29,"completion_rate":100,"compliance_rate":0},
-    {"learner_id":535658448,"name":"Andrew","surname":"Brangan","full_name":"Andrew Brangan","total_courses":30,"completion_rate":90,"compliance_rate":0},
-    {"learner_id":874924759,"name":"Elizabeth","surname":"Brazell","full_name":"Elizabeth Brazell","total_courses":28,"completion_rate":0,"compliance_rate":0},
-    {"learner_id":239219033,"name":"Kaisha","surname":"Brewer","full_name":"Kaisha Brewer","total_courses":33,"completion_rate":96,"compliance_rate":0},
-    {"learner_id":1143201372,"name":"Robert","surname":"Cline","full_name":"Robert Cline","total_courses":42,"completion_rate":95,"compliance_rate":0},
-    {"learner_id":1211580633,"name":"Anna","surname":"Coffman","full_name":"Anna Coffman","total_courses":38,"completion_rate":86,"compliance_rate":0},
-    {"learner_id":1466922052,"name":"Jada","surname":"Cox","full_name":"Jada Cox","total_courses":32,"completion_rate":71,"compliance_rate":0},
-    {"learner_id":2012947773,"name":"Madison","surname":"Cureton","full_name":"Madison Cureton","total_courses":38,"completion_rate":86,"compliance_rate":0},
-    {"learner_id":2034652020,"name":"DaKayla","surname":"Dorsey","full_name":"DaKayla Dorsey","total_courses":28,"completion_rate":100,"compliance_rate":0},
-    {"learner_id":1023958913,"name":"Serina","surname":"Gaskins","full_name":"Serina Gaskins","total_courses":31,"completion_rate":64,"compliance_rate":0},
-    {"learner_id":1040870882,"name":"Brianna","surname":"Gatewood","full_name":"Brianna Gatewood","total_courses":29,"completion_rate":82,"compliance_rate":0},
-    {"learner_id":1700537432,"name":"Richard","surname":"Gibbs","full_name":"Richard Gibbs","total_courses":29,"completion_rate":72,"compliance_rate":0},
-    {"learner_id":106915709,"name":"Ailen","surname":"Gonzalez Cardero","full_name":"Ailen Gonzalez Cardero","total_courses":31,"completion_rate":96,"compliance_rate":0},
-    {"learner_id":664393162,"name":"R'Love","surname":"Hall","full_name":"R'Love Hall","total_courses":30,"completion_rate":93,"compliance_rate":0},
-    {"learner_id":897104061,"name":"Autumn","surname":"Hearn","full_name":"Autumn Hearn","total_courses":29,"completion_rate":86,"compliance_rate":0},
-    {"learner_id":89857504,"name":"Lidy","surname":"Henry","full_name":"Lidy Henry","total_courses":38,"completion_rate":89,"compliance_rate":0},
-    {"learner_id":1618593907,"name":"Maylin","surname":"Hernandez Rodriguez","full_name":"Maylin Hernandez Rodriguez","total_courses":29,"completion_rate":89,"compliance_rate":0},
-    {"learner_id":47355331,"name":"DJuan","surname":"Johnson","full_name":"DJuan Johnson","total_courses":30,"completion_rate":90,"compliance_rate":0},
-    {"learner_id":973882283,"name":"Rusul","surname":"Kadhim","full_name":"Rusul Kadhim","total_courses":35,"completion_rate":28,"compliance_rate":0},
-    {"learner_id":1213486015,"name":"Emanuela","surname":"Kamara","full_name":"Emanuela Kamara","total_courses":30,"completion_rate":96,"compliance_rate":0},
-    {"learner_id":387281733,"name":"Megan","surname":"Kurschner","full_name":"Megan Kurschner","total_courses":35,"completion_rate":0,"compliance_rate":0},
-    {"learner_id":749268849,"name":"Francisco","surname":"Llorente Mejias","full_name":"Francisco Llorente Mejias","total_courses":29,"completion_rate":82,"compliance_rate":0},
-    {"learner_id":823982440,"name":"Vicki","surname":"Lucey","full_name":"Vicki Lucey","total_courses":36,"completion_rate":88,"compliance_rate":0},
-    {"learner_id":1321502132,"name":"Jeremiah","surname":"Matthews","full_name":"Jeremiah Matthews","total_courses":29,"completion_rate":82,"compliance_rate":0},
-    {"learner_id":49747536,"name":"Mykenize","surname":"Milledge","full_name":"Mykenize Milledge","total_courses":29,"completion_rate":96,"compliance_rate":0},
-    {"learner_id":296273834,"name":"Robert","surname":"Muncy Jr","full_name":"Robert Muncy Jr","total_courses":29,"completion_rate":82,"compliance_rate":0},
-    {"learner_id":1441105999,"name":"Anthony","surname":"Pirtle","full_name":"Anthony Pirtle","total_courses":28,"completion_rate":78,"compliance_rate":0},
-    {"learner_id":2064432035,"name":"Nathan","surname":"Roberts","full_name":"Nathan Roberts","total_courses":36,"completion_rate":100,"compliance_rate":0},
-    {"learner_id":23693259,"name":"Madelynn","surname":"Smith","full_name":"Madelynn Smith","total_courses":35,"completion_rate":42,"compliance_rate":0},
-    {"learner_id":686363469,"name":"Ryan","surname":"Vititoe","full_name":"Ryan Vititoe","total_courses":28,"completion_rate":3,"compliance_rate":0},
-    {"learner_id":933077014,"name":"Zack","surname":"Whitten","full_name":"Zack Whitten","total_courses":28,"completion_rate":100,"compliance_rate":0},
-    {"learner_id":727387298,"name":"Kasey","surname":"Wilson","full_name":"Kasey Wilson","total_courses":37,"completion_rate":94,"compliance_rate":0}
+    {
+      "learner_id": 2024854902,
+      "name": "Angela",
+      "surname": "Ashby",
+      "full_name": "Angela Ashby",
+      "total_courses": 29,
+      "completion_rate": 0,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 2080872577,
+      "name": "Alissa",
+      "surname": "Baungardner",
+      "full_name": "Alissa Baungardner",
+      "total_courses": 37,
+      "completion_rate": 83,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 230062831,
+      "name": "Noel",
+      "surname": "Belisle",
+      "full_name": "Noel Belisle",
+      "total_courses": 30,
+      "completion_rate": 96,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 535658448,
+      "name": "Andrew",
+      "surname": "Brangan",
+      "full_name": "Andrew Brangan",
+      "total_courses": 31,
+      "completion_rate": 87,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 874924759,
+      "name": "Elizabeth",
+      "surname": "Brazell",
+      "full_name": "Elizabeth Brazell",
+      "total_courses": 29,
+      "completion_rate": 24,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 239219033,
+      "name": "Kaisha",
+      "surname": "Brewer",
+      "full_name": "Kaisha Brewer",
+      "total_courses": 34,
+      "completion_rate": 94,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1143201372,
+      "name": "Robert",
+      "surname": "Cline",
+      "full_name": "Robert Cline",
+      "total_courses": 43,
+      "completion_rate": 97,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1211580633,
+      "name": "Anna",
+      "surname": "Coffman",
+      "full_name": "Anna Coffman",
+      "total_courses": 39,
+      "completion_rate": 84,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1466922052,
+      "name": "Jada",
+      "surname": "Cox",
+      "full_name": "Jada Cox",
+      "total_courses": 33,
+      "completion_rate": 69,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 2012947773,
+      "name": "Madison",
+      "surname": "Cureton",
+      "full_name": "Madison Cureton",
+      "total_courses": 39,
+      "completion_rate": 84,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 2034652020,
+      "name": "DaKayla",
+      "surname": "Dorsey",
+      "full_name": "DaKayla Dorsey",
+      "total_courses": 29,
+      "completion_rate": 96,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1023958913,
+      "name": "Serina",
+      "surname": "Gaskins",
+      "full_name": "Serina Gaskins",
+      "total_courses": 32,
+      "completion_rate": 62,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1040870882,
+      "name": "Brianna",
+      "surname": "Gatewood",
+      "full_name": "Brianna Gatewood",
+      "total_courses": 30,
+      "completion_rate": 80,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1700537432,
+      "name": "Richard",
+      "surname": "Gibbs",
+      "full_name": "Richard Gibbs",
+      "total_courses": 30,
+      "completion_rate": 70,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 106915709,
+      "name": "Ailen",
+      "surname": "Gonzalez Cardero",
+      "full_name": "Ailen Gonzalez Cardero",
+      "total_courses": 32,
+      "completion_rate": 93,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1598850091,
+      "name": "Javeh",
+      "surname": "Goodman",
+      "full_name": "Javeh Goodman",
+      "total_courses": 29,
+      "completion_rate": 0,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 664393162,
+      "name": "R'Love",
+      "surname": "Hall",
+      "full_name": "R'Love Hall",
+      "total_courses": 31,
+      "completion_rate": 90,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 897104061,
+      "name": "Autumn",
+      "surname": "Hearn",
+      "full_name": "Autumn Hearn",
+      "total_courses": 30,
+      "completion_rate": 83,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 89857504,
+      "name": "Lidy",
+      "surname": "Henry",
+      "full_name": "Lidy Henry",
+      "total_courses": 39,
+      "completion_rate": 87,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1618593907,
+      "name": "Maylin",
+      "surname": "Hernandez Rodriguez",
+      "full_name": "Maylin Hernandez Rodriguez",
+      "total_courses": 30,
+      "completion_rate": 86,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 47355331,
+      "name": "DJuan",
+      "surname": "Johnson",
+      "full_name": "DJuan Johnson",
+      "total_courses": 31,
+      "completion_rate": 87,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 973882283,
+      "name": "Rusul",
+      "surname": "Kadhim",
+      "full_name": "Rusul Kadhim",
+      "total_courses": 37,
+      "completion_rate": 100,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1213486015,
+      "name": "Emanuela",
+      "surname": "Kamara",
+      "full_name": "Emanuela Kamara",
+      "total_courses": 31,
+      "completion_rate": 93,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 387281733,
+      "name": "Megan",
+      "surname": "Kurschner",
+      "full_name": "Megan Kurschner",
+      "total_courses": 36,
+      "completion_rate": 0,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 749268849,
+      "name": "Francisco",
+      "surname": "Llorente Mejias",
+      "full_name": "Francisco Llorente Mejias",
+      "total_courses": 30,
+      "completion_rate": 80,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 823982440,
+      "name": "Vicki",
+      "surname": "Lucey",
+      "full_name": "Vicki Lucey",
+      "total_courses": 37,
+      "completion_rate": 86,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1321502132,
+      "name": "Jeremiah",
+      "surname": "Matthews",
+      "full_name": "Jeremiah Matthews",
+      "total_courses": 30,
+      "completion_rate": 80,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 49747536,
+      "name": "Mykenize",
+      "surname": "Milledge",
+      "full_name": "Mykenize Milledge",
+      "total_courses": 30,
+      "completion_rate": 93,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 296273834,
+      "name": "Robert",
+      "surname": "Muncy Jr",
+      "full_name": "Robert Muncy Jr",
+      "total_courses": 30,
+      "completion_rate": 80,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1441105999,
+      "name": "Anthony",
+      "surname": "Pirtle",
+      "full_name": "Anthony Pirtle",
+      "total_courses": 37,
+      "completion_rate": 100,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 2064432035,
+      "name": "Nathan",
+      "surname": "Roberts",
+      "full_name": "Nathan Roberts",
+      "total_courses": 37,
+      "completion_rate": 97,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 23693259,
+      "name": "Madelynn",
+      "surname": "Smith",
+      "full_name": "Madelynn Smith",
+      "total_courses": 37,
+      "completion_rate": 100,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 686363469,
+      "name": "Ryan",
+      "surname": "Vititoe",
+      "full_name": "Ryan Vititoe",
+      "total_courses": 29,
+      "completion_rate": 3,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 933077014,
+      "name": "Zack",
+      "surname": "Whitten",
+      "full_name": "Zack Whitten",
+      "total_courses": 29,
+      "completion_rate": 96,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 727387298,
+      "name": "Kasey",
+      "surname": "Wilson",
+      "full_name": "Kasey Wilson",
+      "total_courses": 38,
+      "completion_rate": 92,
+      "compliance_rate": 0
+    }
+  ],
+  "behind": [
+    {
+      "learner_id": 2024854902,
+      "name": "Angela",
+      "surname": "Ashby",
+      "full_name": "Angela Ashby",
+      "total_courses": 29,
+      "completion_rate": 0,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1598850091,
+      "name": "Javeh",
+      "surname": "Goodman",
+      "full_name": "Javeh Goodman",
+      "total_courses": 29,
+      "completion_rate": 0,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 387281733,
+      "name": "Megan",
+      "surname": "Kurschner",
+      "full_name": "Megan Kurschner",
+      "total_courses": 36,
+      "completion_rate": 0,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 686363469,
+      "name": "Ryan",
+      "surname": "Vititoe",
+      "full_name": "Ryan Vititoe",
+      "total_courses": 29,
+      "completion_rate": 3,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 874924759,
+      "name": "Elizabeth",
+      "surname": "Brazell",
+      "full_name": "Elizabeth Brazell",
+      "total_courses": 29,
+      "completion_rate": 24,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1023958913,
+      "name": "Serina",
+      "surname": "Gaskins",
+      "full_name": "Serina Gaskins",
+      "total_courses": 32,
+      "completion_rate": 62,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1466922052,
+      "name": "Jada",
+      "surname": "Cox",
+      "full_name": "Jada Cox",
+      "total_courses": 33,
+      "completion_rate": 69,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1700537432,
+      "name": "Richard",
+      "surname": "Gibbs",
+      "full_name": "Richard Gibbs",
+      "total_courses": 30,
+      "completion_rate": 70,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1040870882,
+      "name": "Brianna",
+      "surname": "Gatewood",
+      "full_name": "Brianna Gatewood",
+      "total_courses": 30,
+      "completion_rate": 80,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 749268849,
+      "name": "Francisco",
+      "surname": "Llorente Mejias",
+      "full_name": "Francisco Llorente Mejias",
+      "total_courses": 30,
+      "completion_rate": 80,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1321502132,
+      "name": "Jeremiah",
+      "surname": "Matthews",
+      "full_name": "Jeremiah Matthews",
+      "total_courses": 30,
+      "completion_rate": 80,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 296273834,
+      "name": "Robert",
+      "surname": "Muncy Jr",
+      "full_name": "Robert Muncy Jr",
+      "total_courses": 30,
+      "completion_rate": 80,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 2080872577,
+      "name": "Alissa",
+      "surname": "Baungardner",
+      "full_name": "Alissa Baungardner",
+      "total_courses": 37,
+      "completion_rate": 83,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 897104061,
+      "name": "Autumn",
+      "surname": "Hearn",
+      "full_name": "Autumn Hearn",
+      "total_courses": 30,
+      "completion_rate": 83,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1211580633,
+      "name": "Anna",
+      "surname": "Coffman",
+      "full_name": "Anna Coffman",
+      "total_courses": 39,
+      "completion_rate": 84,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 2012947773,
+      "name": "Madison",
+      "surname": "Cureton",
+      "full_name": "Madison Cureton",
+      "total_courses": 39,
+      "completion_rate": 84,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1618593907,
+      "name": "Maylin",
+      "surname": "Hernandez Rodriguez",
+      "full_name": "Maylin Hernandez Rodriguez",
+      "total_courses": 30,
+      "completion_rate": 86,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 823982440,
+      "name": "Vicki",
+      "surname": "Lucey",
+      "full_name": "Vicki Lucey",
+      "total_courses": 37,
+      "completion_rate": 86,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 535658448,
+      "name": "Andrew",
+      "surname": "Brangan",
+      "full_name": "Andrew Brangan",
+      "total_courses": 31,
+      "completion_rate": 87,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 89857504,
+      "name": "Lidy",
+      "surname": "Henry",
+      "full_name": "Lidy Henry",
+      "total_courses": 39,
+      "completion_rate": 87,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 47355331,
+      "name": "DJuan",
+      "surname": "Johnson",
+      "full_name": "DJuan Johnson",
+      "total_courses": 31,
+      "completion_rate": 87,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 664393162,
+      "name": "R'Love",
+      "surname": "Hall",
+      "full_name": "R'Love Hall",
+      "total_courses": 31,
+      "completion_rate": 90,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 727387298,
+      "name": "Kasey",
+      "surname": "Wilson",
+      "full_name": "Kasey Wilson",
+      "total_courses": 38,
+      "completion_rate": 92,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 106915709,
+      "name": "Ailen",
+      "surname": "Gonzalez Cardero",
+      "full_name": "Ailen Gonzalez Cardero",
+      "total_courses": 32,
+      "completion_rate": 93,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1213486015,
+      "name": "Emanuela",
+      "surname": "Kamara",
+      "full_name": "Emanuela Kamara",
+      "total_courses": 31,
+      "completion_rate": 93,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 49747536,
+      "name": "Mykenize",
+      "surname": "Milledge",
+      "full_name": "Mykenize Milledge",
+      "total_courses": 30,
+      "completion_rate": 93,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 239219033,
+      "name": "Kaisha",
+      "surname": "Brewer",
+      "full_name": "Kaisha Brewer",
+      "total_courses": 34,
+      "completion_rate": 94,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 230062831,
+      "name": "Noel",
+      "surname": "Belisle",
+      "full_name": "Noel Belisle",
+      "total_courses": 30,
+      "completion_rate": 96,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 2034652020,
+      "name": "DaKayla",
+      "surname": "Dorsey",
+      "full_name": "DaKayla Dorsey",
+      "total_courses": 29,
+      "completion_rate": 96,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 933077014,
+      "name": "Zack",
+      "surname": "Whitten",
+      "full_name": "Zack Whitten",
+      "total_courses": 29,
+      "completion_rate": 96,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 1143201372,
+      "name": "Robert",
+      "surname": "Cline",
+      "full_name": "Robert Cline",
+      "total_courses": 43,
+      "completion_rate": 97,
+      "compliance_rate": 0
+    },
+    {
+      "learner_id": 2064432035,
+      "name": "Nathan",
+      "surname": "Roberts",
+      "full_name": "Nathan Roberts",
+      "total_courses": 37,
+      "completion_rate": 97,
+      "compliance_rate": 0
+    }
   ]
 }
