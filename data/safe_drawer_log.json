@@ -621,11 +621,11 @@
     "safe_mid": 677,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
-    "d1_close": 0,
-    "d2_close": 0,
+    "safe_close": 677,
+    "d1_close": 200,
+    "d2_close": 200,
     "ct_os": -80.64,
     "notes": "",
-    "submitted_at": "2026-07-10T20:33:39.996Z"
+    "submitted_at": "2026-07-11T02:29:37.276Z"
   }
 ]
