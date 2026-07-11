@@ -24,7 +24,8 @@
       "processed_at": "2026-07-11T16:53:18",
       "sales_id": 6287459,
       "pos_id": 2148,
-      "result": "ok"
+      "result": "ok",
+      "warning": "DUPLICATE DEPOSIT ON CT SIDE. CT's bankdeposits list shows TWO $634.51 rows (depositId 31238817, 31238822) totaling $1269.02 for this business_date instead of $634.51. Root cause: a race condition, not a data error in this file. The scheduled hourly workflow (run 2026-07-11T16:51:49Z / 12:51:49 PM ET) and a manual/local run of enter_ct_deposits.py both started within the same minute and both read this entry from pending[] on origin/main before either had pushed -- so both independently posted a $634.51 deposit for salesId 6287459. There is no locking around deposits_pending.json / enter_ct_deposits.py today. NOT auto-fixed -- CT's bankdeposits read API returns only depositId+amount+memo (no timestamp/user), so there is no safe programmatic way to tell which of the two rows to remove. Needs a human to open CrunchTime UI (Sales Transactions -> edit salesId 6287459, 07/10/2026) and delete one $634.51 row. Full writeup: scraper/CRUNCHTIME_API.md 'CONFIRMED RISK (2026-07-11)'."
     }
   ]
 }
