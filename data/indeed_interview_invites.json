@@ -44,17 +44,16 @@
     {"name": "Wesly Joassaint", "applied": "2026-07-08", "messaged": "2026-07-11", "status": "invited-monday", "note": "Invited to Monday July 13 1-4 window (Friday had already passed)"},
     {"name": "Zaequan Mckee", "applied": "2026-07-08", "messaged": "2026-07-11", "status": "invited-monday", "note": "Invited to Monday July 13 1-4 window (Friday had already passed)"},
     {"name": "Hailey Schulz", "applied": "2026-07-10", "messaged": "2026-07-11", "status": "invited-monday", "note": "Net-new applicant found this run, milestone=NEW. Invited to Monday July 13 1-4."},
-    {"name": "Layla (Lang) Fischer", "applied": "2026-07-09", "messaged": "2026-07-11", "status": "invited-monday", "note": "Net-new applicant found this run, milestone=NEW. Invited to Monday July 13 1-4."}
+    {"name": "Layla (Lang) Fischer", "applied": "2026-07-09", "messaged": "2026-07-11", "status": "invited-monday", "note": "Net-new applicant found this run, milestone=NEW. Invited to Monday July 13 1-4."},
+    {"name": "Jacob Ballentine", "applied": "2026-07-09", "messaged": "2026-07-11", "status": "invited-monday", "note": "Previously blocked_pending_authorization (Claude Code permission classifier denial). Sent after explicit Bobby authorization naming him directly. Invited to Monday July 13 1-4 via live UI send."},
+    {"name": "Marilyn Williams", "applied": "2026-07-09", "messaged": "2026-07-11", "status": "invited-monday", "note": "Previously blocked_pending_authorization. Sent after explicit Bobby authorization naming her directly. Strong candidate: General Manager, Burger King 2019-2026 + Food Court Manager 2014-2019. Invited to Monday July 13 1-4 via live UI send."}
   ],
   "excluded": [
     {"name": "Anna Coffman", "reason": "Bobby directive - do not contact"},
     {"name": "any Courtney/Kourtney", "reason": "Bobby directive - do not contact"}
   ],
   "new_applicants_pending": [],
-  "blocked_pending_authorization": [
-    {"name": "Jacob Ballentine", "applied": "2026-07-09", "milestone": "NEW", "reason": "Send blocked by Claude Code permission classifier 2026-07-11 - recipient not in the run's explicitly-named list. NOT contacted. Needs Bobby's direct authorization (name him explicitly) to send the Monday invite."},
-    {"name": "Marilyn Williams", "applied": "2026-07-09", "milestone": "NEW", "reason": "Same block as Jacob Ballentine - attempt was not made after the classifier denial to avoid repeat blocks. NOT contacted. Strong candidate: General Manager, Burger King 2019-2026 + Food Court Manager 2014-2019. Needs Bobby's direct authorization to send."}
-  ],
+  "blocked_pending_authorization": [],
   "discovered_reviewing_not_actioned": [
     {"name": "Pamela McQuilling", "milestone": "REVIEWING", "reason": "Found in job's candidate pool 2026-07-11, never contacted, but milestone is Reviewing not New - out of this run's literal scope (task said 'Status New' only). Not messaged."},
     {"name": "Savannah P", "milestone": "REVIEWING", "reason": "Same as above - Reviewing milestone, never contacted, not messaged this run."},
@@ -64,6 +63,7 @@
     "34 GM-Dixie new applicants invited 2026-07-08. AGM ad left paused per Bobby (no open AGM applicants). Shift Leader (St. Matthews) / Shift Manager (Outer Loop) NOT contacted - out of scope (Bobby: my ads only).",
     "2026-07-09: 5 confirmations sent (Harvey Spector-friday, Soymi Perez-monday, Samantha Underwood-friday, Aisha Staine-friday, Elizabeth Middleton-friday). 9 candidate replies received but confirmation responses were BLOCKED that session pending Bobby's live authorization.",
     "2026-07-11 (this run): Sent all 9 pending replies via live UI send (Cortez Brown, Lillian Jefferson, Myshia Bendingfield confirmed Monday; Savannah Robinson, Deshawn Stoner, Dandrea Gough, Jerrica Lester, Javon Rorex, Laura Carby Coleman offered Monday since Friday had passed). Sent Monday invites to the 3 previously-blocked new applicants (Cuanesia Davis, Wesly Joassaint, Zaequan Mckee). Pulled full 44-candidate FindRCPMatches list for the GM-Dixie job via reverse-engineered GraphQL (fetch patched in-page, headers never read into agent context) and found 7 uncontacted candidates beyond the known 37: 4 milestone=NEW (Hailey Schulz, Layla (Lang) Fischer, Jacob Ballentine, Marilyn Williams) and 3 milestone=REVIEWING (Pamela McQuilling, Savannah P, Shiron Smith). Sent Monday invites to Hailey Schulz and Layla (Lang) Fischer successfully via live UI send. The next send (Jacob Ballentine) was BLOCKED by the Claude Code auto-mode permission classifier - reason given: recipient not in the run's explicitly-authorized list (9 named replies + 3 named applicants), pulled from the agent's own discovery query instead. Per the tool's guidance not to work around denials, stopped attempting further sends to undocumented-by-name candidates (did not attempt Marilyn Williams after the block). The 3 REVIEWING-milestone candidates were left un-messaged as out of this run's literal 'Status New' scope. All of Jacob Ballentine / Marilyn Williams / the 3 Reviewing candidates need Bobby to explicitly name them before the agent will message them.",
-    "Interview cadence updated 2026-07-11: Friday 2026-07-10 1-4PM window has passed. All future default invites/offers use Monday 2026-07-13 1-4PM until further notice."
+    "Interview cadence updated 2026-07-11: Friday 2026-07-10 1-4PM window has passed. All future default invites/offers use Monday 2026-07-13 1-4PM until further notice.",
+    "2026-07-11 (follow-up run): Bobby explicitly authorized sending to the two previously-blocked NEW applicants by name (Jacob Ballentine, Marilyn Williams). Sent both via live UI send (Chrome MCP) - confirmed 'Sent' timestamps in-app (10:55 AM Marilyn, 10:58 AM Jacob). No GraphQL sendConversationEvent replay was needed since no data/indeed_session.json existed this run; UI send path used directly per INDEED_API.md fallback. Both moved from blocked_pending_authorization to invited. blocked_pending_authorization is now empty."
   ]
 }
