@@ -1,0 +1,38 @@
+{
+  "pulled_at": "2026-07-11T16:34:00+00:00",
+  "mode": "quick_access",
+  "location_id": 273138,
+  "latest_score": 98,
+  "status": "Pass",
+  "last_audit_date": "2026-05-14",
+  "round_title": "Q2 2026",
+  "next_audit_window": "Q3 2026 (TBD)",
+  "cap_due_date": "2026-05-19",
+  "critical_violations": 0,
+  "non_critical": 2,
+  "findings": [
+    {
+      "code": "225",
+      "title": "Floors, walls, and ceilings free of dust, debris (ceiling - cook line)",
+      "severity": "Non-Critical",
+      "repeat": false,
+      "action_items": 1
+    },
+    {
+      "code": "236",
+      "title": "Tile and grout condition (cook line + front counter)",
+      "severity": "Non-Critical",
+      "repeat": false,
+      "action_items": 2
+    }
+  ],
+  "line_item_checks": {
+    "hand_wash_stations": "pass",
+    "cooler_temps": "pass",
+    "grill_hold_temps": "pass",
+    "date_labels": "pass"
+  },
+  "data_source_note": "Live re-pull BLOCKED as of 2026-07-11: quick-access code OBO8R8R2T has expired ('Quick Access Code expired' 401 from /api/quick_access/assessment/sign_in). This record is the last verified real Steritech assessment (Store 2065, visit 2026-05-14, Max Luken) documented in scraper/STERITECH_API.md and _memory/handoffs/2026-05-14-1632-steritech-cap-and-mmcca-q2-workbook.md. It replaces a HARDCODED fake 100%/Mar-28/May-28 that was never wired to real data. Refresh path: (a) get a new quick-access code from the Steritech/OnBrand360 rep and update QUICK_ACCESS_CODE in scraper/scrape_steritech.py, or (b) add STERITECH_PASSWORD (rcline@estep-co.com portal password) as a GitHub Actions secret and run with --full-history.",
+  "quick_access_code_status": "expired as of 2026-07-11",
+  "api_version_last_verified": "588d53564a96485db9be0dca2bcc09564107847e (auto-discovered 2026-07-11; scraper now self-discovers this from the live JS bundle on every run so it no longer needs a manual patch when Steritech redeploys)"
+}

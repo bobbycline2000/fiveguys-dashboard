@@ -1,0 +1,98 @@
+name: Steritech Monthly Check
+
+on:
+  schedule:
+    # 1st of every month, 6:00 AM Eastern (10:00 UTC EDT / 11:00 UTC EST).
+    # Steritech visits are unannounced/quarterly — monthly is Bobby's check
+    # cadence to catch a new assessment or CAP change as soon as possible.
+    # DST FLIP: when EST returns ~Nov 2 2026, change to "0 11 1 * *".
+    - cron: "0 10 1 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: steritech-check
+  cancel-in-progress: false
+
+jobs:
+  steritech-check:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r scraper/requirements.txt
+
+      # ── Snapshot the previous canonical file so we can detect a NEW audit ──
+      - name: Snapshot previous steritech.json
+        run: |
+          mkdir -p /tmp/steritech-prev
+          if [ -f data/steritech.json ]; then
+            cp data/steritech.json /tmp/steritech-prev/previous.json
+          else
+            echo '{}' > /tmp/steritech-prev/previous.json
+          fi
+
+      # ── Pull the latest assessment ──────────────────────────────────────
+      # Prefers full-history login (STERITECH_PASSWORD secret, rcline@estep-co.com)
+      # when available; falls back to the quick-access code otherwise.
+      # NOTE: the quick-access code (OBO8R8R2T) is known EXPIRED as of 2026-07-11
+      # — this step will exit 2 until either a new code is generated on the
+      # OnBrand360 portal (update QUICK_ACCESS_CODE in scrape_steritech.py) or
+      # STERITECH_PASSWORD is added as a repo secret so --full-history can run.
+      - name: Scrape Steritech assessment
+        id: scrape
+        env:
+          STERITECH_PASSWORD: ${{ secrets.STERITECH_PASSWORD }}
+        run: |
+          if [ -n "$STERITECH_PASSWORD" ]; then
+            echo "STERITECH_PASSWORD present — using full-history login"
+            python scraper/scrape_steritech.py --full-history
+          else
+            echo "No STERITECH_PASSWORD secret — using quick-access code"
+            python scraper/scrape_steritech.py
+          fi
+        continue-on-error: true
+
+      - name: Flag scrape failure (auth blocked)
+        if: steps.scrape.outcome == 'failure'
+        run: |
+          echo "::warning::Steritech scrape failed (likely expired quick-access code or missing STERITECH_PASSWORD). Keeping last known data/steritech.json — see scraper/STERITECH_API.md for the refresh path."
+
+      # ── Wire dashboard.html from whatever data/steritech.json currently holds ──
+      - name: Wire dashboard
+        run: python scraper/wire_dashboard.py
+
+      # ── Alert routing: new audit / sub-100 / sub-90 score → team_notes.json ──
+      - name: Check for new/degraded audit and alert
+        if: steps.scrape.outcome == 'success'
+        run: python scraper/steritech_alert_check.py --previous /tmp/steritech-prev/previous.json
+
+      # ── Commit + push ─────────────────────────────────────────────────────
+      - name: Commit Steritech snapshot
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/steritech.json data/steritech_current.json data/team_notes.json dashboard.html || true
+          if git diff --cached --quiet; then
+            echo "No Steritech changes to commit."
+          else
+            git commit -m "steritech: monthly assessment check ${DATE}"
+            git pull --rebase -X theirs --autostash origin main
+            git push origin main
+          fi
