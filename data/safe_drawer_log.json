@@ -638,11 +638,11 @@
     "safe_mid": 677,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
-    "d1_close": 0,
-    "d2_close": 0,
+    "safe_close": 677,
+    "d1_close": 200,
+    "d2_close": 200,
     "ct_os": -66.68,
     "notes": "",
-    "submitted_at": "2026-07-11T19:41:59.164Z"
+    "submitted_at": "2026-07-12T02:46:07.318Z"
   }
 ]
