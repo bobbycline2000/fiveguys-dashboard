@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-07-06",
+    "week_end": "2026-07-12",
+    "variance_week_start": "2026-07-01",
+    "variance_week_end": "2026-07-05",
+    "month_start": "2026-07-01",
+    "last_month_start": "2026-06-01",
+    "last_month_end": "2026-06-30",
+    "through": "2026-07-12",
+    "pulled": "2026-07-13 07:49 ET",
+    "method": "api+playwright"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": null,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": null,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {
+      "name": "Cheese",
+      "actual": 398.0,
+      "theoretical": 246.0,
+      "over_dollars": 152.0,
+      "variance_pct": -62.0,
+      "rank": 1
+    },
+    {
+      "name": "Hot Dog",
+      "actual": 146.0,
+      "theoretical": 54.0,
+      "over_dollars": 92.0,
+      "variance_pct": -173.0,
+      "rank": 2
+    },
+    {
+      "name": "A1 Steak Sauce",
+      "actual": 43.0,
+      "theoretical": 12.0,
+      "over_dollars": 31.0,
+      "variance_pct": -264.0,
+      "rank": 3
+    },
+    {
+      "name": "Cup, Shake",
+      "actual": 47.0,
+      "theoretical": 25.0,
+      "over_dollars": 22.0,
+      "variance_pct": -88.0,
+      "rank": 4
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 144.0,
+      "theoretical": 170.0,
+      "over_dollars": -26.0,
+      "variance_pct": 16.0,
+      "rank": 5
+    },
+    {
+      "name": "Jalapeno Peppers",
+      "actual": -16.0,
+      "theoretical": 11.0,
+      "over_dollars": -27.0,
+      "variance_pct": 247.0,
+      "rank": 6
+    },
+    {
+      "name": "Bacon, Raw Sliced",
+      "actual": 241.0,
+      "theoretical": 275.0,
+      "over_dollars": -34.0,
+      "variance_pct": 12.0,
+      "rank": 7
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 674.0,
+      "theoretical": 715.0,
+      "over_dollars": -41.0,
+      "variance_pct": 6.0,
+      "rank": 8
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 669.0,
+      "theoretical": 710.0,
+      "over_dollars": -41.0,
+      "variance_pct": 6.0,
+      "rank": 9
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": -63.0,
+      "theoretical": 14.0,
+      "over_dollars": -77.0,
+      "variance_pct": 544.0,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
