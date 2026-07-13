@@ -1,17 +1,17 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-06-29",
-    "week_end": "2026-07-05",
-    "week_label": "6/29-7/5",
-    "month": "June",
-    "generated": "2026-07-06T16:20:14",
+    "week_start": "2026-07-06",
+    "week_end": "2026-07-12",
+    "week_label": "7/6-7/12",
+    "month": "July",
+    "generated": "2026-07-13T15:40:58",
     "notes": []
   },
   "sales": {
-    "forecast": 32591,
-    "net_sales": 31479.78,
-    "over_under": -1111.22
+    "forecast": 32009,
+    "net_sales": 31728.63,
+    "over_under": -280.37
   },
   "food_cost": {
     "cogs_pct": 23.4,
@@ -21,43 +21,43 @@
     "var_to_goal": -4.1,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Topping, Peanut Butter Cup",
-      "Shake Mix",
-      "Ground Beef"
+      "Cheese",
+      "Hot Dog",
+      "A1 Steak Sauce"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 23.75,
+    "hourly_labor_pct": 23.51,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
     "ot_hours": 0.0,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 596.68,
+    "labor_hours": 617.46,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
-    "charged_tips": 614.89
+    "charged_tips": 628.86
   },
   "food_safety": {
     "steritech_pct": null,
     "criticals": null,
-    "shops_month_pct": null,
+    "shops_month_pct": 85.0,
     "shops_month_label": "July 2026",
-    "shops_qtd_pct": null,
-    "shops_qtd_count": 0,
+    "shops_qtd_pct": 85.0,
+    "shops_qtd_count": 1,
     "shops_ytd_pct": 85.3
   },
   "fgu": {
-    "overdue_rate_pct": 50,
-    "completion_rate_pct": 75.22,
+    "overdue_rate_pct": 54.29,
+    "completion_rate_pct": 76.07,
     "behind_learners": [
       {
         "name": "Angela Ashby",
         "completion_pct": 0
       },
       {
-        "name": "Elizabeth Brazell",
+        "name": "Javeh Goodman",
         "completion_pct": 0
       },
       {
@@ -69,42 +69,42 @@
         "completion_pct": 3
       },
       {
-        "name": "Rusul Kadhim",
-        "completion_pct": 28
-      },
-      {
-        "name": "Madelynn Smith",
-        "completion_pct": 42
+        "name": "Elizabeth Brazell",
+        "completion_pct": 24
       },
       {
         "name": "Serina Gaskins",
-        "completion_pct": 64
+        "completion_pct": 62
       },
       {
         "name": "Jada Cox",
-        "completion_pct": 71
+        "completion_pct": 69
       },
       {
         "name": "Richard Gibbs",
-        "completion_pct": 72
-      },
-      {
-        "name": "Anthony Pirtle",
-        "completion_pct": 78
+        "completion_pct": 70
       },
       {
         "name": "Brianna Gatewood",
-        "completion_pct": 82
+        "completion_pct": 80
       },
       {
         "name": "Francisco Llorente Mejias",
-        "completion_pct": 82
+        "completion_pct": 80
+      },
+      {
+        "name": "Jeremiah Matthews",
+        "completion_pct": 80
+      },
+      {
+        "name": "Robert Muncy Jr",
+        "completion_pct": 80
       }
     ],
-    "behind_count": 30
+    "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 84.2,
+    "completion_pct": 89.7,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
