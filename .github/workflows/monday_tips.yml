@@ -10,10 +10,9 @@ name: Monday Tip Entry (Store 2065)
 # enter_tips_browser.py upsert updates rows in place and never duplicates.
 
 on:
-  schedule:
-    # 5:30 AM Eastern (Monday) — 09:30 UTC during EDT (Mar–Nov).
-    # During EST (Nov–Mar) this fires at 4:30 AM ET; revisit cron at DST flip.
-    - cron: "30 9 * * 1"
+  # Scheduled cron removed 2026-07-13 — GitHub silently skipped it two Mondays
+  # in a row (7/6, 7/13), so it was unreliable. Manual dispatch only for now:
+  #   gh workflow run monday_tips.yml -f week_ending=MM/DD/YYYY -f mode=live
   workflow_dispatch:
     inputs:
       week_ending:
