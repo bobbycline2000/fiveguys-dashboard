@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated": "2026-07-06T13:05:06",
-    "alerts_count": 1
+    "generated": "2026-07-13T12:20:55",
+    "alerts_count": 3
   },
   "alerts": [
     {
@@ -26,10 +26,19 @@
           "delta_hd": 0,
           "is_holiday_cell": true,
           "is_locked": true
-        },
+        }
+      ],
+      "headline": "Holiday week (2026-06-29)"
+    },
+    {
+      "week_start_mon": "2026-07-27",
+      "holiday_name": "Holiday",
+      "skipped_delivery_days": [],
+      "skipped_forecast_sales": 0,
+      "delivery_day_recommendations": [
         {
-          "date": "2026-07-01",
-          "weekday": "WED",
+          "date": "2026-08-01",
+          "weekday": "SAT",
           "current_hb": 10,
           "current_hd": 1,
           "forecast_own": 0,
@@ -45,8 +54,34 @@
           "is_locked": true
         },
         {
-          "date": "2026-07-03",
-          "weekday": "FRI",
+          "date": "2026-08-01",
+          "weekday": "SAT",
+          "current_hb": null,
+          "current_hd": null,
+          "forecast_own": 0,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 0,
+          "buffer_applied": 3000,
+          "window_sales": 3000,
+          "recommended_hb": 4,
+          "recommended_hd": 1,
+          "delta_hb": 4,
+          "delta_hd": 1,
+          "is_holiday_cell": false,
+          "is_locked": true
+        }
+      ],
+      "headline": "Holiday week (2026-07-27) \u2014 bumps: SAT 2026-08-01 \u2192 4 HB / 1 HD  (\u0394 +4 HB)"
+    },
+    {
+      "week_start_mon": "2026-08-03",
+      "holiday_name": "Holiday",
+      "skipped_delivery_days": [],
+      "skipped_forecast_sales": 0,
+      "delivery_day_recommendations": [
+        {
+          "date": "2026-08-03",
+          "weekday": "MON",
           "current_hb": 20,
           "current_hd": 2,
           "forecast_own": 0,
@@ -60,9 +95,43 @@
           "delta_hd": -1,
           "is_holiday_cell": true,
           "is_locked": true
+        },
+        {
+          "date": "2026-08-06",
+          "weekday": "THU",
+          "current_hb": 9,
+          "current_hd": 0,
+          "forecast_own": 0,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 0,
+          "buffer_applied": 3000,
+          "window_sales": 3000,
+          "recommended_hb": 4,
+          "recommended_hd": 1,
+          "delta_hb": -5,
+          "delta_hd": 1,
+          "is_holiday_cell": false,
+          "is_locked": true
+        },
+        {
+          "date": "2026-08-08",
+          "weekday": "SAT",
+          "current_hb": 10,
+          "current_hd": 1,
+          "forecast_own": 0,
+          "redistributed_from_skip": 0,
+          "raw_window_sales": 0,
+          "buffer_applied": 3000,
+          "window_sales": 3000,
+          "recommended_hb": 4,
+          "recommended_hd": 1,
+          "delta_hb": -6,
+          "delta_hd": 0,
+          "is_holiday_cell": false,
+          "is_locked": true
         }
       ],
-      "headline": "Holiday week (2026-06-29)"
+      "headline": "Holiday week (2026-08-03) \u2014 bumps: THU 2026-08-06 \u2192 4 HB / 1 HD"
     }
   ]
 }
