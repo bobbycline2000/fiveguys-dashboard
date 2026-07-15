@@ -4,11 +4,11 @@
   "week_end": "2026-07-12",
   "variance_week_start": "2026-07-06",
   "variance_week_end": "2026-07-12",
-  "cogs_pct_week": 23.4,
-  "cogs_pct_week_label": "2026-05-03",
+  "cogs_pct_week": null,
+  "cogs_pct_week_label": "2026-07-12",
   "cogs_goal_pct": 27.5,
   "total_over": 3254.0,
-  "generated": "2026-07-15 10:55 ET",
+  "generated": "2026-07-15 12:42 ET",
   "items": [
     {
       "rank": 1,

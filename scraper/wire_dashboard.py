@@ -143,12 +143,24 @@ except FileNotFoundError:
 # Each snapshot has cogs_pct_week (FP% for that week's date range) and
 # meta.week_end (YYYY-MM-DD). We weight-average by net_sales from period_rollups
 # for a rough M/Q estimate. Falls back to "—" gracefully if data is absent.
+# Food Cost % readings older than this are never used to populate the
+# dashboard as if current — they're stale, not a live reading, regardless of
+# which aggregation window (week/month/quarter) would otherwise include them.
+# Added 2026-07-15: the only cogs_pct_week ever successfully extracted by
+# scrape_cogs.py's P&L scrape (week_end 2026-05-03) was being carried forward
+# into the "Quarter" box and the top Food Cost % value every day since, with
+# no staleness indicator — see handoff 2026-07-13-0801-dashboard-blocked-foodcost.md.
+COGS_STALE_CUTOFF_DAYS = 21
+
 def _load_cogs_snapshots() -> list[dict]:
-    """Load all weekly cogs_variance snapshots that have a valid cogs_pct_week."""
+    """Load all weekly cogs_variance snapshots that have a valid cogs_pct_week
+    AND are recent enough (within COGS_STALE_CUTOFF_DAYS of today) to treat as
+    a real signal rather than ancient carry-forward data."""
     base = RAW / "crunchtime" / STORE_ID
     snaps = []
     if not base.exists():
         return snaps
+    _today = date.today()
     for d in sorted(base.iterdir()):
         if not d.is_dir():
             continue
@@ -161,6 +173,8 @@ def _load_cogs_snapshots() -> list[dict]:
             week_end_str = snap.get("meta", {}).get("week_end")
             if pct is not None and week_end_str:
                 week_end = date.fromisoformat(week_end_str)
+                if (_today - week_end).days > COGS_STALE_CUTOFF_DAYS:
+                    continue
                 snaps.append({"week_end": week_end, "pct": float(pct)})
         except Exception:
             continue
@@ -562,12 +576,27 @@ FOOD_COST_GOAL = 27.5
 _fc_pct_raw = cogs.get("cogs_pct_week") if cogs else None
 _fc_source  = "live"
 # Fallback to food_cost_plan.json when scraper couldn't get pct
-# (read_cogs_email.py Graph API or scrape_cogs.py Playwright both failed)
+# (read_cogs_email.py Graph API or scrape_cogs.py Playwright both failed).
+# Staleness-gated (2026-07-15): food_cost_plan.json's fallback loop walks
+# backward through ALL history for the most recent non-null cogs_pct_week —
+# with scrape_cogs.py's P&L scrape broken since ~2026-05-11, that fallback
+# was silently carrying forward a week_end=2026-05-03 reading (2+ months
+# old) as if it were today's number, with no staleness indicator. Reject
+# anything older than COGS_STALE_CUTOFF_DAYS here too.
 if _fc_pct_raw is None and _food_cost_plan and _food_cost_plan.get("cogs_pct_week") is not None:
-    _fc_pct_raw = _food_cost_plan["cogs_pct_week"]
     _label_date = _food_cost_plan.get("cogs_pct_week_label", "")
-    _fc_source  = f"last known ({_label_date[:10] if _label_date else 'prior'})"
-    print(f"  [wire] food cost % from food_cost_plan fallback: {_fc_pct_raw}% (as of {_label_date})")
+    _fallback_is_recent = False
+    try:
+        if _label_date:
+            _fallback_is_recent = (date.today() - date.fromisoformat(_label_date[:10])).days <= COGS_STALE_CUTOFF_DAYS
+    except Exception:
+        _fallback_is_recent = False
+    if _fallback_is_recent:
+        _fc_pct_raw = _food_cost_plan["cogs_pct_week"]
+        _fc_source  = f"last known ({_label_date[:10] if _label_date else 'prior'})"
+        print(f"  [wire] food cost % from food_cost_plan fallback: {_fc_pct_raw}% (as of {_label_date})")
+    else:
+        print(f"  [wire] food cost % fallback REJECTED — stale ({_label_date}, >{COGS_STALE_CUTOFF_DAYS}d old)")
 
 if _fc_pct_raw is not None:
     fc_pct = float(_fc_pct_raw)
@@ -578,14 +607,19 @@ if _fc_pct_raw is not None:
         fc_flag = "Under Goal"
     else:
         fc_flag = "On Goal"
-    rep(r'(<div class="ctrl-card food-cost">.*?<div class="ctrl-value">)[^<]*(</div>)',
-        rf'\g<1>{fc_val}\g<2>',
-        "Food Cost Big %",
-        flags=DOTALL)
-    rep(r'(<div class="ctrl-card food-cost">.*?<div class="ctrl-flag"><i data-lucide="flag"></i> )[^<]*(</div>)',
-        rf'\g<1>{fc_flag}\g<2>',
-        "Food Cost goal flag",
-        flags=DOTALL)
+else:
+    # No recent reading at all — show honestly rather than leaving whatever
+    # value happened to be baked into the last committed dashboard.html.
+    fc_val = "—"
+    fc_flag = "No Recent Data"
+rep(r'(<div class="ctrl-card food-cost">.*?<div class="ctrl-value">)[^<]*(</div>)',
+    rf'\g<1>{fc_val}\g<2>',
+    "Food Cost Big %",
+    flags=DOTALL)
+rep(r'(<div class="ctrl-card food-cost">.*?<div class="ctrl-flag"><i data-lucide="flag"></i> )[^<]*(</div>)',
+    rf'\g<1>{fc_flag}\g<2>',
+    "Food Cost goal flag",
+    flags=DOTALL)
 
 # ── Food Cost period variance-to-goal boxes (Week / Month / QTD) ───────
 def _vtg_str(cogs_data, key):

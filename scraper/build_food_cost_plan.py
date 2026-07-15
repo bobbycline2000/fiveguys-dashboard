@@ -96,6 +96,14 @@ def main():
     cogs_pct = d.get("cogs_pct_week")
     pct_week_label = m.get("week_end")
     if cogs_pct is None:
+        # Fall back to the most recent non-null cogs_pct_week snapshot — but
+        # only if it's still recent. scrape_cogs.py's P&L scrape has been
+        # broken since ~2026-05-11 (returns cogs_pct_week: null every day),
+        # so an un-gated walk-back was silently reusing a week_end=2026-05-03
+        # reading as "current" for 2+ months. Added 2026-07-15 — see handoff
+        # 2026-07-13-0801-dashboard-blocked-foodcost.md ("labeling bug").
+        STALE_CUTOFF_DAYS = 21
+        today = datetime.date.today()
         base = DATA / "raw" / "crunchtime" / "2065"
         if base.exists():
             for dd in sorted([x for x in base.iterdir() if x.is_dir()], reverse=True):
@@ -104,8 +112,13 @@ def main():
                     try:
                         snap = json.loads(c.read_text())
                         if snap.get("cogs_pct_week") is not None:
+                            snap_week_end = snap.get("meta", {}).get("week_end")
+                            if snap_week_end:
+                                age = (today - datetime.date.fromisoformat(snap_week_end)).days
+                                if age > STALE_CUTOFF_DAYS:
+                                    continue
                             cogs_pct = snap["cogs_pct_week"]
-                            pct_week_label = snap.get("meta", {}).get("week_end")
+                            pct_week_label = snap_week_end
                             break
                     except Exception:
                         continue
