@@ -1,0 +1,24 @@
+{
+  "date": "2026-07-15",
+  "location_id": "18170",
+  "list_count": 2,
+  "overall_required_pct": 53,
+  "overall_all_pct": 53,
+  "lists": [
+    {
+      "name": "11AM: Time and Temp",
+      "list_id": "189006",
+      "required_pct": 100,
+      "all_pct": 100
+    },
+    {
+      "name": "1PM: Time and Temp",
+      "list_id": "199718",
+      "required_pct": 0,
+      "all_pct": 0
+    }
+  ],
+  "fetched_at": "2026-07-15T12:20:09.879183-04:00",
+  "source": "compliancemate_url_replay",
+  "report_type": "list_completions"
+}
