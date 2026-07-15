@@ -1,41 +1,48 @@
 {
-  "date": "2026-07-13",
-  "new_count": 8,
+  "date": "2026-07-15",
+  "new_count": 6,
   "notes": [
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
-      "time": "7/11",
-      "body": "CO2: Check your CO2 levels. If below 25%, call and place an order now — supplier may be short on supply. All locations should have a 50 lb backup tank; if you don't have one, call to order. Standing (7/9): schedule is still written over 25% — hold labor under 25% this week."
-    },
-    {
-      "from": "CrunchTime",
-      "role": "alert",
-      "role_label": "KY-2065 Action",
-      "time": "7/13",
-      "body": "Weekly sales +17.3% W/W ($31,729 vs $27,050 LY). COGS Flash (wk ending 7/12): CGS $8,517, CP% 26.8, FP% 25.2. Open CT tasks: Labor Review 7/11 + 7/12, Inventory Final for Post 7/12, Post Period — Labor Not Posted 7/12. Close today."
+      "time": "7/15",
+      "body": "Food Safety Focus — Cyclosporiasis: cover produce washing + veggie wash solution in shift meetings, sanitize utensils/surfaces/dining/restrooms, keep Freestyle machines wiped, frequent hand-washing + glove changes, follow the food-safety checklist incl. temp checks and effective sanitizer. Also: catch up the Daily Report (opener or closer to complete) and reply who owns it. Possible 2-hr bread delivery delay — check stock, hold a 1-day buffer."
     },
     {
       "from": "Crystal Hess",
       "role": "dm",
       "role_label": "District Manager",
-      "time": "7/11",
-      "body": "Manager Certifications 2065: all three MITs passed — Rusul 100, Anthony 99, Madelynn 98. Temporary certificates issued; training videos fixed. Standing KPI: 60% of score = Secret Shops + Customer complaints + Ticket times."
+      "time": "7/14",
+      "body": "Lettuce/veggie wash: make sure your veggie wash is testing correctly and RESPOND — response requested. Cyclospora: check veggie wash regularly, review Corporate communications, and PRINT + POST all Corporate communications on the board. 'As leaders, we are always on stage.'"
+    },
+    {
+      "from": "Tonya Tucker",
+      "role": "accounting",
+      "role_label": "Estep Accounting",
+      "time": "7/14",
+      "body": "Upload the missing 2065 deposit receipt for 7/10 to the portal."
+    },
+    {
+      "from": "CrunchTime",
+      "role": "alert",
+      "role_label": "KY-2065 Action",
+      "time": "7/15",
+      "body": "7/14 net sales $3,551.84 (145 orders / 678 guests / $24.50 avg). Labor 28.04% — over the 25% ceiling. COGS Flash (wk ending 7/19, early): CP% 22.1. Open CT tasks: VO-Rec-BOSS Alpha Ohio Valley 7/13, L-Rev 7/13, L-Rev 7/14, VO-Rec-Performance Fdsvce 7/14 — close today."
     },
     {
       "from": "Missing Temps",
       "role": "alert",
       "role_label": "Steritech / CM",
-      "time": "7/12",
-      "body": "Sunday 7/12: Closing Checklist MISSED — owner Madison Cureton (PM). AM Vicki Lucey, PM Madison Cureton. Close the loop tonight."
+      "time": "7/14",
+      "body": "Tuesday 7/14: 2 missed — Closing Checklist + PM Pre-Shift Check, owner Anthony Pirtle (PM). AM Vicki Lucey clean. Close the loop tonight."
     },
     {
-      "from": "FGU Overdue Rate",
+      "from": "ComplianceMate",
       "role": "alert",
-      "role_label": "FGU / Schoox",
-      "time": "Standing",
-      "body": "⚠️ Overdue rate elevated (~54%). Push crew below 100% before it compounds. 12 active crew with no FGU account or stuck at 0% (Angela, Ash, Chloe, Divan, Grace, Javeh +6 more)."
+      "role_label": "Compliance Alert",
+      "time": "7/14",
+      "body": "Open ticket — 'probe connected but not taking reading' (no update). Check the sensor is reporting."
     }
   ]
 }
