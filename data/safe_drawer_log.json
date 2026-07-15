@@ -700,7 +700,7 @@
     "date": "2026-07-15",
     "mgr": "vll",
     "deposit": 0,
-    "safe_open": 0,
+    "safe_open": 659,
     "d1_open": 190,
     "d2_open": 200,
     "safe_mid": 0,
@@ -711,6 +711,6 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-07-15T14:55:09.338Z"
+    "submitted_at": "2026-07-15T14:57:17.403Z"
   }
 ]
