@@ -4,13 +4,13 @@
   "week_ending": "2026-07-19",
   "week_start": "2026-07-13",
   "target_pct": 20.0,
-  "generated_at": "2026-07-15T07:11:43.023547-04:00",
+  "generated_at": "2026-07-16T07:19:18.960261-04:00",
   "week": {
     "fcst_sales": 27853,
-    "sched_cost": 6400,
-    "sched_hours": 445.5,
+    "sched_cost": 6394,
+    "sched_hours": 445.0,
     "labor_pct": 23.0,
-    "over_target_dollars": 830,
+    "over_target_dollars": 823,
     "ot_hours": 0.0,
     "ot_value": 0
   },
@@ -34,7 +34,7 @@
     {
       "sev": "high",
       "day": "Thu",
-      "msg": "Thu labor 22.4% \u2014 ~$94 over 20% target"
+      "msg": "Thu labor 22.3% \u2014 ~$88 over 20% target"
     },
     {
       "sev": "high",
@@ -86,11 +86,11 @@
       "date": "2026-07-16",
       "wd": "Thu",
       "sales": 3883,
-      "hrs": 61.5,
-      "cost": 870,
-      "pct": 22.4,
+      "hrs": 61.0,
+      "cost": 864,
+      "pct": 22.3,
       "byPosition": {
-        "2. Crew": 45.5,
+        "2. Crew": 45.0,
         "Shift Leader-Hourly": 16.0
       }
     },
