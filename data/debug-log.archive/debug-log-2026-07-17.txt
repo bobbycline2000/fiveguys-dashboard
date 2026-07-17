@@ -1,0 +1,3 @@
+[2026-07-16 11:20:38] outlook-daily-pull-7am: no actionable work emails after filtering
+[2026-07-16 12:25] shop-action-plan-draft: drafted 2 action plan(s): 20847130, 20847980
+[2026-07-16 12:40] parbrink CI GAP: 2026-07-15 daily reports email was never picked up by CI (still unread in fg2065). Backfilled manually via parbrink_email_pickup.py --date 2026-07-15 + 3 parsers. CHECK: why the CI pickup step skipped 07-15 (PARBRINK_SKIP=1 / missing SCG Gmail secrets in Actions?). If secrets lapsed, future days silently lose Brink data.
