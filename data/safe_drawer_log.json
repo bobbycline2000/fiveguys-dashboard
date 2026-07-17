@@ -737,14 +737,14 @@
     "safe_open": 659,
     "d1_open": 0,
     "d2_open": 0,
-    "safe_mid": 0,
-    "d1_mid": 0,
-    "d2_mid": 0,
+    "safe_mid": 659,
+    "d1_mid": 200,
+    "d2_mid": 200,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
-    "ct_os": 0,
+    "ct_os": -61.5,
     "notes": "",
-    "submitted_at": "2026-07-17T13:50:25.863Z"
+    "submitted_at": "2026-07-17T22:36:06.164Z"
   }
 ]
