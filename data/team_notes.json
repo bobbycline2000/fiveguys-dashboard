@@ -1,41 +1,55 @@
 {
-  "date": "2026-07-16",
-  "new_count": 5,
+  "date": "2026-07-17",
+  "new_count": 7,
   "notes": [
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
-      "time": "7/15",
-      "body": "Daily Report catch-up — decide whether the opening or closing shift lead owns the daily report and lock it as the standing job. Fill any open days on the FG Daily Report xlsx (2065 Dixie)."
+      "time": "7/17 10:26 AM",
+      "body": "SCAM ALERT: Callers posing as Uber with 'connectivity issues' are asking for store email + login. No one from ownership, corporate, or a vendor calls for login info. Post the email and brief every cashier + MOD to hang up and report."
     },
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
-      "time": "7/15",
-      "body": "Food Safety — Cyclosporiasis outbreak. Store-wide #1: veggie-wash tested + used on all produce, sanitize utensils/surfaces/dining/restrooms, wipe Freestyle, hand-wash + glove changes, temp checks + change sanitizer buckets. Drill at every shift meeting."
+      "time": "7/17 7:38 AM",
+      "body": "Short temp — 7/16 missed the 5PM Time & Temp and Closing Checklist (Madison Cureton, PM). Coach on close-out temps + checklist."
     },
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
-      "time": "7/15",
-      "body": "Bread delivery delay (2-hr). Keep a 1-day buffer. Check stock against today's forecast and flag if you need more."
+      "time": "7/16 2:57 PM",
+      "body": "Celebrations: Sales Growth! Matthew & New Albany +73% WTD, Joe & Lafayette +39% WTD. So many up double digits. 2065 +30.3% WTD."
+    },
+    {
+      "from": "Tonya Tucker",
+      "role": "accounting",
+      "role_label": "Staff Accountant, Estep & Company",
+      "time": "7/16 1:06 PM",
+      "body": "Upload deposit receipts to the portal — 2065 owes 7/10 and 7/14."
     },
     {
       "from": "Crystal Hess",
       "role": "dm",
       "role_label": "District Manager",
-      "time": "7/11",
-      "body": "Manager Certifications 2065 — all three passed: Rusul 100, Anthony 99, Madelynn 98. Temporary certificates issued; training videos fixed. Big bench-strength win."
+      "time": "7/16 4:26 PM",
+      "body": "Manager Certifications 2065 complete — Rusul 100, Anthony 99, Madelynn 98. Temporary certificates issued; training videos fixed."
     },
     {
-      "from": "ComplianceMate",
+      "from": "Five Guys Support",
       "role": "alert",
-      "role_label": "Compliance Alert",
-      "time": "7/15",
-      "body": "Ticket 203045 (No Internet 5pm & 7pm temps / probe not reading) resolved and logged for Steritech. Watch the probe today — the 7/15 5PM temp came in incomplete (95%) on the outage. Closing Checklist + Milkshake Pump Check missed by Anthony Pirtle (PM)."
+      "role_label": "PAR Support",
+      "time": "7/16 4:04 PM",
+      "body": "Register 2 not connecting to internet (R1 fine). Ticket 705671 open. Run on R1, follow up if not resolved by open."
+    },
+    {
+      "from": "Five Guys Announcements",
+      "role": "alert",
+      "role_label": "Corporate",
+      "time": "7/17 8:31 AM",
+      "body": "Patty Press (wk of July 13): July Milestone Work Anniversaries; Coke Right-Sizing reminder."
     }
   ]
 }

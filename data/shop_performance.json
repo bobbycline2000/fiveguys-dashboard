@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-07-16",
+  "as_of": "2026-07-17",
   "current_month": "2026-07",
   "current_month_label": "July 2026",
   "store_avg_month": 57.3,
@@ -10,18 +10,18 @@
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 85.0,
-      "ytd_n": 24
+      "month_avg": 43.5,
+      "month_n": 2,
+      "ytd_avg": 81.8,
+      "ytd_n": 26
     },
     {
       "first": "Vicki",
       "name": "Vicki Lucey",
-      "month_avg": 85.0,
-      "month_n": 1,
-      "ytd_avg": 86.4,
-      "ytd_n": 14
+      "month_avg": 86.0,
+      "month_n": 2,
+      "ytd_avg": 86.5,
+      "ytd_n": 15
     },
     {
       "first": "Kasey",
@@ -90,22 +90,6 @@
       "ytd_n": 3
     },
     {
-      "first": "Jeremiah",
-      "name": "Jeremiah Matthews",
-      "month_avg": 85.0,
-      "month_n": 1,
-      "ytd_avg": 89.4,
-      "ytd_n": 18
-    },
-    {
-      "first": "Richard",
-      "name": "Richard Gibbs",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 87.7,
-      "ytd_n": 7
-    },
-    {
       "first": "Lidy",
       "name": "Lidy Henry",
       "month_avg": 85.0,
@@ -130,6 +114,14 @@
       "ytd_n": 8
     },
     {
+      "first": "Jeremiah",
+      "name": "Jeremiah Matthews",
+      "month_avg": 42.5,
+      "month_n": 2,
+      "ytd_avg": 84.7,
+      "ytd_n": 19
+    },
+    {
       "first": "Maylin",
       "name": "Maylin Hernandez Rodriguez",
       "month_avg": 85.0,
@@ -140,10 +132,10 @@
     {
       "first": "Francisco",
       "name": "Francisco Llorente Mejias",
-      "month_avg": 85.0,
-      "month_n": 1,
-      "ytd_avg": 81.0,
-      "ytd_n": 23
+      "month_avg": 86.0,
+      "month_n": 2,
+      "ytd_avg": 81.2,
+      "ytd_n": 24
     },
     {
       "first": "Samuel",
@@ -151,6 +143,14 @@
       "month_avg": null,
       "month_n": 0,
       "ytd_avg": 77.6,
+      "ytd_n": 8
+    },
+    {
+      "first": "Richard",
+      "name": "Richard Gibbs",
+      "month_avg": 0.0,
+      "month_n": 1,
+      "ytd_avg": 76.8,
       "ytd_n": 8
     },
     {
@@ -167,13 +167,21 @@
       "date": "2026-07-12",
       "score": 87.0,
       "meal_period": "Lunch",
-      "on_shift": []
+      "on_shift": [
+        "Francisco Llorente Mejias",
+        "Madison Cureton",
+        "Vicki Lucey"
+      ]
     },
     {
       "date": "2026-07-11",
       "score": 0.0,
       "meal_period": "Dinner",
-      "on_shift": []
+      "on_shift": [
+        "Jeremiah Matthews",
+        "Madison Cureton",
+        "Richard Gibbs"
+      ]
     },
     {
       "date": "2026-07-03",
