@@ -1,55 +1,41 @@
 {
-  "date": "2026-07-17",
-  "new_count": 7,
-  "notes": [
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "7/17 10:26 AM",
-      "body": "SCAM ALERT: Callers posing as Uber with 'connectivity issues' are asking for store email + login. No one from ownership, corporate, or a vendor calls for login info. Post the email and brief every cashier + MOD to hang up and report."
-    },
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "7/17 7:38 AM",
-      "body": "Short temp — 7/16 missed the 5PM Time & Temp and Closing Checklist (Madison Cureton, PM). Coach on close-out temps + checklist."
-    },
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "7/16 2:57 PM",
-      "body": "Celebrations: Sales Growth! Matthew & New Albany +73% WTD, Joe & Lafayette +39% WTD. So many up double digits. 2065 +30.3% WTD."
-    },
-    {
-      "from": "Tonya Tucker",
-      "role": "accounting",
-      "role_label": "Staff Accountant, Estep & Company",
-      "time": "7/16 1:06 PM",
-      "body": "Upload deposit receipts to the portal — 2065 owes 7/10 and 7/14."
-    },
-    {
-      "from": "Crystal Hess",
-      "role": "dm",
-      "role_label": "District Manager",
-      "time": "7/16 4:26 PM",
-      "body": "Manager Certifications 2065 complete — Rusul 100, Anthony 99, Madelynn 98. Temporary certificates issued; training videos fixed."
-    },
-    {
-      "from": "Five Guys Support",
-      "role": "alert",
-      "role_label": "PAR Support",
-      "time": "7/16 4:04 PM",
-      "body": "Register 2 not connecting to internet (R1 fine). Ticket 705671 open. Run on R1, follow up if not resolved by open."
-    },
-    {
-      "from": "Five Guys Announcements",
-      "role": "alert",
-      "role_label": "Corporate",
-      "time": "7/17 8:31 AM",
-      "body": "Patty Press (wk of July 13): July Milestone Work Anniversaries; Coke Right-Sizing reminder."
-    }
-  ]
+ "date": "2026-07-17",
+ "new_count": 32,
+ "notes": [
+  {
+   "from": "Brad Davis",
+   "role": "director",
+   "role_label": "Director of Operations",
+   "time": "7/17 2:26 PM",
+   "body": "SCAM ALERT: Scammers calling stores as \"Uber\" with connectivity issues asking for email+login. NO ONE gives login info over the phone. Post this by the phone."
+  },
+  {
+   "from": "Brad Davis",
+   "role": "director",
+   "role_label": "Director of Operations",
+   "time": "7/17 11:38 AM",
+   "body": "Short temp — 7/16 time-and-temp report flagged. Fix the missed 5PM temp + closing checklist."
+  },
+  {
+   "from": "Brad Davis",
+   "role": "director",
+   "role_label": "Director of Operations",
+   "time": "7/16 2:57 PM",
+   "body": "Celebrations: New Albany +73% WTD, Lafayette +39% WTD. So many up double digits — keep growing."
+  },
+  {
+   "from": "Crystal Hess",
+   "role": "dm",
+   "role_label": "District Manager",
+   "time": "7/16 8:26 PM",
+   "body": "Payroll Error — Thank you so much (Bobby caught new hire entered at $2,065/hr, corrected inside first hour). Manager certs: Rusul 100, Anthony 99, Madelynn 98 — all passed."
+  },
+  {
+   "from": "Tonya Tucker",
+   "role": "accounting",
+   "role_label": "Staff Accountant",
+   "time": "7/16 1:06 PM",
+   "body": "Upload 2065 deposit receipts for 7/10 and 7/14 to the portal."
+  }
+ ]
 }
