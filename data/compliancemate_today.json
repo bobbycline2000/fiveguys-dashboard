@@ -1,9 +1,9 @@
 {
-  "date": "2026-07-16",
+  "date": "2026-07-17",
   "location_id": "18170",
   "list_count": 2,
-  "overall_required_pct": 53,
-  "overall_all_pct": 53,
+  "overall_required_pct": 100,
+  "overall_all_pct": 100,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -12,13 +12,13 @@
       "all_pct": 100
     },
     {
-      "name": "1PM: Time and Temp",
-      "list_id": "199718",
-      "required_pct": 0,
-      "all_pct": 0
+      "name": "Friday Milkshake Cleaning Check",
+      "list_id": "254607",
+      "required_pct": 100,
+      "all_pct": 100
     }
   ],
-  "fetched_at": "2026-07-16T12:28:54.818682-04:00",
+  "fetched_at": "2026-07-17T10:53:27.812579-04:00",
   "source": "compliancemate_url_replay",
   "report_type": "list_completions"
 }
