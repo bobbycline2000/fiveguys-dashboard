@@ -183,6 +183,18 @@ This means the typical lights-out replay (cookie + JSON POST + parse JSON) does 
 
 ---
 
+## Known data-quality incident — Par Brink source-of-truth labor cost error, 2026-07-16
+
+**This is a POS-side data corruption in the Par Brink report itself, NOT a parser bug.** Logged so a future regression isn't mis-diagnosed as a parser issue and re-investigated from scratch.
+
+- `data/raw/parbrink/2065/2026-07-16/sales_summary.json` had `labor_cost: 11674.10` / `labor_percent: 244.65%` — impossible (would be ~$122/hr average wage on a $4,771.80 net-sales day).
+- Confirmed NOT a parsing bug: re-extracted both `Sales Summary.pdf` and the independently-generated `Hourly Sales And Labor.pdf` for the same business date — both PDFs *print* the same bad total ($11,674.10 / 244.65%), and both parsers (`parbrink_parse_sales_summary.py`, `parbrink_parse_hourly_sales_labor.py`) correctly extracted what's on the page.
+- Root cause localized via the hourly breakdown: labor $/hr was normal (~$11-12/hr) for every hour EXCEPT 2PM-7PM, where it spiked to $145-$324/hr (e.g. 3PM: $2,146.20 for 7.95 labor-hours). Worked-hours counts for those hours look normal — only the dollar figure is corrupted. Looks like a bad wage-rate/payroll entry on Par Brink's side for whoever worked that window, not a formatting or OCR issue.
+- **Corrected using an independent cross-check**: CrunchTime's labor API (`data/labor_today.json` snapshot pulled 2026-07-17T10:50:19 for date=2026-07-16, i.e. the "yesterday" pull) reported `labor_dollars: 1095.87`, `labor_percent: 22.9673%`, `actual_hours: 97.43` — consistent with the 7/15 ($907.68 / 19.74%) and 7/17 ($1,019.62 / 22.94%) figures on either side.
+- Fix applied: hand-corrected `data/raw/parbrink/2065/2026-07-16/sales_summary.json` — `labor_cost: 1095.87`, `labor_percent: 22.97`, `labor_hours` left at Brink's own 95.43 (internally consistent, not part of the anomaly). Original bad PDF values preserved in `meta.labor_cost_raw_pdf` / `meta.labor_percent_raw_pdf` for audit trail, plus a `meta.labor_cost_corrected: true` flag and full correction note.
+- **No parser code changes** — `parbrink_parse_sales_summary.py` and `parbrink_parse_hourly_sales_labor.py` both did their job correctly; the source PDF itself was wrong. `hourly_sales_labor.json` for 7/16 still contains the raw uncorrected hourly figures (not touched — it's fallback-only per `wire_dashboard.py`, not read by `aggregate_periods.py`, so it doesn't feed the period rollups the watchdog was fixing). If Bobby wants that file corrected too for historical-record cleanliness, flag it — low priority since nothing downstream reads it for 7/16 specifically.
+- **If this recurs**: check the Hourly Sales And Labor PDF's per-hour breakdown first — a spike isolated to a few consecutive hours with otherwise-normal worked-hours is the signature of a bad wage-rate entry on Brink's side, not a parser regression. Cross-check against `data/labor_today.json` git history (`git show <commit-for-that-day+1>:data/labor_today.json`) for a same-day CT figure before guessing a corrected number.
+
 ## Open work to fully catalog (next sessions)
 
 1. Capture the URL slug for each of the 12 Brink reports listed above (5-min job, browse + copy).
