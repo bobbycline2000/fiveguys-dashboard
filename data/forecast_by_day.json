@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated": "2026-07-17T10:50:20",
-    "today": "2026-07-17",
+    "generated": "2026-07-18T10:21:23",
+    "today": "2026-07-18",
     "this_week_mon": "2026-07-13",
     "next_week_mon": "2026-07-20",
     "week_convention": "Mon-Sun"
@@ -39,7 +39,7 @@
       "date": "2026-07-17",
       "name": "FRI",
       "forecast": 5790.0,
-      "actual": null,
+      "actual": 4445.34,
       "is_next_week": false
     },
     {
