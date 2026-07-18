@@ -735,16 +735,16 @@
     "mgr": "MS",
     "deposit": 0,
     "safe_open": 659,
-    "d1_open": 0,
-    "d2_open": 0,
+    "d1_open": 200,
+    "d2_open": 200,
     "safe_mid": 659,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
-    "d1_close": 0,
-    "d2_close": 0,
+    "safe_close": 659,
+    "d1_close": 200,
+    "d2_close": 200,
     "ct_os": -61.5,
     "notes": "",
-    "submitted_at": "2026-07-17T22:36:39.309Z"
+    "submitted_at": "2026-07-18T02:42:13.876Z"
   }
 ]
