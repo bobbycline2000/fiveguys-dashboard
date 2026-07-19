@@ -754,14 +754,14 @@
     "safe_open": 656.5,
     "d1_open": 200,
     "d2_open": 200,
-    "safe_mid": 657,
+    "safe_mid": 656,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
+    "safe_close": 656,
     "d1_close": 202.71,
     "d2_close": 200,
     "ct_os": -153.8,
     "notes": "",
-    "submitted_at": "2026-07-19T02:34:37.137Z"
+    "submitted_at": "2026-07-19T02:37:08.597Z"
   }
 ]
