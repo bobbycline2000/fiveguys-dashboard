@@ -1,7 +1,7 @@
 {
   "store_id": "2065",
   "month": "July 2026",
-  "generated": "2026-07-19 10:39 ET",
+  "generated": "2026-07-20 11:49 ET",
   "rows": [
     {
       "day": 1,
@@ -222,7 +222,14 @@
     {
       "day": 19,
       "date": "2026-07-19",
-      "empty": true
+      "empty": false,
+      "net_sales": 4400.29,
+      "labor_pct": 18.83,
+      "labor_hours": 87.85,
+      "guests": 840,
+      "sales_guest": 5.24,
+      "discounts": 270.84,
+      "cash_os": -45.43
     },
     {
       "day": 20,
@@ -286,11 +293,11 @@
     }
   ],
   "totals": {
-    "net_sales": 82130.46,
-    "discounts": 6628.1,
-    "labor_hours": 1551.73,
-    "cash_os": -433.9,
-    "avg_labor_pct": 23.28,
-    "days_with_data": 18
+    "net_sales": 86530.75,
+    "discounts": 6898.94,
+    "labor_hours": 1639.58,
+    "cash_os": -479.33,
+    "avg_labor_pct": 23.05,
+    "days_with_data": 19
   }
 }

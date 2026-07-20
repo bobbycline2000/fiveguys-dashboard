@@ -1,0 +1,613 @@
+{
+  "meta": {
+    "source": "parbrink_parse_weekly_schedule.py",
+    "store_id": "2065",
+    "report_date": "2026-07-19",
+    "week_start": "2026-07-13",
+    "week_end": "2026-07-19",
+    "generated": "2026-07-20T11:46:34",
+    "source_pdf": "data/raw/parbrink/2065/week-ending-2026-07-19/Weekly Labor Schedule.pdf"
+  },
+  "totals_by_day": {
+    "2026-07-13": 87.0,
+    "2026-07-14": 82.75,
+    "2026-07-15": 71.0,
+    "2026-07-16": 92.25,
+    "2026-07-17": 89.5,
+    "2026-07-18": 86.0,
+    "2026-07-19": 69.0,
+    "week_total": 577.5
+  },
+  "schedule": {
+    "2026-07-13": {
+      "date": "2026-07-13",
+      "day_of_week": "Monday",
+      "scheduled_hours": 87.0,
+      "shifts": [
+        {
+          "name": "Elizabeth B.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Kaisha B.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "03:00 PM"
+        },
+        {
+          "name": "Robert C.",
+          "role": "General Manager",
+          "start": "06:00 AM",
+          "end": "05:00 PM"
+        },
+        {
+          "name": "Madison C.",
+          "role": "Shift Lead - Hourly",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Serina G.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Brianna G.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "DJuan J.",
+          "role": "Crew",
+          "start": "06:00 PM",
+          "end": "10:00 PM"
+        },
+        {
+          "name": "Rusul K.",
+          "role": "Shift Lead - Hourly",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Francisco L.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "02:00 PM"
+        },
+        {
+          "name": "Anthony P.",
+          "role": "Shift Lead - Hourly",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Madelynn S.",
+          "role": "Shift Lead - Hourly",
+          "start": "07:00 AM",
+          "end": "03:00 PM"
+        },
+        {
+          "name": "Zack W.",
+          "role": "Crew",
+          "start": "11:00 AM",
+          "end": "04:00 PM"
+        }
+      ]
+    },
+    "2026-07-14": {
+      "date": "2026-07-14",
+      "day_of_week": "Tuesday",
+      "scheduled_hours": 82.75,
+      "shifts": [
+        {
+          "name": "Elizabeth B.",
+          "role": "Crew",
+          "start": "05:00 PM",
+          "end": "09:00 PM"
+        },
+        {
+          "name": "Robert C.",
+          "role": "Crew",
+          "start": "09:00 AM",
+          "end": "06:00 PM"
+        },
+        {
+          "name": "Christopher C.",
+          "role": "Shift Lead - Hourly",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Serina G.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Ailen G.",
+          "role": "Crew",
+          "start": "06:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Lidy H.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "DJuan J.",
+          "role": "Crew",
+          "start": "05:00 PM",
+          "end": "10:00 PM"
+        },
+        {
+          "name": "Vicki L.",
+          "role": "Shift Lead - Hourly",
+          "start": "07:00 AM",
+          "end": "02:00 PM"
+        },
+        {
+          "name": "Mykenize M.",
+          "role": "Crew",
+          "start": "04:15 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Anthony P.",
+          "role": "Crew",
+          "start": "02:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Madelynn S.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Zack W.",
+          "role": "Crew",
+          "start": "09:00 AM",
+          "end": "04:00 PM"
+        }
+      ]
+    },
+    "2026-07-15": {
+      "date": "2026-07-15",
+      "day_of_week": "Wednesday",
+      "scheduled_hours": 71.0,
+      "shifts": [
+        {
+          "name": "Kaisha B.",
+          "role": "Crew",
+          "start": "11:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Madison C.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Serina G.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Ailen G.",
+          "role": "Crew",
+          "start": "05:30 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Lidy H.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Emanuela K.",
+          "role": "Crew",
+          "start": "05:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Vicki L.",
+          "role": "Crew",
+          "start": "07:00 AM",
+          "end": "02:00 PM"
+        },
+        {
+          "name": "Jeremiah M.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "08:00 PM"
+        },
+        {
+          "name": "Mykenize M.",
+          "role": "Crew",
+          "start": "04:15 PM",
+          "end": "08:45 PM"
+        },
+        {
+          "name": "Anthony P.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "11:00 PM"
+        }
+      ]
+    },
+    "2026-07-16": {
+      "date": "2026-07-16",
+      "day_of_week": "Thursday",
+      "scheduled_hours": 92.25,
+      "shifts": [
+        {
+          "name": "Elizabeth B.",
+          "role": "Crew",
+          "start": "05:00 PM",
+          "end": "09:00 PM"
+        },
+        {
+          "name": "Kaisha B.",
+          "role": "Crew",
+          "start": "10:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Robert C.",
+          "role": "Crew",
+          "start": "09:00 AM",
+          "end": "06:00 PM"
+        },
+        {
+          "name": "Christopher C.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "08:00 PM"
+        },
+        {
+          "name": "Madison C.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Serina G.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Ailen G.",
+          "role": "Crew",
+          "start": "05:45 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Lidy H.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "02:00 PM"
+        },
+        {
+          "name": "Rusul K.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Francisco L.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Vicki L.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Jeremiah M.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "08:00 PM"
+        },
+        {
+          "name": "Madelynn S.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        }
+      ]
+    },
+    "2026-07-17": {
+      "date": "2026-07-17",
+      "day_of_week": "Friday",
+      "scheduled_hours": 89.5,
+      "shifts": [
+        {
+          "name": "Robert C.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "06:00 PM"
+        },
+        {
+          "name": "Christopher C.",
+          "role": "Crew",
+          "start": "04:30 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Brianna G.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Richard G.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "08:00 PM"
+        },
+        {
+          "name": "Ailen G.",
+          "role": "Crew",
+          "start": "06:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Lidy H.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Rusul K.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Francisco L.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Vicki L.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Jeremiah M.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "08:00 PM"
+        },
+        {
+          "name": "Mykenize M.",
+          "role": "Crew",
+          "start": "05:00 PM",
+          "end": "09:00 PM"
+        },
+        {
+          "name": "Madelynn S.",
+          "role": "Crew",
+          "start": "11:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Zack W.",
+          "role": "Crew",
+          "start": "10:00 AM",
+          "end": "02:00 PM"
+        }
+      ]
+    },
+    "2026-07-18": {
+      "date": "2026-07-18",
+      "day_of_week": "Saturday",
+      "scheduled_hours": 86.0,
+      "shifts": [
+        {
+          "name": "Elizabeth B.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Robert C.",
+          "role": "Crew",
+          "start": "06:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Christopher C.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Madison C.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Lidy H.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "DJuan J.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Rusul K.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "08:00 PM"
+        },
+        {
+          "name": "Emanuela K.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Francisco L.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Mykenize M.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "05:00 PM"
+        },
+        {
+          "name": "Madelynn S.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        }
+      ]
+    },
+    "2026-07-19": {
+      "date": "2026-07-19",
+      "day_of_week": "Sunday",
+      "scheduled_hours": 69.0,
+      "shifts": [
+        {
+          "name": "Elizabeth B.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Madison C.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Brianna G.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "03:00 PM"
+        },
+        {
+          "name": "DJuan J.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Rusul K.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "08:00 PM"
+        },
+        {
+          "name": "Emanuela K.",
+          "role": "Crew",
+          "start": "04:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Francisco L.",
+          "role": "Crew",
+          "start": "03:00 PM",
+          "end": "11:00 PM"
+        },
+        {
+          "name": "Vicki L.",
+          "role": "Crew",
+          "start": "08:00 AM",
+          "end": "04:00 PM"
+        },
+        {
+          "name": "Zack W.",
+          "role": "Crew",
+          "start": "12:00 PM",
+          "end": "08:00 PM"
+        }
+      ]
+    }
+  },
+  "today": {
+    "date": "2026-07-19",
+    "day_of_week": "Sunday",
+    "scheduled_hours": 69.0,
+    "shifts": [
+      {
+        "name": "Elizabeth B.",
+        "role": "Crew",
+        "start": "04:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Madison C.",
+        "role": "Crew",
+        "start": "03:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Brianna G.",
+        "role": "Crew",
+        "start": "08:00 AM",
+        "end": "03:00 PM"
+      },
+      {
+        "name": "DJuan J.",
+        "role": "Crew",
+        "start": "08:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Rusul K.",
+        "role": "Crew",
+        "start": "12:00 PM",
+        "end": "08:00 PM"
+      },
+      {
+        "name": "Emanuela K.",
+        "role": "Crew",
+        "start": "04:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Francisco L.",
+        "role": "Crew",
+        "start": "03:00 PM",
+        "end": "11:00 PM"
+      },
+      {
+        "name": "Vicki L.",
+        "role": "Crew",
+        "start": "08:00 AM",
+        "end": "04:00 PM"
+      },
+      {
+        "name": "Zack W.",
+        "role": "Crew",
+        "start": "12:00 PM",
+        "end": "08:00 PM"
+      }
+    ]
+  }
+}

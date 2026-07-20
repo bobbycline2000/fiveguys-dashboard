@@ -1,3 +1,1 @@
-[2026-07-19 10:56:31] outlook-daily-pull-7am: no actionable work emails after filtering
-[2026-07-20 07:45] xlsx fill SKIPPED for 7/19 — ct_sales_summary_history.json 7/19 row is a partial-day capture (captured 17:55, gross $772.94 vs Par Brink $4,671.13). Deposit/Over-Short unreliable; would write wrong Cash O/S into bdavis workbook. Re-run after a full-day CT deposit pull.
-[2026-07-20 07:45] Daily brief 7/20 sent OK (202). MISSED on carryover sweep: 7/17 deposit not entered ($433.90 O/S) and Victoria Barkhimer payroll question re Ryan Vititoe — both added to _memory/brief-carryover.md and data/team_notes.json for tomorrow.
+[2026-07-20 11:49:29] outlook-daily-pull-7am: no actionable work emails after filtering

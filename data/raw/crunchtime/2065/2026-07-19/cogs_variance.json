@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-07-13",
+    "week_end": "2026-07-19",
+    "variance_week_start": "2026-07-06",
+    "variance_week_end": "2026-07-12",
+    "month_start": "2026-07-01",
+    "last_month_start": "2026-06-01",
+    "last_month_end": "2026-06-30",
+    "through": "2026-07-19",
+    "pulled": "2026-07-20 07:49 ET",
+    "method": "api+playwright"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": null,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": null,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {
+      "name": "Shake Mix",
+      "actual": 266.0,
+      "theoretical": 203.0,
+      "over_dollars": 63.0,
+      "variance_pct": -31.0,
+      "rank": 1
+    },
+    {
+      "name": "Jalapeno Peppers",
+      "actual": 66.0,
+      "theoretical": 12.0,
+      "over_dollars": 54.0,
+      "variance_pct": -437.0,
+      "rank": 2
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 3193.0,
+      "theoretical": 3147.0,
+      "over_dollars": 46.0,
+      "variance_pct": -1.0,
+      "rank": 3
+    },
+    {
+      "name": "Lettuce",
+      "actual": 139.0,
+      "theoretical": 114.0,
+      "over_dollars": 25.0,
+      "variance_pct": -22.0,
+      "rank": 4
+    },
+    {
+      "name": "Topping, Blackberry",
+      "actual": 25.0,
+      "theoretical": 6.0,
+      "over_dollars": 19.0,
+      "variance_pct": -342.0,
+      "rank": 5
+    },
+    {
+      "name": "Peanut Butter inv",
+      "actual": -6.0,
+      "theoretical": 9.0,
+      "over_dollars": -15.0,
+      "variance_pct": 171.0,
+      "rank": 6
+    },
+    {
+      "name": "Mayonnaise",
+      "actual": 60.0,
+      "theoretical": 78.0,
+      "over_dollars": -18.0,
+      "variance_pct": 23.0,
+      "rank": 7
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 933.0,
+      "theoretical": 952.0,
+      "over_dollars": -19.0,
+      "variance_pct": 2.0,
+      "rank": 8
+    },
+    {
+      "name": "Cajun Season",
+      "actual": 55.0,
+      "theoretical": 97.0,
+      "over_dollars": -42.0,
+      "variance_pct": 43.0,
+      "rank": 9
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 924.0,
+      "theoretical": 991.0,
+      "over_dollars": -67.0,
+      "variance_pct": 7.0,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
