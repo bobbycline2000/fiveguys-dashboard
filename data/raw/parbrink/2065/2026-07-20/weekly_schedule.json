@@ -1,0 +1,131 @@
+{
+  "source": "teamworx_api",
+  "source_url": "https://fiveguysfr77.ct-teamworx.com/json/mn/dailyRoster/getPageData",
+  "store": "2065",
+  "labor_date": "2026-07-20",
+  "fetched_at": "2026-07-20T07:28:08.639680-04:00",
+  "shift_count": 10,
+  "total_hours": 79.0,
+  "shifts": [
+    {
+      "name": "Robert C.",
+      "full_name": "Robert Cline",
+      "position": "General Manager-Salary",
+      "role": "GM",
+      "in_text": "6:00 AM",
+      "out_text": "5:00 PM",
+      "in_ms": 1784527200000,
+      "out_ms": 1784566800000,
+      "hours": 11.0,
+      "minor": false
+    },
+    {
+      "name": "Madelynn S.",
+      "full_name": "Madelynn Smith",
+      "position": "Shift Leader-Hourly",
+      "role": "Shift Leader-Hourly",
+      "in_text": "7:00 AM",
+      "out_text": "3:00 PM",
+      "in_ms": 1784530800000,
+      "out_ms": 1784559600000,
+      "hours": 8.0,
+      "minor": false
+    },
+    {
+      "name": "Madison C.",
+      "full_name": "Madison Cureton",
+      "position": "Shift Leader-Hourly",
+      "role": "Shift Leader-Hourly",
+      "in_text": "3:00 PM",
+      "out_text": "11:00 PM",
+      "in_ms": 1784559600000,
+      "out_ms": 1784588400000,
+      "hours": 8.0,
+      "minor": false
+    },
+    {
+      "name": "Rusul K.",
+      "full_name": "Rusul Kadhim",
+      "position": "Shift Leader-Hourly",
+      "role": "Shift Leader-Hourly",
+      "in_text": "7:00 AM",
+      "out_text": "3:00 PM",
+      "in_ms": 1784530800000,
+      "out_ms": 1784559600000,
+      "hours": 8.0,
+      "minor": false
+    },
+    {
+      "name": "Brianna G.",
+      "full_name": "Brianna Gatewood",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "4:00 PM",
+      "out_text": "11:00 PM",
+      "in_ms": 1784563200000,
+      "out_ms": 1784588400000,
+      "hours": 7.0,
+      "minor": false
+    },
+    {
+      "name": "Elizabeth B.",
+      "full_name": "Elizabeth Brazell",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "3:00 PM",
+      "out_text": "11:00 PM",
+      "in_ms": 1784559600000,
+      "out_ms": 1784588400000,
+      "hours": 8.0,
+      "minor": false
+    },
+    {
+      "name": "DJuan J.",
+      "full_name": "DJuan Johnson",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "5:00 PM",
+      "out_text": "11:00 PM",
+      "in_ms": 1784566800000,
+      "out_ms": 1784588400000,
+      "hours": 6.0,
+      "minor": false
+    },
+    {
+      "name": "Lidy H.",
+      "full_name": "Lidy Henry",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "8:00 AM",
+      "out_text": "4:00 PM",
+      "in_ms": 1784534400000,
+      "out_ms": 1784563200000,
+      "hours": 8.0,
+      "minor": false
+    },
+    {
+      "name": "Francisco M.",
+      "full_name": "Francisco Llorente Mejias",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "4:00 PM",
+      "out_text": "11:00 PM",
+      "in_ms": 1784563200000,
+      "out_ms": 1784588400000,
+      "hours": 7.0,
+      "minor": false
+    },
+    {
+      "name": "Zack W.",
+      "full_name": "Zack Whitten",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "11:00 AM",
+      "out_text": "7:00 PM",
+      "in_ms": 1784545200000,
+      "out_ms": 1784574000000,
+      "hours": 8.0,
+      "minor": false
+    }
+  ]
+}

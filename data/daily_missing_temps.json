@@ -1,53 +1,41 @@
 {
   "store": "2065",
-  "date": "2026-07-15",
-  "day_of_week": "Wednesday",
-  "generated_at": "2026-07-16T05:11:11.308324-04:00",
+  "date": "2026-07-19",
+  "day_of_week": "Sunday",
+  "generated_at": "2026-07-20T07:28:52.984597-04:00",
   "schedule": {
-    "date": "2026-07-15",
-    "day_of_week": "Wednesday",
+    "date": "2026-07-19",
+    "day_of_week": "Sunday",
     "am_manager": "Vicki Lucey",
-    "pm_manager": "Anthony Pirtle",
-    "shift_change_manager": "Madison Cureton"
+    "pm_manager": "Madison Cureton",
+    "shift_change_manager": "Rusul Kadhim"
   },
-  "missing_count": 3,
+  "missing_count": 2,
   "missing_items": [
     {
-      "date": "2026-07-15",
-      "day_of_week": "Wednesday",
-      "category": "PM_TEMP",
-      "shift": "PM",
-      "task_name": "5PM: Time and Temp",
-      "status": "INCOMPLETE",
-      "required_pct": 95,
-      "all_pct": 95,
-      "manager": "Anthony Pirtle",
-      "manager_basis": "pm_manager"
-    },
-    {
-      "date": "2026-07-15",
-      "day_of_week": "Wednesday",
+      "date": "2026-07-19",
+      "day_of_week": "Sunday",
       "category": "CHECKLIST",
-      "shift": "N/A",
-      "task_name": "Milkshake Pump Cleaning Check",
+      "shift": "PM",
+      "task_name": "PM Pre-Shift Check",
       "status": "MISSED",
       "required_pct": 0,
       "all_pct": 0,
-      "manager": "Anthony Pirtle",
-      "manager_basis": "pm_manager (closing task)"
+      "manager": "Madison Cureton",
+      "manager_basis": "pm_manager"
     },
     {
-      "date": "2026-07-15",
-      "day_of_week": "Wednesday",
+      "date": "2026-07-19",
+      "day_of_week": "Sunday",
       "category": "CHECKLIST",
       "shift": "N/A",
       "task_name": "Closing Checklist",
       "status": "MISSED",
       "required_pct": 0,
       "all_pct": 0,
-      "manager": "Anthony Pirtle",
+      "manager": "Madison Cureton",
       "manager_basis": "pm_manager (closing task)"
     }
   ],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Wednesday 2026-07-15\n**3 missed/incomplete** (AM mgr: Vicki Lucey \u00b7 PM mgr: Anthony Pirtle)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Anthony Pirtle**\n- **Checklist: Milkshake Pump Cleaning Check** \u2014 MISSED \u2192 **Anthony Pirtle**\n- **PM temp: 5PM: Time and Temp** \u2014 INCOMPLETE (95%) \u2192 **Anthony Pirtle**\n"
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Sunday 2026-07-19\n**2 missed/incomplete** (AM mgr: Vicki Lucey \u00b7 PM mgr: Madison Cureton)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Madison Cureton**\n- **Checklist: PM Pre-Shift Check** \u2014 MISSED \u2192 **Madison Cureton**\n"
 }
