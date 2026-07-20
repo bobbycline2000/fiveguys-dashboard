@@ -1,52 +1,54 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-07-06",
-    "week_end": "2026-07-12",
-    "week_label": "7/6-7/12",
+    "week_start": "2026-07-13",
+    "week_end": "2026-07-19",
+    "week_label": "7/13-7/19",
     "month": "July",
-    "generated": "2026-07-13T15:40:58",
-    "notes": []
+    "generated": "2026-07-20T15:10:59",
+    "notes": [
+      "tips snapshot for w/e 2026-07-19 not found"
+    ]
   },
   "sales": {
-    "forecast": 32009,
-    "net_sales": 31728.63,
-    "over_under": -280.37
+    "forecast": null,
+    "net_sales": 31328.34,
+    "over_under": null
   },
   "food_cost": {
-    "cogs_pct": 23.4,
+    "cogs_pct": null,
     "supplies_pct": null,
     "total_pct": null,
     "qtd_cogs_pct": null,
-    "var_to_goal": -4.1,
+    "var_to_goal": null,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Cheese",
-      "Hot Dog",
-      "A1 Steak Sauce"
+      "Shake Mix",
+      "Jalapeno Peppers",
+      "Ground Beef"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 23.51,
+    "hourly_labor_pct": 21.33,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
-    "ot_hours": 0.0,
+    "ot_hours": null,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 617.46,
+    "labor_hours": 581.87,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
-    "charged_tips": 628.86
+    "charged_tips": null
   },
   "food_safety": {
     "steritech_pct": null,
     "criticals": null,
-    "shops_month_pct": 85.0,
+    "shops_month_pct": 57.3,
     "shops_month_label": "July 2026",
-    "shops_qtd_pct": 85.0,
-    "shops_qtd_count": 1,
-    "shops_ytd_pct": 85.3
+    "shops_qtd_pct": 57.3,
+    "shops_qtd_count": 3,
+    "shops_ytd_pct": 83.2
   },
   "fgu": {
     "overdue_rate_pct": 54.29,
@@ -104,7 +106,7 @@
     "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 89.7,
+    "completion_pct": 83.4,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
