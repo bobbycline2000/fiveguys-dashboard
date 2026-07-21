@@ -7,45 +7,44 @@
   "cogs_pct_week": null,
   "cogs_pct_week_label": "2026-07-19",
   "cogs_goal_pct": 27.5,
-  "total_over": 163.0,
-  "generated": "2026-07-20 11:49 ET",
+  "total_over": 1338.0,
+  "generated": "2026-07-21 11:13 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Shake Mix",
-      "over_dollars": 63.0,
-      "actual": 266.0,
-      "theoretical": 203.0,
-      "variance_pct": -31.0,
-      "big_six": false,
+      "name": "Cheeseburger",
+      "over_dollars": 544.0,
+      "actual": 708.0,
+      "theoretical": 164.0,
+      "variance_pct": null,
+      "big_six": true,
       "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
       "rank": 2,
-      "name": "Jalapeno Peppers",
-      "over_dollars": 54.0,
-      "actual": 66.0,
-      "theoretical": 12.0,
-      "variance_pct": -437.0,
-      "big_six": false,
+      "name": "Bacon Cheeseburger",
+      "over_dollars": 438.0,
+      "actual": 573.0,
+      "theoretical": 135.0,
+      "variance_pct": null,
+      "big_six": true,
       "actions": [
-        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
-        "Confirm prep specs are correct.",
-        "Submit a Product Issue form for yield loss from bad quality off the truck.",
-        "Account for waste."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
       "rank": 3,
-      "name": "Ground Beef",
-      "over_dollars": 46.0,
-      "actual": 3193.0,
-      "theoretical": 3147.0,
-      "variance_pct": -1.0,
+      "name": "Little Cheeseburger",
+      "over_dollars": 356.0,
+      "actual": 438.0,
+      "theoretical": 82.0,
+      "variance_pct": null,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
