@@ -788,14 +788,14 @@
     "safe_open": 672,
     "d1_open": 0,
     "d2_open": 0,
-    "safe_mid": 0,
+    "safe_mid": 672,
     "d1_mid": 0,
     "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
-    "ct_os": 0,
+    "ct_os": -66.77,
     "notes": "",
-    "submitted_at": "2026-07-23T13:39:39.502Z"
+    "submitted_at": "2026-07-23T19:10:39.793Z"
   }
 ]
