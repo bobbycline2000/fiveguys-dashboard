@@ -785,7 +785,7 @@
     "date": "2026-07-23",
     "mgr": "ms",
     "deposit": 0,
-    "safe_open": 0,
+    "safe_open": 672,
     "d1_open": 0,
     "d2_open": 0,
     "safe_mid": 0,
@@ -796,6 +796,6 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-07-23T13:39:34.865Z"
+    "submitted_at": "2026-07-23T13:39:39.502Z"
   }
 ]
