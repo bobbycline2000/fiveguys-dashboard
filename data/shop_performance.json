@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-07-20",
+  "as_of": "2026-07-23",
   "current_month": "2026-07",
   "current_month_label": "July 2026",
-  "store_avg_month": 57.3,
-  "store_avg_ytd": 83.2,
-  "shop_count_month": 3,
-  "shop_count_ytd": 40,
+  "store_avg_month": 66.8,
+  "store_avg_ytd": 83.5,
+  "shop_count_month": 4,
+  "shop_count_ytd": 41,
   "managers": [
     {
       "first": "Madison",
@@ -164,6 +164,12 @@
   ],
   "latest_shops": [
     {
+      "date": "2026-07-16",
+      "score": 95.0,
+      "meal_period": "Dinner",
+      "on_shift": []
+    },
+    {
       "date": "2026-07-12",
       "score": 87.0,
       "meal_period": "Lunch",
@@ -207,15 +213,6 @@
         "Madison Cureton",
         "Maylin Hernandez Rodriguez",
         "Richard Gibbs"
-      ]
-    },
-    {
-      "date": "2026-06-24",
-      "score": 100.0,
-      "meal_period": "Late Dinner",
-      "on_shift": [
-        "Madison Cureton",
-        "Maylin Hernandez Rodriguez"
       ]
     }
   ]

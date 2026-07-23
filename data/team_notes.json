@@ -1,62 +1,41 @@
 {
- "date": "2026-07-20",
- "new_count": 19,
+ "date": "2026-07-23",
+ "new_count": 5,
  "notes": [
   {
-   "from": "Five Guys Support Desk (Zinlli Navarrete)",
-   "role": "alert",
-   "role_label": "Support — DELIVERY OFF",
-   "time": "7/19 8:32 PM",
-   "body": "Delivery deactivated for 2065 INDEFINITELY (ticket 706314) after we reported intermittent internet and drivers arriving for orders we never received. ACTION: deactivate the store on FIVEGUYS.COM (OLO) and file a hub ticket on the internet. Do not request re-activation until the internet is stable for a full day."
-  },
-  {
-   "from": "CrunchTime Task Alert",
-   "role": "alert",
-   "role_label": "CrunchTime — Period Close",
-   "time": "7/20 2:25 AM",
-   "body": "Tasks stacked: L-Rev open 7/16, 7/17, 7/18, 7/19; VO-Rec BOSS Alpha 7/17 + 7/18; VO-Rec Performance Fdsvce x2 7/17; Inv-Final for Post 7/19; Post Period — Labor Not Posted 7/19. Close all today."
+   "from": "Brad Davis",
+   "role": "director",
+   "role_label": "Director of Operations",
+   "time": "7/22 12:39 PM",
+   "body": "55% to Stay Alive — 2065 COGS+Labor combined ran over the 55% goal last week. Bobby sent his plan 9:38 PM; Brad acknowledged and is 'looking forward to celebrating the positive impact.' Execution mode: run the labor tracker daily, work high-labor days, hold combined under 55%. 7/22 labor hit 17.27%."
   },
   {
    "from": "Brad Davis",
    "role": "director",
    "role_label": "Director of Operations",
-   "time": "7/17 9:24 PM",
-   "body": "Shopper scores: Let's get our shoppers to #1 — we're at the bottom this week. Drive, Coach, & Celebrate our Halo Effect! July store average is 57.3% across 3 shops; the 7/11 Dinner zero drives it."
+   "time": "7/22 12:47 PM",
+   "body": "Incident Process PDRs — complete PDRs for the ENTIRE Shift Lead team on the incident-report process (first-aid kit location, when to fill, where to send), following the L2 (guest's daughter burned). Bobby replied 9:27 PM; finish the PDRs and copy Brad on documentation."
   },
   {
    "from": "Brad Davis",
    "role": "alert",
    "role_label": "Director — SCAM ALERT",
-   "time": "7/17 10:26 AM",
-   "body": "SCAM ALERT: Scammers calling stores as \"Uber\" with connectivity issues asking for email+login. NO ONE gives login info over the phone. Post this by the phone."
+   "time": "7/22 12:06 AM",
+   "body": "Another scam call hit Muncie — caller posed as corporate asking for the GM's name and a shipping address. No one gives login/account info, cash, or addresses over the phone. Post the email at the register; call GM/DM/Brad on any such request."
   },
   {
-   "from": "Crystal Hess",
-   "role": "dm",
-   "role_label": "District Manager",
-   "time": "7/11",
-   "body": "Manager Certifications 2065 COMPLETE — Rusul 100, Anthony 99, Madelynn 98; training videos fixed. Standing: 60% of the KPI score is Shops + Complaints + Ticket times. Any outside vendor call still requires a hub ticket."
-  },
-  {
-   "from": "Victoria Barkhimer",
-   "role": "accounting",
-   "role_label": "Payroll — Estep & Company",
-   "time": "7/17 6:11 PM",
-   "body": "OPEN: Is Ryan Vititoe still employed with us? Reply yes/no so payroll can close it out."
-  },
-  {
-   "from": "Cash / Deposit",
-   "role": "alert",
-   "role_label": "Cash / Deposit",
-   "time": "7/18",
-   "body": "OPEN: 7/17 deposit not yet entered — book cash $433.90 showing as O/S short. Enter the deposit in CrunchTime."
+   "from": "Marketforce",
+   "role": "shop",
+   "role_label": "Secret Shop",
+   "time": "7/16 Dinner",
+   "body": "New shop scored 95% (names unavailable — pull from CT). Store: month 66.8% (4 shops), YTD 83.5% (41). 7/11 Dinner scored 0% (Jeremiah, Madison, Richard) — coaching priority. 2065 last in district on shops per Brad — Halo Effect push."
   },
   {
    "from": "Compliance",
    "role": "alert",
    "role_label": "Temps / Checklists",
-   "time": "7/19",
-   "body": "Sunday 7/19: Closing Checklist MISSED and PM Pre-Shift Check MISSED — both on Madison Cureton's PM shift. AM (Vicki Lucey) clean. Second PM flag in two weeks."
+   "time": "7/22",
+   "body": "Wed 7/22: Closing Checklist MISSED and Milkshake Pump Cleaning Check MISSED — both on Madison Cureton's PM shift. AM (Bobby) clean. Coach Madison; get the milkshake pump cleaned today."
   }
  ]
 }
