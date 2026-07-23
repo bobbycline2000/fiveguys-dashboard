@@ -157,6 +157,20 @@
   }
   .saved-flash.show { opacity: 1; }
   .saved-flash.warn { color: #b45309; }
+  .autosave-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-left: 8px; padding: 4px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; letter-spacing: .2px;
+    background: #E7F5EC; color: #0E7B3A; border: 1px solid #b7e3c6;
+    white-space: nowrap;
+  }
+  .autosave-pill::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: currentColor; flex: 0 0 auto;
+  }
+  .autosave-pill.saving { background: #FFF7E6; color: #B45309; border-color: #f0d9a8; }
+  .autosave-pill.needs  { background: #FDECEC; color: #C0392B; border-color: #f3c0bb; }
+  @media print { .autosave-pill { display: none !important; } }
 
   /* ── Side panel: recent counts ─────────────────────────────── */
   aside {
@@ -382,6 +396,7 @@
       <button class="btn-primary" id="btn-save">Save</button>
       <button class="btn-secondary" onclick="window.print()">Print</button>
       <button class="btn-ghost" id="btn-export">Export CSV</button>
+      <span class="autosave-pill" id="autosave-pill" title="Your counts save automatically — the Save button is optional.">Auto-save on</span>
       <span class="saved-flash" id="saved-flash">✓ Saved</span>
     </div>
   </section>
@@ -521,36 +536,119 @@ function renderHistory() {
   }).join('');
 }
 
+// ── Auto-save engine ────────────────────────────────────────────
+// Managers were losing counts by filling the form and never tapping
+// Save (or closing the page first). Auto-save persists every change
+// to this device instantly and to the live shared log within seconds,
+// so the Save button is now optional/redundant.
+const MGR_KEY = 'fg2065_safe_drawer_mgr';   // sticky initials, per device
+let lastSynced   = null;   // JSON of the last payload confirmed live
+let autosaveTimer = null;
+let syncing      = false;
+
+function localBackup(f) {
+  const rows = getEntries().filter(r => r.date !== f.date);
+  rows.push(f);
+  saveEntries(rows);
+}
+
+function setPill(state, text) {
+  const p = $('autosave-pill');
+  if (!p) return;
+  p.classList.remove('saving', 'needs');
+  if (state) p.classList.add(state);
+  p.textContent = text;
+}
+
+// Records the currently loaded form as "already saved" so we don't
+// re-push an untouched row on blur/close. Call after any programmatic load.
+function markSynced() { lastSynced = JSON.stringify(readForm()); }
+
+// One shared network push used by both auto-save and the manual button.
+async function pushEntry(f) {
+  if (!WORKER_URL || !WORKER_SECRET) return { ok: false, error: 'no worker' };
+  const r = await fetch(WORKER_URL + '/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ secret: WORKER_SECRET, entry: f }),
+  });
+  const data = await r.json().catch(() => ({}));
+  if (data.ok) return { ok: true };
+  return { ok: false, error: data.error || r.status };
+}
+
+function scheduleAutosave() {
+  clearTimeout(autosaveTimer);
+  autosaveTimer = setTimeout(autosave, 1800);
+}
+
+// Fires ~1.8s after the last edit, and on blur (flush=true).
+async function autosave(flush) {
+  if (flush) clearTimeout(autosaveTimer);
+  const f = readForm();
+  if (!f.date) return;
+  if (f.mgr) { try { localStorage.setItem(MGR_KEY, f.mgr); } catch (_) {} }
+
+  localBackup(f);                        // never lose it on THIS device
+
+  if (!f.mgr) { setPill('needs', 'Add initials to save'); return; }
+
+  const payload = JSON.stringify(f);
+  if (payload === lastSynced) return;    // nothing changed since last live save
+  if (syncing) { scheduleAutosave(); return; }
+
+  syncing = true;
+  setPill('saving', 'Saving…');
+  const res = await pushEntry(f);
+  syncing = false;
+
+  if (res.ok) {
+    lastSynced = payload;
+    setPill(null, 'Saved ✓ ' + new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}));
+    loadLiveLog().then(renderHistory);
+  } else {
+    setPill('needs', 'Saved on device — retrying…');
+    scheduleAutosave();                  // keep trying
+  }
+}
+
+// Last-ditch save when the page is hidden/closed. sendBeacon survives
+// the tab closing; text/plain avoids a CORS preflight and the worker
+// parses the body regardless of content-type.
+function beaconSave() {
+  const f = readForm();
+  if (!f.date || !f.mgr) return;
+  localBackup(f);
+  const payload = JSON.stringify(f);
+  if (payload === lastSynced) return;
+  if (!navigator.sendBeacon || !WORKER_URL || !WORKER_SECRET) return;
+  const blob = new Blob([JSON.stringify({ secret: WORKER_SECRET, entry: f })],
+    { type: 'text/plain' });
+  navigator.sendBeacon(WORKER_URL + '/submit', blob);
+  lastSynced = payload;
+}
+
 async function saveToday() {
   const f = readForm();
   if (!f.date) { alert('Pick a business date first.'); return; }
   if (!f.mgr)  { alert('Enter your manager initials before saving.'); return; }
+  try { localStorage.setItem(MGR_KEY, f.mgr); } catch (_) {}
 
-  // localStorage backup (this device)
-  const rows = getEntries().filter(r => r.date !== f.date);
-  rows.push(f);
-  saveEntries(rows);
+  localBackup(f);
 
   const flash = $('saved-flash');
   let msg = '✓ Saved to this device';
   let warn = false;
 
   if (WORKER_URL && WORKER_SECRET) {
-    try {
-      const r = await fetch(WORKER_URL + '/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ secret: WORKER_SECRET, entry: f }),
-      });
-      const data = await r.json();
-      if (data.ok) {
-        msg = '✓ Saved to live shared log';
-        await loadLiveLog();
-      } else {
-        msg = '⚠ Saved locally — live log: ' + (data.error || r.status); warn = true;
-      }
-    } catch (e) {
-      msg = '⚠ Saved locally — live log unreachable'; warn = true;
+    const res = await pushEntry(f);
+    if (res.ok) {
+      msg = '✓ Saved to live shared log';
+      lastSynced = JSON.stringify(f);
+      setPill(null, 'Saved ✓ ' + new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}));
+      await loadLiveLog();
+    } else {
+      msg = '⚠ Saved locally — live log: ' + res.error; warn = true;
     }
   }
 
@@ -839,14 +937,39 @@ document.addEventListener('DOMContentLoaded', async () => {
   $('f-date').value = today;
   $('date-display').textContent = prettyDate(today);
 
+  // Sticky initials — prefill last manager on this device so auto-save
+  // can attribute the row without prompting.
+  try {
+    const savedMgr = localStorage.getItem(MGR_KEY);
+    if (savedMgr && !$('f-mgr').value) $('f-mgr').value = savedMgr;
+  } catch (_) {}
+
   ['f-safe-open','f-d1-open','f-d2-open',
    'f-safe-mid','f-d1-mid','f-d2-mid',
    'f-safe-close','f-d1-close','f-d2-close',
    'f-ct-os'].forEach(id => $(id).addEventListener('input', compute));
 
-  $('f-date').addEventListener('change', e => loadForDate(e.target.value));
+  // Auto-save: any edit to any field schedules a save; leaving a field
+  // (blur) flushes immediately. Covers initials + notes too.
+  ['f-mgr','f-notes','f-safe-open','f-d1-open','f-d2-open',
+   'f-safe-mid','f-d1-mid','f-d2-mid','f-safe-close','f-d1-close',
+   'f-d2-close','f-ct-os'].forEach(id => {
+    const el = $(id);
+    el.addEventListener('input', scheduleAutosave);
+    el.addEventListener('change', () => autosave(true));
+    el.addEventListener('blur',   () => autosave(true));
+  });
+
+  $('f-date').addEventListener('change', e => { loadForDate(e.target.value); markSynced(); });
   $('btn-save').addEventListener('click', saveToday);
   $('btn-export').addEventListener('click', exportCsv);
+
+  // Save-on-leave: closing the tab, backgrounding the phone, or navigating
+  // away all fire a final beacon so nothing typed is ever lost.
+  window.addEventListener('pagehide', beaconSave);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') beaconSave();
+  });
 
   loadForDate(today);
   renderHistory();
@@ -856,6 +979,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderHistory();
   renderDeposits();
   renderDepStatus();
+  markSynced();   // baseline: loaded row counts as already saved
 });
 </script>
 </body>
