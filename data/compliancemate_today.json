@@ -1,133 +1,18 @@
 {
-  "date": "2026-07-22",
+  "date": "2026-07-23",
   "location_id": "18170",
-  "list_count": 20,
-  "overall_required_pct": 39,
-  "overall_all_pct": 39,
+  "list_count": 1,
+  "overall_required_pct": 0,
+  "overall_all_pct": 0,
   "lists": [
     {
       "name": "11AM: Time and Temp",
       "list_id": "189006",
-      "required_pct": 100,
-      "all_pct": 100
-    },
-    {
-      "name": "1PM: Time and Temp",
-      "list_id": "199718",
-      "required_pct": 100,
-      "all_pct": 100
-    },
-    {
-      "name": "3PM: Time and Temp",
-      "list_id": "192309",
-      "required_pct": 100,
-      "all_pct": 100
-    },
-    {
-      "name": "5PM: Time and Temp",
-      "list_id": "194748",
-      "required_pct": 100,
-      "all_pct": 100
-    },
-    {
-      "name": "7PM: Time and Temp",
-      "list_id": "197189",
-      "required_pct": 100,
-      "all_pct": 100
-    },
-    {
-      "name": "9PM: Time and Temp",
-      "list_id": "200256",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "AM Pre-Shift Check",
-      "list_id": "220881",
-      "required_pct": 100,
-      "all_pct": 100
-    },
-    {
-      "name": "PM Pre-Shift Check",
-      "list_id": "254617",
-      "required_pct": 100,
-      "all_pct": 100
-    },
-    {
-      "name": "Milkshake Pump Cleaning Check",
-      "list_id": "255588",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "Closing Checklist",
-      "list_id": "214231",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "Pre Open",
-      "list_id": "254262",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "Shift Change",
-      "list_id": "254263",
-      "required_pct": 100,
-      "all_pct": 100
-    },
-    {
-      "name": "Closing",
-      "list_id": "254264",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "Weekly Store Inspection",
-      "list_id": "254265",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "Delivery Check",
-      "list_id": "202131",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "Temperature Sample",
-      "list_id": "215611",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "Calibration Test",
-      "list_id": "208318",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "Operational Spot Check",
-      "list_id": "211389",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "Battery Swap Checklist",
-      "list_id": "211506",
-      "required_pct": 0,
-      "all_pct": 0
-    },
-    {
-      "name": "MMCCA",
-      "list_id": "220122",
       "required_pct": 0,
       "all_pct": 0
     }
   ],
-  "fetched_at": "2026-07-22T20:18:15.305135-04:00",
+  "fetched_at": "2026-07-23T10:05:12.400281-04:00",
   "source": "compliancemate_url_replay",
-  "report_type": "all_list_completions",
-  "pulled_at": "2026-07-22T20:18:15.305229"
+  "report_type": "list_completions"
 }
