@@ -807,12 +807,12 @@
     "d2_open": 200,
     "safe_mid": 672,
     "d1_mid": 200,
-    "d2_mid": 0,
+    "d2_mid": 200,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-07-24T19:15:53.204Z"
+    "submitted_at": "2026-07-24T19:15:57.763Z"
   }
 ]
