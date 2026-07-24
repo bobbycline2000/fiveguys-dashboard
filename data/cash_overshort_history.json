@@ -333,5 +333,10 @@
     "business_date": "2026-07-22",
     "over_short": 0.0,
     "captured_at": "2026-07-23T11:16:04"
+  },
+  {
+    "business_date": "2026-07-23",
+    "over_short": 0.0,
+    "captured_at": "2026-07-24T11:09:01"
   }
 ]
