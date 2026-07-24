@@ -1,5 +1,5 @@
 {
- "date": "2026-07-23",
+ "date": "2026-07-24",
  "new_count": 5,
  "notes": [
   {
@@ -7,35 +7,35 @@
    "role": "director",
    "role_label": "Director of Operations",
    "time": "7/22 12:39 PM",
-   "body": "55% to Stay Alive — 2065 COGS+Labor combined ran over the 55% goal last week. Bobby sent his plan 9:38 PM; Brad acknowledged and is 'looking forward to celebrating the positive impact.' Execution mode: run the labor tracker daily, work high-labor days, hold combined under 55%. 7/22 labor hit 17.27%."
+   "body": "55% to Stay Alive — EXECUTION MODE. Week-to-date we are at 47.88% combined (COGS 26.2% + Labor 21.68%), under the goal by 7.1 points. Hold it through the weekend. Day-by-day labor: Mon 26.33%, Tue 23.55%, Wed 17.27%, Thu 21.48% — build the weekend off Wednesday, not off Monday."
   },
   {
    "from": "Brad Davis",
    "role": "director",
    "role_label": "Director of Operations",
    "time": "7/22 12:47 PM",
-   "body": "Incident Process PDRs — complete PDRs for the ENTIRE Shift Lead team on the incident-report process (first-aid kit location, when to fill, where to send), following the L2 (guest's daughter burned). Bobby replied 9:27 PM; finish the PDRs and copy Brad on documentation."
+   "body": "Incident Process PDRs — STILL OPEN. Complete PDRs for the ENTIRE Shift Lead team on the incident-report process (first-aid kit location, when to fill, where to send), following the L2 (guest's daughter burned). Bobby replied 7/22 9:27 PM; finish the PDRs and copy Brad on documentation."
   },
   {
    "from": "Brad Davis",
    "role": "alert",
    "role_label": "Director — SCAM ALERT",
-   "time": "7/22 12:06 AM",
-   "body": "Another scam call hit Muncie — caller posed as corporate asking for the GM's name and a shipping address. No one gives login/account info, cash, or addresses over the phone. Post the email at the register; call GM/DM/Brad on any such request."
+   "time": "7/23 12:06 AM",
+   "body": "Another scam call hit Muncie the night of 7/23 — caller posed as corporate asking for the GM's name and a shipping address. No one gives login/account info, cash, or addresses over the phone. Post the email at the register; call GM/DM/Brad on any such request."
   },
   {
-   "from": "Marketforce",
-   "role": "shop",
-   "role_label": "Secret Shop",
-   "time": "7/16 Dinner",
-   "body": "New shop scored 95% (names unavailable — pull from CT). Store: month 66.8% (4 shops), YTD 83.5% (41). 7/11 Dinner scored 0% (Jeremiah, Madison, Richard) — coaching priority. 2065 last in district on shops per Brad — Halo Effect push."
+   "from": "Crystal Hess",
+   "role": "dm",
+   "role_label": "District Manager",
+   "time": "7/24 calendar",
+   "body": "Today's Weekly G.M./A.G.M. call at 2:00 PM ET is CANCELED. Ice machine picture due today. Csp plan of action runs every morning starting Sat 7/25. Manager schedule 2nd week Mon 7/27 4 PM. Projections due Tue 7/28 by 4 PM. Certifications with Eric Maxwell Tue 7/28 9 AM ET."
   },
   {
-   "from": "Compliance",
+   "from": "Open Items",
    "role": "alert",
-   "role_label": "Temps / Checklists",
-   "time": "7/22",
-   "body": "Wed 7/22: Closing Checklist MISSED and Milkshake Pump Cleaning Check MISSED — both on Madison Cureton's PM shift. AM (Bobby) clean. Coach Madison; get the milkshake pump cleaned today."
+   "role_label": "Open — Action Required",
+   "time": "7/24 9:52 AM",
+   "body": "7/17 deposit still not entered in CrunchTime — book cash $433.90 showing over/short (open since 7/18). CrunchTime task VO-Inv-Performance Fdsvce due TODAY; L-Rev (07/23) a day late. Delivery still OFF indefinitely (ticket 706314) — confirm OFF on fiveguys.com and file the hub ticket on the intermittent internet. Temps 7/23: all complete, clean day."
   }
  ]
 }

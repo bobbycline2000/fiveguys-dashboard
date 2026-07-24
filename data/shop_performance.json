@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-07-23",
+  "as_of": "2026-07-24",
   "current_month": "2026-07",
   "current_month_label": "July 2026",
   "store_avg_month": 66.8,
@@ -10,10 +10,10 @@
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": 43.5,
-      "month_n": 2,
-      "ytd_avg": 81.8,
-      "ytd_n": 26
+      "month_avg": 60.7,
+      "month_n": 3,
+      "ytd_avg": 82.3,
+      "ytd_n": 27
     },
     {
       "first": "Vicki",
@@ -60,10 +60,10 @@
     {
       "first": "Bobby",
       "name": "Robert Cline",
-      "month_avg": 85.0,
-      "month_n": 1,
+      "month_avg": 90.0,
+      "month_n": 2,
       "ytd_avg": 95.3,
-      "ytd_n": 6
+      "ytd_n": 7
     },
     {
       "first": "Bri",
@@ -116,10 +116,10 @@
     {
       "first": "Jeremiah",
       "name": "Jeremiah Matthews",
-      "month_avg": 42.5,
-      "month_n": 2,
-      "ytd_avg": 84.7,
-      "ytd_n": 19
+      "month_avg": 60.0,
+      "month_n": 3,
+      "ytd_avg": 85.2,
+      "ytd_n": 20
     },
     {
       "first": "Maylin",
@@ -132,10 +132,10 @@
     {
       "first": "Francisco",
       "name": "Francisco Llorente Mejias",
-      "month_avg": 86.0,
-      "month_n": 2,
-      "ytd_avg": 81.2,
-      "ytd_n": 24
+      "month_avg": 89.0,
+      "month_n": 3,
+      "ytd_avg": 81.8,
+      "ytd_n": 25
     },
     {
       "first": "Samuel",
@@ -167,7 +167,12 @@
       "date": "2026-07-16",
       "score": 95.0,
       "meal_period": "Dinner",
-      "on_shift": []
+      "on_shift": [
+        "Robert Cline",
+        "Francisco Llorente Mejias",
+        "Jeremiah Matthews",
+        "Madison Cureton"
+      ]
     },
     {
       "date": "2026-07-12",
