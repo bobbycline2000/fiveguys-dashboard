@@ -2,13 +2,13 @@
   "store": "2065",
   "date": "2026-07-25",
   "day_of_week": "Saturday",
-  "generated_at": "2026-07-26T14:46:00-04:00",
+  "generated_at": "2026-07-26T14:52:43.930429-04:00",
   "schedule": {
     "date": "2026-07-25",
-    "am_manager": null,
-    "pm_manager": null,
-    "shift_change_manager": null,
-    "error": "teamworx_session_expired"
+    "day_of_week": "Saturday",
+    "am_manager": "Robert Cline",
+    "pm_manager": "Madelynn Smith",
+    "shift_change_manager": "Madison Cureton & Rusul Kadhim"
   },
   "missing_count": 1,
   "missing_items": [
@@ -21,9 +21,9 @@
       "status": "MISSED",
       "required_pct": 0,
       "all_pct": 0,
-      "manager": "UNKNOWN (attribution pending)",
-      "manager_basis": "teamworx_session_expired"
+      "manager": "Madelynn Smith",
+      "manager_basis": "pm_manager (closing task)"
     }
   ],
-  "markdown": "### Missing Time & Temps & Checklists \u2014 Saturday 2026-07-25\n1 missed: Closing Checklist MISSED -> manager attribution pending (Teamworx session expired)\n"
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Saturday 2026-07-25\n**1 missed/incomplete** (AM mgr: Robert Cline \u00b7 PM mgr: Madelynn Smith)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Madelynn Smith**\n"
 }
