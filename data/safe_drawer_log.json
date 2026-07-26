@@ -841,12 +841,12 @@
     "d2_open": 200,
     "safe_mid": 680,
     "d1_mid": 200,
-    "d2_mid": 0,
+    "d2_mid": 200,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -95.41,
     "notes": "",
-    "submitted_at": "2026-07-26T19:36:42.991Z"
+    "submitted_at": "2026-07-26T19:36:46.295Z"
   }
 ]
