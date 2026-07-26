@@ -1,29 +1,29 @@
 {
   "store": "2065",
-  "date": "2026-07-24",
-  "day_of_week": "Friday",
-  "generated_at": "2026-07-25T16:54:46.892926-04:00",
+  "date": "2026-07-25",
+  "day_of_week": "Saturday",
+  "generated_at": "2026-07-26T14:46:00-04:00",
   "schedule": {
-    "date": "2026-07-24",
-    "day_of_week": "Friday",
-    "am_manager": "Rusul Kadhim",
-    "pm_manager": "Christopher Conder",
-    "shift_change_manager": "Robert Cline & Madelynn Smith"
+    "date": "2026-07-25",
+    "am_manager": null,
+    "pm_manager": null,
+    "shift_change_manager": null,
+    "error": "teamworx_session_expired"
   },
   "missing_count": 1,
   "missing_items": [
     {
-      "date": "2026-07-24",
-      "day_of_week": "Friday",
+      "date": "2026-07-25",
+      "day_of_week": "Saturday",
       "category": "CHECKLIST",
       "shift": "N/A",
       "task_name": "Closing Checklist",
       "status": "MISSED",
       "required_pct": 0,
       "all_pct": 0,
-      "manager": "Christopher Conder",
-      "manager_basis": "pm_manager (closing task)"
+      "manager": "UNKNOWN (attribution pending)",
+      "manager_basis": "teamworx_session_expired"
     }
   ],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Friday 2026-07-24\n**1 missed/incomplete** (AM mgr: Rusul Kadhim \u00b7 PM mgr: Christopher Conder)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Christopher Conder**\n"
+  "markdown": "### Missing Time & Temps & Checklists \u2014 Saturday 2026-07-25\n1 missed: Closing Checklist MISSED -> manager attribution pending (Teamworx session expired)\n"
 }

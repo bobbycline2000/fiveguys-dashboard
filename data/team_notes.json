@@ -1,27 +1,34 @@
 {
- "date": "2026-07-26",
- "new_count": 3,
- "notes": [
-  {
-   "from": "Brad Davis",
-   "role": "director",
-   "role_label": "Director of Operations",
-   "time": "7/22 (standing)",
-   "body": "55% to Stay Alive — EXECUTION MODE. Combined COGS+Labor must land under 55% this week; run the labor tracker daily and work the projected high-labor days. Also OPEN: Incident Process PDRs for the entire Shift Lead team (copy Brad on the documentation). SCAM alert standing — no login/account/cash info or shipping addresses over the phone, ever. Callers pose as corporate or Uber. Hang up and report."
-  },
-  {
-   "from": "Crystal Hess",
-   "role": "dm",
-   "role_label": "District Manager",
-   "time": "7/11 (standing)",
-   "body": "Manager Certifications 2065 COMPLETE — Rusul 100, Anthony 99, Madelynn 98; training videos fixed. Standing KPI focus: 60% of our score is Secret Shops + Complaints + Ticket times — coach unhappy guests early, spot-check register (fry/drink/shake offered every time), execute the basics every shift."
-  },
-  {
-   "from": "Open Items",
-   "role": "alert",
-   "role_label": "Open — Action Required",
-   "time": "7/26 6:39 AM",
-   "body": "CrunchTime L-Rev (Labor Review) 7/23 re-flagged on today's Task Alert — close today, it has stacked into Monday. Also open: Labor Review 7/24, VO-Rec Performance Fdsvce 7/24, VO-Rec BOSS Alpha (Ohio Valley) 7/24, 7/17 deposit. Delivery reactivated 7/25 2:41 PM — confirm 2065 is toggled back on at fiveguys.com (OLO). Friday 7/24 L3 + L4 complaints both refunded by Brad; coaching open (Christopher Conder's close, Closing Checklist missed same night)."
-  }
- ]
+  "date": "2026-07-26",
+  "new_count": 0,
+  "notes": [
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "Sat 7/25 10:24 AM",
+      "body": "L3 guest complaint (Dixie Highway, #5NXYSX) \u2014 delivery order missing an item. Refunded + closed. \"Please review order delivery accuracy validation with the team!\" Verify every delivery/pickup bag against the ticket before sealing."
+    },
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "7/22 (live)",
+      "body": "55% to Stay Alive \u2014 COGS + Labor combined must land under 55% this week. Execution mode; ties to bonus. Also: Incident Process PDRs open; SCAM alerts live (post at register, no login/cash/address over phone)."
+    },
+    {
+      "from": "Brad Davis",
+      "role": "alert",
+      "role_label": "CT Task Alert",
+      "time": "7/25",
+      "body": "Open CT tasks for 2065: L-Rev 7/23+7/24+7/25 (3 deep), LT-Rec KY-2079 Etown 7/23, VO-Rec Performance Fdsvc 7/24, VO-Rec BOSS Alpha OH Valley 7/24+7/25. Close before Monday."
+    },
+    {
+      "from": "Crystal Hess",
+      "role": "dm",
+      "role_label": "District Manager",
+      "time": "7/11 (standing)",
+      "body": "Manager Certifications complete \u2014 Rusul 100, Anthony 99, Madelynn 98, all videos fixed. KPI Ranking: 60% of score = Secret Shops + Complaints + Ticket times."
+    }
+  ]
 }

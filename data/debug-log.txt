@@ -1,1 +1,2 @@
 [2026-07-26 11:05:46] outlook-daily-pull-7am: no actionable work emails after filtering
+[2026-07-26 14:46] Daily brief RESCUE (watchdog 8:39 path) ran OK — 202 sent to fg2065. Teamworx roster pull FAILED (session expired) — missing-temps 7/25 attribution shows PENDING. Bobby: next Teamworx-dependent run needs a fresh session; re-login to Teamworx in Chrome so daily_missing_temps_block.py can attribute the manager.
