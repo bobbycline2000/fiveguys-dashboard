@@ -1,3 +1,4 @@
 [2026-07-26 11:05:46] outlook-daily-pull-7am: no actionable work emails after filtering
 [2026-07-26 14:46] Daily brief RESCUE (watchdog 8:39 path) ran OK — 202 sent to fg2065. Teamworx roster pull FAILED (session expired) — missing-temps 7/25 attribution shows PENDING. Bobby: next Teamworx-dependent run needs a fresh session; re-login to Teamworx in Chrome so daily_missing_temps_block.py can attribute the manager.
 [2026-07-26 14:53] RESOLVED — Teamworx session re-minted via scrape_teamworx_roster.py (stale cookie, no MFA). 7/25 missing-temps now attributed: Closing Checklist MISSED -> Madelynn Smith (PM). daily_missing_temps.json corrected + pushed. No Bobby action needed.
+[2026-07-27 05:22] Daily brief 5am SENT (202) to fg2065. xlsx fill SKIPPED — Sunday 7/26 full-day Par Brink not yet parsed (CT history 7/26 partial $372.84). GH Actions PB pickup will process the 8:03AM Sales Summary PDF; next run fills the 7/26 row.
