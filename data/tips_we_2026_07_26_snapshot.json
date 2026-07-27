@@ -1,0 +1,163 @@
+{
+  "weekEnding": "07/26/2026",
+  "weekStart": "07/20/2026",
+  "chargedTips": 673.36,
+  "poolHours": 467.97,
+  "tipsPerHour": 1.4389,
+  "sumPayout": 673.37,
+  "delta": 0.01,
+  "payouts": {
+    "Brazell, Elizabeth": {
+      "hours": 26.74,
+      "payout": 38.48,
+      "employeeId": 1437522,
+      "employeeNumber": "E2065349081",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Brewer, Kaisha": {
+      "hours": 30.73,
+      "payout": 44.22,
+      "employeeId": 870073,
+      "employeeNumber": "E2065272938",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Conder, Christopher": {
+      "hours": 12.47,
+      "payout": 17.94,
+      "employeeId": 1250570,
+      "employeeNumber": "E1954336073",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Cureton, Madison": {
+      "hours": 37.2,
+      "payout": 53.53,
+      "employeeId": 860503,
+      "employeeNumber": "E2065266168",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Gaskins, Serina": {
+      "hours": 27.27,
+      "payout": 39.24,
+      "employeeId": 881906,
+      "employeeNumber": "E1704280770",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Gatewood, Brianna": {
+      "hours": 18.67,
+      "payout": 26.86,
+      "employeeId": 935123,
+      "employeeNumber": "E2065317265",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Gibbs, Richard": {
+      "hours": 7.31,
+      "payout": 10.52,
+      "employeeId": 1325244,
+      "employeeNumber": "E2065340543",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Gonzalez Cardero, Ailen": {
+      "hours": 20.27,
+      "payout": 29.17,
+      "employeeId": 885532,
+      "employeeNumber": "E2065283102",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Goodman, Javeh": {
+      "hours": 19.57,
+      "payout": 28.16,
+      "employeeId": 1449217,
+      "employeeNumber": "E2065349921",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Henry, Lidy": {
+      "hours": 37.51,
+      "payout": 53.97,
+      "employeeId": 336368,
+      "employeeNumber": "1911737",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Johnson, DJuan": {
+      "hours": 21.86,
+      "payout": 31.45,
+      "employeeId": 931946,
+      "employeeNumber": "E2065315095",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Kadhim, Rusul": {
+      "hours": 23.94,
+      "payout": 34.45,
+      "employeeId": 1427929,
+      "employeeNumber": "E2065348303",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Kamara, Emanuela": {
+      "hours": 21.88,
+      "payout": 31.48,
+      "employeeId": 1329622,
+      "employeeNumber": "E2065340844",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Llorente Mejias, Francisco": {
+      "hours": 27.43,
+      "payout": 39.47,
+      "employeeId": 898843,
+      "employeeNumber": "E2065292376",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Lucey, Vicki": {
+      "hours": 15.31,
+      "payout": 22.03,
+      "employeeId": 375652,
+      "employeeNumber": "E047592186",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Matthews, Jeremiah": {
+      "hours": 30.15,
+      "payout": 43.38,
+      "employeeId": 920938,
+      "employeeNumber": "E2065307712",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Milledge, Mykenize": {
+      "hours": 23.12,
+      "payout": 33.27,
+      "employeeId": 1295425,
+      "employeeNumber": "E2065338962",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Smith, Madelynn": {
+      "hours": 38.93,
+      "payout": 56.02,
+      "employeeId": 1414222,
+      "employeeNumber": "E2065347146",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Whitten, Zack": {
+      "hours": 27.61,
+      "payout": 39.73,
+      "employeeId": 1369917,
+      "employeeNumber": "E2065343318",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    }
+  }
+}
