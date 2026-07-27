@@ -1,18 +1,16 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-07-13",
-    "week_end": "2026-07-19",
-    "week_label": "7/13-7/19",
+    "week_start": "2026-07-20",
+    "week_end": "2026-07-26",
+    "week_label": "7/20-7/26",
     "month": "July",
-    "generated": "2026-07-20T15:10:59",
-    "notes": [
-      "tips snapshot for w/e 2026-07-19 not found"
-    ]
+    "generated": "2026-07-27T15:41:25",
+    "notes": []
   },
   "sales": {
     "forecast": null,
-    "net_sales": 31328.34,
+    "net_sales": 30680.37,
     "over_under": null
   },
   "food_cost": {
@@ -23,32 +21,32 @@
     "var_to_goal": null,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Shake Mix",
-      "Jalapeno Peppers",
-      "Ground Beef"
+      "Bun, Burger",
+      "Ground Beef",
+      "Shake Mix"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 21.33,
+    "hourly_labor_pct": 20.13,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
-    "ot_hours": null,
+    "ot_hours": 0.0,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 581.87,
+    "labor_hours": 539.83,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
-    "charged_tips": null
+    "charged_tips": 673.36
   },
   "food_safety": {
     "steritech_pct": null,
     "criticals": null,
-    "shops_month_pct": 57.3,
+    "shops_month_pct": 66.8,
     "shops_month_label": "July 2026",
-    "shops_qtd_pct": 57.3,
-    "shops_qtd_count": 3,
-    "shops_ytd_pct": 83.2
+    "shops_qtd_pct": 66.8,
+    "shops_qtd_count": 4,
+    "shops_ytd_pct": 83.5
   },
   "fgu": {
     "overdue_rate_pct": 54.29,
@@ -106,7 +104,7 @@
     "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 83.4,
+    "completion_pct": 91.8,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
