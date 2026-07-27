@@ -1,29 +1,16 @@
 {
   "store": "2065",
-  "date": "2026-07-25",
-  "day_of_week": "Saturday",
-  "generated_at": "2026-07-26T14:52:43.930429-04:00",
+  "date": "2026-07-26",
+  "day_of_week": "Sunday",
+  "generated_at": "2026-07-27T05:13:08.098471-04:00",
   "schedule": {
-    "date": "2026-07-25",
-    "day_of_week": "Saturday",
-    "am_manager": "Robert Cline",
-    "pm_manager": "Madelynn Smith",
-    "shift_change_manager": "Madison Cureton & Rusul Kadhim"
+    "date": "2026-07-26",
+    "day_of_week": "Sunday",
+    "am_manager": "Vicki Lucey",
+    "pm_manager": "Madison Cureton",
+    "shift_change_manager": null
   },
-  "missing_count": 1,
-  "missing_items": [
-    {
-      "date": "2026-07-25",
-      "day_of_week": "Saturday",
-      "category": "CHECKLIST",
-      "shift": "N/A",
-      "task_name": "Closing Checklist",
-      "status": "MISSED",
-      "required_pct": 0,
-      "all_pct": 0,
-      "manager": "Madelynn Smith",
-      "manager_basis": "pm_manager (closing task)"
-    }
-  ],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Saturday 2026-07-25\n**1 missed/incomplete** (AM mgr: Robert Cline \u00b7 PM mgr: Madelynn Smith)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Madelynn Smith**\n"
+  "missing_count": 0,
+  "missing_items": [],
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Sunday 2026-07-26\n\u2705 All temps and checklists complete. Clean day.\n"
 }
