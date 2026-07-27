@@ -1,11 +1,11 @@
 {
   "meta": {
-    "date": "2026-07-26",
-    "generated": "7/26/2026 at 11:06 AM",
+    "date": "2026-07-27",
+    "generated": "7/27/2026 at 5:08 AM",
     "location": "2065",
     "status": "ok"
   },
-  "overall_pct": 43,
+  "overall_pct": 57,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -49,8 +49,8 @@
     },
     {
       "name": "Closing Checklist",
-      "pct": 0,
-      "raw": "Closing Checklist\n0% | 0%"
+      "pct": 100,
+      "raw": "Closing Checklist\n100% | 100%"
     },
     {
       "name": "Pre Open",
