@@ -19,7 +19,7 @@ import json
 import logging
 import os
 import re
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from pathlib import Path
 
 import sys
@@ -33,6 +33,13 @@ PASSWORD = os.getenv("COMPLIANCEMATE_PASSWORD", "")
 BASE_URL  = "https://fg-beta.compliancemate.com"
 DATA_DIR  = Path(__file__).parent.parent / "data"
 TODAY_STR = date.today().strftime("%Y-%m-%d")
+# The script explicitly selects the "Yesterday" date-range filter in the
+# ComplianceMate report UI (see navigate_to_list_completion) — so the content
+# being fetched always describes the calendar day BEFORE the run date, never
+# the run date itself. meta.date (and therefore the snapshot folder name,
+# which is derived from meta.date) must reflect that, not date.today().
+# Bug: this used to be TODAY_STR, mislabeling every snapshot by +1 day.
+REPORT_DATE_STR = (date.today() - timedelta(days=1)).strftime("%Y-%m-%d")
 
 # Exact list names as they appear on ComplianceMate for location 2065
 TARGET_CHECKLISTS = [
@@ -60,7 +67,7 @@ def _fmt(dt, fmt):
 
 EMPTY_DATA = {
     "meta": {
-        "date":      TODAY_STR,
+        "date":      REPORT_DATE_STR,
         "generated": _fmt(datetime.now(), "%-m/%-d/%Y at %-I:%M %p"),
         "location":  "2065",
         "status":    "no_data",
@@ -435,7 +442,7 @@ async def scrape() -> dict:
             status = "ok" if lists else ("overall_only" if overall_pct else "login_ok_no_data")
             return {
                 "meta": {
-                    "date":      TODAY_STR,
+                    "date":      REPORT_DATE_STR,
                     "generated": _fmt(datetime.now(), "%-m/%-d/%Y at %-I:%M %p"),
                     "location":  "2065",
                     "status":    status,
