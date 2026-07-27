@@ -844,9 +844,9 @@
     "d2_mid": 200,
     "safe_close": 682,
     "d1_close": 200,
-    "d2_close": 0,
+    "d2_close": 200,
     "ct_os": -95.41,
     "notes": "",
-    "submitted_at": "2026-07-27T02:52:11.453Z"
+    "submitted_at": "2026-07-27T02:52:14.540Z"
   }
 ]
