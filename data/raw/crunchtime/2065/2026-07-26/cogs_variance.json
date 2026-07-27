@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 P&L Actual vs. Theoretical Cost report",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-07-20",
+    "week_end": "2026-07-26",
+    "variance_week_start": "2026-07-13",
+    "variance_week_end": "2026-07-19",
+    "month_start": "2026-07-01",
+    "last_month_start": "2026-06-01",
+    "last_month_end": "2026-06-30",
+    "through": "2026-07-26",
+    "pulled": "2026-07-27 08:27 ET",
+    "method": "api+playwright"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": null,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": null,
+  "variance_to_goal_week": null,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": null,
+  "items": [
+    {
+      "name": "Bun, Burger",
+      "actual": 1042.0,
+      "theoretical": 910.0,
+      "over_dollars": 132.0,
+      "variance_pct": -15.0,
+      "rank": 1
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 3088.0,
+      "theoretical": 3007.0,
+      "over_dollars": 81.0,
+      "variance_pct": -3.0,
+      "rank": 2
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 284.0,
+      "theoretical": 236.0,
+      "over_dollars": 48.0,
+      "variance_pct": -20.0,
+      "rank": 3
+    },
+    {
+      "name": "Lettuce",
+      "actual": 130.0,
+      "theoretical": 95.0,
+      "over_dollars": 35.0,
+      "variance_pct": -38.0,
+      "rank": 4
+    },
+    {
+      "name": "Hot Dog",
+      "actual": 116.0,
+      "theoretical": 84.0,
+      "over_dollars": 32.0,
+      "variance_pct": -39.0,
+      "rank": 5
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 999.0,
+      "theoretical": 968.0,
+      "over_dollars": 31.0,
+      "variance_pct": -3.0,
+      "rank": 6
+    },
+    {
+      "name": "A1 Steak Sauce",
+      "actual": 45.0,
+      "theoretical": 16.0,
+      "over_dollars": 29.0,
+      "variance_pct": -178.0,
+      "rank": 7
+    },
+    {
+      "name": "Topping, Fudge Bittersweet / NEW Chocolate Fudge Sauce",
+      "actual": 36.0,
+      "theoretical": 16.0,
+      "over_dollars": 20.0,
+      "variance_pct": -124.0,
+      "rank": 8
+    },
+    {
+      "name": "Jalapeno Peppers",
+      "actual": 30.0,
+      "theoretical": 12.0,
+      "over_dollars": 18.0,
+      "variance_pct": -146.0,
+      "rank": 9
+    },
+    {
+      "name": "Cajun Season",
+      "actual": 68.0,
+      "theoretical": 89.0,
+      "over_dollars": -21.0,
+      "variance_pct": 23.0,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}

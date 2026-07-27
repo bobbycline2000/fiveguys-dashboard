@@ -1,17 +1,17 @@
 {
-  "date": "2026-07-25",
-  "labor_percent": 18.5965,
-  "labor_dollars": 900.84,
-  "actual_hours": 71.22,
-  "scheduled_hours": 97.5,
-  "avg_hourly_wage": 12.65,
-  "labor_percent_wtd": 20.1588,
-  "labor_dollars_wtd": 5304.87,
-  "actual_hours_wtd": 463.71,
+  "date": "2026-07-26",
+  "labor_percent": null,
+  "labor_dollars": null,
+  "actual_hours": null,
+  "scheduled_hours": 99.5,
+  "avg_hourly_wage": null,
+  "labor_percent_wtd": null,
+  "labor_dollars_wtd": null,
+  "actual_hours_wtd": null,
   "hourly_breakdown": [],
   "meta": {
     "source": "crunchtime_api",
-    "pulled_at": "2026-07-26T10:47:55",
-    "calc_id_yesterday": 7
+    "pulled_at": "2026-07-27T12:27:12",
+    "calc_id_yesterday": 1
   }
 }
