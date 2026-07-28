@@ -2,21 +2,21 @@
   "store": "2065",
   "week_start": "2026-07-20",
   "week_end": "2026-07-26",
-  "variance_week_start": "2026-07-13",
-  "variance_week_end": "2026-07-19",
+  "variance_week_start": "2026-07-20",
+  "variance_week_end": "2026-07-26",
   "cogs_pct_week": null,
   "cogs_pct_week_label": "2026-07-26",
   "cogs_goal_pct": 27.5,
-  "total_over": 261.0,
-  "generated": "2026-07-27 12:28 ET",
+  "total_over": 1757.0,
+  "generated": "2026-07-28 11:22 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Bun, Burger",
-      "over_dollars": 132.0,
-      "actual": 1042.0,
-      "theoretical": 910.0,
-      "variance_pct": -15.0,
+      "name": "Bacon Cheeseburger",
+      "over_dollars": 730.0,
+      "actual": 953.0,
+      "theoretical": 223.0,
+      "variance_pct": null,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
@@ -26,11 +26,11 @@
     },
     {
       "rank": 2,
-      "name": "Ground Beef",
-      "over_dollars": 81.0,
-      "actual": 3088.0,
-      "theoretical": 3007.0,
-      "variance_pct": -3.0,
+      "name": "Cheeseburger",
+      "over_dollars": 621.0,
+      "actual": 799.0,
+      "theoretical": 178.0,
+      "variance_pct": null,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
@@ -40,16 +40,16 @@
     },
     {
       "rank": 3,
-      "name": "Shake Mix",
-      "over_dollars": 48.0,
-      "actual": 284.0,
-      "theoretical": 236.0,
-      "variance_pct": -20.0,
-      "big_six": false,
+      "name": "Little Cheeseburger",
+      "over_dollars": 406.0,
+      "actual": 499.0,
+      "theoretical": 93.0,
+      "variance_pct": null,
+      "big_six": true,
       "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     }
   ]
