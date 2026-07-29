@@ -1,16 +1,53 @@
 {
   "store": "2065",
-  "date": "2026-07-27",
-  "day_of_week": "Monday",
-  "generated_at": "2026-07-28T14:07:51.500536-04:00",
+  "date": "2026-07-28",
+  "day_of_week": "Tuesday",
+  "generated_at": "2026-07-29T16:13:50.561600-04:00",
   "schedule": {
-    "date": "2026-07-27",
-    "day_of_week": "Monday",
-    "am_manager": "Robert Cline",
-    "pm_manager": "Madison Cureton",
-    "shift_change_manager": "Madelynn Smith & Rusul Kadhim"
+    "date": "2026-07-28",
+    "day_of_week": "Tuesday",
+    "am_manager": "Madelynn Smith",
+    "pm_manager": "Christopher Conder",
+    "shift_change_manager": "Robert Cline & Anthony Pirtle"
   },
-  "missing_count": 0,
-  "missing_items": [],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Monday 2026-07-27\n\u2705 All temps and checklists complete. Clean day.\n"
+  "missing_count": 3,
+  "missing_items": [
+    {
+      "date": "2026-07-28",
+      "day_of_week": "Tuesday",
+      "category": "PM_TEMP",
+      "shift": "PM",
+      "task_name": "9PM: Time and Temp",
+      "status": "INCOMPLETE",
+      "required_pct": 94,
+      "all_pct": 94,
+      "manager": "Christopher Conder",
+      "manager_basis": "pm_manager"
+    },
+    {
+      "date": "2026-07-28",
+      "day_of_week": "Tuesday",
+      "category": "CHECKLIST",
+      "shift": "PM",
+      "task_name": "PM Pre-Shift Check",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0,
+      "manager": "Christopher Conder",
+      "manager_basis": "pm_manager"
+    },
+    {
+      "date": "2026-07-28",
+      "day_of_week": "Tuesday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0,
+      "manager": "Christopher Conder",
+      "manager_basis": "pm_manager (closing task)"
+    }
+  ],
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Tuesday 2026-07-28\n**3 missed/incomplete** (AM mgr: Madelynn Smith \u00b7 PM mgr: Christopher Conder)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Christopher Conder**\n- **Checklist: PM Pre-Shift Check** \u2014 MISSED \u2192 **Christopher Conder**\n- **PM temp: 9PM: Time and Temp** \u2014 INCOMPLETE (94%) \u2192 **Christopher Conder**\n"
 }
