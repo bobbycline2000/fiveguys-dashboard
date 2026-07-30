@@ -1,19 +1,19 @@
 {
-  "as_of": "2026-07-29",
+  "as_of": "2026-07-30",
   "current_month": "2026-07",
   "current_month_label": "July 2026",
-  "store_avg_month": 66.8,
-  "store_avg_ytd": 83.5,
-  "shop_count_month": 4,
-  "shop_count_ytd": 41,
+  "store_avg_month": 73.4,
+  "store_avg_ytd": 83.9,
+  "shop_count_month": 5,
+  "shop_count_ytd": 42,
   "managers": [
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": 60.7,
-      "month_n": 3,
-      "ytd_avg": 82.3,
-      "ytd_n": 27
+      "month_avg": 70.5,
+      "month_n": 4,
+      "ytd_avg": 82.9,
+      "ytd_n": 28
     },
     {
       "first": "Vicki",
@@ -60,10 +60,10 @@
     {
       "first": "Bobby",
       "name": "Robert Cline",
-      "month_avg": 90.0,
-      "month_n": 2,
-      "ytd_avg": 95.3,
-      "ytd_n": 7
+      "month_avg": 93.3,
+      "month_n": 3,
+      "ytd_avg": 95.9,
+      "ytd_n": 8
     },
     {
       "first": "Bri",
@@ -98,6 +98,14 @@
       "ytd_n": 17
     },
     {
+      "first": "Jeremiah",
+      "name": "Jeremiah Matthews",
+      "month_avg": 70.0,
+      "month_n": 4,
+      "ytd_avg": 86.0,
+      "ytd_n": 21
+    },
+    {
       "first": "Mike",
       "name": "NAME_UNRESOLVED (Mike)",
       "month_avg": null,
@@ -114,14 +122,6 @@
       "ytd_n": 8
     },
     {
-      "first": "Jeremiah",
-      "name": "Jeremiah Matthews",
-      "month_avg": 60.0,
-      "month_n": 3,
-      "ytd_avg": 85.2,
-      "ytd_n": 20
-    },
-    {
       "first": "Maylin",
       "name": "Maylin Hernandez Rodriguez",
       "month_avg": 85.0,
@@ -132,10 +132,18 @@
     {
       "first": "Francisco",
       "name": "Francisco Llorente Mejias",
-      "month_avg": 89.0,
-      "month_n": 3,
-      "ytd_avg": 81.8,
-      "ytd_n": 25
+      "month_avg": 91.8,
+      "month_n": 4,
+      "ytd_avg": 82.5,
+      "ytd_n": 26
+    },
+    {
+      "first": "Richard",
+      "name": "Richard Gibbs",
+      "month_avg": 50.0,
+      "month_n": 2,
+      "ytd_avg": 79.3,
+      "ytd_n": 9
     },
     {
       "first": "Samuel",
@@ -143,14 +151,6 @@
       "month_avg": null,
       "month_n": 0,
       "ytd_avg": 77.6,
-      "ytd_n": 8
-    },
-    {
-      "first": "Richard",
-      "name": "Richard Gibbs",
-      "month_avg": 0.0,
-      "month_n": 1,
-      "ytd_avg": 76.8,
       "ytd_n": 8
     },
     {
@@ -163,6 +163,18 @@
     }
   ],
   "latest_shops": [
+    {
+      "date": "2026-07-23",
+      "score": 100.0,
+      "meal_period": "Dinner",
+      "on_shift": [
+        "Robert Cline",
+        "Francisco Llorente Mejias",
+        "Jeremiah Matthews",
+        "Madison Cureton",
+        "Richard Gibbs"
+      ]
+    },
     {
       "date": "2026-07-16",
       "score": 95.0,
@@ -205,19 +217,6 @@
         "Lidy Henry",
         "Maylin Hernandez Rodriguez",
         "Vicki Lucey"
-      ]
-    },
-    {
-      "date": "2026-06-25",
-      "score": 100.0,
-      "meal_period": "Dinner",
-      "on_shift": [
-        "Robert Cline",
-        "Francisco Llorente Mejias",
-        "Jeremiah Matthews",
-        "Madison Cureton",
-        "Maylin Hernandez Rodriguez",
-        "Richard Gibbs"
       ]
     }
   ]

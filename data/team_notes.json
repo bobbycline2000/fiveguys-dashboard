@@ -1,34 +1,48 @@
 {
-  "date": "2026-07-29",
-  "new_count": 4,
+  "date": "2026-07-30",
+  "new_count": 6,
   "notes": [
+    {
+      "from": "Secret Shop",
+      "role": "alert",
+      "role_label": "Marketforce — NEW 100%",
+      "time": "7/30",
+      "body": "NEW 100% shop — 7/23 Dinner. On shift: Bobby Cline, Francisco Llorente Mejias, Jeremiah Matthews, Madison Cureton, Richard Gibbs. Payout shop. Store July avg now 73.4% (5 shops), YTD 83.9% (42 shops)."
+    },
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
       "time": "7/27 (standing)",
-      "body": "ORG CHANGE: Jeff Reiss is now 2065's District Manager, effective Mon 7/27 — over #2079, #2065, #1731, #1704. Crystal Hess realigned to #1788, #475, #384, #1954. Welcome Jeff; his prior store led the country on Shops + Steritech."
-    },
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "7/22 (execution, standing)",
-      "body": "55% to Stay Alive — EXECUTION. Combined COGS+Labor under 55% this week (ties to bonus); last check 47.88%, under by 7 points. Open: Incident-report PDRs for the full Shift Lead team (copy Brad); SCAM alerts (Uber + Muncie) — no login/cash/address over the phone; Steritech in-district (1959); CO2 check daily."
+      "body": "ORG CHANGE: Jeff Reiss is now 2065's District Manager, effective Mon 7/27 — over #2079, #2065, #1731, #1704. Crystal Hess realigned to #1788, #475, #384, #1954. 55% to Stay Alive still in execution (COGS+Labor under 55%, ties to bonus) — we're at ~46%. Steritech in-district (1959) — audit-ready every shift. Open: Incident PDRs for full Shift Lead team; SCAM alerts (no login/cash/address over the phone); CO2 daily."
     },
     {
       "from": "Crystal Hess",
       "role": "dm",
       "role_label": "DM (outgoing — realigned off 2065)",
-      "time": "7/29",
-      "body": "District shout-out: Natasha Davey and Adrienne Garcia both scored 99% on their Shift Lead assessment at 1954. KPI Ranking standing: 60% of score = Secret Shops + Complaints + Ticket times. Jeff Reiss now owns 2065 — watch for his first direct communication."
+      "time": "7/11 (standing)",
+      "body": "All three MITs passed Manager Certification — Rusul 100, Anthony 99, Madelynn 98. KPI focus: Shops + Complaints + Ticket times = 60% of the score. Hub ticket for every outside-vendor call."
     },
     {
-      "from": "CrunchTime + HR",
+      "from": "ComplianceMate",
       "role": "alert",
-      "role_label": "Ops Alert",
+      "role_label": "Missed temps 7/29",
       "time": "7/29",
-      "body": "3 open CT tasks — L-Rev 7/27, VO-Rec Performance Foodservice 7/28, L-Rev 7/28 — close today. 7/17 deposit still not entered ($433.90 O/S short). HR (Jeni Moffatt) needs Bobby's correct home address — mail bouncing. 7/28 close: Closing Checklist + PM Pre-Shift missed, 9PM temp 94% (Christopher Conder)."
+      "body": "3 missed: 11AM Time & Temp (Madison Cureton AM); Closing Checklist + Milkshake Pump Cleaning (Rusul Kadhim PM)."
+    },
+    {
+      "from": "Cash / Deposits",
+      "role": "accounting",
+      "role_label": "Deposit entry",
+      "time": "7/29",
+      "body": "Open deposits to enter in CrunchTime: 7/29 book cash $854.71 showing O/S, and 7/17 deposit $433.90 still open."
+    },
+    {
+      "from": "HR / Corporate",
+      "role": "alert",
+      "role_label": "Onboarding + Promo",
+      "time": "7/29",
+      "body": "4 terminations processed (Jeremiah Matthews, Angela Aaby, Richard Gibbs, Megan) — confirm coverage. Dog Days promo Aug 4-7 ($25+ delivery = free hot dog) is delivery-only — our delivery is OFF, confirm re-activation before 8/4."
     }
   ]
 }
