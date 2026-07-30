@@ -876,11 +876,28 @@
     "safe_mid": 0,
     "d1_mid": 0,
     "d2_mid": 0,
+    "safe_close": 661.93,
+    "d1_close": 200,
+    "d2_close": 200,
+    "ct_os": 0,
+    "notes": "",
+    "submitted_at": "2026-07-30T03:10:24.882Z"
+  },
+  {
+    "date": "2026-07-30",
+    "mgr": "vll",
+    "deposit": 0,
+    "safe_open": 671,
+    "d1_open": 0,
+    "d2_open": 0,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-07-29T15:20:40.012Z"
+    "submitted_at": "2026-07-30T11:51:31.176Z"
   }
 ]
