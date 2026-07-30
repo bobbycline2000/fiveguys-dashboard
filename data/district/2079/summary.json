@@ -1,20 +1,20 @@
 {
   "store_id": "2079",
   "store_name": "FG-2079 Elizabethtown",
-  "generated": "2026-07-29 11:41 ET",
+  "generated": "2026-07-30 11:31 ET",
   "_status": "live CrunchTime KPIs (WTD); Brink/Steritech pending",
   "kpis": {
     "net_sales": {
-      "value": "$6,067",
-      "raw": 6067.2,
+      "value": "$9,440",
+      "raw": 9439.96,
       "label": "Net Sales",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "labor_pct": {
-      "value": "25.4%",
-      "raw": 25.3503,
+      "value": "24.9%",
+      "raw": 24.9364,
       "label": "Labor %",
       "source": "CrunchTime",
       "status": "live",
@@ -41,8 +41,8 @@
       "window": "WTD"
     },
     "sales_guest": {
-      "value": "$5.30",
-      "raw": 5.3033,
+      "value": "$5.45",
+      "raw": 5.4503,
       "label": "Sales / Guest",
       "source": "CrunchTime",
       "status": "live",
