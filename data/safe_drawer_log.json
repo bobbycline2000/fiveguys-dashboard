@@ -891,13 +891,13 @@
     "d1_open": 0,
     "d2_open": 0,
     "safe_mid": 673,
-    "d1_mid": 0,
+    "d1_mid": 200,
     "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -51.73,
     "notes": "",
-    "submitted_at": "2026-07-31T03:06:02.414Z"
+    "submitted_at": "2026-07-31T03:06:05.196Z"
   }
 ]
