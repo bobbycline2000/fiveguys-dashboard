@@ -904,7 +904,7 @@
     "date": "2026-07-31",
     "mgr": "mc",
     "deposit": 0,
-    "safe_open": 0,
+    "safe_open": 673,
     "d1_open": 0,
     "d2_open": 0,
     "safe_mid": 0,
@@ -915,6 +915,6 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-07-31T14:29:15.081Z"
+    "submitted_at": "2026-07-31T14:29:23.697Z"
   }
 ]
