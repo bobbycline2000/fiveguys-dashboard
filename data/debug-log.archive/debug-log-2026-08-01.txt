@@ -1,0 +1,2 @@
+[2026-07-31 11:40:35] outlook-daily-pull-7am: no actionable work emails after filtering
+[2026-07-31 14:06] Daily brief FAILED — Outlook session expired, hit MFA 'Approve sign in request' (Authenticator push, number 79). fg2065 MFA approval routes to Craig in office, not Bobby's phone — cannot complete autonomously. Brief NOT sent. Bobby/Craig: approve the MS Authenticator push OR re-log into outlook.cloud.microsoft in Chrome, then re-run the brief. Last successful step: Step 2 (Chrome connected, Outlook opened).
