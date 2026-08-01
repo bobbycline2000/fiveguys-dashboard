@@ -1,53 +1,16 @@
 {
   "store": "2065",
-  "date": "2026-07-29",
-  "day_of_week": "Wednesday",
-  "generated_at": "2026-07-30T08:10:09.678409-04:00",
+  "date": "2026-07-31",
+  "day_of_week": "Friday",
+  "generated_at": "2026-08-01T09:08:30.499294-04:00",
   "schedule": {
-    "date": "2026-07-29",
-    "day_of_week": "Wednesday",
+    "date": "2026-07-31",
+    "day_of_week": "Friday",
     "am_manager": "Madison Cureton",
-    "pm_manager": "Rusul Kadhim",
-    "shift_change_manager": "Christopher Conder"
+    "pm_manager": "Anthony Pirtle",
+    "shift_change_manager": "Christopher Conder & Robert Cline & Madelynn Smith & Rusul Kadhim"
   },
-  "missing_count": 3,
-  "missing_items": [
-    {
-      "date": "2026-07-29",
-      "day_of_week": "Wednesday",
-      "category": "AM_TEMP",
-      "shift": "AM",
-      "task_name": "11AM: Time and Temp",
-      "status": "MISSED",
-      "required_pct": 0,
-      "all_pct": 0,
-      "manager": "Madison Cureton",
-      "manager_basis": "am_manager"
-    },
-    {
-      "date": "2026-07-29",
-      "day_of_week": "Wednesday",
-      "category": "CHECKLIST",
-      "shift": "N/A",
-      "task_name": "Milkshake Pump Cleaning Check",
-      "status": "MISSED",
-      "required_pct": 0,
-      "all_pct": 0,
-      "manager": "Rusul Kadhim",
-      "manager_basis": "pm_manager (closing task)"
-    },
-    {
-      "date": "2026-07-29",
-      "day_of_week": "Wednesday",
-      "category": "CHECKLIST",
-      "shift": "N/A",
-      "task_name": "Closing Checklist",
-      "status": "MISSED",
-      "required_pct": 0,
-      "all_pct": 0,
-      "manager": "Rusul Kadhim",
-      "manager_basis": "pm_manager (closing task)"
-    }
-  ],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Wednesday 2026-07-29\n**3 missed/incomplete** (AM mgr: Madison Cureton \u00b7 PM mgr: Rusul Kadhim)\n\n- **AM temp: 11AM: Time and Temp** \u2014 MISSED \u2192 **Madison Cureton**\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Rusul Kadhim**\n- **Checklist: Milkshake Pump Cleaning Check** \u2014 MISSED \u2192 **Rusul Kadhim**\n"
+  "missing_count": 0,
+  "missing_items": [],
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Friday 2026-07-31\n\u2705 All temps and checklists complete. Clean day.\n"
 }
