@@ -910,11 +910,11 @@
     "safe_mid": 673,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
+    "safe_close": 673,
     "d1_close": 200,
     "d2_close": 200,
     "ct_os": -57.69,
     "notes": "",
-    "submitted_at": "2026-08-01T02:31:22.766Z"
+    "submitted_at": "2026-08-01T02:33:41.550Z"
   }
 ]
