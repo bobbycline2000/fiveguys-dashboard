@@ -916,5 +916,22 @@
     "ct_os": -57.69,
     "notes": "",
     "submitted_at": "2026-08-01T02:33:47.709Z"
+  },
+  {
+    "date": "2026-08-01",
+    "mgr": "mc",
+    "deposit": 0,
+    "safe_open": 673,
+    "d1_open": 0,
+    "d2_open": 0,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
+    "ct_os": 0,
+    "notes": "",
+    "submitted_at": "2026-08-01T14:24:51.151Z"
   }
 ]
