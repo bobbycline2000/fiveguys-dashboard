@@ -927,11 +927,11 @@
     "safe_mid": 673,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
+    "safe_close": 0.67,
     "d1_close": 200,
     "d2_close": 200,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-08-02T03:16:14.909Z"
+    "submitted_at": "2026-08-02T03:19:38.592Z"
   }
 ]
