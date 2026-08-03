@@ -43,7 +43,13 @@ HDR = {
 }
 PROBE_URL = f"{NETCHEF}/resource/recommended-actions/status"
 
-GM_NAME_KEY = "Cline, Robert"   # excluded from tip pool
+# Names excluded from the tip pool (managers / GMs / GMs-in-training — no tips).
+# Match is substring-based, so use the canonical "Last, First" CrunchTime key.
+EXCLUDED_NAME_KEYS = (
+    "Cline, Robert",              # GM (Bobby)
+    "Uebelacker-Maddox, Heather", # GM-in-training — excluded per Bobby 2026-08-03
+)
+GM_NAME_KEY = EXCLUDED_NAME_KEYS[0]  # kept for any legacy references
 SW_ID_CREDIT_CARD_TIP = 12292   # global supplemental wage type id (verified 2026-05-04)
 
 
@@ -202,7 +208,8 @@ def compute_payouts(employees, charged_tips):
     """Return {name: {hours, payout, employeeId, positionCode, positionName}} keyed by name.
     Excludes GM. Pool = sum of regular hours across non-GM. Penny-rounding may leave a
     sub-cent delta vs charged_tips — accepted by the skill (4/27 reference: $0.01 over)."""
-    non_gm = {n: a for n, a in employees.items() if GM_NAME_KEY not in n}
+    non_gm = {n: a for n, a in employees.items()
+              if not any(x in n for x in EXCLUDED_NAME_KEYS)}
     pool = sum(a["reg"] for a in non_gm.values())
     if pool <= 0:
         raise RuntimeError("pool hours = 0 — sanity fail")
