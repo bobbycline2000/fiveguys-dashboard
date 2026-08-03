@@ -1,107 +1,107 @@
 {
   "meta": {
-    "generated": "2026-08-02T10:44:54",
-    "today": "2026-08-02",
-    "this_week_mon": "2026-07-27",
-    "next_week_mon": "2026-08-03",
+    "generated": "2026-08-03T12:28:57",
+    "today": "2026-08-03",
+    "this_week_mon": "2026-08-03",
+    "next_week_mon": "2026-08-10",
     "week_convention": "Mon-Sun"
   },
   "days": [
-    {
-      "date": "2026-07-27",
-      "name": "MON",
-      "forecast": 3915.0,
-      "actual": 3820.06,
-      "is_next_week": false
-    },
-    {
-      "date": "2026-07-28",
-      "name": "TUE",
-      "forecast": 3533.0,
-      "actual": 4189.75,
-      "is_next_week": false
-    },
-    {
-      "date": "2026-07-29",
-      "name": "WED",
-      "forecast": 4457.0,
-      "actual": 4469.79,
-      "is_next_week": false
-    },
-    {
-      "date": "2026-07-30",
-      "name": "THU",
-      "forecast": 4693.0,
-      "actual": 4970.86,
-      "is_next_week": false
-    },
-    {
-      "date": "2026-07-31",
-      "name": "FRI",
-      "forecast": 5421.0,
-      "actual": 5723.72,
-      "is_next_week": false
-    },
-    {
-      "date": "2026-08-01",
-      "name": "SAT",
-      "forecast": 4867.0,
-      "actual": 5302.35,
-      "is_next_week": false
-    },
-    {
-      "date": "2026-08-02",
-      "name": "SUN",
-      "forecast": 4719.0,
-      "actual": null,
-      "is_next_week": false
-    },
     {
       "date": "2026-08-03",
       "name": "MON",
       "forecast": 4035.0,
       "actual": null,
-      "is_next_week": true
+      "is_next_week": false
     },
     {
       "date": "2026-08-04",
       "name": "TUE",
       "forecast": 3567.0,
       "actual": null,
-      "is_next_week": true
+      "is_next_week": false
     },
     {
       "date": "2026-08-05",
       "name": "WED",
       "forecast": 4510.0,
       "actual": null,
-      "is_next_week": true
+      "is_next_week": false
     },
     {
       "date": "2026-08-06",
       "name": "THU",
       "forecast": 4829.0,
       "actual": null,
-      "is_next_week": true
+      "is_next_week": false
     },
     {
       "date": "2026-08-07",
       "name": "FRI",
       "forecast": 5092.0,
       "actual": null,
-      "is_next_week": true
+      "is_next_week": false
     },
     {
       "date": "2026-08-08",
       "name": "SAT",
       "forecast": 4955.0,
       "actual": null,
-      "is_next_week": true
+      "is_next_week": false
     },
     {
       "date": "2026-08-09",
       "name": "SUN",
       "forecast": 4523.0,
+      "actual": null,
+      "is_next_week": false
+    },
+    {
+      "date": "2026-08-10",
+      "name": "MON",
+      "forecast": 3787.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-08-11",
+      "name": "TUE",
+      "forecast": 3487.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-08-12",
+      "name": "WED",
+      "forecast": 4548.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-08-13",
+      "name": "THU",
+      "forecast": 4686.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-08-14",
+      "name": "FRI",
+      "forecast": 5080.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-08-15",
+      "name": "SAT",
+      "forecast": 5150.0,
+      "actual": null,
+      "is_next_week": true
+    },
+    {
+      "date": "2026-08-16",
+      "name": "SUN",
+      "forecast": 4507.0,
       "actual": null,
       "is_next_week": true
     }
