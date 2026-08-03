@@ -26,6 +26,14 @@ import requests
 
 sys.stdout.reconfigure(encoding="utf-8")
 
+_REQUIRED = ["MS_TENANT_ID", "MS_CLIENT_ID", "MS_CLIENT_SECRET"]
+_missing = [v for v in _REQUIRED if not os.environ.get(v)]
+if _missing:
+    print(f"ERROR: missing required env var(s): {', '.join(_missing)} — "
+          f"app-registration secrets were never added to repo secrets. "
+          f"Skipping COGS email pull (known blocker, needs Azure tenant admin).")
+    sys.exit(1)
+
 TENANT_ID  = os.environ["MS_TENANT_ID"]
 CLIENT_ID  = os.environ["MS_CLIENT_ID"]
 CLIENT_SECRET = os.environ["MS_CLIENT_SECRET"]
@@ -50,11 +58,14 @@ def get_token() -> str:
 
 
 def search_cogs_emails(token: str) -> list:
-    """Return up to 3 most recent COGS Flash Report emails."""
+    """Return up to 10 most recent COGS Flash Report emails (widened from 3
+    so main() has enough candidates to find one with FP% actually populated
+    — CrunchTime ships several mid-week emails per week with FP% blank until
+    inventory closes the period out, see parse_fp_pct() docstring)."""
     url = (
         f"https://graph.microsoft.com/v1.0/users/{MAILBOX}/messages"
         f"?$search=\"COGS Review Week Ending\""
-        f"&$top=3"
+        f"&$top=10"
         f"&$select=subject,receivedDateTime,body,from"
     )
     resp = requests.get(url, headers={"Authorization": f"Bearer {token}",
@@ -78,20 +89,43 @@ def parse_fp_pct(body: str) -> float | None:
       | KY-2065-Di |     |         |    23.4 |
       | Total      |     |         |    23.4 |
 
-    Strategy: find the KY-2065 or Total row, take the last non-empty
-    numeric column value.
+    IMPORTANT: FP% is a running actual/theoretical figure that CrunchTime
+    only populates once inventory has been counted for the period — mid-week
+    "still open" emails routinely ship with FP% BLANK while CP% is populated
+    (confirmed 2026-08-03: week-ending Aug 2 email had CP%=22.1, FP%=blank).
+    We therefore MUST locate the FP% column by its header position and read
+    that exact column — never fall back to "last non-empty numeric column",
+    which would silently mislabel CP% as FP% on any day FP% is blank.
     """
-    for line in body.splitlines():
-        if "KY-2065" in line or "Total" in line:
-            cols = [c.strip() for c in line.split("|")]
-            # Last non-empty column that looks like a number
-            for col in reversed(cols):
+    lines = body.splitlines()
+    header_cols = None
+    for line in lines:
+        if "FP%" in line and "CP%" in line:
+            header_cols = [c.strip() for c in line.split("|")]
+            break
+    if header_cols is None:
+        return None
+    try:
+        fp_idx = header_cols.index("FP%")
+    except ValueError:
+        return None
+
+    # Prefer the store "Total" row; fall back to the "KY-2065" location row.
+    for wanted in ("Total", "KY-2065"):
+        for line in lines:
+            if wanted in line:
+                cols = [c.strip() for c in line.split("|")]
+                if fp_idx >= len(cols):
+                    continue
+                raw = cols[fp_idx]
+                if not raw:
+                    continue  # FP% blank on this row — week not closed out yet
                 try:
-                    val = float(col)
-                    if 5.0 <= val <= 60.0:
-                        return val
+                    val = float(raw)
                 except ValueError:
                     continue
+                if 5.0 <= val <= 60.0:
+                    return val
     return None
 
 
@@ -140,16 +174,24 @@ def main():
         print("No COGS Review emails found — skipping.")
         sys.exit(0)
 
-    # Use the most recent email
-    msg = emails[0]
-    subject = msg.get("subject", "")
-    body    = msg.get("body", {}).get("content", "") or msg.get("bodyPreview", "")
-    received = msg.get("receivedDateTime", "")
+    # Try candidates newest-first; skip any where FP% isn't populated yet
+    # (mid-week emails ship with FP% blank until inventory closes the period).
+    emails.sort(key=lambda m: m.get("receivedDateTime", ""), reverse=True)
+    msg = subject = body = received = fp_pct = None
+    for candidate in emails:
+        c_subject = candidate.get("subject", "")
+        c_body    = candidate.get("body", {}).get("content", "") or candidate.get("bodyPreview", "")
+        c_fp_pct  = parse_fp_pct(c_body)
+        if c_fp_pct is not None:
+            msg, subject, body, received, fp_pct = candidate, c_subject, c_body, candidate.get("receivedDateTime", ""), c_fp_pct
+            break
 
-    fp_pct = parse_fp_pct(body)
     if fp_pct is None:
-        print(f"Could not parse FP% from email: {subject!r}")
-        print("Body preview:", body[:200])
+        newest = emails[0]
+        print(f"Could not parse a populated FP% from any of the {len(emails)} most recent "
+              f"COGS emails — likely mid-week, inventory not yet closed for this period.")
+        print(f"Newest email: {newest.get('subject', '')!r}")
+        print("Body preview:", (newest.get("body", {}).get("content", "") or newest.get("bodyPreview", ""))[:300])
         sys.exit(1)
 
     week_end   = parse_week_end(subject)
