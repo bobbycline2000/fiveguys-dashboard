@@ -210,14 +210,17 @@ def compute_payouts(employees, charged_tips):
     sub-cent delta vs charged_tips — accepted by the skill (4/27 reference: $0.01 over)."""
     non_gm = {n: a for n, a in employees.items()
               if not any(x in n for x in EXCLUDED_NAME_KEYS)}
-    pool = sum(a["reg"] for a in non_gm.values())
+    # Tip pool is divided by TOTAL hours worked (regular + overtime). Regular
+    # hours cap at 40/week, so reg-only would drop every OT hour and shortchange
+    # anyone over 40. Jeff (DM) confirmed 2026-08-03 tips split on reg+OT.
+    pool = sum(a["reg"] + a["ot"] for a in non_gm.values())
     if pool <= 0:
         raise RuntimeError("pool hours = 0 — sanity fail")
     rate = charged_tips / pool
     out = {}
     total_payout = 0.0
     for name, a in non_gm.items():
-        hours = round(a["reg"], 2)
+        hours = round(a["reg"] + a["ot"], 2)
         if hours <= 0: continue
         payout = round(hours * rate, 2)
         if payout <= 0: continue
