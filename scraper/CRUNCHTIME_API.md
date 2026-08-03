@@ -514,6 +514,8 @@ Returns per-invoice GL rows with `glDescription` + `amount`. GL categories seen 
 
 Owner script: `scraper/pull_cogs_supplies.py` — weekly COGS % + Supplies % for the DM Weekly Synopsis (Brad Davis's SharePoint workbook, FG2065 tab). **Caveat:** purchase/delivery-date basis, not P&L COGS basis (Beg Inv + Purchases − End Inv) — week-to-week can swing ±2-4 pts on delivery timing; month totals track much closer.
 
+**Second consumer added 2026-08-03 — `scraper/scrape_cogs.py`.** The dashboard's Food Cost % card (Week/Month/Quarter) had shown "No Recent Data" for 4 straight weeks (07/05–07/26) because its old COGS-% source, `_extract_cogs_pct()` (Playwright DOM navigation to Inventory → Reports → Profit and Loss), reliably returned `None`. Root-caused and fixed by swapping in this same GL-based math via a new `_extract_cogs_pct_via_gl()` function — reuses the live Playwright session's cookies (no separate auth), computes `cogs_dollars / net_sales` for the week/month/last-month windows, gated by the same 5–60% sanity range. Verified live 2026-08-03: week=22.0%, last_month=26.8% (both sane vs the 27.5% goal); month=null (expected — only 2 days into August, purchase-basis needs a delivery in the window). The old DOM-scrape function is kept in the file but deprecated/unused — do not re-wire it.
+
 ---
 
 ## Section 5 — Known constraints / gotchas
