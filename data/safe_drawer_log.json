@@ -945,10 +945,10 @@
     "d1_mid": 200,
     "d2_mid": 200,
     "safe_close": 673,
-    "d1_close": 0,
+    "d1_close": 200,
     "d2_close": 0,
     "ct_os": -97.04,
     "notes": "",
-    "submitted_at": "2026-08-03T01:29:32.290Z"
+    "submitted_at": "2026-08-03T01:29:35.220Z"
   }
 ]
