@@ -2,14 +2,14 @@
   "weekEnding": "08/02/2026",
   "weekStart": "07/27/2026",
   "chargedTips": 644.91,
-  "poolHours": 524.93,
-  "tipsPerHour": 1.2286,
-  "sumPayout": 644.92,
-  "delta": 0.01,
+  "poolHours": 475.94,
+  "tipsPerHour": 1.355,
+  "sumPayout": 644.91,
+  "delta": 0.0,
   "payouts": {
     "Brazell, Elizabeth": {
       "hours": 34.36,
-      "payout": 42.21,
+      "payout": 46.56,
       "employeeId": 1437522,
       "employeeNumber": "E2065349081",
       "positionCode": 1,
@@ -17,7 +17,7 @@
     },
     "Brewer, Kaisha": {
       "hours": 28.15,
-      "payout": 34.58,
+      "payout": 38.14,
       "employeeId": 870073,
       "employeeNumber": "E2065272938",
       "positionCode": 1,
@@ -25,7 +25,7 @@
     },
     "Conder, Christopher": {
       "hours": 21.52,
-      "payout": 26.44,
+      "payout": 29.16,
       "employeeId": 1250570,
       "employeeNumber": "E1954336073",
       "positionCode": 5,
@@ -33,7 +33,7 @@
     },
     "Cureton, Madison": {
       "hours": 40.0,
-      "payout": 49.14,
+      "payout": 54.2,
       "employeeId": 860503,
       "employeeNumber": "E2065266168",
       "positionCode": 5,
@@ -41,7 +41,7 @@
     },
     "Gaskins, Serina": {
       "hours": 25.02,
-      "payout": 30.74,
+      "payout": 33.9,
       "employeeId": 881906,
       "employeeNumber": "E1704280770",
       "positionCode": 1,
@@ -49,7 +49,7 @@
     },
     "Gatewood, Brianna": {
       "hours": 15.01,
-      "payout": 18.44,
+      "payout": 20.34,
       "employeeId": 935123,
       "employeeNumber": "E2065317265",
       "positionCode": 1,
@@ -57,7 +57,7 @@
     },
     "Gonzalez Cardero, Ailen": {
       "hours": 15.05,
-      "payout": 18.49,
+      "payout": 20.39,
       "employeeId": 885532,
       "employeeNumber": "E2065283102",
       "positionCode": 1,
@@ -65,7 +65,7 @@
     },
     "Goodman, Javeh": {
       "hours": 13.72,
-      "payout": 16.86,
+      "payout": 18.59,
       "employeeId": 1449217,
       "employeeNumber": "E2065349921",
       "positionCode": 1,
@@ -73,7 +73,7 @@
     },
     "Henry, Lidy": {
       "hours": 40.0,
-      "payout": 49.14,
+      "payout": 54.2,
       "employeeId": 336368,
       "employeeNumber": "1911737",
       "positionCode": 1,
@@ -81,7 +81,7 @@
     },
     "Johnson, DJuan": {
       "hours": 20.5,
-      "payout": 25.19,
+      "payout": 27.78,
       "employeeId": 931946,
       "employeeNumber": "E2065315095",
       "positionCode": 1,
@@ -89,7 +89,7 @@
     },
     "Kadhim, Rusul": {
       "hours": 36.92,
-      "payout": 45.36,
+      "payout": 50.03,
       "employeeId": 1427929,
       "employeeNumber": "E2065348303",
       "positionCode": 5,
@@ -97,7 +97,7 @@
     },
     "Kamara, Emanuela": {
       "hours": 20.05,
-      "payout": 24.63,
+      "payout": 27.17,
       "employeeId": 1329622,
       "employeeNumber": "E2065340844",
       "positionCode": 1,
@@ -105,7 +105,7 @@
     },
     "Llorente Mejias, Francisco": {
       "hours": 38.76,
-      "payout": 47.62,
+      "payout": 52.52,
       "employeeId": 898843,
       "employeeNumber": "E2065292376",
       "positionCode": 1,
@@ -113,7 +113,7 @@
     },
     "Lucey, Vicki": {
       "hours": 8.34,
-      "payout": 10.25,
+      "payout": 11.3,
       "employeeId": 375652,
       "employeeNumber": "E047592186",
       "positionCode": 5,
@@ -121,7 +121,7 @@
     },
     "Milledge, Mykenize": {
       "hours": 16.05,
-      "payout": 19.72,
+      "payout": 21.75,
       "employeeId": 1295425,
       "employeeNumber": "E2065338962",
       "positionCode": 1,
@@ -129,7 +129,7 @@
     },
     "Muncy Jr, Robert": {
       "hours": 6.98,
-      "payout": 8.58,
+      "payout": 9.46,
       "employeeId": 861813,
       "employeeNumber": "E2065267212",
       "positionCode": 1,
@@ -137,7 +137,7 @@
     },
     "Pirtle, Anthony": {
       "hours": 40.0,
-      "payout": 49.14,
+      "payout": 54.2,
       "employeeId": 1391230,
       "employeeNumber": "E2065345128",
       "positionCode": 5,
@@ -145,23 +145,15 @@
     },
     "Smith, Madelynn": {
       "hours": 25.14,
-      "payout": 30.89,
+      "payout": 34.07,
       "employeeId": 1414222,
       "employeeNumber": "E2065347146",
       "positionCode": 5,
       "positionName": "Shift Leader-Hourly"
     },
-    "Uebelacker-Maddox, Heather": {
-      "hours": 48.99,
-      "payout": 60.19,
-      "employeeId": 1460321,
-      "employeeNumber": "E2079350745",
-      "positionCode": 11,
-      "positionName": "1. Manager Schedule"
-    },
     "Whitten, Zack": {
       "hours": 30.37,
-      "payout": 37.31,
+      "payout": 41.15,
       "employeeId": 1369917,
       "employeeNumber": "E2065343318",
       "positionCode": 1,
