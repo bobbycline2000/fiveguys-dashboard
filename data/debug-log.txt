@@ -16,3 +16,19 @@
   - sales.per_guest=$5.36 from latest.json NOT found in dashboard.html.
   Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
   If fields are missing, a class name or label may have changed in dashboard.html.
+
+[2026-08-03 06:24:50] Dashboard freshness check FAILED
+  - sales.per_guest=$5.36 from latest.json NOT found in dashboard.html.
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
+
+[2026-08-03 06:25:09] Dashboard freshness check FAILED
+  - sales.per_guest=$5.36 from latest.json NOT found in dashboard.html.
+  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
+  If fields are missing, a class name or label may have changed in dashboard.html.
+
+[2026-08-03 06:35:00] watchdog: FIXED verify_dashboard.py false-positive. Check 2 (sales.per_guest) demanded the exact $X.XX string in dashboard.html, but wire_dashboard.py:346 deliberately renders per_guest as "—" whenever CrunchTime report_date is >1 day behind (normal morning posting lag). Result: every pre-8:05 run wrote a bogus "DASHBOARD STALE" entry here. verify now mirrors wire's _ct_stale rule and skips check 2 when CT is stale. Verify exits 0.
+
+[2026-08-03 06:35:00] watchdog: SANITY-CHECK NEEDED on new Food Cost % path. scrape_cogs.py was repointed to the GL/purchases API today and wrote data/cogs_variance.json cogs_pct_week=22.0 at 06:17 — first non-null value in 4 weeks, so the card is live again. BUT 22.0% is well under the 27.5% goal and below the range 2065 normally runs. Bobby: eyeball 22.0% against the P&L before trusting it — a brand-new calc path landing an unusually favorable number on run #1 is worth one look. If it's wrong the GL query is likely missing a cost category.
+
+[2026-08-03 06:35:00] watchdog: OPEN - new cogs_variance.json snapshot has week_end=None and generated=None. Because those are null, data/food_cost_plan.json cogs_pct_week stays null and wire reports MISS on "Food Cost Week variance-to-goal" + "Food Cost Last Mo variance-to-goal". FIX: have scrape_cogs.py stamp week_end/generated on the snapshot it writes, then re-run the food cost plan builder.

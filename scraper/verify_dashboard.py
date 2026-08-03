@@ -114,8 +114,20 @@ def main():
         )
 
     # Check 2: the scraped sales.per_guest appears (CrunchTime is always the source).
+    # Mirror wire_dashboard.py's staleness rule: when CrunchTime's report_date is
+    # more than 1 day behind today, wire deliberately renders per_guest as "—"
+    # (Par Brink is authoritative for sales; CT LY/Forecast/WTD fields go blank).
+    # Without this guard the check fails every morning during normal CT posting
+    # lag and writes a false "DASHBOARD STALE" entry into debug-log.txt.
+    _ct_stale = False
+    if ct_report_date:
+        try:
+            _ct_stale = (date.today() - date.fromisoformat(ct_report_date)).days > 1
+        except (ValueError, TypeError):
+            pass
+
     per_guest = data.get("sales", {}).get("per_guest")
-    if per_guest is not None:
+    if per_guest is not None and not _ct_stale:
         needle = f"${per_guest:.2f}"
         if needle not in html:
             failures.append(
