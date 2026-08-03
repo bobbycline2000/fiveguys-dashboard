@@ -551,3 +551,38 @@ Body: array of one row object. `swId:12292`, amount in `swLumpSumVal` (NOT the d
 UI fallback: disk-save icon (top-right of Labor Detail) → "Labor Adjustments Alert" → Continue.
 
 **No delete:** the Supplemental Wages grid has no row-delete (no trash icon, no right-click menu, no Delete key). To remove an unwanted row, upsert it to `swLumpSumVal:0` (a $0 row pays nothing). `pos`/`swId` for Credit Card Tip = 12292 (global SW type id, verified 2026-05-04).
+
+---
+
+## Consolidated Sales Entry Summary — Charged Tips source-of-truth (reverse-engineered 2026-08-03)
+
+`api_enter_tips.py` currently pulls Charged Tips from `registerSales/summary`'s `chargedTips` field (Section 1.5 "Register Sales Summary" above). The `crunchtime-enter-tips.md` skill's Step 1 says the DM's authoritative number instead comes from the UI report **Consolidated Sales Entry Summary** (top Search bar → type the name → set From/To + Hierarchy → Retrieve → read the KY-2065 row's Charged Tips column). This section documents the API behind that report.
+
+**Endpoint:**
+```
+POST /resource/salesentrysummary/consolidated?_dc=<ms>
+body: {
+  "extraCriteriaMap": {
+    "startDate": "MM/DD/YYYY",   // Monday of the week
+    "endDate":   "MM/DD/YYYY",   // Sunday of the week
+    "hierarchyId": 18380,         // "New Gator Subs-3-GM30 (Dixie Highway)" = KY-2065
+    "locationId": 13969,          // KY-2065-Dixie Highway
+    "isConsolidated": true
+  },
+  "pagingInfo": {"page": 1, "start": 0, "limit": 75}
+}
+```
+Response: `{"rows":[{"locationCode":"2065","locationName":"KY-2065-Dixie Highway","net":<net sales>,"tips":<CHARGED TIPS>,"taxExempt","gifts","overrings","voidsAmount","voidsQty","morningCount","middayCount","endCount","avgTrans",...}], "totalSummary":[...same shape...], "total":1}`. The `tips` field is Charged Tips.
+
+`hierarchyId=18380` = the `hierarchyDetailId` for "New Gator Subs-3-GM30 (Dixie Highway)", confirmed via `GET /resource/hierarchy/display` (walk the tree for `hierarchyDisplay` matching the target store's GM node). Hardcoded for KY-2065; stable unless CT restructures the hierarchy.
+
+Discovery path (no direct hash route exists — `hasHandler:false` on this menuitem in `ct_menu_inventory.json`, so it can't be SPA-hash-routed like `enter_tips_browser.py` does for Labor Detail): drove the top Search bar → typed "Consolidated Sales Entry Summary" → clicked the result (lands on `.../ncext/index.ct#salesMenu~consolidatedSalesEntrySummary?parentModule=salesMenu` — note this is an `index.ct` hash, but reached via in-app client-side routing from a search click, NOT `page.goto`, so the "don't navigate to index.ct" rule (Section 5) doesn't apply here — session stayed alive) → filled From/To date inputs → opened the Hierarchy combo and clicked the GM30 (Dixie Highway) row → clicked Retrieve → captured the POST via `page.on('response')`.
+
+**Verified working function:** `scraper/sales_entry_summary.py` — `pull_charged_tips_sales_entry(jar, mon, sun)`. Run standalone: `python scraper/sales_entry_summary.py MM/DD/YYYY` (Sunday week-end date).
+
+**⚠ OPEN DISCREPANCY (2026-08-03) — endpoint verified correct, but does NOT currently reproduce the DM's remembered $693.38 for WE 08/02/2026.** Drove this exact endpoint (and its non-consolidated sibling report, "Sales Entry Summary" — same UI flow, no hierarchy filter, per-register/per-day rows) for Mon 07/27→Sun 08/02: **both return Charged Tips = $644.91**, identical to `registerSales/summary`. Screenshot-confirmed against the live UI during discovery (debug screenshots not retained — see repro steps above to re-capture) — this is what a human doing the exact Step-1 click sequence would see right now, not a wrong-endpoint artifact. Also ruled out:
+- Sun–Sat week instead of Mon–Sun (07/26–08/01): $633.30
+- Extending the window (07/26–08/02): $730.12, (07/28–08/03): $595.87
+- Per-day `registerSales/summary` rows for Mon–Sun sum to exactly $644.91 (49.04+95.84+94.02+96.14+92.74+120.31+96.82) — self-consistent with the report, just not with $693.38.
+
+None of the 6+ date/report variants tried land on $693.38. Two most likely explanations, neither confirmable without a human back in the live UI: (1) CT data for this week changed between the DM's Monday-morning pull and this 2026-08-03 session (a manager correction, void, or late-settling register batch lowered the total) — this system does have known EOD-batch lag elsewhere (Bank Deposits, Section 1.5), or (2) the $693.38 figure was mis-transcribed/misremembered. **Before wiring this into `api_enter_tips.py`, re-pull close to next Monday's tip-entry cutoff and diff against what the DM sees live on screen that morning — if it still disagrees, this needs Bobby/DM eyes-on, not more endpoint guessing.**
