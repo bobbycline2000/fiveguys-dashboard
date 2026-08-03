@@ -52,6 +52,18 @@ def load_latest(source, report):
 
 # ── data ────────────────────────────────────────────────────────────────
 latest, _ = load_latest("crunchtime", "perf_metrics.json")
+# A raw crunchtime pull can be a same-day "(cached)" fallback the scraper wrote
+# when CT had no real data yet for that dated folder — its report_date can be
+# DAYS behind the folder name itself (confirmed 2026-08-03: folder 2026-08-02
+# contained report_date 2026-07-31 "(cached)"). Trusting the folder name over
+# the content silently regressed the date-chip/labor card past data/latest.json,
+# which already held a genuinely fresher (non-cached) pull. Skip cached content
+# and fall back to data/latest.json instead of wiring in stale numbers.
+if latest is not None and str(latest.get("meta", {}).get("generated", "")).strip().endswith("(cached)"):
+    print(f"  [CT-CACHED-SKIP] crunchtime perf_metrics.json report_date="
+          f"{latest.get('meta', {}).get('report_date')} is a stale (cached) fallback "
+          f"— using data/latest.json instead")
+    latest = None
 if latest is None:
     latest = load("data/latest.json")
 

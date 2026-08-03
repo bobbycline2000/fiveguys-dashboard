@@ -27,6 +27,7 @@ import os, sys, json, re, asyncio, logging
 from datetime import datetime, timedelta, timezone, date
 from pathlib import Path
 
+import requests
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -372,8 +373,121 @@ async def _set_date_range_and_retrieve(page, start_date: str, end_date: str) -> 
         return False
 
 
+GL_URL    = f"{NETCHEF_BASE}/resource/purchasesbygl/location/details"
+SALES_URL = f"{NETCHEF_BASE}/resource/sales/sales/registerSales/summary"
+COGS_GL_CATEGORIES = {"Food", "Bread", "Shakes", "Beverage"}
+
+
+async def _extract_cogs_pct_via_gl(ctx, start_date: date, end_date: date, label: str = "") -> float | None:
+    """
+    PRIMARY path (added 2026-08-03) — compute COGS % via the Purchases-by-GL
+    + Register Sales Summary APIs instead of the Playwright P&L page-scrape.
+
+    Root cause fixed here: `_extract_cogs_pct()` below (the P&L DOM navigation)
+    returned None for FOUR straight weeks (07/05, 07/12, 07/19, 07/26) — see
+    handoffs 2026-07-13 through 2026-07-28-dashboard-blocked-fpct-fgu.md. The
+    P&L "Period"-free date-range report is fragile to navigate/parse reliably.
+
+    `/resource/purchasesbygl/location/details` is a proven, pure-cookie-replay
+    API (confirmed working 2026-07-06, already production for the DM Weekly
+    Synopsis via pull_cogs_supplies.py — see CRUNCHTIME_API.md §1.6b). This
+    reuses that same, already-verified math inside the live Playwright session
+    (extracts cookies from the browser context — no separate auth needed).
+
+    CAVEAT (same as pull_cogs_supplies.py): purchase/delivery-date basis, not
+    the P&L's Beg Inv + Purchases − End Inv COGS-sold basis. Can swing
+    +/-2-4 points week-to-week vs the true P&L number on delivery timing;
+    month/quarter windows track much closer. This is a real, always-available
+    number vs. "No Recent Data" — flagged via meta.cogs_basis on the output.
+    """
+    try:
+        cookies = await ctx.cookies()
+        jar = {c["name"]: c["value"] for c in cookies}
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+            "X-Requested-With": "XMLHttpRequest",
+            "Origin": NETCHEF_BASE,
+            "Referer": f"{NETCHEF_BASE}/ncext/modern.ct",
+        }
+        start_ct = _ct_date_str(start_date)
+        end_ct   = _ct_date_str(end_date)
+
+        gl_body = {
+            "extraCriteriaMap": {
+                "startDate": start_ct, "endDate": end_ct,
+                "locationId": 13969, "hierarchyId": None, "isConsolidated": False,
+            },
+            "pagingInfo": {"page": 1, "start": 0, "limit": 2000},
+        }
+        r = requests.post(GL_URL, json=gl_body, cookies=jar, headers=headers, timeout=30)
+        r.raise_for_status()
+        gdata = r.json()
+        gl_rows = gdata if isinstance(gdata, list) else gdata.get("rows", gdata.get("contentMap", {}).get("rows", []))
+
+        # registerSales/summary silently ignores gte/lte — query day-before/after
+        # and trim exact dates in Python (confirmed 2026-07-06).
+        day_before = (start_date - timedelta(days=1)).strftime("%m/%d/%Y")
+        day_after  = (end_date + timedelta(days=1)).strftime("%m/%d/%Y")
+        sales_body = {
+            "page": 1, "start": 0, "limit": 500,
+            "extraFilter": [
+                {"type": "date", "value": day_before, "field": "salesDate", "comparison": "gt"},
+                {"type": "date", "value": day_after,  "field": "salesDate", "comparison": "lt"},
+            ],
+        }
+        r2 = requests.post(SALES_URL, json=sales_body, cookies=jar, headers=headers, timeout=30)
+        r2.raise_for_status()
+        sdata = r2.json()
+        srows = sdata if isinstance(sdata, list) else sdata.get("rows", sdata.get("contentMap", {}).get("rows", []))
+
+        net_sales, counted = 0.0, 0
+        for row in srows:
+            sd_str = row.get("salesDate", "")
+            try:
+                sd = datetime.strptime(sd_str.split(" ")[0], "%m/%d/%Y").date()
+            except ValueError:
+                continue
+            if not (start_date <= sd <= end_date):
+                continue
+            val = row.get("totTotalNetSales")
+            if val is not None:
+                try:
+                    net_sales += float(val)
+                    counted += 1
+                except (ValueError, TypeError):
+                    pass
+
+        if not counted or net_sales <= 0:
+            log.warning(f"[{label}] GL/sales pull returned no usable net sales for {start_ct}-{end_ct}")
+            return None
+
+        cogs_dollars = sum(
+            float(row.get("amount") or 0)
+            for row in gl_rows
+            if (row.get("glDescription") or "").strip() in COGS_GL_CATEGORIES
+        )
+        pct = round(100 * cogs_dollars / net_sales, 1)
+        if 5.0 <= pct <= 60.0:
+            log.info(f"[{label}] COGS % (GL/purchases basis) = {pct}%  "
+                     f"(net_sales=${net_sales:,.2f}, cogs=${cogs_dollars:,.2f})")
+            return pct
+        log.warning(f"[{label}] GL-derived COGS % out of sane range: {pct}")
+        return None
+    except Exception as e:
+        log.warning(f"[{label}] GL-based COGS pull error: {e}")
+        return None
+
+
 async def _extract_cogs_pct(page, start_date: str, end_date: str, label: str = "") -> float | None:
     """
+    DEPRECATED as of 2026-08-03 — no longer called from run(). Kept only as a
+    documented fallback if the GL-based path (`_extract_cogs_pct_via_gl` above)
+    ever breaks. This DOM-scrape returned None for 4 straight weeks (07/05
+    through 07/26) and is the confirmed root cause of the Food Cost % card
+    showing "No Recent Data". Do not re-wire this without a real fix to the
+    P&L sidebar navigation/parsing — it was never reliable.
+
     Navigate to Inventory → Reports → Profit and Loss, set the date range,
     click Retrieve, and extract the COGS % (Food line or Supplies+COGS sum).
     Same report every time — just different date ranges.
@@ -505,19 +619,12 @@ async def run():
         variance_week_start, variance_week_end = week_start, week_end
         fc_start, fc_end = _last_week_mon_sun(today)
         week_start, week_end = fc_start, fc_end
-        week_s  = _ct_date_str(fc_start)
-        week_e  = _ct_date_str(fc_end)
         log.info(f"Food-cost week (Mon–Sun) = {fc_start} → {fc_end}; "
                  f"variance items week = {variance_week_start} → {variance_week_end}")
-        month_s = _ct_date_str(periods["month_start"])
-        through = _ct_date_str(periods["through"])
 
-        last_mo_s = _ct_date_str(periods["last_month_start"])
-        last_mo_e = _ct_date_str(periods["last_month_end"])
-
-        cogs_pct_week     = await _extract_cogs_pct(page, week_s,   week_e,   "week")
-        cogs_pct_month    = await _extract_cogs_pct(page, month_s,  through,  "month")
-        cogs_pct_last_mo  = await _extract_cogs_pct(page, last_mo_s, last_mo_e, "last_mo")
+        cogs_pct_week     = await _extract_cogs_pct_via_gl(ctx, fc_start, fc_end, "week")
+        cogs_pct_month    = await _extract_cogs_pct_via_gl(ctx, periods["month_start"], periods["through"], "month")
+        cogs_pct_last_mo  = await _extract_cogs_pct_via_gl(ctx, periods["last_month_start"], periods["last_month_end"], "last_mo")
 
         await browser.close()
 
@@ -527,7 +634,8 @@ async def run():
     now = datetime.now(tz=ET)
     out = {
         "meta": {
-            "source": "CrunchTime Net Chef — P&L Actual vs. Theoretical Cost report",
+            "source": "CrunchTime Net Chef — purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
+            "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
             "category": "Food",
             "store": STORE_ID,
             "week_start":    week_start.strftime("%Y-%m-%d"),
@@ -539,7 +647,7 @@ async def run():
             "last_month_end":   periods["last_month_end"].strftime("%Y-%m-%d"),
             "through":          periods["through"].strftime("%Y-%m-%d"),
             "pulled":        now.strftime("%Y-%m-%d %H:%M ET"),
-            "method":        "api+playwright",
+            "method":        "api+playwright (GL-based, 2026-08-03)",
         },
         "cogs_goal_pct":           COGS_GOAL_PCT,
         "cogs_pct_week":           cogs_pct_week,
