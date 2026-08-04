@@ -633,28 +633,16 @@ rep(r'(<div class="ctrl-card food-cost">.*?<div class="ctrl-flag"><i data-lucide
     "Food Cost goal flag",
     flags=DOTALL)
 
-# ── Food Cost period variance-to-goal boxes (Week / Month / QTD) ───────
-def _vtg_str(cogs_data, key):
-    val = cogs_data.get(key) if cogs_data else None
-    if val is not None:
-        return f"{float(val):+.1f}%"
-    # Fall back to computing from raw pct if pre-computed key missing
-    pct_key = key.replace("variance_to_goal_", "cogs_pct_")
-    pct = cogs_data.get(pct_key) if cogs_data else None
-    return f"{float(pct) - FOOD_COST_GOAL:+.1f}%" if pct is not None else None
-
-if cogs:
-    for period_lbl, vtg_key in [("Week",    "variance_to_goal_week"),
-                                  ("Month",   "variance_to_goal_month"),
-                                  ("Last Mo", "variance_to_goal_last_mo")]:
-        vtg_str = _vtg_str(cogs, vtg_key)
-        if vtg_str:
-            rep(
-                rf'(<div class="ctrl-card food-cost">.*?<div class="period-var">.*?<div class="period-val">)[^<]*(</div>\s*<div class="period-lbl">{period_lbl}</div>)',
-                rf'\g<1>{vtg_str}\g<2>',
-                f"Food Cost {period_lbl} variance-to-goal",
-                flags=DOTALL,
-            )
+# NOTE (2026-08-04, dashboard-watchdog): the old "Food Cost period
+# variance-to-goal boxes (Week / Month / QTD)" block that lived here was
+# retired. It targeted <div class="period-lbl">Week</div> / Month / Last Mo
+# — a card structure that no longer exists anywhere in dashboard.html (or
+# district.html/synopsis.html). Commit 1edc6441 renamed QTD->Last Mo here
+# but the card itself had already moved on to "Food Cost % Week/Month/
+# Quarter" labels, wired correctly below (see fc_wmq_week/month/quarter,
+# ~line 552) via a separate, working code path fed by
+# _load_cogs_snapshots()/_weighted_avg_cogs(). This block never matched
+# and only produced daily [MISS] noise — removed rather than re-patched.
 
 # ── Food Cost top-3 variance items (if cogs data) ──────────────────────
 if cogs and cogs.get("items"):
