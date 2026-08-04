@@ -962,10 +962,10 @@
     "d1_mid": 200,
     "d2_mid": 200,
     "safe_close": 673,
-    "d1_close": 673,
+    "d1_close": 200,
     "d2_close": 673,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-08-04T02:54:08.355Z"
+    "submitted_at": "2026-08-04T02:54:14.206Z"
   }
 ]
