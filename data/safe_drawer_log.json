@@ -992,7 +992,7 @@
     "safe_open": 673,
     "d1_open": 200,
     "d2_open": 200,
-    "safe_mid": 0,
+    "safe_mid": 673,
     "d1_mid": 0,
     "d2_mid": 0,
     "safe_close": 0,
@@ -1000,6 +1000,6 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-08-05T14:28:34.712Z"
+    "submitted_at": "2026-08-05T19:25:10.641Z"
   }
 ]
