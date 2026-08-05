@@ -11,8 +11,8 @@
     "month_start": "2026-08-01",
     "last_month_start": "2026-07-01",
     "last_month_end": "2026-07-31",
-    "through": "2026-08-03",
-    "pulled": "2026-08-04 07:46 ET",
+    "through": "2026-08-04",
+    "pulled": "2026-08-05 07:25 ET",
     "method": "api+playwright (GL-based, 2026-08-03)"
   },
   "cogs_goal_pct": 27.5,
@@ -24,12 +24,92 @@
   "variance_to_goal_last_mo": -0.7,
   "items": [
     {
+      "name": "Cheeseburger",
+      "actual": 1940.0,
+      "theoretical": 446.0,
+      "over_dollars": 1494.0,
+      "variance_pct": null,
+      "rank": 1
+    },
+    {
+      "name": "Bacon Cheeseburger",
+      "actual": 1341.0,
+      "theoretical": 313.0,
+      "over_dollars": 1028.0,
+      "variance_pct": null,
+      "rank": 2
+    },
+    {
+      "name": "Little Cheeseburger",
+      "actual": 746.0,
+      "theoretical": 141.0,
+      "over_dollars": 605.0,
+      "variance_pct": null,
+      "rank": 3
+    },
+    {
+      "name": "Little Fry",
+      "actual": 637.0,
+      "theoretical": 127.0,
+      "over_dollars": 510.0,
+      "variance_pct": null,
+      "rank": 4
+    },
+    {
+      "name": "Little Bacon Cheeseburger",
+      "actual": 566.0,
+      "theoretical": 113.0,
+      "over_dollars": 453.0,
+      "variance_pct": null,
+      "rank": 5
+    },
+    {
+      "name": "Milkshake",
+      "actual": 393.0,
+      "theoretical": 72.0,
+      "over_dollars": 321.0,
+      "variance_pct": null,
+      "rank": 6
+    },
+    {
+      "name": "Patty Melt",
+      "actual": 374.0,
+      "theoretical": 75.0,
+      "over_dollars": 299.0,
+      "variance_pct": null,
+      "rank": 7
+    },
+    {
+      "name": "Regular Fry",
+      "actual": 376.0,
+      "theoretical": 91.0,
+      "over_dollars": 285.0,
+      "variance_pct": null,
+      "rank": 8
+    },
+    {
+      "name": "Little Cajun Fry",
+      "actual": 329.0,
+      "theoretical": 73.0,
+      "over_dollars": 256.0,
+      "variance_pct": null,
+      "rank": 9
+    },
+    {
+      "name": "Large Fry",
+      "actual": 325.0,
+      "theoretical": 86.0,
+      "over_dollars": 239.0,
+      "variance_pct": null,
+      "rank": 10
+    },
+    {
       "name": "Cajun Season",
       "actual": 60.0,
       "theoretical": 30.0,
       "over_dollars": 30.0,
       "variance_pct": -101.0,
-      "rank": 1
+      "rank": 11
     },
     {
       "name": "Bun, Burger",
@@ -37,7 +117,7 @@
       "theoretical": 301.0,
       "over_dollars": 21.0,
       "variance_pct": -7.0,
-      "rank": 2
+      "rank": 12
     },
     {
       "name": "Tomatoes, Fresh",
@@ -45,7 +125,7 @@
       "theoretical": 42.0,
       "over_dollars": 15.0,
       "variance_pct": -37.0,
-      "rank": 3
+      "rank": 13
     },
     {
       "name": "Topping, Peanut Butter Cup",
@@ -53,7 +133,7 @@
       "theoretical": 4.0,
       "over_dollars": 12.0,
       "variance_pct": -300.0,
-      "rank": 4
+      "rank": 14
     },
     {
       "name": "Cheese",
@@ -61,7 +141,7 @@
       "theoretical": 101.0,
       "over_dollars": 11.0,
       "variance_pct": -10.0,
-      "rank": 5
+      "rank": 15
     },
     {
       "name": "Jalapeno Peppers",
@@ -69,7 +149,7 @@
       "theoretical": 3.0,
       "over_dollars": 11.0,
       "variance_pct": -294.0,
-      "rank": 6
+      "rank": 16
     },
     {
       "name": "Mayonnaise",
@@ -77,7 +157,7 @@
       "theoretical": 23.0,
       "over_dollars": -9.0,
       "variance_pct": 42.0,
-      "rank": 7
+      "rank": 17
     },
     {
       "name": "Peanut Butter inv",
@@ -85,7 +165,7 @@
       "theoretical": 3.0,
       "over_dollars": -10.0,
       "variance_pct": 370.0,
-      "rank": 8
+      "rank": 18
     },
     {
       "name": "Green Peppers, Fresh",
@@ -93,7 +173,7 @@
       "theoretical": 6.0,
       "over_dollars": -12.0,
       "variance_pct": 216.0,
-      "rank": 9
+      "rank": 19
     },
     {
       "name": "Shake Mix",
@@ -101,7 +181,7 @@
       "theoretical": 83.0,
       "over_dollars": -31.0,
       "variance_pct": 38.0,
-      "rank": 10
+      "rank": 20
     }
   ],
   "ranking": "over_dollars_desc"
