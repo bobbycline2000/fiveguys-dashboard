@@ -1,3 +1,1 @@
-[2026-08-06 07:30:18] shop-email: 100% shop 20872132 (2026-08-01 Dinner) — draft email at /home/runner/work/fiveguys-dashboard/fiveguys-dashboard/data/drafts/secret-shop-email-20872132.md. Send to secretshop@estep-co.com CC chess@estep-co.com. Review before sending.
-[2026-08-06 07:30:18] shop-email: 100% shop 20866691 (2026-07-31 Lunch) — draft email at /home/runner/work/fiveguys-dashboard/fiveguys-dashboard/data/drafts/secret-shop-email-20866691.md. Send to secretshop@estep-co.com CC chess@estep-co.com. Review before sending.
-[2026-08-06 11:30:20] outlook-daily-pull-7am: no actionable work emails after filtering
+[2026-08-06 11:49:27] outlook-daily-pull-7am: no actionable work emails after filtering
