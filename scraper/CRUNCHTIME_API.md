@@ -514,6 +514,26 @@ Returns per-invoice GL rows with `glDescription` + `amount`. GL categories seen 
 
 Owner script: `scraper/pull_cogs_supplies.py` — weekly COGS % + Supplies % for the DM Weekly Synopsis (Brad Davis's SharePoint workbook, FG2065 tab). **Caveat:** purchase/delivery-date basis, not P&L COGS basis (Beg Inv + Purchases − End Inv) — week-to-week can swing ±2-4 pts on delivery timing; month totals track much closer.
 
+### 1.6c Inventory Setup — Sequence (count sheet / GL storage-location item order) — DISCOVERED 2026-08-07 (read-only feasibility pass)
+
+Screen: **Inventory Setup > Sequence tab** (reached via top Search bar → "Inventory Setup" → "Sequence" toggle button, top-right; sibling tab is "Labels"). Loads for Bobby's login with no permission error — plain grid, filtered by a required **Storage Location** dropdown.
+
+This is the screen that controls the row order on printed inventory count sheets. Columns confirmed live: `Sequence, Product Number, Product Name, Storage Location, Storage Type, Include on Count Sheet, Inventory Unit, On Hand, Alt Unit 1/2/3 (Unit, Display)`.
+
+**Storage Locations = the GL/category buckets for KY-2065** (`POST /resource/inventorysetup/initialdata` → `contentMap.storages[]`): Chef Base, Chemical and Cleaning Supplies, COGS: BIB, COGS: Dry Storage Food, COGS: Dunnage Racks, COGS: Freestyle, COGS: Paper, COGS: Walk-In Cooler, Dressing Station, Freestyle Left, Freestyle Right, Front Counter, Non COGS Paper, Unassigned (14 total, each `{storageId, storageName, centralStorageFlag}`). This list came back in what looks like plain alphabetical order — no separate "storage sequence" field was found on the storage-location objects themselves (only products carry a sequence number). **The order of the GL/category *sections* on the sheet was not confirmed as independently configurable in this pass** — only the order of *items within* a section.
+
+Item-level ordering — confirmed via `POST /resource/inventorysetup/products` (body `{"extraCriteriaMap":{"storageId":<id>},"pagingInfo":{...}}`), e.g. storageId 39538 "COGS: Walk-In Cooler" returned rows like:
+```json
+{"productSequence": 1.0, "productNumber": "P00001", "productName": "Bacon, Raw Sliced", "productCategory": "Food COGS", "storageId": 39538, "storageName": "COGS: Walk-In Cooler", ...}
+```
+`productSequence` is a per-product, per-storage-location float (1.0, 2.0, 3.0…) — this is the field that determines the order products print on the count sheet within their GL/storage section, and it lives on the item master (location-scoped, NOT a per-user preference — confirmed separately, see below).
+
+Column widths/visibility for the grid itself are a **different, per-user** config: `GET /resource/layout/configuration/inventorysetupgrid` returns `{"widgetName":"inventorysetupgrid","userId":10018327,"columns":[{"columnName":"productSequence","columnIndex":0,...}, ...]}` — keyed by `userId`, this is just which columns show/how wide, not the sequence value itself.
+
+**No save/write endpoint was captured** — this pass was read-only by design (Bobby asked for a feasibility check, not a change). A `/resource/inventorysetup/...save` (or similar) POST almost certainly exists given every other editable NetChef grid in this doc follows that `/save` convention (Bank Deposits, Supplemental Wages), but it wasn't fired/observed here.
+
+**Order guide / Create Vendor Order (truck order) — NOT independently confirmed.** `GET /resource/purchasing/vendororder/create/data` only returns date-picker metadata (`selectedDate`, `minDate`, `maxDate`, `includeConsumption`) before a vendor is picked; the actual item-list grid only loads after selecting a Vendor + clicking Continue in the wizard, which was not driven in this pass (risk of creating a draft order row — out of scope for a read-only feasibility check). CrunchTime's standard architecture shares one item master across count sheets and purchasing screens, so it's likely the vendor-order item grid also sorts by `productSequence` (or a similar per-vendor sequence field) — but this is an inference, not a verified fact. Confirming it is a 5-minute follow-up: pick a vendor, Continue, capture the resulting POST body/response, check for a sequence field.
+
 **Second consumer added 2026-08-03 — `scraper/scrape_cogs.py`.** The dashboard's Food Cost % card (Week/Month/Quarter) had shown "No Recent Data" for 4 straight weeks (07/05–07/26) because its old COGS-% source, `_extract_cogs_pct()` (Playwright DOM navigation to Inventory → Reports → Profit and Loss), reliably returned `None`. Root-caused and fixed by swapping in this same GL-based math via a new `_extract_cogs_pct_via_gl()` function — reuses the live Playwright session's cookies (no separate auth), computes `cogs_dollars / net_sales` for the week/month/last-month windows, gated by the same 5–60% sanity range. Verified live 2026-08-03: week=22.0%, last_month=26.8% (both sane vs the 27.5% goal); month=null (expected — only 2 days into August, purchase-basis needs a delivery in the window). The old DOM-scrape function is kept in the file but deprecated/unused — do not re-wire it.
 
 ---
