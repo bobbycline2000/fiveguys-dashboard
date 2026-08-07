@@ -1,55 +1,41 @@
 {
-  "date": "2026-08-04",
-  "new_count": 7,
+  "date": "2026-08-07",
+  "new_count": 5,
   "notes": [
     {
-      "from": "Jeff Reiss",
-      "role": "dm",
-      "role_label": "District Manager",
-      "time": "8/2 9:47 PM",
-      "body": "Site visit report — Sunday Aug 2, 2:00 PM. MOD Madison Cureton. Crew worked diligently, quality and standards upheld. Punch list: expired coffee bottle in the walk-in, debris in line garbage cans, patty press cracked, grease on the hood, ice bucket stored wrong end up, mop sink debris, lobby/bathroom intake vents dusty, ceiling dripping in the lobby. Open signs were not illuminated on arrival. Lobby floor littered, tables needed cleaning. Strings on the potato bags. Guests were not greeted after shift change — 2nd shift managers were recently certified and need to understand why it matters. Label all produce cases with the discard date. Crew member on the register was on his phone; MOD handled it professionally."
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "Aug 6, 6:32 PM",
+      "body": "L3 milkshake complaint (Case #5NZYD2) handed to Bobby: \"this was an in store purchase. Could you please reach out to the guest for resolve, ensure fresh bananas, and close the case when complete? It is still open on Marketforce.\""
     },
     {
       "from": "Brad Davis",
       "role": "director",
       "role_label": "Director of Operations",
-      "time": "8/2 4:31 PM",
-      "body": "August 2026 FG Daily Report is shared. 'Shout out to New Albany +33% VS LY Sales in July - Great Job Matthew!' Open the 2065 Dixie sheet and scroll to the bottom for the August sales budget."
+      "time": "Aug 6, 1:41 PM",
+      "body": "\"Excellent job resulting in +30% in Sales VS LY!\""
+    },
+    {
+      "from": "Crystal Hess",
+      "role": "dm",
+      "role_label": "District Manager (West Side)",
+      "time": "Aug 6, 1:30 PM",
+      "body": "Company-wide recognition for New Albany #384 (Matthew Valladares) — double 100% shops two weeks running. \"Success like this does not happen by accident.\""
+    },
+    {
+      "from": "Five Guys Announcements",
+      "role": "alert",
+      "role_label": "Corporate",
+      "time": "Aug 6, 1:56 PM",
+      "body": "Universal Service Desk (USD) launched — single point of contact for all in-store tech/equipment support (POS, Verifone, kiosks, menu boards, Mood Media, ComplianceMate, network). Support line 888-411-0083, portal FiveGuysHelp.Zendesk.com."
     },
     {
       "from": "FoodLogiQ",
       "role": "alert",
-      "role_label": "Alert",
-      "time": "8/3 7:08 PM",
-      "body": "Incident 26-19263 (Produce — Lettuce, 08/01/2026 1:18 PM) returned to the store for further review. Four reminders since 8/1. Log in, add quantity affected + photos to the PIF, and submit."
-    },
-    {
-      "from": "Five Guys Corporate",
-      "role": "alert",
-      "role_label": "Alert",
-      "time": "8/3 2:43 PM",
-      "body": "Dog Days of Summer runs today through Friday (Aug 4–7). $25+ DELIVERY order via the app or website gets a free hot dog. Delivery-only. Our delivery has been OFF since 7/19 — confirm status with Jeff and Brad, and give every MOD an answer for guests who ask."
-    },
-    {
-      "from": "ComplianceMate Support",
-      "role": "alert",
-      "role_label": "Alert",
-      "time": "8/2 1:01 PM",
-      "body": "No response in 4 days on the 'Internet connection issues' ticket — auto-closes in 4 more days. That ticket is the paper trail behind delivery being off. Reply today to keep it open."
-    },
-    {
-      "from": "CrunchTime",
-      "role": "alert",
-      "role_label": "Task Alert",
-      "time": "8/4 6:36 AM",
-      "body": "Open KY-2065 tasks: Sales-POS (8/3), L-Rev (8/3), Mmix (8/3), VO-Rec BOSS Alpha–Ohio Valley (8/3), VO-Inv Performance Fdsvce (8/4). Close them the day they land."
-    },
-    {
-      "from": "Estep/Ops",
-      "role": "accounting",
-      "role_label": "Cash",
-      "time": "carryover",
-      "body": "7/17 deposit still not entered — $433.90 book cash showing O/S short in CrunchTime. Aug 1–3 deposits all clean ($0.00 O/S)."
+      "role_label": "Food Safety",
+      "time": "Aug 6, 7:39 PM",
+      "body": "Incident 26-19263 (Produce - Lettuce) returned to store for more info. SEVEN reminders now. Add quantity affected + photos and submit."
     }
   ]
 }
