@@ -1,13 +1,19 @@
 {
-  "date": "2026-08-03",
+  "date": "2026-08-08",
   "location_id": "18170",
-  "list_count": 12,
-  "overall_required_pct": 10,
-  "overall_all_pct": 10,
+  "list_count": 14,
+  "overall_required_pct": 15,
+  "overall_all_pct": 15,
   "lists": [
     {
       "name": "11AM: Time and Temp",
       "list_id": "189006",
+      "required_pct": 100,
+      "all_pct": 100
+    },
+    {
+      "name": "1PM: Time and Temp",
+      "list_id": "199718",
       "required_pct": 0,
       "all_pct": 0
     },
@@ -16,6 +22,12 @@
       "list_id": "220881",
       "required_pct": 100,
       "all_pct": 100
+    },
+    {
+      "name": "PM Pre-Shift Check",
+      "list_id": "254617",
+      "required_pct": 0,
+      "all_pct": 0
     },
     {
       "name": "Pre Open",
@@ -78,7 +90,7 @@
       "all_pct": 0
     }
   ],
-  "fetched_at": "2026-08-03T10:06:12.403912-04:00",
+  "fetched_at": "2026-08-08T12:18:35.915755-04:00",
   "source": "compliancemate_url_replay",
   "report_type": "all_list_completions"
 }
