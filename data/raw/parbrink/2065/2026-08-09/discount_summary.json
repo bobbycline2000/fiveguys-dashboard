@@ -1,9 +1,9 @@
 {
   "meta": {
     "store_id": "2065",
-    "report_date": "2026-08-08",
-    "generated": "2026-08-10T04:00:09",
-    "source_pdf": "data/raw/parbrink/2065/2026-08-08/Discount Summary.pdf"
+    "report_date": "2026-08-09",
+    "generated": "2026-08-10T05:07:01",
+    "source_pdf": "data/raw/parbrink/2065/2026-08-09/Discount Summary.pdf"
   },
   "items": [
     {
@@ -43,9 +43,9 @@
     },
     {
       "name": "100% Mrg/PR",
-      "count": 2,
-      "total": 33.06,
-      "average": 16.53,
+      "count": 1,
+      "total": 47.95,
+      "average": 47.95,
       "type": "Comp"
     },
     {
@@ -71,9 +71,9 @@
     },
     {
       "name": "Burger/Fry Calibration",
-      "count": 0,
-      "total": 0.0,
-      "average": 0.0,
+      "count": 1,
+      "total": 40.15,
+      "average": 40.15,
       "type": "Discount"
     },
     {
@@ -92,9 +92,9 @@
     },
     {
       "name": "Employee 100%",
-      "count": 3,
-      "total": 58.76,
-      "average": 19.59,
+      "count": 4,
+      "total": 52.32,
+      "average": 13.08,
       "type": "Discount"
     },
     {
@@ -127,9 +127,9 @@
     },
     {
       "name": "GH Promo",
-      "count": 0,
-      "total": 0.0,
-      "average": 0.0,
+      "count": 1,
+      "total": 9.5,
+      "average": 9.5,
       "type": "Discount"
     },
     {
@@ -232,15 +232,15 @@
     },
     {
       "name": "UE Promo",
-      "count": 12,
-      "total": 180.11,
-      "average": 15.01,
+      "count": 20,
+      "total": 318.01,
+      "average": 15.9,
       "type": "Discount"
     }
   ],
-  "total_count": 17,
-  "total_amount": 271.93,
-  "total_average": 16.0,
-  "comps_total": 33.06,
-  "discounts_total": 238.87
+  "total_count": 27,
+  "total_amount": 467.93,
+  "total_average": 17.33,
+  "comps_total": 47.95,
+  "discounts_total": 419.98
 }
