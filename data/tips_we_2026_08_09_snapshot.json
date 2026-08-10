@@ -2,14 +2,14 @@
   "weekEnding": "08/09/2026",
   "weekStart": "08/03/2026",
   "chargedTips": 715.05,
-  "poolHours": 493.08,
-  "tipsPerHour": 1.4502,
-  "sumPayout": 715.04,
-  "delta": -0.01,
+  "poolHours": 450.66,
+  "tipsPerHour": 1.5867,
+  "sumPayout": 715.05,
+  "delta": 0.0,
   "payouts": {
     "Brazell, Elizabeth": {
       "hours": 31.74,
-      "payout": 46.03,
+      "payout": 50.36,
       "employeeId": 1437522,
       "employeeNumber": "E2065349081",
       "positionCode": 1,
@@ -17,7 +17,7 @@
     },
     "Conder, Christopher": {
       "hours": 16.43,
-      "payout": 23.83,
+      "payout": 26.07,
       "employeeId": 1250570,
       "employeeNumber": "E1954336073",
       "positionCode": 5,
@@ -25,15 +25,15 @@
     },
     "Cureton, Madison": {
       "hours": 34.55,
-      "payout": 50.1,
+      "payout": 54.82,
       "employeeId": 860503,
       "employeeNumber": "E2065266168",
       "positionCode": 5,
       "positionName": "Shift Leader-Hourly"
     },
     "Gaskins, Serina": {
-      "hours": 52.21,
-      "payout": 75.71,
+      "hours": 35.16,
+      "payout": 55.79,
       "employeeId": 881906,
       "employeeNumber": "E1704280770",
       "positionCode": 1,
@@ -41,7 +41,7 @@
     },
     "Gatewood, Brianna": {
       "hours": 16.71,
-      "payout": 24.23,
+      "payout": 26.51,
       "employeeId": 935123,
       "employeeNumber": "E2065317265",
       "positionCode": 1,
@@ -49,7 +49,7 @@
     },
     "Gonzalez Cardero, Ailen": {
       "hours": 21.27,
-      "payout": 30.85,
+      "payout": 33.75,
       "employeeId": 885532,
       "employeeNumber": "E2065283102",
       "positionCode": 1,
@@ -57,15 +57,15 @@
     },
     "Goodman, Javeh": {
       "hours": 16.86,
-      "payout": 24.45,
+      "payout": 26.75,
       "employeeId": 1449217,
       "employeeNumber": "E2065349921",
       "positionCode": 1,
       "positionName": "2. Crew"
     },
     "Henry, Lidy": {
-      "hours": 47.2,
-      "payout": 68.45,
+      "hours": 45.42,
+      "payout": 72.07,
       "employeeId": 336368,
       "employeeNumber": "1911737",
       "positionCode": 1,
@@ -73,7 +73,7 @@
     },
     "Johnson, DJuan": {
       "hours": 23.13,
-      "payout": 33.54,
+      "payout": 36.7,
       "employeeId": 931946,
       "employeeNumber": "E2065315095",
       "positionCode": 1,
@@ -81,15 +81,15 @@
     },
     "Kadhim, Rusul": {
       "hours": 37.48,
-      "payout": 54.35,
+      "payout": 59.47,
       "employeeId": 1427929,
       "employeeNumber": "E2065348303",
       "positionCode": 5,
       "positionName": "Shift Leader-Hourly"
     },
     "Kamara, Emanuela": {
-      "hours": 25.86,
-      "payout": 37.5,
+      "hours": 24.09,
+      "payout": 38.22,
       "employeeId": 1329622,
       "employeeNumber": "E2065340844",
       "positionCode": 1,
@@ -97,7 +97,7 @@
     },
     "Llorente Mejias, Francisco": {
       "hours": 39.69,
-      "payout": 57.56,
+      "payout": 62.98,
       "employeeId": 898843,
       "employeeNumber": "E2065292376",
       "positionCode": 1,
@@ -105,7 +105,7 @@
     },
     "Milledge, Mykenize": {
       "hours": 23.8,
-      "payout": 34.51,
+      "payout": 37.76,
       "employeeId": 1295425,
       "employeeNumber": "E2065338962",
       "positionCode": 1,
@@ -113,23 +113,15 @@
     },
     "Pirtle, Anthony": {
       "hours": 34.42,
-      "payout": 49.91,
+      "payout": 54.61,
       "employeeId": 1391230,
       "employeeNumber": "E2065345128",
       "positionCode": 5,
       "positionName": "Shift Leader-Hourly"
     },
-    "Reiss, Jeffrey": {
-      "hours": 21.82,
-      "payout": 31.64,
-      "employeeId": 889846,
-      "employeeNumber": "E0475286031",
-      "positionCode": 8,
-      "positionName": "General Manager-Hourly"
-    },
     "Smith, Madelynn": {
       "hours": 23.61,
-      "payout": 34.24,
+      "payout": 37.46,
       "employeeId": 1414222,
       "employeeNumber": "E2065347146",
       "positionCode": 5,
@@ -137,7 +129,7 @@
     },
     "Whitten, Zack": {
       "hours": 26.3,
-      "payout": 38.14,
+      "payout": 41.73,
       "employeeId": 1369917,
       "employeeNumber": "E2065343318",
       "positionCode": 1,
