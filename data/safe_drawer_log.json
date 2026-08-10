@@ -1064,10 +1064,10 @@
     "d1_mid": 0,
     "d2_mid": 0,
     "safe_close": 673,
-    "d1_close": 0,
+    "d1_close": 200,
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-08-10T02:33:48.091Z"
+    "submitted_at": "2026-08-10T02:33:51.136Z"
   }
 ]
