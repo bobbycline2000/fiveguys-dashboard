@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
+    "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-08-03",
+    "week_end": "2026-08-09",
+    "variance_week_start": "2026-08-01",
+    "variance_week_end": "2026-08-02",
+    "month_start": "2026-08-01",
+    "last_month_start": "2026-07-01",
+    "last_month_end": "2026-07-31",
+    "through": "2026-08-09",
+    "pulled": "2026-08-10 06:21 ET",
+    "method": "api+playwright (GL-based, 2026-08-03)"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 24.9,
+  "cogs_pct_month": 19.9,
+  "cogs_pct_last_month": 26.8,
+  "variance_to_goal_week": -2.6,
+  "variance_to_goal_month": -7.6,
+  "variance_to_goal_last_mo": -0.7,
+  "items": [
+    {
+      "name": "Cajun Season",
+      "actual": 60.0,
+      "theoretical": 30.0,
+      "over_dollars": 30.0,
+      "variance_pct": -101.0,
+      "rank": 1
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 322.0,
+      "theoretical": 301.0,
+      "over_dollars": 21.0,
+      "variance_pct": -7.0,
+      "rank": 2
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 57.0,
+      "theoretical": 42.0,
+      "over_dollars": 15.0,
+      "variance_pct": -37.0,
+      "rank": 3
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": 16.0,
+      "theoretical": 4.0,
+      "over_dollars": 12.0,
+      "variance_pct": -300.0,
+      "rank": 4
+    },
+    {
+      "name": "Cheese",
+      "actual": 112.0,
+      "theoretical": 101.0,
+      "over_dollars": 11.0,
+      "variance_pct": -10.0,
+      "rank": 5
+    },
+    {
+      "name": "Jalapeno Peppers",
+      "actual": 14.0,
+      "theoretical": 3.0,
+      "over_dollars": 11.0,
+      "variance_pct": -294.0,
+      "rank": 6
+    },
+    {
+      "name": "Mayonnaise",
+      "actual": 14.0,
+      "theoretical": 23.0,
+      "over_dollars": -9.0,
+      "variance_pct": 42.0,
+      "rank": 7
+    },
+    {
+      "name": "Peanut Butter inv",
+      "actual": -7.0,
+      "theoretical": 3.0,
+      "over_dollars": -10.0,
+      "variance_pct": 370.0,
+      "rank": 8
+    },
+    {
+      "name": "Green Peppers, Fresh",
+      "actual": -6.0,
+      "theoretical": 6.0,
+      "over_dollars": -12.0,
+      "variance_pct": 216.0,
+      "rank": 9
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 52.0,
+      "theoretical": 83.0,
+      "over_dollars": -31.0,
+      "variance_pct": 38.0,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
