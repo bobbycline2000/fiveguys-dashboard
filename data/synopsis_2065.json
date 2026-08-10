@@ -1,52 +1,52 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-07-27",
-    "week_end": "2026-08-02",
-    "week_label": "7/27-8/2",
-    "month": "July",
-    "generated": "2026-08-03T15:41:56",
+    "week_start": "2026-08-03",
+    "week_end": "2026-08-09",
+    "week_label": "8/3-8/9",
+    "month": "August",
+    "generated": "2026-08-10T14:19:15",
     "notes": []
   },
   "sales": {
     "forecast": null,
-    "net_sales": 33440.44,
+    "net_sales": 33352.44,
     "over_under": null
   },
   "food_cost": {
-    "cogs_pct": 22.0,
+    "cogs_pct": 24.9,
     "supplies_pct": null,
     "total_pct": null,
     "qtd_cogs_pct": null,
-    "var_to_goal": -5.5,
+    "var_to_goal": -2.6,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Potato, Idaho",
-      "Shake Mix",
-      "Lettuce"
+      "Cajun Season",
+      "Bun, Burger",
+      "Tomatoes, Fresh"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 19.71,
+    "hourly_labor_pct": 20.33,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
-    "ot_hours": 0.0,
+    "ot_hours": 5.42,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 603.55,
+    "labor_hours": 573.93,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
-    "charged_tips": 644.91
+    "charged_tips": 715.05
   },
   "food_safety": {
     "steritech_pct": null,
     "criticals": null,
-    "shops_month_pct": null,
+    "shops_month_pct": 100.0,
     "shops_month_label": "August 2026",
-    "shops_qtd_pct": 73.4,
+    "shops_qtd_pct": 96.4,
     "shops_qtd_count": 5,
-    "shops_ytd_pct": 83.9
+    "shops_ytd_pct": 84.6
   },
   "fgu": {
     "overdue_rate_pct": 54.29,
@@ -104,7 +104,7 @@
     "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 92.1,
+    "completion_pct": 90.7,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
