@@ -1,41 +1,16 @@
 {
   "store": "2065",
-  "date": "2026-08-09",
-  "day_of_week": "Sunday",
-  "generated_at": "2026-08-10T01:14:55.274232-04:00",
+  "date": "2026-08-10",
+  "day_of_week": "Monday",
+  "generated_at": "2026-08-11T11:10:40.004420-04:00",
   "schedule": {
-    "date": "2026-08-09",
-    "day_of_week": "Sunday",
-    "am_manager": "Madison Cureton",
+    "date": "2026-08-10",
+    "day_of_week": "Monday",
+    "am_manager": "Robert Cline",
     "pm_manager": "Rusul Kadhim",
-    "shift_change_manager": "Christopher Conder & Anthony Pirtle"
+    "shift_change_manager": "Heather Uebelacker-Maddox & Madelynn Smith & Anthony Pirtle & Christopher Conder & Madison Cureton"
   },
-  "missing_count": 2,
-  "missing_items": [
-    {
-      "date": "2026-08-09",
-      "day_of_week": "Sunday",
-      "category": "PM_TEMP",
-      "shift": "PM",
-      "task_name": "9PM: Time and Temp",
-      "status": "MISSED",
-      "required_pct": 0,
-      "all_pct": 0,
-      "manager": "Rusul Kadhim",
-      "manager_basis": "pm_manager"
-    },
-    {
-      "date": "2026-08-09",
-      "day_of_week": "Sunday",
-      "category": "CHECKLIST",
-      "shift": "N/A",
-      "task_name": "Closing Checklist",
-      "status": "MISSED",
-      "required_pct": 0,
-      "all_pct": 0,
-      "manager": "Rusul Kadhim",
-      "manager_basis": "pm_manager (closing task)"
-    }
-  ],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Sunday 2026-08-09\n**2 missed/incomplete** (AM mgr: Madison Cureton \u00b7 PM mgr: Rusul Kadhim)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Rusul Kadhim**\n- **PM temp: 9PM: Time and Temp** \u2014 MISSED \u2192 **Rusul Kadhim**\n"
+  "missing_count": 0,
+  "missing_items": [],
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Monday 2026-08-10\n\u2705 All temps and checklists complete. Clean day.\n"
 }
