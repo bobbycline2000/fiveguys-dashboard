@@ -1,2 +1,1 @@
-[2026-08-10 10:46:14] outlook-daily-pull-7am: no actionable work emails after filtering
-[2026-08-10 09:09 EDT] sharepoint-fill: BLOCKED for 2026-08-09 — Claude in Chrome extension reports no connected browsers (Chrome IS running, 21 procs; extension not paired). Cannot obtain graph.microsoft.com files.readwrite MSAL token. No local MS_TENANT_ID/CLIENT_ID/CLIENT_SECRET fallback. Par Brink + CT data for 2026-08-09 all present and validated. No marker written — next run will backfill.
+[2026-08-11 10:06:43] outlook-daily-pull-7am: no actionable work emails after filtering
