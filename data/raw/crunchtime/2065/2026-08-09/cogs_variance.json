@@ -11,73 +11,97 @@
     "month_start": "2026-08-01",
     "last_month_start": "2026-07-01",
     "last_month_end": "2026-07-31",
-    "through": "2026-08-10",
-    "pulled": "2026-08-11 06:30 ET",
+    "through": "2026-08-11",
+    "pulled": "2026-08-12 06:11 ET",
     "method": "api+playwright (GL-based, 2026-08-03)"
   },
   "cogs_goal_pct": 27.5,
   "cogs_pct_week": 26.0,
-  "cogs_pct_month": 19.2,
+  "cogs_pct_month": 18.0,
   "cogs_pct_last_month": 26.8,
   "variance_to_goal_week": -1.5,
-  "variance_to_goal_month": -8.3,
+  "variance_to_goal_month": -9.5,
   "variance_to_goal_last_mo": -0.7,
   "items": [
     {
       "name": "Cheeseburger",
-      "actual": 1029.0,
-      "theoretical": 225.0,
-      "over_dollars": 804.0,
+      "actual": 1899.0,
+      "theoretical": 414.0,
+      "over_dollars": 1485.0,
       "variance_pct": null,
       "rank": 1
     },
     {
       "name": "Bacon Cheeseburger",
-      "actual": 568.0,
-      "theoretical": 129.0,
-      "over_dollars": 439.0,
+      "actual": 1112.0,
+      "theoretical": 249.0,
+      "over_dollars": 863.0,
       "variance_pct": null,
       "rank": 2
     },
     {
       "name": "Little Cheeseburger",
-      "actual": 361.0,
-      "theoretical": 66.0,
-      "over_dollars": 295.0,
+      "actual": 703.0,
+      "theoretical": 130.0,
+      "over_dollars": 573.0,
       "variance_pct": null,
       "rank": 3
     },
     {
       "name": "Little Fry",
-      "actual": 256.0,
-      "theoretical": 50.0,
-      "over_dollars": 206.0,
+      "actual": 483.0,
+      "theoretical": 94.0,
+      "over_dollars": 389.0,
       "variance_pct": null,
       "rank": 4
     },
     {
       "name": "Little Bacon Cheeseburger",
-      "actual": 207.0,
-      "theoretical": 42.0,
-      "over_dollars": 165.0,
+      "actual": 455.0,
+      "theoretical": 89.0,
+      "over_dollars": 366.0,
       "variance_pct": null,
       "rank": 5
     },
     {
-      "name": "Large Fry",
-      "actual": 205.0,
-      "theoretical": 53.0,
-      "over_dollars": 152.0,
+      "name": "Regular Fry",
+      "actual": 350.0,
+      "theoretical": 82.0,
+      "over_dollars": 268.0,
       "variance_pct": null,
       "rank": 6
     },
     {
       "name": "Little Cajun Fry",
-      "actual": 188.0,
-      "theoretical": 41.0,
-      "over_dollars": 147.0,
+      "actual": 339.0,
+      "theoretical": 73.0,
+      "over_dollars": 266.0,
       "variance_pct": null,
       "rank": 7
+    },
+    {
+      "name": "Milkshake",
+      "actual": 290.0,
+      "theoretical": 52.0,
+      "over_dollars": 238.0,
+      "variance_pct": null,
+      "rank": 8
+    },
+    {
+      "name": "Large Fry",
+      "actual": 302.0,
+      "theoretical": 78.0,
+      "over_dollars": 224.0,
+      "variance_pct": null,
+      "rank": 9
+    },
+    {
+      "name": "Hamburger",
+      "actual": 251.0,
+      "theoretical": 57.0,
+      "over_dollars": 194.0,
+      "variance_pct": null,
+      "rank": 10
     },
     {
       "name": "Shake Mix",
@@ -85,23 +109,7 @@
       "theoretical": 225.0,
       "over_dollars": 143.0,
       "variance_pct": -64.0,
-      "rank": 8
-    },
-    {
-      "name": "Regular Fry",
-      "actual": 186.0,
-      "theoretical": 43.0,
-      "over_dollars": 143.0,
-      "variance_pct": null,
-      "rank": 9
-    },
-    {
-      "name": "Milkshake",
-      "actual": 154.0,
-      "theoretical": 28.0,
-      "over_dollars": 126.0,
-      "variance_pct": null,
-      "rank": 10
+      "rank": 11
     },
     {
       "name": "Bun, Burger",
@@ -109,14 +117,6 @@
       "theoretical": 991.0,
       "over_dollars": 105.0,
       "variance_pct": -11.0,
-      "rank": 11
-    },
-    {
-      "name": "Hamburger",
-      "actual": 127.0,
-      "theoretical": 29.0,
-      "over_dollars": 98.0,
-      "variance_pct": null,
       "rank": 12
     },
     {
