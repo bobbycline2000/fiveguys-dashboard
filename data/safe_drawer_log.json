@@ -1098,10 +1098,10 @@
     "d1_mid": 0,
     "d2_mid": 0,
     "safe_close": 672,
-    "d1_close": 0,
+    "d1_close": 200,
     "d2_close": 0,
     "ct_os": -134.85,
     "notes": "",
-    "submitted_at": "2026-08-13T02:42:12.844Z"
+    "submitted_at": "2026-08-13T02:42:15.570Z"
   }
 ]
