@@ -1109,7 +1109,7 @@
     "mgr": "ms",
     "deposit": 0,
     "safe_open": 667,
-    "d1_open": 0,
+    "d1_open": 200,
     "d2_open": 0,
     "safe_mid": 0,
     "d1_mid": 0,
@@ -1119,6 +1119,6 @@
     "d2_close": 0,
     "ct_os": -42.65,
     "notes": "",
-    "submitted_at": "2026-08-13T19:26:50.135Z"
+    "submitted_at": "2026-08-13T19:26:53.446Z"
   }
 ]
