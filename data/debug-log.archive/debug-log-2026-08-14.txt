@@ -1,0 +1,4 @@
+[2026-08-13 10:39:56] outlook-daily-pull-7am: no actionable work emails after filtering
+[2026-08-13 09:10 ET] sharepoint-fill: BLOCKED - no Graph token. Chrome extension not connected (list_connected_browsers returned empty; 22 chrome.exe running). Fallback delegated GRAPH_REFRESH_TOKEN in .env is EXPIRED (AADSTS700084, SPA token issued 2026-05-19, 24h fixed lifetime). Dates NOT filled: 2026-08-09, 08-10, 08-11, 08-12. Par Brink + CT data for all 4 dates verified present. No marker files written - next run will backfill once a token path is restored.
+[2026-08-13 09:34] shop-payout-draft: no new 100% shops
+[2026-08-13 09:54] shop-action-plan-draft: SKIPPED — Chrome/Outlook not available (1 candidate ready: 20880599)
