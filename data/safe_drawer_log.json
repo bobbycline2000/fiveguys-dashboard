@@ -1125,7 +1125,7 @@
     "date": "2026-08-15",
     "mgr": "ms",
     "deposit": 0,
-    "safe_open": 6,
+    "safe_open": 641,
     "d1_open": 200,
     "d2_open": 200,
     "safe_mid": 0,
@@ -1136,6 +1136,6 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-08-15T13:37:52.893Z"
+    "submitted_at": "2026-08-15T13:38:16.067Z"
   }
 ]
