@@ -89,9 +89,13 @@ async def run_store(store_id: str):
         log.error(f"Par Brink email pickup exited {pb_rc}")
 
     # Parse the daily Par Brink PDFs into JSON the dashboard reads.
+    # Pick the newest folder that actually holds the PDFs. The Teamworx step
+    # writes weekly_schedule.json into a folder named for TODAY, which sorts
+    # ahead of yesterday's business-date folder — without this filter the
+    # parsers land on an empty folder and silently skip. Fixed 2026-08-16.
     pb_folder = sorted(
         (p for p in (ROOT / "data" / "raw" / "parbrink" / store_id).glob("*")
-         if p.is_dir() and p.name[:4].isdigit()),
+         if p.is_dir() and p.name[:4].isdigit() and (p / "Sales Summary.pdf").exists()),
         reverse=True,
     )
     pb_folder = pb_folder[0] if pb_folder else None
