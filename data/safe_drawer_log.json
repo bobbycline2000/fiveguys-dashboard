@@ -1143,7 +1143,7 @@
     "mgr": "AP",
     "deposit": 0,
     "safe_open": 662,
-    "d1_open": 0,
+    "d1_open": 200,
     "d2_open": 0,
     "safe_mid": 0,
     "d1_mid": 0,
@@ -1153,6 +1153,6 @@
     "d2_close": 0,
     "ct_os": -37.99,
     "notes": "",
-    "submitted_at": "2026-08-16T20:09:17.115Z"
+    "submitted_at": "2026-08-16T20:09:19.812Z"
   }
 ]
