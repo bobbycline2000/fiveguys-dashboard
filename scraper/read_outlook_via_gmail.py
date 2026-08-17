@@ -1119,6 +1119,99 @@ def _build_cash_section(today: date) -> list[str]:
     return out
 
 
+def _build_manager_crew_section(today: date) -> list[str]:
+    """Manager scoreboard every day; crew scoreboard on Mondays only."""
+    path = REPO_ROOT / "data" / "shop_performance.json"
+    if not path.exists():
+        return []
+    try:
+        sp = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        log(f"manager/crew section skipped: {exc}")
+        return []
+
+    def fmt(avg, n):
+        if avg is None or not n:
+            return "— (0 shops)"
+        return f"{avg:.1f}% ({n} shop{'s' if n != 1 else ''})"
+
+    lines = ["## 👥 Manager Performance — Running Scoreboard", ""]
+    lines.append(
+        f"**Store:** month {fmt(sp.get('store_avg_month'), sp.get('shop_count_month'))} "
+        f"· YTD {fmt(sp.get('store_avg_ytd'), sp.get('shop_count_ytd'))}"
+    )
+    lines.append("")
+
+    managers = sp.get("managers", [])
+    if managers:
+        top = max(
+            (m for m in managers if m.get("month_avg") is not None),
+            key=lambda m: m["month_avg"],
+            default=None,
+        )
+        lines.append("| Manager | This Month | YTD |")
+        lines.append("|---|---|---|")
+        for m in managers:
+            month_txt = fmt(m.get("month_avg"), m.get("month_n"))
+            ytd_txt = fmt(m.get("ytd_avg"), m.get("ytd_n"))
+            if top and m["name"] == top["name"]:
+                month_txt = f"🟢 **{month_txt}**"
+            ytd = m.get("ytd_avg")
+            if ytd is not None and ytd < 80:
+                ytd_txt = f"🔴 {ytd_txt}"
+            lines.append(f"| **{m.get('name')}** | {month_txt} | {ytd_txt} |")
+        lines.append("")
+
+    if today.weekday() == 0:
+        crew = [c for c in sp.get("crew", []) if c.get("ytd_n")]
+        if crew:
+            lines.append("### 🧑‍🍳 Crew Performance — YTD (Mondays)")
+            lines.append("")
+            lines.append("| Crew | YTD | Shops |")
+            lines.append("|---|---|---|")
+            for c in sorted(crew, key=lambda c: c.get("ytd_avg") or 0, reverse=True):
+                lines.append(
+                    f"| {c.get('name')} | {c['ytd_avg']:.1f}% | {c['ytd_n']} |"
+                )
+            lines.append("")
+
+    lines.append("---")
+    lines.append("")
+    return lines
+
+
+def _build_missing_temps_section() -> list[str]:
+    """Yesterday's missed temps/checklists, attributed to the manager on duty."""
+    path = REPO_ROOT / "data" / "daily_missing_temps.json"
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        log(f"missing-temps section skipped: {exc}")
+        return []
+
+    md = (data.get("markdown") or "").strip()
+    if not md:
+        return []
+    return [md, "", "---", ""]
+
+
+def _build_signoff_block() -> list[str]:
+    """Printable accountability footer — manager signs, crew initials."""
+    return [
+        "## ✍️ Read and Understood — Sign Before First Shift",
+        "",
+        "```",
+        "Manager on duty (signature): __________________________   Date: _______",
+        "",
+        "Crew (initials — every team member who reads this brief):",
+        "  [   ]  [   ]  [   ]  [   ]  [   ]  [   ]  [   ]  [   ]",
+        "```",
+        "",
+    ]
+
+
 def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
     """Builds the daily brief markdown string."""
     lines: list[str] = []
@@ -1270,6 +1363,12 @@ def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
     if corner:
         lines.append(corner)
 
+    # ── Manager scoreboard (daily) + crew scoreboard (Mondays) ───────────────
+    lines.extend(_build_manager_crew_section(today))
+
+    # ── Yesterday's missed temps / checklists (daily) ────────────────────────
+    lines.extend(_build_missing_temps_section())
+
     # ── Shift Huddle Plan (always — runs every brief) ────────────────────────
     huddle = build_shift_huddle_plan(today, categorized)
     if huddle:
@@ -1319,6 +1418,9 @@ def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
             reason = em.get("skip_reason", "filtered")
             lines.append(f"| {sender} | {subj} | {reason} |")
         lines.append("")
+
+    # ── Sign-off block (footer — every brief) ────────────────────────────────
+    lines.extend(_build_signoff_block())
 
     return "\n".join(lines)
 
@@ -1584,9 +1686,11 @@ def main() -> int:
             })
 
     if not raw_messages:
-        log("No messages found — nothing to brief.")
-        write_debug("no fg2065 emails found in lookback window")
-        return 1
+        # The brief still ships: pillars, shops, manager performance, temps and
+        # cash sections are self-generating and are mandatory every day.
+        log("No messages found — building brief from daily sections only.")
+        write_debug("no fg2065 emails found in lookback window (brief still sent)")
+        raw_messages = []
 
     # ── Categorize ───────────────────────────────────────────────────────────
     categorized: dict[str, list[dict]] = {}
@@ -1646,9 +1750,10 @@ def main() -> int:
     log(f"Categorized {total_work} work emails across {len([k for k in categorized if not k.startswith('_') and categorized[k]])} categories")
 
     if total_work == 0:
-        log("No actionable work emails found.")
-        write_debug("no actionable work emails after filtering")
-        return 1
+        # Quiet inbox is not a reason to skip the brief — the Four Pillars,
+        # shop section, manager performance and temps block run every day.
+        log("No actionable work emails — building brief from daily sections only.")
+        write_debug("no actionable work emails after filtering (brief still sent)")
 
     # ── Build brief ───────────────────────────────────────────────────────────
     brief_md = build_brief(categorized, today)
@@ -1680,7 +1785,8 @@ def main() -> int:
     # ── Write team_notes.json for dashboard Team Notes card ──────────────────
     try:
         notes = []
-        now_str = datetime.now().strftime("%-I:%M %p")
+        # %-I is glibc-only and raises "Invalid format string" on Windows.
+        now_str = datetime.now().strftime("%I:%M %p").lstrip("0")
 
         # Director messages → red border
         for em in categorized.get("Director's Corner", []):
@@ -1732,6 +1838,8 @@ def main() -> int:
     # ── Send ──────────────────────────────────────────────────────────────────
     if args.dry_run:
         log("--dry-run: skipping email send. Brief preview:")
+        # Windows consoles default to cp1252 and cannot encode the brief's emoji.
+        sys.stdout.reconfigure(errors="replace")
         print(brief_md[:500])
         return 0
 

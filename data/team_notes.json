@@ -1,48 +1,5 @@
 {
-  "date": "2026-08-10",
-  "new_count": 6,
-  "notes": [
-    {
-      "from": "ComplianceMate",
-      "role": "alert",
-      "role_label": "Equipment Alert",
-      "time": "2026-08-09 13:01 ET → ongoing",
-      "body": "ALL sensors offline — Prep Area, Walk In, Meat Drawer, Milkshake Cooler, Salad Station. 26 alerts since Sunday 1:01 PM, still firing 12:16 AM Monday. Gateway lost power or internet. Check gateway power + network on open, then call Universal Service Desk 888-411-0083."
-    },
-    {
-      "from": "Marketforce",
-      "role": "alert",
-      "role_label": "Guest Complaint",
-      "time": "2026-08-09 16:26 ET",
-      "body": "Case #5P2WXL — L4, visit Sun 8/9 12:45 PM. Bag dropped on the floor at pickup; manager told the crew member 'it didn't happen' and to put the burgers back up. Guest witnessed it. Open on Marketforce. Sunday lineup: Madison Cureton (AM), Christopher Conder & Anthony Pirtle (shift change), Rusul Kadhim (PM)."
-    },
-    {
-      "from": "Tonya Tucker",
-      "role": "accounting",
-      "role_label": "Estep Accounting",
-      "time": "2026-08-07 13:13 ET",
-      "body": "\"Would you please provide the list of employees who were working the dinner shift on 7/23 so they can receive their Secret Shopper rewards?\" — 7/23 Dinner scored 100%. On shift: Robert Cline, Francisco Llorente Mejias, Jeremiah Matthews, Madison Cureton, Richard Gibbs."
-    },
-    {
-      "from": "CrunchTime Task Alert",
-      "role": "alert",
-      "role_label": "CrunchTime",
-      "time": "2026-08-09 06:24 ET",
-      "body": "Period close due today: Post Period – Labor Not Posted (08/09), Inv-Final for Post (08/09), L-Rev 08/07 and 08/08, VO-Rec BOSS: Alpha – Ohio Valley (08/08)."
-    },
-    {
-      "from": "Jeni Moffatt",
-      "role": "dm",
-      "role_label": "HR Manager",
-      "time": "2026-08-07 13:13 ET",
-      "body": "Cortez Brown — \"He is processed and is good to schedule.\" Added to the employee directory (active count 33 → 34). Phone PENDING."
-    },
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "2026-08-06 13:41 ET",
-      "body": "\"Excellent job resulting in +30% in Sales VS LY!\" — Week ending 8/9 landing at COGS + Labor 51.3%, under the 55% line. Still open: L3 Case #5NZYD2 (banana shakes) and Incident Process PDRs for the Shift Lead team."
-    }
-  ]
+  "notes": [],
+  "new_count": 0,
+  "date": "2026-08-17"
 }
