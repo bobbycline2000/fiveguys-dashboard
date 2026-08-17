@@ -1,14 +1,5 @@
 {
-  "pending": [
-    {
-      "id": "f40c05a8-5804-46b8-86ab-151121078180",
-      "business_date": "2026-08-15",
-      "amount": 855.22,
-      "memo": "",
-      "mgr": "VL",
-      "requested_at": "2026-08-16T20:09:00.343Z"
-    }
-  ],
+  "pending": [],
   "processed": [
     {
       "id": "b0da1449-23c2-47df-9075-03dfd63bcca4",
@@ -45,6 +36,18 @@
       "requested_at": "2026-07-30T11:51:04.836Z",
       "processed_at": "2026-07-30T15:09:04",
       "sales_id": 6329191,
+      "pos_id": 2148,
+      "result": "ok"
+    },
+    {
+      "id": "f40c05a8-5804-46b8-86ab-151121078180",
+      "business_date": "2026-08-15",
+      "amount": 855.22,
+      "memo": "",
+      "mgr": "VL",
+      "requested_at": "2026-08-16T20:09:00.343Z",
+      "processed_at": "2026-08-17T13:37:51",
+      "sales_id": 6510251,
       "pos_id": 2148,
       "result": "ok"
     }
