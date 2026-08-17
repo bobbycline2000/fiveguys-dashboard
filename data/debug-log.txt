@@ -4,3 +4,5 @@
 [2026-08-17 06:37:41] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
 [2026-08-17 06:39:00] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
 [2026-08-17 06:39:41] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
+[2026-08-17 06:41] Daily brief 5am — SENT via Gmail path (Chrome/Outlook REST unavailable: no Chrome extension connected). Brief delivered to fg2065@estep-co.com 06:39 ET.
+[2026-08-17 06:41] Daily brief 5am — SKIPPED Step 8.6 SharePoint FG Daily Report xlsx fill for 2026-08-16 (requires Chrome MCP; extension not connected). Needs manual fill or a Chrome-connected run.
