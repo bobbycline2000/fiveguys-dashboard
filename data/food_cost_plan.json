@@ -1,36 +1,36 @@
 {
   "store": "2065",
-  "week_start": "2026-08-03",
-  "week_end": "2026-08-09",
+  "week_start": "2026-08-10",
+  "week_end": "2026-08-16",
   "variance_week_start": "2026-08-03",
   "variance_week_end": "2026-08-09",
-  "cogs_pct_week": 26.0,
-  "cogs_pct_week_label": "2026-08-09",
+  "cogs_pct_week": 27.0,
+  "cogs_pct_week_label": "2026-08-16",
   "cogs_goal_pct": 27.5,
-  "total_over": 11004.0,
-  "generated": "2026-08-16 09:32 ET",
+  "total_over": 285.0,
+  "generated": "2026-08-17 09:47 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Cheeseburger",
-      "over_dollars": 4796.0,
-      "actual": 6153.0,
-      "theoretical": 1357.0,
-      "variance_pct": null,
-      "big_six": true,
+      "name": "Shake Mix",
+      "over_dollars": 143.0,
+      "actual": 368.0,
+      "theoretical": 225.0,
+      "variance_pct": -64.0,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     },
     {
       "rank": 2,
-      "name": "Bacon Cheeseburger",
-      "over_dollars": 3828.0,
-      "actual": 4947.0,
-      "theoretical": 1119.0,
-      "variance_pct": null,
+      "name": "Bun, Burger",
+      "over_dollars": 105.0,
+      "actual": 1096.0,
+      "theoretical": 991.0,
+      "variance_pct": -11.0,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
@@ -40,16 +40,15 @@
     },
     {
       "rank": 3,
-      "name": "Little Cheeseburger",
-      "over_dollars": 2380.0,
-      "actual": 2915.0,
-      "theoretical": 535.0,
-      "variance_pct": null,
+      "name": "Cheese",
+      "over_dollars": 37.0,
+      "actual": 379.0,
+      "theoretical": 342.0,
+      "variance_pct": -11.0,
       "big_six": true,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Big Six item \u2014 watch it. Count cheese slices per build; verify receiving count vs invoice.",
+        "Recount on-hand \u2014 a miscount is the usual cause of a big swing."
       ]
     }
   ]
