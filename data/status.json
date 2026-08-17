@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-17 09:47 ET",
-  "overall": "yellow",
+  "generated": "2026-08-17 06:38 ET",
+  "overall": "green",
   "sources": [
     {
       "key": "sales",
       "label": "Sales / Labor",
-      "status": "yellow",
-      "as_of": "2026-08-15",
-      "detail": "report 2026-08-15 (2d ago)"
+      "status": "green",
+      "as_of": "2026-08-16",
+      "detail": "report 2026-08-16 (1d ago)"
     },
     {
       "key": "crunchtime",
