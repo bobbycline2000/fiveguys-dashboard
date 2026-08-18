@@ -1162,14 +1162,14 @@
     "safe_open": 664.5,
     "d1_open": 200,
     "d2_open": 200,
-    "safe_mid": 0,
+    "safe_mid": 664.5,
     "d1_mid": 0,
     "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
-    "ct_os": 0,
+    "ct_os": -55.35,
     "notes": "",
-    "submitted_at": "2026-08-18T14:11:33.813Z"
+    "submitted_at": "2026-08-18T19:28:48.104Z"
   }
 ]
