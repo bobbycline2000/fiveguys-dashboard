@@ -2,7 +2,7 @@
   "meta": {
     "report_date": "2026-08-18",
     "report_display": "Tuesday, August 18, 2026",
-    "generated": "8/19/2026 at 6:01 AM"
+    "generated": "8/19/2026 at 5:53 PM"
   },
   "sales": {
     "net": 3986.0,
@@ -18,9 +18,9 @@
     "per_guest_week": 5.44
   },
   "labor": {
-    "cost": null,
-    "cost_week": null,
-    "pct": 21.88,
+    "cost": 12.0,
+    "cost_week": 12.0,
+    "pct": 22.33,
     "pct_week": 18.77,
     "actual_hours": 0.0,
     "actual_hours_week": 0.0,
@@ -59,15 +59,15 @@
       "week": "$2,455"
     },
     "Actual Labor": {
-      "day": "",
-      "week": ""
+      "day": "12",
+      "week": "12"
     },
     "Hours Variance": {
       "day": "",
       "week": ""
     },
     "Labor % of Net Sales": {
-      "day": "21.88%",
+      "day": "22.33%",
       "week": "18.77%"
     },
     "Total Cash Over/Short": {
