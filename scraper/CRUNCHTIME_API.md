@@ -33,7 +33,12 @@ The dashboard rebuild targets **#1**. The Public API is documented below for com
 ```
 1. GET  https://fiveguysfr77.net-chef.com/resource/ceslogin/resources
 2. POST https://fiveguysfr77.net-chef.com/resource/ceslogin/auth
-   body: {"username": "...", "password": "..."}    (form fields)
+   body: {"username": "...", "password": "..."}    JSON BODY
+   Content-Type: application/json;charset=UTF-8
+   ⚠️ CORRECTED 2026-08-19: this doc previously said "form fields". It is NOT
+   form-encoded — posting form data returns HTTP 415 Unsupported Media Type
+   (surfaced by the endpoint as a 404 with a 415 message in the body).
+   Must be a JSON body with the JSON Content-Type.
 3. GET  https://fiveguysfr77.net-chef.com/resource/ceslogin/locations?page=1&start=0&limit=25
 4. POST https://fiveguysfr77.net-chef.com/resource/ceslogin/choose-location
    body: {"locationId": 13969}     (KY-2065 = 13969)
@@ -379,6 +384,39 @@ The shorter path that the agent script uses: navigate the edit URL `https://five
 | Method | Path |
 |---|---|
 | POST | `/resource/administration/posting/post/validate` |
+
+---
+
+### 1.4b Last-Year (LY) sales — the 364/357 rule (discovered 2026-08-19)
+
+The "Last Year" column in the **`<MONTH> <YEAR> FG Daily Report.xlsx`** SharePoint
+workbook (bdavis's OneDrive, tab `2065 Dixie`) is NOT same-calendar-date last year.
+It is a fiscal-week alignment:
+
+| Day of week | LY date offset |
+|---|---|
+| Mon–Sat | `date − 364 days` |
+| **Sun**  | `date − 357 days` |
+
+**Verified 14/14** against the LY values already keyed into the August 2026 sheet
+(days 1–14) — every one matched to the dollar after rounding. The Sunday exception
+is real and repeatable: Sun 2026-08-02 → 2025-08-10, Sun 2026-08-09 → 2025-08-17.
+
+Pull the LY numbers with the register sales summary endpoint against last year's
+date range, then round to whole dollars (the sheet stores integers):
+
+```python
+POST /resource/sales/sales/registerSales/summary
+{"page":1,"start":0,"limit":75,"extraFilter":[
+  {"type":"date","value":"07/25/2025","field":"salesDate","comparison":"gt"},
+  {"type":"date","value":"08/25/2025","field":"salesDate","comparison":"lt"}]}
+# -> rows keyed by salesDate ("MM/DD/YYYY 00:00:00"), use totTotalNetSales
+```
+
+Response rows come back under `rows` (not `data`) — read defensively.
+
+**Always re-verify the mapping against the already-filled rows before writing
+new LY values.** If any known row mismatches, stop — do not write.
 
 ---
 
