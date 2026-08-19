@@ -4,7 +4,7 @@
   "week_ending": "2026-08-23",
   "week_start": "2026-08-17",
   "target_pct": 20.0,
-  "generated_at": "2026-08-18T05:59:50.512632-04:00",
+  "generated_at": "2026-08-19T05:59:53.598097-04:00",
   "week": {
     "fcst_sales": 38595,
     "sched_cost": 10049,
@@ -14,7 +14,7 @@
     "ot_hours": 0.0,
     "ot_value": 0
   },
-  "issue_count": 7,
+  "issue_count": 6,
   "issues": [
     {
       "sev": "high",
@@ -24,7 +24,7 @@
     {
       "sev": "high",
       "day": "Tue",
-      "msg": "Tue labor 28.3% \u2014 ~$402 over 20% target"
+      "msg": "Tue labor 32.9% \u2014 ~$626 over 20% target"
     },
     {
       "sev": "high",
@@ -45,11 +45,6 @@
       "sev": "high",
       "day": "Sat",
       "msg": "Sat labor 26.8% \u2014 ~$402 over 20% target"
-    },
-    {
-      "sev": "high",
-      "day": "Sun",
-      "msg": "Sun labor 22.5% \u2014 ~$162 over 20% target"
     }
   ],
   "per_day": [
@@ -70,13 +65,13 @@
       "date": "2026-08-18",
       "wd": "Tue",
       "sales": 4835,
-      "hrs": 90.5,
-      "cost": 1370,
-      "pct": 28.3,
+      "hrs": 94.5,
+      "cost": 1593,
+      "pct": 32.9,
       "byPosition": {
         "2. Crew": 53.5,
         "Shift Leader-Hourly": 28.0,
-        "General Manager-Salary": 9.0
+        "General Manager-Salary": 13.0
       }
     },
     {
@@ -109,13 +104,13 @@
       "date": "2026-08-21",
       "wd": "Fri",
       "sales": 5955,
-      "hrs": 106.0,
+      "hrs": 102.0,
       "cost": 1676,
       "pct": 28.1,
       "byPosition": {
         "Shift Leader-Hourly": 28.0,
         "2. Crew": 57.0,
-        "General Manager-Salary": 21.0
+        "General Manager-Salary": 17.0
       }
     },
     {
@@ -136,13 +131,13 @@
       "wd": "Sun",
       "sales": 6455,
       "hrs": 88.5,
-      "cost": 1453,
-      "pct": 22.5,
+      "cost": 1230,
+      "pct": 19.0,
       "byPosition": {
         "2. Crew": 58.0,
         "Shift Leader-Hourly": 13.5,
-        "General Manager-Salary": 7.0,
-        "Shift Manager-Hourly": 10.0
+        "Shift Manager-Hourly": 10.0,
+        "General Manager-Salary": 7.0
       }
     }
   ]
