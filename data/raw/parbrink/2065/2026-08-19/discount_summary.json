@@ -1,9 +1,9 @@
 {
   "meta": {
     "store_id": "2065",
-    "report_date": "2026-08-18",
-    "generated": "2026-08-20T04:00:10",
-    "source_pdf": "data/raw/parbrink/2065/2026-08-18/Discount Summary.pdf"
+    "report_date": "2026-08-19",
+    "generated": "2026-08-20T05:04:30",
+    "source_pdf": "data/raw/parbrink/2065/2026-08-19/Discount Summary.pdf"
   },
   "items": [
     {
@@ -43,9 +43,9 @@
     },
     {
       "name": "100% Mrg/PR",
-      "count": 1,
-      "total": 26.57,
-      "average": 26.57,
+      "count": 2,
+      "total": 32.16,
+      "average": 16.08,
       "type": "Comp"
     },
     {
@@ -71,9 +71,9 @@
     },
     {
       "name": "Burger/Fry Calibration",
-      "count": 1,
-      "total": 40.15,
-      "average": 40.15,
+      "count": 0,
+      "total": 0.0,
+      "average": 0.0,
       "type": "Discount"
     },
     {
@@ -92,9 +92,9 @@
     },
     {
       "name": "Employee 100%",
-      "count": 7,
-      "total": 98.56,
-      "average": 14.08,
+      "count": 5,
+      "total": 71.4,
+      "average": 14.28,
       "type": "Discount"
     },
     {
@@ -232,9 +232,9 @@
     },
     {
       "name": "UE Promo",
-      "count": 9,
-      "total": 150.85,
-      "average": 16.76,
+      "count": 12,
+      "total": 188.02,
+      "average": 15.67,
       "type": "Discount"
     },
     {
@@ -252,9 +252,9 @@
       "type": "Discount"
     }
   ],
-  "total_count": 18,
-  "total_amount": 316.13,
-  "total_average": 17.56,
-  "comps_total": 26.57,
-  "discounts_total": 289.56
+  "total_count": 19,
+  "total_amount": 291.58,
+  "total_average": 15.35,
+  "comps_total": 32.16,
+  "discounts_total": 259.42
 }
