@@ -1,19 +1,19 @@
 {
-  "as_of": "2026-08-19",
+  "as_of": "2026-08-20",
   "current_month": "2026-08",
   "current_month_label": "August 2026",
-  "store_avg_month": 97.5,
-  "store_avg_ytd": 84.8,
-  "shop_count_month": 2,
-  "shop_count_ytd": 45,
+  "store_avg_month": 96.7,
+  "store_avg_ytd": 85.1,
+  "shop_count_month": 3,
+  "shop_count_ytd": 46,
   "managers": [
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": 100.0,
-      "month_n": 1,
-      "ytd_avg": 84.1,
-      "ytd_n": 30
+      "month_avg": 97.5,
+      "month_n": 2,
+      "ytd_avg": 84.4,
+      "ytd_n": 31
     },
     {
       "first": "Vicki",
@@ -164,6 +164,14 @@
   ],
   "latest_shops": [
     {
+      "date": "2026-08-15",
+      "score": 95.0,
+      "meal_period": "Dinner",
+      "on_shift": [
+        "Madison Cureton"
+      ]
+    },
+    {
       "date": "2026-08-08",
       "score": 95.0,
       "meal_period": "Lunch",
@@ -200,17 +208,6 @@
         "Jeremiah Matthews",
         "Madison Cureton",
         "Richard Gibbs"
-      ]
-    },
-    {
-      "date": "2026-07-16",
-      "score": 95.0,
-      "meal_period": "Dinner",
-      "on_shift": [
-        "Robert Cline",
-        "Francisco Llorente Mejias",
-        "Jeremiah Matthews",
-        "Madison Cureton"
       ]
     }
   ]
