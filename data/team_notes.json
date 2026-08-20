@@ -1,41 +1,5 @@
 {
-  "date": "2026-08-20",
-  "new_count": 5,
-  "notes": [
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "2026-08-19 11:43 AM ET",
-      "body": "End of Promotion: BlackBerry Shake. Effective Sunday August 16 the Blackberry Milkshake mix-in promotion has concluded. Keep all blackberry promotional signage on display and continue selling until store inventory is fully depleted. Once inventory is gone, submit a Help Desk ticket with the exact subject line \"Please Turn Off Blackberry\" to remove the item from POS and Olo. No additional information is needed in the ticket."
-    },
-    {
-      "from": "Jeff Reiss",
-      "role": "dm",
-      "role_label": "District Manager",
-      "time": "2026-08-19 10:19 AM ET",
-      "body": "Re: 737 FG Deposits. \"2065 - Deposit was just taken to the bank.\" Jeff covered the bank run for us on Tonya's deposit request. The portal upload for 8/14 is still ours to close."
-    },
-    {
-      "from": "Tonya Tucker",
-      "role": "accounting",
-      "role_label": "Staff Accountant, Estep Accounting",
-      "time": "2026-08-19 9:11 AM ET",
-      "body": "737 FG Deposits: \"Please upload the deposit receipts for the business days below to the portal.\" 2065 owes 8/14. (Also 1731 8/15 + 8/17, 1788 8/14, 2079 8/14-8/17.)"
-    },
-    {
-      "from": "Marketforce",
-      "role": "alert",
-      "role_label": "Secret Shop",
-      "time": "2026-08-20 4:28 AM ET",
-      "body": "New completed secret shop, job #20874284 - shopped Friday 2026-08-15, Dinner, score 95.0%. On shift: Lidy Henry, Madison Cureton. 5.0 points lost; sub-score breakdown not yet released by Marketforce. Action plan drafted to Outlook Drafts. August store average now 96.7% across 3 shops; YTD 85.1% across 46."
-    },
-    {
-      "from": "ComplianceMate Support",
-      "role": "alert",
-      "role_label": "Ticket 205942",
-      "time": "2026-08-19 9:38 AM ET",
-      "body": "Heidi Jundt: \"The Milkshake Cleaning Pump Checklist is always on Wednesdays for Five Guys. Could you please clarify the difficulty you are having with completing the list item on Wednesday?\" Needs a reply - we clean the pumps Wednesday night after close, so the Wednesday-dated list cannot be signed until the work is done. Same list came back 0% on 8/19."
-    }
-  ]
+  "notes": [],
+  "new_count": 0,
+  "date": "2026-08-20"
 }
