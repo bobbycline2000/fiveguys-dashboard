@@ -1198,12 +1198,12 @@
     "d2_open": 200,
     "safe_mid": 663,
     "d1_mid": 200,
-    "d2_mid": 0,
+    "d2_mid": 200,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -22.33,
     "notes": "",
-    "submitted_at": "2026-08-21T01:28:53.899Z"
+    "submitted_at": "2026-08-21T01:28:56.889Z"
   }
 ]
