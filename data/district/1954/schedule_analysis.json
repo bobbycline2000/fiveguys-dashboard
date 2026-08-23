@@ -1,126 +1,20 @@
 {
   "store_id": "1954",
   "store_name": "Jeffersonville",
-  "week_ending": "2026-08-23",
-  "week_start": "2026-08-17",
+  "week_ending": "2026-08-30",
+  "week_start": "2026-08-24",
   "target_pct": 20.0,
-  "generated_at": "2026-08-22T05:52:57.452543-04:00",
+  "generated_at": "2026-08-23T05:53:52.705793-04:00",
   "week": {
-    "fcst_sales": 34101,
-    "sched_cost": 7156,
-    "sched_hours": 500.0,
-    "labor_pct": 21.0,
-    "over_target_dollars": 336,
+    "fcst_sales": 0,
+    "sched_cost": 0,
+    "sched_hours": 0.0,
+    "labor_pct": 0,
+    "over_target_dollars": 0,
     "ot_hours": 0.0,
     "ot_value": 0
   },
-  "issue_count": 2,
-  "issues": [
-    {
-      "sev": "high",
-      "day": "Mon",
-      "msg": "Mon labor 25.7% \u2014 ~$217 over 20% target"
-    },
-    {
-      "sev": "high",
-      "day": "Sat",
-      "msg": "Sat labor 22.4% \u2014 ~$143 over 20% target"
-    }
-  ],
-  "per_day": [
-    {
-      "date": "2026-08-17",
-      "wd": "Mon",
-      "sales": 3824,
-      "hrs": 64.0,
-      "cost": 982,
-      "pct": 25.7,
-      "byPosition": {
-        "Shift Manager-Hourly": 8.0,
-        "2. Crew": 31.0,
-        "General Manager-Salary": 10.0,
-        "Shift Leader-Hourly": 15.0
-      }
-    },
-    {
-      "date": "2026-08-18",
-      "wd": "Tue",
-      "sales": 3966,
-      "hrs": 60.5,
-      "cost": 773,
-      "pct": 19.5,
-      "byPosition": {
-        "Shift Leader-Hourly": 23.0,
-        "2. Crew": 37.5
-      }
-    },
-    {
-      "date": "2026-08-19",
-      "wd": "Wed",
-      "sales": 4482,
-      "hrs": 62.5,
-      "cost": 916,
-      "pct": 20.4,
-      "byPosition": {
-        "2. Crew": 29.5,
-        "Shift Leader-Hourly": 18.0,
-        "Shift Manager-Hourly": 5.0,
-        "General Manager-Salary": 10.0
-      }
-    },
-    {
-      "date": "2026-08-20",
-      "wd": "Thu",
-      "sales": 5067,
-      "hrs": 76.5,
-      "cost": 1072,
-      "pct": 21.2,
-      "byPosition": {
-        "General Manager-Salary": 10.0,
-        "2. Crew": 43.5,
-        "Shift Leader-Hourly": 23.0
-      }
-    },
-    {
-      "date": "2026-08-21",
-      "wd": "Fri",
-      "sales": 5583,
-      "hrs": 72.5,
-      "cost": 1068,
-      "pct": 19.1,
-      "byPosition": {
-        "2. Crew": 39.5,
-        "General Manager-Salary": 10.0,
-        "Shift Leader-Hourly": 16.0,
-        "Shift Manager-Hourly": 7.0
-      }
-    },
-    {
-      "date": "2026-08-22",
-      "wd": "Sat",
-      "sales": 5841,
-      "hrs": 88.0,
-      "cost": 1311,
-      "pct": 22.4,
-      "byPosition": {
-        "Shift Leader-Hourly": 23.0,
-        "Shift Manager-Hourly": 6.0,
-        "2. Crew": 55.0,
-        "General Manager-Salary": 4.0
-      }
-    },
-    {
-      "date": "2026-08-23",
-      "wd": "Sun",
-      "sales": 5338,
-      "hrs": 76.0,
-      "cost": 1035,
-      "pct": 19.4,
-      "byPosition": {
-        "2. Crew": 53.0,
-        "Shift Leader-Hourly": 15.0,
-        "Shift Manager-Hourly": 8.0
-      }
-    }
-  ]
+  "issue_count": 0,
+  "issues": [],
+  "per_day": []
 }
