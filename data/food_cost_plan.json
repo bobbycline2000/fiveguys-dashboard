@@ -7,15 +7,15 @@
   "cogs_pct_week": 27.4,
   "cogs_pct_week_label": "2026-08-16",
   "cogs_goal_pct": 27.5,
-  "total_over": 9377.0,
-  "generated": "2026-08-22 09:33 ET",
+  "total_over": 11570.0,
+  "generated": "2026-08-23 09:33 ET",
   "items": [
     {
       "rank": 1,
       "name": "Cheeseburger",
-      "over_dollars": 3993.0,
-      "actual": 5154.0,
-      "theoretical": 1161.0,
+      "over_dollars": 5016.0,
+      "actual": 6472.0,
+      "theoretical": 1456.0,
       "variance_pct": null,
       "big_six": true,
       "actions": [
@@ -27,9 +27,9 @@
     {
       "rank": 2,
       "name": "Bacon Cheeseburger",
-      "over_dollars": 3597.0,
-      "actual": 4667.0,
-      "theoretical": 1070.0,
+      "over_dollars": 4212.0,
+      "actual": 5464.0,
+      "theoretical": 1252.0,
       "variance_pct": null,
       "big_six": true,
       "actions": [
@@ -41,9 +41,9 @@
     {
       "rank": 3,
       "name": "Little Cheeseburger",
-      "over_dollars": 1787.0,
-      "actual": 2190.0,
-      "theoretical": 403.0,
+      "over_dollars": 2342.0,
+      "actual": 2870.0,
+      "theoretical": 528.0,
       "variance_pct": null,
       "big_six": true,
       "actions": [
