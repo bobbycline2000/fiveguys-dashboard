@@ -1233,11 +1233,11 @@
     "safe_mid": 669,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
+    "safe_close": 669,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-08-23T02:39:28.791Z"
+    "submitted_at": "2026-08-23T02:39:31.051Z"
   }
 ]
