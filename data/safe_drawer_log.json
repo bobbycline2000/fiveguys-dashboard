@@ -1250,11 +1250,11 @@
     "safe_mid": 672,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
+    "safe_close": 672,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -186.08,
     "notes": "",
-    "submitted_at": "2026-08-24T02:36:23.712Z"
+    "submitted_at": "2026-08-24T02:36:27.210Z"
   }
 ]
