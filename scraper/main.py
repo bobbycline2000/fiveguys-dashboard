@@ -762,8 +762,41 @@ async def _extract_from_page_text(page) -> dict:
 
     # CrunchTime table: col 0 = label, cols 1–7 = Mon–Sun, col 8 = Week-to-date.
     # yest.weekday() gives 0=Mon … 6=Sun, so it's the 0-based index into data cols.
-    yest_col = yest.weekday()   # 0=Mon … 6=Sun
-    log.info(f"Text strategy: yesterday = {yest.strftime('%A')}, data col index {yest_col}")
+    #
+    # GUARD (added 2026-08-24): the Performance Metrics widget renders whatever week
+    # CrunchTime defaults to — which on a MONDAY run is the *upcoming* Mon–Sun week,
+    # not the week containing yesterday (Sunday). When that happens every per-day cell
+    # is blank and the only values on the row are Week-to-Date / Period-to-Date totals.
+    # The old code then fell back to values[0] and silently wrote the PTD total in as
+    # yesterday's net sales (2026-08-16 => $74,629 and 2026-08-23 => $108,118 against a
+    # real day of ~$4.7K). Verify the grid's own date headers contain yesterday before
+    # trusting any column; if they don't, return nothing and let wire_dashboard.py's
+    # Par Brink fallback own the number (see CRUNCHTIME_API.md "Actual family can be
+    # null for an ENTIRE new week").
+    # Anchor to the Performance Metrics grid itself — other widgets on the page carry
+    # their own MM/DD/YYYY labels, so a naive page-wide scan picks up the wrong dates.
+    _pm_idx  = full_text.find("Performance Metrics")
+    _pm_tail = full_text[_pm_idx:] if _pm_idx >= 0 else full_text
+    _DOW_RE  = r'(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)'
+    header_dates = re.findall(_DOW_RE + r'\s*(\d{2}/\d{2}/\d{4})', _pm_tail)[:7]
+    yest_col = yest.weekday()   # 0=Mon … 6=Sun (fallback when no headers parsed)
+
+    if header_dates:
+        if RPT_MMDDYYYY in header_dates:
+            yest_col = header_dates.index(RPT_MMDDYYYY)
+            log.info(f"Text strategy: matched {RPT_MMDDYYYY} in grid headers "
+                     f"{header_dates} → data col index {yest_col}")
+        else:
+            log.error(
+                f"Text strategy ABORT: grid is showing the wrong week. "
+                f"Yesterday ({RPT_MMDDYYYY}) is not in the displayed date headers "
+                f"{header_dates}. Refusing to read a Week/Period-to-Date total as a "
+                f"daily value — returning no metrics so the Par Brink fallback is used."
+            )
+            return {}
+    else:
+        log.warning(f"Text strategy: no MM/DD/YYYY grid headers found — falling back to "
+                    f"weekday index {yest_col} ({yest.strftime('%A')})")
 
     metrics: dict[str, dict] = {}
 
@@ -788,11 +821,14 @@ async def _extract_from_page_text(page) -> dict:
         values   = VALUE_RE.findall(combined)
         values   = [v.strip() for v in values if v.strip() and len(v.strip()) > 1]
 
-        # Pick yesterday's column; fall back to first value if index out of range
-        if yest_col < len(values):
-            day_val = values[yest_col]
-        else:
-            day_val = values[0] if values else ""
+        # Pick yesterday's column. If the row doesn't have that many values the day
+        # cell was blank — leave it EMPTY. Never substitute values[0]: on a row whose
+        # per-day cells are blank that is the Week/Period-to-Date total, which is ~23x
+        # a real day and silently corrupts latest.json.
+        day_val = values[yest_col] if yest_col < len(values) else ""
+        if not day_val:
+            log.warning(f"  {matched_label!r}: no value at day col {yest_col} "
+                        f"({len(values)} values on row) — leaving blank")
 
         # Week-to-date is typically second-to-last value (after all 7 day columns)
         week_val = values[-2] if len(values) >= 2 else (values[-1] if values else "")

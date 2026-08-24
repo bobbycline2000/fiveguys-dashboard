@@ -1,29 +1,16 @@
 {
   "store": "2065",
-  "date": "2026-08-18",
-  "day_of_week": "Tuesday",
-  "generated_at": "2026-08-19T17:53:47.820645-04:00",
+  "date": "2026-08-23",
+  "day_of_week": "Sunday",
+  "generated_at": "2026-08-24T05:13:17.285931-04:00",
   "schedule": {
-    "date": "2026-08-18",
-    "day_of_week": "Tuesday",
-    "am_manager": "Heather Uebelacker-Maddox",
-    "pm_manager": "Rusul Kadhim",
-    "shift_change_manager": "Robert Cline & Vicki Lucey & Anthony Pirtle & Madison Cureton"
+    "date": "2026-08-23",
+    "day_of_week": "Sunday",
+    "am_manager": "Vicki Lucey",
+    "pm_manager": "Anthony Pirtle",
+    "shift_change_manager": null
   },
-  "missing_count": 1,
-  "missing_items": [
-    {
-      "date": "2026-08-18",
-      "day_of_week": "Tuesday",
-      "category": "CHECKLIST",
-      "shift": "N/A",
-      "task_name": "Closing Checklist",
-      "status": "INCOMPLETE",
-      "required_pct": 23,
-      "all_pct": 23,
-      "manager": "Rusul Kadhim",
-      "manager_basis": "pm_manager (closing task)"
-    }
-  ],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Tuesday 2026-08-18\n**1 missed/incomplete** (AM mgr: Heather Uebelacker-Maddox \u00b7 PM mgr: Rusul Kadhim)\n\n- **Checklist: Closing Checklist** \u2014 INCOMPLETE (23%) \u2192 **Rusul Kadhim**\n"
+  "missing_count": 0,
+  "missing_items": [],
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Sunday 2026-08-23\n\u2705 All temps and checklists complete. Clean day.\n"
 }
