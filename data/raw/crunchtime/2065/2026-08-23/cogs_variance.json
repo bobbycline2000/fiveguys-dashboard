@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
+    "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-08-17",
+    "week_end": "2026-08-23",
+    "variance_week_start": "2026-08-10",
+    "variance_week_end": "2026-08-16",
+    "month_start": "2026-08-01",
+    "last_month_start": "2026-07-01",
+    "last_month_end": "2026-07-31",
+    "through": "2026-08-23",
+    "pulled": "2026-08-24 05:53 ET",
+    "method": "api+playwright (GL-based, 2026-08-03)"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 24.5,
+  "cogs_pct_month": 23.9,
+  "cogs_pct_last_month": 26.8,
+  "variance_to_goal_week": -3.0,
+  "variance_to_goal_month": -3.6,
+  "variance_to_goal_last_mo": -0.7,
+  "items": [
+    {
+      "name": "Bun, Burger",
+      "actual": 991.0,
+      "theoretical": 930.0,
+      "over_dollars": 61.0,
+      "variance_pct": -7.0,
+      "rank": 1
+    },
+    {
+      "name": "Cup, Shake",
+      "actual": 61.0,
+      "theoretical": 32.0,
+      "over_dollars": 29.0,
+      "variance_pct": -90.0,
+      "rank": 2
+    },
+    {
+      "name": "Lettuce",
+      "actual": 111.0,
+      "theoretical": 83.0,
+      "over_dollars": 28.0,
+      "variance_pct": -33.0,
+      "rank": 3
+    },
+    {
+      "name": "Bun, Hot Dog",
+      "actual": 81.0,
+      "theoretical": 54.0,
+      "over_dollars": 27.0,
+      "variance_pct": -49.0,
+      "rank": 4
+    },
+    {
+      "name": "Mushroom Pcs",
+      "actual": 120.0,
+      "theoretical": 99.0,
+      "over_dollars": 21.0,
+      "variance_pct": -22.0,
+      "rank": 5
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": 8.0,
+      "theoretical": 32.0,
+      "over_dollars": -24.0,
+      "variance_pct": 75.0,
+      "rank": 6
+    },
+    {
+      "name": "Cajun Season",
+      "actual": 69.0,
+      "theoretical": 96.0,
+      "over_dollars": -27.0,
+      "variance_pct": 28.0,
+      "rank": 7
+    },
+    {
+      "name": "Bacon, Raw Sliced",
+      "actual": 313.0,
+      "theoretical": 349.0,
+      "over_dollars": -36.0,
+      "variance_pct": 10.0,
+      "rank": 8
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 909.0,
+      "theoretical": 971.0,
+      "over_dollars": -62.0,
+      "variance_pct": 6.0,
+      "rank": 9
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 95.0,
+      "theoretical": 225.0,
+      "over_dollars": -130.0,
+      "variance_pct": 58.0,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}

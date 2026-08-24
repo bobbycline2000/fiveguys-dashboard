@@ -1,0 +1,10 @@
+[2026-08-23 09:55:00] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
+[2026-08-24 06:12] Daily brief 5am — SENT OK (HTTP 202, pillar guardrail PASS). Dashboard wired + pushed (2647c872).
+[2026-08-24 06:12] xlsx fill PARTIAL — 2065 Dixie row 30 (Aug 23): B30 Sales 4,371.84 OK, G30 Labor 21.66% OK.
+    I30 (Actual Hrs 70.78) and K30 (Discounts 303.02) NOT entered — Excel Online renderer froze mid-save
+    ("Still working on it", repeated CDP screenshot timeouts, Name Box lag showing stale cell refs).
+    L30 (Cash O/S) intentionally left blank: CT shows -186.08 only because the 8/23 deposit is unentered;
+    writing that would put a false $186 shortage on Brad's district report. Enter after the deposit posts.
+    INCIDENT: while the renderer was frozen, stray keystrokes renamed sheet tab "1954 Jeffersonville" -> "21.66".
+    REPAIRED same session — tab renamed back, verified after a clean reload. No cell data on that sheet was altered.
+    8/21 and 8/22 rows were already filled by prior runs and match Par Brink exactly. Only 8/23 was outstanding.

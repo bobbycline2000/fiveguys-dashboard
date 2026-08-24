@@ -1,41 +1,5 @@
 {
-  "date": "2026-08-24",
-  "new_count": 5,
-  "notes": [
-    {
-      "from": "Steritech / OnBrand360",
-      "role": "alert",
-      "role_label": "Food Safety",
-      "time": "Fri 8/21 4:00 PM",
-      "body": "Food Safety Assessment COMPLETE for 2065 \u2014 Score 94, Medium-Low Risk, 0 Critical, 2 Non-Critical. Kevin Goyke (FGE FBM) filed a 5-point FSA challenge on 2 bags of opened buns; if granted the score lands at 99."
-    },
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director of Operations",
-      "time": "Fri 8/21 5:36 PM",
-      "body": "Re: Kevin RE: 5 Pt Challenge \u2014 \"Thank you Kevin!\" Brad acknowledged the FSA challenge on the 94 score. Standing directives still live: 55% to Stay Alive, labor under 25%, Halo Effect on shops, Incident Process PDRs for the whole Shift Lead team, scam-call vigilance, CO2 under 25% plus 50 lb backup."
-    },
-    {
-      "from": "Kevin Goyke",
-      "role": "alert",
-      "role_label": "FGE Franchise Business Manager",
-      "time": "Fri 8/21 6:48 PM",
-      "body": "RE: L3 Taste of Food and Beverage (Case #5NZYD2) \u2014 \"I just submitted a level 4 request for this.\" Marketforce confirmed the reclass request the same minute. This is Brad's assigned banana-milkshake complaint; no further action needed from the store."
-    },
-    {
-      "from": "ComplianceMate Support",
-      "role": "alert",
-      "role_label": "Vendor",
-      "time": "Sun 8/23 2:01 PM",
-      "body": "No Update on \"FG 2065 - milkshake pump checklist on wrong day\" \u2014 ticket auto-closes in 4 days without a reply. Respond: pumps are cleaned Wednesday night after close, so the Wednesday-dated list cannot be signed until the work is done; move it to Thursday."
-    },
-    {
-      "from": "Payroll (Victoria Barkhimer)",
-      "role": "accounting",
-      "role_label": "Payroll",
-      "time": "Thu 8/21 5:33 PM",
-      "body": "RE: Pay card Update \u2014 \"This pay card has been linked to Ailen Gonzalez Cardero.\" Closed, no further action."
-    }
-  ]
+  "notes": [],
+  "new_count": 0,
+  "date": "2026-08-24"
 }
