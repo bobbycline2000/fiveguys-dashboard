@@ -2,7 +2,7 @@
   "meta": {
     "report_date": "2026-08-23",
     "report_display": "Sunday, August 23, 2026",
-    "generated": "8/24/2026 at 5:50 AM (cached)",
+    "generated": "8/24/2026 at 6:20 AM (cached)",
     "data_quality": "CT Performance Metrics grid displayed the wrong week on this run (Monday run: grid defaults to the upcoming Mon-Sun). Day values were not available for this date and have been nulled rather than carrying wrong-week figures. See scraper/main.py _extract_from_page_text guard."
   },
   "sales": {
