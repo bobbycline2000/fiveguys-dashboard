@@ -1284,11 +1284,11 @@
     "safe_mid": 673,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
+    "safe_close": 673,
     "d1_close": 200,
     "d2_close": 200,
     "ct_os": -30.02,
     "notes": "",
-    "submitted_at": "2026-08-26T02:27:19.398Z"
+    "submitted_at": "2026-08-26T02:27:21.750Z"
   }
 ]
