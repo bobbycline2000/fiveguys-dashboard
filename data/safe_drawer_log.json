@@ -1300,12 +1300,12 @@
     "d2_open": 200,
     "safe_mid": 0,
     "d1_mid": 0,
-    "d2_mid": 200,
+    "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-08-27T14:42:30.229Z"
+    "submitted_at": "2026-08-27T14:42:34.597Z"
   }
 ]
