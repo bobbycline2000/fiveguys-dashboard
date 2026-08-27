@@ -4,13 +4,13 @@
   "week_ending": "2026-08-30",
   "week_start": "2026-08-24",
   "target_pct": 20.0,
-  "generated_at": "2026-08-26T06:07:20.839156-04:00",
+  "generated_at": "2026-08-27T15:57:05.905953-04:00",
   "week": {
     "fcst_sales": 33791,
-    "sched_cost": 6492,
-    "sched_hours": 451.0,
-    "labor_pct": 19.2,
-    "over_target_dollars": -266,
+    "sched_cost": 6456,
+    "sched_hours": 448.0,
+    "labor_pct": 19.1,
+    "over_target_dollars": -302,
     "ot_hours": 0.0,
     "ot_value": 0
   },
@@ -94,12 +94,12 @@
       "date": "2026-08-29",
       "wd": "Sat",
       "sales": 5593,
-      "hrs": 72.0,
-      "cost": 999,
-      "pct": 17.9,
+      "hrs": 69.0,
+      "cost": 963,
+      "pct": 17.2,
       "byPosition": {
         "2. Crew": 47.0,
-        "Shift Leader-Hourly": 15.0,
+        "Shift Leader-Hourly": 12.0,
         "General Manager-Salary": 10.0
       }
     },
