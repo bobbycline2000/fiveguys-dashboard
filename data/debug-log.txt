@@ -1,1 +1,3 @@
-[2026-08-26 10:08:47] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
+[2026-08-27 15:44:25] shop-email: 100% shop 20892727 (2026-08-21 Lunch) — draft email at /home/runner/work/fiveguys-dashboard/fiveguys-dashboard/data/drafts/secret-shop-email-20892727.md. Send to secretshop@estep-co.com CC chess@estep-co.com. Review before sending.
+[2026-08-27 19:44:27] outlook-daily-pull-7am: no fg2065 emails found in lookback window (brief still sent)
+[2026-08-27 19:44:27] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
