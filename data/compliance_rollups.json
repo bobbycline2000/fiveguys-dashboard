@@ -1,12 +1,12 @@
 {
   "meta": {
     "store_id": "2065",
-    "anchor_date": "2026-08-26",
-    "days_seen_total": 121,
+    "anchor_date": "2026-08-27",
+    "days_seen_total": 122,
     "days_in_week": 7,
     "days_in_month": 30,
     "days_in_quarter": 90,
-    "generated": "2026-08-27T19:59:29"
+    "generated": "2026-08-28T20:46:40"
   },
   "week": {
     "required_pct_avg": 98.4,
@@ -14,8 +14,8 @@
     "days": 7
   },
   "month": {
-    "required_pct_avg": 92.7,
-    "lists_at_100_avg": 8.3,
+    "required_pct_avg": 93.8,
+    "lists_at_100_avg": 8.4,
     "days": 30
   },
   "quarter": {
