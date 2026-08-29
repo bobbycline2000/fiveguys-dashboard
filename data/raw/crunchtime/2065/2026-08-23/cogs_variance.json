@@ -2,6 +2,7 @@
   "meta": {
     "source": "CrunchTime Net Chef \u2014 purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
     "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+    "item_source": "api_ingredient_level",
     "category": "Food",
     "store": "2065",
     "week_start": "2026-08-17",
@@ -12,7 +13,7 @@
     "last_month_start": "2026-07-01",
     "last_month_end": "2026-07-31",
     "through": "2026-08-28",
-    "pulled": "2026-08-29 08:14 ET",
+    "pulled": "2026-08-29 08:16 ET",
     "method": "api+playwright (GL-based, 2026-08-03)"
   },
   "cogs_goal_pct": 27.5,
@@ -24,164 +25,84 @@
   "variance_to_goal_last_mo": -0.7,
   "items": [
     {
-      "name": "Cheeseburger",
-      "actual": 5210.0,
-      "theoretical": 1149.0,
-      "over_dollars": 4061.0,
-      "variance_pct": null,
+      "name": "Bun, Burger",
+      "actual": 1031.77,
+      "theoretical": 984.4,
+      "over_dollars": 47.37,
+      "variance_pct": -4.8,
       "rank": 1
     },
     {
-      "name": "Bacon Cheeseburger",
-      "actual": 3713.0,
-      "theoretical": 834.0,
-      "over_dollars": 2879.0,
-      "variance_pct": null,
+      "name": "Shake Mix",
+      "actual": 220.12,
+      "theoretical": 178.35,
+      "over_dollars": 41.77,
+      "variance_pct": -23.4,
       "rank": 2
     },
     {
-      "name": "Little Cheeseburger",
-      "actual": 2190.0,
-      "theoretical": 401.0,
-      "over_dollars": 1789.0,
-      "variance_pct": null,
+      "name": "Banana Marinade",
+      "actual": 48.72,
+      "theoretical": 8.12,
+      "over_dollars": 40.6,
+      "variance_pct": -500,
       "rank": 3
     },
     {
-      "name": "Little Fry",
-      "actual": 1360.0,
-      "theoretical": 267.0,
-      "over_dollars": 1093.0,
-      "variance_pct": null,
+      "name": "Onion, Yellow Jumbo",
+      "actual": 75.65,
+      "theoretical": 56.21,
+      "over_dollars": 19.44,
+      "variance_pct": -34.6,
       "rank": 4
     },
     {
-      "name": "Little Bacon Cheeseburger",
-      "actual": 1134.0,
-      "theoretical": 223.0,
-      "over_dollars": 911.0,
-      "variance_pct": null,
+      "name": "Bacon, Raw Sliced",
+      "actual": 384.62,
+      "theoretical": 366.04,
+      "over_dollars": 18.58,
+      "variance_pct": -5.1,
       "rank": 5
     },
     {
-      "name": "Regular Fry",
-      "actual": 1090.0,
-      "theoretical": 261.0,
-      "over_dollars": 829.0,
-      "variance_pct": null,
+      "name": "Strawberry Marinade",
+      "actual": 0.39,
+      "theoretical": 14.81,
+      "over_dollars": -14.42,
+      "variance_pct": 97.4,
       "rank": 6
     },
     {
-      "name": "Milkshake",
-      "actual": 740.0,
-      "theoretical": 131.0,
-      "over_dollars": 609.0,
-      "variance_pct": null,
+      "name": "Mushroom Pcs",
+      "actual": 89.1,
+      "theoretical": 107.55,
+      "over_dollars": -18.45,
+      "variance_pct": 17.2,
       "rank": 7
     },
     {
-      "name": "Regular Soda",
-      "actual": 613.0,
-      "theoretical": 14.0,
-      "over_dollars": 599.0,
-      "variance_pct": null,
+      "name": "Cajun Season",
+      "actual": 46.89,
+      "theoretical": 89.33,
+      "over_dollars": -42.44,
+      "variance_pct": 47.5,
       "rank": 8
     },
     {
-      "name": "Large Fry",
-      "actual": 759.0,
-      "theoretical": 195.0,
-      "over_dollars": 564.0,
-      "variance_pct": null,
+      "name": "Tomatoes, Fresh",
+      "actual": 104.66,
+      "theoretical": 148.6,
+      "over_dollars": -43.94,
+      "variance_pct": 29.6,
       "rank": 9
     },
     {
-      "name": "Little Cajun Fry",
-      "actual": 715.0,
-      "theoretical": 159.0,
-      "over_dollars": 556.0,
-      "variance_pct": null,
-      "rank": 10
-    },
-    {
-      "name": "Bun, Burger",
-      "actual": 1032.0,
-      "theoretical": 984.0,
-      "over_dollars": 48.0,
-      "variance_pct": -5.0,
-      "rank": 11
-    },
-    {
-      "name": "Shake Mix",
-      "actual": 220.0,
-      "theoretical": 178.0,
-      "over_dollars": 42.0,
-      "variance_pct": -23.0,
-      "rank": 12
-    },
-    {
-      "name": "Banana Marinade",
-      "actual": 49.0,
-      "theoretical": 8.0,
-      "over_dollars": 41.0,
-      "variance_pct": -500.0,
-      "rank": 13
-    },
-    {
-      "name": "Onion, Yellow Jumbo",
-      "actual": 76.0,
-      "theoretical": 56.0,
-      "over_dollars": 20.0,
-      "variance_pct": -35.0,
-      "rank": 14
-    },
-    {
-      "name": "Bacon, Raw Sliced",
-      "actual": 385.0,
-      "theoretical": 366.0,
-      "over_dollars": 19.0,
-      "variance_pct": -5.0,
-      "rank": 15
-    },
-    {
-      "name": "Strawberry Marinade",
-      "actual": 0.0,
-      "theoretical": 15.0,
-      "over_dollars": -15.0,
-      "variance_pct": 97.0,
-      "rank": 16
-    },
-    {
-      "name": "Mushroom Pcs",
-      "actual": 89.0,
-      "theoretical": 108.0,
-      "over_dollars": -19.0,
-      "variance_pct": 17.0,
-      "rank": 17
-    },
-    {
-      "name": "Cajun Season",
-      "actual": 47.0,
-      "theoretical": 89.0,
-      "over_dollars": -42.0,
-      "variance_pct": 48.0,
-      "rank": 18
-    },
-    {
-      "name": "Tomatoes, Fresh",
-      "actual": 105.0,
-      "theoretical": 149.0,
-      "over_dollars": -44.0,
-      "variance_pct": 30.0,
-      "rank": 19
-    },
-    {
       "name": "Cup, Shake",
-      "actual": -25.0,
-      "theoretical": 26.0,
-      "over_dollars": -51.0,
+      "actual": -25.09,
+      "theoretical": 25.61,
+      "over_dollars": -50.7,
       "variance_pct": 198.0,
-      "rank": 20
+      "rank": 10
     }
   ],
   "ranking": "over_dollars_desc"
