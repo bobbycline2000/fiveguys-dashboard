@@ -7,16 +7,16 @@
   "cogs_pct_week": 24.5,
   "cogs_pct_week_label": "2026-08-23",
   "cogs_goal_pct": 27.5,
-  "total_over": 8729.0,
-  "generated": "2026-08-29 12:15 ET",
+  "total_over": 129.74,
+  "generated": "2026-08-29 08:16 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Cheeseburger",
-      "over_dollars": 4061.0,
-      "actual": 5210.0,
-      "theoretical": 1149.0,
-      "variance_pct": null,
+      "name": "Bun, Burger",
+      "over_dollars": 47.37,
+      "actual": 1031.77,
+      "theoretical": 984.4,
+      "variance_pct": -4.8,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
@@ -26,30 +26,30 @@
     },
     {
       "rank": 2,
-      "name": "Bacon Cheeseburger",
-      "over_dollars": 2879.0,
-      "actual": 3713.0,
-      "theoretical": 834.0,
-      "variance_pct": null,
-      "big_six": true,
+      "name": "Shake Mix",
+      "over_dollars": 41.77,
+      "actual": 220.12,
+      "theoretical": 178.35,
+      "variance_pct": -23.4,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     },
     {
       "rank": 3,
-      "name": "Little Cheeseburger",
-      "over_dollars": 1789.0,
-      "actual": 2190.0,
-      "theoretical": 401.0,
-      "variance_pct": null,
-      "big_six": true,
+      "name": "Banana Marinade",
+      "over_dollars": 40.6,
+      "actual": 48.72,
+      "theoretical": 8.12,
+      "variance_pct": -500,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     }
   ]
