@@ -610,6 +610,135 @@ def build_blackberry_lto_update(today: date) -> list[str]:
     return lines
 
 
+def _huddle_data_snapshot(today: date) -> dict:
+    """Pull today's live operational numbers for the Shift Huddle Plan so the
+    huddle never quotes frozen prose from a past date. Sources:
+      - data/labor_today.json               (WTD + today labor %)
+      - data/food_cost_plan.json             (COGS % vs goal -- headline fields
+        only; item-level $ variance is covered by a separate in-flight fix and
+        is intentionally NOT read here)
+      - data/ct_sales_summary_history.json   (deposit / over-short streak)
+      - data/shop_performance.json           (latest secret shop, month/YTD
+        averages, manager scoreboard)
+      - data/raw/marketforce/2065/<latest>/shops.json (lunch vs dinner split +
+        weakest KPI -- same pipeline build_secret_shop_corner() already reads)
+    Every field is optional -- a missing/unreadable file just leaves that key
+    out, and callers fall back to generic evergreen language rather than
+    crash or print a stale/frozen number."""
+    import json as _json
+
+    snap: dict = {}
+
+    labor_path = REPO_ROOT / "data" / "labor_today.json"
+    if labor_path.exists():
+        try:
+            labor = _json.loads(labor_path.read_text(encoding="utf-8"))
+            snap["labor_pct_wtd"] = labor.get("labor_percent_wtd")
+            snap["labor_pct_today"] = labor.get("labor_percent")
+        except Exception:
+            pass
+
+    cogs_path = REPO_ROOT / "data" / "food_cost_plan.json"
+    if cogs_path.exists():
+        try:
+            cogs = _json.loads(cogs_path.read_text(encoding="utf-8"))
+            snap["cogs_pct"] = cogs.get("cogs_pct_week")
+            snap["cogs_goal"] = cogs.get("cogs_goal_pct")
+            snap["cogs_total_over"] = cogs.get("total_over")
+        except Exception:
+            pass
+
+    cash_path = REPO_ROOT / "data" / "ct_sales_summary_history.json"
+    if cash_path.exists():
+        try:
+            rows = _json.loads(cash_path.read_text(encoding="utf-8"))
+            rows_sorted = sorted(rows, key=lambda r: r.get("business_date", ""))
+            streak = 0
+            for r in reversed(rows_sorted):
+                v = r.get("over_short", 0.0) or 0.0
+                if abs(v) < 1.0:
+                    streak += 1
+                else:
+                    snap["last_over_date"] = r.get("business_date")
+                    snap["last_over_val"] = v
+                    break
+            snap["deposit_streak"] = streak
+            if rows_sorted:
+                snap["last_deposit_date"] = rows_sorted[-1].get("business_date")
+        except Exception:
+            pass
+
+    shop_path = REPO_ROOT / "data" / "shop_performance.json"
+    if shop_path.exists():
+        try:
+            sp = _json.loads(shop_path.read_text(encoding="utf-8"))
+            latest_list = sp.get("latest_shops") or []
+            if latest_list:
+                latest = latest_list[0]
+                snap["shop_latest_date"] = latest.get("date")
+                snap["shop_latest_score"] = latest.get("score")
+                snap["shop_latest_meal"] = latest.get("meal_period")
+                snap["shop_latest_names"] = latest.get("on_shift") or []
+            snap["shop_month_avg"] = sp.get("store_avg_month")
+            snap["shop_month_n"] = sp.get("shop_count_month")
+            snap["shop_ytd_avg"] = sp.get("store_avg_ytd")
+            snap["shop_ytd_n"] = sp.get("shop_count_ytd")
+            managers = sp.get("managers") or []
+            ranked_month = sorted(
+                (m for m in managers if m.get("month_avg") is not None),
+                key=lambda m: m["month_avg"], reverse=True,
+            )
+            snap["shop_top_manager"] = ranked_month[0] if ranked_month else None
+            ranked_ytd = sorted(
+                (m for m in managers if m.get("ytd_avg") is not None),
+                key=lambda m: m["ytd_avg"],
+            )
+            snap["shop_weak_manager"] = ranked_ytd[0] if ranked_ytd else None
+        except Exception:
+            pass
+
+    mf_root = REPO_ROOT / "data" / "raw" / "marketforce" / "2065"
+    if mf_root.exists():
+        latest_dir = None
+        for d in sorted(mf_root.iterdir(), reverse=True):
+            if d.is_dir() and (d / "shops.json").exists():
+                latest_dir = d
+                break
+        if latest_dir:
+            try:
+                mf = _json.loads((latest_dir / "shops.json").read_text(encoding="utf-8"))
+                shops = mf.get("shops") or []
+                lunch = [s["score"] for s in shops if "lunch" in (s.get("meal_period", "").lower())]
+                dinner = [s["score"] for s in shops if "dinner" in (s.get("meal_period", "").lower())]
+                snap["shop_lunch_avg"] = round(sum(lunch) / len(lunch), 1) if lunch else None
+                snap["shop_dinner_avg"] = round(sum(dinner) / len(dinner), 1) if dinner else None
+
+                def _avgf(field: str):
+                    vals = [s.get(field) for s in shops if s.get(field) is not None]
+                    return round(sum(vals) / len(vals), 1) if vals else None
+
+                kpi = {
+                    "Service": _avgf("service"), "Quality": _avgf("quality"),
+                    "Cleanliness": _avgf("cleanliness"), "Customer Satisfaction": _avgf("customer_satisfaction"),
+                }
+                weak = sorted(((v, k) for k, v in kpi.items() if v is not None))
+                if weak:
+                    snap["shop_weakest_kpi"] = weak[0][1]
+                    snap["shop_weakest_kpi_score"] = weak[0][0]
+            except Exception:
+                pass
+
+    return snap
+
+
+def _h_pct(v, digits: int = 1) -> str:
+    return f"{v:.{digits}f}%" if isinstance(v, (int, float)) else "--"
+
+
+def _h_money(v) -> str:
+    return f"${v:,.2f}" if isinstance(v, (int, float)) else "--"
+
+
 def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | None = None) -> str:
     """Daily 5-minute shift huddle plan focused on in-store operations.
     Four pillars run EVERY day until Bobby updates them: COGS, Shops, Steritech, Labor.
@@ -619,197 +748,193 @@ def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | No
     dow = today.weekday()
     iso_week = today.isocalendar()[1]
     biweek_flag = iso_week % 2  # alternates 0/1 each week
+    # Pull today's live numbers so the huddle never quotes a frozen date/number.
+    snap = _huddle_data_snapshot(today)
+
+    labor_wtd = snap.get("labor_pct_wtd")
+    cogs_pct = snap.get("cogs_pct")
+    cogs_goal = snap.get("cogs_goal") if snap.get("cogs_goal") is not None else 27.5
+    cogs_over = snap.get("cogs_total_over")
+    deposit_streak = snap.get("deposit_streak")
+    last_over_date = snap.get("last_over_date")
+    last_over_val = snap.get("last_over_val")
+    shop_date = snap.get("shop_latest_date")
+    shop_score = snap.get("shop_latest_score")
+    shop_meal = snap.get("shop_latest_meal")
+    shop_names = snap.get("shop_latest_names") or []
+    shop_month_avg = snap.get("shop_month_avg")
+    shop_month_n = snap.get("shop_month_n")
+    shop_ytd_avg = snap.get("shop_ytd_avg")
+    shop_ytd_n = snap.get("shop_ytd_n")
+    top_mgr = snap.get("shop_top_manager")
+    weak_mgr = snap.get("shop_weak_manager")
+    lunch_avg = snap.get("shop_lunch_avg")
+    dinner_avg = snap.get("shop_dinner_avg")
+    weakest_kpi = snap.get("shop_weakest_kpi")
+    weakest_kpi_score = snap.get("shop_weakest_kpi_score")
+
+    # -- Reusable dynamic phrases, built once so every day/theme stays in sync --
+    if deposit_streak:
+        deposit_phrase = f"**{deposit_streak} straight clean deposits** -- no unexplained overs, keep it going"
+    elif last_over_date:
+        over_label = "OVER" if (last_over_val or 0) > 0 else "SHORT"
+        deposit_phrase = (f"**{last_over_date} came back {_h_money(abs(last_over_val))} {over_label}** "
+                          "-- count it, enter it, log it on the Safe & Drawer page tonight")
+    else:
+        deposit_phrase = "count the drawer and **enter the deposit tonight** -- every night, no exceptions"
+
+    if shop_date:
+        who = ", ".join(shop_names) if shop_names else "the crew on shift"
+        shop_phrase = f"**Latest shop: {shop_date} {shop_meal or ''}, {_h_pct(shop_score)}** -- on shift: {who}"
+    else:
+        shop_phrase = "no new shop on file yet -- keep the standards up for the next one"
+
+    month_ytd_phrase = (f"**Month: {_h_pct(shop_month_avg)} ({shop_month_n or 0} shops). "
+                        f"YTD: {_h_pct(shop_ytd_avg)} ({shop_ytd_n or 0} shops).**")
+
+    if labor_wtd is not None:
+        ceiling_word = "under" if labor_wtd < 25 else "over"
+        labor_phrase = f"**labor is at {_h_pct(labor_wtd, 2)} week-to-date**, {ceiling_word} the 25% ceiling"
+    else:
+        labor_phrase = "check labor against the 25% ceiling"
+
+    if cogs_pct is not None:
+        cogs_state = "under" if cogs_pct <= cogs_goal else "over"
+        cogs_phrase = (f"**food cost is {_h_pct(cogs_pct)} against a {_h_pct(cogs_goal)} goal** ({cogs_state}), "
+                       f"total variance {_h_money(cogs_over)}")
+    else:
+        cogs_phrase = "check today's food cost number against goal on the dashboard"
+
+    if lunch_avg is not None and dinner_avg is not None:
+        gap = abs(lunch_avg - dinner_avg)
+        if lunch_avg >= dinner_avg:
+            shift_phrase = f"**Lunch averages {_h_pct(lunch_avg)} and Dinner averages {_h_pct(dinner_avg)}** -- a **{gap:.1f}-point gap**"
+        else:
+            shift_phrase = f"**Dinner averages {_h_pct(dinner_avg)} and Lunch averages {_h_pct(lunch_avg)}** -- a **{gap:.1f}-point gap**"
+    else:
+        shift_phrase = "watch the lunch-vs-dinner split on the next shop"
+
+    if weakest_kpi:
+        kpi_phrase = f"**{weakest_kpi} sits at {_h_pct(weakest_kpi_score)}**, our softest KPI right now"
+    else:
+        kpi_phrase = "keep an eye on Service, Quality, Cleanliness and CSAT evenly"
+
+    mgr_bits = []
+    if top_mgr:
+        mgr_bits.append(f"**{top_mgr.get('name')} {_h_pct(top_mgr.get('month_avg'))} ({top_mgr.get('month_n')} shops)** leads this month")
+    if weak_mgr:
+        mgr_bits.append(f"**{weak_mgr.get('name')} {_h_pct(weak_mgr.get('ytd_avg'))} YTD ({weak_mgr.get('ytd_n')} shops)** needs in-person coaching, not an email")
+    mgr_phrase = ". ".join(mgr_bits) + ("." if mgr_bits else "")
+
     rotating_ideas = {
-        0: ("Monday — The Streak Ended at 95. Enter the Deposits and Get Javeh Off the Schedule.",
-            "Straight talk to open the week. The run of three perfect shops ended — **8/8 Lunch came "
-            "back 95.0%**, five points gone on **guest recovery**, and **Lidy Henry** was the one on "
-            "the floor. That is not a bad person, that is a coaching gap: when a guest looks unhappy, "
-            "**the MOD is at that table inside 60 seconds** and any crew member can flag it. The plan "
-            "is written — **five proactive table-touches per shift, logged on the BOH clipboard.** "
-            "August still reads **97.5% (2 shops)** and we are **84.8% YTD across 45 shops**, so we "
-            "are fine — we just have to stop giving points back. Now the Monday reset, three items. "
-            "**(1) CASH — the deposits are not being entered.** CrunchTime shows **8/15 $855.22 OVER "
-            "and 8/16 $1,384.44 OVER**, and the manager count sheet for Sunday came in with **all "
-            "zeros**. An 'over' that size is not extra money, it is a deposit sitting unentered. "
-            "Count it, enter it, log it on the Safe & Drawer page — every night, no exceptions. "
-            "**(2) TRAINING — Javeh Goodman is 0% with an onboarding deadline that passed 8/9.** Per "
-            "the standard, **off the schedule until Five Guys University is complete.** Angela Ashby "
-            "0%, Megan Kurschner 0%, Ryan Vititoe 3% are right behind him. **(3) CLEAR THE "
-            "CRUNCHTIME BOARD** this morning — post labor reviews and receive vendor orders before "
-            "noon; stacking L-Rev is the pattern that keeps getting us flagged. Housekeeping: **the "
-            "Blackberry LTO came off yesterday (8/16)** — pull the callouts, nobody offers it today. "
-            "Standing: CO2 under 25% → order and confirm the 50 lb backup. All in-store tech goes to "
-            "the **Universal Service Desk, 888-411-0083 / FiveGuysHelp.Zendesk.com.** Scams still "
-            "live — **no email, login, cash, or shipping address over the phone, ever.**"),
-        1: ("Tuesday — Lunch Scores 87.5, Dinner Scores 74.9. The Night Shift Is Costing Us the Board.",
-            "Here is the number nobody has said out loud yet: across every shop on record, **Lunch "
-            "averages 87.5% and Dinner averages 74.9%** — a **12.6-point gap between the same store "
-            "in the daytime and the same store at night.** Same building, same equipment, same "
-            "recipes. The difference is the shift. And it lines up exactly with our weakest KPI: "
-            "**Service sits at 90.1%** while Quality is **100%**, CSAT **99.4%** and Cleanliness "
-            "**95.8%**. We are cooking the food right and we are losing points on how we treat the "
-            "person buying it — and we lose them mostly after 4 PM. So tonight, dinner crew, the "
-            "**HALO EFFECT** is the whole job: **greet at the door AND at the register**, eye "
-            "contact, call the order back at handoff, **fries-up**, a real thank-you and goodbye that "
-            "the guest actually hears. **Tickets under 6 minutes** — over 8 costs us 5 points, over "
-            "10 costs us 20, and the fry station is our named bottleneck, so pre-drop into the rush "
-            "and put your fastest fry person on at peak. **Every bag checked against the ticket "
-            "before it is sealed.** Shift-change is where the greet dies — when the crew turns over, "
-            "somebody still owns the door. If we pull Dinner up to where Lunch already runs, the "
-            "whole YTD moves with it."),
-        2: ("Wednesday — COGS Came In UNDER Goal. One Item Is Doing All the Damage: Shake Mix.",
-            "Win first, because we earned it: **food cost landed 27.0% against a 27.5% goal — under, "
-            "for the closed week** — and total variance for the period is **$285 over theoretical.** "
-            "For context, earlier this summer that number was in the thousands. The discipline is "
-            "working; do not let up. Now the one line still leaking: **Shake Mix is $143 over — "
-            "$368 actual against $225 theoretical, a 64% variance, the single worst percentage on "
-            "the sheet.** That is over-pouring at the shake station, plain and simple, and it is the "
-            "**same station that already cost us a guest complaint** for a shake drowned in chocolate "
-            "syrup. **Mix and syrup are measured pumps, not pours** — re-drill the build with every "
-            "person who touches that station today, and **every waste cup gets logged as it "
-            "happens.** After that it is small and fixable: **Bun/Burger $105 over (11%)** — "
-            "spot-check the **3.5 oz patty roll**, weigh a few, correct heavy rollers on the spot, "
-            "and **cook to the board, not to a guess** so we are not dumping meat at the end of a "
-            "rush. **Cheese $37 over (11%)** — count the slices per build and check receiving against "
-            "the invoice; a miscount at the back door shows up as a variance at close. Fries scooped "
-            "level, toppings measured, condiments portioned, lids on. **Labor is holding at 21.72%**, "
-            "well under the 25% ceiling — food and labor together are what pay the bonus, and right "
-            "now both halves are winning. Protect it."),
-        3: ("Thursday — ComplianceMate Closed Sunday at 39%. The Shift Is Not Over Until It Is Signed.",
-            "Sunday's ComplianceMate came back at **39% overall**, and the zeros tell the story: "
-            "**Closing Checklist 0% · 9PM Time and Temp 0% · Pre Open 0% · Closing 0% · Weekly Store "
-            "Inspection 0% · Delivery Check 0%.** Every daytime temp — 11 AM, 1 PM, 3 PM, 5 PM, 7 PM "
-            "— came back **100%**. So this is not a capability problem, it is a **finish problem**: "
-            "we start clean and quit before the last two tasks. And it is not a one-off — the exact "
-            "same two items (**Closing Checklist + 9 PM temp**) were missed the Sunday before. Today "
-            "the standard is simple: **the closing manager does not leave until the Closing Checklist "
-            "and every time-and-temp are complete and signed — on time, never backfilled.** If "
-            "something genuinely cannot be finished, it gets written down and handed to the opener, "
-            "never skipped silently. **Pre Open and Weekly Store Inspection get an owner by name "
-            "today**, not 'whoever gets to it.' On top of that, the daily standard the inspector "
-            "grades: **manager walk completed and SIGNED before doors** — hand sinks for handwashing "
-            "ONLY, DayMark discard dates current, potato-cutter teeth and slicer blades chip-free, "
-            "**lids on mushrooms and onions**, wet dishes stacked, sanitizer buckets changed on "
-            "schedule, veggie wash tested and logged, expired product out of the walk-in, hood "
-            "degreased, mop sink clean, line trash cans with no liquid or debris. **Steritech has "
-            "worked our district and has not hit 2065 yet** — we are still in the window. And if the "
-            "temp sensors go quiet again, that is the gateway: check power and internet, then "
-            "**Universal Service Desk 888-411-0083.**"),
-        4: ("Friday — Shop Review: 95 on 8/8, Dinner Is the Gap, and Kasey Still Needs a Shop.",
-            "Pull the board and read it out loud. **Latest shop: 8/8 Lunch, 95.0% — five points lost "
-            "on guest recovery**, with **Lidy Henry** on the meal period. **August: 97.5% (2 shops). "
-            "YTD: 84.8% across 45 shops. Quarter: 86.8% (16 shops).** The action plan from that shop "
-            "is live and it is one behavior: **MOD at the table within 60 seconds of any unhappy "
-            "guest, five proactive table-touches a shift, logged on the clipboard** — anybody on the "
-            "crew can flag it, nobody waits to be asked. Now the two gaps worth naming. **(1) The "
-            "shift gap — Lunch 87.5% vs Dinner 74.9%.** Every point of upside we have is on the "
-            "night shift, and it is Service (90.1%) not food (Quality 100%). **(2) The manager "
-            "board — Nathan Roberts 94.8% (6 shops), Vicki Lucey 86.5% (15), Madison Cureton 84.1% "
-            "(30), Kasey Wilson 75.1% (7).** Kasey is the only one under 80 and has not had a shop "
-            "this month; that needs in-person coaching on the basics, not an email. Crew end of the "
-            "board: **Jada Cox 72.5%, Samuel Galban Rocha 77.6%, Richard Gibbs 79.3%** — pair them "
-            "with the people running 90+. The points live where they always live: **greet at the "
-            "door and the register, tickets under 6 minutes, every bag checked against the ticket, "
-            "milkshake offered out loud on every order, open signs on before doors, no phones on the "
-            "register.** Set the weekend crew up to win the next one — and make it a dinner."),
-        5: ("Saturday — Biggest Volume of the Week. Food on the Floor Gets Remade, Every Time.",
-            "Saturday volume — full prep, par up bread and potatoes early, everybody knows their "
-            "backup station **before** the rush, not during it. Start with the guest-experience "
-            "lesson we paid for: we have a **Level-4 complaint on the books from a dropped bag** — "
-            "the crew member went to remake it and was told **\"it didn't happen.\"** The guest was "
-            "standing right there. Two standards from that, permanently: **food that touches the "
-            "floor is thrown away and remade — bagged or not, no exceptions** — and **you never "
-            "correct a crew member in front of a guest.** The young lady on that ticket did the "
-            "right thing; that is the behavior we want. Then run the day: **labor is at 21.72% for "
-            "the week, under the 25% ceiling** — hold it the way we earned it, **check the number "
-            "hourly**, trim openers and mids on a real lull, **never the close**, **30-minute breaks "
-            "actually taken**, **employee meals rung in at the time of the break.** Sell into the "
-            "traffic — milkshake, drink, fries on every ticket, Large soda 30¢ up; we are **#1 in "
-            "Incidence Sales company-wide** and we hold that by asking out loud. **Blackberry is "
-            "gone as of 8/16 — do not offer it.** Keep tickets **under 6 minutes**, fastest fry "
-            "person at peak, **check every bag against the ticket before it is sealed.** "
-            "Steritech-clean all day. Count the drawer and **enter the deposit tonight** — two "
-            "straight days came back as big unexplained overs because deposits are not getting "
-            "entered."),
-        6: ("Sunday — Sunday Is the Day We Quit Early. Not This One.",
-            "Look at the pattern honestly: **the last two Sunday closes both dropped the Closing "
-            "Checklist and the 9 PM Time and Temp** — different managers, same two items, and "
-            "Sunday's ComplianceMate finished at **39%** with **Pre Open, Closing, Weekly Store "
-            "Inspection and Delivery Check all at zero** while every daytime temp came back 100%. "
-            "Sunday is not our hardest day, it is our **quit-early day.** Fix it in one move: **the "
-            "closing manager does not leave until the Closing Checklist and every time-and-temp are "
-            "complete and signed — on time, not backfilled Monday morning.** Anything genuinely "
-            "unfinished gets written down and handed to the opener. Then close the week the rest of "
-            "the way: re-par what the weekend drained (bread, potatoes, condiments, cups), DayMark "
-            "labels current, **Milkshake Pump Cleaning done** — the shake station is both our worst "
-            "food-cost line (**Shake Mix $143 over, 64% variance**) and our last guest complaint, so "
-            "it gets cleaned and re-drilled, waste sheet honest, **drawer counted and the deposit "
-            "ENTERED** (8/15 and 8/16 both came back as overs because they were not), **CT tasks "
-            "closed the day they land.** Recap the week for the team so they hear the whole picture: "
-            "**COGS 27.0% under a 27.5% goal, total variance down to $285, labor 21.72% under the "
-            "25% ceiling, August shops at 97.5%.** That is a strong month. The only things standing "
-            "between us and a great one are the last two tasks of the night and the greet on the "
-            "dinner shift. Hand the openers a Monday-ready store."),
+        0: ("Monday -- Reset the Week: Cash, Training, and a Clean CrunchTime Board",
+            f"Straight talk to open the week. {shop_phrase}. {month_ytd_phrase} Stay on the trend, don't give "
+            "points back. Now the Monday reset, three items. "
+            f"**(1) CASH** -- {deposit_phrase}. "
+            "**(2) TRAINING** -- pull up Five Guys University this morning. Anyone under 100% with a deadline "
+            "coming up gets a completion date today; anyone past their onboarding deadline comes off the "
+            "schedule per the standard. "
+            "**(3) CLEAR THE CRUNCHTIME BOARD** this morning -- post labor reviews and receive vendor orders "
+            "before noon; stacking L-Rev is the pattern that keeps getting us flagged. Standing: CO2 under "
+            "25% -> order and confirm the 50 lb backup. All in-store tech goes to the **Universal Service "
+            "Desk, 888-411-0083 / FiveGuysHelp.Zendesk.com.** Scams still live -- no email, login, cash, or "
+            "shipping address over the phone, ever."),
+        1: ("Tuesday -- Lunch vs. Dinner: Close the Shift Gap",
+            f"{shift_phrase}. {kpi_phrase}. Same building, same recipes -- the difference is the shift. So "
+            "today, dinner crew especially, the **HALO EFFECT** is the whole job: greet at the door AND at "
+            "the register, eye contact, call the order back at handoff, **fries-up**, a real thank-you and "
+            "goodbye the guest actually hears. **Tickets under 6 minutes** -- over 8 costs us 5 points, over "
+            "10 costs us 20, and the fry station is our named bottleneck, so pre-drop into the rush and put "
+            "your fastest fry person on at peak. **Every bag checked against the ticket before it is "
+            "sealed.** Shift-change is where the greet dies -- when the crew turns over, somebody still owns "
+            "the door. Pull Dinner up to where Lunch already runs and the whole YTD moves with it."),
+        2: ("Wednesday -- COGS Check: Protect the Number We're Earning",
+            f"{cogs_phrase}. If we're under goal, we earned it -- do not let up; if we're over, this is the "
+            "day we correct it, not Friday. Portion the fries level, measure toppings and condiments, cook "
+            "to the board and not to a guess so we are not dumping meat at the end of a rush, and log every "
+            "waste cup as it happens. Check the variance list on the dashboard for today's worst line and "
+            "re-drill that station's build with everyone who touches it. "
+            f"{labor_phrase} -- food and labor together are what pay the bonus, and right now both halves "
+            "need to be winning. Protect it."),
+        3: ("Thursday -- Steritech Standard: Sign Off Before Doors",
+            "Check today's ComplianceMate status before doors -- if any section is red or incomplete from "
+            "last night, it gets closed before the shift starts, not backfilled later. The standard is "
+            "simple: **manager walk completed and SIGNED before doors** -- hand sinks for handwashing ONLY, "
+            "DayMark discard dates current, potato-cutter teeth and slicer blades chip-free, **lids on "
+            "mushrooms and onions**, wet dishes stacked, sanitizer buckets changed on schedule, veggie wash "
+            "tested and logged, expired product out of the walk-in, hood degreased, mop sink clean, line "
+            "trash cans with no liquid or debris. **The closing manager does not leave until the Closing "
+            "Checklist and every time-and-temp are complete and signed -- on time, never backfilled.** If "
+            "something genuinely cannot be finished, write it down and hand it to the opener, never skip it "
+            "silently. If the temp sensors go quiet, check power and internet, then **Universal Service Desk "
+            "888-411-0083.**"),
+        4: ("Friday -- Shop Review: Read the Board Out Loud",
+            f"Pull the board and read it out loud. {shop_phrase}. {month_ytd_phrase} {mgr_phrase} The action "
+            "plan stays one behavior: **MOD at the table within 60 seconds of any unhappy guest, five "
+            "proactive table-touches a shift, logged on the clipboard** -- anybody on the crew can flag it, "
+            f"nobody waits to be asked. {shift_phrase}. The points live where they always live: greet at the "
+            "door and the register, tickets under 6 minutes, every bag checked against the ticket, milkshake "
+            "offered out loud on every order, open signs on before doors, no phones on the register. Set the "
+            "weekend crew up to win the next one -- and make it a dinner."),
+        5: ("Saturday -- Biggest Volume Day: Hold the Line on Labor and Cash",
+            "Saturday volume -- full prep, par up bread and potatoes early, everybody knows their backup "
+            "station **before** the rush, not during it. Standing rule, no exceptions: **food that touches "
+            "the floor is thrown away and remade -- bagged or not** -- and **you never correct a crew member "
+            f"in front of a guest.** Run the day: {labor_phrase} -- hold it the way we earned it, **check the "
+            "number hourly**, trim openers and mids on a real lull, **never the close**, **30-minute breaks "
+            "actually taken**, **employee meals rung in at the time of the break.** Sell into the traffic -- "
+            "milkshake, drink, fries on every ticket, Large soda 30 cents up. Keep tickets **under 6 "
+            "minutes**, fastest fry person at peak, **check every bag against the ticket before it is "
+            f"sealed.** Steritech-clean all day. {deposit_phrase}."),
+        6: ("Sunday -- Finish the Week: Recap and Reset for Monday",
+            "Sunday is the day we tend to quit early -- not this one. **The closing manager does not leave "
+            "until the Closing Checklist and every time-and-temp are complete and signed -- on time, not "
+            "backfilled Monday morning.** Anything genuinely unfinished gets written down and handed to the "
+            "opener. Then close the week the rest of the way: re-par what the weekend drained (bread, "
+            "potatoes, condiments, cups), DayMark labels current, **Milkshake Pump Cleaning done**, waste "
+            f"sheet honest, {deposit_phrase}, **CT tasks closed the day they land.** Recap the week for the "
+            f"team so they hear the whole picture: {cogs_phrase}. {labor_phrase}. {shop_phrase}. Hand the "
+            "openers a Monday-ready store."),
     }
     biweekly_themes = [
-        ("Even Weeks — Finish the Shift: Signed Closings, Clean Cash, and Training Off the Bottom",
-         "This week is about **finishing what we start**, because that is the only place we are "
-         "losing right now. **(1) THE CLOSE.** Sunday's ComplianceMate came back **39% overall** — "
-         "**Closing Checklist 0%, 9 PM Time and Temp 0%, Pre Open 0%, Closing 0%, Weekly Store "
-         "Inspection 0%, Delivery Check 0%** — while every daytime temp (11 AM through 7 PM) came "
-         "back **100%**. And the **same two items were missed the Sunday before, under a different "
-         "manager.** That is a habit, not an accident. The rule for the week: **the closing manager "
-         "does not leave until the Closing Checklist and every time-and-temp are complete and "
-         "signed — on time, never backfilled.** Pre Open, Weekly Store Inspection and Delivery "
-         "Check each get an owner **by name.** **(2) THE CASH.** CrunchTime shows **8/15 $855.22 "
-         "OVER and 8/16 $1,384.44 OVER**, and Sunday's manager count sheet was submitted as **all "
-         "zeros.** An over that size means a deposit was never entered. **Count the safe and both "
-         "drawers at open ($700 / $200 / $200), count at close, drop to the safe, prep the deposit, "
-         "log it on the Safe & Drawer page, and ENTER it in CrunchTime — every night.** **(3) THE "
-         "TRAINING.** Five Guys University is at **76% store completion with a 54% overdue rate and "
-         "32 of 35 crew under 100%.** **Javeh Goodman is at 0% with an onboarding deadline that "
-         "passed 8/9 — off the schedule until it is complete.** Angela Ashby 0%, Megan Kurschner "
-         "0%, Ryan Vititoe 3%, Elizabeth Brazell 24% — every one of them gets a completion date "
-         "this week. **(4) THE INSPECTION STANDARD underneath all of it:** manager walk completed "
-         "and **SIGNED before doors** — hand sinks for handwashing only, DayMark dates current, "
-         "cutter teeth and slicer blades chip-free, **lids on mushrooms and onions**, wet dishes "
-         "stacked, sanitizer buckets changed, veggie wash tested and logged, expired product out of "
-         "the walk-in, hood degreased, line trash with no liquid or debris, restroom checked hourly "
-         "on a signed sheet. **Steritech has worked our district and has not hit 2065 yet** — we are "
-         "still the one in the window. If the temp sensors go quiet, check the gateway's power and "
-         "internet, then **Universal Service Desk 888-411-0083 / FiveGuysHelp.Zendesk.com.** Scams "
-         "still live — nothing over the phone, ever."),
-        ("Odd Weeks — Win the Night: Dinner Shops, Guest Recovery, and the Shake Station",
-         "One theme, because one number explains most of what we are losing: **Lunch averages 87.5% "
-         "on shops and Dinner averages 74.9%.** Same store, same food, **12.6 points apart** — and "
-         "our weakest KPI is **Service at 90.1%** while **Quality is 100%**, CSAT **99.4%**, "
-         "Cleanliness **95.8%**. We build the food right and we lose points on the guest, mostly "
-         "after 4 PM. **(1) THE NIGHT SHIFT OWNS THE HALO EFFECT** — greet at the door AND the "
-         "register, eye contact, order called back at handoff, fries-up, a real thank-you and "
-         "goodbye. **Tickets under 6 minutes** (over 8 = −5, over 10 = −20; fry station is the "
-         "bottleneck — pre-drop into the rush, fastest fry person at peak), **every bag checked "
-         "against the ticket**, **milkshake offered out loud on every order**, open signs on before "
-         "doors, **no phones on the register**, and when the shift changes somebody still owns the "
-         "door. **(2) GUEST RECOVERY IS A SCORED SKILL.** Our latest shop — **8/8 Lunch, 95.0%** — "
-         "lost its five points there. The plan is live: **MOD at the table within 60 seconds of any "
-         "unhappy guest, five proactive table-touches per shift, logged on the BOH clipboard**, and "
-         "any crew member can flag it. Add the lesson from the dropped-bag complaint: **food that "
-         "touches the floor is remade, every time**, and **you never correct a crew member in front "
-         "of a guest.** **(3) THE SHAKE STATION IS COSTING US BOTH WAYS.** It is our worst food-cost "
-         "line — **Shake Mix $143 over theoretical, a 64% variance** — and the source of our last "
-         "shake complaint. **Mix and syrup are measured pumps, not pours**, toppings containers "
-         "clean, **Milkshake Pump Cleaning done on schedule**, every waste cup logged. **(4) THE "
-         "MONEY IS ALREADY WINNING — DEFEND IT.** **COGS 27.0% against a 27.5% goal, total variance "
-         "down to $285, labor 21.72% under the 25% ceiling.** Spot-check the **3.5 oz patty roll** "
-         "(Bun/Burger $105 over), count cheese slices per build ($37 over), cook to the board, "
-         "check labor **hourly**, cut on a real lull and **never the close**, 30-minute breaks "
-         "actually taken, **employee meals rung in.** Standing items that keep biting us: **CO2 "
-         "under 25% → order and confirm the 50 lb backup**, **close CT tasks the day they land**, "
-         "**enter the deposit every night**, **Closing Checklist signed before the closing manager "
-         "leaves.** Scams still live — nothing over the phone, ever."),
+        ("Even Weeks -- Finish the Shift: Signed Closings, Clean Cash, and Training On Track",
+         "This week is about **finishing what we start.** **(1) THE CLOSE.** The standard: **the closing "
+         "manager does not leave until the Closing Checklist and every time-and-temp are complete and "
+         "signed -- on time, never backfilled.** Pre Open, Weekly Store Inspection and Delivery Check each "
+         f"get an owner **by name.** **(2) THE CASH.** {deposit_phrase}. Count the safe and both drawers at "
+         "open ($700 / $200 / $200), count at close, drop to the safe, prep the deposit, log it on the Safe "
+         "& Drawer page, and **enter it in CrunchTime -- every night.** **(3) THE TRAINING.** Check Five "
+         "Guys University this week -- everyone under 100% gets a completion date, anyone past an "
+         "onboarding deadline comes off the schedule per the standard. **(4) THE INSPECTION STANDARD "
+         "underneath all of it:** manager walk completed and **SIGNED before doors** -- hand sinks for "
+         "handwashing only, DayMark dates current, cutter teeth and slicer blades chip-free, **lids on "
+         "mushrooms and onions**, wet dishes stacked, sanitizer buckets changed, veggie wash tested and "
+         "logged, expired product out of the walk-in, hood degreased, line trash with no liquid or debris, "
+         "restroom checked hourly on a signed sheet. If the temp sensors go quiet, check the gateway's power "
+         "and internet, then **Universal Service Desk 888-411-0083 / FiveGuysHelp.Zendesk.com.** Scams "
+         "still live -- nothing over the phone, ever."),
+        ("Odd Weeks -- Win the Night: Dinner Shops, Guest Recovery, and the Numbers That Are Working",
+         f"{shift_phrase}. {kpi_phrase}. We build the food right and we lose points on the guest, mostly "
+         "after 4 PM. **(1) THE NIGHT SHIFT OWNS THE HALO EFFECT** -- greet at the door AND the register, "
+         "eye contact, order called back at handoff, fries-up, a real thank-you and goodbye. **Tickets "
+         "under 6 minutes** (over 8 = -5, over 10 = -20; fry station is the bottleneck -- pre-drop into the "
+         "rush, fastest fry person at peak), **every bag checked against the ticket**, **milkshake offered "
+         "out loud on every order**, open signs on before doors, **no phones on the register**, and when "
+         "the shift changes somebody still owns the door. **(2) GUEST RECOVERY IS A SCORED SKILL.** "
+         f"{shop_phrase}. The plan is live: **MOD at the table within 60 seconds of any unhappy guest, five "
+         "proactive table-touches per shift, logged on the BOH clipboard**, any crew member can flag it. "
+         "**Food that touches the floor is remade, every time**, and **you never correct a crew member in "
+         f"front of a guest.** **(3) THE MONEY IS BEING WATCHED -- DEFEND IT.** {cogs_phrase}. "
+         f"{labor_phrase}. Portion fries level, measure toppings, cook to the board, spot-check patty weight "
+         "and cheese count, check labor **hourly**, cut on a real lull and **never the close**, 30-minute "
+         "breaks actually taken, **employee meals rung in.** Standing items that keep biting us: **CO2 "
+         "under 25% -> order and confirm the 50 lb backup**, **close CT tasks the day they land**, "
+         f"{deposit_phrase}, **Closing Checklist signed before the closing manager leaves.** Scams still "
+         "live -- nothing over the phone, ever."),
     ]
     rot_title, rot_body = rotating_ideas[dow]
     bi_title, bi_body = biweekly_themes[biweek_flag]
+
 
     lines: list[str] = []
     lines.append("## 📋 Shift Huddle Plan — Today's 5-Minute Pre-Shift")
