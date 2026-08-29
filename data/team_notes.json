@@ -1,5 +1,34 @@
 {
-  "notes": [],
-  "new_count": 0,
-  "date": "2026-08-28"
+  "date": "2026-08-29",
+  "new_count": 4,
+  "notes": [
+    {
+      "from": "Jeff Reiss",
+      "role": "dm",
+      "role_label": "District Manager",
+      "time": "2026-08-28 13:20 ET",
+      "body": "BREAD ORDER CHANGE — update Monday's bread order in BOSS to cover 24 hours past the Performance truck (Monday delivery must carry through Tuesday afternoon). Zero out all BOSS deliveries after Monday. Bread now comes on the Performance truck only, twice a week. Ten bags per case. Add bread to the next Performance order. Next-generation bread lands in stores next week. Questions: call Jeff direct at 859.481.2675."
+    },
+    {
+      "from": "CrunchTime Task Alert",
+      "role": "alert",
+      "role_label": "CrunchTime Alert",
+      "time": "2026-08-29 02:28 ET",
+      "body": "Six open tasks on KY-2065: VO-Rec-Performance Fdsvce (8/25), VO-Rec-BOSS Alpha Ohio Valley (8/26), L-Rev (8/27), L-Rev (8/28), VO-Rec-Performance Fdsvce (8/28), VO-Rec-BOSS Alpha Ohio Valley (8/28). Both BOSS receiving tasks tie to the bread change."
+    },
+    {
+      "from": "ComplianceMate",
+      "role": "alert",
+      "role_label": "Compliance",
+      "time": "2026-08-28 11:01 ET",
+      "body": "Friday 8/28 — Closing Checklist MISSED (Madison Cureton, PM/close). All temps logged on time. Vicki Lucey opened. Separate: feedback survey open on the 'milkshake pump checklist on wrong day' ticket."
+    },
+    {
+      "from": "Marketforce",
+      "role": "alert",
+      "role_label": "Guest Feedback",
+      "time": "2026-08-28 11:11 ET",
+      "body": "Case #5P95LY reclassified to L4 General Inquiry — guest could not find milkshakes on the DoorDash site (visit 8/27 2:24 PM). No action needed. Separately, Case #5NZYD2 (8/4 banana milkshake, assigned by Brad Davis) is STILL OPEN — reach the guest or request removal and close."
+    }
+  ]
 }
