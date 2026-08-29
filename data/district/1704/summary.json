@@ -1,20 +1,20 @@
 {
   "store_id": "1704",
   "store_name": "FG-1704 Shelbyville Road",
-  "generated": "2026-08-28 20:58 ET",
+  "generated": "2026-08-29 14:39 ET",
   "_status": "live CrunchTime KPIs (WTD); Brink/Steritech pending",
   "kpis": {
     "net_sales": {
-      "value": "$18,439",
-      "raw": 18439.33,
+      "value": "$24,330",
+      "raw": 24329.64,
       "label": "Net Sales",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "labor_pct": {
-      "value": "26.6%",
-      "raw": 26.6446,
+      "value": "26.0%",
+      "raw": 25.9885,
       "label": "Labor %",
       "source": "CrunchTime",
       "status": "live",
@@ -33,16 +33,16 @@
       "status": "pending"
     },
     "cash_os": {
-      "value": "-$9",
-      "raw": -9.4,
+      "value": "-$378",
+      "raw": -378.43,
       "label": "Cash O/S",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "sales_guest": {
-      "value": "$5.55",
-      "raw": 5.5472,
+      "value": "$5.51",
+      "raw": 5.5145,
       "label": "Sales / Guest",
       "source": "CrunchTime",
       "status": "live",
