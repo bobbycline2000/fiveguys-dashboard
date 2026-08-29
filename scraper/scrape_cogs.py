@@ -179,29 +179,49 @@ async def _fetch_variance_api(page) -> dict | None:
     Tries /ncext/ prefix first (correct path from modern.ct context), then
     falls back to the root-relative path in case the routing changes.
     """
-    # Proven endpoint (discovered 2026-05-24): POST returns ingredient-level
-    # listSummary (Bacon Raw Sliced, Cheese, Potato Idaho…) — the real
-    # Actual-vs-Theoretical report. Category 1 = Food.
+    # Proven endpoint + body (re-verified live 2026-08-29): POST returns
+    # ingredient-level listSummary (Bun Burger, Shake Mix, Bacon Raw Sliced…)
+    # — the real Actual-vs-Theoretical report.
+    #
+    # ROOT CAUSE (found 2026-08-29): commit ee014947 (2026-05-24) changed this
+    # body to {"category": 1}, which 404s on /resource/... and returns an
+    # empty listSummary on /ncext/resource/... — despite that commit's own
+    # message claiming "proven endpoint... Category 1 = Food". That claim was
+    # never actually verified end-to-end; every scheduled pull since 2026-05-24
+    # silently fell through to the NCDashboard MENU-item widget fallback below
+    # (Cheeseburger, Bacon Cheeseburger… with variance_pct always null), which
+    # is the WRONG report — menu items, not ingredients. ~13 weeks of
+    # cogs_variance.json item-level data were affected.
+    #
+    # The correct body is the one documented in
+    # _memory/handoffs/2026-05-08-0237-overnight-cogs-analysis.md and
+    # re-confirmed live 2026-08-29 (200 OK, 10 ingredient-level items,
+    # dateRange 08/17/2026-08/23/2026): {"singleStatus": false, "page": 1,
+    # "start": 0, "limit": 25}. Only the non-/ncext/ path works with this body.
     paths = [
         "/resource/dashboard/top/actual/vs/theoretical",
         "/ncext/resource/dashboard/top/actual/vs/theoretical",
     ]
+    body = {"singleStatus": False, "page": 1, "start": 0, "limit": 25}
     for path in paths:
-        result = await page.evaluate(f"""
-            async () => {{
-                try {{
-                    const r = await fetch('{path}', {{
+        result = await page.evaluate(
+            """
+            async ([path, body]) => {
+                try {
+                    const r = await fetch(path, {
                         method: 'POST', credentials: 'include',
-                        headers: {{'Accept':'application/json','Content-Type':'application/json;charset=UTF-8','X-Requested-With':'XMLHttpRequest'}},
-                        body: JSON.stringify({{category: 1}})
-                    }});
-                    if (!r.ok) return {{error: r.status, path: '{path}'}};
+                        headers: {'Accept':'application/json','Content-Type':'application/json;charset=UTF-8','X-Requested-With':'XMLHttpRequest'},
+                        body: JSON.stringify(body)
+                    });
+                    if (!r.ok) return {error: r.status, path: path};
                     return await r.json();
-                }} catch (e) {{
-                    return {{error: String(e), path: '{path}'}};
-                }}
-            }}
-        """)
+                } catch (e) {
+                    return {error: String(e), path: path};
+                }
+            }
+            """,
+            [path, body],
+        )
         if result and "error" not in result and result.get("listSummary"):
             log.info(f"Variance API ({path}): {len(result.get('listSummary', []))} items")
             return result
@@ -583,22 +603,30 @@ async def run():
         # so the API is primary and the widget is fallback only. (Fixed 2026-05-24.)
         items = []
         week_start = week_end = None
+        item_source = "none"
         api_data = await _fetch_variance_api(page)
         if api_data and api_data.get("listSummary"):
             items = _parse_items(api_data.get("listSummary", []))
             date_range = api_data.get("dateRange", {})
             week_start = _parse_ct_date(date_range.get("startDate", ""))
             week_end   = _parse_ct_date(date_range.get("endDate", ""))
+            item_source = "api_ingredient_level"
             log.info(f"AvT API: {len(items)} ingredient-level variance items, "
                      f"range={week_start}–{week_end}")
         else:
-            log.warning("AvT API unavailable — falling back to NCDashboard widget text")
+            # WARNING: this branch returns MENU items (Cheeseburger, etc.), not
+            # ingredients — it is the wrong report for the food-cost drill-down.
+            # It only exists as a last-resort fallback. If this fires, the AvT
+            # API call above is broken again and needs the same live-verification
+            # treatment as the 2026-08-29 fix (see comment in _fetch_variance_api).
+            log.warning("AvT API unavailable — falling back to NCDashboard MENU-item widget text (WRONG report, ingredient API is broken)")
             page_text = await page.inner_text("body")
             widget_data = _parse_ncdashboard_avt(page_text)
             if widget_data and widget_data["items"]:
                 items = widget_data["items"]
                 week_start = widget_data["week_start"]
                 week_end   = widget_data["week_end"]
+                item_source = "widget_menu_level_FALLBACK"
 
         if not week_start or not week_end:
             today_fb = datetime.now(tz=ET).date()
@@ -636,6 +664,7 @@ async def run():
         "meta": {
             "source": "CrunchTime Net Chef — purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
             "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+            "item_source": item_source,
             "category": "Food",
             "store": STORE_ID,
             "week_start":    week_start.strftime("%Y-%m-%d"),
