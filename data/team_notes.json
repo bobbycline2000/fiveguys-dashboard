@@ -1,5 +1,41 @@
 {
-  "notes": [],
-  "new_count": 0,
-  "date": "2026-08-29"
+  "date": "2026-08-29",
+  "new_count": 5,
+  "notes": [
+    {
+      "from": "Jeff Reiss",
+      "role": "dm",
+      "role_label": "District Manager",
+      "time": "2026-08-28 17:20 ET",
+      "body": "BREAD — update Monday's BOSS order to cover 24 hours past the Performance truck (through Tuesday afternoon). After Monday, ZERO OUT all BOSS deliveries. Bread now comes on the Performance truck only, twice a week — 10 bags per case, add it to the next Performance order. Corporate wants next-generation bread in stores next week. Questions: 859.481.2675."
+    },
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "2026-08-24 12:00 ET",
+      "body": "PAST DUE — Bread Policy signatures. All black shirts, including the GM, sign the Bread Policy and return in ONE email. Deadline was Wed Aug 26 at noon."
+    },
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "2026-08-24 17:37 ET",
+      "body": "Red Flag Report — drive the top 2 items holding our KPIs back on shoppers, rankings and OSAT. (1) Ticket times — head on a swivel, eliminate bottlenecks. (2) Drinks, Fries and Shakes suggested to EVERY guest — the Halo Effect. These two line items alone are holding us back."
+    },
+    {
+      "from": "Kevin Goyke / George Estep",
+      "role": "alert",
+      "role_label": "Win — Food Safety",
+      "time": "2026-08-25 19:54 ET",
+      "body": "Steritech FSA reversed from 94 to 99. Justin Kincaid: 'Scoring for this line item has been reversed. The score is now 99.' Kevin Goyke (FBM): 'This one is now a 99%. Congrats Bobby and team!' George Estep, CEO: 'Congrats team! Thank you, Kevin.'"
+    },
+    {
+      "from": "Tonya Tucker",
+      "role": "accounting",
+      "role_label": "Estep Accounting",
+      "time": "2026-08-27 12:53 ET",
+      "body": "SS7 FG Deposits portal upload requests for 8/26 and 8/27 — 2065 is NOT on either list. Still open from 8/19: upload the 8/14 deposit receipt to the portal, and send the 7/23 dinner-shift employee list for Secret Shopper rewards."
+    }
+  ]
 }
