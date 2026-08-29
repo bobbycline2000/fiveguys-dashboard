@@ -1,16 +1,29 @@
 {
   "store": "2065",
-  "date": "2026-08-23",
-  "day_of_week": "Sunday",
-  "generated_at": "2026-08-24T05:13:17.285931-04:00",
+  "date": "2026-08-28",
+  "day_of_week": "Friday",
+  "generated_at": "2026-08-29T07:51:11.853620-04:00",
   "schedule": {
-    "date": "2026-08-23",
-    "day_of_week": "Sunday",
+    "date": "2026-08-28",
+    "day_of_week": "Friday",
     "am_manager": "Vicki Lucey",
-    "pm_manager": "Anthony Pirtle",
-    "shift_change_manager": null
+    "pm_manager": "Madison Cureton",
+    "shift_change_manager": "Robert Cline & Madelynn Smith"
   },
-  "missing_count": 0,
-  "missing_items": [],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Sunday 2026-08-23\n\u2705 All temps and checklists complete. Clean day.\n"
+  "missing_count": 1,
+  "missing_items": [
+    {
+      "date": "2026-08-28",
+      "day_of_week": "Friday",
+      "category": "CHECKLIST",
+      "shift": "N/A",
+      "task_name": "Closing Checklist",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0,
+      "manager": "Madison Cureton",
+      "manager_basis": "pm_manager (closing task)"
+    }
+  ],
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Friday 2026-08-28\n**1 missed/incomplete** (AM mgr: Vicki Lucey \u00b7 PM mgr: Madison Cureton)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Madison Cureton**\n"
 }
