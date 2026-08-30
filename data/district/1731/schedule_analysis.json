@@ -1,35 +1,40 @@
 {
   "store_id": "1731",
   "store_name": "Outer Loop",
-  "week_ending": "2026-08-30",
-  "week_start": "2026-08-24",
+  "week_ending": "2026-09-06",
+  "week_start": "2026-08-31",
   "target_pct": 20.0,
-  "generated_at": "2026-08-29T10:39:43.239994-04:00",
+  "generated_at": "2026-08-30T10:30:28.586790-04:00",
   "week": {
-    "fcst_sales": 31116,
-    "sched_cost": 6540,
-    "sched_hours": 425.0,
-    "labor_pct": 21.0,
-    "over_target_dollars": 317,
-    "ot_hours": 25.5,
-    "ot_value": 652
+    "fcst_sales": 30086,
+    "sched_cost": 6554,
+    "sched_hours": 428.5,
+    "labor_pct": 21.8,
+    "over_target_dollars": 536,
+    "ot_hours": 17.0,
+    "ot_value": 447
   },
-  "issue_count": 6,
+  "issue_count": 7,
   "issues": [
     {
       "sev": "high",
       "day": "Mon",
-      "msg": "Mon labor 24.6% \u2014 ~$168 over 20% target"
+      "msg": "Mon labor 22.5% \u2014 ~$99 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Tue",
+      "msg": "Tue labor 23.1% \u2014 ~$124 over 20% target"
     },
     {
       "sev": "high",
       "day": "Wed",
-      "msg": "Wed labor 22.8% \u2014 ~$109 over 20% target"
+      "msg": "Wed labor 24.8% \u2014 ~$176 over 20% target"
     },
     {
-      "sev": "med",
+      "sev": "high",
       "day": "Thu",
-      "msg": "Thu overtime 2.5h ($67)"
+      "msg": "Thu labor 22.8% \u2014 ~$114 over 20% target"
     },
     {
       "sev": "med",
@@ -39,94 +44,94 @@
     {
       "sev": "med",
       "day": "Sat",
-      "msg": "Sat overtime 11.0h ($274)"
+      "msg": "Sat overtime 6.0h ($154)"
     },
     {
-      "sev": "med",
+      "sev": "high",
       "day": "Sun",
-      "msg": "Sun overtime 1.0h ($18)"
+      "msg": "Sun labor 22.9% \u2014 ~$118 over 20% target"
     }
   ],
   "per_day": [
     {
-      "date": "2026-08-24",
+      "date": "2026-08-31",
       "wd": "Mon",
-      "sales": 3641,
+      "sales": 3914,
       "hrs": 58.0,
-      "cost": 896,
-      "pct": 24.6,
+      "cost": 882,
+      "pct": 22.5,
       "byPosition": {
         "Shift Leader-Hourly": 29.0,
         "2. Crew": 29.0
       }
     },
     {
-      "date": "2026-08-25",
+      "date": "2026-09-01",
       "wd": "Tue",
-      "sales": 3849,
-      "hrs": 55.5,
-      "cost": 836,
-      "pct": 21.7,
+      "sales": 3951,
+      "hrs": 60.0,
+      "cost": 914,
+      "pct": 23.1,
       "byPosition": {
-        "2. Crew": 32.5,
-        "Shift Leader-Hourly": 23.0
+        "2. Crew": 42.0,
+        "Shift Leader-Hourly": 18.0
       }
     },
     {
-      "date": "2026-08-26",
+      "date": "2026-09-02",
       "wd": "Wed",
-      "sales": 3953,
+      "sales": 3626,
       "hrs": 60.0,
-      "cost": 900,
+      "cost": 901,
+      "pct": 24.8,
+      "byPosition": {
+        "2. Crew": 38.0,
+        "Shift Leader-Hourly": 22.0
+      }
+    },
+    {
+      "date": "2026-09-03",
+      "wd": "Thu",
+      "sales": 4055,
+      "hrs": 61.5,
+      "cost": 926,
       "pct": 22.8,
       "byPosition": {
-        "2. Crew": 39.0,
-        "Shift Leader-Hourly": 21.0
+        "Shift Leader-Hourly": 22.0,
+        "2. Crew": 39.5
       }
     },
     {
-      "date": "2026-08-27",
-      "wd": "Thu",
-      "sales": 4345,
-      "hrs": 61.5,
-      "cost": 936,
-      "pct": 21.5,
-      "byPosition": {
-        "2. Crew": 37.0,
-        "Shift Leader-Hourly": 24.5
-      }
-    },
-    {
-      "date": "2026-08-28",
+      "date": "2026-09-04",
       "wd": "Fri",
-      "sales": 5144,
+      "sales": 5484,
       "hrs": 62.5,
       "cost": 1030,
-      "pct": 20.0,
+      "pct": 18.8,
       "byPosition": {
         "2. Crew": 44.5,
         "Shift Leader-Hourly": 18.0
       }
     },
     {
-      "date": "2026-08-29",
+      "date": "2026-09-05",
       "wd": "Sat",
-      "sales": 5261,
-      "hrs": 63.5,
-      "cost": 1002,
-      "pct": 19.0,
+      "sales": 4974,
+      "hrs": 62.5,
+      "cost": 967,
+      "pct": 19.4,
       "byPosition": {
-        "2. Crew": 41.0,
+        "2. Crew": 40.0,
         "Shift Leader-Hourly": 22.5
       }
     },
     {
-      "date": "2026-08-30",
+      "date": "2026-09-06",
       "wd": "Sun",
-      "sales": 4923,
+      "sales": 4082,
       "hrs": 64.0,
-      "cost": 940,
-      "pct": 19.1,
+      "cost": 934,
+      "pct": 22.9,
       "byPosition": {
         "2. Crew": 40.0,
         "Shift Leader-Hourly": 24.0

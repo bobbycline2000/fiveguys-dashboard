@@ -1,115 +1,109 @@
 {
   "store_id": "2079",
   "store_name": "Elizabethtown",
-  "week_ending": "2026-08-30",
-  "week_start": "2026-08-24",
+  "week_ending": "2026-09-06",
+  "week_start": "2026-08-31",
   "target_pct": 20.0,
-  "generated_at": "2026-08-29T10:39:43.239994-04:00",
+  "generated_at": "2026-08-30T10:30:28.586790-04:00",
   "week": {
-    "fcst_sales": 27201,
-    "sched_cost": 5612,
-    "sched_hours": 387.5,
-    "labor_pct": 20.6,
-    "over_target_dollars": 171,
+    "fcst_sales": 27460,
+    "sched_cost": 5102,
+    "sched_hours": 406.5,
+    "labor_pct": 18.6,
+    "over_target_dollars": -390,
     "ot_hours": 0.0,
     "ot_value": 0
   },
-  "issue_count": 2,
-  "issues": [
-    {
-      "sev": "high",
-      "day": "Mon",
-      "msg": "Mon labor 24.6% \u2014 ~$144 over 20% target"
-    },
-    {
-      "sev": "high",
-      "day": "Tue",
-      "msg": "Tue labor 24.8% \u2014 ~$143 over 20% target"
-    }
-  ],
+  "issue_count": 0,
+  "issues": [],
   "per_day": [
     {
-      "date": "2026-08-24",
+      "date": "2026-08-31",
       "wd": "Mon",
-      "sales": 3103,
-      "hrs": 50.5,
-      "cost": 764,
-      "pct": 24.6,
+      "sales": 3095,
+      "hrs": 55.0,
+      "cost": 663,
+      "pct": 21.4,
       "byPosition": {
-        "Shift Leader-Hourly": 33.5,
-        "2. Crew": 17.0
+        "2. Crew": 21.0,
+        "Shift Leader-Hourly": 24.0,
+        "General Manager-Salary": 10.0
       }
     },
     {
-      "date": "2026-08-25",
+      "date": "2026-09-01",
       "wd": "Tue",
-      "sales": 2966,
-      "hrs": 51.0,
-      "cost": 736,
-      "pct": 24.8,
+      "sales": 3106,
+      "hrs": 53.0,
+      "cost": 607,
+      "pct": 19.5,
       "byPosition": {
-        "2. Crew": 29.0,
-        "Shift Leader-Hourly": 22.0
+        "2. Crew": 27.0,
+        "Shift Leader-Hourly": 16.0,
+        "General Manager-Salary": 10.0
       }
     },
     {
-      "date": "2026-08-26",
+      "date": "2026-09-02",
       "wd": "Wed",
-      "sales": 3507,
-      "hrs": 50.0,
-      "cost": 740,
-      "pct": 21.1,
+      "sales": 3525,
+      "hrs": 52.0,
+      "cost": 734,
+      "pct": 20.8,
       "byPosition": {
-        "2. Crew": 13.0,
-        "Shift Leader-Hourly": 37.0
+        "2. Crew": 24.0,
+        "Shift Leader-Hourly": 28.0
       }
     },
     {
-      "date": "2026-08-27",
+      "date": "2026-09-03",
       "wd": "Thu",
-      "sales": 3611,
-      "hrs": 54.0,
-      "cost": 756,
-      "pct": 20.9,
+      "sales": 3586,
+      "hrs": 56.5,
+      "cost": 645,
+      "pct": 18.0,
       "byPosition": {
-        "2. Crew": 32.0,
-        "Shift Leader-Hourly": 22.0
+        "General Manager-Salary": 10.0,
+        "Shift Leader-Hourly": 19.5,
+        "2. Crew": 27.0
       }
     },
     {
-      "date": "2026-08-28",
+      "date": "2026-09-04",
       "wd": "Fri",
-      "sales": 4698,
-      "hrs": 59.0,
-      "cost": 873,
-      "pct": 18.6,
+      "sales": 4745,
+      "hrs": 64.0,
+      "cost": 786,
+      "pct": 16.6,
       "byPosition": {
-        "Shift Leader-Hourly": 46.0,
-        "2. Crew": 13.0
+        "Shift Leader-Hourly": 29.0,
+        "2. Crew": 25.0,
+        "General Manager-Salary": 10.0
       }
     },
     {
-      "date": "2026-08-29",
+      "date": "2026-09-05",
       "wd": "Sat",
-      "sales": 4718,
-      "hrs": 61.0,
-      "cost": 866,
-      "pct": 18.4,
+      "sales": 4830,
+      "hrs": 63.0,
+      "cost": 749,
+      "pct": 15.5,
       "byPosition": {
-        "2. Crew": 26.0,
-        "Shift Leader-Hourly": 35.0
+        "General Manager-Salary": 10.0,
+        "Shift Leader-Hourly": 30.0,
+        "2. Crew": 23.0
       }
     },
     {
-      "date": "2026-08-30",
+      "date": "2026-09-06",
       "wd": "Sun",
-      "sales": 4598,
-      "hrs": 62.0,
-      "cost": 876,
-      "pct": 19.0,
+      "sales": 4573,
+      "hrs": 63.0,
+      "cost": 918,
+      "pct": 20.1,
       "byPosition": {
-        "2. Crew": 35.0,
-        "Shift Leader-Hourly": 27.0
+        "2. Crew": 24.0,
+        "Shift Leader-Hourly": 39.0
       }
     }
   ]
