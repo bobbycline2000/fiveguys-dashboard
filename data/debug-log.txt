@@ -1,1 +1,2 @@
 [2026-08-30 14:31:46] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
+[2026-08-30 16:45] Daily brief SENT (HTTP 202) via Outlook REST refresh-token path. Chrome extension was disconnected all run (list_connected_browsers returned []). Step 8.6 SharePoint xlsx fill SKIPPED — needs Chrome. Rows 8/24-8/29 still unfilled; numbers are in _memory/brief-carryover.md.
