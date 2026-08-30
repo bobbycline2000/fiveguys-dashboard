@@ -1,5 +1,34 @@
 {
-  "notes": [],
-  "new_count": 0,
-  "date": "2026-08-30"
+ "date": "2026-08-30",
+ "new_count": 4,
+ "notes": [
+  {
+   "from": "ComplianceMate Support (Mya Black)",
+   "role": "alert",
+   "role_label": "Alert",
+   "time": "3:23 PM",
+   "body": "Temp probes down - 1 PM temps not taken. Tickets 206837 / 206838 / 206846 open. Fix path: app to 6.2.14, restart tablet, unpair probes in Bluetooth, Bluetooth off/on, Location on + Wi-Fi, reopen app, Probes > Search > Activate Probe. If still down: Settings > Location > Disconnect Device and ask Mya for a new QR code. Record temps by hand until fixed."
+  },
+  {
+   "from": "CrunchTime Task Alert",
+   "role": "alert",
+   "role_label": "Alert",
+   "time": "6:28 AM",
+   "body": "10 open tasks on KY-2065. Today: Post Period - Labor Not Posted, Inv-Final for Post. L-Rev stacked 8/27, 8/28, 8/29. Two BOSS and two PFG vendor orders unreceived."
+  },
+  {
+   "from": "Five Guys Corporate",
+   "role": "alert",
+   "role_label": "Corporate",
+   "time": "Fri 9:53 PM",
+   "body": "Idaho Norkotah potato transition begins September 1. Case cost DOWN $3.41-$5.02 ($4.35 avg). PFG RFS Cincinnati (Ohio Valley) line: $23.31 to $19.65, -$3.66, transition Sept 4 - confirm our DC with Jeff. Watch fry color and cook time the first week on new crop."
+  },
+  {
+   "from": "Tonya Tucker, Estep Accounting",
+   "role": "accounting",
+   "role_label": "Accounting",
+   "time": "carryover",
+   "body": "Two items still open: upload the 8/14 deposit receipt to the portal (11 days), and send the 7/23 dinner-shift employee list for Secret Shopper rewards (23 days - answer ready: Robert Cline, Francisco Llorente Mejias, Jeremiah Matthews, Madison Cureton, Richard Gibbs)."
+  }
+ ]
 }
