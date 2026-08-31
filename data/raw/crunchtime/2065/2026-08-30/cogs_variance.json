@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
+    "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+    "item_source": "api_ingredient_level",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-08-24",
+    "week_end": "2026-08-30",
+    "variance_week_start": "2026-08-17",
+    "variance_week_end": "2026-08-23",
+    "month_start": "2026-08-01",
+    "last_month_start": "2026-07-01",
+    "last_month_end": "2026-07-31",
+    "through": "2026-08-30",
+    "pulled": "2026-08-31 12:50 ET",
+    "method": "api+playwright (GL-based, 2026-08-03)"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 26.4,
+  "cogs_pct_month": 24.4,
+  "cogs_pct_last_month": 26.8,
+  "variance_to_goal_week": -1.1,
+  "variance_to_goal_month": -3.1,
+  "variance_to_goal_last_mo": -0.7,
+  "items": [
+    {
+      "name": "Bun, Burger",
+      "actual": 1031.77,
+      "theoretical": 984.4,
+      "over_dollars": 47.37,
+      "variance_pct": -4.8,
+      "rank": 1
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 220.12,
+      "theoretical": 178.35,
+      "over_dollars": 41.77,
+      "variance_pct": -23.4,
+      "rank": 2
+    },
+    {
+      "name": "Banana Marinade",
+      "actual": 48.72,
+      "theoretical": 8.12,
+      "over_dollars": 40.6,
+      "variance_pct": -500,
+      "rank": 3
+    },
+    {
+      "name": "Onion, Yellow Jumbo",
+      "actual": 75.65,
+      "theoretical": 56.21,
+      "over_dollars": 19.44,
+      "variance_pct": -34.6,
+      "rank": 4
+    },
+    {
+      "name": "Bacon, Raw Sliced",
+      "actual": 384.62,
+      "theoretical": 366.04,
+      "over_dollars": 18.58,
+      "variance_pct": -5.1,
+      "rank": 5
+    },
+    {
+      "name": "Strawberry Marinade",
+      "actual": 0.39,
+      "theoretical": 14.81,
+      "over_dollars": -14.42,
+      "variance_pct": 97.4,
+      "rank": 6
+    },
+    {
+      "name": "Mushroom Pcs",
+      "actual": 89.1,
+      "theoretical": 107.55,
+      "over_dollars": -18.45,
+      "variance_pct": 17.2,
+      "rank": 7
+    },
+    {
+      "name": "Cajun Season",
+      "actual": 46.89,
+      "theoretical": 89.33,
+      "over_dollars": -42.44,
+      "variance_pct": 47.5,
+      "rank": 8
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 104.66,
+      "theoretical": 148.6,
+      "over_dollars": -43.94,
+      "variance_pct": 29.6,
+      "rank": 9
+    },
+    {
+      "name": "Cup, Shake",
+      "actual": -25.09,
+      "theoretical": 25.61,
+      "over_dollars": -50.7,
+      "variance_pct": 198.0,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
