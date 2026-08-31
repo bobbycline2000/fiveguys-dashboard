@@ -1,0 +1,143 @@
+{
+  "source": "teamworx_api",
+  "source_url": "https://fiveguysfr77.ct-teamworx.com/json/mn/dailyRoster/getPageData",
+  "store": "2065",
+  "labor_date": "2026-08-31",
+  "fetched_at": "2026-08-31T04:00:14.816588-04:00",
+  "shift_count": 11,
+  "total_hours": 77.75,
+  "shifts": [
+    {
+      "name": "Robert C.",
+      "full_name": "Robert Cline",
+      "position": "General Manager-Salary",
+      "role": "GM",
+      "in_text": "6:00 AM",
+      "out_text": "3:30 PM",
+      "in_ms": 1788156000000,
+      "out_ms": 1788190200000,
+      "hours": 9.5,
+      "minor": false
+    },
+    {
+      "name": "Madelynn S.",
+      "full_name": "Madelynn Smith",
+      "position": "Shift Leader-Hourly",
+      "role": "Shift Leader-Hourly",
+      "in_text": "12:00 PM",
+      "out_text": "7:00 PM",
+      "in_ms": 1788177600000,
+      "out_ms": 1788202800000,
+      "hours": 7.0,
+      "minor": false
+    },
+    {
+      "name": "Madison C.",
+      "full_name": "Madison Cureton",
+      "position": "Shift Leader-Hourly",
+      "role": "Shift Leader-Hourly",
+      "in_text": "5:00 PM",
+      "out_text": "11:00 PM",
+      "in_ms": 1788195600000,
+      "out_ms": 1788217200000,
+      "hours": 6.0,
+      "minor": false
+    },
+    {
+      "name": "Mykenize M.",
+      "full_name": "Mykenize Milledge",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "5:00 PM",
+      "out_text": "10:30 PM",
+      "in_ms": 1788195600000,
+      "out_ms": 1788215400000,
+      "hours": 5.5,
+      "minor": false
+    },
+    {
+      "name": "Elizabeth B.",
+      "full_name": "Elizabeth Brazell",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "8:00 AM",
+      "out_text": "4:00 PM",
+      "in_ms": 1788163200000,
+      "out_ms": 1788192000000,
+      "hours": 8.0,
+      "minor": false
+    },
+    {
+      "name": "Zack W.",
+      "full_name": "Zack Whitten",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "9:00 AM",
+      "out_text": "4:30 PM",
+      "in_ms": 1788166800000,
+      "out_ms": 1788193800000,
+      "hours": 7.5,
+      "minor": false
+    },
+    {
+      "name": "Serina G.",
+      "full_name": "Serina Gaskins",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "4:00 PM",
+      "out_text": "11:00 PM",
+      "in_ms": 1788192000000,
+      "out_ms": 1788217200000,
+      "hours": 7.0,
+      "minor": false
+    },
+    {
+      "name": "Emanuela K.",
+      "full_name": "Emanuela Kamara",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "4:15 PM",
+      "out_text": "10:30 PM",
+      "in_ms": 1788192900000,
+      "out_ms": 1788215400000,
+      "hours": 6.25,
+      "minor": false
+    },
+    {
+      "name": "Francisco M.",
+      "full_name": "Francisco Llorente Mejias",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "8:00 AM",
+      "out_text": "4:00 PM",
+      "in_ms": 1788163200000,
+      "out_ms": 1788192000000,
+      "hours": 8.0,
+      "minor": false
+    },
+    {
+      "name": "Cortez B.",
+      "full_name": "Cortez Brown",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "12:00 PM",
+      "out_text": "8:00 PM",
+      "in_ms": 1788177600000,
+      "out_ms": 1788206400000,
+      "hours": 8.0,
+      "minor": false
+    },
+    {
+      "name": "Ailen C.",
+      "full_name": "Ailen Gonzalez Cardero",
+      "position": "2. Crew",
+      "role": "Crew",
+      "in_text": "6:00 PM",
+      "out_text": "11:00 PM",
+      "in_ms": 1788199200000,
+      "out_ms": 1788217200000,
+      "hours": 5.0,
+      "minor": false
+    }
+  ]
+}

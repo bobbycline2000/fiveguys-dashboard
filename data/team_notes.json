@@ -1,34 +1,27 @@
 {
- "date": "2026-08-30",
- "new_count": 4,
- "notes": [
-  {
-   "from": "ComplianceMate Support (Mya Black)",
-   "role": "alert",
-   "role_label": "Alert",
-   "time": "3:23 PM",
-   "body": "Temp probes down - 1 PM temps not taken. Tickets 206837 / 206838 / 206846 open. Fix path: app to 6.2.14, restart tablet, unpair probes in Bluetooth, Bluetooth off/on, Location on + Wi-Fi, reopen app, Probes > Search > Activate Probe. If still down: Settings > Location > Disconnect Device and ask Mya for a new QR code. Record temps by hand until fixed."
-  },
-  {
-   "from": "CrunchTime Task Alert",
-   "role": "alert",
-   "role_label": "Alert",
-   "time": "6:28 AM",
-   "body": "10 open tasks on KY-2065. Today: Post Period - Labor Not Posted, Inv-Final for Post. L-Rev stacked 8/27, 8/28, 8/29. Two BOSS and two PFG vendor orders unreceived."
-  },
-  {
-   "from": "Five Guys Corporate",
-   "role": "alert",
-   "role_label": "Corporate",
-   "time": "Fri 9:53 PM",
-   "body": "Idaho Norkotah potato transition begins September 1. Case cost DOWN $3.41-$5.02 ($4.35 avg). PFG RFS Cincinnati (Ohio Valley) line: $23.31 to $19.65, -$3.66, transition Sept 4 - confirm our DC with Jeff. Watch fry color and cook time the first week on new crop."
-  },
-  {
-   "from": "Tonya Tucker, Estep Accounting",
-   "role": "accounting",
-   "role_label": "Accounting",
-   "time": "carryover",
-   "body": "Two items still open: upload the 8/14 deposit receipt to the portal (11 days), and send the 7/23 dinner-shift employee list for Secret Shopper rewards (23 days - answer ready: Robert Cline, Francisco Llorente Mejias, Jeremiah Matthews, Madison Cureton, Richard Gibbs)."
-  }
- ]
+  "date": "2026-08-31",
+  "new_count": 3,
+  "notes": [
+    {
+      "from": "ComplianceMate Support (Mya Black / Kayla Sexton)",
+      "role": "alert",
+      "role_label": "CRITICAL ALERT",
+      "time": "8/30 3:23 PM - 8/31 12:00 AM",
+      "body": "ALL TEMP PROBES DEAD at 2065. Tickets 206837 / 206838 / 206846 open. Store placed in MANUAL MODE for 15 business days - all temps on paper, on time, signed. ACTION: call ThermoWorks 1-800-393-6434 for an RMA (they own the probe warranty), and reply to Kayla confirming all backup probes also failed. Sync the tablet: three lines -> Settings -> Sync -> Synchronize Data."
+    },
+    {
+      "from": "CrunchTime (noreply@net-chef.com)",
+      "role": "alert",
+      "role_label": "TASK ALERT",
+      "time": "8/31 2:28 AM ET",
+      "body": "11 overdue CrunchTime tasks and the period closes today. Post Period - Labor Not Posted (8/30) and Inv-Final for Post (8/30) are the week close - do those first. L-Rev overdue 8/27-8/30 (four deep). VO-Rec BOSS 8/26, 8/28, 8/29. VO-Rec Performance Fdsvce 8/25, 8/28. Clear the board before noon."
+    },
+    {
+      "from": "Brad Davis (standing)",
+      "role": "director",
+      "role_label": "DIRECTOR",
+      "time": "carryover",
+      "body": "55% to Stay Alive - week ending 8/30 closed at 39.9% combined (FP% 19.7 + Labor 20.18%). Under Brad's 55% line and under his 25% labor line. Still open: L3 guest complaint Case #5NZYD2 on Marketforce (25 days), Shift Lead incident-process PDRs, Bread Policy signatures past due."
+    }
+  ]
 }
