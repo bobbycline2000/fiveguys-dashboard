@@ -4,17 +4,121 @@
   "week_ending": "2026-09-06",
   "week_start": "2026-08-31",
   "target_pct": 20.0,
-  "generated_at": "2026-08-30T10:30:28.586790-04:00",
+  "generated_at": "2026-08-31T13:14:03.017731-04:00",
   "week": {
-    "fcst_sales": 0,
-    "sched_cost": 0,
-    "sched_hours": 0.0,
-    "labor_pct": 0,
-    "over_target_dollars": 0,
+    "fcst_sales": 32734,
+    "sched_cost": 6406,
+    "sched_hours": 444.0,
+    "labor_pct": 19.6,
+    "over_target_dollars": -141,
     "ot_hours": 0.0,
     "ot_value": 0
   },
-  "issue_count": 0,
-  "issues": [],
-  "per_day": []
+  "issue_count": 2,
+  "issues": [
+    {
+      "sev": "high",
+      "day": "Mon",
+      "msg": "Mon labor 27.5% \u2014 ~$269 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Tue",
+      "msg": "Tue labor 23.8% \u2014 ~$149 over 20% target"
+    }
+  ],
+  "per_day": [
+    {
+      "date": "2026-08-31",
+      "wd": "Mon",
+      "sales": 3585,
+      "hrs": 68.0,
+      "cost": 986,
+      "pct": 27.5,
+      "byPosition": {
+        "2. Crew": 51.0,
+        "Shift Manager-Hourly": 7.0,
+        "General Manager-Salary": 10.0
+      }
+    },
+    {
+      "date": "2026-09-01",
+      "wd": "Tue",
+      "sales": 3929,
+      "hrs": 60.5,
+      "cost": 935,
+      "pct": 23.8,
+      "byPosition": {
+        "2. Crew": 28.5,
+        "Shift Manager-Hourly": 7.0,
+        "Shift Leader-Hourly": 15.0,
+        "General Manager-Salary": 10.0
+      }
+    },
+    {
+      "date": "2026-09-02",
+      "wd": "Wed",
+      "sales": 3853,
+      "hrs": 55.5,
+      "cost": 827,
+      "pct": 21.5,
+      "byPosition": {
+        "2. Crew": 34.5,
+        "Shift Manager-Hourly": 5.0,
+        "General Manager-Salary": 10.0,
+        "Shift Leader-Hourly": 6.0
+      }
+    },
+    {
+      "date": "2026-09-03",
+      "wd": "Thu",
+      "sales": 4859,
+      "hrs": 61.5,
+      "cost": 913,
+      "pct": 18.8,
+      "byPosition": {
+        "2. Crew": 36.5,
+        "Shift Leader-Hourly": 15.0,
+        "General Manager-Salary": 10.0
+      }
+    },
+    {
+      "date": "2026-09-04",
+      "wd": "Fri",
+      "sales": 5758,
+      "hrs": 71.0,
+      "cost": 1036,
+      "pct": 18.0,
+      "byPosition": {
+        "2. Crew": 46.0,
+        "General Manager-Salary": 10.0,
+        "Shift Leader-Hourly": 8.0,
+        "Shift Manager-Hourly": 7.0
+      }
+    },
+    {
+      "date": "2026-09-05",
+      "wd": "Sat",
+      "sales": 5637,
+      "hrs": 63.0,
+      "cost": 840,
+      "pct": 14.9,
+      "byPosition": {
+        "2. Crew": 48.0,
+        "Shift Leader-Hourly": 15.0
+      }
+    },
+    {
+      "date": "2026-09-06",
+      "wd": "Sun",
+      "sales": 5113,
+      "hrs": 64.5,
+      "cost": 870,
+      "pct": 17.0,
+      "byPosition": {
+        "2. Crew": 49.5,
+        "Shift Leader-Hourly": 15.0
+      }
+    }
+  ]
 }
