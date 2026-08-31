@@ -1,41 +1,41 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-08-17",
-    "week_end": "2026-08-23",
-    "week_label": "8/17-8/23",
+    "week_start": "2026-08-24",
+    "week_end": "2026-08-30",
+    "week_label": "8/24-8/30",
     "month": "August",
-    "generated": "2026-08-24T13:55:50",
+    "generated": "2026-08-31T19:23:27",
     "notes": [
-      "tips snapshot for w/e 2026-08-23 not found"
+      "tips snapshot for w/e 2026-08-30 not found"
     ]
   },
   "sales": {
     "forecast": null,
-    "net_sales": 32638.59,
+    "net_sales": 30691.89,
     "over_under": null
   },
   "food_cost": {
-    "cogs_pct": 24.5,
+    "cogs_pct": 26.4,
     "supplies_pct": null,
     "total_pct": null,
     "qtd_cogs_pct": null,
-    "var_to_goal": -3.0,
+    "var_to_goal": -1.1,
     "goal_pct": 27.5,
     "top_var_items": [
       "Bun, Burger",
-      "Cup, Shake",
-      "Lettuce"
+      "Shake Mix",
+      "Banana Marinade"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 20.44,
+    "hourly_labor_pct": 20.18,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
     "ot_hours": null,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 586.12,
+    "labor_hours": 518.97,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
@@ -44,11 +44,11 @@
   "food_safety": {
     "steritech_pct": null,
     "criticals": null,
-    "shops_month_pct": 96.7,
+    "shops_month_pct": 97.5,
     "shops_month_label": "August 2026",
     "shops_qtd_pct": 98.0,
     "shops_qtd_count": 5,
-    "shops_ytd_pct": 85.1
+    "shops_ytd_pct": 85.4
   },
   "fgu": {
     "overdue_rate_pct": 54.29,
@@ -106,7 +106,7 @@
     "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 93.7,
+    "completion_pct": 90.5,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
