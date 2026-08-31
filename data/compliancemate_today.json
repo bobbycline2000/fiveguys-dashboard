@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-29",
+  "date": "2026-08-31",
   "location_id": "18170",
   "list_count": 1,
   "overall_required_pct": 0,
@@ -12,7 +12,7 @@
       "all_pct": 0
     }
   ],
-  "fetched_at": "2026-08-29T10:04:45.444556-04:00",
+  "fetched_at": "2026-08-31T10:06:05.510370-04:00",
   "source": "compliancemate_url_replay",
   "report_type": "list_completions"
 }
