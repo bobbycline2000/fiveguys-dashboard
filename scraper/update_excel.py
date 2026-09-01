@@ -61,6 +61,7 @@ import json
 import os
 import random
 import sys
+import time
 from pathlib import Path
 
 import requests
@@ -150,7 +151,7 @@ def find_workbook(headers, day):
     """
     want = f"{calendar.month_name[day.month]} {day.year} FG Daily Report"
     alt = f"{day.strftime('%b')} {day.year} FG Daily Report"   # Jan/Feb are abbreviated
-    r = requests.get(f"{GRAPH}/me/drive/sharedWithMe", headers=headers, timeout=60)
+    r = graph_call("GET", f"{GRAPH}/me/drive/sharedWithMe", headers)
     r.raise_for_status()
     for it in r.json().get("value", []):
         name = (it.get("name") or "").strip()
@@ -171,11 +172,34 @@ def sheet_base(drive, item):
             f"/workbook/worksheets/{requests.utils.quote(SHEET_NAME)}")
 
 
+def graph_call(method, url, headers, tries=5, **kw):
+    """Graph request with throttle handling.
+
+    The workbook API throttles per user, and a burst of range reads/writes will
+    draw a 429 — observed in CI on 2026-09-01 after a busy session, which killed
+    the whole fill because there was no retry. 429/503/504 are transient; honour
+    Retry-After when Graph sends it, otherwise back off exponentially.
+    """
+    delay = 2
+    for attempt in range(1, tries + 1):
+        r = requests.request(method, url, headers=headers, timeout=60, **kw)
+        if r.status_code not in (429, 503, 504):
+            return r
+        if attempt == tries:
+            return r
+        wait = int(r.headers.get("Retry-After") or 0) or delay
+        print(f"  [throttle] HTTP {r.status_code} — retrying in {wait}s "
+              f"({attempt}/{tries - 1})")
+        time.sleep(wait)
+        delay = min(delay * 2, 60)
+    return r
+
+
 def read_range(headers, base, addr, select=None):
     url = f"{base}/range(address='{addr}')"
     if select:
         url += f"?$select={select}"
-    r = requests.get(url, headers=headers, timeout=60)
+    r = graph_call("GET", url, headers)
     r.raise_for_status()
     return r.json()
 
@@ -323,8 +347,8 @@ def write_day(headers, base, row, day, vals, dry=False):
             print(f"  [dry] {col}{row} <- {val}")
             written += 1
             continue
-        r = requests.patch(f"{base}/range(address='{col}{row}')", headers=headers,
-                           data=json.dumps({"values": [[val]]}), timeout=45)
+        r = graph_call("PATCH", f"{base}/range(address='{col}{row}')", headers,
+                       data=json.dumps({"values": [[val]]}))
         if r.status_code == 200:
             written += 1
         else:
