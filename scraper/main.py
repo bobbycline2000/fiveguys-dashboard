@@ -121,6 +121,19 @@ def color_class(v: float | None, good_if_positive: bool = True) -> str:
 
 
 # ─── Scraper ──────────────────────────────────────────────────────────────────
+async def safe_shot(page, name: str) -> None:
+    """Diagnostic screenshot — never fatal.
+
+    Chromium can raise Page.captureScreenshot protocol errors under memory
+    pressure (ERR_INSUFFICIENT_RESOURCES). These shots are debug artifacts
+    only; losing one must not abort the data pull.
+    """
+    try:
+        await page.screenshot(path=str(DATA_DIR / name))
+    except Exception as e:
+        log.warning(f"Screenshot {name} failed (non-fatal): {e}")
+
+
 async def do_login(page) -> bool:
     log.info(f"Loading {NETCHEF_BASE} …")
     try:
@@ -129,7 +142,7 @@ async def do_login(page) -> bool:
         log.error(f"Failed to load login page: {e}")
         return False
 
-    await page.screenshot(path=str(DATA_DIR / "01_login.png"))
+    await safe_shot(page, "01_login.png")
 
     # Wait for the login form to render — CrunchTime's login page is also
     # ExtJS-driven; the input fields are injected by JavaScript after load.
@@ -150,7 +163,7 @@ async def do_login(page) -> bool:
             continue
 
     if not username_sel_found:
-        await page.screenshot(path=str(DATA_DIR / "01_login_failed.png"))
+        await safe_shot(page, "01_login_failed.png")
         log.error("Username field not found after 30 s — see 01_login_failed.png")
         return False
 
@@ -202,7 +215,7 @@ async def do_login(page) -> bool:
     except PlaywrightTimeout:
         log.warning("Network not idle after 45 s — continuing")
 
-    await page.screenshot(path=str(DATA_DIR / "02_after_login.png"))
+    await safe_shot(page, "02_after_login.png")
     log.info(f"Post-login URL: {page.url}")
 
     if any(kw in page.url.lower() for kw in ["login", "signin", "logon"]):
@@ -284,7 +297,7 @@ async def select_location(page):
     try:
         pg_text = await page.inner_text("body")
         log.info(f"PAGE TEXT ({len(pg_text)} chars):\n---\n{pg_text[:800]}\n---")
-        await page.screenshot(path=str(DATA_DIR / "02c_before_location_click.png"))
+        await safe_shot(page, "02c_before_location_click.png")
         (DATA_DIR / "02b_page_source.html").write_text(await page.content(), encoding="utf-8")
         (DATA_DIR / "02b_page_text.txt").write_text(pg_text, encoding="utf-8")
         log.info("Saved 02b debug snapshots")
@@ -369,7 +382,7 @@ async def select_location(page):
             await page.keyboard.type("2065", delay=100)
             log.info("Typed '2065' to filter list")
             await page.wait_for_timeout(2_000)
-            await page.screenshot(path=str(DATA_DIR / "02d_after_typing.png"))
+            await safe_shot(page, "02d_after_typing.png")
         except Exception as exc:
             log.warning(f"Typing failed: {exc}")
 
@@ -431,7 +444,7 @@ async def select_location(page):
         """)
         log.info(f"Scroll result: {scroll_result}")
         await page.wait_for_timeout(800)
-        await page.screenshot(path=str(DATA_DIR / "02e_after_scroll.png"))
+        await safe_shot(page, "02e_after_scroll.png")
     except Exception as exc:
         log.warning(f"Scroll failed: {exc}")
 
@@ -472,7 +485,7 @@ async def select_location(page):
         return
 
     log.info("Location picker not found — proceeding anyway")
-    await page.screenshot(path=str(DATA_DIR / "03_no_picker.png"))
+    await safe_shot(page, "03_no_picker.png")
 
 
 async def _after_location_click(page):
@@ -496,7 +509,7 @@ async def _after_location_click(page):
         await page.wait_for_load_state("networkidle", timeout=15_000)
     except PlaywrightTimeout:
         pass
-    await page.screenshot(path=str(DATA_DIR / "03_location_selected.png"))
+    await safe_shot(page, "03_location_selected.png")
     log.info(f"Post-selection URL: {page.url}")
 
 
@@ -542,16 +555,16 @@ async def extract_performance_metrics(page) -> dict:
             log.info(f"Keyword '{keyword}' not found within 30 s, continuing…")
 
     # ── Scroll to load all lazy-rendered rows ──────────────────────────────
-    await page.screenshot(path=str(DATA_DIR / "04_dashboard_top.png"))
+    await safe_shot(page, "04_dashboard_top.png")
 
     # Scroll main page
     await page.evaluate("window.scrollBy(0, 800)")
     await page.wait_for_timeout(1_500)
-    await page.screenshot(path=str(DATA_DIR / "05_dashboard_mid.png"))
+    await safe_shot(page, "05_dashboard_mid.png")
 
     await page.evaluate("window.scrollBy(0, 800)")
     await page.wait_for_timeout(1_500)
-    await page.screenshot(path=str(DATA_DIR / "06_dashboard_bottom.png"))
+    await safe_shot(page, "06_dashboard_bottom.png")
 
     # Scroll INSIDE the Performance Metrics section — it has its own scrollbar
     # that must be scrolled to reveal Actual Hours, Discounts, Cash O/S, etc.
@@ -573,7 +586,7 @@ async def extract_performance_metrics(page) -> dict:
     """)
     log.info(f"Internal section scroll: {scroll_result}")
     await page.wait_for_timeout(1_500)
-    await page.screenshot(path=str(DATA_DIR / "06b_after_section_scroll.png"))
+    await safe_shot(page, "06b_after_section_scroll.png")
 
     await page.evaluate("window.scrollTo(0, 0)")
     await page.wait_for_timeout(500)
