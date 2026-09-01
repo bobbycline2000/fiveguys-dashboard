@@ -4,13 +4,13 @@
   "week_ending": "2026-09-06",
   "week_start": "2026-08-31",
   "target_pct": 20.0,
-  "generated_at": "2026-08-31T13:14:03.017731-04:00",
+  "generated_at": "2026-09-01T10:16:03.543316-04:00",
   "week": {
     "fcst_sales": 37733,
-    "sched_cost": 8965,
+    "sched_cost": 8979,
     "sched_hours": 573.5,
     "labor_pct": 23.8,
-    "over_target_dollars": 1418,
+    "over_target_dollars": 1432,
     "ot_hours": 0.0,
     "ot_value": 0
   },
@@ -24,7 +24,7 @@
     {
       "sev": "high",
       "day": "Tue",
-      "msg": "Tue labor 29.7% \u2014 ~$425 over 20% target"
+      "msg": "Tue labor 30.0% \u2014 ~$439 over 20% target"
     },
     {
       "sev": "high",
@@ -61,8 +61,8 @@
       "wd": "Tue",
       "sales": 4396,
       "hrs": 85.0,
-      "cost": 1304,
-      "pct": 29.7,
+      "cost": 1318,
+      "pct": 30.0,
       "byPosition": {
         "2. Crew": 57.0,
         "Shift Leader-Hourly": 18.0,
