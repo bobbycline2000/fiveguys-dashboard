@@ -172,6 +172,98 @@ JS_VERIFY = r"""
 """
 
 
+class PostedPeriodError(RuntimeError):
+    """The week ending date sits inside a period CrunchTime has already POSTED.
+
+    Net-Chef refuses all Labor Detail edits for a posted week — the only button
+    it offers is "OK", which DELETES the pending data and bounces to Labor
+    Summary. Tips cannot be entered at all, so this is a hard stop that must
+    reach Bobby, not something to retry. Seen 2026-09-01 on WE 08/30 after the
+    August month-end post on 8/31.
+    """
+
+
+# Two things can sit on top of the Labor Detail page. Both were previously
+# invisible to this script and both surfaced as the same misleading error,
+# "supplemental-wages grid never loaded":
+#
+#   * "Corporate Daily News" — a sporadic corporate interstitial that renders
+#     over the SPA and swallows clicks. It appears only when corporate posts
+#     news, which is exactly why the grid failures looked random (5x on
+#     2026-06-24, again 6/29, again 9/1).
+#   * The posted-period Labor Detail Alert — a hard lock, see above.
+#
+# Detect posted FIRST: it renders on top of the news modal, and its only button
+# is destructive, so it must never be clicked blindly.
+JS_PAGE_STATE = r"""
+() => {
+  const txt = document.body ? (document.body.innerText || '') : '';
+  const posted = /Labor Detail Alert/i.test(txt)
+              && /cannot continue working with it/i.test(txt);
+  const news = [...document.querySelectorAll('div,span,h1,h2,h3')]
+    .some(el => (el.innerText || '').trim() === 'Corporate Daily News');
+  return {posted, news};
+}
+"""
+
+JS_DISMISS_NEWS = r"""
+() => {
+  const hdr = [...document.querySelectorAll('div,span,h1,h2,h3')]
+    .find(el => (el.innerText || '').trim() === 'Corporate Daily News');
+  if (!hdr) return 'no-news';
+  let box = hdr;
+  for (let i = 0; i < 6 && box.parentElement; i++) {
+    box = box.parentElement;
+    const cands = [...box.querySelectorAll('*')].filter(el => {
+      const t = (el.innerText || el.textContent || '').trim();
+      const cn = el.className;
+      const cls = String((cn && cn.baseVal !== undefined) ? cn.baseVal : (cn || ''));
+      const r = el.getBoundingClientRect();
+      return r.width > 0 && r.width < 60 && r.height > 0 && r.height < 60 &&
+             (t === '×' || t === '✕' || t === '✖' || t === 'X' ||
+              /close/i.test(cls));
+    });
+    if (cands.length) {
+      const c = cands[0], r = c.getBoundingClientRect();
+      ['mouseover','mousedown','mouseup','click'].forEach(tp =>
+        c.dispatchEvent(new MouseEvent(tp, {bubbles:true, cancelable:true, view:window,
+          clientX: r.x + r.width/2, clientY: r.y + r.height/2})));
+      return 'closed';
+    }
+  }
+  return 'no-close-control';
+}
+"""
+
+
+async def clear_interstitials(page, sun_label=""):
+    """Clear anything sitting on top of Labor Detail before we look for the grid.
+
+    Raises PostedPeriodError if the week is locked. Returns True if the page
+    looks clear, False if a news modal stubbornly survived (caller retries).
+    """
+    for _ in range(3):
+        st = await page.evaluate(JS_PAGE_STATE)
+        if st.get("posted"):
+            raise PostedPeriodError(
+                f"WE {sun_label} is inside a POSTED period — CrunchTime will not "
+                f"accept Labor Detail edits for it, so tips cannot be entered. "
+                f"This needs Jeff/Crystal to un-post the period, or the week is "
+                f"closed for good. (Net-Chef's only option here is 'OK', which "
+                f"deletes pending data — deliberately not clicked.)")
+        if not st.get("news"):
+            return True
+        try:
+            await page.keyboard.press("Escape")
+        except Exception:
+            pass
+        await page.wait_for_timeout(600)
+        r = await page.evaluate(JS_DISMISS_NEWS)
+        print(f"[browser] Corporate Daily News interstitial -> {r}")
+        await page.wait_for_timeout(1500)
+    return False
+
+
 async def click_visible_text(page, text, timeout=4000):
     """Click the first visible element whose trimmed text == `text`. Returns True if clicked."""
     try:
@@ -297,6 +389,11 @@ async def enter_via_browser(mon, sun, targets, expected_total, storage_state_pat
                 print(f"[browser] SPA-routed to LaborDetails editMode for WE {sundate} (attempt {attempt})")
                 await page.wait_for_timeout(6000)
 
+                # Clear the Corporate Daily News interstitial / hard-stop if the
+                # week is posted. Must run BEFORE the Continue click and the grid
+                # wait — an overlay swallows both.
+                await clear_interstitials(page, sundate)
+
                 # "Net-Chef detected previous Labor Detail data that was not saved" → Continue
                 if await click_visible_text(page, "Continue"):
                     print("[browser] dismissed unsaved-data alert (Continue)")
@@ -353,6 +450,7 @@ async def enter_via_browser(mon, sun, targets, expected_total, storage_state_pat
                 await page.evaluate("(h) => { window.location.hash = h; }",
                                     f"LaborDetails?weekEndingDate={T.fmt(sun)}&editMode=false")
                 await page.wait_for_timeout(6000)
+                await clear_interstitials(page, T.fmt(sun))
                 # A view-mode open can still raise the unsaved-data alert.
                 if await click_visible_text(page, "Continue"):
                     await page.wait_for_timeout(2500)
@@ -483,7 +581,14 @@ def main():
         print("[dry] no write performed.")
         return 0
 
-    ok, v, res = asyncio.run(enter_via_browser(mon, sun, targets, sum_payout, str(state_path)))
+    try:
+        ok, v, res = asyncio.run(enter_via_browser(mon, sun, targets, sum_payout, str(state_path)))
+    except PostedPeriodError as e:
+        # Non-zero so the workflow fails loudly and the [FAIL] alert reaches
+        # fg2065 — a locked week means the crew's tips cannot be entered at all,
+        # which Bobby has to know about the same morning. Retrying won't help.
+        print(f"[BLOCKED] {e}")
+        return 2
 
     # log
     log = ROOT.parent.parent / "_memory" / "tip-entry-log.md"
