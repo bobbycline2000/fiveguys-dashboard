@@ -1,25 +1,25 @@
 {
-  "as_of": "2026-08-31",
-  "current_month": "2026-08",
-  "current_month_label": "August 2026",
-  "store_avg_month": 97.5,
+  "as_of": "2026-09-01",
+  "current_month": "2026-09",
+  "current_month_label": "September 2026",
+  "store_avg_month": null,
   "store_avg_ytd": 85.4,
-  "shop_count_month": 4,
+  "shop_count_month": 0,
   "shop_count_ytd": 47,
   "managers": [
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": 98.3,
-      "month_n": 3,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 84.9,
       "ytd_n": 32
     },
     {
       "first": "Vicki",
       "name": "Vicki Lucey",
-      "month_avg": 100.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 87.3,
       "ytd_n": 16
     },
@@ -60,8 +60,8 @@
     {
       "first": "Bobby",
       "name": "Robert Cline",
-      "month_avg": 100.0,
-      "month_n": 2,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 97.0,
       "ytd_n": 11
     },
@@ -92,8 +92,8 @@
     {
       "first": "Lidy",
       "name": "Lidy Henry",
-      "month_avg": 97.5,
-      "month_n": 2,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 88.2,
       "ytd_n": 20
     },
@@ -124,8 +124,8 @@
     {
       "first": "Francisco",
       "name": "Francisco Llorente Mejias",
-      "month_avg": 100.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 83.1,
       "ytd_n": 27
     },

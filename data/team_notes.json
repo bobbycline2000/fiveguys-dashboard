@@ -1,5 +1,48 @@
 {
-  "notes": [],
-  "new_count": 0,
-  "date": "2026-08-31"
+  "date": "2026-09-01",
+  "new_count": 21,
+  "notes": [
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "2026-08-31 12:00 PM ET",
+      "body": "September Daily Report is out. “KPI's are improving - let's keep up the positive momentum!” Open September 2026 FG Daily Report .xlsx, 2065 Dixie sheet, scroll to the bottom for September's sales budget."
+    },
+    {
+      "from": "Jeff Reiss",
+      "role": "dm",
+      "role_label": "District Manager",
+      "time": "standing",
+      "body": "Site-visit punch list still open: patty press cracked, moldy ceiling tiles (9788, waiting on SMR), grill wheels (9761, ordering), milkshake cooler gasket (9780 — send the ID tag photo), cracked tile/grout, outlet, potato sink faucet. Top three: open signs on before doors, greet every guest at the door after shift change, no phones on the register."
+    },
+    {
+      "from": "Michelle Glover",
+      "role": "alert",
+      "role_label": "Five Guys Corporate",
+      "time": "2026-08-31 6:19 PM ET",
+      "body": "Secret Shopper Winners 8.20.26-8.26.26 — 845 US shops scored 100 that week. Our 8/21 Lunch shop scored 100% and sits inside that window: Robert Cline, Francisco Llorente Mejias, Lidy Henry, Madison Cureton, Vicki Lucey."
+    },
+    {
+      "from": "PFG Performance Foodservice",
+      "role": "alert",
+      "role_label": "Vendor",
+      "time": "2026-08-31 12:49 PM ET",
+      "body": "Order posted — 89 cases delivering TODAY 09/01. Invoice 352978, PO VO-4893084. Includes 4 cases seeded hamburger buns + 1 case hot dog buns (bread changeover is live). HACCP warning: K7468 cannot be returned. Receive it in CrunchTime — VO-Inv-Performance Fdsvce due 09/01."
+    },
+    {
+      "from": "ComplianceMate Support",
+      "role": "alert",
+      "role_label": "Vendor",
+      "time": "2026-08-31 8:01 PM ET",
+      "body": "Satisfaction survey sent on request [probe] — the ticket was marked solved. Monday's 1 PM Time and Temp still came back 6%. Reply on the thread and answer Mya Black's open question: do we have a backup probe."
+    },
+    {
+      "from": "Five Guys Announcements",
+      "role": "alert",
+      "role_label": "Corporate",
+      "time": "2026-09-01 1:30 AM ET",
+      "body": "Patty Press — Week of August 31, 2026: (1) Hours of Operations Update Process Change, (2) Blackberry LTO Results."
+    }
+  ]
 }

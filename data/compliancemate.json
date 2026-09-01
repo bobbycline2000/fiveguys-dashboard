@@ -1,11 +1,11 @@
 {
   "meta": {
-    "date": "2026-08-30",
-    "generated": "8/31/2026 at 5:16 PM",
+    "date": "2026-08-31",
+    "generated": "9/1/2026 at 5:02 AM",
     "location": "2065",
     "status": "ok"
   },
-  "overall_pct": 37,
+  "overall_pct": 53,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -14,28 +14,28 @@
     },
     {
       "name": "1PM: Time and Temp",
-      "pct": 11,
-      "raw": "1PM: Time and Temp\n11% | 11%"
+      "pct": 6,
+      "raw": "1PM: Time and Temp\n6% | 6%"
     },
     {
       "name": "3PM: Time and Temp",
-      "pct": 0,
-      "raw": "3PM: Time and Temp\n0% | 0%"
+      "pct": 100,
+      "raw": "3PM: Time and Temp\n100% | 100%"
     },
     {
       "name": "5PM: Time and Temp",
-      "pct": 0,
-      "raw": "5PM: Time and Temp\n0% | 0%"
+      "pct": 100,
+      "raw": "5PM: Time and Temp\n100% | 100%"
     },
     {
       "name": "7PM: Time and Temp",
-      "pct": 0,
-      "raw": "7PM: Time and Temp\n0% | 0%"
+      "pct": 100,
+      "raw": "7PM: Time and Temp\n100% | 100%"
     },
     {
       "name": "9PM: Time and Temp",
-      "pct": 0,
-      "raw": "9PM: Time and Temp\n0% | 0%"
+      "pct": 100,
+      "raw": "9PM: Time and Temp\n100% | 100%"
     },
     {
       "name": "AM Pre-Shift Check",

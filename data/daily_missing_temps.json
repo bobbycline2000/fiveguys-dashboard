@@ -1,77 +1,29 @@
 {
   "store": "2065",
-  "date": "2026-08-30",
-  "day_of_week": "Sunday",
-  "generated_at": "2026-08-31T05:10:51.854963-04:00",
+  "date": "2026-08-31",
+  "day_of_week": "Monday",
+  "generated_at": "2026-09-01T05:48:12.711546-04:00",
   "schedule": {
-    "date": "2026-08-30",
-    "day_of_week": "Sunday",
-    "am_manager": "Vicki Lucey",
+    "date": "2026-08-31",
+    "day_of_week": "Monday",
+    "am_manager": "Robert Cline",
     "pm_manager": "Madison Cureton",
-    "shift_change_manager": null
+    "shift_change_manager": "Madelynn Smith"
   },
-  "missing_count": 5,
+  "missing_count": 1,
   "missing_items": [
     {
-      "date": "2026-08-30",
-      "day_of_week": "Sunday",
+      "date": "2026-08-31",
+      "day_of_week": "Monday",
       "category": "SHIFT_CHANGE_TEMP",
       "shift": "SHIFT_CHANGE",
       "task_name": "1PM: Time and Temp",
       "status": "INCOMPLETE",
-      "required_pct": 11,
-      "all_pct": 11,
-      "manager": "Vicki Lucey -> Madison Cureton",
-      "manager_basis": "am_pm_handoff (no distinct mid-shift mgr)"
-    },
-    {
-      "date": "2026-08-30",
-      "day_of_week": "Sunday",
-      "category": "SHIFT_CHANGE_TEMP",
-      "shift": "SHIFT_CHANGE",
-      "task_name": "3PM: Time and Temp",
-      "status": "MISSED",
-      "required_pct": 0,
-      "all_pct": 0,
-      "manager": "Vicki Lucey -> Madison Cureton",
-      "manager_basis": "am_pm_handoff (no distinct mid-shift mgr)"
-    },
-    {
-      "date": "2026-08-30",
-      "day_of_week": "Sunday",
-      "category": "PM_TEMP",
-      "shift": "PM",
-      "task_name": "5PM: Time and Temp",
-      "status": "MISSED",
-      "required_pct": 0,
-      "all_pct": 0,
-      "manager": "Madison Cureton",
-      "manager_basis": "pm_manager"
-    },
-    {
-      "date": "2026-08-30",
-      "day_of_week": "Sunday",
-      "category": "PM_TEMP",
-      "shift": "PM",
-      "task_name": "7PM: Time and Temp",
-      "status": "MISSED",
-      "required_pct": 0,
-      "all_pct": 0,
-      "manager": "Madison Cureton",
-      "manager_basis": "pm_manager"
-    },
-    {
-      "date": "2026-08-30",
-      "day_of_week": "Sunday",
-      "category": "PM_TEMP",
-      "shift": "PM",
-      "task_name": "9PM: Time and Temp",
-      "status": "MISSED",
-      "required_pct": 0,
-      "all_pct": 0,
-      "manager": "Madison Cureton",
-      "manager_basis": "pm_manager"
+      "required_pct": 6,
+      "all_pct": 6,
+      "manager": "Madelynn Smith",
+      "manager_basis": "shift_change_manager"
     }
   ],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Sunday 2026-08-30\n**5 missed/incomplete** (AM mgr: Vicki Lucey \u00b7 PM mgr: Madison Cureton)\n\n- **PM temp: 5PM: Time and Temp** \u2014 MISSED \u2192 **Madison Cureton**\n- **PM temp: 7PM: Time and Temp** \u2014 MISSED \u2192 **Madison Cureton**\n- **PM temp: 9PM: Time and Temp** \u2014 MISSED \u2192 **Madison Cureton**\n- **Shift-change temp: 1PM: Time and Temp** \u2014 INCOMPLETE (11%) \u2192 **Vicki Lucey -> Madison Cureton**\n- **Shift-change temp: 3PM: Time and Temp** \u2014 MISSED \u2192 **Vicki Lucey -> Madison Cureton**\n"
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Monday 2026-08-31\n**1 missed/incomplete** (AM mgr: Robert Cline \u00b7 PM mgr: Madison Cureton)\n\n- **Shift-change temp: 1PM: Time and Temp** \u2014 INCOMPLETE (6%) \u2192 **Madelynn Smith**\n"
 }
