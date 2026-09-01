@@ -8,10 +8,26 @@
   "labor_percent_wtd": 26.183,
   "labor_dollars_wtd": 912.59,
   "actual_hours_wtd": 84.68,
-  "hourly_breakdown": [],
+  "hourly_breakdown": [
+    {
+      "label": "11A",
+      "hour_24": 11,
+      "labor_percent": 23.6
+    },
+    {
+      "label": "12P",
+      "hour_24": 12,
+      "labor_percent": 32.0
+    },
+    {
+      "label": "1P",
+      "hour_24": 13,
+      "labor_percent": 0.0
+    }
+  ],
   "meta": {
     "source": "crunchtime_api",
-    "pulled_at": "2026-09-01T14:01:08",
+    "pulled_at": "2026-09-01T17:01:37",
     "calc_id_yesterday": 2
   }
 }
