@@ -46,6 +46,9 @@ import api_discover as D            # do_login, USERNAME, PASSWORD
 
 ROOT = Path(__file__).parent.parent
 DATA = ROOT / "data"
+# Ledger of weeks entered AND verified. Committed by the workflow so the Tue/Wed
+# catch-up crons can tell "Monday already did this" from "Monday never ran".
+LEDGER = DATA / "tips_entered.json"
 NETCHEF = "https://fiveguysfr77.net-chef.com"
 SW_ID = 12292  # Credit Card Tip
 
@@ -328,15 +331,48 @@ async def enter_via_browser(mon, sun, targets, expected_total, storage_state_pat
             await page.wait_for_timeout(5000)
 
             # VERIFY in a fresh read-only view.
-            vurl = f"{NETCHEF}/ncext/next.ct#LaborDetails?weekEndingDate={T.fmt(sun)}&editMode=false"
-            await page.goto(vurl, wait_until="domcontentloaded", timeout=30_000)
-            await page.wait_for_timeout(5000)
-            await click_visible_text(page, "Supplemental Wages")
-            await page.wait_for_timeout(2500)
-            await wait_for_sw_grid(page)
-            v = await page.evaluate(JS_VERIFY, {"sw": SW_ID})
-            if v.get("error"):
-                raise RuntimeError(f"verify read failed: {v['error']}")
+            #
+            # ROOT CAUSE of the 2026-08-10 false failure ("verify: grid store not
+            # found", run 31383183670 — the upsert had ALREADY appended 16 rows
+            # cleanly, so the write was fine and only this read was broken):
+            # this block used page.goto(next.ct#LaborDetails...), the exact call
+            # commit 9071d5ef removed from the EDIT path because a full goto to a
+            # hash URL does NOT route the SPA in headless — the router only fires
+            # on an in-document hashchange. The verify path never got the same
+            # fix, so it landed on the bare next.ct shell, LaborDetails never
+            # mounted, and the grid it was looking for could not exist.
+            #
+            # Same pattern as the edit path now: land on the shell, set
+            # location.hash, retry the whole cycle. Read-only and idempotent —
+            # retrying costs nothing and writes nothing.
+            v = None
+            for vattempt in range(1, 4):
+                await page.goto(f"{NETCHEF}/ncext/next.ct",
+                                wait_until="domcontentloaded", timeout=30_000)
+                await page.wait_for_timeout(4000)
+                await page.evaluate("(h) => { window.location.hash = h; }",
+                                    f"LaborDetails?weekEndingDate={T.fmt(sun)}&editMode=false")
+                await page.wait_for_timeout(6000)
+                # A view-mode open can still raise the unsaved-data alert.
+                if await click_visible_text(page, "Continue"):
+                    await page.wait_for_timeout(2500)
+                await click_visible_text(page, "Supplemental Wages")
+                await page.wait_for_timeout(2500)
+                if not await wait_for_sw_grid(page, timeout_ms=30000):
+                    print(f"[verify] grid not loaded on attempt {vattempt} — retrying")
+                    continue
+                v = await page.evaluate(JS_VERIFY, {"sw": SW_ID})
+                if not v.get("error"):
+                    break
+                print(f"[verify] read error on attempt {vattempt}: {v['error']} — retrying")
+            if v is None or v.get("error"):
+                await page.screenshot(path=str(DATA / f"tips_verify_FAIL_{sun.strftime('%Y_%m_%d')}.png"))
+                raise RuntimeError(
+                    f"verify read failed after 3 attempts: "
+                    f"{(v or {}).get('error', 'grid never loaded')}. "
+                    f"NOTE: the write above reported "
+                    f"appended={res['appended']} updated={res['updated']} — check CrunchTime "
+                    f"before re-running (the re-run is idempotent and safe either way).")
             print(f"[verify] paidRows={v['paidRows']} unique={v['unique']} "
                   f"total=${v['total']:.2f} (expected ${expected_total:.2f}) dups={v['dups']}")
 
@@ -349,9 +385,40 @@ async def enter_via_browser(mon, sun, targets, expected_total, storage_state_pat
             await browser.close()
 
 
+def already_entered(sun):
+    """True if this week is recorded verified in the ledger."""
+    if not LEDGER.exists():
+        return False
+    try:
+        return bool(json.loads(LEDGER.read_text()).get(T.fmt(sun), {}).get("verified"))
+    except Exception:
+        return False
+
+
+def record_entered(sun, v, expected_total):
+    """Append a verified week to the ledger. This is what makes the Tue/Wed
+    catch-up crons cheap — they read this and exit before launching a browser."""
+    led = {}
+    if LEDGER.exists():
+        try:
+            led = json.loads(LEDGER.read_text())
+        except Exception:
+            led = {}
+    led[T.fmt(sun)] = {"verified": True, "rows": v["unique"], "total": v["total"],
+                       "expected": round(expected_total, 2),
+                       "enteredAt": dt.datetime.now().isoformat(timespec="seconds")}
+    LEDGER.write_text(json.dumps(led, indent=2, sort_keys=True))
+    print(f"[ledger] recorded WE {T.fmt(sun)} verified -> {LEDGER.name}")
+
+
 def main():
     args = sys.argv[1:]
     dry = "dry" in args
+    # --cron marks an unattended scheduled run (Mon/Tue/Wed). It only ever makes
+    # the script MORE conservative: skip a week already done, and stand down
+    # rather than enter tips off labor that isn't Reviewed yet. Manual dispatch
+    # behaviour is unchanged.
+    cron = "--cron" in args
     explicit = next((a for a in args if "/" in a), None)
     if explicit:
         sun = dt.datetime.strptime(explicit, "%m/%d/%Y").date()
@@ -359,7 +426,12 @@ def main():
     else:
         mon, sun = T.prior_week_mon_sun()
     print(f"=== KY-2065 tip entry (BROWSER) — WE {T.fmt(sun)} (Mon {T.fmt(mon)} → Sun {T.fmt(sun)}) ===")
-    print(f"  mode: {'DRY (no write)' if dry else 'LIVE'}")
+    print(f"  mode: {'DRY (no write)' if dry else 'LIVE'}{' [cron]' if cron else ''}")
+
+    # Catch-up guard: Tue/Wed runs exit here in ~1s when Monday already landed.
+    if cron and not dry and already_entered(sun):
+        print(f"[cron] WE {T.fmt(sun)} already entered and verified — nothing to do.")
+        return 0
 
     # ── READS (cookie-auth requests; these work cold) ──
     jar = T.ensure_session()
@@ -370,6 +442,15 @@ def main():
         print("[browser] storage_state missing — minting via api_discover")
         T.remint()
     if not T.labor_reviewed(jar, sun):
+        if cron:
+            # Sunday labor is often still unreviewed at 5:20 AM Monday. Entering
+            # against unreviewed actuals produces wrong payouts, which is worse
+            # than entering late — and there are two more crons behind this one.
+            # Exit 0, not 1: this is a deliberate stand-down, not a failure, and
+            # it must not fire the [FAIL] alert email.
+            print(f"[cron] WE {T.fmt(sun)} labor not Reviewed yet — standing down. "
+                  f"The next catch-up run (Tue/Wed 09:20 UTC) will pick it up.")
+            return 0
         print(f"[prereq] WARNING: WE {T.fmt(sun)} labor not Reviewed — proceeding; validate hours look right.")
     charged, _ = T.pull_charged_tips(jar, mon, sun)
     print(f"[tips] Charged Tips Mon-Sun: ${charged:.2f}")
@@ -417,6 +498,9 @@ def main():
     if not ok:
         print("[FATAL] verification failed — review before posting.")
         return 1
+    # Only a verified week goes in the ledger — that is what the catch-up crons
+    # trust to decide they can stand down.
+    record_entered(sun, v, sum_payout)
     print(f"[OK] WE {T.fmt(sun)}: {v['unique']} rows, ${v['total']:.2f}, 0 dups — persisted & verified.")
     return 0
 

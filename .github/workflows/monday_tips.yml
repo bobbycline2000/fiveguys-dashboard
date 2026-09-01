@@ -10,9 +10,22 @@ name: Monday Tip Entry (Store 2065)
 # enter_tips_browser.py upsert updates rows in place and never duplicates.
 
 on:
-  # Scheduled cron removed 2026-07-13 — GitHub silently skipped it two Mondays
-  # in a row (7/6, 7/13), so it was unreliable. Manual dispatch only for now:
-  #   gh workflow run monday_tips.yml -f week_ending=MM/DD/YYYY -f mode=live
+  schedule:
+    # RESTORED 2026-09-01. The 2026-07-13 removal rested on a misread: the cron
+    # was never "silently skipped" — GitHub DELAYED it. Run 28793512925 on 7/6
+    # was a `schedule` trigger that fired at 13:02 UTC against a 09:30 UTC cron
+    # (3h32m late) and SUCCEEDED. GitHub queues scheduled workflows on shared
+    # runners and routinely defers them 30min–3h under load. Prior sessions
+    # dispatched manually before the late run landed, saw nothing at 7 AM, and
+    # concluded it had been skipped.
+    #
+    # The answer to delay-or-drop risk is THREE chances, not one. Mon/Tue/Wed at
+    # 09:20 UTC (5:20 AM EDT / 4:20 AM EST) — an off-peak minute, clear of the
+    # :00 and :30 spikes. Tue/Wed are catch-up runs and cost ~20s each: the
+    # --cron flag makes enter_tips_browser.py exit 0 immediately once the week
+    # is recorded verified in data/tips_entered.json. A single delayed or
+    # dropped run can no longer cost Bobby the week.
+    - cron: "20 9 * * 1,2,3"
   workflow_dispatch:
     inputs:
       week_ending:
@@ -79,7 +92,14 @@ jobs:
             ARGS="$ARGS dry"
           fi
           # On the cron-triggered path (no inputs): default to LIVE — this is
-          # the Monday 5:30 AM run Bobby actually wants firing.
+          # the Monday 5:20 AM run Bobby actually wants firing. --cron additionally
+          # (a) exits early if data/tips_entered.json already has this week
+          # verified, so the Tue/Wed catch-up runs are ~20s no-ops, and
+          # (b) stands down (exit 0, no alert) if the prior week's labor is not
+          # Reviewed yet, leaving the week to the next catch-up run.
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            ARGS="$ARGS --cron"
+          fi
           #
           # HEADLESS-BROWSER path (replaces the pure-requests api_enter_tips.py,
           # which ghosted: /save only persists with a live editMode page holding
@@ -94,7 +114,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/tips_we_*_snapshot.json data/ct_cookies.json data/ct_storage_state.json || true
+          git add data/tips_we_*_snapshot.json data/tips_entered.json data/ct_cookies.json data/ct_storage_state.json || true
           if git diff --cached --quiet; then
             echo "No tip-entry artifacts to commit."
           else
