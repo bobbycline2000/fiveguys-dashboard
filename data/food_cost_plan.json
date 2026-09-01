@@ -2,21 +2,21 @@
   "store": "2065",
   "week_start": "2026-08-24",
   "week_end": "2026-08-30",
-  "variance_week_start": "2026-08-17",
-  "variance_week_end": "2026-08-23",
+  "variance_week_start": "2026-08-24",
+  "variance_week_end": "2026-08-30",
   "cogs_pct_week": 26.4,
   "cogs_pct_week_label": "2026-08-30",
   "cogs_goal_pct": 27.5,
-  "total_over": 129.74,
-  "generated": "2026-08-31 16:52 ET",
+  "total_over": 190.53,
+  "generated": "2026-09-01 14:03 ET",
   "items": [
     {
       "rank": 1,
       "name": "Bun, Burger",
-      "over_dollars": 47.37,
-      "actual": 1031.77,
-      "theoretical": 984.4,
-      "variance_pct": -4.8,
+      "over_dollars": 75.8,
+      "actual": 974.18,
+      "theoretical": 898.38,
+      "variance_pct": -8.4,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
@@ -26,11 +26,11 @@
     },
     {
       "rank": 2,
-      "name": "Shake Mix",
-      "over_dollars": 41.77,
-      "actual": 220.12,
-      "theoretical": 178.35,
-      "variance_pct": -23.4,
+      "name": "Cup, Shake",
+      "over_dollars": 60.24,
+      "actual": 84.6,
+      "theoretical": 24.36,
+      "variance_pct": -247.3,
       "big_six": false,
       "actions": [
         "Watch portioning and confirm the build/prep spec.",
@@ -40,16 +40,15 @@
     },
     {
       "rank": 3,
-      "name": "Banana Marinade",
-      "over_dollars": 40.6,
-      "actual": 48.72,
-      "theoretical": 8.12,
-      "variance_pct": -500,
-      "big_six": false,
+      "name": "Cheese",
+      "over_dollars": 54.49,
+      "actual": 364.42,
+      "theoretical": 309.93,
+      "variance_pct": -17.6,
+      "big_six": true,
       "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
+        "Big Six item \u2014 watch it. Count cheese slices per build; verify receiving count vs invoice.",
+        "Recount on-hand \u2014 a miscount is the usual cause of a big swing."
       ]
     }
   ]

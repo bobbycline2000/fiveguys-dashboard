@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated": "2026-08-31T16:50:06",
-    "today": "2026-08-31",
+    "generated": "2026-09-01T14:01:10",
+    "today": "2026-09-01",
     "this_week_mon": "2026-08-31",
     "next_week_mon": "2026-09-07",
     "week_convention": "Mon-Sun"
@@ -11,7 +11,7 @@
       "date": "2026-08-31",
       "name": "MON",
       "forecast": 3819.0,
-      "actual": null,
+      "actual": 3486.73,
       "is_next_week": false
     },
     {
