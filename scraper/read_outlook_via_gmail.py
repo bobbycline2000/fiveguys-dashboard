@@ -1814,6 +1814,8 @@ def main() -> int:
     parser.add_argument("--setup", action="store_true", help="Run OAuth flow (first time / reauth)")
     parser.add_argument("--dry-run", action="store_true", help="Generate brief but don't send email")
     parser.add_argument("--hours", type=int, default=28, help="Lookback window in hours (default 28)")
+    parser.add_argument("--force", action="store_true",
+                        help="Send even if today's brief already landed in the inbox (bypass duplicate guard)")
     args = parser.parse_args()
 
     today = date.today()
@@ -2021,6 +2023,23 @@ def main() -> int:
         return 0
 
     subject_line = f"Daily Brief — {today.strftime('%Y-%m-%d')}"
+
+    # Duplicate-send guard (added 2026-09-03). The primary (09:00 UTC) and backup
+    # (09:40 UTC) dashboard workflows BOTH run this script unconditionally, so Bobby
+    # was receiving two identical briefs every morning (3 on 2026-09-01). The backup
+    # is documented as a contingency run, so the second send is a defect, not intent.
+    # raw_messages is the unfiltered inbox pull for the lookback window, so an earlier
+    # run's brief is already sitting in it -- match on subject and skip the send.
+    # --force bypasses this for a deliberate re-send (e.g. a correction brief).
+    if not args.force:
+        _already = [m for m in raw_messages
+                    if (m.get("subject") or "").strip() == subject_line]
+        if _already:
+            log(f"Duplicate guard: '{subject_line}' already in inbox -- skipping send. "
+                f"Use --force to override.")
+            write_debug("brief already sent today - duplicate send skipped by guard")
+            return 0
+
     if _use_graph:
         sent_ok = _graph_send(graph_token, subject_line, md_to_html(brief_md))
     else:

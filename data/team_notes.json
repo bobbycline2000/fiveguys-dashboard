@@ -1,5 +1,48 @@
 {
-  "notes": [],
-  "new_count": 0,
-  "date": "2026-09-03"
+  "date": "2026-09-03",
+  "new_count": 6,
+  "notes": [
+    {
+      "from": "Brad Davis",
+      "role": "director",
+      "role_label": "Director of Operations",
+      "time": "2026-09-01 08:36 ET",
+      "body": "Patty Press, week of Aug 31 \u2014 read it and share it. Six items: National Cheeseburger Day forecast, new bread info, Blackberry Shake deactivation, proactive Freestyle service, holiday bread delivery, beef prices lowering."
+    },
+    {
+      "from": "Jeff Reiss",
+      "role": "dm",
+      "role_label": "District Manager",
+      "time": "2026-09-01 18:21 ET",
+      "body": "Recognition for Bec (Outer Loop) \u2014 took a closing shift at Etown on her day off after 47 hours, store was pristine the next morning. Brad: \u201cOutstanding Job Bec - way to represent & thank you!\u201d Read it at huddle."
+    },
+    {
+      "from": "Five Guys Enterprises / FoodLogiQ",
+      "role": "alert",
+      "role_label": "Corporate Alert",
+      "time": "2026-09-03 12:18 ET",
+      "body": "3rd reminder \u2014 incident #26-22677, Produce Lettuce, 24 cases claimed. Corporate needs more photos: \u201cI am only seeing 4 heads of lettuce and you are claiming 24.\u201d Auto-resolves with no credit ~Tue 9/8."
+    },
+    {
+      "from": "Daniel Karrick (PFG)",
+      "role": "alert",
+      "role_label": "Vendor",
+      "time": "2026-09-01 09:03 ET",
+      "body": "Labor Day week delivery shift: Monday deliveries move to Tuesday, Tuesday to Wednesday. Order Sunday for Tuesday, Tuesday for Wednesday. Thu/Fri/Sat unchanged."
+    },
+    {
+      "from": "Marketforce",
+      "role": "alert",
+      "role_label": "Secret Shop",
+      "time": "2026-09-03 08:33 ET",
+      "body": "Two shops posted: 8/27 Dinner 100% (Bobby, Madison) and 8/30 Lunch 0.0% (Brianna Gatewood, Vicki Lucey). Action plan drafted for the 8/30 shop."
+    },
+    {
+      "from": "Jeni / Onboarding",
+      "role": "accounting",
+      "role_label": "HR / Onboarding",
+      "time": "2026-09-03 08:14 ET",
+      "body": "Martel Miller did not pass the background check \u2014 not moving forward. Not added to the employee directory; active count unchanged."
+    }
+  ]
 }
