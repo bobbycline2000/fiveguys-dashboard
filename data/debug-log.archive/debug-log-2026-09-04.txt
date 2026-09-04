@@ -1,0 +1,2 @@
+[2026-09-03 13:50:00] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
+[2026-09-03 16:12] FGU pull FAILED - "no token, set FGU_TOKEN or write data/fgu_session.json". data/fgu_training.json is stale since 2026-07-11 (54 days). Daily brief omitted FGU numbers rather than quote July data as current. Needs a fresh Schoox session capture.
