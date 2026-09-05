@@ -1,20 +1,20 @@
 {
   "store_id": "1731",
   "store_name": "FG-1731 Outer Loop",
-  "generated": "2026-09-04 13:42 ET",
+  "generated": "2026-09-05 12:58 ET",
   "_status": "live CrunchTime KPIs (WTD); Brink/Steritech pending",
   "kpis": {
     "net_sales": {
-      "value": "$13,033",
-      "raw": 13032.84,
+      "value": "$18,148",
+      "raw": 18148.36,
       "label": "Net Sales",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "labor_pct": {
-      "value": "22.0%",
-      "raw": 21.952,
+      "value": "19.6%",
+      "raw": 19.644,
       "label": "Labor %",
       "source": "CrunchTime",
       "status": "live",
@@ -41,8 +41,8 @@
       "window": "WTD"
     },
     "sales_guest": {
-      "value": "$5.37",
-      "raw": 5.3744,
+      "value": "$5.41",
+      "raw": 5.4109,
       "label": "Sales / Guest",
       "source": "CrunchTime",
       "status": "live",
