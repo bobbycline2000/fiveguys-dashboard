@@ -202,6 +202,150 @@ def _graph_send(token: str, subject: str, html_body: str) -> bool:
     return False
 
 
+# -- Delegated Outlook REST helpers (local path: no Gmail forwarding, no browser) --
+# Added 2026-09-07. The MS Graph path above needs MS_CLIENT_SECRET, which only exists
+# as a GitHub Secret, so a laptop/scheduled-task run silently fell through to the Gmail
+# forwarding path -- which saw 3 of the 15 messages actually sitting in the fg2065 inbox
+# and would have shipped a brief with no CrunchTime numbers in it. The delegated refresh
+# token in .env (GRAPH_TENANT_ID / GRAPH_CLIENT_ID / GRAPH_REFRESH_TOKEN) exchanges for
+# an outlook.office.com token that reads AND sends against the same mailbox with zero
+# browser involvement. See memory reference_outlook_rest_without_chrome.
+REST_BASE = "https://outlook.office.com/api/v2.0/me"
+REST_SCOPE = ("https://outlook.office.com/Mail.ReadWrite "
+              "https://outlook.office.com/Mail.Send offline_access")
+
+
+def _rest_env() -> dict:
+    """Read GRAPH_* from the repo .env, letting the real environment win."""
+    env: dict = {}
+    env_path = REPO_ROOT / ".env"
+    if env_path.exists():
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            if "=" in line and not line.strip().startswith("#"):
+                k, v = line.split("=", 1)
+                env[k.strip()] = v.strip()
+    for k in ("GRAPH_TENANT_ID", "GRAPH_CLIENT_ID", "GRAPH_REFRESH_TOKEN"):
+        if os.environ.get(k):
+            env[k] = os.environ[k]
+    return env
+
+
+def _rest_save_refresh_token(new_rt: str) -> None:
+    """The refresh token rotates on every exchange -- persist it or tomorrow fails."""
+    env_path = REPO_ROOT / ".env"
+    if not env_path.exists():
+        return
+    lines = env_path.read_text(encoding="utf-8").splitlines()
+    out, found = [], False
+    for line in lines:
+        if line.startswith("GRAPH_REFRESH_TOKEN="):
+            out.append("GRAPH_REFRESH_TOKEN=" + new_rt)
+            found = True
+        else:
+            out.append(line)
+    if not found:
+        out.append("GRAPH_REFRESH_TOKEN=" + new_rt)
+    env_path.write_text("\n".join(out) + "\n", encoding="utf-8")
+
+
+def _rest_token() -> str:
+    env = _rest_env()
+    resp = _requests.post(
+        f"https://login.microsoftonline.com/{env['GRAPH_TENANT_ID']}/oauth2/v2.0/token",
+        data={
+            "grant_type": "refresh_token",
+            "client_id": env["GRAPH_CLIENT_ID"],
+            "refresh_token": env["GRAPH_REFRESH_TOKEN"],
+            "scope": REST_SCOPE,
+        }, timeout=30)
+    resp.raise_for_status()
+    body = resp.json()
+    new_rt = body.get("refresh_token")
+    if new_rt and new_rt != env["GRAPH_REFRESH_TOKEN"]:
+        _rest_save_refresh_token(new_rt)
+    return body["access_token"]
+
+
+def _rest_fetch(token: str, lookback_hours: int) -> list[dict]:
+    cutoff = (datetime.now(timezone.utc) - timedelta(hours=lookback_hours)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    url = (
+        f"{REST_BASE}/MailFolders/Inbox/messages"
+        f"?$top=80"
+        f"&$select=Id,Subject,From,ReceivedDateTime,BodyPreview,Body,HasAttachments"
+        f"&$filter=ReceivedDateTime ge {cutoff}"
+        f"&$orderby=ReceivedDateTime desc"
+    )
+    resp = _requests.get(url, headers={
+        "Authorization": f"Bearer {token}",
+        "Prefer": 'outlook.body-content-type="text"',
+    }, timeout=45)
+    if not resp.ok:
+        log(f"Outlook REST fetch failed: {resp.status_code} {resp.text[:200]}")
+        return []
+    messages = resp.json().get("value", [])
+    log(f"Outlook REST: fetched {len(messages)} messages from {WORK_INBOX}")
+    normalized = []
+    for m in messages:
+        sender = ((m.get("From") or {}).get("EmailAddress") or {}).get("Address", "")
+        subject = m.get("Subject", "") or ""
+        received = m.get("ReceivedDateTime", "") or ""
+        try:
+            dt = datetime.fromisoformat(received.replace("Z", "+00:00"))
+            # %-I is glibc-only; strip a leading zero the Windows-safe way.
+            sent_str = dt.astimezone().strftime("%a %m/%d/%Y %I:%M %p")
+        except Exception:
+            sent_str = received
+        body = ((m.get("Body") or {}).get("Content") or "")
+        body = re.sub(r"<[^>]+>", " ", body).strip()
+        normalized.append({
+            "sender": sender,
+            "subject": subject,
+            "sent": sent_str,
+            "snippet": m.get("BodyPreview", ""),
+            "body": body,
+            "pdf_texts": [],
+            "_rest_msg_id": m.get("Id"),
+            "_has_attachments": bool(m.get("HasAttachments")),
+        })
+    return normalized
+
+
+def _rest_get_pdfs(token: str, msg_id: str) -> list:
+    url = f"{REST_BASE}/messages/{msg_id}/attachments"
+    resp = _requests.get(url, headers={"Authorization": f"Bearer {token}"}, timeout=45)
+    if not resp.ok:
+        return []
+    out = []
+    for att in resp.json().get("value", []):
+        name = att.get("Name", "") or ""
+        if name.lower().endswith(".pdf") and att.get("ContentBytes"):
+            try:
+                out.append((name, base64.b64decode(att["ContentBytes"])))
+            except Exception:
+                pass
+    return out
+
+
+def _rest_send(token: str, subject: str, html_body: str) -> bool:
+    payload = {
+        "Message": {
+            "Subject": subject,
+            "Body": {"ContentType": "HTML", "Content": html_body},
+            "ToRecipients": [{"EmailAddress": {"Address": TO_ADDRESS}}],
+        },
+        "SaveToSentItems": "false",
+    }
+    resp = _requests.post(f"{REST_BASE}/sendmail", json=payload, headers={
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+    }, timeout=45)
+    if resp.ok:
+        log(f"Brief sent via Outlook REST to {TO_ADDRESS} (HTTP {resp.status_code})")
+        return True
+    log(f"Outlook REST send failed: {resp.status_code} {resp.text[:300]}")
+    return False
+
+
 def write_debug(reason: str, detail_path: str = "") -> None:
     DEBUG_LOG.parent.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -1824,10 +1968,23 @@ def main() -> int:
 
     # ── Auth: prefer MS Graph in CI, fall back to Gmail OAuth locally ────────
     _use_graph = all(os.environ.get(k) for k in ("MS_TENANT_ID", "MS_CLIENT_ID", "MS_CLIENT_SECRET"))
+    _rest_cfg = _rest_env()
+    _use_rest = (not _use_graph) and all(
+        _rest_cfg.get(k) for k in ("GRAPH_TENANT_ID", "GRAPH_CLIENT_ID", "GRAPH_REFRESH_TOKEN"))
     graph_token: str | None = None
+    rest_token: str | None = None
     service = None
 
-    if _use_graph:
+    if _use_rest:
+        log("Outlook REST path active (delegated refresh token, no Gmail forwarding, no browser)")
+        try:
+            rest_token = _rest_token()
+        except Exception as e:
+            log(f"Outlook REST token failed: {e}")
+            write_debug(f"outlook rest auth failure: {e}")
+            return 3
+        raw_messages = _rest_fetch(rest_token, args.hours)
+    elif _use_graph:
         log("MS Graph path active (CI mode — no Gmail forwarding needed)")
         try:
             graph_token = _graph_token()
@@ -1895,7 +2052,10 @@ def main() -> int:
 
         # Deep-read: pull PDF attachments for key categories
         if category in ("Patty Press", "Secret Shop", "New Hire / Onboarding"):
-            if _use_graph:
+            if _use_rest:
+                pdfs = (_rest_get_pdfs(rest_token, msg["_rest_msg_id"])
+                        if msg.get("_has_attachments") else [])
+            elif _use_graph:
                 pdfs = _graph_get_pdfs(graph_token, msg["_graph_msg_id"])
             else:
                 pdfs = get_pdf_attachments(service, msg["_gmail_raw"])
@@ -2040,7 +2200,9 @@ def main() -> int:
             write_debug("brief already sent today - duplicate send skipped by guard")
             return 0
 
-    if _use_graph:
+    if _use_rest:
+        sent_ok = _rest_send(rest_token, subject_line, md_to_html(brief_md))
+    elif _use_graph:
         sent_ok = _graph_send(graph_token, subject_line, md_to_html(brief_md))
     else:
         sent_ok = send_brief(service, subject_line, brief_md)

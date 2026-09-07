@@ -1,29 +1,16 @@
 {
   "store": "2065",
-  "date": "2026-08-31",
-  "day_of_week": "Monday",
-  "generated_at": "2026-09-01T05:48:12.711546-04:00",
+  "date": "2026-09-06",
+  "day_of_week": "Sunday",
+  "generated_at": "2026-09-07T05:59:48.323043-04:00",
   "schedule": {
-    "date": "2026-08-31",
-    "day_of_week": "Monday",
-    "am_manager": "Robert Cline",
+    "date": "2026-09-06",
+    "day_of_week": "Sunday",
+    "am_manager": "Vicki Lucey",
     "pm_manager": "Madison Cureton",
-    "shift_change_manager": "Madelynn Smith"
+    "shift_change_manager": "Anthony Pirtle"
   },
-  "missing_count": 1,
-  "missing_items": [
-    {
-      "date": "2026-08-31",
-      "day_of_week": "Monday",
-      "category": "SHIFT_CHANGE_TEMP",
-      "shift": "SHIFT_CHANGE",
-      "task_name": "1PM: Time and Temp",
-      "status": "INCOMPLETE",
-      "required_pct": 6,
-      "all_pct": 6,
-      "manager": "Madelynn Smith",
-      "manager_basis": "shift_change_manager"
-    }
-  ],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Monday 2026-08-31\n**1 missed/incomplete** (AM mgr: Robert Cline \u00b7 PM mgr: Madison Cureton)\n\n- **Shift-change temp: 1PM: Time and Temp** \u2014 INCOMPLETE (6%) \u2192 **Madelynn Smith**\n"
+  "missing_count": 0,
+  "missing_items": [],
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Sunday 2026-09-06\n\u2705 All temps and checklists complete. Clean day.\n"
 }

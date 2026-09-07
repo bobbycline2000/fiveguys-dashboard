@@ -1,27 +1,27 @@
 {
-  "as_of": "2026-09-01",
+  "as_of": "2026-09-07",
   "current_month": "2026-09",
   "current_month_label": "September 2026",
   "store_avg_month": null,
-  "store_avg_ytd": 85.4,
+  "store_avg_ytd": 83.9,
   "shop_count_month": 0,
-  "shop_count_ytd": 47,
+  "shop_count_ytd": 49,
   "managers": [
     {
       "first": "Madison",
       "name": "Madison Cureton",
       "month_avg": null,
       "month_n": 0,
-      "ytd_avg": 84.9,
-      "ytd_n": 32
+      "ytd_avg": 85.4,
+      "ytd_n": 33
     },
     {
       "first": "Vicki",
       "name": "Vicki Lucey",
       "month_avg": null,
       "month_n": 0,
-      "ytd_avg": 87.3,
-      "ytd_n": 16
+      "ytd_avg": 82.2,
+      "ytd_n": 17
     },
     {
       "first": "Kasey",
@@ -62,16 +62,8 @@
       "name": "Robert Cline",
       "month_avg": null,
       "month_n": 0,
-      "ytd_avg": 97.0,
-      "ytd_n": 11
-    },
-    {
-      "first": "Bri",
-      "name": "Brianna Gatewood",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 94.4,
-      "ytd_n": 5
+      "ytd_avg": 97.2,
+      "ytd_n": 12
     },
     {
       "first": "Dakayla",
@@ -146,6 +138,14 @@
       "ytd_n": 9
     },
     {
+      "first": "Bri",
+      "name": "Brianna Gatewood",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 78.7,
+      "ytd_n": 6
+    },
+    {
       "first": "Samuel",
       "name": "Samuel Galban Rocha",
       "month_avg": null,
@@ -163,6 +163,24 @@
     }
   ],
   "latest_shops": [
+    {
+      "date": "2026-08-30",
+      "score": 0.0,
+      "meal_period": "Lunch",
+      "on_shift": [
+        "Brianna Gatewood",
+        "Vicki Lucey"
+      ]
+    },
+    {
+      "date": "2026-08-27",
+      "score": 100.0,
+      "meal_period": "Dinner",
+      "on_shift": [
+        "Robert Cline",
+        "Madison Cureton"
+      ]
+    },
     {
       "date": "2026-08-21",
       "score": 100.0,
@@ -189,25 +207,6 @@
       "meal_period": "Lunch",
       "on_shift": [
         "Lidy Henry"
-      ]
-    },
-    {
-      "date": "2026-08-01",
-      "score": 100.0,
-      "meal_period": "Dinner",
-      "on_shift": [
-        "Robert Cline",
-        "Madison Cureton"
-      ]
-    },
-    {
-      "date": "2026-07-31",
-      "score": 100.0,
-      "meal_period": "Lunch",
-      "on_shift": [
-        "Robert Cline",
-        "Lidy Henry",
-        "Madison Cureton"
       ]
     }
   ]
