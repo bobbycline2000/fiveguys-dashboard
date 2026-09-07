@@ -1684,14 +1684,39 @@ async def main():
         log.info("Scrape succeeded")
     except Exception as e:
         log.error(f"Scrape failed: {e}")
-        fallback = DATA_DIR / "latest.json"
-        if fallback.exists():
-            log.warning("Using cached data from previous run")
-            data = json.loads(fallback.read_text())
-            data["meta"]["generated"] = GEN_DISPLAY + " (cached)"
-        else:
-            log.error("No cached data — cannot generate dashboard")
-            sys.exit(1)
+
+        # ── API backfill (added 2026-09-07) ───────────────────────────────────
+        # The DOM scrape returns nothing whenever the Performance Metrics grid is
+        # showing a week that doesn't contain yesterday — which happens EVERY
+        # MONDAY, because CrunchTime defaults the grid to the new Mon–Sun week
+        # while yesterday is the Sunday that closed the previous one. Before
+        # 2026-09-07 that dropped straight to the cached branch below, so the
+        # dashboard sat a day stale from Monday morning until Tuesday's run.
+        # /resource/dailypayrollcontrol/summary IS date-parameterized (the metrics
+        # endpoint is not — probed and confirmed 2026-09-07) and its sales figures
+        # reconcile to the dollar against Par Brink. Sales family only; see
+        # ct_daily_payroll.py for the payroll-exclusion rationale.
+        data = None
+        try:
+            from scraper.ct_daily_payroll import fetch_day
+            api_raw = fetch_day(yest.date())
+            if api_raw:
+                log.warning(f"DOM scrape unavailable — using CrunchTime API backfill "
+                            f"for {RPT_MMDDYYYY} (sales/forecast only; labor falls "
+                            f"through to Par Brink in wire_dashboard.py)")
+                data = parse_metrics(api_raw)
+        except Exception as api_exc:
+            log.error(f"API backfill failed: {api_exc}")
+
+        if data is None:
+            fallback = DATA_DIR / "latest.json"
+            if fallback.exists():
+                log.warning("Using cached data from previous run")
+                data = json.loads(fallback.read_text())
+                data["meta"]["generated"] = GEN_DISPLAY + " (cached)"
+            else:
+                log.error("No cached data — cannot generate dashboard")
+                sys.exit(1)
 
     # Save snapshot — new structure: data/raw/crunchtime/<store>/<report_date>/perf_metrics.json
     # Back-compat: also write top-level data/latest.json until wire/downstream readers are fully migrated.

@@ -159,21 +159,21 @@ async def run_store(store_id: str):
     if verify_rc != 0:
         log.error("verify_dashboard.py detected stale dashboard — details in data/debug-log.txt")
 
-    # ── Excel update ───────────────────────────────────────────────────────────
-    log.info("\n--- SharePoint Excel ---")
-    try:
-        from scraper.update_excel import run as xl_run
-        xl_run(os.getenv("STORE_ID", "2065"))
-    except (Exception, SystemExit) as e:
-        log.error(f"Excel update failed (no Azure credentials configured — skipping): {e}")
+    # ── SharePoint Excel ───────────────────────────────────────────────────────
+    # NOT called from here. The 2026-09-01 rewrite of scraper/update_excel.py
+    # replaced run(store_id) with a main() that parses sys.argv for a date range,
+    # so the old `from scraper.update_excel import run` raised ImportError on every
+    # single run — logged as "no Azure credentials configured", which read like the
+    # documented benign skip and hid the breakage. The FG Daily Report fill is owned
+    # by daily_dashboard.yml, which invokes `python scraper/update_excel.py`
+    # directly and has been filling the sheet correctly the whole time. Removed the
+    # dead in-process call 2026-09-07 rather than re-wire a second caller for a step
+    # CI already owns. To fill by hand: python scraper/update_excel.py [start] [end]
 
-    # ── Discord daily brief post ───────────────────────────────────────────────
-    log.info("\n--- Discord Daily Brief ---")
-    try:
-        from post_daily_brief import post as post_brief
-        post_brief()
-    except Exception as e:
-        log.error(f"Discord brief post failed: {e}")
+    # ── Discord daily brief ────────────────────────────────────────────────────
+    # Removed 2026-09-07: `post_daily_brief` does not exist anywhere in the repo —
+    # the import failed on every run and logged an ERROR. Per Bobby's standing
+    # preference, Discord posting is not wired into automations by default.
 
     log.info(f"\nDone — store {store_id} complete.")
     log.info(f"Dashboard: {ROOT / 'dashboard.html'}")
