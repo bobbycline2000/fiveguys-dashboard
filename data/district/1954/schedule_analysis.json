@@ -4,13 +4,13 @@
   "week_ending": "2026-09-13",
   "week_start": "2026-09-07",
   "target_pct": 20.0,
-  "generated_at": "2026-09-07T11:10:34.776351-04:00",
+  "generated_at": "2026-09-08T09:48:16.424923-04:00",
   "week": {
     "fcst_sales": 31705,
-    "sched_cost": 6199,
-    "sched_hours": 428.0,
-    "labor_pct": 19.6,
-    "over_target_dollars": -142,
+    "sched_cost": 6535,
+    "sched_hours": 452.0,
+    "labor_pct": 20.6,
+    "over_target_dollars": 194,
     "ot_hours": 0.0,
     "ot_value": 0
   },
@@ -29,12 +29,12 @@
     {
       "sev": "high",
       "day": "Wed",
-      "msg": "Wed labor 23.7% \u2014 ~$135 over 20% target"
+      "msg": "Wed labor 26.8% \u2014 ~$247 over 20% target"
     },
     {
       "sev": "high",
       "day": "Thu",
-      "msg": "Thu labor 22.6% \u2014 ~$120 over 20% target"
+      "msg": "Thu labor 25.0% \u2014 ~$232 over 20% target"
     }
   ],
   "per_day": [
@@ -68,11 +68,11 @@
       "date": "2026-09-09",
       "wd": "Wed",
       "sales": 3618,
-      "hrs": 55.0,
-      "cost": 858,
-      "pct": 23.7,
+      "hrs": 63.0,
+      "cost": 970,
+      "pct": 26.8,
       "byPosition": {
-        "2. Crew": 26.0,
+        "2. Crew": 34.0,
         "General Manager-Salary": 10.0,
         "Shift Leader-Hourly": 19.0
       }
@@ -81,11 +81,11 @@
       "date": "2026-09-10",
       "wd": "Thu",
       "sales": 4661,
-      "hrs": 67.0,
-      "cost": 1052,
-      "pct": 22.6,
+      "hrs": 75.0,
+      "cost": 1164,
+      "pct": 25.0,
       "byPosition": {
-        "2. Crew": 30.0,
+        "2. Crew": 38.0,
         "Shift Manager-Hourly": 4.0,
         "Shift Leader-Hourly": 23.0,
         "General Manager-Salary": 10.0
@@ -95,12 +95,12 @@
       "date": "2026-09-11",
       "wd": "Fri",
       "sales": 5298,
-      "hrs": 62.0,
-      "cost": 887,
-      "pct": 16.7,
+      "hrs": 70.0,
+      "cost": 999,
+      "pct": 18.9,
       "byPosition": {
         "Shift Leader-Hourly": 13.0,
-        "2. Crew": 41.0,
+        "2. Crew": 49.0,
         "Shift Manager-Hourly": 8.0
       }
     },
