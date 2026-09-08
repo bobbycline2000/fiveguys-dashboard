@@ -1403,12 +1403,12 @@
     "safe_mid": 654,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
+    "safe_close": 654,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -162.26,
     "notes": "",
-    "submitted_at": "2026-09-08T02:41:45.695Z"
+    "submitted_at": "2026-09-08T02:41:49.435Z"
   },
   {
     "date": "2099-01-01",
