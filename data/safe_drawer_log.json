@@ -1414,7 +1414,7 @@
     "date": "2026-09-08",
     "mgr": "MS",
     "deposit": 0,
-    "safe_open": 6,
+    "safe_open": 654,
     "d1_open": 0,
     "d2_open": 0,
     "safe_mid": 0,
@@ -1425,7 +1425,7 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-09-08T14:20:50.925Z"
+    "submitted_at": "2026-09-08T14:20:56.263Z"
   },
   {
     "date": "2099-01-01",
