@@ -1404,11 +1404,11 @@
     "d1_mid": 200,
     "d2_mid": 200,
     "safe_close": 654,
-    "d1_close": 0,
+    "d1_close": 200,
     "d2_close": 0,
     "ct_os": -162.26,
     "notes": "",
-    "submitted_at": "2026-09-08T02:41:49.435Z"
+    "submitted_at": "2026-09-08T02:41:52.211Z"
   },
   {
     "date": "2099-01-01",
