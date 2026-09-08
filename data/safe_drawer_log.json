@@ -1401,14 +1401,14 @@
     "d1_open": 200,
     "d2_open": 200,
     "safe_mid": 654,
-    "d1_mid": 0,
+    "d1_mid": 200,
     "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -162.26,
     "notes": "",
-    "submitted_at": "2026-09-08T02:41:39.601Z"
+    "submitted_at": "2026-09-08T02:41:42.571Z"
   },
   {
     "date": "2099-01-01",
