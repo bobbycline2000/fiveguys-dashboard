@@ -1,2 +1,1 @@
-[2026-09-07 15:11:41] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
-[2026-09-07 15:11:41] outlook-daily-pull-7am: brief already sent today - duplicate send skipped by guard
+[2026-09-08 13:26:42] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
