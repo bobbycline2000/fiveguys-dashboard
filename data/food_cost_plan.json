@@ -2,52 +2,56 @@
   "store": "2065",
   "week_start": "2026-08-31",
   "week_end": "2026-09-06",
-  "variance_week_start": "2026-08-31",
-  "variance_week_end": "2026-08-31",
+  "variance_week_start": "2026-09-01",
+  "variance_week_end": "2026-09-06",
   "cogs_pct_week": 30.0,
   "cogs_pct_week_label": "2026-09-06",
   "cogs_goal_pct": 27.5,
-  "total_over": 67.77,
-  "generated": "2026-09-08 13:26 ET",
+  "total_over": 75.94,
+  "generated": "2026-09-09 13:35 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Topping, Peanut Butter Cup",
-      "over_dollars": 28.67,
-      "actual": 31.05,
-      "theoretical": 2.38,
-      "variance_pct": -1204.6,
-      "big_six": false,
+      "name": "Bun, Burger",
+      "over_dollars": 34.79,
+      "actual": 832.44,
+      "theoretical": 797.65,
+      "variance_pct": -4.4,
+      "big_six": true,
       "actions": [
-        "This is a miscount \u2014 the inventory wasn't counted correctly. Recount it."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
       "rank": 2,
-      "name": "Ground Beef",
-      "over_dollars": 20.37,
-      "actual": 357.83,
-      "theoretical": 337.46,
-      "variance_pct": -6.0,
-      "big_six": true,
+      "name": "Lettuce",
+      "over_dollars": 21.12,
+      "actual": 80.2,
+      "theoretical": 59.08,
+      "variance_pct": -35.8,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
+        "Confirm prep specs are correct.",
+        "Submit a Product Issue form for yield loss from bad quality off the truck.",
+        "Account for waste."
       ]
     },
     {
       "rank": 3,
-      "name": "Bun, Burger",
-      "over_dollars": 18.73,
-      "actual": 121.77,
-      "theoretical": 103.04,
-      "variance_pct": -18.2,
-      "big_six": true,
+      "name": "Pickles",
+      "over_dollars": 20.03,
+      "actual": 111.38,
+      "theoretical": 91.35,
+      "variance_pct": -21.9,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
+        "Confirm prep specs are correct.",
+        "Submit a Product Issue form for yield loss from bad quality off the truck.",
+        "Account for waste."
       ]
     }
   ]
