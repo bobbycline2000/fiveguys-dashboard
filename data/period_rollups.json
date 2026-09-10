@@ -1,47 +1,47 @@
 {
   "meta": {
     "store_id": "2065",
-    "anchor_date": "2026-09-06",
-    "generated": "2026-09-09T13:53:51",
-    "days_seen_total": 133,
-    "days_in_week": 7,
-    "days_in_month": 30,
-    "days_in_quarter": 90
+    "anchor_date": "2026-09-09",
+    "generated": "2026-09-10T13:22:40",
+    "days_seen_total": 134,
+    "days_in_week": 5,
+    "days_in_month": 28,
+    "days_in_quarter": 88
   },
   "week": {
-    "net_sales": 30740.04,
-    "gross_sales": 33200.69,
-    "order_count": 1312,
-    "guest_count": 5853,
-    "labor_cost": 6495.48,
-    "labor_hours": 548.5,
-    "labor_percent": 21.13,
-    "sales_per_guest": 5.25,
-    "avg_ticket": 23.43,
-    "days": 7
+    "net_sales": 22595.2,
+    "gross_sales": 24419.95,
+    "order_count": 943,
+    "guest_count": 4289,
+    "labor_cost": 4954.09,
+    "labor_hours": 410.07,
+    "labor_percent": 21.93,
+    "sales_per_guest": 5.27,
+    "avg_ticket": 23.96,
+    "days": 5
   },
   "month": {
-    "net_sales": 136108.32,
-    "gross_sales": 145984.28,
-    "order_count": 5694,
-    "guest_count": 25623,
-    "labor_cost": 28463.51,
-    "labor_hours": 2398.02,
-    "labor_percent": 20.91,
-    "sales_per_guest": 5.31,
-    "avg_ticket": 23.9,
-    "days": 30
+    "net_sales": 124897.74,
+    "gross_sales": 133922.16,
+    "order_count": 5237,
+    "guest_count": 23545,
+    "labor_cost": 26640.14,
+    "labor_hours": 2255.33,
+    "labor_percent": 21.33,
+    "sales_per_guest": 5.3,
+    "avg_ticket": 23.85,
+    "days": 28
   },
   "quarter": {
-    "net_sales": 410637.52,
-    "gross_sales": 440404.62,
-    "order_count": 17055,
-    "guest_count": 77235,
-    "labor_cost": 86755.41,
-    "labor_hours": 7386.25,
-    "labor_percent": 21.13,
+    "net_sales": 401178.91,
+    "gross_sales": 430256.92,
+    "order_count": 16625,
+    "guest_count": 75450,
+    "labor_cost": 85126.85,
+    "labor_hours": 7253.94,
+    "labor_percent": 21.22,
     "sales_per_guest": 5.32,
-    "avg_ticket": 24.08,
-    "days": 90
+    "avg_ticket": 24.13,
+    "days": 88
   }
 }
