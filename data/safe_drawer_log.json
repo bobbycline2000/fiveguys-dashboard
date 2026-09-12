@@ -1445,6 +1445,23 @@
     "submitted_at": "2026-09-10T14:15:42.920Z"
   },
   {
+    "date": "2026-09-11",
+    "mgr": "bc",
+    "deposit": 0,
+    "safe_open": 644,
+    "d1_open": 0,
+    "d2_open": 0,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
+    "ct_os": -207.79,
+    "notes": "",
+    "submitted_at": "2026-09-12T02:48:10.807Z"
+  },
+  {
     "date": "2099-01-01",
     "mgr": "TEST",
     "deposit": 0,
