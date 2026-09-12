@@ -4,17 +4,17 @@
   "week_ending": "2026-09-13",
   "week_start": "2026-09-07",
   "target_pct": 20.0,
-  "generated_at": "2026-09-11T09:44:51.931581-04:00",
+  "generated_at": "2026-09-12T09:03:30.407075-04:00",
   "week": {
     "fcst_sales": 26179,
-    "sched_cost": 5850,
-    "sched_hours": 465.0,
-    "labor_pct": 22.3,
-    "over_target_dollars": 614,
-    "ot_hours": 11.0,
-    "ot_value": 228
+    "sched_cost": 5654,
+    "sched_hours": 448.0,
+    "labor_pct": 21.6,
+    "over_target_dollars": 418,
+    "ot_hours": 18.0,
+    "ot_value": 364
   },
-  "issue_count": 5,
+  "issue_count": 4,
   "issues": [
     {
       "sev": "high",
@@ -32,14 +32,9 @@
       "msg": "Thu labor 28.2% \u2014 ~$265 over 20% target"
     },
     {
-      "sev": "high",
-      "day": "Fri",
-      "msg": "Fri labor 22.6% \u2014 ~$114 over 20% target"
-    },
-    {
       "sev": "med",
       "day": "Sun",
-      "msg": "Sun overtime 11.0h ($228)"
+      "msg": "Sun overtime 18.0h ($364)"
     }
   ],
   "per_day": [
@@ -97,12 +92,12 @@
       "date": "2026-09-11",
       "wd": "Fri",
       "sales": 4384,
-      "hrs": 82.0,
-      "cost": 990,
-      "pct": 22.6,
+      "hrs": 71.0,
+      "cost": 826,
+      "pct": 18.9,
       "byPosition": {
-        "2. Crew": 47.0,
-        "Shift Leader-Hourly": 25.0,
+        "2. Crew": 40.0,
+        "Shift Leader-Hourly": 21.0,
         "General Manager-Salary": 10.0
       }
     },
@@ -110,11 +105,11 @@
       "date": "2026-09-12",
       "wd": "Sat",
       "sales": 4712,
-      "hrs": 77.0,
-      "cost": 909,
-      "pct": 19.3,
+      "hrs": 70.0,
+      "cost": 818,
+      "pct": 17.4,
       "byPosition": {
-        "2. Crew": 49.0,
+        "2. Crew": 42.0,
         "General Manager-Salary": 10.0,
         "Shift Leader-Hourly": 18.0
       }
@@ -123,11 +118,11 @@
       "date": "2026-09-13",
       "wd": "Sun",
       "sales": 4573,
-      "hrs": 61.0,
-      "cost": 774,
-      "pct": 16.9,
+      "hrs": 62.0,
+      "cost": 832,
+      "pct": 18.2,
       "byPosition": {
-        "2. Crew": 33.0,
+        "2. Crew": 34.0,
         "Shift Leader-Hourly": 18.0,
         "General Manager-Salary": 10.0
       }
