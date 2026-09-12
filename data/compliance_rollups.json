@@ -1,12 +1,12 @@
 {
   "meta": {
     "store_id": "2065",
-    "anchor_date": "2026-09-10",
-    "days_seen_total": 136,
+    "anchor_date": "2026-09-11",
+    "days_seen_total": 137,
     "days_in_week": 7,
     "days_in_month": 30,
     "days_in_quarter": 90,
-    "generated": "2026-09-11T13:47:42"
+    "generated": "2026-09-12T12:43:38"
   },
   "week": {
     "required_pct_avg": 95.2,
