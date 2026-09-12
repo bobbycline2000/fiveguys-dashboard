@@ -1455,11 +1455,11 @@
     "d1_mid": 200,
     "d2_mid": 200,
     "safe_close": 644,
-    "d1_close": 0,
+    "d1_close": 200,
     "d2_close": 0,
     "ct_os": -207.79,
     "notes": "",
-    "submitted_at": "2026-09-12T02:48:27.917Z"
+    "submitted_at": "2026-09-12T02:48:30.115Z"
   },
   {
     "date": "2099-01-01",
