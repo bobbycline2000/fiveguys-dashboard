@@ -1473,10 +1473,10 @@
     "d2_mid": 200,
     "safe_close": 644,
     "d1_close": 200,
-    "d2_close": 0,
+    "d2_close": 200,
     "ct_os": -30.07,
     "notes": "",
-    "submitted_at": "2026-09-13T02:52:51.856Z"
+    "submitted_at": "2026-09-13T02:52:57.424Z"
   },
   {
     "date": "2099-01-01",
