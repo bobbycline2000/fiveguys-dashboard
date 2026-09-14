@@ -1,41 +1,42 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-08-31",
-    "week_end": "2026-09-06",
-    "week_label": "8/31-9/6",
-    "month": "August",
-    "generated": "2026-09-07T18:06:31",
+    "week_start": "2026-09-07",
+    "week_end": "2026-09-13",
+    "week_label": "9/7-9/13",
+    "month": "September",
+    "generated": "2026-09-14T18:21:02",
     "notes": [
-      "tips snapshot for w/e 2026-09-06 not found"
+      "Brink sales cover 5/7 days",
+      "tips snapshot for w/e 2026-09-13 not found"
     ]
   },
   "sales": {
     "forecast": null,
-    "net_sales": 30740.04,
+    "net_sales": 20953.85,
     "over_under": null
   },
   "food_cost": {
-    "cogs_pct": 30.0,
+    "cogs_pct": 27.5,
     "supplies_pct": null,
     "total_pct": null,
     "qtd_cogs_pct": null,
-    "var_to_goal": 2.5,
+    "var_to_goal": 0.0,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Topping, Peanut Butter Cup",
-      "Ground Beef",
-      "Bun, Burger"
+      "Bun, Burger",
+      "Lettuce",
+      "Pickles"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 21.13,
+    "hourly_labor_pct": 23.74,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
     "ot_hours": null,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 548.5,
+    "labor_hours": 428.77,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
@@ -106,7 +107,7 @@
     "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 98.4,
+    "completion_pct": 93.2,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
