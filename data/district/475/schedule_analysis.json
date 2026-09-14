@@ -4,17 +4,138 @@
   "week_ending": "2026-09-20",
   "week_start": "2026-09-14",
   "target_pct": 20.0,
-  "generated_at": "2026-09-13T09:56:24.431243-04:00",
+  "generated_at": "2026-09-14T12:02:58.278067-04:00",
   "week": {
-    "fcst_sales": 0,
-    "sched_cost": 0,
-    "sched_hours": 0.0,
-    "labor_pct": 0,
-    "over_target_dollars": 0,
+    "fcst_sales": 37971,
+    "sched_cost": 8345,
+    "sched_hours": 523.0,
+    "labor_pct": 22.0,
+    "over_target_dollars": 751,
     "ot_hours": 0.0,
     "ot_value": 0
   },
-  "issue_count": 0,
-  "issues": [],
-  "per_day": []
+  "issue_count": 4,
+  "issues": [
+    {
+      "sev": "high",
+      "day": "Mon",
+      "msg": "Mon labor 25.5% \u2014 ~$241 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Tue",
+      "msg": "Tue labor 26.2% \u2014 ~$265 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Wed",
+      "msg": "Wed labor 24.0% \u2014 ~$199 over 20% target"
+    },
+    {
+      "sev": "high",
+      "day": "Thu",
+      "msg": "Thu labor 24.3% \u2014 ~$238 over 20% target"
+    }
+  ],
+  "per_day": [
+    {
+      "date": "2026-09-14",
+      "wd": "Mon",
+      "sales": 4401,
+      "hrs": 69.0,
+      "cost": 1121,
+      "pct": 25.5,
+      "byPosition": {
+        "Assistant Manager-Salary": 10.0,
+        "2. Crew": 35.0,
+        "General Manager-Salary": 10.0,
+        "Shift Leader-Hourly": 7.0,
+        "Shift Manager-Hourly": 7.0
+      }
+    },
+    {
+      "date": "2026-09-15",
+      "wd": "Tue",
+      "sales": 4269,
+      "hrs": 70.0,
+      "cost": 1119,
+      "pct": 26.2,
+      "byPosition": {
+        "General Manager-Salary": 10.0,
+        "2. Crew": 44.0,
+        "Shift Leader-Hourly": 6.0,
+        "Assistant Manager-Salary": 10.0
+      }
+    },
+    {
+      "date": "2026-09-16",
+      "wd": "Wed",
+      "sales": 4965,
+      "hrs": 78.0,
+      "cost": 1192,
+      "pct": 24.0,
+      "byPosition": {
+        "2. Crew": 54.0,
+        "Assistant Manager-Salary": 9.0,
+        "Shift Manager-Hourly": 9.0,
+        "Shift Leader-Hourly": 6.0
+      }
+    },
+    {
+      "date": "2026-09-17",
+      "wd": "Thu",
+      "sales": 5492,
+      "hrs": 83.0,
+      "cost": 1336,
+      "pct": 24.3,
+      "byPosition": {
+        "Shift Leader-Hourly": 21.0,
+        "2. Crew": 44.0,
+        "Shift Manager-Hourly": 8.0,
+        "General Manager-Salary": 10.0
+      }
+    },
+    {
+      "date": "2026-09-18",
+      "wd": "Fri",
+      "sales": 6320,
+      "hrs": 78.0,
+      "cost": 1319,
+      "pct": 20.9,
+      "byPosition": {
+        "2. Crew": 37.0,
+        "General Manager-Salary": 10.0,
+        "Assistant Manager-Salary": 8.0,
+        "Shift Leader-Hourly": 16.0,
+        "Shift Manager-Hourly": 7.0
+      }
+    },
+    {
+      "date": "2026-09-19",
+      "wd": "Sat",
+      "sales": 6854,
+      "hrs": 79.0,
+      "cost": 1208,
+      "pct": 17.6,
+      "byPosition": {
+        "2. Crew": 48.0,
+        "Assistant Manager-Salary": 9.0,
+        "Shift Leader-Hourly": 14.0,
+        "Shift Manager-Hourly": 8.0
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "wd": "Sun",
+      "sales": 5670,
+      "hrs": 66.0,
+      "cost": 1050,
+      "pct": 18.5,
+      "byPosition": {
+        "2. Crew": 40.0,
+        "Shift Leader-Hourly": 16.0,
+        "General Manager-Salary": 10.0
+      }
+    }
+  ]
 }
