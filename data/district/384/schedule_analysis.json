@@ -4,13 +4,13 @@
   "week_ending": "2026-09-20",
   "week_start": "2026-09-14",
   "target_pct": 20.0,
-  "generated_at": "2026-09-14T12:02:58.278067-04:00",
+  "generated_at": "2026-09-15T10:25:49.140556-04:00",
   "week": {
     "fcst_sales": 30729,
-    "sched_cost": 7036,
-    "sched_hours": 488.5,
-    "labor_pct": 22.9,
-    "over_target_dollars": 890,
+    "sched_cost": 6996,
+    "sched_hours": 480.5,
+    "labor_pct": 22.8,
+    "over_target_dollars": 850,
     "ot_hours": 5.0,
     "ot_value": 98
   },
@@ -19,17 +19,17 @@
     {
       "sev": "high",
       "day": "Mon",
-      "msg": "Mon labor 31.5% \u2014 ~$350 over 20% target"
+      "msg": "Mon labor 32.3% \u2014 ~$374 over 20% target"
     },
     {
       "sev": "high",
       "day": "Tue",
-      "msg": "Tue labor 33.9% \u2014 ~$453 over 20% target"
+      "msg": "Tue labor 34.7% \u2014 ~$477 over 20% target"
     },
     {
       "sev": "high",
       "day": "Wed",
-      "msg": "Wed labor 23.8% \u2014 ~$160 over 20% target"
+      "msg": "Wed labor 24.4% \u2014 ~$184 over 20% target"
     },
     {
       "sev": "high",
@@ -53,8 +53,8 @@
       "wd": "Mon",
       "sales": 3042,
       "hrs": 67.5,
-      "cost": 958,
-      "pct": 31.5,
+      "cost": 982,
+      "pct": 32.3,
       "byPosition": {
         "Shift Leader-Hourly": 15.0,
         "General Manager-Salary": 10.0,
@@ -66,8 +66,8 @@
       "wd": "Tue",
       "sales": 3256,
       "hrs": 77.0,
-      "cost": 1104,
-      "pct": 33.9,
+      "cost": 1128,
+      "pct": 34.7,
       "byPosition": {
         "Shift Leader-Hourly": 23.0,
         "2. Crew": 44.0,
@@ -79,8 +79,8 @@
       "wd": "Wed",
       "sales": 4200,
       "hrs": 68.0,
-      "cost": 1000,
-      "pct": 23.8,
+      "cost": 1024,
+      "pct": 24.4,
       "byPosition": {
         "General Manager-Salary": 10.0,
         "2. Crew": 42.0,
@@ -91,12 +91,12 @@
       "date": "2026-09-17",
       "wd": "Thu",
       "sales": 5500,
-      "hrs": 71.5,
-      "cost": 1043,
-      "pct": 19.0,
+      "hrs": 63.5,
+      "cost": 931,
+      "pct": 16.9,
       "byPosition": {
         "2. Crew": 46.5,
-        "Shift Leader-Hourly": 15.0,
+        "Shift Leader-Hourly": 7.0,
         "General Manager-Salary": 10.0
       }
     },
