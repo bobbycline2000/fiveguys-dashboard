@@ -2,21 +2,21 @@
   "store": "2065",
   "week_start": "2026-09-07",
   "week_end": "2026-09-13",
-  "variance_week_start": "2026-09-01",
-  "variance_week_end": "2026-09-06",
+  "variance_week_start": "2026-09-07",
+  "variance_week_end": "2026-09-13",
   "cogs_pct_week": 27.5,
   "cogs_pct_week_label": "2026-09-13",
   "cogs_goal_pct": 27.5,
-  "total_over": 75.94,
-  "generated": "2026-09-14 15:47 ET",
+  "total_over": 133.41,
+  "generated": "2026-09-15 14:15 ET",
   "items": [
     {
       "rank": 1,
       "name": "Bun, Burger",
-      "over_dollars": 34.79,
-      "actual": 832.44,
-      "theoretical": 797.65,
-      "variance_pct": -4.4,
+      "over_dollars": 51.03,
+      "actual": 890.78,
+      "theoretical": 839.75,
+      "variance_pct": -6.1,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
@@ -27,10 +27,10 @@
     {
       "rank": 2,
       "name": "Lettuce",
-      "over_dollars": 21.12,
-      "actual": 80.2,
-      "theoretical": 59.08,
-      "variance_pct": -35.8,
+      "over_dollars": 46.64,
+      "actual": 105.15,
+      "theoretical": 58.51,
+      "variance_pct": -79.7,
       "big_six": false,
       "actions": [
         "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
@@ -41,17 +41,15 @@
     },
     {
       "rank": 3,
-      "name": "Pickles",
-      "over_dollars": 20.03,
-      "actual": 111.38,
-      "theoretical": 91.35,
-      "variance_pct": -21.9,
-      "big_six": false,
+      "name": "Cheese",
+      "over_dollars": 35.74,
+      "actual": 341.66,
+      "theoretical": 305.92,
+      "variance_pct": -11.7,
+      "big_six": true,
       "actions": [
-        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
-        "Confirm prep specs are correct.",
-        "Submit a Product Issue form for yield loss from bad quality off the truck.",
-        "Account for waste."
+        "Big Six item \u2014 watch it. Count cheese slices per build; verify receiving count vs invoice.",
+        "Recount on-hand \u2014 a miscount is the usual cause of a big swing."
       ]
     }
   ]
