@@ -1,20 +1,20 @@
 {
   "store_id": "1788",
   "store_name": "FG-1788 Middletown",
-  "generated": "2026-09-17 14:25 ET",
+  "generated": "2026-09-18 13:46 ET",
   "_status": "live CrunchTime KPIs (WTD); Brink/Steritech pending",
   "kpis": {
     "net_sales": {
-      "value": "$11,566",
-      "raw": 11565.88,
+      "value": "$17,182",
+      "raw": 17182.1,
       "label": "Net Sales",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "labor_pct": {
-      "value": "22.9%",
-      "raw": 22.8688,
+      "value": "22.1%",
+      "raw": 22.1278,
       "label": "Labor %",
       "source": "CrunchTime",
       "status": "live",
@@ -34,15 +34,15 @@
     },
     "cash_os": {
       "value": "$0",
-      "raw": 0.01,
+      "raw": 0.02,
       "label": "Cash O/S",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "sales_guest": {
-      "value": "$5.35",
-      "raw": 5.3522,
+      "value": "$5.00",
+      "raw": 4.9977,
       "label": "Sales / Guest",
       "source": "CrunchTime",
       "status": "live",

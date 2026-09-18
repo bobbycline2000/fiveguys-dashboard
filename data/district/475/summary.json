@@ -1,20 +1,20 @@
 {
   "store_id": "475",
   "store_name": "FG-475 Paddock Shops",
-  "generated": "2026-09-17 14:25 ET",
+  "generated": "2026-09-18 13:46 ET",
   "_status": "live CrunchTime KPIs (WTD); Brink/Steritech pending",
   "kpis": {
     "net_sales": {
-      "value": "$12,624",
-      "raw": 12623.65,
+      "value": "$19,974",
+      "raw": 19974.2,
       "label": "Net Sales",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "labor_pct": {
-      "value": "31.1%",
-      "raw": 31.1074,
+      "value": "26.4%",
+      "raw": 26.4093,
       "label": "Labor %",
       "source": "CrunchTime",
       "status": "live",
@@ -41,8 +41,8 @@
       "window": "WTD"
     },
     "sales_guest": {
-      "value": "$5.13",
-      "raw": 5.1275,
+      "value": "$4.99",
+      "raw": 4.9898,
       "label": "Sales / Guest",
       "source": "CrunchTime",
       "status": "live",
