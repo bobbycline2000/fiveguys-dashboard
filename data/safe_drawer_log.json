@@ -1518,7 +1518,7 @@
     "deposit": 0,
     "safe_open": 649,
     "d1_open": 200,
-    "d2_open": 0,
+    "d2_open": 200,
     "safe_mid": 0,
     "d1_mid": 0,
     "d2_mid": 0,
@@ -1527,7 +1527,7 @@
     "d2_close": 0,
     "ct_os": -29.32,
     "notes": "",
-    "submitted_at": "2026-09-19T03:22:08.107Z"
+    "submitted_at": "2026-09-19T03:22:10.843Z"
   },
   {
     "date": "2099-01-01",
