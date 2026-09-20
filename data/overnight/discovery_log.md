@@ -302,3 +302,6 @@
 
 ## 2026-09-19 — CrunchTime
 +0 new endpoints, +17 new screens
+
+## 2026-09-20 — CrunchTime
++0 new endpoints, +18 new screens
