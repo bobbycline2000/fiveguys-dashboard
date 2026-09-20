@@ -1,124 +1,129 @@
 {
   "store_id": "1731",
   "store_name": "Outer Loop",
-  "week_ending": "2026-09-20",
-  "week_start": "2026-09-14",
+  "week_ending": "2026-09-27",
+  "week_start": "2026-09-21",
   "target_pct": 20.0,
-  "generated_at": "2026-09-19T09:19:39.928223-04:00",
+  "generated_at": "2026-09-20T09:40:18.415411-04:00",
   "week": {
-    "fcst_sales": 27235,
-    "sched_cost": 5450,
-    "sched_hours": 437.5,
-    "labor_pct": 20.0,
-    "over_target_dollars": 3,
+    "fcst_sales": 26642,
+    "sched_cost": 5440,
+    "sched_hours": 425.5,
+    "labor_pct": 20.4,
+    "over_target_dollars": 111,
     "ot_hours": 11.0,
-    "ot_value": 24
+    "ot_value": 0
   },
-  "issue_count": 3,
+  "issue_count": 4,
   "issues": [
     {
       "sev": "high",
+      "day": "Mon",
+      "msg": "Mon labor 26.6% \u2014 ~$178 over 20% target"
+    },
+    {
+      "sev": "high",
       "day": "Tue",
-      "msg": "Tue labor 23.4% \u2014 ~$98 over 20% target"
+      "msg": "Tue labor 24.0% \u2014 ~$99 over 20% target"
     },
     {
       "sev": "med",
       "day": "Fri",
-      "msg": "Fri overtime 10.0h ($0)"
+      "msg": "Fri overtime 11.0h ($0)"
     },
     {
-      "sev": "med",
+      "sev": "high",
       "day": "Sun",
-      "msg": "Sun overtime 1.0h ($24)"
+      "msg": "Sun labor 22.6% \u2014 ~$113 over 20% target"
     }
   ],
   "per_day": [
     {
-      "date": "2026-09-14",
+      "date": "2026-09-21",
       "wd": "Mon",
-      "sales": 3255,
-      "hrs": 58.0,
-      "cost": 647,
-      "pct": 19.9,
+      "sales": 2711,
+      "hrs": 62.0,
+      "cost": 720,
+      "pct": 26.6,
       "byPosition": {
-        "2. Crew": 41.0,
+        "2. Crew": 38.0,
         "General Manager-Salary": 11.0,
-        "Shift Leader-Hourly": 6.0
+        "Shift Leader-Hourly": 13.0
       }
     },
     {
-      "date": "2026-09-15",
+      "date": "2026-09-22",
       "wd": "Tue",
-      "sales": 2833,
-      "hrs": 56.0,
-      "cost": 664,
-      "pct": 23.4,
+      "sales": 2477,
+      "hrs": 51.0,
+      "cost": 594,
+      "pct": 24.0,
       "byPosition": {
-        "2. Crew": 39.0,
-        "General Manager-Salary": 10.0,
-        "Shift Leader-Hourly": 7.0
-      }
-    },
-    {
-      "date": "2026-09-16",
-      "wd": "Wed",
-      "sales": 3418,
-      "hrs": 58.0,
-      "cost": 697,
-      "pct": 20.4,
-      "byPosition": {
-        "2. Crew": 36.0,
-        "Shift Leader-Hourly": 12.0,
-        "General Manager-Salary": 10.0
-      }
-    },
-    {
-      "date": "2026-09-17",
-      "wd": "Thu",
-      "sales": 4040,
-      "hrs": 61.0,
-      "cost": 776,
-      "pct": 19.2,
-      "byPosition": {
-        "2. Crew": 39.0,
-        "General Manager-Salary": 8.0,
-        "Shift Leader-Hourly": 14.0
-      }
-    },
-    {
-      "date": "2026-09-18",
-      "wd": "Fri",
-      "sales": 5142,
-      "hrs": 74.0,
-      "cost": 876,
-      "pct": 17.0,
-      "byPosition": {
-        "2. Crew": 63.0,
+        "Shift Leader-Hourly": 7.0,
+        "2. Crew": 33.0,
         "General Manager-Salary": 11.0
       }
     },
     {
-      "date": "2026-09-19",
-      "wd": "Sat",
-      "sales": 4608,
-      "hrs": 70.5,
-      "cost": 969,
-      "pct": 21.0,
+      "date": "2026-09-23",
+      "wd": "Wed",
+      "sales": 3361,
+      "hrs": 58.0,
+      "cost": 700,
+      "pct": 20.8,
       "byPosition": {
-        "2. Crew": 52.0,
-        "Shift Leader-Hourly": 18.5
+        "General Manager-Salary": 10.0,
+        "Shift Leader-Hourly": 12.0,
+        "2. Crew": 36.0
       }
     },
     {
-      "date": "2026-09-20",
-      "wd": "Sun",
-      "sales": 3939,
-      "hrs": 60.0,
-      "cost": 822,
-      "pct": 20.9,
+      "date": "2026-09-24",
+      "wd": "Thu",
+      "sales": 4082,
+      "hrs": 62.0,
+      "cost": 810,
+      "pct": 19.8,
       "byPosition": {
-        "2. Crew": 46.0,
-        "Shift Leader-Hourly": 14.0
+        "2. Crew": 40.0,
+        "Shift Leader-Hourly": 14.0,
+        "General Manager-Salary": 8.0
+      }
+    },
+    {
+      "date": "2026-09-25",
+      "wd": "Fri",
+      "sales": 5022,
+      "hrs": 63.0,
+      "cost": 742,
+      "pct": 14.8,
+      "byPosition": {
+        "2. Crew": 52.0,
+        "General Manager-Salary": 11.0
+      }
+    },
+    {
+      "date": "2026-09-26",
+      "wd": "Sat",
+      "sales": 4598,
+      "hrs": 62.5,
+      "cost": 882,
+      "pct": 19.2,
+      "byPosition": {
+        "Shift Leader-Hourly": 18.5,
+        "2. Crew": 44.0
+      }
+    },
+    {
+      "date": "2026-09-27",
+      "wd": "Sun",
+      "sales": 4391,
+      "hrs": 67.0,
+      "cost": 991,
+      "pct": 22.6,
+      "byPosition": {
+        "Shift Leader-Hourly": 24.0,
+        "2. Crew": 43.0
       }
     }
   ]

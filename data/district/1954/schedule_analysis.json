@@ -1,124 +1,20 @@
 {
   "store_id": "1954",
   "store_name": "Jeffersonville",
-  "week_ending": "2026-09-20",
-  "week_start": "2026-09-14",
+  "week_ending": "2026-09-27",
+  "week_start": "2026-09-21",
   "target_pct": 20.0,
-  "generated_at": "2026-09-19T09:19:39.928223-04:00",
+  "generated_at": "2026-09-20T09:40:18.415411-04:00",
   "week": {
-    "fcst_sales": 30966,
-    "sched_cost": 6436,
-    "sched_hours": 447.5,
-    "labor_pct": 20.8,
-    "over_target_dollars": 243,
-    "ot_hours": 3.0,
-    "ot_value": 72
+    "fcst_sales": 0,
+    "sched_cost": 0,
+    "sched_hours": 0.0,
+    "labor_pct": 0,
+    "over_target_dollars": 0,
+    "ot_hours": 0.0,
+    "ot_value": 0
   },
-  "issue_count": 3,
-  "issues": [
-    {
-      "sev": "high",
-      "day": "Tue",
-      "msg": "Tue labor 29.3% \u2014 ~$327 over 20% target"
-    },
-    {
-      "sev": "high",
-      "day": "Wed",
-      "msg": "Wed labor 31.8% \u2014 ~$435 over 20% target"
-    },
-    {
-      "sev": "med",
-      "day": "Sun",
-      "msg": "Sun overtime 3.0h ($72)"
-    }
-  ],
-  "per_day": [
-    {
-      "date": "2026-09-14",
-      "wd": "Mon",
-      "sales": 3397,
-      "hrs": 51.0,
-      "cost": 735,
-      "pct": 21.6,
-      "byPosition": {
-        "Shift Leader-Hourly": 10.0,
-        "2. Crew": 34.0,
-        "Shift Manager-Hourly": 7.0
-      }
-    },
-    {
-      "date": "2026-09-15",
-      "wd": "Tue",
-      "sales": 3527,
-      "hrs": 67.0,
-      "cost": 1032,
-      "pct": 29.3,
-      "byPosition": {
-        "Shift Leader-Hourly": 31.0,
-        "2. Crew": 27.0,
-        "Shift Manager-Hourly": 9.0
-      }
-    },
-    {
-      "date": "2026-09-16",
-      "wd": "Wed",
-      "sales": 3677,
-      "hrs": 81.5,
-      "cost": 1170,
-      "pct": 31.8,
-      "byPosition": {
-        "2. Crew": 44.5,
-        "Shift Leader-Hourly": 33.0,
-        "Shift Manager-Hourly": 4.0
-      }
-    },
-    {
-      "date": "2026-09-17",
-      "wd": "Thu",
-      "sales": 4699,
-      "hrs": 62.5,
-      "cost": 926,
-      "pct": 19.7,
-      "byPosition": {
-        "2. Crew": 35.5,
-        "Shift Leader-Hourly": 27.0
-      }
-    },
-    {
-      "date": "2026-09-18",
-      "wd": "Fri",
-      "sales": 4897,
-      "hrs": 68.5,
-      "cost": 950,
-      "pct": 19.4,
-      "byPosition": {
-        "2. Crew": 49.5,
-        "Shift Leader-Hourly": 19.0
-      }
-    },
-    {
-      "date": "2026-09-19",
-      "wd": "Sat",
-      "sales": 5765,
-      "hrs": 68.5,
-      "cost": 932,
-      "pct": 16.2,
-      "byPosition": {
-        "Shift Leader-Hourly": 15.0,
-        "2. Crew": 53.5
-      }
-    },
-    {
-      "date": "2026-09-20",
-      "wd": "Sun",
-      "sales": 5004,
-      "hrs": 48.5,
-      "cost": 691,
-      "pct": 13.8,
-      "byPosition": {
-        "Shift Leader-Hourly": 15.0,
-        "2. Crew": 33.5
-      }
-    }
-  ]
+  "issue_count": 0,
+  "issues": [],
+  "per_day": []
 }

@@ -1,20 +1,20 @@
 {
   "store_id": "384",
   "store_name": "FG-384 New Albany",
-  "generated": "2026-09-19 13:19 ET",
+  "generated": "2026-09-20 13:40 ET",
   "_status": "live CrunchTime KPIs (WTD); Brink/Steritech pending",
   "kpis": {
     "net_sales": {
-      "value": "$24,015",
-      "raw": 24014.82,
+      "value": "$28,725",
+      "raw": 28724.78,
       "label": "Net Sales",
       "source": "CrunchTime",
       "status": "live",
       "window": "WTD"
     },
     "labor_pct": {
-      "value": "21.2%",
-      "raw": 21.2076,
+      "value": "22.0%",
+      "raw": 22.0226,
       "label": "Labor %",
       "source": "CrunchTime",
       "status": "live",
@@ -41,8 +41,8 @@
       "window": "WTD"
     },
     "sales_guest": {
-      "value": "$4.86",
-      "raw": 4.8594,
+      "value": "$4.95",
+      "raw": 4.9526,
       "label": "Sales / Guest",
       "source": "CrunchTime",
       "status": "live",
