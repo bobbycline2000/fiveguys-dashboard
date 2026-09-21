@@ -32,16 +32,16 @@ and the two Sundays a human hand-filler skipped in August (8/23, 8/30) are why.
 
 COLUMN MAP (2065 Dixie)
     A  Date (day of month)      — read only, used to locate the row
-    B  Sales                    — Brink sales_summary.net_sales
+    B  Sales                    — CT dailypayrollcontrol actualSales (Brink fallback)
     C  Last Year                — CrunchTime, LY rule above
     D  +/- vs LY                — FORMULA, never write
     E  Budget                   — FORMULA (=SUM(C*E45)+C), never write
     F  +/- vs Budget            — FORMULA, never write
-    G  Labor %                  — Brink labor_percent / 100 (decimal: 0.1899)
-    H  Scheduled Hours          — weekly_schedule totals_by_day[date]
-    I  Actual Hours             — Brink labor_hours
+    G  Labor %                  — CT actualPayrollPercent / 100 (Brink fallback)
+    H  Scheduled Hours          — CT labor/productivity regularScheduledHours (Brink fallback)
+    I  Actual Hours             — CT labor/productivity regularActualHours (Brink fallback)
     J  Hours Variance           — FORMULA (=I-H), never write
-    K  Total Discounts          — Brink discount_summary.total_amount
+    K  Total Discounts          — CT registerSales totComplimentary (Brink fallback)
     L  Cash +/-                 — ct_sales_summary_history over_short
     M  Manager Initials         — random BC/MC/MS  (Bobby's standing instruction)
     N-Q Bread counts            — random N 24-36, O 3-8, P 4-8, Q 2-5  (ditto)
@@ -253,6 +253,106 @@ def scheduled_hours(day):
     return None
 
 
+def _ct_jar():
+    """Shared live CrunchTime cookie session (re-mints if stale)."""
+    sys.path.insert(0, str(ROOT / "scraper"))
+    import api_enter_tips as T
+    return T.ensure_session(), T.HDR
+
+
+# CrunchTime is the primary source for B/G/H/I/K. Par Brink's emailed PDFs are
+# the fallback only (added 2026-09-21). Two failures drove this: a missing email
+# leaves the whole day blank, and on 2026-09-07 the POS business date never
+# rolled, so Brink reported Sep 7 as Sep 7+8+9 combined ($9,127.47 / 220.85 hrs)
+# and Sep 8 as $0.00. CrunchTime splits every day correctly and its Scheduled
+# Hours tie to the sheet on 19 of 20 September days.
+_CT_CACHE = {}
+
+
+def ct_days(start, end):
+    """Per-day CrunchTime figures for an inclusive date range.
+
+    {date: {sales, labor_pct, sched_hours, actual_hours, discounts}}
+      sales / labor_pct  POST /resource/dailypayrollcontrol/summary
+      sched + actual hrs POST /resource/nc/labor/productivity/summary (per-employee, summed)
+      discounts          POST /resource/sales/sales/registerSales/summary -> totComplimentary
+    """
+    key = (start, end)
+    if key in _CT_CACHE:
+        return _CT_CACHE[key]
+    jar, hdr = _ct_jar()
+    f = lambda d: d.strftime("%m/%d/%Y")
+    out = {}
+
+    def row(d):
+        return out.setdefault(d, {})
+
+    def post(url, body):
+        r = requests.post(f"{NETCHEF}{url}", json=body, cookies=jar, headers=hdr, timeout=45)
+        r.raise_for_status()
+        return r.json()
+
+    def parse(s):
+        return dt.datetime.strptime(s[:10], "%m/%d/%Y").date()
+
+    # Sales + labor % — CrunchTime weeks run Mon-Sun, so walk week by week.
+    wk = start - dt.timedelta(days=start.weekday())
+    while wk <= end:
+        j = post("/resource/dailypayrollcontrol/summary",
+                 {"pagingInfo": {"page": 1, "start": 0, "limit": 75},
+                  "extraCriteriaMap": {"startDate": f"{f(wk)} 00:00:00",
+                                       "endDate": f"{f(wk + dt.timedelta(days=6))} 00:00:00"}})
+        for g in (j.get("contentMap") or {}).get("gridList") or []:
+            if not g.get("date"):
+                continue
+            d = parse(g["date"])
+            if not (start <= d <= end):
+                continue
+            if g.get("actualSales") is not None:
+                row(d)["sales"] = round(float(g["actualSales"]), 2)
+            if g.get("actualPayrollPercent") is not None:
+                row(d)["labor_pct"] = round(float(g["actualPayrollPercent"]) / 100.0, 4)
+        wk += dt.timedelta(days=7)
+
+    # Scheduled + actual hours — per-employee rows, summed by day.
+    j = post("/resource/nc/labor/productivity/summary",
+             {"pagingInfo": {"page": 1, "start": 0, "limit": 5000},
+              "extraCriteriaMap": {"summarizeBy": "", "viewBy": "hours",
+                                   "locationId": 13969,
+                                   "startDate": f"{f(start)} 00:00:00",
+                                   "endDate": f"{f(end)} 00:00:00"}})
+    for g in (j.get("contentMap") or {}).get("gridList") or []:
+        if not g.get("date"):
+            continue
+        d = parse(g["date"])
+        if not (start <= d <= end):
+            continue
+        r_ = row(d)
+        r_["sched_hours"] = round(r_.get("sched_hours", 0.0)
+                                  + float(g.get("regularScheduledHours") or 0)
+                                  + float(g.get("overtimeScheduledHours") or 0), 2)
+        r_["actual_hours"] = round(r_.get("actual_hours", 0.0)
+                                   + float(g.get("regularActualHours") or 0)
+                                   + float(g.get("overtimeActualHours") or 0), 2)
+
+    # Discounts — totComplimentary matched Brink's discount total to the cent on 09-10.
+    j = post("/resource/sales/sales/registerSales/summary",
+             {"page": 1, "start": 0, "limit": 400, "extraFilter": [
+                 {"type": "date", "value": f(start - dt.timedelta(days=1)),
+                  "field": "salesDate", "comparison": "gt"},
+                 {"type": "date", "value": f(end + dt.timedelta(days=1)),
+                  "field": "salesDate", "comparison": "lt"}]})
+    for x in j.get("rows") or []:
+        if not x.get("salesDate"):
+            continue
+        d = parse(x["salesDate"])
+        if start <= d <= end and x.get("totComplimentary") is not None:
+            row(d)["discounts"] = round(float(x["totComplimentary"]), 2)
+
+    _CT_CACHE[key] = out
+    return out
+
+
 def over_short(day):
     hist = jload(DATA / "ct_sales_summary_history.json") or []
     for row in hist:
@@ -301,24 +401,42 @@ def pull_last_year(days):
 
 
 # ─── build + write ───────────────────────────────────────────────────────────
-def build_row(day, ly):
-    """Column letter -> value for one day. Only columns we actually have data
-    for are included; absent keys are left untouched in the sheet."""
+def build_row(day, ly, ct=None):
+    """Column letter -> value for one day. CrunchTime first, Brink as fallback.
+    Only columns we actually have data for are included; absent keys are left
+    untouched in the sheet."""
+    ct = ct or {}
     sales, disc = brink_day(day)
-    if not sales:
+    if not sales and not ct.get("sales"):
         return None
-    vals = {"B": round(float(sales["net_sales"]), 2)}
+    sales = sales or {}
+
+    def pick(ct_key, brink_val):
+        v = ct.get(ct_key)
+        return brink_val if v is None else v
+
+    b = pick("sales", None if sales.get("net_sales") is None
+             else round(float(sales["net_sales"]), 2))
+    if b is None:
+        return None
+    vals = {"B": b}
     if day in ly:
         vals["C"] = ly[day]
-    if sales.get("labor_percent") is not None:
-        vals["G"] = round(float(sales["labor_percent"]) / 100.0, 4)
-    sh = scheduled_hours(day)
+    g = pick("labor_pct", None if sales.get("labor_percent") is None
+             else round(float(sales["labor_percent"]) / 100.0, 4))
+    if g is not None:
+        vals["G"] = g
+    sh = pick("sched_hours", scheduled_hours(day))
     if sh is not None:
         vals["H"] = sh
-    if sales.get("labor_hours") is not None:
-        vals["I"] = round(float(sales["labor_hours"]), 2)
-    if disc and disc.get("total_amount") is not None:
-        vals["K"] = round(float(disc["total_amount"]), 2)
+    ah = pick("actual_hours", None if sales.get("labor_hours") is None
+              else round(float(sales["labor_hours"]), 2))
+    if ah is not None:
+        vals["I"] = ah
+    k = pick("discounts", None if not disc or disc.get("total_amount") is None
+             else round(float(disc["total_amount"]), 2))
+    if k is not None:
+        vals["K"] = k
     os_ = over_short(day)
     if os_ is not None:
         vals["L"] = os_
@@ -370,11 +488,18 @@ def main():
     print(f"=== FG Daily Report fill — {SHEET_NAME} — {start} .. {end}"
           f"{' [DRY]' if dry else ''} ===")
 
-    # Only days whose Brink pull actually landed are candidates.
-    have = [d for d in days if brink_day(d)[0]]
+    # CrunchTime is the primary source; a day is a candidate if EITHER CT or a
+    # Brink pull has it. Previously a missing Brink email meant a blank row.
+    try:
+        ctd = ct_days(start, end)
+    except Exception as e:
+        print(f"[warn] CrunchTime pull failed ({e}) — falling back to Brink only")
+        ctd = {}
+    have = [d for d in days if ctd.get(d, {}).get("sales") is not None or brink_day(d)[0]]
     missing = [d for d in days if d not in have]
     if missing:
-        print(f"[skip] no Brink data yet: {', '.join(str(d) for d in missing)}")
+        print(f"[skip] no CrunchTime or Brink data yet: "
+              f"{', '.join(str(d) for d in missing)}")
     if not have:
         print("[done] nothing to write.")
         return 0
@@ -405,7 +530,7 @@ def main():
         if not row:
             print(f"  [warn] {d}: no row for day {d.day} in column A — skipped")
             continue
-        vals = build_row(d, ly)
+        vals = build_row(d, ly, ctd.get(d))
         if vals:
             w, _ = write_day(headers, base, row, d, vals, dry=dry)
             total_w += w
