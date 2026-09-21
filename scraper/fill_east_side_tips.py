@@ -13,6 +13,7 @@ import datetime as dt
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 import requests
@@ -109,11 +110,18 @@ def main() -> int:
     print(f"[totals] row {tot_row}")
 
     # 5. read back + verify
-    rb = requests.get(f"{base}/range(address='A3:D{tot_row}')", headers=H, timeout=60)
-    rb.raise_for_status()
-    vals = rb.json()["values"]
-    tot_payout = float(vals[-1][2] or 0)
-    tot_hours = float(vals[-1][1] or 0)
+    # Graph can return 0 for freshly-written SUM formulas until the workbook
+    # recalculates — retry a few times before believing a zero (2026-09-21).
+    tot_payout = tot_hours = 0.0
+    for attempt in range(5):
+        rb = requests.get(f"{base}/range(address='A3:D{tot_row}')", headers=H, timeout=60)
+        rb.raise_for_status()
+        vals = rb.json()["values"]
+        tot_payout = float(vals[-1][2] or 0)
+        tot_hours = float(vals[-1][1] or 0)
+        if abs(tot_payout - charged) <= 0.05:
+            break
+        time.sleep(3)
     print(f"[verify] hours={tot_hours:.2f} payouts=${tot_payout:.2f} "
           f"charged=${charged:.2f} delta=${tot_payout - charged:+.2f}")
     if abs(tot_payout - charged) > 0.05:
