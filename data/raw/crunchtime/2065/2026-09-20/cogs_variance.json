@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
+    "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+    "item_source": "api_ingredient_level",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-09-14",
+    "week_end": "2026-09-20",
+    "variance_week_start": "2026-09-07",
+    "variance_week_end": "2026-09-13",
+    "month_start": "2026-09-01",
+    "last_month_start": "2026-08-01",
+    "last_month_end": "2026-08-31",
+    "through": "2026-09-20",
+    "pulled": "2026-09-21 11:46 ET",
+    "method": "api+playwright (GL-based, 2026-08-03)"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 25.4,
+  "cogs_pct_month": 28.1,
+  "cogs_pct_last_month": 24.1,
+  "variance_to_goal_week": -2.1,
+  "variance_to_goal_month": 0.6,
+  "variance_to_goal_last_mo": -3.4,
+  "items": [
+    {
+      "name": "Bun, Burger",
+      "actual": 890.78,
+      "theoretical": 839.75,
+      "over_dollars": 51.03,
+      "variance_pct": -6.1,
+      "rank": 1
+    },
+    {
+      "name": "Lettuce",
+      "actual": 105.15,
+      "theoretical": 58.51,
+      "over_dollars": 46.64,
+      "variance_pct": -79.7,
+      "rank": 2
+    },
+    {
+      "name": "Cheese",
+      "actual": 341.66,
+      "theoretical": 305.92,
+      "over_dollars": 35.74,
+      "variance_pct": -11.7,
+      "rank": 3
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 254.05,
+      "theoretical": 233.25,
+      "over_dollars": 20.8,
+      "variance_pct": -8.9,
+      "rank": 4
+    },
+    {
+      "name": "Bacon, Raw Sliced",
+      "actual": 392.49,
+      "theoretical": 372.17,
+      "over_dollars": 20.32,
+      "variance_pct": -5.5,
+      "rank": 5
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 2867.05,
+      "theoretical": 2849.12,
+      "over_dollars": 17.93,
+      "variance_pct": -0.6,
+      "rank": 6
+    },
+    {
+      "name": "Cajun Season",
+      "actual": 65.79,
+      "theoretical": 84.49,
+      "over_dollars": -18.7,
+      "variance_pct": 22.1,
+      "rank": 7
+    },
+    {
+      "name": "A1 Steak Sauce",
+      "actual": -18.74,
+      "theoretical": 13.09,
+      "over_dollars": -31.83,
+      "variance_pct": 243.2,
+      "rank": 8
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 719.81,
+      "theoretical": 769.98,
+      "over_dollars": -50.17,
+      "variance_pct": 6.5,
+      "rank": 9
+    },
+    {
+      "name": "Whipped Cream Can",
+      "actual": -347.48,
+      "theoretical": 20.91,
+      "over_dollars": -368.39,
+      "variance_pct": 1761.8,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
