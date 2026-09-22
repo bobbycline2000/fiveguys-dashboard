@@ -2,54 +2,54 @@
   "store": "2065",
   "week_start": "2026-09-14",
   "week_end": "2026-09-20",
-  "variance_week_start": "2026-09-07",
-  "variance_week_end": "2026-09-13",
+  "variance_week_start": "2026-09-14",
+  "variance_week_end": "2026-09-20",
   "cogs_pct_week": 25.4,
   "cogs_pct_week_label": "2026-09-20",
   "cogs_goal_pct": 27.5,
-  "total_over": 133.41,
-  "generated": "2026-09-21 15:48 ET",
+  "total_over": 585.88,
+  "generated": "2026-09-22 14:00 ET",
   "items": [
     {
       "rank": 1,
+      "name": "Whipped Cream Can",
+      "over_dollars": 364.15,
+      "actual": 394.09,
+      "theoretical": 29.94,
+      "variance_pct": -1216.3,
+      "big_six": false,
+      "actions": [
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "Peanut Butter inv",
+      "over_dollars": 148.49,
+      "actual": 157.01,
+      "theoretical": 8.52,
+      "variance_pct": -1742.8,
+      "big_six": false,
+      "actions": [
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
+      ]
+    },
+    {
+      "rank": 3,
       "name": "Bun, Burger",
-      "over_dollars": 51.03,
-      "actual": 890.78,
-      "theoretical": 839.75,
-      "variance_pct": -6.1,
+      "over_dollars": 73.24,
+      "actual": 1150.89,
+      "theoretical": 1077.65,
+      "variance_pct": -6.8,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
         "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
         "Audit comps & employee meals \u2014 every free build has to be rung."
-      ]
-    },
-    {
-      "rank": 2,
-      "name": "Lettuce",
-      "over_dollars": 46.64,
-      "actual": 105.15,
-      "theoretical": 58.51,
-      "variance_pct": -79.7,
-      "big_six": false,
-      "actions": [
-        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
-        "Confirm prep specs are correct.",
-        "Submit a Product Issue form for yield loss from bad quality off the truck.",
-        "Account for waste."
-      ]
-    },
-    {
-      "rank": 3,
-      "name": "Cheese",
-      "over_dollars": 35.74,
-      "actual": 341.66,
-      "theoretical": 305.92,
-      "variance_pct": -11.7,
-      "big_six": true,
-      "actions": [
-        "Big Six item \u2014 watch it. Count cheese slices per build; verify receiving count vs invoice.",
-        "Recount on-hand \u2014 a miscount is the usual cause of a big swing."
       ]
     }
   ]
