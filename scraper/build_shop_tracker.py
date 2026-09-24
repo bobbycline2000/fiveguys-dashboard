@@ -73,6 +73,7 @@ PART_JSON  = DATA_ROOT / STORE_ID / "participation.json"
 # (participation_key, display_name, section)
 # participation_key must match first-name keys in participation.json (after normalization)
 MANAGERS = [
+    ("Bobby",  "Robert Cline",   "Manager"),
     ("Vicki",  "Vicki Lucey",    "Manager"),
     ("Kasey",  "Kasey Wilson",   "Manager"),
     ("Nathan", "Nathan Roberts", "Manager"),
@@ -84,24 +85,35 @@ CREW = [
     ("Ash",       "Ash",                           "CREW"),
     ("Autumn",    "Autumn Hearn",                  "CREW"),
     ("Bri",       "Brianna Gatewood",              "CREW"),
+    ("Christopher", "Christopher Conder",          "CREW"),
+    ("Cortez",    "Cortez Brown",                  "CREW"),
+    ("DJuan",     "DJuan Johnson",                 "CREW"),
     ("Dakayla",   "DaKayla Dorsey",                "CREW"),
     ("Damon",     "Damon",                         "CREW"),
     ("Divan",     "Divan",                         "CREW"),
+    ("Emanuela",  "Emanuela Kamara",               "CREW"),
     ("Francisco", "Francisco Llorente Mejias",     "CREW"),
     ("Grace",     "Grace",                         "CREW"),
+    ("Heather",   "Heather Uebelacker-Maddox",     "CREW"),
     ("Jada",      "Jada Cox",                      "CREW"),
+    ("Javeh",     "Javeh Goodman",                 "CREW"),
     ("Jeremiah",  "Jeremiah Matthews",             "CREW"),
     ("Kable",     "Kable",                         "CREW"),
     ("Kaisha",    "Kaisha Brewer",                 "CREW"),
     ("Kayla",     "Kayla Valenzuela",              "CREW"),
     ("Kenzie",    "Kenzie",                        "CREW"),
     ("Lidy",      "Lidy Henry",                    "CREW"),
+    ("Madelynn",  "Madelynn Smith",                "CREW"),
+    ("Madison",   "Madison Cureton",               "CREW"),
     ("Maylin",    "Maylin Hernandez Rodriguez",    "CREW"),
     ("Mike",      "Mike",                          "CREW"),
+    ("Mykenize",  "Mykenize Milledge",             "CREW"),
     ("Nyatiek",   "Nyatiek Keah",                  "CREW"),
     ("Richard",   "Richard Gibbs",                 "CREW"),
+    ("Rusul",     "Rusul Kadhim",                  "CREW"),
     ("Ryan",      "Ryan",                          "CREW"),
     ("Samuel",    "Samuel Galban Rocha",           "CREW"),
+    ("Serina",    "Serina Gaskins",                "CREW"),
     ("Zach",      "Zack Whitten",                  "CREW"),
 ]
 
@@ -111,6 +123,7 @@ PART_KEY_NORM: dict[str, str] = {
     "Zack":    "Zach",
     "DaKayla": "Dakayla",
     "Brianna": "Bri",
+    "Ailen":   "Alen",
 }
 
 MONTHS = {

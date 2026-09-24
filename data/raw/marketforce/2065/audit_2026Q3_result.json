@@ -1,0 +1,1993 @@
+{
+  "20836204": {
+    "date": "2026-06-24",
+    "meal_period": "Late Dinner",
+    "score": 100.0,
+    "visit_window": [
+      19.0,
+      22.0
+    ],
+    "full": [
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            15.016666666666667,
+            23.166666666666668
+          ]
+        ]
+      },
+      {
+        "name": "Emanuela Kamara",
+        "intervals": [
+          [
+            16.716666666666665,
+            18.266666666666666
+          ],
+          [
+            18.633333333333333,
+            22.65
+          ]
+        ]
+      },
+      {
+        "name": "Anthony Pirtle",
+        "intervals": [
+          [
+            18.716666666666665,
+            23.15
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Smith, Madelynn - E2065347146)",
+        "intervals": [
+          [
+            14.983333333333333,
+            17.3
+          ],
+          [
+            17.833333333333332,
+            23.166666666666668
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "Ailen Gonzalez Cardero",
+        "intervals": [
+          [
+            18.016666666666666,
+            20.0
+          ],
+          [
+            20.333333333333332,
+            23.15
+          ]
+        ]
+      },
+      {
+        "name": "Maylin Hernandez Rodriguez",
+        "intervals": [
+          [
+            16.016666666666666,
+            18.966666666666665
+          ],
+          [
+            19.3,
+            23.15
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Smith, Madelynn - E2065347146"
+    ]
+  },
+  "20817932": {
+    "date": "2026-06-25",
+    "meal_period": "Dinner",
+    "score": 100.0,
+    "visit_window": [
+      16.0,
+      18.983333333333334
+    ],
+    "full": [
+      {
+        "name": "Robert Cline",
+        "intervals": [
+          [
+            12.416666666666666,
+            23.016666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            12.0,
+            19.866666666666667
+          ]
+        ]
+      },
+      {
+        "name": "Francisco Llorente Mejias",
+        "intervals": [
+          [
+            16.0,
+            22.983333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Jeremiah Matthews",
+        "intervals": [
+          [
+            15.1,
+            20.066666666666666
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Gaskins, Serina - E1704280770)",
+        "intervals": [
+          [
+            14.966666666666667,
+            17.033333333333335
+          ],
+          [
+            17.483333333333334,
+            23.0
+          ]
+        ]
+      },
+      {
+        "name": "Richard Gibbs",
+        "intervals": [
+          [
+            15.1,
+            17.85
+          ],
+          [
+            18.366666666666667,
+            20.066666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Ailen Gonzalez Cardero",
+        "intervals": [
+          [
+            17.95,
+            22.983333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Maylin Hernandez Rodriguez",
+        "intervals": [
+          [
+            14.933333333333334,
+            17.983333333333334
+          ],
+          [
+            18.4,
+            22.983333333333334
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Kadhim, Rusul - E2065348303)",
+        "intervals": [
+          [
+            10.983333333333333,
+            16.1
+          ],
+          [
+            16.6,
+            19.016666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Anthony Pirtle",
+        "intervals": [
+          [
+            15.933333333333334,
+            18.283333333333335
+          ],
+          [
+            18.683333333333334,
+            23.016666666666666
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Gaskins, Serina - E1704280770",
+      "Kadhim, Rusul - E2065348303"
+    ]
+  },
+  "20831747": {
+    "date": "2026-07-03",
+    "meal_period": "Lunch",
+    "score": 85.0,
+    "visit_window": [
+      13.5,
+      15.983333333333333
+    ],
+    "full": [
+      {
+        "name": "Robert Cline",
+        "intervals": [
+          [
+            9.75,
+            16.75
+          ]
+        ]
+      },
+      {
+        "name": "Francisco Llorente Mejias",
+        "intervals": [
+          [
+            10.916666666666666,
+            17.266666666666666
+          ],
+          [
+            17.683333333333334,
+            20.066666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Vicki Lucey",
+        "intervals": [
+          [
+            7.05,
+            10.666666666666666
+          ],
+          [
+            10.966666666666667,
+            16.283333333333335
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Gaskins, Serina - E1704280770)",
+        "intervals": [
+          [
+            15.9,
+            18.95
+          ],
+          [
+            19.416666666666668,
+            19.516666666666666
+          ],
+          [
+            20.133333333333333,
+            23.066666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Lidy Henry",
+        "intervals": [
+          [
+            7.333333333333333,
+            10.55
+          ],
+          [
+            10.916666666666666,
+            15.933333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Maylin Hernandez Rodriguez",
+        "intervals": [
+          [
+            15.016666666666667,
+            18.0
+          ],
+          [
+            18.4,
+            23.05
+          ]
+        ]
+      },
+      {
+        "name": "Jeremiah Matthews",
+        "intervals": [
+          [
+            15.016666666666667,
+            18.416666666666668
+          ],
+          [
+            19.05,
+            21.083333333333332
+          ]
+        ]
+      },
+      {
+        "name": "Anthony Pirtle",
+        "intervals": [
+          [
+            15.466666666666667,
+            18.5
+          ],
+          [
+            18.85,
+            23.1
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Smith, Madelynn - E2065347146)",
+        "intervals": [
+          [
+            7.083333333333333,
+            10.716666666666667
+          ],
+          [
+            11.266666666666667,
+            14.933333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Zack Whitten",
+        "intervals": [
+          [
+            9.916666666666666,
+            14.016666666666667
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Gaskins, Serina - E1704280770",
+      "Smith, Madelynn - E2065347146"
+    ]
+  },
+  "20847980": {
+    "date": "2026-07-11",
+    "meal_period": "Dinner",
+    "score": 0.0,
+    "visit_window": [
+      19.0,
+      22.0
+    ],
+    "full": [
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            15.066666666666666,
+            23.116666666666667
+          ]
+        ]
+      },
+      {
+        "name": "Jeremiah Matthews",
+        "intervals": [
+          [
+            16.05,
+            18.216666666666665
+          ],
+          [
+            18.733333333333334,
+            23.1
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "Christopher Conder",
+        "intervals": [
+          [
+            14.916666666666666,
+            20.333333333333332
+          ]
+        ]
+      },
+      {
+        "name": "Richard Gibbs",
+        "intervals": [
+          [
+            16.05,
+            18.766666666666666
+          ],
+          [
+            19.266666666666666,
+            23.1
+          ]
+        ]
+      },
+      {
+        "name": "Emanuela Kamara",
+        "intervals": [
+          [
+            16.516666666666666,
+            19.883333333333333
+          ],
+          [
+            20.333333333333332,
+            22.85
+          ]
+        ]
+      },
+      {
+        "name": "Anthony Pirtle",
+        "intervals": [
+          [
+            17.833333333333332,
+            20.766666666666666
+          ],
+          [
+            21.25,
+            23.116666666666667
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Gaskins, Serina - E1704280770",
+      "Kadhim, Rusul - E2065348303",
+      "Smith, Madelynn - E2065347146"
+    ]
+  },
+  "20847130": {
+    "date": "2026-07-12",
+    "meal_period": "Lunch",
+    "score": 87.0,
+    "visit_window": [
+      13.5,
+      15.983333333333333
+    ],
+    "full": [
+      {
+        "name": "DJuan Johnson",
+        "intervals": [
+          [
+            8.133333333333333,
+            10.616666666666667
+          ],
+          [
+            11.166666666666666,
+            16.183333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Emanuela Kamara",
+        "intervals": [
+          [
+            9.05,
+            10.716666666666667
+          ],
+          [
+            10.716666666666667,
+            10.716666666666667
+          ],
+          [
+            11.016666666666667,
+            16.716666666666665
+          ]
+        ]
+      },
+      {
+        "name": "Zack Whitten",
+        "intervals": [
+          [
+            11.683333333333334,
+            16.2
+          ],
+          [
+            16.666666666666668,
+            20.1
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Brazell, Elizabeth - E2065349081)",
+        "intervals": [
+          [
+            15.816666666666666,
+            17.683333333333334
+          ],
+          [
+            18.383333333333333,
+            20.133333333333333
+          ]
+        ]
+      },
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            15.133333333333333,
+            23.083333333333332
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Gaskins, Serina - E1704280770)",
+        "intervals": [
+          [
+            14.933333333333334,
+            17.133333333333333
+          ],
+          [
+            17.583333333333332,
+            23.05
+          ]
+        ]
+      },
+      {
+        "name": "Francisco Llorente Mejias",
+        "intervals": [
+          [
+            10.966666666666667,
+            14.783333333333333
+          ],
+          [
+            15.2,
+            19.066666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Vicki Lucey",
+        "intervals": [
+          [
+            7.05,
+            15.3
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Gaskins, Serina - E1704280770"
+    ]
+  },
+  "20857875": {
+    "date": "2026-07-16",
+    "meal_period": "Dinner",
+    "score": 95.0,
+    "visit_window": [
+      16.0,
+      18.983333333333334
+    ],
+    "full": [
+      {
+        "name": "Robert Cline",
+        "intervals": [
+          [
+            10.916666666666666,
+            20.0
+          ]
+        ]
+      },
+      {
+        "name": "Christopher Conder",
+        "intervals": [
+          [
+            11.783333333333333,
+            15.2
+          ],
+          [
+            15.7,
+            19.283333333333335
+          ],
+          [
+            19.433333333333334,
+            19.433333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            15.55,
+            23.233333333333334
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Brazell, Elizabeth - E2065349081)",
+        "intervals": [
+          [
+            16.733333333333334,
+            18.75
+          ],
+          [
+            19.35,
+            22.783333333333335
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Gaskins, Serina - E1704280770)",
+        "intervals": [
+          [
+            14.866666666666667,
+            16.816666666666666
+          ],
+          [
+            17.316666666666666,
+            23.216666666666665
+          ]
+        ]
+      },
+      {
+        "name": "Ailen Gonzalez Cardero",
+        "intervals": [
+          [
+            17.916666666666668,
+            20.216666666666665
+          ],
+          [
+            20.483333333333334,
+            23.233333333333334
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Goodman, Javeh - E2065349921)",
+        "intervals": [
+          [
+            14.15,
+            17.583333333333332
+          ],
+          [
+            18.1,
+            19.816666666666666
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Kadhim, Rusul - E2065348303)",
+        "intervals": [
+          [
+            16.016666666666666,
+            18.766666666666666
+          ],
+          [
+            19.2,
+            23.233333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Francisco Llorente Mejias",
+        "intervals": [
+          [
+            14.95,
+            17.4
+          ],
+          [
+            17.716666666666665,
+            23.233333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Jeremiah Matthews",
+        "intervals": [
+          [
+            12.466666666666667,
+            16.316666666666666
+          ],
+          [
+            16.833333333333332,
+            20.2
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Smith, Madelynn - E2065347146)",
+        "intervals": [
+          [
+            14.983333333333333,
+            18.05
+          ],
+          [
+            18.65,
+            18.683333333333334
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Gaskins, Serina - E1704280770",
+      "Goodman, Javeh - E2065349921",
+      "Kadhim, Rusul - E2065348303",
+      "Smith, Madelynn - E2065347146"
+    ]
+  },
+  "20865580": {
+    "date": "2026-07-23",
+    "meal_period": "Dinner",
+    "score": 100.0,
+    "visit_window": [
+      16.0,
+      18.983333333333334
+    ],
+    "full": [
+      {
+        "name": "Robert Cline",
+        "intervals": [
+          [
+            12.383333333333333,
+            21.516666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            14.983333333333333,
+            23.333333333333332
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Brazell, Elizabeth - E2065349081)",
+        "intervals": [
+          [
+            16.916666666666668,
+            18.683333333333334
+          ],
+          [
+            19.216666666666665,
+            23.316666666666666
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Gaskins, Serina - E1704280770)",
+        "intervals": [
+          [
+            15.983333333333333,
+            17.516666666666666
+          ],
+          [
+            17.966666666666665,
+            23.333333333333332
+          ]
+        ]
+      },
+      {
+        "name": "Richard Gibbs",
+        "intervals": [
+          [
+            12.15,
+            15.833333333333334
+          ],
+          [
+            16.333333333333332,
+            19.966666666666665
+          ]
+        ]
+      },
+      {
+        "name": "Ailen Gonzalez Cardero",
+        "intervals": [
+          [
+            18.033333333333335,
+            19.666666666666668
+          ],
+          [
+            19.933333333333334,
+            23.316666666666666
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Goodman, Javeh - E2065349921)",
+        "intervals": [
+          [
+            18.2,
+            21.816666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Francisco Llorente Mejias",
+        "intervals": [
+          [
+            14.95,
+            17.066666666666666
+          ],
+          [
+            17.433333333333334,
+            23.316666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Jeremiah Matthews",
+        "intervals": [
+          [
+            12.133333333333333,
+            16.583333333333332
+          ],
+          [
+            17.083333333333332,
+            19.966666666666665
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Gaskins, Serina - E1704280770",
+      "Goodman, Javeh - E2065349921",
+      "Smith, Madelynn - E2065347146"
+    ]
+  },
+  "20866691": {
+    "date": "2026-07-31",
+    "meal_period": "Lunch",
+    "score": 100.0,
+    "visit_window": [
+      11.0,
+      14
+    ],
+    "full": [
+      {
+        "name": "Robert Cline",
+        "intervals": [
+          [
+            8.033333333333333,
+            17.166666666666668
+          ]
+        ]
+      },
+      {
+        "name": "Christopher Conder",
+        "intervals": [
+          [
+            7.316666666666666,
+            10.483333333333333
+          ],
+          [
+            10.966666666666667,
+            14.966666666666667
+          ]
+        ]
+      },
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            7.316666666666666,
+            10.533333333333333
+          ],
+          [
+            10.933333333333334,
+            16.083333333333332
+          ]
+        ]
+      },
+      {
+        "name": "Lidy Henry",
+        "intervals": [
+          [
+            7.783333333333333,
+            10.516666666666667
+          ],
+          [
+            10.95,
+            16.0
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Kadhim, Rusul - E2065348303)",
+        "intervals": [
+          [
+            7.316666666666666,
+            10.483333333333333
+          ],
+          [
+            10.95,
+            16.316666666666666
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Uebelacker-Maddox, Heather - E2079350745)",
+        "intervals": [
+          [
+            7.083333333333333,
+            10.416666666666666
+          ],
+          [
+            10.95,
+            16.883333333333333
+          ]
+        ]
+      },
+      {
+        "name": "Zack Whitten",
+        "intervals": [
+          [
+            7.966666666666667,
+            10.45
+          ],
+          [
+            10.95,
+            14.033333333333333
+          ]
+        ]
+      }
+    ],
+    "partial": [],
+    "unresolved_raw": [
+      "Goodman, Javeh - E2065349921",
+      "Kadhim, Rusul - E2065348303",
+      "Smith, Madelynn - E2065347146",
+      "Uebelacker-Maddox, Heather - E2079350745"
+    ]
+  },
+  "20872132": {
+    "date": "2026-08-01",
+    "meal_period": "Dinner",
+    "score": 100.0,
+    "visit_window": [
+      16.0,
+      18.983333333333334
+    ],
+    "full": [
+      {
+        "name": "NAME_UNRESOLVED(Kadhim, Rusul - E2065348303)",
+        "intervals": [
+          [
+            15.0,
+            19.083333333333332
+          ],
+          [
+            19.366666666666667,
+            23.9
+          ]
+        ]
+      },
+      {
+        "name": "Anthony Pirtle",
+        "intervals": [
+          [
+            14.766666666666667,
+            23.9
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Brazell, Elizabeth - E2065349081)",
+        "intervals": [
+          [
+            15.983333333333333,
+            18.45
+          ],
+          [
+            18.983333333333334,
+            19.0
+          ],
+          [
+            19.05,
+            23.883333333333333
+          ]
+        ]
+      },
+      {
+        "name": "Robert Cline",
+        "intervals": [
+          [
+            8.666666666666666,
+            17.9
+          ]
+        ]
+      },
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            7.833333333333333,
+            10.6
+          ],
+          [
+            10.966666666666667,
+            16.583333333333332
+          ]
+        ]
+      },
+      {
+        "name": "DJuan Johnson",
+        "intervals": [
+          [
+            16.133333333333333,
+            19.766666666666666
+          ],
+          [
+            20.35,
+            23.45
+          ]
+        ]
+      },
+      {
+        "name": "Emanuela Kamara",
+        "intervals": [
+          [
+            8.166666666666666,
+            10.566666666666666
+          ],
+          [
+            10.966666666666667,
+            16.216666666666665
+          ]
+        ]
+      },
+      {
+        "name": "Mykenize Milledge",
+        "intervals": [
+          [
+            12.366666666666667,
+            16.883333333333333
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Smith, Madelynn - E2065347146)",
+        "intervals": [
+          [
+            16.05,
+            19.3
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Uebelacker-Maddox, Heather - E2079350745)",
+        "intervals": [
+          [
+            8.016666666666667,
+            17.933333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Zack Whitten",
+        "intervals": [
+          [
+            15.933333333333334,
+            17.933333333333334
+          ],
+          [
+            18.4,
+            23.45
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Kadhim, Rusul - E2065348303",
+      "Smith, Madelynn - E2065347146",
+      "Uebelacker-Maddox, Heather - E2079350745"
+    ]
+  },
+  "20880599": {
+    "date": "2026-08-08",
+    "meal_period": "Lunch",
+    "score": 95.0,
+    "visit_window": [
+      11.0,
+      14
+    ],
+    "full": [
+      {
+        "name": "Lidy Henry",
+        "intervals": [
+          [
+            8.0,
+            10.683333333333334
+          ],
+          [
+            10.683333333333334,
+            10.683333333333334
+          ],
+          [
+            11.0,
+            16.033333333333335
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Uebelacker-Maddox, Heather - E2079350745)",
+        "intervals": [
+          [
+            8.0,
+            17.916666666666668
+          ],
+          [
+            8.0,
+            8.0
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "Emanuela Kamara",
+        "intervals": [
+          [
+            8.0,
+            10.666666666666666
+          ],
+          [
+            10.666666666666666,
+            10.666666666666666
+          ],
+          [
+            11.016666666666667,
+            16.333333333333332
+          ]
+        ]
+      },
+      {
+        "name": "Mykenize Milledge",
+        "intervals": [
+          [
+            12.05,
+            17.05
+          ]
+        ]
+      },
+      {
+        "name": "Anthony Pirtle",
+        "intervals": [
+          [
+            12.35,
+            15.983333333333333
+          ],
+          [
+            16.433333333333334,
+            17.0
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Goodman, Javeh - E2065349921",
+      "Kadhim, Rusul - E2065348303",
+      "Uebelacker-Maddox, Heather - E2079350745"
+    ]
+  },
+  "20874284": {
+    "date": "2026-08-15",
+    "meal_period": "Dinner",
+    "score": 95.0,
+    "visit_window": [
+      16.0,
+      18.983333333333334
+    ],
+    "full": [
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            14.616666666666667,
+            21.966666666666665
+          ]
+        ]
+      },
+      {
+        "name": "Anthony Pirtle",
+        "intervals": [
+          [
+            10.85,
+            15.033333333333333
+          ],
+          [
+            15.483333333333333,
+            19.816666666666666
+          ],
+          [
+            21.95,
+            23.4
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Brazell, Elizabeth - E2065349081)",
+        "intervals": [
+          [
+            15.966666666666667,
+            17.55
+          ],
+          [
+            17.916666666666668,
+            23.283333333333335
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Brown, Cortez - E2065352109)",
+        "intervals": [
+          [
+            16.066666666666666,
+            18.65
+          ],
+          [
+            19.133333333333333,
+            23.3
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Gaskins, Serina - E1704280770)",
+        "intervals": [
+          [
+            17.95,
+            20.133333333333333
+          ],
+          [
+            20.566666666666666,
+            23.25
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Goodman, Javeh - E2065349921)",
+        "intervals": [
+          [
+            17.033333333333335,
+            19.366666666666667
+          ],
+          [
+            19.866666666666667,
+            23.183333333333334
+          ]
+        ]
+      },
+      {
+        "name": "DJuan Johnson",
+        "intervals": [
+          [
+            16.233333333333334,
+            18.05
+          ],
+          [
+            18.616666666666667,
+            22.266666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Emanuela Kamara",
+        "intervals": [
+          [
+            8.6,
+            10.616666666666667
+          ],
+          [
+            11.033333333333333,
+            16.033333333333335
+          ]
+        ]
+      },
+      {
+        "name": "Mykenize Milledge",
+        "intervals": [
+          [
+            12.066666666666666,
+            15.833333333333334
+          ],
+          [
+            16.116666666666667,
+            17.233333333333334
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Uebelacker-Maddox, Heather - E2079350745)",
+        "intervals": [
+          [
+            7.0,
+            17.066666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Zack Whitten",
+        "intervals": [
+          [
+            17.0,
+            19.116666666666667
+          ],
+          [
+            19.616666666666667,
+            21.95
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Brown, Cortez - E2065352109",
+      "Gaskins, Serina - E1704280770",
+      "Goodman, Javeh - E2065349921",
+      "Kadhim, Rusul - E2065348303",
+      "Smith, Madelynn - E2065347146",
+      "Uebelacker-Maddox, Heather - E2079350745"
+    ]
+  },
+  "20892727": {
+    "date": "2026-08-21",
+    "meal_period": "Lunch",
+    "score": 100.0,
+    "visit_window": [
+      13.5,
+      15.983333333333333
+    ],
+    "full": [
+      {
+        "name": "NAME_UNRESOLVED(Brown, Cortez - E2065352109)",
+        "intervals": [
+          [
+            9.9,
+            10.366666666666667
+          ],
+          [
+            10.916666666666666,
+            16.85
+          ]
+        ]
+      },
+      {
+        "name": "Robert Cline",
+        "intervals": [
+          [
+            8.2,
+            18.916666666666668
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Smith, Madelynn - E2065347146)",
+        "intervals": [
+          [
+            12.016666666666667,
+            20.066666666666666
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Uebelacker-Maddox, Heather - E2079350745)",
+        "intervals": [
+          [
+            7.016666666666667,
+            16.9
+          ]
+        ]
+      },
+      {
+        "name": "Zack Whitten",
+        "intervals": [
+          [
+            9.983333333333333,
+            10.366666666666667
+          ],
+          [
+            10.916666666666666,
+            16.483333333333334
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            7.3,
+            10.433333333333334
+          ],
+          [
+            10.916666666666666,
+            14.883333333333333
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Gaskins, Serina - E1704280770)",
+        "intervals": [
+          [
+            15.833333333333334,
+            18.283333333333335
+          ],
+          [
+            18.733333333333334,
+            23.05
+          ]
+        ]
+      },
+      {
+        "name": "Lidy Henry",
+        "intervals": [
+          [
+            7.916666666666667,
+            10.366666666666667
+          ],
+          [
+            10.933333333333334,
+            15.95
+          ]
+        ]
+      },
+      {
+        "name": "Francisco Llorente Mejias",
+        "intervals": [
+          [
+            15.016666666666667,
+            18.033333333333335
+          ],
+          [
+            18.25,
+            23.1
+          ]
+        ]
+      },
+      {
+        "name": "Vicki Lucey",
+        "intervals": [
+          [
+            6.966666666666667,
+            14.05
+          ]
+        ]
+      },
+      {
+        "name": "Anthony Pirtle",
+        "intervals": [
+          [
+            15.916666666666666,
+            17.55
+          ],
+          [
+            17.983333333333334,
+            23.116666666666667
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Brown, Cortez - E2065352109",
+      "Gaskins, Serina - E1704280770",
+      "Smith, Madelynn - E2065347146",
+      "Uebelacker-Maddox, Heather - E2079350745"
+    ]
+  },
+  "20900136": {
+    "date": "2026-08-27",
+    "meal_period": "Dinner",
+    "score": 100.0,
+    "visit_window": [
+      16.0,
+      18.983333333333334
+    ],
+    "full": [],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Brazell, Elizabeth - E2065349081)",
+        "intervals": [
+          [
+            16.466666666666665,
+            18.066666666666666
+          ],
+          [
+            18.616666666666667,
+            23.35
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Brown, Cortez - E2065352109)",
+        "intervals": [
+          [
+            7.933333333333334,
+            10.666666666666666
+          ],
+          [
+            11.016666666666667,
+            16.5
+          ]
+        ]
+      },
+      {
+        "name": "Robert Cline",
+        "intervals": [
+          [
+            8.75,
+            18.683333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            16.666666666666668,
+            23.066666666666666
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Gaskins, Serina - E1704280770)",
+        "intervals": [
+          [
+            16.966666666666665,
+            18.616666666666667
+          ],
+          [
+            19.083333333333332,
+            23.366666666666667
+          ]
+        ]
+      },
+      {
+        "name": "Ailen Gonzalez Cardero",
+        "intervals": [
+          [
+            18.033333333333335,
+            19.716666666666665
+          ],
+          [
+            20.05,
+            23.1
+          ]
+        ]
+      },
+      {
+        "name": "DJuan Johnson",
+        "intervals": [
+          [
+            17.1,
+            19.15
+          ],
+          [
+            19.7,
+            22.0
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Smith, Madelynn - E2065347146)",
+        "intervals": [
+          [
+            15.066666666666666,
+            17.5
+          ],
+          [
+            18.033333333333335,
+            23.366666666666667
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Brown, Cortez - E2065352109",
+      "Gaskins, Serina - E1704280770",
+      "Smith, Madelynn - E2065347146"
+    ]
+  },
+  "20900964": {
+    "date": "2026-08-30",
+    "meal_period": "Lunch",
+    "score": 0.0,
+    "visit_window": [
+      13.5,
+      15.983333333333333
+    ],
+    "full": [
+      {
+        "name": "Emanuela Kamara",
+        "intervals": [
+          [
+            8.083333333333334,
+            10.583333333333334
+          ],
+          [
+            10.983333333333333,
+            16.8
+          ]
+        ]
+      },
+      {
+        "name": "Vicki Lucey",
+        "intervals": [
+          [
+            7.083333333333333,
+            16.2
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Brown, Cortez - E2065352109)",
+        "intervals": [
+          [
+            15.966666666666667,
+            17.583333333333332
+          ],
+          [
+            18.083333333333332,
+            23.216666666666665
+          ]
+        ]
+      },
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            15.916666666666666,
+            23.216666666666665
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Gaskins, Serina - E1704280770)",
+        "intervals": [
+          [
+            8.016666666666667,
+            10.566666666666666
+          ],
+          [
+            10.916666666666666,
+            15.1
+          ]
+        ]
+      },
+      {
+        "name": "Brianna Gatewood",
+        "intervals": [
+          [
+            14.483333333333333,
+            16.983333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Francisco Llorente Mejias",
+        "intervals": [
+          [
+            15.933333333333334,
+            18.0
+          ],
+          [
+            18.233333333333334,
+            23.15
+          ]
+        ]
+      },
+      {
+        "name": "Zack Whitten",
+        "intervals": [
+          [
+            10.983333333333333,
+            14.566666666666666
+          ],
+          [
+            15.066666666666666,
+            18.966666666666665
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Brown, Cortez - E2065352109",
+      "Gaskins, Serina - E1704280770",
+      "Goodman, Javeh - E2065349921"
+    ]
+  },
+  "20910153": {
+    "date": "2026-09-14",
+    "meal_period": "Dinner",
+    "score": 100.0,
+    "visit_window": [
+      16.0,
+      18.983333333333334
+    ],
+    "full": [
+      {
+        "name": "Madison Cureton",
+        "intervals": [
+          [
+            15.416666666666666,
+            23.066666666666666
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Brazell, Elizabeth - E2065349081)",
+        "intervals": [
+          [
+            7.95,
+            10.283333333333333
+          ],
+          [
+            10.866666666666667,
+            16.566666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Robert Cline",
+        "intervals": [
+          [
+            5.366666666666666,
+            16.75
+          ]
+        ]
+      },
+      {
+        "name": "Ailen Gonzalez Cardero",
+        "intervals": [
+          [
+            18.033333333333335,
+            23.05
+          ]
+        ]
+      },
+      {
+        "name": "NAME_UNRESOLVED(Goodman, Javeh - E2065349921)",
+        "intervals": [
+          [
+            16.983333333333334,
+            19.166666666666668
+          ],
+          [
+            19.666666666666668,
+            22.8
+          ]
+        ]
+      },
+      {
+        "name": "Emanuela Kamara",
+        "intervals": [
+          [
+            16.483333333333334,
+            18.016666666666666
+          ],
+          [
+            18.45,
+            23.033333333333335
+          ]
+        ]
+      },
+      {
+        "name": "Francisco Llorente Mejias",
+        "intervals": [
+          [
+            7.9,
+            10.283333333333333
+          ],
+          [
+            10.85,
+            16.116666666666667
+          ]
+        ]
+      },
+      {
+        "name": "Mykenize Milledge",
+        "intervals": [
+          [
+            16.783333333333335,
+            18.35
+          ],
+          [
+            18.883333333333333,
+            23.033333333333335
+          ]
+        ]
+      },
+      {
+        "name": "Anthony Pirtle",
+        "intervals": [
+          [
+            16.616666666666667,
+            23.066666666666666
+          ]
+        ]
+      },
+      {
+        "name": "Zack Whitten",
+        "intervals": [
+          [
+            9.066666666666666,
+            10.35
+          ],
+          [
+            10.866666666666667,
+            16.566666666666666
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Goodman, Javeh - E2065349921"
+    ]
+  },
+  "20926856": {
+    "date": "2026-09-22",
+    "meal_period": "Lunch",
+    "score": 100.0,
+    "visit_window": [
+      13.5,
+      15.983333333333333
+    ],
+    "full": [
+      {
+        "name": "NAME_UNRESOLVED(Brown, Cortez - E2065352109)",
+        "intervals": [
+          [
+            7.75,
+            10.333333333333334
+          ],
+          [
+            10.783333333333333,
+            16.2
+          ]
+        ]
+      },
+      {
+        "name": "Robert Cline",
+        "intervals": [
+          [
+            9.583333333333334,
+            17.5
+          ]
+        ]
+      },
+      {
+        "name": "Lidy Henry",
+        "intervals": [
+          [
+            7.833333333333333,
+            10.25
+          ],
+          [
+            10.783333333333333,
+            16.183333333333334
+          ]
+        ]
+      },
+      {
+        "name": "Zack Whitten",
+        "intervals": [
+          [
+            8.05,
+            10.25
+          ],
+          [
+            10.866666666666667,
+            16.083333333333332
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "Francisco Llorente Mejias",
+        "intervals": [
+          [
+            15.85,
+            18.0
+          ],
+          [
+            18.233333333333334,
+            22.8
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brown, Cortez - E2065352109",
+      "Smith, Madelynn - E2065347146"
+    ]
+  },
+  "20927199": {
+    "date": "2026-09-23",
+    "meal_period": "Dinner",
+    "score": 34.0,
+    "visit_window": [
+      19.0,
+      22.0
+    ],
+    "full": [
+      {
+        "name": "Ailen Gonzalez Cardero",
+        "intervals": [
+          [
+            18.016666666666666,
+            22.9
+          ]
+        ]
+      },
+      {
+        "name": "Francisco Llorente Mejias",
+        "intervals": [
+          [
+            14.866666666666667,
+            18.1
+          ],
+          [
+            18.266666666666666,
+            22.9
+          ]
+        ]
+      }
+    ],
+    "partial": [
+      {
+        "name": "NAME_UNRESOLVED(Goodman, Javeh - E2065349921)",
+        "intervals": [
+          [
+            16.116666666666667,
+            19.45
+          ],
+          [
+            19.966666666666665,
+            23.166666666666668
+          ]
+        ]
+      },
+      {
+        "name": "Emanuela Kamara",
+        "intervals": [
+          [
+            16.8,
+            20.0
+          ],
+          [
+            20.5,
+            22.883333333333333
+          ]
+        ]
+      }
+    ],
+    "unresolved_raw": [
+      "Brazell, Elizabeth - E2065349081",
+      "Goodman, Javeh - E2065349921",
+      "Kadhim, Rusul - E2065348303"
+    ]
+  }
+}

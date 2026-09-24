@@ -46,13 +46,17 @@ from scrape_shop_payout_email import (
 
 # ── Roster (matches build_shop_tracker) ────────────────────────────────────
 ROSTER = [
-    "Alen", "Ash", "Autumn", "Bobby", "Bri", "Dakayla", "Divan", "Francisco", "Grace",
-    "Jada", "Jeremiah", "Kable", "Kasey", "Kayla", "Kenzie", "Lidy", "Madison",
-    "Maylin", "Mike", "Nathan", "Richard", "Samuel", "Vicki", "Zach",
+    "Alen", "Anthony", "Ash", "Autumn", "Bobby", "Bri", "Christopher", "Cortez",
+    "DJuan", "Dakayla", "Damon", "Divan", "Emanuela", "Francisco", "Grace",
+    "Heather", "Jada", "Javeh", "Jeremiah", "Kable", "Kaisha", "Kasey", "Kayla",
+    "Kenzie", "Lidy", "Madelynn", "Madison", "Maylin", "Mike", "Mykenize",
+    "Nathan", "Nyatiek", "Richard", "Rusul", "Ryan", "Samuel", "Serina", "Vicki",
+    "Zach",
 ]
 # Robert → Bobby: CrunchTime stores Bobby as "Cline, Robert" but roster uses "Bobby".
 NICK = {"Michael": "Mike", "Mickey": "Mike", "Ashton": "Ash", "Ashley": "Ash",
-        "Brianna": "Bri", "Robert": "Bobby"}
+        "Brianna": "Bri", "Robert": "Bobby", "Ailen": "Alen", "Zack": "Zach",
+        "DaKayla": "Dakayla"}
 
 # Default windows by meal_period when visit_window is absent.
 # These must stay in sync with MEAL_WINDOWS in scrape_shop_payout_email.py.
@@ -172,6 +176,21 @@ async def clear_grid(page) -> None:
 
 
 def filter_to_roster(records: list[dict], window: tuple[float, float]) -> list[str]:
+    """
+    STRICT on-clock rule (per Bobby's 2026-09-24 audit directive): an employee
+    is included ONLY if a single punch interval fully covers the shop's
+    visit_window bucket (timeIn <= win_s AND timeOut >= win_e). The KF visit
+    bucket is a range, not a single instant, so "on the clock at that time"
+    means on the clock for the WHOLE bucket -- otherwise we can't rule out
+    that the true visit instant fell in a gap (break, clock-out) inside the
+    bucket. Partial overlap is NOT enough and must NOT be included.
+
+    Replaced the old MIN_OVERLAP_HRS (0.5 hr any-overlap) rule 2026-09-24
+    after a live 3-month audit showed it wrongly included employees who were
+    on break/clocked out during part of the shop window, and wrongly
+    excluded fully-on-clock employees on shifts split by punches. See
+    _memory/handoffs/2026-09-24 audit for the full before/after diff.
+    """
     win_s, win_e = window
     by_emp: dict[str, list[dict]] = {}
     for r in records:
@@ -183,17 +202,16 @@ def filter_to_roster(records: list[dict], window: tuple[float, float]) -> list[s
 
     matched: set[str] = set()
     for emp_str, shifts in by_emp.items():
-        overlap = 0.0
+        full_coverage = False
         for s in shifts:
             t_in = parse_hour(s.get("timeIn"))
             t_out = parse_hour(s.get("timeOut"))
             if t_in is None or t_out is None or t_out < t_in:
                 continue
-            o_s = max(t_in, win_s)
-            o_e = min(t_out, win_e)
-            if o_e > o_s:
-                overlap += (o_e - o_s)
-        if overlap < MIN_OVERLAP_HRS:
+            if t_in <= win_s and t_out >= win_e:
+                full_coverage = True
+                break
+        if not full_coverage:
             continue
         m = match_to_roster(first_name(emp_str))
         if m:
