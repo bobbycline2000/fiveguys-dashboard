@@ -1,2 +1,2 @@
-[2026-09-23 14:22:44] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
-[2026-09-23 14:22:44] outlook-daily-pull-7am: brief already sent today - duplicate send skipped by guard
+[2026-09-24 10:10:38] shop-email: 100% shop 20926856 (2026-09-22 Lunch) — draft email at /home/runner/work/fiveguys-dashboard/fiveguys-dashboard/data/drafts/secret-shop-email-20926856.md. Send to secretshop@estep-co.com CC chess@estep-co.com. Review before sending.
+[2026-09-24 14:10:40] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)

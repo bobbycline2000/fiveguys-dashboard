@@ -1,47 +1,47 @@
 {
-  "generated": "2026-09-23 14:11 ET",
+  "generated": "2026-09-24 14:10 ET",
   "overall": "green",
   "sources": [
     {
       "key": "sales",
       "label": "Sales / Labor",
       "status": "green",
-      "as_of": "2026-09-22",
-      "detail": "report 2026-09-22 (1d ago)"
+      "as_of": "2026-09-23",
+      "detail": "report 2026-09-23 (1d ago)"
     },
     {
       "key": "crunchtime",
       "label": "CrunchTime",
       "status": "green",
-      "as_of": "2026-09-22",
-      "detail": "report 2026-09-22 (1d ago)"
+      "as_of": "2026-09-23",
+      "detail": "report 2026-09-23 (1d ago)"
     },
     {
       "key": "foodcost",
       "label": "Food Cost %",
       "status": "green",
-      "as_of": "2026-09-23",
+      "as_of": "2026-09-24",
       "detail": "food cost plan updated (0d ago)"
     },
     {
       "key": "shops",
       "label": "Secret Shops",
       "status": "green",
-      "as_of": "2026-09-23",
-      "detail": "pull 2026-09-23 (0d ago)"
+      "as_of": "2026-09-24",
+      "detail": "pull 2026-09-24 (0d ago)"
     },
     {
       "key": "compliance",
       "label": "ComplianceMate",
       "status": "green",
-      "as_of": "2026-09-23",
+      "as_of": "2026-09-24",
       "detail": "file updated (0d ago)"
     },
     {
       "key": "daily",
       "label": "Daily Numbers",
       "status": "green",
-      "as_of": "2026-09-23",
+      "as_of": "2026-09-24",
       "detail": "file updated (0d ago)"
     }
   ]
