@@ -159,9 +159,15 @@ def parse_bucket(text: str) -> list[float] | None:
 
     start = to_24(sh, sm, sa)
     end = to_24(eh, em, ea)
-    # Round end :59 up to next hour
-    if abs(end - round(end)) > 0.4:
-        end = round(end + 0.5)
+    # Round end :59 up to next hour (KF uses "HH:59" as shorthand for "up to
+    # but not including HH+1:00"). FIXED 2026-09-24: the old test
+    # `abs(end - round(end)) > 0.4` also caught ":29" endings (e.g. "1:29 pm"
+    # -> 13.483, which is 0.483 from 13 -> wrongly rounded up to 14.0,
+    # inflating the bucket by ~30 min). Only round when the actual minute
+    # value is 59 -- any other minute is a real, precise boundary.
+    end_minute = int(em) if em else 0
+    if end_minute == 59:
+        end = int(to_24(eh, 0, ea)) + 1
     return [start, end]
 
 

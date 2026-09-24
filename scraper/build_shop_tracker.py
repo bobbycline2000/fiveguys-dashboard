@@ -91,6 +91,7 @@ CREW = [
     ("Dakayla",   "DaKayla Dorsey",                "CREW"),
     ("Damon",     "Damon",                         "CREW"),
     ("Divan",     "Divan",                         "CREW"),
+    ("Elizabeth", "Elizabeth Brazell",             "CREW"),
     ("Emanuela",  "Emanuela Kamara",               "CREW"),
     ("Francisco", "Francisco Llorente Mejias",     "CREW"),
     ("Grace",     "Grace",                         "CREW"),

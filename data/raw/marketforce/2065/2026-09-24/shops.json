@@ -59,7 +59,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -75,7 +75,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -91,7 +91,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -107,7 +107,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -123,7 +123,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -139,7 +139,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -155,7 +155,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -171,7 +171,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -187,7 +187,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -203,7 +203,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -219,7 +219,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -235,7 +235,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -267,7 +267,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -283,7 +283,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -315,7 +315,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -331,7 +331,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -347,7 +347,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -363,7 +363,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -379,7 +379,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -395,7 +395,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -427,7 +427,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -443,7 +443,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -459,7 +459,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -475,9 +475,9 @@
       "customer_satisfaction": 100.0,
       "visit_window": [
         13.5,
-        16.0
+        16
       ],
-      "visit_window_source": "manual"
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20758995",
@@ -491,9 +491,9 @@
       "customer_satisfaction": 100.0,
       "visit_window": [
         16.0,
-        19.0
+        19
       ],
-      "visit_window_source": "manual"
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20763859",
@@ -507,9 +507,9 @@
       "customer_satisfaction": 90.0,
       "visit_window": [
         11.0,
-        13.5
+        13.483333333333333
       ],
-      "visit_window_source": "manual"
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20752330",
@@ -522,10 +522,10 @@
       "cleanliness": 100,
       "customer_satisfaction": 100,
       "visit_window": [
-        19.5,
-        22.0
+        16.0,
+        19
       ],
-      "visit_window_source": "manual"
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20744756",
@@ -539,9 +539,9 @@
       "customer_satisfaction": 100,
       "visit_window": [
         11.0,
-        13.5
+        13.483333333333333
       ],
-      "visit_window_source": "manual"
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20747008",
@@ -554,10 +554,10 @@
       "cleanliness": 97,
       "customer_satisfaction": 100,
       "visit_window": [
-        19.0,
-        22.0
+        16.0,
+        19
       ],
-      "visit_window_source": "manual"
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20747930",
@@ -571,7 +571,7 @@
       "customer_satisfaction": 100,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -603,7 +603,7 @@
       "customer_satisfaction": 100,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -619,7 +619,7 @@
       "customer_satisfaction": 100,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -635,7 +635,7 @@
       "customer_satisfaction": 100,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -651,7 +651,7 @@
       "customer_satisfaction": 100,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -667,7 +667,7 @@
       "customer_satisfaction": 100,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -683,7 +683,7 @@
       "customer_satisfaction": 100,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -699,7 +699,7 @@
       "customer_satisfaction": 100,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -715,7 +715,7 @@
       "customer_satisfaction": 100,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -731,7 +731,7 @@
       "customer_satisfaction": 100,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -747,7 +747,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -763,7 +763,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -779,7 +779,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -795,7 +795,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -811,7 +811,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -827,7 +827,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -843,7 +843,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -859,7 +859,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -875,7 +875,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -907,7 +907,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -939,7 +939,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -955,7 +955,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -971,7 +971,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -987,7 +987,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1003,7 +1003,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1019,7 +1019,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1035,7 +1035,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1051,7 +1051,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1067,7 +1067,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1083,7 +1083,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1115,7 +1115,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1147,7 +1147,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1163,7 +1163,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1179,7 +1179,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1195,7 +1195,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1227,7 +1227,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1275,7 +1275,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1291,7 +1291,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1323,7 +1323,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1339,7 +1339,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1355,7 +1355,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1387,7 +1387,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1403,7 +1403,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1419,7 +1419,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1435,7 +1435,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1467,7 +1467,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1483,7 +1483,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1499,7 +1499,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1515,7 +1515,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1547,7 +1547,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1563,7 +1563,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1579,7 +1579,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1595,7 +1595,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1611,7 +1611,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1643,7 +1643,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1659,7 +1659,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1691,7 +1691,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1707,7 +1707,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1723,7 +1723,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1739,7 +1739,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1755,7 +1755,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1771,7 +1771,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1787,7 +1787,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1819,7 +1819,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1835,7 +1835,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1851,7 +1851,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1867,7 +1867,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1883,7 +1883,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1899,7 +1899,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1915,7 +1915,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1931,7 +1931,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1963,7 +1963,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1979,7 +1979,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -1995,7 +1995,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2011,7 +2011,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2027,7 +2027,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2059,7 +2059,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2091,7 +2091,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2107,7 +2107,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2123,7 +2123,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2139,7 +2139,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2155,7 +2155,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2171,7 +2171,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2187,7 +2187,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2203,7 +2203,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2219,7 +2219,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2235,7 +2235,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2251,7 +2251,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         13.5,
-        15.983333333333333
+        16
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2267,7 +2267,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         16.0,
-        18.983333333333334
+        19
       ],
       "visit_window_source": "knowledgeforce"
     },
@@ -2283,7 +2283,7 @@
       "customer_satisfaction": null,
       "visit_window": [
         11.0,
-        14
+        13.483333333333333
       ],
       "visit_window_source": "knowledgeforce"
     }
