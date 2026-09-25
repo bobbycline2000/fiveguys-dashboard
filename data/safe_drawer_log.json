@@ -1590,12 +1590,12 @@
     "safe_mid": 648,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
+    "safe_close": 648,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -97.69,
     "notes": "",
-    "submitted_at": "2026-09-25T02:30:11.980Z"
+    "submitted_at": "2026-09-25T02:30:15.893Z"
   },
   {
     "date": "2099-01-01",
