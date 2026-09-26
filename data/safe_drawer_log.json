@@ -1616,7 +1616,7 @@
   },
   {
     "date": "2026-09-26",
-    "mgr": "vll",
+    "mgr": "BC",
     "deposit": 0,
     "safe_open": 0,
     "d1_open": 0,
@@ -1629,7 +1629,7 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-09-26T13:55:03.316Z"
+    "submitted_at": "2026-09-26T13:55:09.402Z"
   },
   {
     "date": "2099-01-01",
