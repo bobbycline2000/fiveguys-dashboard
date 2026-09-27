@@ -1626,10 +1626,10 @@
     "d2_mid": 200,
     "safe_close": 649,
     "d1_close": 200,
-    "d2_close": 0,
+    "d2_close": 200,
     "ct_os": -201.46,
     "notes": "",
-    "submitted_at": "2026-09-27T02:24:39.041Z"
+    "submitted_at": "2026-09-27T02:24:42.503Z"
   },
   {
     "date": "2099-01-01",
