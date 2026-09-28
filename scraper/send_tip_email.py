@@ -40,8 +40,9 @@ def get_token() -> str:
 def main() -> int:
     arg = next((a for a in sys.argv[1:] if "/" in a and a.count("/") == 2), None)
     to_addr = next((a for a in sys.argv[1:] if "@" in a), "jreiss@estep-co.com")
+    revised = "revised" in (a.lower() for a in sys.argv[1:])
     if not arg:
-        print("usage: send_tip_email.py MM/DD/YYYY [recipient]"); return 2
+        print("usage: send_tip_email.py MM/DD/YYYY [recipient] [revised]"); return 2
     sun = dt.datetime.strptime(arg, "%m/%d/%Y").date()
     snap = json.loads((ROOT / "data" / f"tips_we_{sun.strftime('%Y_%m_%d')}_snapshot.json").read_text())
     p = snap["payouts"]; names = sorted(p)
@@ -55,6 +56,7 @@ def main() -> int:
     html = f"""<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#222">
 <div style="background:#DA291C;color:#fff;padding:10px 14px;font-weight:bold">KY-2065 Dixie Highway — Week End {we}</div>
 <p>Jeff,</p>
+{"<p><b>REVISED</b> &mdash; an employee's hours were corrected after my first email; tips were re-entered in CrunchTime and the sheet refilled. Please use these numbers and disregard the earlier email.</p>" if revised else ""}
 <p>Tips for week end {we} are entered in CrunchTime (Labor &rarr; Supplemental Wages, Credit Card Tip)
 and verified against the source. Your live <b>east side tips.xlsx</b> tab <b>2065</b> is filled and ties.
 Please double-check and <b>Post Labor</b> when you're satisfied.</p>
@@ -79,7 +81,7 @@ Please double-check and <b>Post Labor</b> when you're satisfied.</p>
 
     xlsx = ROOT / "data" / "tip-sheets" / f"tip-sheet-2065-WE-{sun.strftime('%m-%d')}.xlsx"
     payload = {"Message": {
-        "Subject": f"WE {we} — 2065 Tips Entered (please double-check + Post Labor)",
+        "Subject": f"{'REVISED — ' if revised else ''}WE {we} — 2065 Tips Entered (please double-check + Post Labor)",
         "Body": {"ContentType": "HTML", "Content": html},
         "ToRecipients": [{"EmailAddress": {"Address": to_addr}}],
         "Attachments": [{"@odata.type": "#Microsoft.OutlookServices.FileAttachment",
