@@ -1,41 +1,41 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-09-14",
-    "week_end": "2026-09-20",
-    "week_label": "9/14-9/20",
+    "week_start": "2026-09-21",
+    "week_end": "2026-09-27",
+    "week_label": "9/21-9/27",
     "month": "September",
-    "generated": "2026-09-21T18:28:44",
+    "generated": "2026-09-28T19:59:45",
     "notes": [
-      "tips snapshot for w/e 2026-09-20 not found"
+      "tips snapshot for w/e 2026-09-27 not found"
     ]
   },
   "sales": {
     "forecast": null,
-    "net_sales": 35140.82,
+    "net_sales": 29707.01,
     "over_under": null
   },
   "food_cost": {
-    "cogs_pct": 25.4,
+    "cogs_pct": 26.9,
     "supplies_pct": null,
     "total_pct": null,
     "qtd_cogs_pct": null,
-    "var_to_goal": -2.1,
+    "var_to_goal": -0.6,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Bun, Burger",
-      "Lettuce",
-      "Cheese"
+      "Whipped Cream Can",
+      "Peanut Butter inv",
+      "Bun, Burger"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 18.48,
+    "hourly_labor_pct": 21.88,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
     "ot_hours": null,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 513.14,
+    "labor_hours": 583.66,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
@@ -106,7 +106,7 @@
     "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 91.1,
+    "completion_pct": 92.0,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
