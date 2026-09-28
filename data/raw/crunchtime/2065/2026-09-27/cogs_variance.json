@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
+    "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+    "item_source": "api_ingredient_level",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-09-21",
+    "week_end": "2026-09-27",
+    "variance_week_start": "2026-09-14",
+    "variance_week_end": "2026-09-20",
+    "month_start": "2026-09-01",
+    "last_month_start": "2026-08-01",
+    "last_month_end": "2026-08-31",
+    "through": "2026-09-27",
+    "pulled": "2026-09-28 13:30 ET",
+    "method": "api+playwright (GL-based, 2026-08-03)"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 26.9,
+  "cogs_pct_month": 27.8,
+  "cogs_pct_last_month": 24.1,
+  "variance_to_goal_week": -0.6,
+  "variance_to_goal_month": 0.3,
+  "variance_to_goal_last_mo": -3.4,
+  "items": [
+    {
+      "name": "Whipped Cream Can",
+      "actual": 394.09,
+      "theoretical": 29.94,
+      "over_dollars": 364.15,
+      "variance_pct": -1216.3,
+      "rank": 1
+    },
+    {
+      "name": "Peanut Butter inv",
+      "actual": 157.01,
+      "theoretical": 8.52,
+      "over_dollars": 148.49,
+      "variance_pct": -1742.8,
+      "rank": 2
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 1150.89,
+      "theoretical": 1077.65,
+      "over_dollars": 73.24,
+      "variance_pct": -6.8,
+      "rank": 3
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 292.39,
+      "theoretical": 252.01,
+      "over_dollars": 40.38,
+      "variance_pct": -16.0,
+      "rank": 4
+    },
+    {
+      "name": "Cheese",
+      "actual": 431.56,
+      "theoretical": 402.2,
+      "over_dollars": 29.36,
+      "variance_pct": -7.3,
+      "rank": 5
+    },
+    {
+      "name": "Pickles",
+      "actual": 161.39,
+      "theoretical": 141.45,
+      "over_dollars": 19.94,
+      "variance_pct": -14.1,
+      "rank": 6
+    },
+    {
+      "name": "Cajun Season",
+      "actual": 72.55,
+      "theoretical": 95.82,
+      "over_dollars": -23.27,
+      "variance_pct": 24.3,
+      "rank": 7
+    },
+    {
+      "name": "A1 Steak Sauce",
+      "actual": -5.18,
+      "theoretical": 21.18,
+      "over_dollars": -26.36,
+      "variance_pct": 124.5,
+      "rank": 8
+    },
+    {
+      "name": "Bacon, Raw Sliced",
+      "actual": 422.04,
+      "theoretical": 456.21,
+      "over_dollars": -34.17,
+      "variance_pct": 7.5,
+      "rank": 9
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 3672.97,
+      "theoretical": 3723.81,
+      "over_dollars": -50.84,
+      "variance_pct": 1.4,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
