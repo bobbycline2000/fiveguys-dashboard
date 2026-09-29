@@ -1649,6 +1649,23 @@
     "submitted_at": "2026-09-28T15:40:50.010Z"
   },
   {
+    "date": "2026-09-29",
+    "mgr": "VLL",
+    "deposit": 0,
+    "safe_open": 0,
+    "d1_open": 0,
+    "d2_open": 0,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
+    "ct_os": 0,
+    "notes": "",
+    "submitted_at": "2026-09-29T14:15:34.269Z"
+  },
+  {
     "date": "2099-01-01",
     "mgr": "TEST",
     "deposit": 0,
