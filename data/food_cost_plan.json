@@ -2,21 +2,21 @@
   "store": "2065",
   "week_start": "2026-09-21",
   "week_end": "2026-09-27",
-  "variance_week_start": "2026-09-14",
-  "variance_week_end": "2026-09-20",
+  "variance_week_start": "2026-09-21",
+  "variance_week_end": "2026-09-27",
   "cogs_pct_week": 26.9,
   "cogs_pct_week_label": "2026-09-27",
   "cogs_goal_pct": 27.5,
-  "total_over": 585.88,
-  "generated": "2026-09-28 17:31 ET",
+  "total_over": 283.48,
+  "generated": "2026-09-29 15:32 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Whipped Cream Can",
-      "over_dollars": 364.15,
-      "actual": 394.09,
-      "theoretical": 29.94,
-      "variance_pct": -1216.3,
+      "name": "Peanut Butter inv",
+      "over_dollars": 220.95,
+      "actual": 230.07,
+      "theoretical": 9.12,
+      "variance_pct": -2422.7,
       "big_six": false,
       "actions": [
         "Watch portioning and confirm the build/prep spec.",
@@ -26,11 +26,11 @@
     },
     {
       "rank": 2,
-      "name": "Peanut Butter inv",
-      "over_dollars": 148.49,
-      "actual": 157.01,
-      "theoretical": 8.52,
-      "variance_pct": -1742.8,
+      "name": "Shake Mix",
+      "over_dollars": 32.78,
+      "actual": 290.66,
+      "theoretical": 257.88,
+      "variance_pct": -12.7,
       "big_six": false,
       "actions": [
         "Watch portioning and confirm the build/prep spec.",
@@ -40,16 +40,17 @@
     },
     {
       "rank": 3,
-      "name": "Bun, Burger",
-      "over_dollars": 73.24,
-      "actual": 1150.89,
-      "theoretical": 1077.65,
-      "variance_pct": -6.8,
-      "big_six": true,
+      "name": "Tomatoes, Fresh",
+      "over_dollars": 29.75,
+      "actual": 166.68,
+      "theoretical": 136.93,
+      "variance_pct": -21.7,
+      "big_six": false,
       "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
+        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
+        "Confirm prep specs are correct.",
+        "Submit a Product Issue form for yield loss from bad quality off the truck.",
+        "Account for waste."
       ]
     }
   ]
