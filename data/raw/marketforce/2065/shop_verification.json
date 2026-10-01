@@ -1524,5 +1524,51 @@
         ]
       }
     ]
+  },
+  "20916632": {
+    "date": "2026-09-25",
+    "meal_period": "Late Dinner",
+    "score": 43.0,
+    "visit_window_bucket": null,
+    "visit_window_hours": [
+      19.0,
+      22.0
+    ],
+    "verification_status": "UNVERIFIED-EXACT-TIME",
+    "exact_time": null,
+    "exact_time_source": null,
+    "verification_note": "KnowledgeForce does not expose a numeric visit timestamp anywhere in the shop payload (confirmed by full-text search across all comment/narrative fields and the page header) -- only a 2.5-3hr Time-In bucket. The 'Cashier' free-text answer (Q64) names who was working the register at the moment of the visit and is treated as a direct on-clock confirmation when that person's CrunchTime punch overlaps the bucket at all. Everyone else who merely overlaps the bucket (without full coverage or being the named cashier) is listed as an unverified candidate, not silently dropped and not auto-credited.",
+    "cashier_raw": null,
+    "cashier_resolved": null,
+    "cashier_confirmed_on_clock": false,
+    "confirmed_on_clock": [
+      "Alen",
+      "Elizabeth",
+      "Madison"
+    ],
+    "unverified_candidates": [
+      {
+        "employee": "Cline, Robert - E2065314244",
+        "intervals": [
+          [
+            15.183333333333334,
+            19.916666666666668
+          ]
+        ]
+      },
+      {
+        "employee": "Goodman, Javeh - E2065349921",
+        "intervals": [
+          [
+            17.233333333333334,
+            18.816666666666666
+          ],
+          [
+            19.316666666666666,
+            23.133333333333333
+          ]
+        ]
+      }
+    ]
   }
 }
