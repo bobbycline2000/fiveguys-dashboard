@@ -60,6 +60,7 @@ import datetime as dt
 import json
 import os
 import random
+import re
 import sys
 import time
 from pathlib import Path
@@ -150,12 +151,15 @@ def find_workbook(headers, day):
     Report.xlsx"), so match on the month/year prefix instead of the full name.
     """
     want = f"{calendar.month_name[day.month]} {day.year} FG Daily Report"
-    alt = f"{day.strftime('%b')} {day.year} FG Daily Report"   # Jan/Feb are abbreviated
+    # Jan/Feb are abbreviated, and October 2026 dropped "FG" ("October 2026
+    # Daily Report  .xlsx") — match month + year + "Daily Report", any spacing.
+    pat = re.compile(rf"^({calendar.month_name[day.month]}|{day.strftime('%b')})\s+"
+                     rf"{day.year}\s+(FG\s+)?Daily\s+Report", re.I)
     r = graph_call("GET", f"{GRAPH}/me/drive/sharedWithMe", headers)
     r.raise_for_status()
     for it in r.json().get("value", []):
         name = (it.get("name") or "").strip()
-        if name.startswith(want) or name.startswith(alt):
+        if pat.match(name):
             remote = it.get("remoteItem", {})
             drive = remote.get("parentReference", {}).get("driveId")
             item = remote.get("id")
