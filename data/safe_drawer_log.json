@@ -1694,10 +1694,10 @@
     "d2_mid": 200,
     "safe_close": 649,
     "d1_close": 200,
-    "d2_close": 0,
+    "d2_close": 200,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-10-02T02:18:36.026Z"
+    "submitted_at": "2026-10-02T02:18:38.863Z"
   },
   {
     "date": "2099-01-01",
