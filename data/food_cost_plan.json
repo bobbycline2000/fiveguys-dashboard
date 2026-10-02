@@ -2,35 +2,35 @@
   "store": "2065",
   "week_start": "2026-09-21",
   "week_end": "2026-09-27",
-  "variance_week_start": "2026-09-21",
-  "variance_week_end": "2026-09-27",
+  "variance_week_start": "2026-09-28",
+  "variance_week_end": "2026-09-30",
   "cogs_pct_week": 26.9,
   "cogs_pct_week_label": "2026-09-27",
   "cogs_goal_pct": 27.5,
-  "total_over": 283.48,
-  "generated": "2026-10-01 16:16 ET",
+  "total_over": 255.96,
+  "generated": "2026-10-02 15:34 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Peanut Butter inv",
-      "over_dollars": 220.95,
-      "actual": 230.07,
-      "theoretical": 9.12,
-      "variance_pct": -2422.7,
-      "big_six": false,
+      "name": "Bun, Burger",
+      "over_dollars": 129.94,
+      "actual": 426.65,
+      "theoretical": 296.71,
+      "variance_pct": -43.8,
+      "big_six": true,
       "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
       "rank": 2,
-      "name": "Shake Mix",
-      "over_dollars": 32.78,
-      "actual": 290.66,
-      "theoretical": 257.88,
-      "variance_pct": -12.7,
+      "name": "Potato, Idaho",
+      "over_dollars": 93.24,
+      "actual": 398.69,
+      "theoretical": 305.45,
+      "variance_pct": -30.5,
       "big_six": false,
       "actions": [
         "Watch portioning and confirm the build/prep spec.",
@@ -40,17 +40,16 @@
     },
     {
       "rank": 3,
-      "name": "Tomatoes, Fresh",
-      "over_dollars": 29.75,
-      "actual": 166.68,
-      "theoretical": 136.93,
-      "variance_pct": -21.7,
+      "name": "Mayonnaise",
+      "over_dollars": 32.78,
+      "actual": 60,
+      "theoretical": 27.22,
+      "variance_pct": -120.4,
       "big_six": false,
       "actions": [
-        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
-        "Confirm prep specs are correct.",
-        "Submit a Product Issue form for yield loss from bad quality off the truck.",
-        "Account for waste."
+        "Watch portioning and confirm the build/prep spec.",
+        "Verify employee meals are being rung and review waste.",
+        "Recount on-hand \u2014 check for a miscount or receiving error."
       ]
     }
   ]
