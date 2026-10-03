@@ -1706,15 +1706,15 @@
     "safe_open": 655,
     "d1_open": 200,
     "d2_open": 200,
-    "safe_mid": 0,
+    "safe_mid": 655,
     "d1_mid": 0,
     "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
-    "ct_os": 0,
+    "ct_os": -160.02,
     "notes": "",
-    "submitted_at": "2026-10-02T14:29:55.701Z"
+    "submitted_at": "2026-10-03T02:41:48.481Z"
   },
   {
     "date": "2099-01-01",
