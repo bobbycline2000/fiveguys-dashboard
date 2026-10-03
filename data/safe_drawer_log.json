@@ -1709,12 +1709,12 @@
     "safe_mid": 655,
     "d1_mid": 0,
     "d2_mid": 0,
-    "safe_close": 0,
+    "safe_close": 655,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -160.02,
     "notes": "",
-    "submitted_at": "2026-10-03T02:41:48.481Z"
+    "submitted_at": "2026-10-03T02:41:51.328Z"
   },
   {
     "date": "2099-01-01",
