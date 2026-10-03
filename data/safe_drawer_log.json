@@ -1711,10 +1711,10 @@
     "d2_mid": 200,
     "safe_close": 655,
     "d1_close": 200,
-    "d2_close": 0,
+    "d2_close": 200,
     "ct_os": -160.02,
     "notes": "",
-    "submitted_at": "2026-10-03T02:42:05.885Z"
+    "submitted_at": "2026-10-03T02:42:08.978Z"
   },
   {
     "date": "2099-01-01",
