@@ -1,14 +1,14 @@
 {
   "store": "2065",
-  "week_start": "2026-09-21",
-  "week_end": "2026-09-27",
+  "week_start": "2026-09-28",
+  "week_end": "2026-10-04",
   "variance_week_start": "2026-09-28",
   "variance_week_end": "2026-09-30",
-  "cogs_pct_week": 26.9,
-  "cogs_pct_week_label": "2026-09-27",
+  "cogs_pct_week": 23.8,
+  "cogs_pct_week_label": "2026-10-04",
   "cogs_goal_pct": 27.5,
   "total_over": 255.96,
-  "generated": "2026-10-04 14:46 ET",
+  "generated": "2026-10-05 18:07 ET",
   "items": [
     {
       "rank": 1,
