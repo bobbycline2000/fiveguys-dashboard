@@ -1755,7 +1755,7 @@
     "mgr": "vll",
     "deposit": 0,
     "safe_open": 655,
-    "d1_open": 0,
+    "d1_open": 200,
     "d2_open": 0,
     "safe_mid": 0,
     "d1_mid": 0,
@@ -1765,7 +1765,7 @@
     "d2_close": 0,
     "ct_os": -126.23,
     "notes": "",
-    "submitted_at": "2026-10-06T02:50:41.149Z"
+    "submitted_at": "2026-10-06T02:50:44.815Z"
   },
   {
     "date": "2099-01-01",
