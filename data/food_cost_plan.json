@@ -2,35 +2,21 @@
   "store": "2065",
   "week_start": "2026-09-28",
   "week_end": "2026-10-04",
-  "variance_week_start": "2026-09-28",
-  "variance_week_end": "2026-09-30",
+  "variance_week_start": "2026-10-01",
+  "variance_week_end": "2026-10-04",
   "cogs_pct_week": 23.8,
   "cogs_pct_week_label": "2026-10-04",
   "cogs_goal_pct": 27.5,
-  "total_over": 255.96,
-  "generated": "2026-10-05 18:07 ET",
+  "total_over": 63.85,
+  "generated": "2026-10-06 15:49 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Bun, Burger",
-      "over_dollars": 129.94,
-      "actual": 426.65,
-      "theoretical": 296.71,
-      "variance_pct": -43.8,
-      "big_six": true,
-      "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
-      ]
-    },
-    {
-      "rank": 2,
-      "name": "Potato, Idaho",
-      "over_dollars": 93.24,
-      "actual": 398.69,
-      "theoretical": 305.45,
-      "variance_pct": -30.5,
+      "name": "Shake Mix",
+      "over_dollars": 28.04,
+      "actual": 180.58,
+      "theoretical": 152.54,
+      "variance_pct": -18.4,
       "big_six": false,
       "actions": [
         "Watch portioning and confirm the build/prep spec.",
@@ -39,12 +25,27 @@
       ]
     },
     {
+      "rank": 2,
+      "name": "Lettuce",
+      "over_dollars": 18.48,
+      "actual": 49.65,
+      "theoretical": 31.17,
+      "variance_pct": -59.3,
+      "big_six": false,
+      "actions": [
+        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
+        "Confirm prep specs are correct.",
+        "Submit a Product Issue form for yield loss from bad quality off the truck.",
+        "Account for waste."
+      ]
+    },
+    {
       "rank": 3,
-      "name": "Mayonnaise",
-      "over_dollars": 32.78,
-      "actual": 60,
-      "theoretical": 27.22,
-      "variance_pct": -120.4,
+      "name": "Peanut Butter inv",
+      "over_dollars": 17.33,
+      "actual": 25.54,
+      "theoretical": 8.21,
+      "variance_pct": -211.1,
       "big_six": false,
       "actions": [
         "Watch portioning and confirm the build/prep spec.",
