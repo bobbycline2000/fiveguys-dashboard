@@ -1791,15 +1791,15 @@
     "safe_open": 661,
     "d1_open": 200,
     "d2_open": 200,
-    "safe_mid": 0,
+    "safe_mid": 661,
     "d1_mid": 0,
     "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
-    "ct_os": 0,
+    "ct_os": -80.33,
     "notes": "",
-    "submitted_at": "2026-10-07T13:41:17.239Z"
+    "submitted_at": "2026-10-08T03:07:37.619Z"
   },
   {
     "date": "2099-01-01",
