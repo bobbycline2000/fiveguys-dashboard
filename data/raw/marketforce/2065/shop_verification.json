@@ -1570,5 +1570,97 @@
         ]
       }
     ]
+  },
+  "20916362": {
+    "date": "2026-10-04",
+    "meal_period": "Lunch",
+    "score": 92.0,
+    "visit_window_bucket": null,
+    "visit_window_hours": [
+      13.5,
+      16.0
+    ],
+    "verification_status": "UNVERIFIED-EXACT-TIME",
+    "exact_time": null,
+    "exact_time_source": null,
+    "verification_note": "KnowledgeForce does not expose a numeric visit timestamp anywhere in the shop payload (confirmed by full-text search across all comment/narrative fields and the page header) -- only a 2.5-3hr Time-In bucket. The 'Cashier' free-text answer (Q64) names who was working the register at the moment of the visit and is treated as a direct on-clock confirmation when that person's CrunchTime punch overlaps the bucket at all. Everyone else who merely overlaps the bucket (without full coverage or being the named cashier) is listed as an unverified candidate, not silently dropped and not auto-credited.",
+    "cashier_raw": null,
+    "cashier_resolved": null,
+    "cashier_confirmed_on_clock": false,
+    "confirmed_on_clock": [
+      "Emanuela"
+    ],
+    "unverified_candidates": [
+      {
+        "employee": "Brazell, Elizabeth - E2065349081",
+        "intervals": [
+          [
+            10.05,
+            13.783333333333333
+          ],
+          [
+            14.333333333333334,
+            16.666666666666668
+          ]
+        ]
+      },
+      {
+        "employee": "Brown, Cortez - E2065352109",
+        "intervals": [
+          [
+            15.933333333333334,
+            18.016666666666666
+          ],
+          [
+            18.483333333333334,
+            22.833333333333332
+          ]
+        ]
+      },
+      {
+        "employee": "Cureton, Madison - E2065266168",
+        "intervals": [
+          [
+            14.45,
+            22.866666666666667
+          ]
+        ]
+      },
+      {
+        "employee": "Lucey, Vicki - E047592186",
+        "intervals": [
+          [
+            6.983333333333333,
+            14.533333333333333
+          ]
+        ]
+      },
+      {
+        "employee": "Pirtle, Anthony - E2065345128",
+        "intervals": [
+          [
+            11.2,
+            15.7
+          ],
+          [
+            16.066666666666666,
+            20.0
+          ]
+        ]
+      },
+      {
+        "employee": "Whitten, Zack - E2065343318",
+        "intervals": [
+          [
+            7.983333333333333,
+            10.35
+          ],
+          [
+            10.9,
+            15.966666666666667
+          ]
+        ]
+      }
+    ]
   }
 }
