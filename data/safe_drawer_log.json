@@ -1796,10 +1796,10 @@
     "d2_mid": 200,
     "safe_close": 661,
     "d1_close": 200,
-    "d2_close": 0,
+    "d2_close": 200,
     "ct_os": -80.33,
     "notes": "",
-    "submitted_at": "2026-10-08T03:07:47.838Z"
+    "submitted_at": "2026-10-08T03:07:50.669Z"
   },
   {
     "date": "2099-01-01",
