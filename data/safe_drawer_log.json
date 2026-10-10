@@ -1827,13 +1827,13 @@
     "d2_open": 200,
     "safe_mid": 660,
     "d1_mid": 200,
-    "d2_mid": 0,
+    "d2_mid": 200,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -310.31,
     "notes": "",
-    "submitted_at": "2026-10-10T02:45:50.654Z"
+    "submitted_at": "2026-10-10T02:45:53.440Z"
   },
   {
     "date": "2099-01-01",
