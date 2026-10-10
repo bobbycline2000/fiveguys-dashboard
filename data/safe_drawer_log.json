@@ -1829,11 +1829,11 @@
     "d1_mid": 200,
     "d2_mid": 200,
     "safe_close": 660,
-    "d1_close": 0,
+    "d1_close": 200,
     "d2_close": 0,
     "ct_os": -310.31,
     "notes": "",
-    "submitted_at": "2026-10-10T02:45:56.827Z"
+    "submitted_at": "2026-10-10T02:46:01.669Z"
   },
   {
     "date": "2099-01-01",
