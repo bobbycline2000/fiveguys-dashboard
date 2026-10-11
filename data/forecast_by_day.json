@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated": "2026-10-10T15:09:23",
-    "today": "2026-10-10",
+    "generated": "2026-10-11T15:26:16",
+    "today": "2026-10-11",
     "this_week_mon": "2026-10-05",
     "next_week_mon": "2026-10-12",
     "week_convention": "Mon-Sun"
@@ -46,7 +46,7 @@
       "date": "2026-10-10",
       "name": "SAT",
       "forecast": 5025.0,
-      "actual": null,
+      "actual": 4711.75,
       "is_next_week": false
     },
     {
