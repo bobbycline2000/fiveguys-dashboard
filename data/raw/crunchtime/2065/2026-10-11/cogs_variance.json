@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
+    "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+    "item_source": "api_ingredient_level",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-10-05",
+    "week_end": "2026-10-11",
+    "variance_week_start": "2026-10-01",
+    "variance_week_end": "2026-10-04",
+    "month_start": "2026-10-01",
+    "last_month_start": "2026-09-01",
+    "last_month_end": "2026-09-30",
+    "through": "2026-10-11",
+    "pulled": "2026-10-12 14:45 ET",
+    "method": "api+playwright (GL-based, 2026-08-03)"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 20.8,
+  "cogs_pct_month": 21.3,
+  "cogs_pct_last_month": 27.7,
+  "variance_to_goal_week": -6.7,
+  "variance_to_goal_month": -6.2,
+  "variance_to_goal_last_mo": 0.2,
+  "items": [
+    {
+      "name": "Shake Mix",
+      "actual": 180.58,
+      "theoretical": 152.54,
+      "over_dollars": 28.04,
+      "variance_pct": -18.4,
+      "rank": 1
+    },
+    {
+      "name": "Lettuce",
+      "actual": 49.65,
+      "theoretical": 31.17,
+      "over_dollars": 18.48,
+      "variance_pct": -59.3,
+      "rank": 2
+    },
+    {
+      "name": "Peanut Butter inv",
+      "actual": 25.54,
+      "theoretical": 8.21,
+      "over_dollars": 17.33,
+      "variance_pct": -211.1,
+      "rank": 3
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 101.65,
+      "theoretical": 84.41,
+      "over_dollars": 17.24,
+      "variance_pct": -20.4,
+      "rank": 4
+    },
+    {
+      "name": "Onion, Yellow Jumbo",
+      "actual": 44.92,
+      "theoretical": 30.89,
+      "over_dollars": 14.03,
+      "variance_pct": -45.4,
+      "rank": 5
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": 7.92,
+      "theoretical": 21.38,
+      "over_dollars": -13.46,
+      "variance_pct": 63.0,
+      "rank": 6
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 1542.22,
+      "theoretical": 1558.65,
+      "over_dollars": -16.43,
+      "variance_pct": 1.1,
+      "rank": 7
+    },
+    {
+      "name": "A1 Steak Sauce",
+      "actual": -9.97,
+      "theoretical": 6.71,
+      "over_dollars": -16.68,
+      "variance_pct": 248.6,
+      "rank": 8
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 446.26,
+      "theoretical": 470.6,
+      "over_dollars": -24.34,
+      "variance_pct": 5.2,
+      "rank": 9
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 398.27,
+      "theoretical": 472.77,
+      "over_dollars": -74.5,
+      "variance_pct": 15.8,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
