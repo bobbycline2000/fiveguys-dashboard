@@ -1,41 +1,41 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-09-21",
-    "week_end": "2026-09-27",
-    "week_label": "9/21-9/27",
-    "month": "September",
-    "generated": "2026-09-28T19:59:45",
+    "week_start": "2026-10-05",
+    "week_end": "2026-10-11",
+    "week_label": "10/5-10/11",
+    "month": "October",
+    "generated": "2026-10-12T21:33:38",
     "notes": [
-      "tips snapshot for w/e 2026-09-27 not found"
+      "tips snapshot for w/e 2026-10-11 not found"
     ]
   },
   "sales": {
     "forecast": null,
-    "net_sales": 29707.01,
+    "net_sales": 30571.99,
     "over_under": null
   },
   "food_cost": {
-    "cogs_pct": 26.9,
+    "cogs_pct": 20.8,
     "supplies_pct": null,
     "total_pct": null,
     "qtd_cogs_pct": null,
-    "var_to_goal": -0.6,
+    "var_to_goal": -6.7,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Whipped Cream Can",
-      "Peanut Butter inv",
-      "Bun, Burger"
+      "Shake Mix",
+      "Lettuce",
+      "Peanut Butter inv"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 21.88,
+    "hourly_labor_pct": 21.51,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
     "ot_hours": null,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 583.66,
+    "labor_hours": 542.75,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
@@ -46,8 +46,8 @@
     "criticals": null,
     "shops_month_pct": null,
     "shops_month_label": "September 2026",
-    "shops_qtd_pct": 78.0,
-    "shops_qtd_count": 5,
+    "shops_qtd_pct": null,
+    "shops_qtd_count": 0,
     "shops_ytd_pct": 83.9
   },
   "fgu": {
