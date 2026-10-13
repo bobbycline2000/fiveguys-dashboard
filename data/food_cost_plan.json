@@ -2,21 +2,21 @@
   "store": "2065",
   "week_start": "2026-10-05",
   "week_end": "2026-10-11",
-  "variance_week_start": "2026-10-01",
-  "variance_week_end": "2026-10-04",
+  "variance_week_start": "2026-10-05",
+  "variance_week_end": "2026-10-11",
   "cogs_pct_week": 20.8,
   "cogs_pct_week_label": "2026-10-11",
   "cogs_goal_pct": 27.5,
-  "total_over": 63.85,
-  "generated": "2026-10-12 18:46 ET",
+  "total_over": 121.13,
+  "generated": "2026-10-13 16:51 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Shake Mix",
-      "over_dollars": 28.04,
-      "actual": 180.58,
-      "theoretical": 152.54,
-      "variance_pct": -18.4,
+      "name": "Potato, Idaho",
+      "over_dollars": 66.56,
+      "actual": 836.16,
+      "theoretical": 769.6,
+      "variance_pct": -8.6,
       "big_six": false,
       "actions": [
         "Watch portioning and confirm the build/prep spec.",
@@ -26,31 +26,29 @@
     },
     {
       "rank": 2,
-      "name": "Lettuce",
-      "over_dollars": 18.48,
-      "actual": 49.65,
-      "theoretical": 31.17,
-      "variance_pct": -59.3,
-      "big_six": false,
+      "name": "Bun, Burger",
+      "over_dollars": 28.46,
+      "actual": 798.77,
+      "theoretical": 770.31,
+      "variance_pct": -3.7,
+      "big_six": true,
       "actions": [
-        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
-        "Confirm prep specs are correct.",
-        "Submit a Product Issue form for yield loss from bad quality off the truck.",
-        "Account for waste."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
       "rank": 3,
-      "name": "Peanut Butter inv",
-      "over_dollars": 17.33,
-      "actual": 25.54,
-      "theoretical": 8.21,
-      "variance_pct": -211.1,
-      "big_six": false,
+      "name": "Cheese",
+      "over_dollars": 26.11,
+      "actual": 311.68,
+      "theoretical": 285.57,
+      "variance_pct": -9.1,
+      "big_six": true,
       "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
+        "Big Six item \u2014 watch it. Count cheese slices per build; verify receiving count vs invoice.",
+        "Recount on-hand \u2014 a miscount is the usual cause of a big swing."
       ]
     }
   ]
