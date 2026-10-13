@@ -1861,13 +1861,13 @@
     "d2_open": 200,
     "safe_mid": 660,
     "d1_mid": 200,
-    "d2_mid": 0,
+    "d2_mid": 200,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -406.1,
     "notes": "",
-    "submitted_at": "2026-10-13T02:30:17.178Z"
+    "submitted_at": "2026-10-13T02:30:19.437Z"
   },
   {
     "date": "2099-01-01",
