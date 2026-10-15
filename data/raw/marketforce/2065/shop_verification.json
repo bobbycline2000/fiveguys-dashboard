@@ -1662,5 +1662,118 @@
         ]
       }
     ]
+  },
+  "20948592": {
+    "date": "2026-10-12",
+    "meal_period": "Lunch",
+    "score": 95.0,
+    "visit_window_bucket": null,
+    "visit_window_hours": [
+      11.0,
+      13.483333333333333
+    ],
+    "verification_status": "UNVERIFIED-EXACT-TIME",
+    "exact_time": null,
+    "exact_time_source": null,
+    "verification_note": "KnowledgeForce does not expose a numeric visit timestamp anywhere in the shop payload (confirmed by full-text search across all comment/narrative fields and the page header) -- only a 2.5-3hr Time-In bucket. The 'Cashier' free-text answer (Q64) names who was working the register at the moment of the visit and is treated as a direct on-clock confirmation when that person's CrunchTime punch overlaps the bucket at all. Everyone else who merely overlaps the bucket (without full coverage or being the named cashier) is listed as an unverified candidate, not silently dropped and not auto-credited.",
+    "cashier_raw": null,
+    "cashier_resolved": null,
+    "cashier_confirmed_on_clock": false,
+    "confirmed_on_clock": [
+      "Bobby",
+      "Francisco",
+      "Madelynn",
+      "Zach"
+    ],
+    "unverified_candidates": []
+  },
+  "20946656": {
+    "date": "2026-10-09",
+    "meal_period": "Dinner",
+    "score": 100.0,
+    "visit_window_bucket": null,
+    "visit_window_hours": [
+      16.0,
+      19.0
+    ],
+    "verification_status": "UNVERIFIED-EXACT-TIME",
+    "exact_time": null,
+    "exact_time_source": null,
+    "verification_note": "KnowledgeForce does not expose a numeric visit timestamp anywhere in the shop payload (confirmed by full-text search across all comment/narrative fields and the page header) -- only a 2.5-3hr Time-In bucket. The 'Cashier' free-text answer (Q64) names who was working the register at the moment of the visit and is treated as a direct on-clock confirmation when that person's CrunchTime punch overlaps the bucket at all. Everyone else who merely overlaps the bucket (without full coverage or being the named cashier) is listed as an unverified candidate, not silently dropped and not auto-credited.",
+    "cashier_raw": null,
+    "cashier_resolved": null,
+    "cashier_confirmed_on_clock": false,
+    "confirmed_on_clock": [
+      "Anthony",
+      "Rusul"
+    ],
+    "unverified_candidates": [
+      {
+        "employee": "Cline, Robert - E2065314244",
+        "intervals": [
+          [
+            7.25,
+            16.916666666666668
+          ]
+        ]
+      },
+      {
+        "employee": "Gonzalez Cardero, Ailen - E2065283102",
+        "intervals": [
+          [
+            17.95,
+            23.033333333333335
+          ]
+        ]
+      },
+      {
+        "employee": "Goodman, Javeh - E2065349921",
+        "intervals": [
+          [
+            17.1,
+            18.933333333333334
+          ],
+          [
+            19.433333333333334,
+            22.933333333333334
+          ]
+        ]
+      },
+      {
+        "employee": "Llorente Mejias, Francisco - E2065292376",
+        "intervals": [
+          [
+            15.016666666666667,
+            17.983333333333334
+          ],
+          [
+            18.2,
+            23.033333333333335
+          ]
+        ]
+      },
+      {
+        "employee": "Smith, Madelynn - E2065347146",
+        "intervals": [
+          [
+            12.1,
+            17.25
+          ],
+          [
+            17.883333333333333,
+            20.366666666666667
+          ]
+        ]
+      },
+      {
+        "employee": "Valentin, Katherine - E2065357246",
+        "intervals": [
+          [
+            16.983333333333334,
+            19.266666666666666
+          ]
+        ]
+      }
+    ]
   }
 }
