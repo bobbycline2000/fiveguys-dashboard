@@ -175,7 +175,18 @@ jobs:
         run: python scraper/aggregate_periods.py --store 2065
 
       # ── 5. Scrape ComplianceMate first so dashboard.html includes fresh data ─
-      - name: Scrape ComplianceMate (store 2065)
+      # Primary: pure-requests API client (Playwright path returned login_ok_no_data
+      # every day since ~2026-09-27). Legacy Playwright scraper runs only if API fails.
+      - name: Scrape ComplianceMate (store 2065) - API
+        id: cm_api
+        continue-on-error: true
+        env:
+          COMPLIANCEMATE_USERNAME: ${{ secrets.COMPLIANCEMATE_USERNAME }}
+          COMPLIANCEMATE_PASSWORD: ${{ secrets.COMPLIANCEMATE_PASSWORD }}
+        run: python scraper/scrape_compliancemate_api.py --store 2065
+
+      - name: Scrape ComplianceMate (store 2065) - Playwright fallback
+        if: steps.cm_api.outcome != 'success'
         continue-on-error: true
         env:
           COMPLIANCEMATE_USERNAME: ${{ secrets.COMPLIANCEMATE_USERNAME }}
