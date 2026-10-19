@@ -1,54 +1,52 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-10-05",
-    "week_end": "2026-10-11",
-    "week_label": "10/5-10/11",
+    "week_start": "2026-10-12",
+    "week_end": "2026-10-18",
+    "week_label": "10/12-10/18",
     "month": "October",
-    "generated": "2026-10-12T21:33:38",
-    "notes": [
-      "tips snapshot for w/e 2026-10-11 not found"
-    ]
+    "generated": "2026-10-19T19:01:21",
+    "notes": []
   },
   "sales": {
     "forecast": null,
-    "net_sales": 30571.99,
+    "net_sales": 31250.14,
     "over_under": null
   },
   "food_cost": {
-    "cogs_pct": 20.8,
+    "cogs_pct": 22.2,
     "supplies_pct": null,
     "total_pct": null,
     "qtd_cogs_pct": null,
-    "var_to_goal": -6.7,
+    "var_to_goal": -5.3,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Shake Mix",
-      "Lettuce",
-      "Peanut Butter inv"
+      "Potato, Idaho",
+      "Bun, Burger",
+      "Cheese"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 21.51,
+    "hourly_labor_pct": 20.64,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
-    "ot_hours": null,
+    "ot_hours": 0.0,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 542.75,
+    "labor_hours": 519.85,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
-    "charged_tips": null
+    "charged_tips": 778.75
   },
   "food_safety": {
     "steritech_pct": null,
     "criticals": null,
-    "shops_month_pct": null,
-    "shops_month_label": "September 2026",
-    "shops_qtd_pct": null,
-    "shops_qtd_count": 0,
-    "shops_ytd_pct": 83.9
+    "shops_month_pct": 95.7,
+    "shops_month_label": "October 2026",
+    "shops_qtd_pct": 95.7,
+    "shops_qtd_count": 3,
+    "shops_ytd_pct": 83.5
   },
   "fgu": {
     "overdue_rate_pct": 54.29,
@@ -106,7 +104,7 @@
     "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 92.0,
+    "completion_pct": 88.9,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
