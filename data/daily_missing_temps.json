@@ -1,16 +1,29 @@
 {
   "store": "2065",
-  "date": "2026-09-06",
+  "date": "2026-10-18",
   "day_of_week": "Sunday",
-  "generated_at": "2026-09-07T05:59:48.323043-04:00",
+  "generated_at": "2026-10-19T06:34:30.299676-04:00",
   "schedule": {
-    "date": "2026-09-06",
+    "date": "2026-10-18",
     "day_of_week": "Sunday",
     "am_manager": "Vicki Lucey",
-    "pm_manager": "Madison Cureton",
-    "shift_change_manager": "Anthony Pirtle"
+    "pm_manager": "Alexandra Campbell",
+    "shift_change_manager": "Madison Cureton & Rusul Kadhim"
   },
-  "missing_count": 0,
-  "missing_items": [],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Sunday 2026-09-06\n\u2705 All temps and checklists complete. Clean day.\n"
+  "missing_count": 1,
+  "missing_items": [
+    {
+      "date": "2026-10-18",
+      "day_of_week": "Sunday",
+      "category": "CHECKLIST",
+      "shift": "PM",
+      "task_name": "PM Pre-Shift Check",
+      "status": "MISSED",
+      "required_pct": 0,
+      "all_pct": 0,
+      "manager": "Alexandra Campbell",
+      "manager_basis": "pm_manager"
+    }
+  ],
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Sunday 2026-10-18\n**1 missed/incomplete** (AM mgr: Vicki Lucey \u00b7 PM mgr: Alexandra Campbell)\n\n- **Checklist: PM Pre-Shift Check** \u2014 MISSED \u2192 **Alexandra Campbell**\n"
 }
