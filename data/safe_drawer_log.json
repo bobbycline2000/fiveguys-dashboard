@@ -1944,7 +1944,7 @@
     "safe_open": 643,
     "d1_open": 200,
     "d2_open": 0,
-    "safe_mid": 0,
+    "safe_mid": 643,
     "d1_mid": 0,
     "d2_mid": 0,
     "safe_close": 0,
@@ -1952,7 +1952,7 @@
     "d2_close": 0,
     "ct_os": -91.68,
     "notes": "",
-    "submitted_at": "2026-10-21T02:56:00.083Z"
+    "submitted_at": "2026-10-21T02:56:02.791Z"
   },
   {
     "date": "2099-01-01",
