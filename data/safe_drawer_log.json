@@ -1958,7 +1958,7 @@
     "date": "2026-10-21",
     "mgr": "bc",
     "deposit": 0,
-    "safe_open": 0,
+    "safe_open": 643,
     "d1_open": 0,
     "d2_open": 0,
     "safe_mid": 0,
@@ -1969,7 +1969,7 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-10-21T14:58:46.433Z"
+    "submitted_at": "2026-10-21T14:58:53.131Z"
   },
   {
     "date": "2099-01-01",
