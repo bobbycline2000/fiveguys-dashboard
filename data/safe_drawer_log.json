@@ -1938,6 +1938,23 @@
     "submitted_at": "2026-10-20T02:48:44.232Z"
   },
   {
+    "date": "2026-10-20",
+    "mgr": "ms",
+    "deposit": 0,
+    "safe_open": 0,
+    "d1_open": 0,
+    "d2_open": 0,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
+    "ct_os": -91.68,
+    "notes": "",
+    "submitted_at": "2026-10-21T02:55:35.535Z"
+  },
+  {
     "date": "2099-01-01",
     "mgr": "TEST",
     "deposit": 0,
