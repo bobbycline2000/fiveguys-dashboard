@@ -1941,7 +1941,7 @@
     "date": "2026-10-20",
     "mgr": "ms",
     "deposit": 0,
-    "safe_open": 0,
+    "safe_open": 643,
     "d1_open": 200,
     "d2_open": 0,
     "safe_mid": 0,
@@ -1952,7 +1952,7 @@
     "d2_close": 0,
     "ct_os": -91.68,
     "notes": "",
-    "submitted_at": "2026-10-21T02:55:52.730Z"
+    "submitted_at": "2026-10-21T02:56:00.083Z"
   },
   {
     "date": "2099-01-01",
