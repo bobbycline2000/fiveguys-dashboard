@@ -1959,8 +1959,8 @@
     "mgr": "bc",
     "deposit": 0,
     "safe_open": 643,
-    "d1_open": 0,
-    "d2_open": 0,
+    "d1_open": 200,
+    "d2_open": 200,
     "safe_mid": 0,
     "d1_mid": 0,
     "d2_mid": 0,
@@ -1969,7 +1969,7 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-10-21T14:58:53.131Z"
+    "submitted_at": "2026-10-21T14:58:56.279Z"
   },
   {
     "date": "2099-01-01",
