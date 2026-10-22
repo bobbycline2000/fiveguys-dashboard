@@ -1975,7 +1975,7 @@
     "date": "2026-10-22",
     "mgr": "vll",
     "deposit": 0,
-    "safe_open": 0,
+    "safe_open": 654,
     "d1_open": 0,
     "d2_open": 0,
     "safe_mid": 0,
@@ -1986,7 +1986,7 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-10-22T14:06:41.715Z"
+    "submitted_at": "2026-10-22T14:06:47.272Z"
   },
   {
     "date": "2099-01-01",
