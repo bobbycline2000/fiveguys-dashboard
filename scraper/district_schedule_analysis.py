@@ -160,13 +160,26 @@ def main() -> int:
         return 1
 
     ok = 0
+    noaccess = 0
+    try:
+        visible = {int(l["locationId"]) for l in twx.list_locations(s)}
+    except Exception:
+        visible = None  # unknown; fall back to attempting the switch
     for store in stores:
         sid = store.get("store_id", "?")
         if "teamworx_location_id" not in store:
             print(f"SKIP {sid}: no teamworx_location_id in config")
             continue
+        lid = int(store["teamworx_location_id"])
+        if visible is not None and lid not in visible:
+            # Session is valid but this login can no longer see the store
+            # (account permission change, not an auth failure). Skip, don't abort.
+            print(f"::warning::NOACCESS {sid}: Teamworx login cannot see location {lid} "
+                  f"(visible: {sorted(visible)}) - ask HR/Teamworx admin to restore access")
+            noaccess += 1
+            continue
         try:
-            twx.switch_location(s, int(store["teamworx_location_id"]))
+            twx.switch_location(s, lid)
             we = args.week_ending or upcoming_week_ending(s, year, today)
             if not we:
                 print(f"SKIP {sid}: no upcoming schedule found")
@@ -187,6 +200,10 @@ def main() -> int:
             print(f"FAIL {sid}: {e}", file=sys.stderr)
 
     print(f"Done: {ok}/{len(stores)} stores analyzed")
+    if noaccess:
+        print(f"WARN: {noaccess} store(s) skipped - Teamworx login lacks access")
+        if not ok:
+            return 0  # permission gap, not a code failure; keep downstream steps running
     return 0 if ok else 1
 
 
