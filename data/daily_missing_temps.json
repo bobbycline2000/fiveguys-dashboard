@@ -1,23 +1,23 @@
 {
   "store": "2065",
-  "date": "2026-10-21",
-  "day_of_week": "Wednesday",
-  "generated_at": "2026-10-22T05:11:08.875023-04:00",
+  "date": "2026-10-22",
+  "day_of_week": "Thursday",
+  "generated_at": "2026-10-23T08:45:29.662017-04:00",
   "schedule": {
-    "date": "2026-10-21",
-    "day_of_week": "Wednesday",
+    "date": "2026-10-22",
+    "day_of_week": "Thursday",
     "am_manager": "Robert Cline",
     "pm_manager": "Rusul Kadhim",
-    "shift_change_manager": "Madison Cureton & Vicki Lucey"
+    "shift_change_manager": "Alexandra Campbell & Vicki Lucey & Madelynn Smith & Cortez Brown"
   },
   "missing_count": 1,
   "missing_items": [
     {
-      "date": "2026-10-21",
-      "day_of_week": "Wednesday",
+      "date": "2026-10-22",
+      "day_of_week": "Thursday",
       "category": "CHECKLIST",
       "shift": "N/A",
-      "task_name": "Milkshake Pump Cleaning Check",
+      "task_name": "Closing Checklist",
       "status": "MISSED",
       "required_pct": 0,
       "all_pct": 0,
@@ -25,5 +25,5 @@
       "manager_basis": "pm_manager (closing task)"
     }
   ],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Wednesday 2026-10-21\n**1 missed/incomplete** (AM mgr: Robert Cline \u00b7 PM mgr: Rusul Kadhim)\n\n- **Checklist: Milkshake Pump Cleaning Check** \u2014 MISSED \u2192 **Rusul Kadhim**\n"
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Thursday 2026-10-22\n**1 missed/incomplete** (AM mgr: Robert Cline \u00b7 PM mgr: Rusul Kadhim)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Rusul Kadhim**\n"
 }

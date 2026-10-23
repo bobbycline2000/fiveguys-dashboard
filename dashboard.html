@@ -829,10 +829,10 @@ body.sidebar-open .sidebar-backdrop { display: block; }
     <!-- Page header -->
     <div class="page-hdr">
       <div>
-        <div class="page-title">Good afternoon, Bobby.</div>
+        <div class="page-title">Good morning, Bobby.</div>
         <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>2:42 PM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>8:46 AM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -910,7 +910,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="ctrl-stat-lbl">Actual Hrs</div>
           </div>
           <div>
-            <div class="ctrl-stat-val">81.5</div>
+            <div class="ctrl-stat-val">—</div>
             <div class="ctrl-stat-lbl">Sched Hrs</div>
           </div>
           <div>
@@ -922,15 +922,15 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="ctrl-section-lbl"><span>Week-to-Date Running Labor</span><span class="goal-tag">Goal 18.5%</span></div>
         <div class="period-var">
           <div class="period-box">
-            <div class="period-val">22.2%</div>
+            <div class="period-val">20.2%</div>
             <div class="period-lbl">WTD %</div>
           </div>
           <div class="period-box">
-            <div class="period-val">$2,380</div>
+            <div class="period-val">$6,158</div>
             <div class="period-lbl">WTD Labor $</div>
           </div>
           <div class="period-box">
-            <div class="period-val">200.9</div>
+            <div class="period-val">504.5</div>
             <div class="period-lbl">WTD Hours</div>
           </div>
         </div>
@@ -969,7 +969,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         </div>
         <div class="kpi-val data-swap" data-today="$2,846" data-week="$10,723" data-month="$129,214" data-quarter="$405,006">$2,846</div>
         <div class="kpi-lbl data-swap" data-today="Daily Sales" data-week="Week Sales (WTD)" data-month="Month Sales (MTD)" data-quarter="Quarter Sales (QTD)">Daily Sales</div>
-        <div class="kpi-sub data-swap" data-today="LY $3,867 &nbsp;&middot;&nbsp; Fcst $4,185" data-week="LY $9,826 &nbsp;&middot;&nbsp; Fcst $11,640" data-month="30d &middot; $4,307/day" data-quarter="90d &middot; $4,500/day">LY $3,867 &nbsp;&middot;&nbsp; Fcst $4,185</div>
+        <div class="kpi-sub data-swap" data-today="LY — &nbsp;&middot;&nbsp; Fcst —" data-week="LY — &nbsp;&middot;&nbsp; Fcst —" data-month="30d &middot; $4,307/day" data-quarter="90d &middot; $4,500/day">LY — &nbsp;&middot;&nbsp; Fcst —</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top">
@@ -985,9 +985,9 @@ body.sidebar-open .sidebar-backdrop { display: block; }
           <div class="kpi-ico"><i data-lucide="tag"></i></div>
           <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;$0.60</div>
         </div>
-        <div class="kpi-val data-swap" data-today="$5.10" data-week="$5.44" data-month="$5.60" data-quarter="$5.37">$5.10</div>
+        <div class="kpi-val data-swap" data-today="—" data-week="$5.44" data-month="$5.60" data-quarter="$5.37">—</div>
         <div class="kpi-lbl data-swap" data-today="Sales / Guest" data-week="Sales / Guest (WTD)" data-month="Sales / Guest (MTD)" data-quarter="Sales / Guest (QTD)">Sales / Guest</div>
-        <div class="kpi-sub data-swap" data-today="Week avg $5.44" data-week="Day avg $5.10" data-month="30d avg" data-quarter="90d avg">Week avg $5.44</div>
+        <div class="kpi-sub data-swap" data-today="Week avg $5.44" data-week="Day avg —" data-month="30d avg" data-quarter="90d avg">Week avg $5.44</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top">
@@ -1129,10 +1129,20 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="card-title"><i data-lucide="message-square"></i> Team Notes</div>
             <div class="card-sub">Messages from GM / DM / Director</div>
           </div>
-          <div class="pill pill-white">0 new</div>
+          <div class="pill pill-white">1 new</div>
         </div>
         <!-- TEAM-NOTES-START -->
         <div class="notes-list">
+          <div class="note-item ">
+            <div class="note-head">
+              <span>
+                <span class="note-from">Prometheus</span>
+                <span class="note-role">Alert</span>
+              </span>
+              <span class="note-time">Today 8:46 AM</span>
+            </div>
+            <div class="note-body">🚨 New hire: Rodolfo Trujillo — </div>
+          </div>
         </div>
         <!-- TEAM-NOTES-END -->
         <div class="note-input-row">
@@ -1153,7 +1163,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="card-title">Today's Schedule</div>
             <div class="card-sub">Scheduled vs actual hours by employee</div>
           </div>
-          <div class="pill pill-white">October 22</div>
+          <div class="pill pill-white">October 23</div>
         </div>
         <div class="schedule-tabs">
           <button class="sched-tab active" onclick="showShift('am', this)">AM Shift &nbsp;8AM&ndash;4PM</button>
@@ -1163,92 +1173,20 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <!-- AM Shift -->
         <div id="shift-am">
           <table class="sched-table">
-            <thead>
-              <tr>
-                <th>Employee</th>
-                <th>Sched Hrs</th>
-                <th>Actual Hrs</th>
-                <th>Variance</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Employee</th><th>Sched Hrs</th><th>Actual Hrs</th><th>Variance</th></tr></thead>
             <tbody>
-              <tr>
-                <td><div class="emp-name">Lidy H.</div><div class="emp-role">Crew</div></td>
-                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Robert C.</div><div class="emp-role">GM</div></td>
-                <td>10.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Vicki L.</div><div class="emp-role">Shift Lead</div></td>
-                <td>7.5</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Alexandra C.</div><div class="emp-role">Shift Lead</div></td>
-                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Cortez B.</div><div class="emp-role">Shift Lead</div></td>
-                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
+              <tr><td colspan="4" style="text-align:center;color:#aaa;padding:1.2rem;">Schedule not yet available for today</td></tr>
             </tbody>
-            <tfoot>
-              <tr class="total-row">
-                <td>AM Total</td>
-                <td>41.5 hrs</td>
-                <td class="pending">Pending</td>
-                <td class="pending">—</td>
-              </tr>
-            </tfoot>
           </table>
         </div>
 
         <!-- PM Shift -->
         <div id="shift-pm" style="display:none">
           <table class="sched-table">
-            <thead>
-              <tr>
-                <th>Employee</th>
-                <th>Sched Hrs</th>
-                <th>Actual Hrs</th>
-                <th>Variance</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Employee</th><th>Sched Hrs</th><th>Actual Hrs</th><th>Variance</th></tr></thead>
             <tbody>
-              <tr>
-                <td><div class="emp-name">Francisco M.</div><div class="emp-role">Crew</div></td>
-                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Zack W.</div><div class="emp-role">Crew</div></td>
-                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Justice H.</div><div class="emp-role">Crew</div></td>
-                <td>6.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Ailen C.</div><div class="emp-role">Crew</div></td>
-                <td>5.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Rusul K.</div><div class="emp-role">Shift Lead</div></td>
-                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
-              <tr>
-                <td><div class="emp-name">Madelynn S.</div><div class="emp-role">Shift Lead</div></td>
-                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
-              </tr>
+              <tr><td colspan="4" style="text-align:center;color:#aaa;padding:1.2rem;">Schedule not yet available for today</td></tr>
             </tbody>
-            <tfoot>
-              <tr class="total-row">
-                <td>PM Total</td>
-                <td>40.0 hrs</td>
-                <td class="pending">Pending close</td>
-                <td class="pending">—</td>
-              </tr>
-            </tfoot>
           </table>
         </div>
       </div>
@@ -1385,7 +1323,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>2:42 PM</span> &nbsp;&middot;&nbsp; October 22 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>8:46 AM</span> &nbsp;&middot;&nbsp; October 23 2026</span>
   </div>
 
 </div><!-- /main -->
