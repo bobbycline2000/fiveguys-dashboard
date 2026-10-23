@@ -25,6 +25,7 @@ EMPLOYEES = [
     ("Madison",      "(502) 938-9208", "Active"),
     ("Octavious",    "(502) 649-6790", "Active"),
     ("Robert Muncy", "(PHONE PENDING)", "Active"),
+    ("Rodolfo",      "(PHONE PENDING)", "Active"),
     ("Rusul",        "(502) 656-9660", "Active"),
     ("Vicki",        "(502) 701-9597", "Active"),
     ("Zach",         "(502) 422-9066", "Active"),
