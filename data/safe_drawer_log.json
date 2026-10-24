@@ -2009,7 +2009,7 @@
     "date": "2026-10-24",
     "mgr": "bc",
     "deposit": 0,
-    "safe_open": 0,
+    "safe_open": 644,
     "d1_open": 0,
     "d2_open": 0,
     "safe_mid": 0,
@@ -2020,7 +2020,7 @@
     "d2_close": 0,
     "ct_os": -23.92,
     "notes": "",
-    "submitted_at": "2026-10-24T16:40:52.268Z"
+    "submitted_at": "2026-10-24T16:40:54.004Z"
   },
   {
     "date": "2099-01-01",
