@@ -793,5 +793,10 @@
     "business_date": "2026-10-24",
     "over_short": 776.67,
     "captured_at": "2026-10-25T13:41:22"
+  },
+  {
+    "business_date": "2026-10-25",
+    "over_short": 776.67,
+    "captured_at": "2026-10-26T16:00:30"
   }
 ]
