@@ -1,0 +1,139 @@
+{
+  "weekEnding": "10/25/2026",
+  "weekStart": "10/19/2026",
+  "chargedTips": 715.25,
+  "poolHours": 426.92,
+  "tipsPerHour": 1.6754,
+  "sumPayout": 715.24,
+  "delta": -0.01,
+  "payouts": {
+    "Brown, Cortez": {
+      "hours": 20.72,
+      "payout": 34.71,
+      "employeeId": 1472868,
+      "employeeNumber": "E2065352109",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Campbell, Alexandra": {
+      "hours": 30.69,
+      "payout": 51.42,
+      "employeeId": 1512153,
+      "employeeNumber": "E2065356898",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Cureton, Madison": {
+      "hours": 40.02,
+      "payout": 67.05,
+      "employeeId": 860503,
+      "employeeNumber": "E2065266168",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Gonzalez Cardero, Ailen": {
+      "hours": 14.62,
+      "payout": 24.49,
+      "employeeId": 885532,
+      "employeeNumber": "E2065283102",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Goodman, Javeh": {
+      "hours": 10.59,
+      "payout": 17.74,
+      "employeeId": 1449217,
+      "employeeNumber": "E2065349921",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Henry, Lidy": {
+      "hours": 38.21,
+      "payout": 64.02,
+      "employeeId": 336368,
+      "employeeNumber": "1911737",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Kadhim, Rusul": {
+      "hours": 21.82,
+      "payout": 36.56,
+      "employeeId": 1427929,
+      "employeeNumber": "E2065348303",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Kamara, Emanuela": {
+      "hours": 31.97,
+      "payout": 53.56,
+      "employeeId": 1329622,
+      "employeeNumber": "E2065340844",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Llorente Mejias, Francisco": {
+      "hours": 40.54,
+      "payout": 67.92,
+      "employeeId": 898843,
+      "employeeNumber": "E2065292376",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Lucey, Vicki": {
+      "hours": 35.69,
+      "payout": 59.79,
+      "employeeId": 375652,
+      "employeeNumber": "E047592186",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Milledge, Mykenize": {
+      "hours": 12.72,
+      "payout": 21.31,
+      "employeeId": 1295425,
+      "employeeNumber": "E2065338962",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Muncy Jr, Robert": {
+      "hours": 6.18,
+      "payout": 10.35,
+      "employeeId": 861813,
+      "employeeNumber": "E2065267212",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Pirtle, Anthony": {
+      "hours": 37.5,
+      "payout": 62.83,
+      "employeeId": 1391230,
+      "employeeNumber": "E2065345128",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Smith, Madelynn": {
+      "hours": 30.12,
+      "payout": 50.46,
+      "employeeId": 1414222,
+      "employeeNumber": "E2065347146",
+      "positionCode": 5,
+      "positionName": "Shift Leader-Hourly"
+    },
+    "Valentin, Katherine": {
+      "hours": 31.73,
+      "payout": 53.16,
+      "employeeId": 1514134,
+      "employeeNumber": "E2065357246",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    },
+    "Whitten, Zack": {
+      "hours": 23.8,
+      "payout": 39.87,
+      "employeeId": 1369917,
+      "employeeNumber": "E2065343318",
+      "positionCode": 1,
+      "positionName": "2. Crew"
+    }
+  }
+}
