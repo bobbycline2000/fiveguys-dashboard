@@ -12,12 +12,12 @@
     {
       "label": "11A",
       "hour_24": 11,
-      "labor_percent": 0.0
+      "labor_percent": 85.7
     }
   ],
   "meta": {
     "source": "crunchtime_api",
-    "pulled_at": "2026-10-28T15:44:32",
+    "pulled_at": "2026-10-28T15:49:45",
     "calc_id_yesterday": 3
   }
 }
