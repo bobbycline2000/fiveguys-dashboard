@@ -44,6 +44,9 @@ def main() -> int:
                         "location": a.store, "status": "ok", "source": "api"},
                "overall_pct": overall, "lists": lists}
     (dest / "compliance.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    # Keep the canonical data/compliancemate.json (read by main.py + legacy paths) in sync;
+    # it sat at 10/20 for a week because only the Playwright scraper wrote it.
+    (ROOT / "data" / "compliancemate.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print(f"[CM-API] OK {d}: {len(lists)} lists, overall {overall}%")
     return 0
 
