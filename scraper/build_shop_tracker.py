@@ -8,7 +8,9 @@ Matches original training-tracker format exactly:
   Row 5 : TOTAL SCORE (integer %)
   Rows 6-10 : Sub-score labels (blank — shops.json lacks those fields)
   Row 11: INDIVIDUAL PERFORMANCE divider + MTD column headers
-  Row 12+: Manager rows (col A="Manager"), then Crew rows (col A="CREW")
+  Row 12+: Manager rows (col A="Manager"), then Crew rows (col A="CREW") —
+           roster = everyone CrunchTime shows on the clock during that month's shops
+  Q1-Q4 Summary tabs: per-person shops worked / 100% shops / avg / earned
             col B = display name, shop cols = score if on shift else blank,
             MTD SCORE = AVERAGE formula, MTD DOLLARS = Python-computed
 
@@ -67,65 +69,11 @@ def _find_latest_shops_json() -> Path:
 
 
 SHOPS_JSON = _find_latest_shops_json()
-PART_JSON  = DATA_ROOT / STORE_ID / "participation.json"
+ONSHIFT_JSON = DATA_ROOT / STORE_ID / "shop_onshift_2026.json"   # built by build_shop_onshift.py
 
-# ── Employee roster ────────────────────────────────────────────────────────
-# (participation_key, display_name, section)
-# participation_key must match first-name keys in participation.json (after normalization)
-MANAGERS = [
-    ("Bobby",  "Robert Cline",   "Manager"),
-    ("Vicki",  "Vicki Lucey",    "Manager"),
-    ("Kasey",  "Kasey Wilson",   "Manager"),
-    ("Nathan", "Nathan Roberts", "Manager"),
-]
-
-CREW = [
-    ("Alen",      "Ailen Gonzalez Cardero",       "CREW"),
-    ("Anthony",   "Anthony Pirtle",                "CREW"),
-    ("Ash",       "Ash",                           "CREW"),
-    ("Autumn",    "Autumn Hearn",                  "CREW"),
-    ("Bri",       "Brianna Gatewood",              "CREW"),
-    ("Christopher", "Christopher Conder",          "CREW"),
-    ("Cortez",    "Cortez Brown",                  "CREW"),
-    ("DJuan",     "DJuan Johnson",                 "CREW"),
-    ("Dakayla",   "DaKayla Dorsey",                "CREW"),
-    ("Damon",     "Damon",                         "CREW"),
-    ("Divan",     "Divan",                         "CREW"),
-    ("Elizabeth", "Elizabeth Brazell",             "CREW"),
-    ("Emanuela",  "Emanuela Kamara",               "CREW"),
-    ("Francisco", "Francisco Llorente Mejias",     "CREW"),
-    ("Grace",     "Grace",                         "CREW"),
-    ("Heather",   "Heather Uebelacker-Maddox",     "CREW"),
-    ("Jada",      "Jada Cox",                      "CREW"),
-    ("Javeh",     "Javeh Goodman",                 "CREW"),
-    ("Jeremiah",  "Jeremiah Matthews",             "CREW"),
-    ("Kable",     "Kable",                         "CREW"),
-    ("Kaisha",    "Kaisha Brewer",                 "CREW"),
-    ("Kayla",     "Kayla Valenzuela",              "CREW"),
-    ("Kenzie",    "Kenzie",                        "CREW"),
-    ("Lidy",      "Lidy Henry",                    "CREW"),
-    ("Madelynn",  "Madelynn Smith",                "CREW"),
-    ("Madison",   "Madison Cureton",               "CREW"),
-    ("Maylin",    "Maylin Hernandez Rodriguez",    "CREW"),
-    ("Mike",      "Mike",                          "CREW"),
-    ("Mykenize",  "Mykenize Milledge",             "CREW"),
-    ("Nyatiek",   "Nyatiek Keah",                  "CREW"),
-    ("Richard",   "Richard Gibbs",                 "CREW"),
-    ("Rusul",     "Rusul Kadhim",                  "CREW"),
-    ("Ryan",      "Ryan",                          "CREW"),
-    ("Samuel",    "Samuel Galban Rocha",           "CREW"),
-    ("Serina",    "Serina Gaskins",                "CREW"),
-    ("Zach",      "Zack Whitten",                  "CREW"),
-]
-
-# ── Name normalisation: participation.json first-name → roster key ─────────
-# Handles alternate spellings that appear in participation.json
-PART_KEY_NORM: dict[str, str] = {
-    "Zack":    "Zach",
-    "DaKayla": "Dakayla",
-    "Brianna": "Bri",
-    "Ailen":   "Alen",
-}
+# Roster is no longer hardcoded: each tab lists exactly the people CrunchTime
+# Employee Time Detail shows on the clock during that month's shop windows
+# (full names, managers included). Role = their CT position on the shop day.
 
 MONTHS = {
     1: "January", 2: "February", 3: "March",    4: "April",
@@ -143,10 +91,6 @@ SUB_ROWS = [
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────
-
-def _norm(name: str) -> str:
-    return PART_KEY_NORM.get(name, name)
-
 
 def _b(colour: str = MID_GREY) -> Border:
     s = Side(border_style="thin", color=colour)
@@ -207,8 +151,7 @@ def compute_mtd_dollars(month_shops: list, raw_by_shop: dict,
         raw_names = raw_by_shop.get(jid, [])
         if not raw_names:
             continue
-        norm_names = {_norm(n) for n in raw_names}
-        if roster_key in norm_names:
+        if roster_key in raw_names:
             total += 230.0 / len(raw_names)   # divisor = actual on-shift count
     return round(total, 2)
 
@@ -216,7 +159,7 @@ def compute_mtd_dollars(month_shops: list, raw_by_shop: dict,
 # ── Sheet builder ──────────────────────────────────────────────────────────
 
 def build_sheet(wb: Workbook, month_name: str, shops: list,
-                raw_by_shop: dict) -> None:
+                raw_by_shop: dict, sections: list) -> None:
     ws = wb.create_sheet(month_name)
     ws.sheet_view.showGridLines = False
 
@@ -334,7 +277,7 @@ def build_sheet(wb: Workbook, month_name: str, shops: list,
     for shop in shops:
         jid = shop["job_id"]
         raw = raw_by_shop.get(jid, [])
-        norm_on_shift[jid] = {_norm(n) for n in raw}
+        norm_on_shift[jid] = set(raw)
 
     # First/last shop column letters for AVERAGE formula
     if shop_cols:
@@ -342,11 +285,12 @@ def build_sheet(wb: Workbook, month_name: str, shops: list,
         last_shop_col  = shop_cols[-1]
 
     # ── Employee rows (Managers, then Crew) ─────────────────────────────────
-    for section_label, emp_list in (("Manager", MANAGERS), ("CREW", CREW)):
+    for section_label, emp_list in sections:
         is_mgr = section_label == "Manager"
         row_bg = MGR_BG if is_mgr else WHITE
 
-        for roster_key, display_name, _sec in emp_list:
+        for roster_key in emp_list:
+            display_name = roster_key
             _set(ws.cell(r, 1), section_label,
                  size=8, fg=DARK_GREY, bg=row_bg, bold=is_mgr)
             _set(ws.cell(r, 2), display_name,
@@ -397,11 +341,85 @@ def build_sheet(wb: Workbook, month_name: str, shops: list,
     # ── Footer ─────────────────────────────────────────────────────────────
     ws.merge_cells(f"A{r}:{last_col}{r}")
     _set(ws.cell(r, 1),
-         "Score = shop score if on shift during meal window; blank if not. "
+         "Score = shop score if on the clock (CrunchTime Employee Time Detail) during the shop visit window; blank if not. "
          "MTD SCORE = average of scores worked. "
          "MTD DOLLARS = $230 ÷ on-shift count per 100% shop.",
          size=7, fg=DARK_GREY, bg=LIGHT_GREY, italic=True, h="left", border=False)
     ws.row_dimensions[r].height = 12
+
+
+# ── Quarter sheet ─────────────────────────────────────────────────────────
+
+QUARTERS = {1: (1, 3), 2: (4, 6), 3: (7, 9), 4: (10, 12)}
+
+
+def build_quarter_sheet(wb: Workbook, q: int, shops: list, onshift: dict) -> None:
+    """Per-person quarter breakdown, Managers then Crew."""
+    ws = wb.create_sheet(f"Q{q} Summary")
+    ws.sheet_view.showGridLines = False
+    m0, m1 = QUARTERS[q]
+    heads = ["Role", "Name", "Shops Worked", "100% Shops", "Avg Score", "Best", "Lowest", "Earned"]
+    widths = [11, 28, 13, 12, 11, 9, 9, 12]
+    for i, w in enumerate(widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = w
+    last = get_column_letter(len(heads))
+
+    r = 1
+    ws.merge_cells(f"A{r}:{last}{r}")
+    _set(ws.cell(r, 1), f"SECRET SHOPPER — Q{q} 2026 ({MONTHS[m0][:3]}–{MONTHS[m1][:3]})",
+         bold=True, size=14, fg=WHITE, bg=RED, border=False)
+    ws.row_dimensions[r].height = 28
+    r += 1
+
+    scores = [s["score"] for s in shops]
+    n100 = sum(1 for x in scores if x == 100.0)
+    avg = round(sum(scores) / len(scores), 1) if scores else None
+    ws.merge_cells(f"A{r}:{last}{r}")
+    _set(ws.cell(r, 1), f"Store 2065 — {len(shops)} shops · avg {avg if avg is not None else '—'}% · "
+         f"{n100} perfect (100%) shops", bold=True, size=10, fg=NAVY, bg=LIGHT_GREY)
+    r += 2
+
+    stats: dict = {}
+    for s in shops:
+        on = onshift.get(s["job_id"], {}).get("on_shift", [])
+        for p in on:
+            st = stats.setdefault(p["name"], {"role": p["role"], "last": "", "scores": [], "earned": 0.0})
+            if s["date"] >= st["last"]:
+                st["role"], st["last"] = p["role"], s["date"]
+            st["scores"].append(s["score"])
+            if s["score"] == 100.0 and on:
+                st["earned"] += 230.0 / len(on)
+
+    for label in ("Manager", "Crew"):
+        people = sorted((n for n, st in stats.items() if st["role"] == label),
+                        key=lambda n: (-len(stats[n]["scores"]), n))
+        if not people:
+            continue
+        for i, h in enumerate(heads, 1):
+            _set(ws.cell(r, i), h if i > 1 else ("MANAGERS" if label == "Manager" else "CREW"), bold=True, size=9, fg=WHITE, bg=NAVY)
+        r += 1
+        for n in people:
+            st = stats[n]
+            sc = st["scores"]
+            a = round(sum(sc) / len(sc), 1)
+            bg = MGR_BG if label == "Manager" else WHITE
+            vals = [label, n, len(sc), sum(1 for x in sc if x == 100.0), a, max(sc), min(sc),
+                    round(st["earned"], 2)]
+            for i, v in enumerate(vals, 1):
+                c = ws.cell(r, i)
+                _set(c, v, size=10, bold=(i == 2), fg=DARK, bg=bg, h="left" if i == 2 else "center")
+            ws.cell(r, 5).fill = _f(_score_bg(a)); ws.cell(r, 5).font = Font(name="Arial", bold=True, size=10, color=_score_fg(a))
+            ws.cell(r, 5).number_format = "0.0"
+            ws.cell(r, 8).number_format = '"$"#,##0.00'
+            r += 1
+        r += 1
+
+    ws.merge_cells(f"A{r}:{last}{r}")
+    _set(ws.cell(r, 1), "On shift = on the clock in CrunchTime Employee Time Detail during the shop's visit "
+         "window (managers included). Role = most recent CT position this quarter. "
+         "Earned = $230 ÷ on-shift count per 100% shop.",
+         size=7, fg=DARK_GREY, bg=LIGHT_GREY, italic=True, h="left", border=False, wrap=True)
+    ws.row_dimensions[r].height = 24
 
 
 # ── Main ───────────────────────────────────────────────────────────────────
@@ -409,52 +427,41 @@ def build_sheet(wb: Workbook, month_name: str, shops: list,
 def build() -> None:
     shops_data = json.loads(SHOPS_JSON.read_text(encoding="utf-8"))
     all_shops  = sorted(shops_data["shops"], key=lambda s: s["date"])
-
-    # YEAR FILTER — 2026 only (eliminates 2025-Jun bleed-in bug)
     shops_2026 = [s for s in all_shops if s["date"] >= "2026-01-01"]
+
+    onshift = json.loads(ONSHIFT_JSON.read_text(encoding="utf-8"))
+    missing = [s["job_id"] for s in shops_2026 if s["job_id"] not in onshift]
+    if missing:
+        raise SystemExit(f"Run build_shop_onshift.py first — no on-shift data for {missing}")
+    raw_by_shop = {j: [p["name"] for p in v["on_shift"]] for j, v in onshift.items()}
 
     by_month: dict[int, list] = defaultdict(list)
     for s in shops_2026:
         by_month[int(s["date"][5:7])].append(s)
 
-    raw_by_shop: dict = {}
-    if PART_JSON.exists():
-        raw_by_shop = json.loads(
-            PART_JSON.read_text(encoding="utf-8")
-        ).get("by_shop", {})
-
     wb = Workbook()
     wb.remove(wb.active)
+    last_month = max(by_month) if by_month else 1
+    for m in range(1, last_month + 1):
+        month_shops = by_month.get(m, [])
+        roles: dict = {}
+        for s in month_shops:                       # latest role in the month wins
+            for p in onshift[s["job_id"]]["on_shift"]:
+                roles[p["name"]] = p["role"]
+        sections = [("Manager", sorted(n for n, r_ in roles.items() if r_ == "Manager")),
+                    ("CREW",    sorted(n for n, r_ in roles.items() if r_ == "Crew"))]
+        build_sheet(wb, MONTHS[m], month_shops, raw_by_shop, sections)
 
-    for m in sorted(by_month.keys()):
-        month_shops = by_month[m]
-        if not month_shops:
-            continue
-        build_sheet(wb, MONTHS[m], month_shops, raw_by_shop)
+    for q, (m0, m1) in QUARTERS.items():
+        q_shops = [s for s in shops_2026 if m0 <= int(s["date"][5:7]) <= m1]
+        if q_shops:
+            build_quarter_sheet(wb, q, q_shops, onshift)
 
     wb.save(OUT)
-    print(f"Saved: {OUT}")
-    print()
-
-    # Summary for verification
-    for m in sorted(by_month.keys()):
-        shops = by_month[m]
-        hundreds = [s for s in shops if s["score"] == 100.0]
-        print(f"  {MONTHS[m]:12s}: {len(shops):2d} shop(s), "
-              f"{len(hundreds)} × 100%")
-
-    # Spot-check: June 4 payout
-    june_shops = by_month.get(6, [])
-    for shop in june_shops:
-        if shop["date"] == "2026-06-04":
-            jid        = shop["job_id"]
-            raw_names  = raw_by_shop.get(jid, [])
-            n          = len(raw_names)
-            per_person = round(230.0 / n, 2) if n > 0 else 0
-            print(f"\n  June 4 check — job {jid}")
-            print(f"    Score      : {shop['score']}")
-            print(f"    On shift   : {raw_names}  (n={n})")
-            print(f"    Per person : ${per_person:.2f}  (target $46.00)")
+    print(f"Saved: {OUT}  tabs: {wb.sheetnames}")
+    for m in sorted(by_month):
+        sh = by_month[m]
+        print(f"  {MONTHS[m]:12s}: {len(sh):2d} shop(s), {sum(1 for s in sh if s['score'] == 100.0)} x 100%")
 
 
 if __name__ == "__main__":

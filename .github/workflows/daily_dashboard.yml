@@ -305,9 +305,19 @@ jobs:
           STORE_ID: "2065"
         run: xvfb-run --server-args="-screen 0 1440x900x24" python scraper/scrape_shop_participation.py --store 2065
 
+      # ── 5b3b2. On-shift roster per shop straight from CT Employee Time Detail ─
+      # API pull (managers included, full names) → shop_onshift_2026.json.
+      # This is the tracker's name source (the UI CETD pull above hides managers).
+      - name: Build shop on-shift roster from CrunchTime
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: python scraper/build_shop_onshift.py
+
       # ── 5b3c. Build Shop_Tracker_2065_2026.xlsx for download ──────────────
-      # Reads shops.json + participation.json, emits the Excel tracker with
-      # 4 monthly tabs (Jan-Apr-...), Manager/Crew sections, auto-calc avgs.
+      # Reads shops.json + shop_onshift_2026.json, emits the Excel tracker with
+      # monthly tabs Jan→current, Manager/Crew sections, plus Q1-Q4 Summary tabs.
       # The dashboard sidebar links to this file.
       - name: Build Shop Tracker Excel
         continue-on-error: true

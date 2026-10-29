@@ -1,0 +1,7114 @@
+{
+ "20648457": {
+  "date": "2026-01-05",
+  "meal_period": "Lunch",
+  "score": 92.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Michael Ruth",
+    "ct_name": "Ruth, Michael",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.97,
+      10.53
+     ],
+     [
+      11.03,
+      16.52
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      5.72,
+      16.5
+     ]
+    ]
+   },
+   {
+    "name": "Ashton Seadler-Wathen",
+    "ct_name": "Seadler-Wathen, Ashton",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.98,
+      10.57
+     ],
+     [
+      11.02,
+      16.4
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.98,
+      19.23
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.77,
+      10.53
+     ],
+     [
+      10.98,
+      16.03
+     ]
+    ]
+   }
+  ]
+ },
+ "20650977": {
+  "date": "2026-01-09",
+  "meal_period": "Dinner",
+  "score": 0.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Alissa Baungardner",
+    "ct_name": "Baungardner, Alissa",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.03,
+      22.88
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      11.98,
+      17.22
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.17,
+      16.5
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.87,
+      22.87
+     ]
+    ]
+   },
+   {
+    "name": "Jada Cox",
+    "ct_name": "Cox, Jada",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.98,
+      15.95
+     ],
+     [
+      16.48,
+      22.18
+     ]
+    ]
+   },
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.67,
+      22.85
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.6,
+      10.67
+     ],
+     [
+      10.92,
+      16.07
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.87,
+      22.85
+     ]
+    ]
+   },
+   {
+    "name": "Samuel Galban Rocha",
+    "ct_name": "Galban Rocha, Samuel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.98,
+      22.85
+     ]
+    ]
+   }
+  ]
+ },
+ "20649453": {
+  "date": "2026-01-10",
+  "meal_period": "Lunch",
+  "score": 80.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Michael Ruth",
+    "ct_name": "Ruth, Michael",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.08,
+      17.98
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.75,
+      14.0
+     ],
+     [
+      17.98,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Ashton Seadler-Wathen",
+    "ct_name": "Seadler-Wathen, Ashton",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.98,
+      10.7
+     ],
+     [
+      10.93,
+      14.05
+     ],
+     [
+      17.98,
+      20.62
+     ],
+     [
+      21.13,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.02,
+      19.42
+     ],
+     [
+      19.97,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.8,
+      10.58
+     ],
+     [
+      10.93,
+      16.02
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.13,
+      10.58
+     ],
+     [
+      10.97,
+      16.02
+     ]
+    ]
+   }
+  ]
+ },
+ "20650374": {
+  "date": "2026-01-16",
+  "meal_period": "Dinner",
+  "score": 72.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.97,
+      23.37
+     ]
+    ]
+   },
+   {
+    "name": "Michael Ruth",
+    "ct_name": "Ruth, Michael",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.92,
+      23.38
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.0,
+      17.3
+     ]
+    ]
+   },
+   {
+    "name": "Ashton Seadler-Wathen",
+    "ct_name": "Seadler-Wathen, Ashton",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      8.0,
+      10.63
+     ],
+     [
+      10.92,
+      16.15
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.08,
+      18.75
+     ],
+     [
+      19.38,
+      23.0
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.9,
+      23.23
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.98,
+      20.2
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      8.0,
+      16.42
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.92,
+      23.23
+     ]
+    ]
+   },
+   {
+    "name": "Samuel Galban Rocha",
+    "ct_name": "Galban Rocha, Samuel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.97,
+      23.23
+     ]
+    ]
+   }
+  ]
+ },
+ "20659897": {
+  "date": "2026-01-23",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.25,
+      17.37
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.03,
+      10.55
+     ],
+     [
+      11.02,
+      14.63
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.45,
+      10.53
+     ],
+     [
+      10.95,
+      16.02
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.1,
+      10.53
+     ],
+     [
+      10.93,
+      16.02
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.8,
+      10.53
+     ],
+     [
+      10.93,
+      16.1
+     ]
+    ]
+   }
+  ]
+ },
+ "20680431": {
+  "date": "2026-01-28",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.0,
+      23.45
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.95,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Ashton Seadler-Wathen",
+    "ct_name": "Seadler-Wathen, Ashton",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.02,
+      10.38
+     ],
+     [
+      10.92,
+      17.2
+     ]
+    ]
+   },
+   {
+    "name": "Autumn Hearn",
+    "ct_name": "Hearn, Autumn",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.43,
+      19.45
+     ],
+     [
+      20.03,
+      23.13
+     ]
+    ]
+   },
+   {
+    "name": "Brianna Gatewood",
+    "ct_name": "Gatewood, Brianna",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.32,
+      18.6
+     ],
+     [
+      19.23,
+      22.53
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.73,
+      10.38
+     ],
+     [
+      10.95,
+      16.05
+     ]
+    ]
+   },
+   {
+    "name": "Samuel Galban Rocha",
+    "ct_name": "Galban Rocha, Samuel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.12,
+      23.1
+     ]
+    ]
+   }
+  ]
+ },
+ "20681743": {
+  "date": "2026-01-29",
+  "meal_period": "Dinner",
+  "score": 80.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.97,
+      23.38
+     ]
+    ]
+   },
+   {
+    "name": "Michael Ruth",
+    "ct_name": "Ruth, Michael",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      11.98,
+      20.58
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.95,
+      23.35
+     ]
+    ]
+   },
+   {
+    "name": "Autumn Hearn",
+    "ct_name": "Hearn, Autumn",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.75,
+      22.78
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.02,
+      19.2
+     ],
+     [
+      19.82,
+      23.08
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.93,
+      10.55
+     ],
+     [
+      10.97,
+      16.03
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.97,
+      23.35
+     ]
+    ]
+   },
+   {
+    "name": "Samuel Galban Rocha",
+    "ct_name": "Galban Rocha, Samuel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.25,
+      23.37
+     ]
+    ]
+   }
+  ]
+ },
+ "20673321": {
+  "date": "2026-01-31",
+  "meal_period": "Lunch",
+  "score": 85.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.12,
+      15.68
+     ]
+    ]
+   },
+   {
+    "name": "Michael Ruth",
+    "ct_name": "Ruth, Michael",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.82,
+      23.97
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.58,
+      17.5
+     ]
+    ]
+   },
+   {
+    "name": "Akur Alier",
+    "ct_name": "Alier, Akur",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.95,
+      15.3
+     ],
+     [
+      15.73,
+      16.05
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.93,
+      10.52
+     ],
+     [
+      10.97,
+      16.0
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.47,
+      23.83
+     ]
+    ]
+   },
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.98,
+      23.82
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.17,
+      10.52
+     ],
+     [
+      10.95,
+      15.98
+     ]
+    ]
+   }
+  ]
+ },
+ "20689193": {
+  "date": "2026-02-07",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.05,
+      23.5
+     ]
+    ]
+   },
+   {
+    "name": "Michael Ruth",
+    "ct_name": "Ruth, Michael",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      11.9,
+      17.17
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.08,
+      17.98
+     ]
+    ]
+   },
+   {
+    "name": "Akur Alier",
+    "ct_name": "Alier, Akur",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.9,
+      16.02
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.97,
+      10.53
+     ],
+     [
+      10.93,
+      16.03
+     ]
+    ]
+   },
+   {
+    "name": "Jada Cox",
+    "ct_name": "Cox, Jada",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.98,
+      18.53
+     ],
+     [
+      19.07,
+      23.5
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.52,
+      18.08
+     ],
+     [
+      18.58,
+      23.5
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.02,
+      10.57
+     ],
+     [
+      10.95,
+      15.98
+     ]
+    ]
+   }
+  ]
+ },
+ "20698566": {
+  "date": "2026-02-12",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.98,
+      23.3
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.75,
+      19.9
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.15,
+      16.27
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.28,
+      23.28
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.07,
+      19.55
+     ],
+     [
+      20.1,
+      23.22
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.92,
+      10.73
+     ],
+     [
+      10.98,
+      16.05
+     ]
+    ]
+   },
+   {
+    "name": "Kelly Hamilton",
+    "ct_name": "Hamilton, Kelly",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.05,
+      16.05
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.9,
+      10.73
+     ],
+     [
+      11.0,
+      16.07
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.12,
+      23.28
+     ]
+    ]
+   },
+   {
+    "name": "Samuel Galban Rocha",
+    "ct_name": "Galban Rocha, Samuel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.98,
+      23.28
+     ]
+    ]
+   }
+  ]
+ },
+ "20685367": {
+  "date": "2026-02-19",
+  "meal_period": "Lunch",
+  "score": 69.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Michael Ruth",
+    "ct_name": "Ruth, Michael",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      11.83,
+      18.1
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      10.5,
+      22.98
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.2,
+      10.8
+     ],
+     [
+      10.87,
+      15.43
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.92,
+      10.72
+     ],
+     [
+      10.95,
+      16.05
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.55,
+      11.27
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.82,
+      10.72
+     ],
+     [
+      10.95,
+      15.98
+     ]
+    ]
+   }
+  ]
+ },
+ "20692443": {
+  "date": "2026-02-22",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.68,
+      23.0
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      12.17,
+      13.62
+     ],
+     [
+      14.17,
+      20.37
+     ]
+    ]
+   },
+   {
+    "name": "Jada Cox",
+    "ct_name": "Cox, Jada",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.95,
+      17.2
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.03,
+      19.03
+     ],
+     [
+      19.57,
+      23.03
+     ]
+    ]
+   },
+   {
+    "name": "Kable Hunt Jr",
+    "ct_name": "Hunt Jr, Kable",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.05,
+      13.68
+     ],
+     [
+      14.3,
+      16.22
+     ]
+    ]
+   },
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.12,
+      22.93
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.98,
+      23.0
+     ]
+    ]
+   },
+   {
+    "name": "Robert Muncy Jr",
+    "ct_name": "Muncy Jr, Robert",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.72,
+      23.0
+     ]
+    ]
+   },
+   {
+    "name": "Samuel Galban Rocha",
+    "ct_name": "Galban Rocha, Samuel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.02,
+      23.0
+     ]
+    ]
+   }
+  ]
+ },
+ "20703980": {
+  "date": "2026-02-27",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Michael Ruth",
+    "ct_name": "Ruth, Michael",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      11.9,
+      13.63
+     ],
+     [
+      14.17,
+      23.08
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      10.77,
+      19.85
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.28,
+      14.4
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.35,
+      16.05
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.83,
+      10.78
+     ],
+     [
+      11.03,
+      15.82
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.83,
+      10.78
+     ],
+     [
+      11.03,
+      14.37
+     ]
+    ]
+   }
+  ]
+ },
+ "20701465": {
+  "date": "2026-02-28",
+  "meal_period": "Dinner",
+  "score": 95.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.32,
+      16.63
+     ],
+     [
+      19.37,
+      23.53
+     ]
+    ]
+   },
+   {
+    "name": "Michael Ruth",
+    "ct_name": "Ruth, Michael",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.9,
+      19.5
+     ]
+    ]
+   },
+   {
+    "name": "Autumn Hearn",
+    "ct_name": "Hearn, Autumn",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.68,
+      23.52
+     ]
+    ]
+   },
+   {
+    "name": "Jada Cox",
+    "ct_name": "Cox, Jada",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.98,
+      23.4
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.5,
+      23.48
+     ]
+    ]
+   },
+   {
+    "name": "Kable Hunt Jr",
+    "ct_name": "Hunt Jr, Kable",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.2,
+      10.58
+     ],
+     [
+      11.03,
+      16.03
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.67,
+      10.55
+     ],
+     [
+      10.93,
+      16.02
+     ]
+    ]
+   },
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.1,
+      23.5
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.45,
+      10.55
+     ],
+     [
+      10.98,
+      16.02
+     ]
+    ]
+   }
+  ]
+ },
+ "20725210": {
+  "date": "2026-03-05",
+  "meal_period": "Dinner",
+  "score": 72.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.25,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.98,
+      23.08
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      9.42,
+      19.15
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.08,
+      23.07
+     ]
+    ]
+   },
+   {
+    "name": "Autumn Hearn",
+    "ct_name": "Hearn, Autumn",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.1,
+      20.23
+     ],
+     [
+      20.75,
+      23.08
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.08,
+      19.52
+     ],
+     [
+      20.08,
+      22.95
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.95,
+      10.5
+     ],
+     [
+      10.95,
+      18.02
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.92,
+      23.07
+     ]
+    ]
+   },
+   {
+    "name": "Samuel Galban Rocha",
+    "ct_name": "Galban Rocha, Samuel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.05,
+      23.05
+     ]
+    ]
+   }
+  ]
+ },
+ "20722737": {
+  "date": "2026-03-09",
+  "meal_period": "Lunch",
+  "score": 80.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      5.75,
+      17.08
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.8,
+      10.63
+     ],
+     [
+      10.98,
+      16.08
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.78,
+      10.67
+     ],
+     [
+      10.98,
+      16.15
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.9,
+      10.67
+     ],
+     [
+      10.98,
+      16.98
+     ]
+    ]
+   }
+  ]
+ },
+ "20734340": {
+  "date": "2026-03-15",
+  "meal_period": "Lunch",
+  "score": 72.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.13,
+      23.5
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.22,
+      10.67
+     ],
+     [
+      11.0,
+      15.47
+     ]
+    ]
+   },
+   {
+    "name": "Brianna Gatewood",
+    "ct_name": "Gatewood, Brianna",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.42,
+      10.58
+     ],
+     [
+      11.02,
+      17.78
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.22,
+      10.53
+     ],
+     [
+      11.02,
+      15.82
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.02,
+      10.63
+     ],
+     [
+      10.97,
+      16.27
+     ]
+    ]
+   },
+   {
+    "name": "Jada Cox",
+    "ct_name": "Cox, Jada",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.98,
+      20.13
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.15,
+      23.5
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.02,
+      23.03
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.15,
+      10.53
+     ],
+     [
+      11.02,
+      16.13
+     ]
+    ]
+   }
+  ]
+ },
+ "20743045": {
+  "date": "2026-03-24",
+  "meal_period": "Late Dinner",
+  "score": 49.0,
+  "window": [
+   19.0,
+   22.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.98,
+      23.18
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.08,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Autumn Hearn",
+    "ct_name": "Hearn, Autumn",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.92,
+      23.12
+     ]
+    ]
+   },
+   {
+    "name": "Jada Cox",
+    "ct_name": "Cox, Jada",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.0,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.95,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Robert Muncy Jr",
+    "ct_name": "Muncy Jr, Robert",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.87,
+      23.17
+     ]
+    ]
+   }
+  ]
+ },
+ "20747930": {
+  "date": "2026-03-31",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.85,
+      23.13
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.03,
+      19.42
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.5,
+      10.6
+     ],
+     [
+      10.95,
+      15.18
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.97,
+      17.13
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.9,
+      10.05
+     ],
+     [
+      10.97,
+      16.08
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.9,
+      10.05
+     ],
+     [
+      10.97,
+      14.08
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.9,
+      23.08
+     ]
+    ]
+   },
+   {
+    "name": "Nathan Roberts",
+    "ct_name": "Roberts, Nathan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.5,
+      10.05
+     ],
+     [
+      10.95,
+      15.53
+     ]
+    ]
+   }
+  ]
+ },
+ "20747008": {
+  "date": "2026-04-02",
+  "meal_period": "Dinner",
+  "score": 97.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      11.57,
+      18.73
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.02,
+      23.4
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.93,
+      23.3
+     ]
+    ]
+   },
+   {
+    "name": "Autumn Hearn",
+    "ct_name": "Hearn, Autumn",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.57,
+      20.22
+     ],
+     [
+      20.75,
+      23.23
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.92,
+      10.47
+     ],
+     [
+      10.95,
+      17.9
+     ]
+    ]
+   },
+   {
+    "name": "Jada Cox",
+    "ct_name": "Cox, Jada",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.0,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.5,
+      17.43
+     ],
+     [
+      18.03,
+      20.17
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.97,
+      10.57
+     ],
+     [
+      10.95,
+      16.1
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.8,
+      23.3
+     ]
+    ]
+   },
+   {
+    "name": "Nathan Roberts",
+    "ct_name": "Roberts, Nathan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.67,
+      14.0
+     ],
+     [
+      14.62,
+      17.0
+     ]
+    ]
+   },
+   {
+    "name": "Richard Gibbs",
+    "ct_name": "Gibbs, Richard",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.1,
+      18.0
+     ],
+     [
+      18.5,
+      23.4
+     ]
+    ]
+   },
+   {
+    "name": "Samuel Galban Rocha",
+    "ct_name": "Galban Rocha, Samuel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.17,
+      23.3
+     ]
+    ]
+   }
+  ]
+ },
+ "20744756": {
+  "date": "2026-04-09",
+  "meal_period": "Lunch",
+  "score": 87.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      12.55,
+      20.03
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      10.55,
+      21.57
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.1,
+      10.53
+     ],
+     [
+      10.98,
+      13.25
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.0,
+      10.55
+     ],
+     [
+      10.93,
+      13.25
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.12,
+      18.05
+     ],
+     [
+      18.55,
+      20.15
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.9,
+      10.57
+     ],
+     [
+      10.95,
+      15.67
+     ]
+    ]
+   },
+   {
+    "name": "Noel Belisle",
+    "ct_name": "Belisle, Noel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.93,
+      16.1
+     ]
+    ]
+   }
+  ]
+ },
+ "20752330": {
+  "date": "2026-04-11",
+  "meal_period": "Dinner",
+  "score": 95.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.02,
+      24.0
+     ]
+    ]
+   },
+   {
+    "name": "Autumn Hearn",
+    "ct_name": "Hearn, Autumn",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.53,
+      24.0
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.8,
+      23.02
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.88,
+      23.82
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.67,
+      10.65
+     ],
+     [
+      10.95,
+      16.05
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.03,
+      18.98
+     ]
+    ]
+   },
+   {
+    "name": "Nathan Roberts",
+    "ct_name": "Roberts, Nathan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.17,
+      23.48
+     ]
+    ]
+   }
+  ]
+ },
+ "20763859": {
+  "date": "2026-04-17",
+  "meal_period": "Lunch",
+  "score": 47.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      12.5,
+      19.77
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.07,
+      15.47
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.95,
+      17.0
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.92,
+      10.6
+     ],
+     [
+      11.02,
+      15.42
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.72,
+      10.62
+     ],
+     [
+      11.02,
+      15.27
+     ]
+    ]
+   },
+   {
+    "name": "Richard Gibbs",
+    "ct_name": "Gibbs, Richard",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      12.03,
+      14.62
+     ],
+     [
+      15.03,
+      20.47
+     ]
+    ]
+   }
+  ]
+ },
+ "20758995": {
+  "date": "2026-04-23",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      16.97,
+      23.13
+     ]
+    ]
+   },
+   {
+    "name": "Nathan Roberts",
+    "ct_name": "Roberts, Nathan",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      9.28,
+      16.97
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.08,
+      23.25
+     ]
+    ]
+   },
+   {
+    "name": "Autumn Hearn",
+    "ct_name": "Hearn, Autumn",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.5,
+      23.25
+     ]
+    ]
+   },
+   {
+    "name": "Brianna Gatewood",
+    "ct_name": "Gatewood, Brianna",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.08,
+      18.72
+     ],
+     [
+      19.42,
+      21.02
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.97,
+      10.82
+     ],
+     [
+      10.98,
+      16.02
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.92,
+      23.25
+     ]
+    ]
+   },
+   {
+    "name": "Richard Gibbs",
+    "ct_name": "Gibbs, Richard",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.0,
+      23.27
+     ]
+    ]
+   }
+  ]
+ },
+ "20770564": {
+  "date": "2026-04-25",
+  "meal_period": "Lunch",
+  "score": 87.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Kasey Wilson",
+    "ct_name": "Wilson, Kasey",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.03,
+      24.0
+     ]
+    ]
+   },
+   {
+    "name": "Nathan Roberts",
+    "ct_name": "Roberts, Nathan",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      10.83,
+      17.05
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.07,
+      16.95
+     ]
+    ]
+   },
+   {
+    "name": "DaKayla Dorsey",
+    "ct_name": "Dorsey, DaKayla",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.0,
+      14.13
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.87,
+      19.23
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.82,
+      24.0
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.0,
+      10.62
+     ],
+     [
+      10.97,
+      14.12
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.0,
+      10.62
+     ],
+     [
+      10.97,
+      16.03
+     ]
+    ]
+   },
+   {
+    "name": "Noel Belisle",
+    "ct_name": "Belisle, Noel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.0,
+      10.65
+     ],
+     [
+      10.95,
+      16.13
+     ]
+    ]
+   },
+   {
+    "name": "Richard Gibbs",
+    "ct_name": "Gibbs, Richard",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.83,
+      24.0
+     ]
+    ]
+   }
+  ]
+ },
+ "20764354": {
+  "date": "2026-05-01",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      11.03,
+      16.58
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      9.03,
+      17.83
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.07,
+      10.55
+     ],
+     [
+      10.98,
+      15.23
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.75,
+      23.03
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.0,
+      10.62
+     ],
+     [
+      10.95,
+      13.48
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.0,
+      10.62
+     ],
+     [
+      10.98,
+      13.47
+     ]
+    ]
+   }
+  ]
+ },
+ "20770900": {
+  "date": "2026-05-11",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.88,
+      22.73
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      5.0,
+      17.08
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.97,
+      22.7
+     ]
+    ]
+   },
+   {
+    "name": "Brianna Gatewood",
+    "ct_name": "Gatewood, Brianna",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.93,
+      18.63
+     ],
+     [
+      19.15,
+      22.57
+     ]
+    ]
+   },
+   {
+    "name": "DaKayla Dorsey",
+    "ct_name": "Dorsey, DaKayla",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.65,
+      21.15
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.83,
+      10.65
+     ],
+     [
+      10.95,
+      17.95
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.8,
+      10.58
+     ],
+     [
+      10.92,
+      16.03
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.92,
+      22.7
+     ]
+    ]
+   },
+   {
+    "name": "Robert Muncy Jr",
+    "ct_name": "Muncy Jr, Robert",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.93,
+      22.73
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.93,
+      16.07
+     ]
+    ]
+   }
+  ]
+ },
+ "20790453": {
+  "date": "2026-05-14",
+  "meal_period": "Lunch",
+  "score": 95.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.67,
+      14.08
+     ]
+    ]
+   },
+   {
+    "name": "Nathan Roberts",
+    "ct_name": "Roberts, Nathan",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      10.33,
+      13.65
+     ],
+     [
+      14.18,
+      19.03
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.38,
+      17.63
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      9.73,
+      16.6
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.5,
+      21.0
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.67,
+      10.58
+     ],
+     [
+      10.92,
+      14.27
+     ]
+    ]
+   },
+   {
+    "name": "Richard Gibbs",
+    "ct_name": "Gibbs, Richard",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.5,
+      14.63
+     ],
+     [
+      15.17,
+      21.45
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.97,
+      15.13
+     ]
+    ]
+   }
+  ]
+ },
+ "20790887": {
+  "date": "2026-05-16",
+  "meal_period": "Dinner",
+  "score": 75.0,
+  "window": [
+   19.0,
+   22.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.88,
+      23.28
+     ]
+    ]
+   },
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.0,
+      18.07
+     ],
+     [
+      18.52,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.12,
+      23.07
+     ]
+    ]
+   },
+   {
+    "name": "Jada Cox",
+    "ct_name": "Cox, Jada",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      13.9,
+      20.02
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.27,
+      23.13
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.98,
+      19.27
+     ],
+     [
+      19.78,
+      22.93
+     ]
+    ]
+   }
+  ]
+ },
+ "20805101": {
+  "date": "2026-05-26",
+  "meal_period": "Lunch",
+  "score": 60.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.07,
+      22.92
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      9.67,
+      17.82
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.88,
+      15.98
+     ]
+    ]
+   },
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.9,
+      18.15
+     ],
+     [
+      18.48,
+      22.92
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.95,
+      20.1
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.9,
+      10.67
+     ],
+     [
+      10.95,
+      15.93
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.17,
+      22.92
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.97,
+      11.22
+     ],
+     [
+      11.72,
+      14.28
+     ]
+    ]
+   }
+  ]
+ },
+ "20797153": {
+  "date": "2026-05-31",
+  "meal_period": "Dinner",
+  "score": 92.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Nathan Roberts",
+    "ct_name": "Roberts, Nathan",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      13.93,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.02,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Autumn Hearn",
+    "ct_name": "Hearn, Autumn",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.62,
+      23.18
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.38,
+      10.55
+     ],
+     [
+      11.07,
+      14.95
+     ],
+     [
+      15.23,
+      16.17
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.9,
+      10.55
+     ],
+     [
+      10.98,
+      16.23
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.32,
+      10.67
+     ],
+     [
+      10.97,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Jada Cox",
+    "ct_name": "Cox, Jada",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.87,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.55,
+      23.18
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.18,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.42,
+      18.65
+     ],
+     [
+      19.13,
+      21.0
+     ]
+    ]
+   }
+  ]
+ },
+ "20810427": {
+  "date": "2026-06-02",
+  "meal_period": "Lunch",
+  "score": 95.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.65,
+      15.65
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.97,
+      20.18
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.97,
+      10.62
+     ],
+     [
+      10.95,
+      15.35
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.97,
+      10.78
+     ],
+     [
+      11.1,
+      15.55
+     ]
+    ]
+   }
+  ]
+ },
+ "20808696": {
+  "date": "2026-06-04",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.37,
+      10.58
+     ],
+     [
+      11.0,
+      16.1
+     ]
+    ]
+   },
+   {
+    "name": "Brianna Gatewood",
+    "ct_name": "Gatewood, Brianna",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.92,
+      16.95
+     ]
+    ]
+   },
+   {
+    "name": "Kaisha Brewer",
+    "ct_name": "Brewer, Kaisha",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.92,
+      15.2
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.93,
+      10.53
+     ],
+     [
+      10.95,
+      12.72
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.95,
+      14.98
+     ]
+    ]
+   }
+  ]
+ },
+ "20813539": {
+  "date": "2026-06-14",
+  "meal_period": "Dinner",
+  "score": 80.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.0,
+      17.08
+     ],
+     [
+      17.6,
+      18.1
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.7,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.25,
+      23.12
+     ]
+    ]
+   },
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.8,
+      15.12
+     ],
+     [
+      15.57,
+      17.4
+     ],
+     [
+      17.87,
+      20.12
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.37,
+      11.97
+     ],
+     [
+      12.45,
+      16.35
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.95,
+      12.43
+     ],
+     [
+      12.92,
+      19.08
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.87,
+      19.77
+     ],
+     [
+      20.28,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.95,
+      17.3
+     ],
+     [
+      17.67,
+      23.12
+     ]
+    ]
+   },
+   {
+    "name": "Richard Gibbs",
+    "ct_name": "Gibbs, Richard",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.87,
+      18.45
+     ],
+     [
+      19.0,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.42,
+      18.78
+     ],
+     [
+      19.28,
+      20.93
+     ]
+    ]
+   }
+  ]
+ },
+ "20815978": {
+  "date": "2026-06-21",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.4,
+      23.25
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.53,
+      10.57
+     ],
+     [
+      10.88,
+      16.18
+     ]
+    ]
+   },
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.83,
+      16.82
+     ],
+     [
+      17.28,
+      21.02
+     ]
+    ]
+   },
+   {
+    "name": "Brianna Gatewood",
+    "ct_name": "Gatewood, Brianna",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.03,
+      10.5
+     ],
+     [
+      11.03,
+      13.67
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.5,
+      10.52
+     ],
+     [
+      11.03,
+      16.15
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.92,
+      10.52
+     ],
+     [
+      10.97,
+      16.4
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.08,
+      17.78
+     ],
+     [
+      18.2,
+      23.15
+     ]
+    ]
+   }
+  ]
+ },
+ "20836204": {
+  "date": "2026-06-24",
+  "meal_period": "Late Dinner",
+  "score": 100.0,
+  "window": [
+   19.0,
+   22.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.98,
+      17.3
+     ],
+     [
+      17.83,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.02,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.02,
+      20.0
+     ],
+     [
+      20.33,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.72,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.72,
+      18.27
+     ],
+     [
+      18.63,
+      22.65
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.02,
+      18.97
+     ],
+     [
+      19.3,
+      23.15
+     ]
+    ]
+   }
+  ]
+ },
+ "20817932": {
+  "date": "2026-06-25",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      12.0,
+      19.87
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      12.42,
+      23.02
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.95,
+      22.98
+     ]
+    ]
+   },
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.93,
+      18.28
+     ],
+     [
+      18.68,
+      23.02
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.0,
+      22.98
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.1,
+      20.07
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.93,
+      17.98
+     ],
+     [
+      18.4,
+      22.98
+     ]
+    ]
+   },
+   {
+    "name": "Richard Gibbs",
+    "ct_name": "Gibbs, Richard",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.1,
+      17.85
+     ],
+     [
+      18.37,
+      20.07
+     ]
+    ]
+   },
+   {
+    "name": "Rusul Kadhim",
+    "ct_name": "Kadhim, Rusul",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.98,
+      16.1
+     ],
+     [
+      16.6,
+      19.02
+     ]
+    ]
+   },
+   {
+    "name": "Serina Gaskins",
+    "ct_name": "Gaskins, Serina",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.97,
+      17.03
+     ],
+     [
+      17.48,
+      23.0
+     ]
+    ]
+   }
+  ]
+ },
+ "20831747": {
+  "date": "2026-07-03",
+  "meal_period": "Lunch",
+  "score": 85.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.08,
+      10.72
+     ],
+     [
+      11.27,
+      14.93
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      9.75,
+      16.75
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.05,
+      10.67
+     ],
+     [
+      10.97,
+      16.28
+     ]
+    ]
+   },
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.47,
+      18.5
+     ],
+     [
+      18.85,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.92,
+      17.27
+     ],
+     [
+      17.68,
+      20.07
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.02,
+      18.42
+     ],
+     [
+      19.05,
+      21.08
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.33,
+      10.55
+     ],
+     [
+      10.92,
+      15.93
+     ]
+    ]
+   },
+   {
+    "name": "Maylin Hernandez Rodriguez",
+    "ct_name": "Hernandez Rodriguez, Maylin",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.02,
+      18.0
+     ],
+     [
+      18.4,
+      23.05
+     ]
+    ]
+   },
+   {
+    "name": "Serina Gaskins",
+    "ct_name": "Gaskins, Serina",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.9,
+      18.95
+     ],
+     [
+      19.42,
+      19.52
+     ],
+     [
+      20.13,
+      23.07
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.92,
+      14.02
+     ]
+    ]
+   }
+  ]
+ },
+ "20847980": {
+  "date": "2026-07-11",
+  "meal_period": "Dinner",
+  "score": 0.0,
+  "window": [
+   19.0,
+   22.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      17.83,
+      20.77
+     ],
+     [
+      21.25,
+      23.12
+     ]
+    ]
+   },
+   {
+    "name": "Christopher Conder",
+    "ct_name": "Conder, Christopher",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.92,
+      20.33
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.07,
+      23.12
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.52,
+      19.88
+     ],
+     [
+      20.33,
+      22.85
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.05,
+      18.22
+     ],
+     [
+      18.73,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Richard Gibbs",
+    "ct_name": "Gibbs, Richard",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.05,
+      18.77
+     ],
+     [
+      19.27,
+      23.1
+     ]
+    ]
+   }
+  ]
+ },
+ "20847130": {
+  "date": "2026-07-12",
+  "meal_period": "Lunch",
+  "score": 87.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.13,
+      23.08
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.05,
+      15.3
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.13,
+      10.62
+     ],
+     [
+      11.17,
+      16.18
+     ]
+    ]
+   },
+   {
+    "name": "Elizabeth Brazell",
+    "ct_name": "Brazell, Elizabeth",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.82,
+      17.68
+     ],
+     [
+      18.38,
+      20.13
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.05,
+      10.72
+     ],
+     [
+      10.72,
+      10.72
+     ],
+     [
+      11.02,
+      16.72
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.97,
+      14.78
+     ],
+     [
+      15.2,
+      19.07
+     ]
+    ]
+   },
+   {
+    "name": "Serina Gaskins",
+    "ct_name": "Gaskins, Serina",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.93,
+      17.13
+     ],
+     [
+      17.58,
+      23.05
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.68,
+      16.2
+     ],
+     [
+      16.67,
+      20.1
+     ]
+    ]
+   }
+  ]
+ },
+ "20857875": {
+  "date": "2026-07-16",
+  "meal_period": "Dinner",
+  "score": 95.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Christopher Conder",
+    "ct_name": "Conder, Christopher",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      11.78,
+      15.2
+     ],
+     [
+      15.7,
+      19.28
+     ],
+     [
+      19.43,
+      19.43
+     ]
+    ]
+   },
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.98,
+      18.05
+     ],
+     [
+      18.65,
+      18.68
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.55,
+      23.23
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      10.92,
+      20.0
+     ]
+    ]
+   },
+   {
+    "name": "Rusul Kadhim",
+    "ct_name": "Kadhim, Rusul",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      16.02,
+      18.77
+     ],
+     [
+      19.2,
+      23.23
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.92,
+      20.22
+     ],
+     [
+      20.48,
+      23.23
+     ]
+    ]
+   },
+   {
+    "name": "Elizabeth Brazell",
+    "ct_name": "Brazell, Elizabeth",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.73,
+      18.75
+     ],
+     [
+      19.35,
+      22.78
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.95,
+      17.4
+     ],
+     [
+      17.72,
+      23.23
+     ]
+    ]
+   },
+   {
+    "name": "Javeh Goodman",
+    "ct_name": "Goodman, Javeh",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.15,
+      17.58
+     ],
+     [
+      18.1,
+      19.82
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      12.47,
+      16.32
+     ],
+     [
+      16.83,
+      20.2
+     ]
+    ]
+   },
+   {
+    "name": "Serina Gaskins",
+    "ct_name": "Gaskins, Serina",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.87,
+      16.82
+     ],
+     [
+      17.32,
+      23.22
+     ]
+    ]
+   }
+  ]
+ },
+ "20865580": {
+  "date": "2026-07-23",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.98,
+      23.33
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      12.38,
+      21.52
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.03,
+      19.67
+     ],
+     [
+      19.93,
+      23.32
+     ]
+    ]
+   },
+   {
+    "name": "Elizabeth Brazell",
+    "ct_name": "Brazell, Elizabeth",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.92,
+      18.68
+     ],
+     [
+      19.22,
+      23.32
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.95,
+      17.07
+     ],
+     [
+      17.43,
+      23.32
+     ]
+    ]
+   },
+   {
+    "name": "Javeh Goodman",
+    "ct_name": "Goodman, Javeh",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.2,
+      21.82
+     ]
+    ]
+   },
+   {
+    "name": "Jeremiah Matthews",
+    "ct_name": "Matthews, Jeremiah",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      12.13,
+      16.58
+     ],
+     [
+      17.08,
+      19.97
+     ]
+    ]
+   },
+   {
+    "name": "Richard Gibbs",
+    "ct_name": "Gibbs, Richard",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      12.15,
+      15.83
+     ],
+     [
+      16.33,
+      19.97
+     ]
+    ]
+   },
+   {
+    "name": "Serina Gaskins",
+    "ct_name": "Gaskins, Serina",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.98,
+      17.52
+     ],
+     [
+      17.97,
+      23.33
+     ]
+    ]
+   }
+  ]
+ },
+ "20866691": {
+  "date": "2026-07-31",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Christopher Conder",
+    "ct_name": "Conder, Christopher",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.32,
+      10.48
+     ],
+     [
+      10.97,
+      14.97
+     ]
+    ]
+   },
+   {
+    "name": "Heather Uebelacker-Maddox",
+    "ct_name": "Uebelacker-Maddox, Heather",
+    "position": "1. Manager Schedule",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.08,
+      10.42
+     ],
+     [
+      10.95,
+      16.88
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.32,
+      10.53
+     ],
+     [
+      10.93,
+      16.08
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.03,
+      17.17
+     ]
+    ]
+   },
+   {
+    "name": "Rusul Kadhim",
+    "ct_name": "Kadhim, Rusul",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.32,
+      10.48
+     ],
+     [
+      10.95,
+      16.32
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.78,
+      10.52
+     ],
+     [
+      10.95,
+      16.0
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.97,
+      10.45
+     ],
+     [
+      10.95,
+      14.03
+     ]
+    ]
+   }
+  ]
+ },
+ "20872132": {
+  "date": "2026-08-01",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.77,
+      23.9
+     ]
+    ]
+   },
+   {
+    "name": "Heather Uebelacker-Maddox",
+    "ct_name": "Uebelacker-Maddox, Heather",
+    "position": "1. Manager Schedule",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.02,
+      17.93
+     ]
+    ]
+   },
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      16.05,
+      19.3
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.83,
+      10.6
+     ],
+     [
+      10.97,
+      16.58
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.67,
+      17.9
+     ]
+    ]
+   },
+   {
+    "name": "Rusul Kadhim",
+    "ct_name": "Kadhim, Rusul",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.0,
+      19.08
+     ],
+     [
+      19.37,
+      23.9
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.13,
+      19.77
+     ],
+     [
+      20.35,
+      23.45
+     ]
+    ]
+   },
+   {
+    "name": "Elizabeth Brazell",
+    "ct_name": "Brazell, Elizabeth",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.98,
+      18.45
+     ],
+     [
+      18.98,
+      19.0
+     ],
+     [
+      19.05,
+      23.88
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.17,
+      10.57
+     ],
+     [
+      10.97,
+      16.22
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      12.37,
+      16.88
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.93,
+      17.93
+     ],
+     [
+      18.4,
+      23.45
+     ]
+    ]
+   }
+  ]
+ },
+ "20880599": {
+  "date": "2026-08-08",
+  "meal_period": "Lunch",
+  "score": 95.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      12.35,
+      15.98
+     ],
+     [
+      16.43,
+      17.0
+     ]
+    ]
+   },
+   {
+    "name": "Heather Uebelacker-Maddox",
+    "ct_name": "Uebelacker-Maddox, Heather",
+    "position": "1. Manager Schedule",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.0,
+      8.0
+     ],
+     [
+      8.0,
+      17.92
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.0,
+      10.67
+     ],
+     [
+      10.67,
+      10.67
+     ],
+     [
+      11.02,
+      16.33
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.0,
+      10.68
+     ],
+     [
+      10.68,
+      10.68
+     ],
+     [
+      11.0,
+      16.03
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      12.05,
+      17.05
+     ]
+    ]
+   }
+  ]
+ },
+ "20874284": {
+  "date": "2026-08-15",
+  "meal_period": "Dinner",
+  "score": 95.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      10.85,
+      15.03
+     ],
+     [
+      15.48,
+      19.82
+     ],
+     [
+      21.95,
+      23.4
+     ]
+    ]
+   },
+   {
+    "name": "Heather Uebelacker-Maddox",
+    "ct_name": "Uebelacker-Maddox, Heather",
+    "position": "1. Manager Schedule",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.0,
+      17.07
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.62,
+      21.97
+     ]
+    ]
+   },
+   {
+    "name": "Cortez Brown",
+    "ct_name": "Brown, Cortez",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.07,
+      18.65
+     ],
+     [
+      19.13,
+      23.3
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.23,
+      18.05
+     ],
+     [
+      18.62,
+      22.27
+     ]
+    ]
+   },
+   {
+    "name": "Elizabeth Brazell",
+    "ct_name": "Brazell, Elizabeth",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.97,
+      17.55
+     ],
+     [
+      17.92,
+      23.28
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.6,
+      10.62
+     ],
+     [
+      11.03,
+      16.03
+     ]
+    ]
+   },
+   {
+    "name": "Javeh Goodman",
+    "ct_name": "Goodman, Javeh",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.03,
+      19.37
+     ],
+     [
+      19.87,
+      23.18
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      12.07,
+      15.83
+     ],
+     [
+      16.12,
+      17.23
+     ]
+    ]
+   },
+   {
+    "name": "Serina Gaskins",
+    "ct_name": "Gaskins, Serina",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.95,
+      20.13
+     ],
+     [
+      20.57,
+      23.25
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.0,
+      19.12
+     ],
+     [
+      19.62,
+      21.95
+     ]
+    ]
+   }
+  ]
+ },
+ "20892727": {
+  "date": "2026-08-21",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.92,
+      17.55
+     ],
+     [
+      17.98,
+      23.12
+     ]
+    ]
+   },
+   {
+    "name": "Heather Uebelacker-Maddox",
+    "ct_name": "Uebelacker-Maddox, Heather",
+    "position": "1. Manager Schedule",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.02,
+      16.9
+     ]
+    ]
+   },
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      12.02,
+      20.07
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.3,
+      10.43
+     ],
+     [
+      10.92,
+      14.88
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.2,
+      18.92
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.97,
+      14.05
+     ]
+    ]
+   },
+   {
+    "name": "Cortez Brown",
+    "ct_name": "Brown, Cortez",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.9,
+      10.37
+     ],
+     [
+      10.92,
+      16.85
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.02,
+      18.03
+     ],
+     [
+      18.25,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.92,
+      10.37
+     ],
+     [
+      10.93,
+      15.95
+     ]
+    ]
+   },
+   {
+    "name": "Serina Gaskins",
+    "ct_name": "Gaskins, Serina",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.83,
+      18.28
+     ],
+     [
+      18.73,
+      23.05
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.98,
+      10.37
+     ],
+     [
+      10.92,
+      16.48
+     ]
+    ]
+   }
+  ]
+ },
+ "20900136": {
+  "date": "2026-08-27",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.07,
+      17.5
+     ],
+     [
+      18.03,
+      23.37
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      16.67,
+      23.07
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.75,
+      18.68
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.03,
+      19.72
+     ],
+     [
+      20.05,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Cortez Brown",
+    "ct_name": "Brown, Cortez",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.93,
+      10.67
+     ],
+     [
+      11.02,
+      16.5
+     ]
+    ]
+   },
+   {
+    "name": "DJuan Johnson",
+    "ct_name": "Johnson, DJuan",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.1,
+      19.15
+     ],
+     [
+      19.7,
+      22.0
+     ]
+    ]
+   },
+   {
+    "name": "Elizabeth Brazell",
+    "ct_name": "Brazell, Elizabeth",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.47,
+      18.07
+     ],
+     [
+      18.62,
+      23.35
+     ]
+    ]
+   },
+   {
+    "name": "Serina Gaskins",
+    "ct_name": "Gaskins, Serina",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.97,
+      18.62
+     ],
+     [
+      19.08,
+      23.37
+     ]
+    ]
+   }
+  ]
+ },
+ "20900964": {
+  "date": "2026-08-30",
+  "meal_period": "Lunch",
+  "score": 0.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.92,
+      23.22
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.08,
+      16.2
+     ]
+    ]
+   },
+   {
+    "name": "Brianna Gatewood",
+    "ct_name": "Gatewood, Brianna",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.48,
+      16.98
+     ]
+    ]
+   },
+   {
+    "name": "Cortez Brown",
+    "ct_name": "Brown, Cortez",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.97,
+      17.58
+     ],
+     [
+      18.08,
+      23.22
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.08,
+      10.58
+     ],
+     [
+      10.98,
+      16.8
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.93,
+      18.0
+     ],
+     [
+      18.23,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Serina Gaskins",
+    "ct_name": "Gaskins, Serina",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.02,
+      10.57
+     ],
+     [
+      10.92,
+      15.1
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.98,
+      14.57
+     ],
+     [
+      15.07,
+      18.97
+     ]
+    ]
+   }
+  ]
+ },
+ "20910153": {
+  "date": "2026-09-14",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      16.62,
+      23.07
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.42,
+      23.07
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      5.37,
+      16.75
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.03,
+      23.05
+     ]
+    ]
+   },
+   {
+    "name": "Elizabeth Brazell",
+    "ct_name": "Brazell, Elizabeth",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.95,
+      10.28
+     ],
+     [
+      10.87,
+      16.57
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.48,
+      18.02
+     ],
+     [
+      18.45,
+      23.03
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.9,
+      10.28
+     ],
+     [
+      10.85,
+      16.12
+     ]
+    ]
+   },
+   {
+    "name": "Javeh Goodman",
+    "ct_name": "Goodman, Javeh",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.98,
+      19.17
+     ],
+     [
+      19.67,
+      22.8
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.78,
+      18.35
+     ],
+     [
+      18.88,
+      23.03
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.07,
+      10.35
+     ],
+     [
+      10.87,
+      16.57
+     ]
+    ]
+   }
+  ]
+ },
+ "20926856": {
+  "date": "2026-09-22",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      9.58,
+      17.5
+     ]
+    ]
+   },
+   {
+    "name": "Cortez Brown",
+    "ct_name": "Brown, Cortez",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.75,
+      10.33
+     ],
+     [
+      10.78,
+      16.2
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.85,
+      18.0
+     ],
+     [
+      18.23,
+      22.8
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.83,
+      10.25
+     ],
+     [
+      10.78,
+      16.18
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.05,
+      10.25
+     ],
+     [
+      10.87,
+      16.08
+     ]
+    ]
+   }
+  ]
+ },
+ "20927199": {
+  "date": "2026-09-23",
+  "meal_period": "Dinner",
+  "score": 34.0,
+  "window": [
+   19.0,
+   22.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Rusul Kadhim",
+    "ct_name": "Kadhim, Rusul",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.98,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.02,
+      22.9
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.8,
+      20.0
+     ],
+     [
+      20.5,
+      22.88
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.87,
+      18.1
+     ],
+     [
+      18.27,
+      22.9
+     ]
+    ]
+   },
+   {
+    "name": "Javeh Goodman",
+    "ct_name": "Goodman, Javeh",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.12,
+      19.45
+     ],
+     [
+      19.97,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.82,
+      18.63
+     ],
+     [
+      19.18,
+      22.5
+     ]
+    ]
+   }
+  ]
+ },
+ "20916632": {
+  "date": "2026-09-25",
+  "meal_period": "Late Dinner",
+  "score": 43.0,
+  "window": [
+   19.0,
+   22.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Bec Cahoe",
+    "ct_name": "Cahoe, Bec",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      16.75,
+      22.48
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.22,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.18,
+      19.92
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.03,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Elizabeth Brazell",
+    "ct_name": "Brazell, Elizabeth",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.03,
+      18.07
+     ],
+     [
+      18.53,
+      23.15
+     ]
+    ]
+   },
+   {
+    "name": "Javeh Goodman",
+    "ct_name": "Goodman, Javeh",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.23,
+      18.82
+     ],
+     [
+      19.32,
+      23.13
+     ]
+    ]
+   }
+  ]
+ },
+ "20916362": {
+  "date": "2026-10-04",
+  "meal_period": "Lunch",
+  "score": 92.0,
+  "window": [
+   13.5,
+   16.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      11.2,
+      15.7
+     ],
+     [
+      16.07,
+      20.0
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.45,
+      22.87
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.98,
+      14.53
+     ]
+    ]
+   },
+   {
+    "name": "Cortez Brown",
+    "ct_name": "Brown, Cortez",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.93,
+      18.02
+     ],
+     [
+      18.48,
+      22.83
+     ]
+    ]
+   },
+   {
+    "name": "Elizabeth Brazell",
+    "ct_name": "Brazell, Elizabeth",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.05,
+      13.78
+     ],
+     [
+      14.33,
+      16.67
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.97,
+      10.45
+     ],
+     [
+      10.95,
+      16.17
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.98,
+      10.35
+     ],
+     [
+      10.9,
+      15.97
+     ]
+    ]
+   }
+  ]
+ },
+ "20946656": {
+  "date": "2026-10-09",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.67,
+      23.03
+     ]
+    ]
+   },
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      12.1,
+      17.25
+     ],
+     [
+      17.88,
+      20.37
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.25,
+      16.92
+     ]
+    ]
+   },
+   {
+    "name": "Rusul Kadhim",
+    "ct_name": "Kadhim, Rusul",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.7,
+      23.02
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.95,
+      23.03
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.02,
+      17.98
+     ],
+     [
+      18.2,
+      23.03
+     ]
+    ]
+   },
+   {
+    "name": "Javeh Goodman",
+    "ct_name": "Goodman, Javeh",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.1,
+      18.93
+     ],
+     [
+      19.43,
+      22.93
+     ]
+    ]
+   },
+   {
+    "name": "Katherine Valentin",
+    "ct_name": "Valentin, Katherine",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.98,
+      19.27
+     ]
+    ]
+   }
+  ]
+ },
+ "20948592": {
+  "date": "2026-10-12",
+  "meal_period": "Lunch",
+  "score": 95.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.18,
+      10.6
+     ],
+     [
+      11.0,
+      17.38
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.55,
+      16.75
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.07,
+      10.53
+     ],
+     [
+      10.95,
+      17.02
+     ]
+    ]
+   },
+   {
+    "name": "Zack Whitten",
+    "ct_name": "Whitten, Zack",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      9.02,
+      10.52
+     ],
+     [
+      10.63,
+      16.53
+     ]
+    ]
+   }
+  ]
+ },
+ "20968986": {
+  "date": "2026-10-26",
+  "meal_period": "Dinner",
+  "score": 92.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      16.55,
+      18.92
+     ],
+     [
+      19.25,
+      22.78
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      12.48,
+      21.77
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.5,
+      16.73
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.0,
+      22.77
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.23,
+      18.73
+     ],
+     [
+      19.17,
+      22.68
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.25,
+      18.12
+     ],
+     [
+      18.65,
+      22.75
+     ]
+    ]
+   },
+   {
+    "name": "Rodolfo Trujillo",
+    "ct_name": "Trujillo, Rodolfo",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.08,
+      19.28
+     ],
+     [
+      19.73,
+      22.78
+     ]
+    ]
+   }
+  ]
+ },
+ "20970038": {
+  "date": "2026-10-27",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   19.0,
+   22.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Alexandra Campbell",
+    "ct_name": "Campbell, Alexandra",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      17.03,
+      19.23
+     ],
+     [
+      19.75,
+      23.03
+     ]
+    ]
+   },
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.4,
+      20.85
+     ],
+     [
+      21.17,
+      23.05
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.97,
+      18.73
+     ],
+     [
+      19.18,
+      23.02
+     ]
+    ]
+   },
+   {
+    "name": "Katherine Valentin",
+    "ct_name": "Valentin, Katherine",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.25,
+      20.25
+     ],
+     [
+      20.75,
+      23.03
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.1,
+      19.88
+     ],
+     [
+      20.45,
+      23.05
+     ]
+    ]
+   }
+  ]
+ },
+ "20969994": {
+  "date": "2026-10-28",
+  "meal_period": "Lunch",
+  "score": 100.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Cortez Brown",
+    "ct_name": "Brown, Cortez",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      9.0,
+      16.0
+     ]
+    ]
+   },
+   {
+    "name": "Madelynn Smith",
+    "ct_name": "Smith, Madelynn",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.62,
+      15.02
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      9.92,
+      14.67
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      8.97,
+      10.78
+     ],
+     [
+      11.0,
+      16.0
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.8,
+      10.65
+     ],
+     [
+      10.95,
+      15.27
+     ]
+    ]
+   }
+  ]
+ }
+}
