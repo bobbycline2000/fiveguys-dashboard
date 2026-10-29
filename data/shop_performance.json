@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-10-23",
+  "as_of": "2026-10-29",
   "current_month": "2026-10",
   "current_month_label": "October 2026",
-  "store_avg_month": 95.7,
-  "store_avg_ytd": 83.5,
-  "shop_count_month": 3,
-  "shop_count_ytd": 56,
+  "store_avg_month": 96.5,
+  "store_avg_ytd": 84.2,
+  "shop_count_month": 6,
+  "shop_count_ytd": 59,
   "managers": [
     {
       "first": "Madison",
@@ -252,6 +252,24 @@
   ],
   "latest_shops": [
     {
+      "date": "2026-10-28",
+      "score": 100.0,
+      "meal_period": "Lunch",
+      "on_shift": []
+    },
+    {
+      "date": "2026-10-27",
+      "score": 100.0,
+      "meal_period": "Dinner",
+      "on_shift": []
+    },
+    {
+      "date": "2026-10-26",
+      "score": 92.0,
+      "meal_period": "Dinner",
+      "on_shift": []
+    },
+    {
       "date": "2026-10-12",
       "score": 95.0,
       "meal_period": "Lunch",
@@ -269,34 +287,6 @@
       "on_shift": [
         "Anthony Pirtle",
         "Rusul Kadhim"
-      ]
-    },
-    {
-      "date": "2026-10-04",
-      "score": 92.0,
-      "meal_period": "Lunch",
-      "on_shift": [
-        "Emanuela Kamara"
-      ]
-    },
-    {
-      "date": "2026-09-25",
-      "score": 43.0,
-      "meal_period": "Late Dinner",
-      "on_shift": [
-        "Ailen Gonzalez Cardero",
-        "Elizabeth Brazell",
-        "Madison Cureton"
-      ]
-    },
-    {
-      "date": "2026-09-23",
-      "score": 34.0,
-      "meal_period": "Dinner",
-      "on_shift": [
-        "Ailen Gonzalez Cardero",
-        "Emanuela Kamara",
-        "Francisco Llorente Mejias"
       ]
     }
   ]
