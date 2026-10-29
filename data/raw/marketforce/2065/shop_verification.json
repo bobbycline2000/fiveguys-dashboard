@@ -1775,5 +1775,205 @@
         ]
       }
     ]
+  },
+  "20969994": {
+    "date": "2026-10-28",
+    "meal_period": "Lunch",
+    "score": 100.0,
+    "visit_window_bucket": null,
+    "visit_window_hours": [
+      11.0,
+      13.483333333333333
+    ],
+    "verification_status": "UNVERIFIED-EXACT-TIME",
+    "exact_time": null,
+    "exact_time_source": null,
+    "verification_note": "KnowledgeForce does not expose a numeric visit timestamp anywhere in the shop payload (confirmed by full-text search across all comment/narrative fields and the page header) -- only a 2.5-3hr Time-In bucket. The 'Cashier' free-text answer (Q64) names who was working the register at the moment of the visit and is treated as a direct on-clock confirmation when that person's CrunchTime punch overlaps the bucket at all. Everyone else who merely overlaps the bucket (without full coverage or being the named cashier) is listed as an unverified candidate, not silently dropped and not auto-credited.",
+    "cashier_raw": null,
+    "cashier_resolved": null,
+    "cashier_confirmed_on_clock": false,
+    "confirmed_on_clock": [
+      "Lidy",
+      "Madelynn",
+      "Vicki"
+    ],
+    "unverified_candidates": []
+  },
+  "20970038": {
+    "date": "2026-10-27",
+    "meal_period": "Dinner",
+    "score": 100.0,
+    "visit_window_bucket": null,
+    "visit_window_hours": [
+      19.0,
+      22.0
+    ],
+    "verification_status": "UNVERIFIED-EXACT-TIME",
+    "exact_time": null,
+    "exact_time_source": null,
+    "verification_note": "KnowledgeForce does not expose a numeric visit timestamp anywhere in the shop payload (confirmed by full-text search across all comment/narrative fields and the page header) -- only a 2.5-3hr Time-In bucket. The 'Cashier' free-text answer (Q64) names who was working the register at the moment of the visit and is treated as a direct on-clock confirmation when that person's CrunchTime punch overlaps the bucket at all. Everyone else who merely overlaps the bucket (without full coverage or being the named cashier) is listed as an unverified candidate, not silently dropped and not auto-credited.",
+    "cashier_raw": null,
+    "cashier_resolved": null,
+    "cashier_confirmed_on_clock": false,
+    "confirmed_on_clock": [],
+    "unverified_candidates": [
+      {
+        "employee": "Campbell, Alexandra - E2065356898",
+        "intervals": [
+          [
+            17.033333333333335,
+            19.233333333333334
+          ],
+          [
+            19.75,
+            23.033333333333335
+          ]
+        ]
+      },
+      {
+        "employee": "Kamara, Emanuela - E2065340844",
+        "intervals": [
+          [
+            15.966666666666667,
+            18.733333333333334
+          ],
+          [
+            19.183333333333334,
+            23.016666666666666
+          ]
+        ]
+      },
+      {
+        "employee": "Milledge, Mykenize - E2065338962",
+        "intervals": [
+          [
+            16.1,
+            19.883333333333333
+          ],
+          [
+            20.45,
+            23.05
+          ]
+        ]
+      },
+      {
+        "employee": "Smith, Madelynn - E2065347146",
+        "intervals": [
+          [
+            15.4,
+            20.85
+          ],
+          [
+            21.166666666666668,
+            23.05
+          ]
+        ]
+      },
+      {
+        "employee": "Valentin, Katherine - E2065357246",
+        "intervals": [
+          [
+            17.25,
+            20.25
+          ],
+          [
+            20.75,
+            23.033333333333335
+          ]
+        ]
+      }
+    ]
+  },
+  "20968986": {
+    "date": "2026-10-26",
+    "meal_period": "Dinner",
+    "score": 92.0,
+    "visit_window_bucket": null,
+    "visit_window_hours": [
+      16.0,
+      19.0
+    ],
+    "verification_status": "UNVERIFIED-EXACT-TIME",
+    "exact_time": null,
+    "exact_time_source": null,
+    "verification_note": "KnowledgeForce does not expose a numeric visit timestamp anywhere in the shop payload (confirmed by full-text search across all comment/narrative fields and the page header) -- only a 2.5-3hr Time-In bucket. The 'Cashier' free-text answer (Q64) names who was working the register at the moment of the visit and is treated as a direct on-clock confirmation when that person's CrunchTime punch overlaps the bucket at all. Everyone else who merely overlaps the bucket (without full coverage or being the named cashier) is listed as an unverified candidate, not silently dropped and not auto-credited.",
+    "cashier_raw": null,
+    "cashier_resolved": null,
+    "cashier_confirmed_on_clock": false,
+    "confirmed_on_clock": [
+      "Madison"
+    ],
+    "unverified_candidates": [
+      {
+        "employee": "Cline, Robert - E2065314244",
+        "intervals": [
+          [
+            6.5,
+            16.733333333333334
+          ]
+        ]
+      },
+      {
+        "employee": "Gonzalez Cardero, Ailen - E2065283102",
+        "intervals": [
+          [
+            18.0,
+            22.766666666666666
+          ]
+        ]
+      },
+      {
+        "employee": "Kamara, Emanuela - E2065340844",
+        "intervals": [
+          [
+            16.233333333333334,
+            18.733333333333334
+          ],
+          [
+            19.166666666666668,
+            22.683333333333334
+          ]
+        ]
+      },
+      {
+        "employee": "Milledge, Mykenize - E2065338962",
+        "intervals": [
+          [
+            16.25,
+            18.116666666666667
+          ],
+          [
+            18.65,
+            22.75
+          ]
+        ]
+      },
+      {
+        "employee": "Pirtle, Anthony - E2065345128",
+        "intervals": [
+          [
+            16.55,
+            18.916666666666668
+          ],
+          [
+            19.25,
+            22.783333333333335
+          ]
+        ]
+      },
+      {
+        "employee": "Trujillo, Rodolfo - E2065359120",
+        "intervals": [
+          [
+            18.083333333333332,
+            19.283333333333335
+          ],
+          [
+            19.733333333333334,
+            22.783333333333335
+          ]
+        ]
+      }
+    ]
   }
 }

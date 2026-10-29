@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated": "2026-10-28T15:49:46",
-    "today": "2026-10-28",
+    "generated": "2026-10-29T15:57:19",
+    "today": "2026-10-29",
     "this_week_mon": "2026-10-26",
     "next_week_mon": "2026-11-02",
     "week_convention": "Mon-Sun"
@@ -25,7 +25,7 @@
       "date": "2026-10-28",
       "name": "WED",
       "forecast": 4021.0,
-      "actual": null,
+      "actual": 4696.98,
       "is_next_week": false
     },
     {
