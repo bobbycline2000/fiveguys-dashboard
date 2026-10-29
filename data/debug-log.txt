@@ -1,5 +1,2 @@
-[2026-10-29 12:00:36] shop-participation: ZERO_NAMES_100PCT_SHOP job_id=20970038 (2026-10-27 Dinner)
-[2026-10-29 12:00:40] shop-email: 100% shop 20969994 (2026-10-28 Lunch) — draft email at /home/runner/work/fiveguys-dashboard/fiveguys-dashboard/data/drafts/secret-shop-email-20969994.md. Send to secretshop@estep-co.com CC chess@estep-co.com. Review before sending.
-[2026-10-29 12:00:40] shop-email: PARTICIPATION_RETRY_FAILED job=20970038 (2026-10-27 Dinner)
-[2026-10-29 12:00:40] shop-email: 100% shop 20970038 (2026-10-27 Dinner) — draft email at /home/runner/work/fiveguys-dashboard/fiveguys-dashboard/data/drafts/secret-shop-email-20970038.md. Send to secretshop@estep-co.com CC chess@estep-co.com. Review before sending.
-[2026-10-29 16:00:43] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
+[2026-10-29 16:24:04] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
+[2026-10-29 16:24:04] outlook-daily-pull-7am: brief already sent today - duplicate send skipped by guard
