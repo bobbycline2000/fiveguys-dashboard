@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "report_date": "2026-10-29",
+    "report_display": "Thursday, October 29, 2026",
+    "generated": "10/30/2026 at 11:39 AM"
+  },
+  "sales": {
+    "net": 4867.0,
+    "net_week": 16488.0,
+    "ly": 3892.0,
+    "ly_week": 15302.0,
+    "forecast": 4348.0,
+    "forecast_week": 15725.0,
+    "vs_ly": 975.0,
+    "vs_ly_week": 1186.0,
+    "vs_forecast": 519.0,
+    "per_guest": 5.45,
+    "per_guest_week": 5.46
+  },
+  "labor": {
+    "cost": 963.0,
+    "cost_week": 3332.0,
+    "pct": 19.79,
+    "pct_week": 20.21,
+    "actual_hours": 180.0,
+    "actual_hours_week": 651.0,
+    "sched_hours": 68.0,
+    "sched_hours_week": 249.75,
+    "hours_variance": null,
+    "productivity": 64.0,
+    "productivity_week": 63.0,
+    "hours_var": null
+  },
+  "cash": {
+    "over_short": 0.0
+  },
+  "comps": [],
+  "raw": {
+    "Actual Net Sales": {
+      "day": "$4,867",
+      "week": "$16,488"
+    },
+    "Last Year Same Day": {
+      "day": "$3,892",
+      "week": "$15,302"
+    },
+    "Forecasted Sales": {
+      "day": "$4,348",
+      "week": "$15,725"
+    },
+    "Net Sales to Last Year": {
+      "day": "$975",
+      "week": "$1,186"
+    },
+    "Actual Labor": {
+      "day": "$963",
+      "week": "$3,332"
+    },
+    "Hours Variance": {
+      "day": "",
+      "week": ""
+    },
+    "Labor % of Net Sales": {
+      "day": "19.79%",
+      "week": "20.21%"
+    },
+    "Total Cash Over/Short": {
+      "day": "$0.00",
+      "week": "$0.00"
+    },
+    "Comps and Discounts": {
+      "day": "",
+      "week": "$6.24"
+    },
+    "Sales / Guest": {
+      "day": "$5.45",
+      "week": "$5.46"
+    },
+    "Labor Productivity": {
+      "day": "$64",
+      "week": "$63"
+    },
+    "Actual Hours": {
+      "day": "180",
+      "week": "651"
+    },
+    "Scheduled Hours": {
+      "day": "68.00",
+      "week": "249.75"
+    },
+    "Guest Count": {
+      "day": "778",
+      "week": "$5.45"
+    }
+  }
+}
