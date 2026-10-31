@@ -577,7 +577,7 @@ jobs:
           # data/labor_today.json (and everything else on the line) for weeks
           # whenever data/cm_results_source.html was absent — root cause of the
           # "Labor % dashboard.html does NOT contain X%" backup-run FAIL emails.
-          for f in dashboard.html district.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/team_notes.json data/forecast_by_day.json data/fgu_training.json data/fgu_reconciliation.json data/fgu_overdue_history.json; do
+          for f in dashboard.html district.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/team_notes.json data/forecast_by_day.json data/forecast_history.json data/fgu_training.json data/fgu_reconciliation.json data/fgu_overdue_history.json; do
             git add -- "$f" 2>/dev/null || true
           done
           git add briefs/ || true
