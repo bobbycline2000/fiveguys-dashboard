@@ -2051,10 +2051,10 @@
     "d2_mid": 200,
     "safe_close": 640,
     "d1_close": 200,
-    "d2_close": 0,
+    "d2_close": 200,
     "ct_os": -192.15,
     "notes": "",
-    "submitted_at": "2026-10-31T02:38:54.912Z"
+    "submitted_at": "2026-10-31T02:38:57.601Z"
   },
   {
     "date": "2099-01-01",
