@@ -54,5 +54,61 @@
   "2026-07-12": {
     "forecast": 5008.0,
     "actual": null
+  },
+  "2026-10-26": {
+    "forecast": 3878.0,
+    "actual": 3219.26
+  },
+  "2026-10-27": {
+    "forecast": 3478.0,
+    "actual": 3704.87
+  },
+  "2026-10-28": {
+    "forecast": 4021.0,
+    "actual": 4696.98
+  },
+  "2026-10-29": {
+    "forecast": 4348.0,
+    "actual": 4867.17
+  },
+  "2026-10-30": {
+    "forecast": 5166.0,
+    "actual": 5795.83
+  },
+  "2026-10-31": {
+    "forecast": 4739.0,
+    "actual": null
+  },
+  "2026-11-01": {
+    "forecast": 4591.0,
+    "actual": null
+  },
+  "2026-11-02": {
+    "forecast": 3904.0,
+    "actual": null
+  },
+  "2026-11-03": {
+    "forecast": 3728.0,
+    "actual": null
+  },
+  "2026-11-04": {
+    "forecast": 3988.0,
+    "actual": null
+  },
+  "2026-11-05": {
+    "forecast": 4411.0,
+    "actual": null
+  },
+  "2026-11-06": {
+    "forecast": 5321.0,
+    "actual": null
+  },
+  "2026-11-07": {
+    "forecast": 4679.0,
+    "actual": null
+  },
+  "2026-11-08": {
+    "forecast": 4705.0,
+    "actual": null
   }
 }
