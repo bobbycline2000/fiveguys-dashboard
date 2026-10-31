@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-29",
+  "as_of": "2026-10-31",
   "current_month": "2026-10",
   "current_month_label": "October 2026",
   "store_avg_month": 96.5,
@@ -10,18 +10,18 @@
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 83.0,
-      "ytd_n": 31
+      "month_avg": 92.0,
+      "month_n": 1,
+      "ytd_avg": 83.3,
+      "ytd_n": 32
     },
     {
       "first": "Vicki",
       "name": "Vicki Lucey",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 80.7,
-      "ytd_n": 15
+      "month_avg": 100.0,
+      "month_n": 1,
+      "ytd_avg": 81.9,
+      "ytd_n": 16
     },
     {
       "first": "Kasey",
@@ -82,18 +82,18 @@
       "ytd_n": 4
     },
     {
+      "first": "Madelynn",
+      "name": "Madelynn Smith",
+      "month_avg": 97.5,
+      "month_n": 2,
+      "ytd_avg": 98.8,
+      "ytd_n": 4
+    },
+    {
       "first": "Heather",
       "name": "Heather Uebelacker-Maddox",
       "month_avg": null,
       "month_n": 0,
-      "ytd_avg": 98.3,
-      "ytd_n": 3
-    },
-    {
-      "first": "Madelynn",
-      "name": "Madelynn Smith",
-      "month_avg": 95.0,
-      "month_n": 1,
       "ytd_avg": 98.3,
       "ytd_n": 3
     },
@@ -132,10 +132,10 @@
     {
       "first": "Lidy",
       "name": "Lidy Henry",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 88.4,
-      "ytd_n": 19
+      "month_avg": 100.0,
+      "month_n": 1,
+      "ytd_avg": 89.0,
+      "ytd_n": 20
     },
     {
       "first": "DJuan",
@@ -255,7 +255,11 @@
       "date": "2026-10-28",
       "score": 100.0,
       "meal_period": "Lunch",
-      "on_shift": []
+      "on_shift": [
+        "Lidy Henry",
+        "Madelynn Smith",
+        "Vicki Lucey"
+      ]
     },
     {
       "date": "2026-10-27",
@@ -267,7 +271,9 @@
       "date": "2026-10-26",
       "score": 92.0,
       "meal_period": "Dinner",
-      "on_shift": []
+      "on_shift": [
+        "Madison Cureton"
+      ]
     },
     {
       "date": "2026-10-12",
