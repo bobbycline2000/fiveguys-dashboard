@@ -2048,13 +2048,13 @@
     "d2_open": 200,
     "safe_mid": 640,
     "d1_mid": 200,
-    "d2_mid": 0,
+    "d2_mid": 200,
     "safe_close": 640,
     "d1_close": 200,
     "d2_close": 0,
     "ct_os": -192.15,
     "notes": "",
-    "submitted_at": "2026-10-31T02:38:52.711Z"
+    "submitted_at": "2026-10-31T02:38:54.912Z"
   },
   {
     "date": "2099-01-01",
