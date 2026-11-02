@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
+    "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+    "item_source": "api_ingredient_level",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-10-26",
+    "week_end": "2026-11-01",
+    "variance_week_start": "2026-10-19",
+    "variance_week_end": "2026-10-25",
+    "month_start": "2026-11-01",
+    "last_month_start": "2026-10-01",
+    "last_month_end": "2026-10-31",
+    "through": "2026-11-01",
+    "pulled": "2026-11-02 15:19 ET",
+    "method": "api+playwright (GL-based, 2026-08-03)"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 14.3,
+  "cogs_pct_month": null,
+  "cogs_pct_last_month": 22.8,
+  "variance_to_goal_week": -13.2,
+  "variance_to_goal_month": null,
+  "variance_to_goal_last_mo": -4.7,
+  "items": [
+    {
+      "name": "Bun, Burger",
+      "actual": 828.29,
+      "theoretical": 761.12,
+      "over_dollars": 67.17,
+      "variance_pct": -8.8,
+      "rank": 1
+    },
+    {
+      "name": "Topping, Fudge Bittersweet / NEW Chocolate Fudge Sauce",
+      "actual": 64.34,
+      "theoretical": 16.09,
+      "over_dollars": 48.25,
+      "variance_pct": -299.9,
+      "rank": 2
+    },
+    {
+      "name": "Lettuce",
+      "actual": 98.47,
+      "theoretical": 58.31,
+      "over_dollars": 40.16,
+      "variance_pct": -68.9,
+      "rank": 3
+    },
+    {
+      "name": "A1 Steak Sauce",
+      "actual": 53.83,
+      "theoretical": 16.67,
+      "over_dollars": 37.16,
+      "variance_pct": -222.9,
+      "rank": 4
+    },
+    {
+      "name": "Topping, Blackberry",
+      "actual": 35.85,
+      "theoretical": 2.61,
+      "over_dollars": 33.24,
+      "variance_pct": -1273.6,
+      "rank": 5
+    },
+    {
+      "name": "Bun, Hot Dog",
+      "actual": 63.4,
+      "theoretical": 37.25,
+      "over_dollars": 26.15,
+      "variance_pct": -70.2,
+      "rank": 6
+    },
+    {
+      "name": "Mayonnaise",
+      "actual": 86.96,
+      "theoretical": 65.85,
+      "over_dollars": 21.11,
+      "variance_pct": -32.1,
+      "rank": 7
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": 3.17,
+      "theoretical": 26.15,
+      "over_dollars": -22.98,
+      "variance_pct": 87.9,
+      "rank": 8
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 2138.72,
+      "theoretical": 2163.85,
+      "over_dollars": -25.13,
+      "variance_pct": 1.2,
+      "rank": 9
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 700.16,
+      "theoretical": 749.17,
+      "over_dollars": -49.01,
+      "variance_pct": 6.5,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}

@@ -829,10 +829,10 @@ body.sidebar-open .sidebar-backdrop { display: block; }
     <!-- Page header -->
     <div class="page-hdr">
       <div>
-        <div class="page-title">Good morning, Bobby.</div>
+        <div class="page-title">Good evening, Bobby.</div>
         <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>6:36 AM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>7:21 PM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -843,7 +843,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="ctrl-eyebrow">The Controllables &nbsp;&mdash;&nbsp; Food Cost</div>
         <div class="ctrl-main">
           <div>
-            <div class="ctrl-value">25.4%</div>
+            <div class="ctrl-value">14.3%</div>
             <div class="ctrl-flag"><i data-lucide="flag"></i> Under Goal</div>
           </div>
           <div class="ctrl-meta">
@@ -851,7 +851,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
           </div>
         </div>
         <div class="ctrl-divider"></div>
-        <div class="ctrl-section-lbl"><span>Top 3 Variance Items</span><span class="goal-tag">10/19–10/25</span></div>
+        <div class="ctrl-section-lbl"><span>Top 3 Variance Items</span><span class="goal-tag">10/26–11/01</span></div>
         <div class="var-list">
           <div class="var-item">
             <span class="var-rank">1</span>
@@ -873,15 +873,15 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="ctrl-section-lbl"><span>Food Cost % by Period</span><span class="goal-tag">Goal 27.5%</span></div>
         <div class="period-var">
           <div class="period-box">
-            <div class="period-val">25.4%</div>
+            <div class="period-val">14.3%</div>
             <div class="period-lbl">Food Cost % Week</div>
           </div>
           <div class="period-box">
-            <div class="period-val">23.8%</div>
+            <div class="period-val">20.6%</div>
             <div class="period-lbl">Food Cost % Month</div>
           </div>
           <div class="period-box">
-            <div class="period-val">23.8%</div>
+            <div class="period-val">20.6%</div>
             <div class="period-lbl">Food Cost % Quarter</div>
           </div>
         </div>
@@ -910,7 +910,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="ctrl-stat-lbl">Actual Hrs</div>
           </div>
           <div>
-            <div class="ctrl-stat-val">—</div>
+            <div class="ctrl-stat-val">56.2</div>
             <div class="ctrl-stat-lbl">Sched Hrs</div>
           </div>
           <div>
@@ -994,9 +994,9 @@ body.sidebar-open .sidebar-backdrop { display: block; }
           <div class="kpi-ico"><i data-lucide="shield-check"></i></div>
           <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;+0pts</div>
         </div>
-        <div class="kpi-val data-swap" data-today="89%" data-week="92%" data-month="93%" data-quarter="93%">89%</div>
+        <div class="kpi-val data-swap" data-today="89%" data-week="92%" data-month="92%" data-quarter="93%">89%</div>
         <div class="kpi-lbl data-swap" data-today="Compliance" data-week="Compliance (WTD)" data-month="Compliance (MTD)" data-quarter="Compliance (QTD)">Compliance</div>
-        <div class="kpi-sub data-swap" data-today="8/9 required lists" data-week="7d avg" data-month="15d avg" data-quarter="70d avg">8/9 required lists</div>
+        <div class="kpi-sub data-swap" data-today="8/9 required lists" data-week="7d avg" data-month="16d avg" data-quarter="70d avg">8/9 required lists</div>
       </div>
     </div>
 
@@ -1163,20 +1163,84 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <!-- AM Shift -->
         <div id="shift-am">
           <table class="sched-table">
-            <thead><tr><th>Employee</th><th>Sched Hrs</th><th>Actual Hrs</th><th>Variance</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Sched Hrs</th>
+                <th>Actual Hrs</th>
+                <th>Variance</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td colspan="4" style="text-align:center;color:#aaa;padding:1.2rem;">Schedule not yet available for today</td></tr>
+              <tr>
+                <td><div class="emp-name">Lidy H.</div><div class="emp-role">Crew</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Zack W.</div><div class="emp-role">Crew</div></td>
+                <td>2.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Robert C.</div><div class="emp-role">GM</div></td>
+                <td>9.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Cortez B.</div><div class="emp-role">Shift Lead</div></td>
+                <td>8.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
             </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td>AM Total</td>
+                <td>27.0 hrs</td>
+                <td class="pending">Pending</td>
+                <td class="pending">—</td>
+              </tr>
+            </tfoot>
           </table>
         </div>
 
         <!-- PM Shift -->
         <div id="shift-pm" style="display:none">
           <table class="sched-table">
-            <thead><tr><th>Employee</th><th>Sched Hrs</th><th>Actual Hrs</th><th>Variance</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Sched Hrs</th>
+                <th>Actual Hrs</th>
+                <th>Variance</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td colspan="4" style="text-align:center;color:#aaa;padding:1.2rem;">Schedule not yet available for today</td></tr>
+              <tr>
+                <td><div class="emp-name">Mykenize M.</div><div class="emp-role">Crew</div></td>
+                <td>5.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Emanuela K.</div><div class="emp-role">Crew</div></td>
+                <td>6.5</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Ailen C.</div><div class="emp-role">Crew</div></td>
+                <td>5.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Madison C.</div><div class="emp-role">Shift Lead</div></td>
+                <td>7.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
+              <tr>
+                <td><div class="emp-name">Anthony P.</div><div class="emp-role">Shift Lead</div></td>
+                <td>6.0</td><td class="pending">In progress</td><td class="pending">—</td>
+              </tr>
             </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td>PM Total</td>
+                <td>29.5 hrs</td>
+                <td class="pending">Pending close</td>
+                <td class="pending">—</td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -1313,7 +1377,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>6:36 AM</span> &nbsp;&middot;&nbsp; November 2 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>7:21 PM</span> &nbsp;&middot;&nbsp; November 2 2026</span>
   </div>
 
 </div><!-- /main -->
@@ -1403,18 +1467,10 @@ function showShift(shift, btn) {
 // ── Labor % mini bars (11 AM – 10 PM, goal 18.5%) ──
 const LABOR_GOAL = 18.5;
 const laborData = [
-  { hr: '11A', pct: 15.6 },
-  { hr: '12P', pct: 11.4 },
-  { hr: '1P', pct: 10.4 },
-  { hr: '2P', pct: 5.9 },
-  { hr: '3P', pct: 11.8 },
-  { hr: '4P', pct: 16.0 },
-  { hr: '5P', pct: 10.2 },
-  { hr: '6P', pct: 14.2 },
-  { hr: '7P', pct: 18.6 },
-  { hr: '8P', pct: 26.9 },
-  { hr: '9P', pct: 88.6 },
-  { hr: '10P', pct: 100.0 }
+  { hr: '11A', pct: 1.6 },
+  { hr: '12P', pct: 1.7 },
+  { hr: '1P', pct: 7.8 },
+  { hr: '2P', pct: 0.0 }
 ];
 const realPcts = laborData.filter(d => d.pct !== null).map(d => d.pct);
 const maxPct = Math.max(...realPcts, LABOR_GOAL) * 1.1;

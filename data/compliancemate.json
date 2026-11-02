@@ -1,12 +1,12 @@
 {
   "meta": {
-    "date": "2026-10-31",
-    "generated": "11/01/2026 at 04:17 PM",
+    "date": "2026-11-01",
+    "generated": "11/02/2026 at 07:15 PM",
     "location": "2065",
     "status": "ok",
     "source": "api"
   },
-  "overall_pct": 47,
+  "overall_pct": 50,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -65,8 +65,8 @@
     },
     {
       "name": "Closing",
-      "pct": 0,
-      "raw": "Closing\n0% | 0%"
+      "pct": 48,
+      "raw": "Closing\n48% | 48%"
     },
     {
       "name": "Weekly Store Inspection",
