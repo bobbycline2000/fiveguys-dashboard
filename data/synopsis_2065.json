@@ -1,52 +1,54 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-10-19",
-    "week_end": "2026-10-25",
-    "week_label": "10/19-10/25",
+    "week_start": "2026-10-26",
+    "week_end": "2026-11-01",
+    "week_label": "10/26-11/1",
     "month": "October",
-    "generated": "2026-10-26T19:01:33",
-    "notes": []
+    "generated": "2026-11-02T22:08:50",
+    "notes": [
+      "tips snapshot for w/e 2026-11-01 not found"
+    ]
   },
   "sales": {
-    "forecast": null,
-    "net_sales": 29494.36,
-    "over_under": null
+    "forecast": 30221,
+    "net_sales": 31523.49,
+    "over_under": 1302.49
   },
   "food_cost": {
-    "cogs_pct": 25.4,
+    "cogs_pct": 14.3,
     "supplies_pct": null,
     "total_pct": null,
     "qtd_cogs_pct": null,
-    "var_to_goal": -2.1,
+    "var_to_goal": -13.2,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Mushroom Pcs",
       "Bun, Burger",
-      "Cheese"
+      "Topping, Fudge Bittersweet / NEW Chocolate Fudge Sauce",
+      "Lettuce"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 21.28,
+    "hourly_labor_pct": 18.84,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
-    "ot_hours": 0.56,
+    "ot_hours": null,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 503.39,
+    "labor_hours": 507.19,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
-    "charged_tips": 715.25
+    "charged_tips": null
   },
   "food_safety": {
     "steritech_pct": null,
     "criticals": null,
-    "shops_month_pct": 95.7,
+    "shops_month_pct": 96.5,
     "shops_month_label": "October 2026",
-    "shops_qtd_pct": 95.7,
-    "shops_qtd_count": 3,
-    "shops_ytd_pct": 83.5
+    "shops_qtd_pct": 97.4,
+    "shops_qtd_count": 5,
+    "shops_ytd_pct": 84.2
   },
   "fgu": {
     "overdue_rate_pct": 54.29,
@@ -104,7 +106,7 @@
     "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 93.8,
+    "completion_pct": 92.1,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
