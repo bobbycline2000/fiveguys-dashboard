@@ -214,11 +214,21 @@ def day_row_map(headers, base):
     Never assume row = day + constant. WK#n subtotal rows are interleaved and
     sit at different offsets in different months (August: 14->r20, 15->r21,
     16->r22, 17->r24; September: 1->r5, 7->r12).
+
+    Returns (offset, map). November 2026 shifted the whole table one column
+    right (Date in B, Sales in C), so find the "Date" header instead of
+    assuming column A. offset = how many columns right of A the table starts.
     """
-    vals = read_range(headers, base, "A1:A60")["values"]
+    vals = read_range(headers, base, "A1:C60")["values"]
+    offset = 0
+    for row in vals[:10]:
+        hits = [i for i, c in enumerate(row) if str(c).strip().lower() == "date"]
+        if hits:
+            offset = hits[0]
+            break
     out = {}
     for idx, row in enumerate(vals, start=1):
-        cell = row[0] if row else None
+        cell = row[offset] if row else None
         if cell is None or str(cell).strip() == "":
             continue
         try:
@@ -227,7 +237,7 @@ def day_row_map(headers, base):
             continue                      # "WK#3", "MTD", "Date" ...
         if 1 <= n <= 31 and n not in out:
             out[n] = idx
-    return out
+    return offset, out
 
 
 # ─── data sources ────────────────────────────────────────────────────────────
@@ -453,14 +463,18 @@ def build_row(day, ly, ct=None):
     return vals
 
 
-def write_day(headers, base, row, day, vals, dry=False):
-    """Write only cells that are currently empty. Returns (written, skipped)."""
-    existing = read_range(headers, base, f"A{row}:Q{row}")["values"][0]
-    cols = "ABCDEFGHIJKLMNOPQ"
+def write_day(headers, base, row, day, vals, dry=False, offset=0):
+    """Write only cells that are currently empty. Returns (written, skipped).
+
+    `vals` uses the October-layout letters (B=Sales ... Q=Hot Dog Buns);
+    `offset` shifts them right to wherever this month's table actually sits."""
+    cols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    existing = read_range(headers, base, f"A{row}:{cols[16 + offset]}{row}")["values"][0]
     written = skipped = 0
     for col, val in sorted(vals.items()):
         if col in READ_ONLY_COLS:
             continue
+        col = cols[cols.index(col) + offset]
         cur = existing[cols.index(col)]
         if cur is not None and str(cur).strip() != "":
             skipped += 1
@@ -528,15 +542,15 @@ def main():
         if key not in months:
             drive, item = find_workbook(headers, d)
             base = sheet_base(drive, item)
-            months[key] = (base, day_row_map(headers, base))
-        base, rowmap = months[key]
+            months[key] = (base, *day_row_map(headers, base))
+        base, offset, rowmap = months[key]
         row = rowmap.get(d.day)
         if not row:
             print(f"  [warn] {d}: no row for day {d.day} in column A — skipped")
             continue
         vals = build_row(d, ly, ctd.get(d))
         if vals:
-            w, _ = write_day(headers, base, row, d, vals, dry=dry)
+            w, _ = write_day(headers, base, row, d, vals, dry=dry, offset=offset)
             total_w += w
     print(f"[done] {total_w} cells written.")
     return 0
