@@ -1,25 +1,25 @@
 {
-  "as_of": "2026-10-31",
-  "current_month": "2026-10",
-  "current_month_label": "October 2026",
-  "store_avg_month": 96.5,
+  "as_of": "2026-11-03",
+  "current_month": "2026-11",
+  "current_month_label": "November 2026",
+  "store_avg_month": null,
   "store_avg_ytd": 84.2,
-  "shop_count_month": 6,
+  "shop_count_month": 0,
   "shop_count_ytd": 59,
   "managers": [
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": 92.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 83.3,
       "ytd_n": 32
     },
     {
       "first": "Vicki",
       "name": "Vicki Lucey",
-      "month_avg": 100.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 81.9,
       "ytd_n": 16
     },
@@ -60,8 +60,8 @@
     {
       "first": "Rusul",
       "name": "Rusul Kadhim",
-      "month_avg": 100.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 100.0,
       "ytd_n": 3
     },
@@ -76,16 +76,16 @@
     {
       "first": "Anthony",
       "name": "Anthony Pirtle",
-      "month_avg": 100.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 98.8,
       "ytd_n": 4
     },
     {
       "first": "Madelynn",
       "name": "Madelynn Smith",
-      "month_avg": 97.5,
-      "month_n": 2,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 98.8,
       "ytd_n": 4
     },
@@ -100,8 +100,8 @@
     {
       "first": "Bobby",
       "name": "Robert Cline",
-      "month_avg": 95.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 96.8,
       "ytd_n": 12
     },
@@ -132,8 +132,8 @@
     {
       "first": "Lidy",
       "name": "Lidy Henry",
-      "month_avg": 100.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 89.0,
       "ytd_n": 20
     },
@@ -172,8 +172,8 @@
     {
       "first": "Zach",
       "name": "Zack Whitten",
-      "month_avg": 95.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 85.2,
       "ytd_n": 8
     },
@@ -196,8 +196,8 @@
     {
       "first": "Francisco",
       "name": "Francisco Llorente Mejias",
-      "month_avg": 95.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 79.7,
       "ytd_n": 25
     },
@@ -228,8 +228,8 @@
     {
       "first": "Emanuela",
       "name": "Emanuela Kamara",
-      "month_avg": 92.0,
-      "month_n": 1,
+      "month_avg": null,
+      "month_n": 0,
       "ytd_avg": 68.0,
       "ytd_n": 6
     },

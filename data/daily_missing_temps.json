@@ -1,29 +1,29 @@
 {
   "store": "2065",
-  "date": "2026-10-30",
-  "day_of_week": "Friday",
-  "generated_at": "2026-10-31T05:11:18.326223-04:00",
+  "date": "2026-11-02",
+  "day_of_week": "Monday",
+  "generated_at": "2026-11-03T06:11:19.437977-04:00",
   "schedule": {
-    "date": "2026-10-30",
-    "day_of_week": "Friday",
+    "date": "2026-11-02",
+    "day_of_week": "Monday",
     "am_manager": "Robert Cline",
-    "pm_manager": "Cortez Brown",
-    "shift_change_manager": "Alexandra Campbell & Madelynn Smith & Vicki Lucey & Anthony Pirtle"
+    "pm_manager": "Anthony Pirtle",
+    "shift_change_manager": "Madison Cureton & Cortez Brown"
   },
   "missing_count": 1,
   "missing_items": [
     {
-      "date": "2026-10-30",
-      "day_of_week": "Friday",
+      "date": "2026-11-02",
+      "day_of_week": "Monday",
       "category": "CHECKLIST",
       "shift": "N/A",
       "task_name": "Closing Checklist",
       "status": "MISSED",
       "required_pct": 0,
       "all_pct": 0,
-      "manager": "Cortez Brown",
+      "manager": "Anthony Pirtle",
       "manager_basis": "pm_manager (closing task)"
     }
   ],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Friday 2026-10-30\n**1 missed/incomplete** (AM mgr: Robert Cline \u00b7 PM mgr: Cortez Brown)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Cortez Brown**\n"
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Monday 2026-11-02\n**1 missed/incomplete** (AM mgr: Robert Cline \u00b7 PM mgr: Anthony Pirtle)\n\n- **Checklist: Closing Checklist** \u2014 MISSED \u2192 **Anthony Pirtle**\n"
 }
