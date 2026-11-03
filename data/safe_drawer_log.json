@@ -2085,10 +2085,10 @@
     "d2_mid": 200,
     "safe_close": 640,
     "d1_close": 200,
-    "d2_close": 0,
+    "d2_close": 200,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-11-03T03:55:47.426Z"
+    "submitted_at": "2026-11-03T03:55:50.317Z"
   },
   {
     "date": "2099-01-01",
