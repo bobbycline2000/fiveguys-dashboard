@@ -2,35 +2,21 @@
   "store": "2065",
   "week_start": "2026-10-26",
   "week_end": "2026-11-01",
-  "variance_week_start": "2026-10-19",
-  "variance_week_end": "2026-10-25",
+  "variance_week_start": "2026-11-01",
+  "variance_week_end": "2026-11-01",
   "cogs_pct_week": 19.5,
   "cogs_pct_week_label": "2026-11-01",
   "cogs_goal_pct": 27.5,
-  "total_over": 155.58,
-  "generated": "2026-11-03 16:58 ET",
+  "total_over": 97.21,
+  "generated": "2026-11-04 17:06 ET",
   "items": [
     {
       "rank": 1,
-      "name": "Bun, Burger",
-      "over_dollars": 67.17,
-      "actual": 828.29,
-      "theoretical": 761.12,
-      "variance_pct": -8.8,
-      "big_six": true,
-      "actions": [
-        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
-        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
-        "Audit comps & employee meals \u2014 every free build has to be rung."
-      ]
-    },
-    {
-      "rank": 2,
-      "name": "Topping, Fudge Bittersweet / NEW Chocolate Fudge Sauce",
-      "over_dollars": 48.25,
-      "actual": 64.34,
-      "theoretical": 16.09,
-      "variance_pct": -299.9,
+      "name": "A1 Steak Sauce",
+      "over_dollars": 47.97,
+      "actual": 49.84,
+      "theoretical": 1.87,
+      "variance_pct": -2565.2,
       "big_six": false,
       "actions": [
         "Watch portioning and confirm the build/prep spec.",
@@ -39,18 +25,29 @@
       ]
     },
     {
+      "rank": 2,
+      "name": "Bacon, Raw Sliced",
+      "over_dollars": 24.9,
+      "actual": 86.62,
+      "theoretical": 61.72,
+      "variance_pct": -40.3,
+      "big_six": true,
+      "actions": [
+        "Variance = over-cooking. Too much cooked and wasted at close, or someone's eating it.",
+        "Cook in smaller batches through the day \u2014 aim to run out around 8 PM, not over-cook in the morning.",
+        "Lock down end-of-night bacon waste and account for it."
+      ]
+    },
+    {
       "rank": 3,
-      "name": "Lettuce",
-      "over_dollars": 40.16,
-      "actual": 98.47,
-      "theoretical": 58.31,
-      "variance_pct": -68.9,
+      "name": "Strawberry Marinade",
+      "over_dollars": 24.34,
+      "actual": 26.99,
+      "theoretical": 2.65,
+      "variance_pct": -918.5,
       "big_six": false,
       "actions": [
-        "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
-        "Confirm prep specs are correct.",
-        "Submit a Product Issue form for yield loss from bad quality off the truck.",
-        "Account for waste."
+        "This is a miscount \u2014 the inventory wasn't counted correctly. Recount it."
       ]
     }
   ]
