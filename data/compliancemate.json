@@ -1,7 +1,7 @@
 {
   "meta": {
-    "date": "2026-11-03",
-    "generated": "11/04/2026 at 05:28 PM",
+    "date": "2026-11-04",
+    "generated": "11/05/2026 at 01:58 PM",
     "location": "2065",
     "status": "ok",
     "source": "api"
@@ -49,9 +49,9 @@
       "raw": "PM Pre-Shift Check\n100% | 100%"
     },
     {
-      "name": "Tuesday Milkshake Cleaning Check",
+      "name": "Milkshake Pump Cleaning Check",
       "pct": 100,
-      "raw": "Tuesday Milkshake Cleaning Check\n100% | 100%"
+      "raw": "Milkshake Pump Cleaning Check\n100% | 100%"
     },
     {
       "name": "Closing Checklist",

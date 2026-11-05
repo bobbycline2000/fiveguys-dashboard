@@ -7110,5 +7110,97 @@
     ]
    }
   ]
+ },
+ "20976187": {
+  "date": "2026-11-02",
+  "meal_period": "Dinner",
+  "score": 92.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.02,
+      22.98
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.02,
+      22.97
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      11.97,
+      28.0
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.0,
+      22.8
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.48,
+      18.55
+     ],
+     [
+      18.95,
+      22.75
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      15.95,
+      18.02
+     ],
+     [
+      18.52,
+      21.43
+     ]
+    ]
+   }
+  ]
  }
 }
