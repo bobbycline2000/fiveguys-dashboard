@@ -1,8 +1,1 @@
-[2026-11-05 17:37:13] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)
-[2026-11-05 17:37:13] outlook-daily-pull-7am: brief already sent today - duplicate send skipped by guard
-
-[2026-11-06 08:29:13] Dashboard freshness check FAILED
-  - Today's Schedule card has no employee rows — shift tables are empty, wire_dashboard.py likely missed them.
-  Fix: run `python scraper/wire_dashboard.py` locally and inspect MISS list.
-  If fields are missing, a class name or label may have changed in dashboard.html.
-[2026-11-06 08:29] outlook-daily-pull-7am: ComplianceMate refresh returned login_ok_no_data during brief run; compliancemate.json not committed. Missing-temps for 11/05 reported 0 misses — verify against CM.
+[2026-11-06 13:35:42] outlook-daily-pull-7am: no actionable work emails after filtering (brief still sent)

@@ -1,7 +1,7 @@
 {
   "store_id": "2065",
   "month": "November 2026",
-  "generated": "2026-11-06 08:30 ET",
+  "generated": "2026-11-06 13:35 ET",
   "rows": [
     {
       "day": 1,
@@ -61,7 +61,7 @@
       "guests": 819,
       "sales_guest": 5.7,
       "discounts": 88.0,
-      "cash_os": -303.32
+      "cash_os": -596.31
     },
     {
       "day": 6,
@@ -193,7 +193,7 @@
     "net_sales": 23053.22,
     "discounts": 734.43,
     "labor_hours": 355.12,
-    "cash_os": -305.38,
+    "cash_os": -598.37,
     "avg_labor_pct": 17.47,
     "days_with_data": 5
   }
