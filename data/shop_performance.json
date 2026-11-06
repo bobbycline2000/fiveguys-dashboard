@@ -1,19 +1,19 @@
 {
-  "as_of": "2026-11-03",
+  "as_of": "2026-11-06",
   "current_month": "2026-11",
   "current_month_label": "November 2026",
-  "store_avg_month": null,
-  "store_avg_ytd": 84.2,
-  "shop_count_month": 0,
-  "shop_count_ytd": 59,
+  "store_avg_month": 92.0,
+  "store_avg_ytd": 84.3,
+  "shop_count_month": 1,
+  "shop_count_ytd": 60,
   "managers": [
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 83.3,
-      "ytd_n": 32
+      "month_avg": 92.0,
+      "month_n": 1,
+      "ytd_avg": 83.5,
+      "ytd_n": 33
     },
     {
       "first": "Vicki",
@@ -74,14 +74,6 @@
       "ytd_n": 1
     },
     {
-      "first": "Anthony",
-      "name": "Anthony Pirtle",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 98.8,
-      "ytd_n": 4
-    },
-    {
       "first": "Madelynn",
       "name": "Madelynn Smith",
       "month_avg": null,
@@ -96,6 +88,14 @@
       "month_n": 0,
       "ytd_avg": 98.3,
       "ytd_n": 3
+    },
+    {
+      "first": "Anthony",
+      "name": "Anthony Pirtle",
+      "month_avg": 92.0,
+      "month_n": 1,
+      "ytd_avg": 97.4,
+      "ytd_n": 5
     },
     {
       "first": "Bobby",
@@ -252,6 +252,15 @@
   ],
   "latest_shops": [
     {
+      "date": "2026-11-02",
+      "score": 92.0,
+      "meal_period": "Dinner",
+      "on_shift": [
+        "Anthony Pirtle",
+        "Madison Cureton"
+      ]
+    },
+    {
       "date": "2026-10-28",
       "score": 100.0,
       "meal_period": "Lunch",
@@ -284,15 +293,6 @@
         "Francisco Llorente Mejias",
         "Madelynn Smith",
         "Zack Whitten"
-      ]
-    },
-    {
-      "date": "2026-10-09",
-      "score": 100.0,
-      "meal_period": "Dinner",
-      "on_shift": [
-        "Anthony Pirtle",
-        "Rusul Kadhim"
       ]
     }
   ]
