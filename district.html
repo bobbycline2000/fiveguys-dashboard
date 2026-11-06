@@ -893,7 +893,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <div class="page-title">Good afternoon, Bobby.</div>
         <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>1:35 PM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>4:58 PM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -1450,7 +1450,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>1:35 PM</span> &nbsp;&middot;&nbsp; November 6 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>4:58 PM</span> &nbsp;&middot;&nbsp; November 6 2026</span>
   </div>
 
 </div><!-- /main -->
@@ -1540,18 +1540,7 @@ function showShift(shift, btn) {
 // ── Labor % mini bars (11 AM – 10 PM, goal 18.5%) ──
 const LABOR_GOAL = 18.5;
 const laborData = [
-  { hr: '11A', pct: 11.0 },
-  { hr: '12P', pct: 9.7 },
-  { hr: '1P', pct: 13.1 },
-  { hr: '2P', pct: 18.9 },
-  { hr: '3P', pct: 37.6 },
-  { hr: '4P', pct: 16.2 },
-  { hr: '5P', pct: 9.6 },
-  { hr: '6P', pct: 6.4 },
-  { hr: '7P', pct: 12.4 },
-  { hr: '8P', pct: 15.3 },
-  { hr: '9P', pct: 47.4 },
-  { hr: '10P', pct: 100.0 }
+  { hr: '11A', pct: 28.9 }
 ];
 const realPcts = laborData.filter(d => d.pct !== null).map(d => d.pct);
 const maxPct = Math.max(...realPcts, LABOR_GOAL) * 1.1;
