@@ -1,53 +1,53 @@
 {
   "store": "2065",
-  "week_start": "2026-10-26",
-  "week_end": "2026-11-01",
-  "variance_week_start": "2026-11-01",
-  "variance_week_end": "2026-11-01",
-  "cogs_pct_week": 19.5,
-  "cogs_pct_week_label": "2026-11-01",
+  "week_start": "2026-08-31",
+  "week_end": "2026-09-06",
+  "variance_week_start": "2026-08-31",
+  "variance_week_end": "2026-08-31",
+  "cogs_pct_week": 30.0,
+  "cogs_pct_week_label": "2026-09-06",
   "cogs_goal_pct": 27.5,
-  "total_over": 97.21,
-  "generated": "2026-11-05 17:14 ET",
+  "total_over": 67.77,
+  "generated": "2026-11-06 08:30 ET",
   "items": [
     {
       "rank": 1,
-      "name": "A1 Steak Sauce",
-      "over_dollars": 47.97,
-      "actual": 49.84,
-      "theoretical": 1.87,
-      "variance_pct": -2565.2,
+      "name": "Topping, Peanut Butter Cup",
+      "over_dollars": 28.67,
+      "actual": 31.05,
+      "theoretical": 2.38,
+      "variance_pct": -1204.6,
       "big_six": false,
       "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
+        "This is a miscount \u2014 the inventory wasn't counted correctly. Recount it."
       ]
     },
     {
       "rank": 2,
-      "name": "Bacon, Raw Sliced",
-      "over_dollars": 24.9,
-      "actual": 86.62,
-      "theoretical": 61.72,
-      "variance_pct": -40.3,
+      "name": "Ground Beef",
+      "over_dollars": 20.37,
+      "actual": 357.83,
+      "theoretical": 337.46,
+      "variance_pct": -6.0,
       "big_six": true,
       "actions": [
-        "Variance = over-cooking. Too much cooked and wasted at close, or someone's eating it.",
-        "Cook in smaller batches through the day \u2014 aim to run out around 8 PM, not over-cook in the morning.",
-        "Lock down end-of-night bacon waste and account for it."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     },
     {
       "rank": 3,
-      "name": "Strawberry Marinade",
-      "over_dollars": 24.34,
-      "actual": 26.99,
-      "theoretical": 2.65,
-      "variance_pct": -918.5,
-      "big_six": false,
+      "name": "Bun, Burger",
+      "over_dollars": 18.73,
+      "actual": 121.77,
+      "theoretical": 103.04,
+      "variance_pct": -18.2,
+      "big_six": true,
       "actions": [
-        "This is a miscount \u2014 the inventory wasn't counted correctly. Recount it."
+        "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
+        "Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop.",
+        "Audit comps & employee meals \u2014 every free build has to be rung."
       ]
     }
   ]
