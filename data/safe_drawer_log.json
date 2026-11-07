@@ -2119,10 +2119,10 @@
     "d2_mid": 200,
     "safe_close": 639,
     "d1_close": 200,
-    "d2_close": 0,
+    "d2_close": 200,
     "ct_os": -66.24,
     "notes": "",
-    "submitted_at": "2026-11-07T03:44:05.632Z"
+    "submitted_at": "2026-11-07T03:44:08.562Z"
   },
   {
     "date": "2099-01-01",
