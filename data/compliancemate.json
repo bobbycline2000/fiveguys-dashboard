@@ -1,12 +1,12 @@
 {
   "meta": {
-    "date": "2026-11-06",
-    "generated": "11/07/2026 at 03:54 PM",
+    "date": "2026-11-07",
+    "generated": "11/08/2026 at 03:50 PM",
     "location": "2065",
     "status": "ok",
     "source": "api"
   },
-  "overall_pct": 55,
+  "overall_pct": 53,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -25,8 +25,8 @@
     },
     {
       "name": "5PM: Time and Temp",
-      "pct": 100,
-      "raw": "5PM: Time and Temp\n100% | 100%"
+      "pct": 5,
+      "raw": "5PM: Time and Temp\n5% | 5%"
     },
     {
       "name": "7PM: Time and Temp",
@@ -49,19 +49,14 @@
       "raw": "PM Pre-Shift Check\n100% | 100%"
     },
     {
-      "name": "Friday Milkshake Cleaning Check",
-      "pct": 100,
-      "raw": "Friday Milkshake Cleaning Check\n100% | 100%"
-    },
-    {
       "name": "Closing Checklist",
       "pct": 100,
       "raw": "Closing Checklist\n100% | 100%"
     },
     {
       "name": "Pre Open",
-      "pct": 0,
-      "raw": "Pre Open\n0% | 0%"
+      "pct": 100,
+      "raw": "Pre Open\n100% | 100%"
     },
     {
       "name": "Shift Change",
