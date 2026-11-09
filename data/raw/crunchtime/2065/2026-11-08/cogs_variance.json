@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
+    "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+    "item_source": "api_ingredient_level",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-11-02",
+    "week_end": "2026-11-08",
+    "variance_week_start": "2026-11-01",
+    "variance_week_end": "2026-11-01",
+    "month_start": "2026-11-01",
+    "last_month_start": "2026-10-01",
+    "last_month_end": "2026-10-31",
+    "through": "2026-11-08",
+    "pulled": "2026-11-09 15:36 ET",
+    "method": "api+playwright (GL-based, 2026-08-03)"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 21.5,
+  "cogs_pct_month": 18.7,
+  "cogs_pct_last_month": 22.8,
+  "variance_to_goal_week": -6.0,
+  "variance_to_goal_month": -8.8,
+  "variance_to_goal_last_mo": -4.7,
+  "items": [
+    {
+      "name": "A1 Steak Sauce",
+      "actual": 49.84,
+      "theoretical": 1.87,
+      "over_dollars": 47.97,
+      "variance_pct": -2565.2,
+      "rank": 1
+    },
+    {
+      "name": "Bacon, Raw Sliced",
+      "actual": 86.62,
+      "theoretical": 61.72,
+      "over_dollars": 24.9,
+      "variance_pct": -40.3,
+      "rank": 2
+    },
+    {
+      "name": "Strawberry Marinade",
+      "actual": 26.99,
+      "theoretical": 2.65,
+      "over_dollars": 24.34,
+      "variance_pct": -918.5,
+      "rank": 3
+    },
+    {
+      "name": "Banana Marinade",
+      "actual": 25.02,
+      "theoretical": 2.9,
+      "over_dollars": 22.12,
+      "variance_pct": -762.8,
+      "rank": 4
+    },
+    {
+      "name": "Tomatoes, Fresh",
+      "actual": 35.2,
+      "theoretical": 24.77,
+      "over_dollars": 10.43,
+      "variance_pct": -42.1,
+      "rank": 5
+    },
+    {
+      "name": "Topping, Caramel",
+      "actual": 9.91,
+      "theoretical": 0.73,
+      "over_dollars": 9.18,
+      "variance_pct": -1257.5,
+      "rank": 6
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 46.67,
+      "theoretical": 38.61,
+      "over_dollars": 8.06,
+      "variance_pct": -20.9,
+      "rank": 7
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 359.07,
+      "theoretical": 367.29,
+      "over_dollars": -8.22,
+      "variance_pct": 2.2,
+      "rank": 8
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 120.13,
+      "theoretical": 131.08,
+      "over_dollars": -10.95,
+      "variance_pct": 8.3,
+      "rank": 9
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 116.34,
+      "theoretical": 135.91,
+      "over_dollars": -19.57,
+      "variance_pct": 14.4,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}

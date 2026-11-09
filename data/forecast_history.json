@@ -113,7 +113,7 @@
   },
   "2026-11-09": {
     "forecast": 3826.0,
-    "actual": null
+    "actual": 964.67
   },
   "2026-11-10": {
     "forecast": 3689.0,
@@ -137,6 +137,34 @@
   },
   "2026-11-15": {
     "forecast": 4694.0,
+    "actual": null
+  },
+  "2026-11-16": {
+    "forecast": 3591.0,
+    "actual": null
+  },
+  "2026-11-17": {
+    "forecast": 3857.0,
+    "actual": null
+  },
+  "2026-11-18": {
+    "forecast": 3848.0,
+    "actual": null
+  },
+  "2026-11-19": {
+    "forecast": 4463.0,
+    "actual": null
+  },
+  "2026-11-20": {
+    "forecast": 5753.0,
+    "actual": null
+  },
+  "2026-11-21": {
+    "forecast": 4395.0,
+    "actual": null
+  },
+  "2026-11-22": {
+    "forecast": 4849.0,
     "actual": null
   }
 }
