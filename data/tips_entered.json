@@ -19,5 +19,12 @@
     "rows": 16,
     "total": 647.51,
     "verified": true
+  },
+  "11/08/2026": {
+    "enteredAt": "2026-11-09T06:18:45",
+    "expected": 748.37,
+    "rows": 15,
+    "total": 748.37,
+    "verified": true
   }
 }
