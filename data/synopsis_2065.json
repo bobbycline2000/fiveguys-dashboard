@@ -1,54 +1,52 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-10-26",
-    "week_end": "2026-11-01",
-    "week_label": "10/26-11/1",
-    "month": "October",
-    "generated": "2026-11-02T22:08:50",
-    "notes": [
-      "tips snapshot for w/e 2026-11-01 not found"
-    ]
+    "week_start": "2026-11-02",
+    "week_end": "2026-11-08",
+    "week_label": "11/2-11/8",
+    "month": "November",
+    "generated": "2026-11-09T22:52:05",
+    "notes": []
   },
   "sales": {
-    "forecast": 30221,
-    "net_sales": 31523.49,
-    "over_under": 1302.49
+    "forecast": 30736,
+    "net_sales": 34464.41,
+    "over_under": 3728.41
   },
   "food_cost": {
-    "cogs_pct": 14.3,
+    "cogs_pct": 21.5,
     "supplies_pct": null,
     "total_pct": null,
     "qtd_cogs_pct": null,
-    "var_to_goal": -13.2,
+    "var_to_goal": -6.0,
     "goal_pct": 27.5,
     "top_var_items": [
-      "Bun, Burger",
-      "Topping, Fudge Bittersweet / NEW Chocolate Fudge Sauce",
-      "Lettuce"
+      "A1 Steak Sauce",
+      "Bacon, Raw Sliced",
+      "Strawberry Marinade"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 18.84,
+    "hourly_labor_pct": 16.73,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
-    "ot_hours": null,
+    "ot_hours": 0.13,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 507.19,
+    "labor_hours": 498.12,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
-    "charged_tips": null
+    "charged_tips": 748.37
   },
   "food_safety": {
     "steritech_pct": null,
     "criticals": null,
-    "shops_month_pct": 96.5,
-    "shops_month_label": "October 2026",
-    "shops_qtd_pct": 97.4,
+    "shops_month_pct": 92.0,
+    "shops_month_label": "November 2026",
+    "shops_qtd_pct": 95.8,
     "shops_qtd_count": 5,
-    "shops_ytd_pct": 84.2
+    "shops_ytd_pct": 84.3
   },
   "fgu": {
     "overdue_rate_pct": 54.29,
@@ -106,7 +104,7 @@
     "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 92.1,
+    "completion_pct": 96.9,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
