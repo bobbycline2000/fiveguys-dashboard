@@ -1,7 +1,7 @@
 // Five Guys 2065 Ops — service worker
 // Cache-first for app shell, network-first for data so live numbers stay fresh.
 
-const VERSION = 'fg-2065-ops-8dc8878c0e-2026-11-09';
+const VERSION = 'fg-2065-ops-ebd6b70b75-2026-11-10';
 const SCOPE = '/fiveguys-dashboard';
 
 // App-shell files we want available offline.
