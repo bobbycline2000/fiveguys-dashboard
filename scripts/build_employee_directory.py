@@ -11,6 +11,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, 
 
 EMPLOYEES = [
     ("Alen",         "(407) 334-3088", "Active"),
+    ("Alexander",    "(PHONE PENDING)", "Active"),
     ("Anthony",      "(502) 938-5182", "Active"),
     ("Cortez",       "(PHONE PENDING)", "Active"),
     ("Elizabeth",    "(PHONE PENDING)", "Active"),

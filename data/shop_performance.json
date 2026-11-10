@@ -1,18 +1,18 @@
 {
-  "as_of": "2026-11-07",
+  "as_of": "2026-11-10",
   "current_month": "2026-11",
   "current_month_label": "November 2026",
-  "store_avg_month": 92.0,
-  "store_avg_ytd": 84.3,
+  "store_avg_month": 100.0,
+  "store_avg_ytd": 84.5,
   "shop_count_month": 1,
   "shop_count_ytd": 60,
   "managers": [
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": 92.0,
+      "month_avg": 100.0,
       "month_n": 1,
-      "ytd_avg": 83.5,
+      "ytd_avg": 83.8,
       "ytd_n": 33
     },
     {
@@ -74,6 +74,14 @@
       "ytd_n": 1
     },
     {
+      "first": "Anthony",
+      "name": "Anthony Pirtle",
+      "month_avg": 100.0,
+      "month_n": 1,
+      "ytd_avg": 99.0,
+      "ytd_n": 5
+    },
+    {
       "first": "Madelynn",
       "name": "Madelynn Smith",
       "month_avg": null,
@@ -88,14 +96,6 @@
       "month_n": 0,
       "ytd_avg": 98.3,
       "ytd_n": 3
-    },
-    {
-      "first": "Anthony",
-      "name": "Anthony Pirtle",
-      "month_avg": 92.0,
-      "month_n": 1,
-      "ytd_avg": 97.4,
-      "ytd_n": 5
     },
     {
       "first": "Bobby",
@@ -253,7 +253,7 @@
   "latest_shops": [
     {
       "date": "2026-11-02",
-      "score": 92.0,
+      "score": 100.0,
       "meal_period": "Dinner",
       "on_shift": [
         "Anthony Pirtle",
