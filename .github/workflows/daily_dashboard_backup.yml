@@ -10,7 +10,7 @@ on:
   schedule:
     # 5:40 AM Eastern (09:40 UTC EDT / 10:40 UTC EST).
     # DST FLIP: when EST returns ~Nov 2 2026, change to "40 10 * * *".
-    - cron: "40 9 * * *"
+    - cron: "40 10 * * *"
   workflow_dispatch:  # allow manual trigger from GitHub Actions tab
 
 permissions:

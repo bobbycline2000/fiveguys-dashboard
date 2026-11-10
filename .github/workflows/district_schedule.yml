@@ -9,7 +9,7 @@ on:
   schedule:
     # 5:30 AM Eastern (09:30 UTC EDT / 10:30 UTC EST).
     # DST FLIP: when EST returns ~Nov 2 2026, change to "30 10 * * *".
-    - cron: "30 9 * * *"
+    - cron: "30 10 * * *"
   workflow_dispatch:
 
 permissions:
