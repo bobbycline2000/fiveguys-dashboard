@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated": "2026-11-09T19:35:57",
-    "today": "2026-11-09",
+    "generated": "2026-11-11T17:44:08",
+    "today": "2026-11-11",
     "this_week_mon": "2026-11-09",
     "next_week_mon": "2026-11-16",
     "week_convention": "Mon-Sun"
@@ -11,21 +11,21 @@
       "date": "2026-11-09",
       "name": "MON",
       "forecast": 3826.0,
-      "actual": 964.67,
+      "actual": 4026.34,
       "is_next_week": false
     },
     {
       "date": "2026-11-10",
       "name": "TUE",
       "forecast": 3689.0,
-      "actual": null,
+      "actual": 3918.18,
       "is_next_week": false
     },
     {
       "date": "2026-11-11",
       "name": "WED",
       "forecast": 3707.0,
-      "actual": null,
+      "actual": 344.65,
       "is_next_week": false
     },
     {

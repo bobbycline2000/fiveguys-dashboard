@@ -1,15 +1,5 @@
 [
   {
-    "business_date": "2026-10-20",
-    "deposit": 683.24,
-    "over_short": 0.0,
-    "book_cash": 683.24,
-    "gross_sales": 4050.55,
-    "net_sales": 3821.34,
-    "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
-  },
-  {
     "business_date": "2026-10-21",
     "deposit": 402.65,
     "over_short": 0.0,
@@ -17,7 +7,7 @@
     "gross_sales": 3016.24,
     "net_sales": 2845.62,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-10-22",
@@ -27,7 +17,7 @@
     "gross_sales": 4054.54,
     "net_sales": 3825.18,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-10-23",
@@ -37,7 +27,7 @@
     "gross_sales": 6288.01,
     "net_sales": 5932.37,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-10-24",
@@ -47,7 +37,7 @@
     "gross_sales": 4570.61,
     "net_sales": 4312.03,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-10-25",
@@ -57,7 +47,7 @@
     "gross_sales": 4983.81,
     "net_sales": 4701.84,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-10-26",
@@ -67,7 +57,7 @@
     "gross_sales": 3412.13,
     "net_sales": 3219.26,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-10-27",
@@ -77,7 +67,7 @@
     "gross_sales": 3926.95,
     "net_sales": 3704.87,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-10-28",
@@ -87,7 +77,7 @@
     "gross_sales": 4978.62,
     "net_sales": 4696.98,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-10-29",
@@ -97,7 +87,7 @@
     "gross_sales": 5159.03,
     "net_sales": 4867.17,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-10-30",
@@ -107,7 +97,7 @@
     "gross_sales": 6143.37,
     "net_sales": 5795.83,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-10-31",
@@ -117,7 +107,7 @@
     "gross_sales": 4408.07,
     "net_sales": 4158.78,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-11-01",
@@ -127,7 +117,7 @@
     "gross_sales": 5385.28,
     "net_sales": 5080.6,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-11-02",
@@ -137,7 +127,7 @@
     "gross_sales": 4062.5,
     "net_sales": 3832.75,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-11-03",
@@ -147,7 +137,7 @@
     "gross_sales": 5293.36,
     "net_sales": 4993.98,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-11-04",
@@ -157,7 +147,7 @@
     "gross_sales": 4746.81,
     "net_sales": 4478.26,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-11-05",
@@ -167,7 +157,7 @@
     "gross_sales": 4947.55,
     "net_sales": 4667.63,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-11-06",
@@ -177,7 +167,7 @@
     "gross_sales": 5874.0,
     "net_sales": 5541.71,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-11-07",
@@ -187,7 +177,7 @@
     "gross_sales": 6046.04,
     "net_sales": 5703.95,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-11-08",
@@ -197,7 +187,7 @@
     "gross_sales": 5560.67,
     "net_sales": 5246.13,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-11-09",
@@ -207,16 +197,26 @@
     "gross_sales": 4267.72,
     "net_sales": 4026.34,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
   },
   {
     "business_date": "2026-11-10",
-    "deposit": 0.0,
-    "over_short": -196.03,
-    "book_cash": 196.03,
-    "gross_sales": 1267.07,
-    "net_sales": 1195.39,
+    "deposit": 570.32,
+    "over_short": 0.0,
+    "book_cash": 570.32,
+    "gross_sales": 4153.16,
+    "net_sales": 3918.18,
     "register_count": 1,
-    "captured_at": "2026-11-10T20:11:50"
+    "captured_at": "2026-11-11T17:47:02"
+  },
+  {
+    "business_date": "2026-11-11",
+    "deposit": 0.0,
+    "over_short": -127.56,
+    "book_cash": 127.56,
+    "gross_sales": 1231.0,
+    "net_sales": 1161.35,
+    "register_count": 1,
+    "captured_at": "2026-11-11T17:47:02"
   }
 ]
