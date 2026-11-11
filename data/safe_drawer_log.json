@@ -2152,11 +2152,11 @@
     "d1_mid": 200,
     "d2_mid": 200,
     "safe_close": 643,
-    "d1_close": 0,
+    "d1_close": 200,
     "d2_close": 0,
     "ct_os": -196.03,
     "notes": "",
-    "submitted_at": "2026-11-11T03:47:16.564Z"
+    "submitted_at": "2026-11-11T03:47:23.362Z"
   },
   {
     "date": "2099-01-01",
