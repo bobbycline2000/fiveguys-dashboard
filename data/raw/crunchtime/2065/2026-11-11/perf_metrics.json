@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "report_date": "2026-11-11",
+    "report_display": "Wednesday, November 11, 2026",
+    "generated": "11/12/2026 at 1:56 PM"
+  },
+  "sales": {
+    "net": 5437.0,
+    "net_week": 13382.0,
+    "ly": 3612.0,
+    "ly_week": 10558.0,
+    "forecast": 3707.0,
+    "forecast_week": 11222.0,
+    "vs_ly": 1825.0,
+    "vs_ly_week": 2824.0,
+    "vs_forecast": 1730.0,
+    "per_guest": 5.6,
+    "per_guest_week": 5.57
+  },
+  "labor": {
+    "cost": 756.0,
+    "cost_week": 2410.0,
+    "pct": 13.9,
+    "pct_week": 18.01,
+    "actual_hours": 153.0,
+    "actual_hours_week": 433.0,
+    "sched_hours": 56.5,
+    "sched_hours_week": 182.5,
+    "hours_variance": null,
+    "productivity": 66.0,
+    "productivity_week": 61.0,
+    "hours_var": null
+  },
+  "cash": {
+    "over_short": 0.0
+  },
+  "comps": [
+    {
+      "name": "Comps and Discounts",
+      "day": "$18.33",
+      "week": "$5.30"
+    }
+  ],
+  "raw": {
+    "Actual Net Sales": {
+      "day": "$5,437",
+      "week": "$13,382"
+    },
+    "Last Year Same Day": {
+      "day": "$3,612",
+      "week": "$10,558"
+    },
+    "Forecasted Sales": {
+      "day": "$3,707",
+      "week": "$11,222"
+    },
+    "Net Sales to Last Year": {
+      "day": "$1,825",
+      "week": "$2,824"
+    },
+    "Actual Labor": {
+      "day": "$756",
+      "week": "$2,410"
+    },
+    "Hours Variance": {
+      "day": "",
+      "week": ""
+    },
+    "Labor % of Net Sales": {
+      "day": "13.90%",
+      "week": "18.01%"
+    },
+    "Total Cash Over/Short": {
+      "day": "$0.00",
+      "week": "$0.00"
+    },
+    "Comps and Discounts": {
+      "day": "$18.33",
+      "week": "$5.30"
+    },
+    "Sales / Guest": {
+      "day": "$5.60",
+      "week": "$5.57"
+    },
+    "Labor Productivity": {
+      "day": "$66",
+      "week": "$61"
+    },
+    "Actual Hours": {
+      "day": "153",
+      "week": "433"
+    },
+    "Scheduled Hours": {
+      "day": "56.50",
+      "week": "182.50"
+    },
+    "Guest Count": {
+      "day": "684",
+      "week": "$5.59"
+    }
+  }
+}

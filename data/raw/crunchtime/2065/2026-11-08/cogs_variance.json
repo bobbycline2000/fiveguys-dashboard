@@ -12,16 +12,16 @@
     "month_start": "2026-11-01",
     "last_month_start": "2026-10-01",
     "last_month_end": "2026-10-31",
-    "through": "2026-11-10",
-    "pulled": "2026-11-11 14:04 ET",
+    "through": "2026-11-11",
+    "pulled": "2026-11-12 13:58 ET",
     "method": "api+playwright (GL-based, 2026-08-03)"
   },
   "cogs_goal_pct": 27.5,
   "cogs_pct_week": 21.5,
-  "cogs_pct_month": 23.3,
+  "cogs_pct_month": 20.9,
   "cogs_pct_last_month": 22.8,
   "variance_to_goal_week": -6.0,
-  "variance_to_goal_month": -4.2,
+  "variance_to_goal_month": -6.6,
   "variance_to_goal_last_mo": -4.7,
   "items": [
     {
