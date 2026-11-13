@@ -7202,5 +7202,133 @@
     ]
    }
   ]
+ },
+ "20988745": {
+  "date": "2026-11-11",
+  "meal_period": "Dinner",
+  "score": 80.0,
+  "window": [
+   16.0,
+   19.0
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      14.82,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.95,
+      10.55
+     ],
+     [
+      10.93,
+      16.25
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      18.03,
+      23.0
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.33,
+      18.18
+     ],
+     [
+      18.67,
+      22.73
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      14.93,
+      17.58
+     ],
+     [
+      17.82,
+      22.98
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.95,
+      10.48
+     ],
+     [
+      10.93,
+      16.03
+     ]
+    ]
+   },
+   {
+    "name": "Mykenize Milledge",
+    "ct_name": "Milledge, Mykenize",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.17,
+      17.82
+     ],
+     [
+      18.3,
+      20.03
+     ]
+    ]
+   },
+   {
+    "name": "Robert Muncy Jr",
+    "ct_name": "Muncy Jr, Robert",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.87,
+      23.0
+     ]
+    ]
+   }
+  ]
  }
 }
