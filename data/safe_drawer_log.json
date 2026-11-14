@@ -2185,12 +2185,12 @@
     "safe_mid": 643,
     "d1_mid": 200,
     "d2_mid": 200,
-    "safe_close": 0,
+    "safe_close": 643,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-11-14T03:57:22.803Z"
+    "submitted_at": "2026-11-14T03:57:26.950Z"
   },
   {
     "date": "2099-01-01",
