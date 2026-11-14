@@ -215,9 +215,11 @@ def day_row_map(headers, base):
     sit at different offsets in different months (August: 14->r20, 15->r21,
     16->r22, 17->r24; September: 1->r5, 7->r12).
 
-    Returns (offset, map). November 2026 shifted the whole table one column
-    right (Date in B, Sales in C), so find the "Date" header instead of
+    Returns (offset, map, proj_col). November 2026 shifted the whole table one
+    column right (Date in B, Sales in C), so find the "Date" header instead of
     assuming column A. offset = how many columns right of A the table starts.
+    proj_col = column letter of the "Daily Projections" header (added Nov 2026,
+    column A) or None if this month's sheet has no such column.
     """
     vals = read_range(headers, base, "A1:C60")["values"]
     offset = 0
@@ -225,6 +227,12 @@ def day_row_map(headers, base):
         hits = [i for i, c in enumerate(row) if str(c).strip().lower() == "date"]
         if hits:
             offset = hits[0]
+            break
+    proj_col = None
+    for row in vals[:10]:
+        hits = [i for i, c in enumerate(row) if "projection" in str(c).strip().lower()]
+        if hits:
+            proj_col = "ABC"[hits[0]]
             break
     out = {}
     for idx, row in enumerate(vals, start=1):
@@ -237,7 +245,39 @@ def day_row_map(headers, base):
             continue                      # "WK#3", "MTD", "Date" ...
         if 1 <= n <= 31 and n not in out:
             out[n] = idx
-    return offset, out
+    return offset, out, proj_col
+
+
+def projection(day):
+    """CrunchTime Manage Sales Forecast $ for a day (forecast_history.json,
+    refreshed daily by scrape_forecast_by_day.py). Whole dollars."""
+    rec = (jload(DATA / "forecast_history.json") or {}).get(day.isoformat()) or {}
+    if rec.get("forecast") is None:
+        fb = jload(DATA / "forecast_by_day.json") or {}
+        rec = next((x for x in fb.get("days", []) if x.get("date") == day.isoformat()), {})
+    v = rec.get("forecast")
+    return None if v is None else round(float(v), 2)
+
+
+def write_projection(headers, base, proj_col, row, day, dry=False):
+    """Fill the Daily Projections cell for one day if it is empty."""
+    v = projection(day)
+    if v is None:
+        print(f"  [warn] {day}: no CT forecast — projection left blank")
+        return 0
+    cur = read_range(headers, base, f"{proj_col}{row}")["values"][0][0]
+    if cur is not None and str(cur).strip() != "":
+        return 0
+    if dry:
+        print(f"  [dry] {proj_col}{row} <- {v} (projection)")
+        return 1
+    r = graph_call("PATCH", f"{base}/range(address='{proj_col}{row}')", headers,
+                   data=json.dumps({"values": [[v]]}))
+    if r.status_code == 200:
+        print(f"  {day} (row {row}): projection {proj_col}{row} <- {v}")
+        return 1
+    print(f"  [warn] {proj_col}{row} <- {v}  HTTP {r.status_code} {r.text[:120]}")
+    return 0
 
 
 # ─── data sources ────────────────────────────────────────────────────────────
@@ -518,12 +558,15 @@ def main():
     if missing:
         print(f"[skip] no CrunchTime or Brink data yet: "
               f"{', '.join(str(d) for d in missing)}")
-    if not have:
+    # Daily Projections (CT forecast) is known before the day happens, so it is
+    # written for every day in the range plus today, even with no sales yet.
+    proj_days = sorted(set(days) | {dt.date.today()})
+    if not have and not any(projection(d) is not None for d in proj_days):
         print("[done] nothing to write.")
         return 0
 
     try:
-        ly = pull_last_year(have)
+        ly = pull_last_year(have) if have else {}
         for d in have:
             if d not in ly:
                 print(f"  [warn] no LY figure for {d} (LY {ly_date(d)}) — C left blank")
@@ -537,13 +580,26 @@ def main():
 
     months = {}
     total_w = 0
-    for d in have:
+
+    def month(d):
         key = (d.year, d.month)
         if key not in months:
             drive, item = find_workbook(headers, d)
             base = sheet_base(drive, item)
             months[key] = (base, *day_row_map(headers, base))
-        base, offset, rowmap = months[key]
+        return months[key]
+
+    for d in proj_days:
+        try:
+            base, offset, rowmap, proj_col = month(d)
+        except Exception as e:
+            print(f"  [warn] {d}: workbook lookup failed for projection ({e})")
+            continue
+        if proj_col and rowmap.get(d.day):
+            total_w += write_projection(headers, base, proj_col, rowmap[d.day], d, dry=dry)
+
+    for d in have:
+        base, offset, rowmap, _ = month(d)
         row = rowmap.get(d.day)
         if not row:
             print(f"  [warn] {d}: no row for day {d.day} in column A — skipped")
