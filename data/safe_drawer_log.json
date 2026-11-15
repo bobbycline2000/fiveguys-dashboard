@@ -2200,14 +2200,14 @@
     "d1_open": 200,
     "d2_open": 200,
     "safe_mid": 643,
-    "d1_mid": 0,
+    "d1_mid": 200,
     "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
     "ct_os": -189.13,
     "notes": "",
-    "submitted_at": "2026-11-15T03:44:16.195Z"
+    "submitted_at": "2026-11-15T03:44:18.157Z"
   },
   {
     "date": "2099-01-01",
