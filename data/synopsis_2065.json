@@ -1,52 +1,54 @@
 {
   "meta": {
     "store": "2065",
-    "week_start": "2026-11-02",
-    "week_end": "2026-11-08",
-    "week_label": "11/2-11/8",
+    "week_start": "2026-11-09",
+    "week_end": "2026-11-15",
+    "week_label": "11/9-11/15",
     "month": "November",
-    "generated": "2026-11-09T22:52:05",
-    "notes": []
+    "generated": "2026-11-16T22:43:59",
+    "notes": [
+      "Brink sales cover 6/7 days"
+    ]
   },
   "sales": {
-    "forecast": 30736,
-    "net_sales": 34464.41,
-    "over_under": 3728.41
+    "forecast": 30438,
+    "net_sales": 31821.04,
+    "over_under": 1383.04
   },
   "food_cost": {
-    "cogs_pct": 21.5,
+    "cogs_pct": 23.1,
     "supplies_pct": null,
     "total_pct": null,
     "qtd_cogs_pct": null,
-    "var_to_goal": -6.0,
+    "var_to_goal": -4.4,
     "goal_pct": 27.5,
     "top_var_items": [
-      "A1 Steak Sauce",
-      "Bacon, Raw Sliced",
-      "Strawberry Marinade"
+      "Bun, Burger",
+      "Coffee for Shakes",
+      "Cheese"
     ]
   },
   "labor": {
-    "hourly_labor_pct": 16.73,
+    "hourly_labor_pct": 16.89,
     "labor_all_in_pct": null,
     "labor_no_salary_pct": null,
-    "ot_hours": 0.13,
+    "ot_hours": 12.43,
     "qtd_labor_pct": null,
     "qtd_labor_no_salary_pct": null,
-    "labor_hours": 498.12,
+    "labor_hours": 439.41,
     "cogs_labor_all_in_pct": null
   },
   "tips": {
-    "charged_tips": 748.37
+    "charged_tips": 748.64
   },
   "food_safety": {
     "steritech_pct": null,
     "criticals": null,
-    "shops_month_pct": 92.0,
+    "shops_month_pct": 100.0,
     "shops_month_label": "November 2026",
-    "shops_qtd_pct": 95.8,
+    "shops_qtd_pct": 97.4,
     "shops_qtd_count": 5,
-    "shops_ytd_pct": 84.3
+    "shops_ytd_pct": 84.5
   },
   "fgu": {
     "overdue_rate_pct": 54.29,
@@ -104,7 +106,7 @@
     "behind_count": 32
   },
   "compliancemate": {
-    "completion_pct": 96.9,
+    "completion_pct": 99.4,
     "shake_pct": null,
     "short_completions": null,
     "am_pm_pct": null,
