@@ -563,6 +563,8 @@ def main():
         "weekEnding": T.fmt(sun), "weekStart": T.fmt(mon), "chargedTips": charged,
         "poolHours": pool_hrs, "tipsPerHour": rate, "sumPayout": sum_payout,
         "delta": round(sum_payout - charged, 2), "payouts": payouts,
+        # GM's own total hours (reg+OT) — not in the pool, but reported on Jeff's email (Bobby 2026-11-16)
+        "gmHours": round(sum(a["reg"] + a["ot"] for n, a in employees.items() if T.GM_NAME_KEY in n), 2),
     }, indent=2, default=str))
     print(f"[snapshot] {snap}")
     try:

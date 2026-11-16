@@ -66,6 +66,7 @@ Please double-check and <b>Post Labor</b> when you're satisfied.</p>
 <tr><td style="padding:2px 12px">Tip pool hours (paid, breaks excluded)</td><td style="padding:2px 12px;text-align:right">{snap['poolHours']:.2f}</td></tr>
 <tr><td style="padding:2px 12px">Tips per hour</td><td style="padding:2px 12px;text-align:right">${snap['tipsPerHour']:.4f}</td></tr>
 <tr><td style="padding:2px 12px">Delta</td><td style="padding:2px 12px;text-align:right">${snap['delta']:+.2f}</td></tr>
+{f"<tr><td style='padding:2px 12px'>Bobby Cline (GM) total hours &mdash; not in tip pool</td><td style='padding:2px 12px;text-align:right'><b>{snap['gmHours']:.2f}</b></td></tr>" if snap.get('gmHours') is not None else ""}
 </table>
 <p style="margin-top:16px"><b>Per-employee breakdown</b> (GM excluded from the pool)</p>
 <table style="border-collapse:collapse;font-size:13px">
