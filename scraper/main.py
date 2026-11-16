@@ -1698,7 +1698,13 @@ async def main():
         # ct_daily_payroll.py for the payroll-exclusion rationale.
         data = None
         try:
-            from scraper.ct_daily_payroll import fetch_day
+            try:
+                from scraper.ct_daily_payroll import fetch_day
+            except ImportError:
+                # CI runs `python scraper/main.py` so sys.path[0] is scraper/,
+                # not the repo root — 'scraper' package isn't importable there
+                # (this froze every Monday on cached data, incl. 2026-11-16).
+                from ct_daily_payroll import fetch_day
             api_raw = fetch_day(yest.date())
             if api_raw:
                 log.warning(f"DOM scrape unavailable — using CrunchTime API backfill "
