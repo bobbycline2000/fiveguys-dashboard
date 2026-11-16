@@ -8,10 +8,36 @@
   "labor_percent_wtd": null,
   "labor_dollars_wtd": null,
   "actual_hours_wtd": null,
-  "hourly_breakdown": [],
+  "hourly_breakdown": [
+    {
+      "label": "11A",
+      "hour_24": 11,
+      "labor_percent": 6.8
+    },
+    {
+      "label": "12P",
+      "hour_24": 12,
+      "labor_percent": 7.3
+    },
+    {
+      "label": "1P",
+      "hour_24": 13,
+      "labor_percent": 7.0
+    },
+    {
+      "label": "2P",
+      "hour_24": 14,
+      "labor_percent": 34.1
+    },
+    {
+      "label": "3P",
+      "hour_24": 15,
+      "labor_percent": 0.0
+    }
+  ],
   "meta": {
     "source": "crunchtime_api",
-    "pulled_at": "2026-11-16T11:24:00",
+    "pulled_at": "2026-11-16T20:02:06",
     "calc_id_yesterday": 1
   }
 }
