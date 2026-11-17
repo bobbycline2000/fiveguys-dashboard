@@ -1,19 +1,19 @@
 {
-  "as_of": "2026-11-12",
+  "as_of": "2026-11-17",
   "current_month": "2026-11",
   "current_month_label": "November 2026",
-  "store_avg_month": 100.0,
-  "store_avg_ytd": 84.5,
-  "shop_count_month": 1,
-  "shop_count_ytd": 60,
+  "store_avg_month": 90.0,
+  "store_avg_ytd": 84.4,
+  "shop_count_month": 2,
+  "shop_count_ytd": 61,
   "managers": [
     {
       "first": "Madison",
       "name": "Madison Cureton",
-      "month_avg": 100.0,
-      "month_n": 1,
-      "ytd_avg": 83.8,
-      "ytd_n": 33
+      "month_avg": 90.0,
+      "month_n": 2,
+      "ytd_avg": 83.7,
+      "ytd_n": 34
     },
     {
       "first": "Vicki",
@@ -252,6 +252,14 @@
   ],
   "latest_shops": [
     {
+      "date": "2026-11-11",
+      "score": 80.0,
+      "meal_period": "Dinner",
+      "on_shift": [
+        "Madison Cureton"
+      ]
+    },
+    {
       "date": "2026-11-02",
       "score": 100.0,
       "meal_period": "Dinner",
@@ -282,17 +290,6 @@
       "meal_period": "Dinner",
       "on_shift": [
         "Madison Cureton"
-      ]
-    },
-    {
-      "date": "2026-10-12",
-      "score": 95.0,
-      "meal_period": "Lunch",
-      "on_shift": [
-        "Robert Cline",
-        "Francisco Llorente Mejias",
-        "Madelynn Smith",
-        "Zack Whitten"
       ]
     }
   ]
