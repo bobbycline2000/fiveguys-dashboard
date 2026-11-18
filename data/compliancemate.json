@@ -1,12 +1,12 @@
 {
   "meta": {
-    "date": "2026-11-16",
-    "generated": "11/17/2026 at 07:22 PM",
+    "date": "2026-11-17",
+    "generated": "11/18/2026 at 06:40 PM",
     "location": "2065",
     "status": "ok",
     "source": "api"
   },
-  "overall_pct": 48,
+  "overall_pct": 55,
   "lists": [
     {
       "name": "11AM: Time and Temp",
@@ -49,9 +49,14 @@
       "raw": "PM Pre-Shift Check\n100% | 100%"
     },
     {
+      "name": "Tuesday Milkshake Cleaning Check",
+      "pct": 100,
+      "raw": "Tuesday Milkshake Cleaning Check\n100% | 100%"
+    },
+    {
       "name": "Closing Checklist",
-      "pct": 3,
-      "raw": "Closing Checklist\n3% | 3%"
+      "pct": 100,
+      "raw": "Closing Checklist\n100% | 100%"
     },
     {
       "name": "Pre Open",
