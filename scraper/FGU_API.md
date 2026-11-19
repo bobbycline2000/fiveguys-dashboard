@@ -16,6 +16,8 @@ Discovered 2026-07-05 via Chrome MCP network capture while Bobby was logged in.
 - Token lifetime unknown; assume session-scoped. If a call returns 401, re-capture.
 - Send `Accept: application/json`.
 
+> **2026-11-19 ROUTE CHANGE:** `/team-dashboard/learners` and `/team-dashboard/learners/statistics` now return **404**. The live UI calls `/api/v2/academies/1177/team-dashboard/training/learners` and `.../training/learners/statistics` (same filters; a direct replay with `trainingFilterSet=teamDashboardLearners` returned 422, so the filter-set name likely changed too — capture it from the UI before rewiring `scrape_fgu.py`). Per-learner course list UI: `/academy/fiveguys/team/dashboard/learners/<userId>/training/courses/overview`.
+
 ## Endpoints (all GET, academyId=1177)
 
 ### Roster + per-employee completion — THE main pull
