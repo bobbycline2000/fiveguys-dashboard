@@ -558,8 +558,15 @@ def classify_email(sender: str, subject: str) -> str | None:
 
 def extract_phones(text: str) -> list[str]:
     """Finds phone numbers in text."""
-    phones = re.findall(r"\(?\d{3}\)?[\s\-\.]\d{3}[\s\-\.]\d{4}", text)
-    return list(set(phones))
+    # Skip signature/office lines (Direct, Fax, Office, Main, Ext/x.) so HR's
+    # office numbers are never mistaken for the new hire's own phone (2026-11-19).
+    sig = re.compile(r"\b(direct|fax|office|main|tel|telephone|ph|ext\.?)\b|\bx\.?\s?\d{2,}", re.IGNORECASE)
+    phones: list[str] = []
+    for line in text.splitlines():
+        if sig.search(line):
+            continue
+        phones += re.findall(r"\(?\d{3}\)?[\s\-\.]\d{3}[\s\-\.]\d{4}", line)
+    return list(dict.fromkeys(phones))
 
 
 def extract_new_hire_info(body: str, subject: str) -> dict:
