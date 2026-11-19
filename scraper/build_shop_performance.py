@@ -25,7 +25,7 @@ import json
 import glob
 import os
 from collections import defaultdict
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -34,7 +34,13 @@ DATA = DASH / "data"
 MF = DATA / "raw" / "marketforce" / "2065"
 OUT = DATA / "shop_performance.json"
 
-MANAGERS = ["Madison", "Vicki", "Kasey", "Nathan"]
+# Who was on shift for each shop = CrunchTime Employee Time Detail
+# (shop_onshift_2026.json, built by build_shop_onshift.py). Bobby's rule
+# 2026-11-07: CT time detail is the only source for shop names.
+ONSHIFT = MF / "shop_onshift_2026.json"
+BRINK = DATA / "raw" / "parbrink" / "2065"
+LEAD_ROLES = ("shift lead", "shift manager", "manager")  # GM (Bobby) excluded
+ROSTER_LOOKBACK_DAYS = 7
 
 
 def latest_shops_json() -> Path:
@@ -48,11 +54,57 @@ def load():
     with open(latest_shops_json()) as f:
         shops_doc = json.load(f)
     shops = shops_doc.get("shops", [])
-    with open(MF / "participation.json") as f:
-        part = json.load(f).get("by_shop", {})
-    with open(DATA / "employee_name_map.json") as f:
-        name_map = json.load(f)
-    return shops, part, name_map
+    onshift = json.loads(ONSHIFT.read_text(encoding="utf-8")) if ONSHIFT.exists() else {}
+    part = {jid: [p["name"] for p in rec.get("on_shift", [])] for jid, rec in onshift.items()}
+    return shops, part
+
+
+SEPARATED = DATA / "separated_employees.json"
+
+
+def _key(name: str) -> str:
+    """'Rusul K.' / 'Rusul Kadhim' -> 'rusul k' (first name + last initial)."""
+    p = name.replace(".", "").split()
+    return f"{p[0].lower()} {p[-1][:1].lower()}" if len(p) > 1 else p[0].lower()
+
+
+def separated_keys() -> set:
+    if not SEPARATED.exists():
+        return set()
+    doc = json.loads(SEPARATED.read_text(encoding="utf-8"))
+    return {_key(e["name"]) for e in doc.get("separated", [])}
+
+
+def current_managers(known_full_names: set) -> list:
+    """Shift Leads on the Teamworx roster in the last 7 days who are still active.
+
+    Teamworx gives "First L." — resolve to a full name from CT names we've seen.
+    """
+    today = date.today()
+    gone = separated_keys()
+    seen = []
+    for i in range(ROSTER_LOOKBACK_DAYS + 1):
+        day = (today - timedelta(days=i)).isoformat()
+        f = BRINK / day / "weekly_schedule.json"
+        if not f.exists():
+            continue
+        doc = json.loads(f.read_text(encoding="utf-8"))
+        for d in doc.get("schedule", {}).values():
+            for sh in d.get("shifts", []):
+                role = (sh.get("role") or "").lower()
+                if any(r in role for r in LEAD_ROLES) and "general" not in role and sh.get("name") not in seen:
+                    seen.append(sh["name"])
+    out = []
+    for short in seen:
+        parts = short.replace(".", "").split()
+        first, init = parts[0], (parts[-1][:1] if len(parts) > 1 else "")
+        if _key(short) in gone:
+            continue
+        full = next((n for n in sorted(known_full_names)
+                     if n.split()[0].lower() == first.lower()
+                     and (not init or n.split()[-1][:1].upper() == init.upper())), None)
+        out.append(full or short)
+    return sorted(out)
 
 
 def avg(scores):
@@ -62,7 +114,7 @@ def avg(scores):
 
 
 def main():
-    shops, part, name_map = load()
+    shops, part = load()
 
     today = date.today()
     current_month = today.strftime("%Y-%m")
@@ -85,19 +137,22 @@ def main():
             if str(s["date"]).startswith(current_month):
                 per_emp_month[first].append(score)
 
-    def emp_record(first):
+    def emp_record(full):
         return {
-            "first": first,
-            "name": name_map.get(first, f"NAME_UNRESOLVED ({first})"),
-            "month_avg": avg(per_emp_month.get(first, [])),
-            "month_n": len(per_emp_month.get(first, [])),
-            "ytd_avg": avg(per_emp_ytd.get(first, [])),
-            "ytd_n": len(per_emp_ytd.get(first, [])),
+            "first": full.split()[0],
+            "name": full,
+            "month_avg": avg(per_emp_month.get(full, [])),
+            "month_n": len(per_emp_month.get(full, [])),
+            "ytd_avg": avg(per_emp_ytd.get(full, [])),
+            "ytd_n": len(per_emp_ytd.get(full, [])),
         }
 
-    managers = [emp_record(m) for m in MANAGERS]
-    crew_firsts = sorted(set(per_emp_ytd.keys()) - set(MANAGERS))
-    crew = [emp_record(c) for c in crew_firsts]
+    mgr_names = current_managers(set(per_emp_ytd.keys()))
+    managers = [emp_record(m) for m in mgr_names]
+    gone = separated_keys()
+    crew_names = sorted(n for n in set(per_emp_ytd.keys()) - set(mgr_names)
+                        if _key(n) not in gone)
+    crew = [emp_record(c) for c in crew_names]
     crew = [c for c in crew if c["ytd_n"] > 0]
     crew.sort(key=lambda c: (c["ytd_avg"] is None, -(c["ytd_avg"] or 0)))
 
@@ -105,7 +160,7 @@ def main():
     for s in sorted(ytd_shops, key=lambda x: x["date"], reverse=True)[:5]:
         jid = str(s["job_id"])
         names = part.get(jid, [])
-        full = [name_map.get(n, n) for n in names]
+        full = list(names)
         latest_shops.append({
             "date": s["date"],
             "score": s.get("score"),

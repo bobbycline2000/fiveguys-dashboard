@@ -399,7 +399,7 @@ def _resolve_full_names(raw_first_names: list[str]) -> tuple[list[str], list[str
     resolved = []
     unresolved = []
     for n in raw_first_names:
-        full = name_map.get(n)
+        full = n if " " in n.strip() else name_map.get(n)  # CT names are already "First Last"
         if full:
             resolved.append(full)
         else:
@@ -470,6 +470,18 @@ def append_debug_log(msg: str) -> None:
 
 # ── participation fallback ────────────────────────────────────────────────────
 
+def load_ct_onshift_names(store_id: str, job_id: str) -> list[str]:
+    """Full names from CrunchTime Employee Time Detail for this shop, or []."""
+    p = DATA_ROOT / store_id / "shop_onshift_2026.json"
+    if not p.exists():
+        return []
+    try:
+        rec = json.loads(p.read_text(encoding="utf-8")).get(str(job_id), {})
+        return [e["name"] for e in rec.get("on_shift", []) if e.get("name")]
+    except Exception:
+        return []
+
+
 def load_participation_names(store_id: str, job_id: str) -> list[str]:
     """Return first-names from participation.json for this job_id, or []."""
     p = DATA_ROOT / store_id / "participation.json"
@@ -527,6 +539,14 @@ def resolve_employees(shop: dict, store_id: str, _ct_employees_unused: list[str]
       3. If all paths fail → log PARTICIPATION_RETRY_FAILED and return [].
     """
     job_id = shop.get("job_id", "?")
+
+    # 0. CrunchTime Employee Time Detail (shop_onshift_2026.json from
+    #    build_shop_onshift.py, which runs right before this step). Bobby's rule
+    #    2026-11-07: CT time detail is THE source for who was on shift.
+    ct = load_ct_onshift_names(store_id, job_id)
+    if ct:
+        log(f"  Using CrunchTime time detail ({len(ct)} names) for job {job_id}: {ct}")
+        return ct
 
     cached = load_participation_names(store_id, job_id)
     if cached:

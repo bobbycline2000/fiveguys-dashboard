@@ -390,9 +390,20 @@ def _check_100pct_participation() -> dict | None:
         except Exception:
             pass
 
+    # CrunchTime Employee Time Detail is the source of truth for shop names
+    # (Bobby 2026-11-07). A shop only counts as a gap if CT has no names either.
+    ct_path = RAW / "marketforce" / STORE_ID / "shop_onshift_2026.json"
+    ct: dict = {}
+    if ct_path.exists():
+        try:
+            ct = json.loads(ct_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
     missing = [
         s for s in perfect
-        if not by_shop.get(s.get("job_id"), [])
+        if not ct.get(str(s.get("job_id")), {}).get("on_shift")
+        and not by_shop.get(s.get("job_id"), [])
     ]
     if not missing:
         return None
