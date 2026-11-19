@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-11-19 08:29",
+    "generated": "2026-11-19 08:38",
     "location": "2065",
     "status": "ok",
     "shops_total": 152
@@ -40,7 +40,12 @@
       "service": null,
       "quality": null,
       "cleanliness": null,
-      "customer_satisfaction": null
+      "customer_satisfaction": null,
+      "visit_window": [
+        11.0,
+        13.483333333333333
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20992579",
@@ -51,7 +56,12 @@
       "service": null,
       "quality": null,
       "cleanliness": null,
-      "customer_satisfaction": null
+      "customer_satisfaction": null,
+      "visit_window": [
+        16.0,
+        19
+      ],
+      "visit_window_source": "knowledgeforce"
     },
     {
       "job_id": "20988745",

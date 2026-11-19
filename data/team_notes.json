@@ -1,20 +1,5 @@
 {
-  "notes": [
-    {
-      "from": "Brad Davis",
-      "role": "director",
-      "role_label": "Director",
-      "time": "Today 7:33 AM",
-      "body": "We want to take a moment to celebrate the growth of our people and recognize an exciting leadership milestone within our team! Effective immediately, Matthew V. is stepping into the role of Multi-Unit Manager, with direct responsibility for our 384 New Albany and 1954 Jeffersonville locations and re"
-    },
-    {
-      "from": "Prometheus",
-      "role": "gm",
-      "role_label": "Alert",
-      "time": "Today 7:33 AM",
-      "body": "\ud83d\udea8 New hire: Samuel Muradas \u2014 "
-    }
-  ],
-  "new_count": 2,
+  "notes": [],
+  "new_count": 0,
   "date": "2026-11-19"
 }

@@ -7336,10 +7336,10 @@
   "meal_period": "Dinner",
   "score": 100.0,
   "window": [
-   15.0,
-   22.0
+   16.0,
+   19.0
   ],
-  "window_source": "meal-default",
+  "window_source": "knowledgeforce",
   "on_shift": [
    {
     "name": "Alexandra Campbell",
@@ -7473,9 +7473,9 @@
   "score": 92.0,
   "window": [
    11.0,
-   15.0
+   13.483333333333333
   ],
-  "window_source": "meal-default",
+  "window_source": "knowledgeforce",
   "on_shift": [
    {
     "name": "Cortez Brown",
