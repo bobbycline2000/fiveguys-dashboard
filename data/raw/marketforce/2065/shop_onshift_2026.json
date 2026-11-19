@@ -7330,5 +7330,197 @@
     ]
    }
   ]
+ },
+ "20992579": {
+  "date": "2026-11-15",
+  "meal_period": "Dinner",
+  "score": 100.0,
+  "window": [
+   15.0,
+   22.0
+  ],
+  "window_source": "meal-default",
+  "on_shift": [
+   {
+    "name": "Alexandra Campbell",
+    "ct_name": "Campbell, Alexandra",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      17.05,
+      18.07
+     ],
+     [
+      18.42,
+      23.17
+     ]
+    ]
+   },
+   {
+    "name": "Anthony Pirtle",
+    "ct_name": "Pirtle, Anthony",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      10.1,
+      13.87
+     ],
+     [
+      14.27,
+      20.2
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.4,
+      23.33
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.92,
+      12.98
+     ],
+     [
+      13.45,
+      16.07
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      8.15,
+      10.57
+     ],
+     [
+      10.95,
+      16.55
+     ]
+    ]
+   },
+   {
+    "name": "Javeh Goodman",
+    "ct_name": "Goodman, Javeh",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.05,
+      17.6
+     ],
+     [
+      18.15,
+      23.05
+     ]
+    ]
+   },
+   {
+    "name": "Katherine Valentin",
+    "ct_name": "Valentin, Katherine",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.0,
+      15.55
+     ],
+     [
+      16.05,
+      19.47
+     ]
+    ]
+   },
+   {
+    "name": "Rodolfo Trujillo",
+    "ct_name": "Trujillo, Rodolfo",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.9,
+      18.55
+     ],
+     [
+      19.05,
+      23.2
+     ]
+    ]
+   }
+  ]
+ },
+ "20991764": {
+  "date": "2026-11-16",
+  "meal_period": "Lunch",
+  "score": 92.0,
+  "window": [
+   11.0,
+   15.0
+  ],
+  "window_source": "meal-default",
+  "on_shift": [
+   {
+    "name": "Cortez Brown",
+    "ct_name": "Brown, Cortez",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.03,
+      10.48
+     ],
+     [
+      10.97,
+      16.13
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      10.08,
+      28.0
+     ]
+    ]
+   },
+   {
+    "name": "Rodolfo Trujillo",
+    "ct_name": "Trujillo, Rodolfo",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      10.88,
+      16.62
+     ],
+     [
+      17.1,
+      19.0
+     ]
+    ]
+   }
+  ]
  }
 }
