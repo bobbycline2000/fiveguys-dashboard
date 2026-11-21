@@ -315,6 +315,21 @@ jobs:
           CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
         run: python scraper/build_shop_onshift.py
 
+      # ── 5b3b3. Who actually works here — CT punches, last 5 weeks ─────────
+      # data/active_roster.json drives the brief's FGU list + manager scoreboard
+      # (added 2026-11-21: people gone 5-7 months were still listed).
+      - name: Build active roster from CrunchTime punches
+        continue-on-error: true
+        env:
+          CRUNCHTIME_USERNAME: ${{ secrets.CRUNCHTIME_USERNAME }}
+          CRUNCHTIME_PASSWORD: ${{ secrets.CRUNCHTIME_PASSWORD }}
+        run: python scraper/build_active_roster.py --weeks 5
+
+      # Manager / crew shop scoreboard (was never rebuilt in CI before 2026-11-21).
+      - name: Build manager + crew shop scoreboard
+        continue-on-error: true
+        run: python scraper/build_shop_performance.py
+
       # ── 5b3c. Build Shop_Tracker_2065_2026.xlsx for download ──────────────
       # Reads shops.json + shop_onshift_2026.json, emits the Excel tracker with
       # monthly tabs Jan→current, Manager/Crew sections, plus Q1-Q4 Summary tabs.
@@ -577,7 +592,7 @@ jobs:
           # data/labor_today.json (and everything else on the line) for weeks
           # whenever data/cm_results_source.html was absent — root cause of the
           # "Labor % dashboard.html does NOT contain X%" backup-run FAIL emails.
-          for f in dashboard.html district.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/team_notes.json data/forecast_by_day.json data/forecast_history.json data/fgu_training.json data/fgu_reconciliation.json data/fgu_overdue_history.json; do
+          for f in dashboard.html district.html Shop_Tracker_2065_2026.xlsx safe_drawer.html safe_drawer_log.xlsx safe_drawer_log.pdf data/latest.json data/labor_today.json data/compliancemate.json data/period_rollups.json data/compliance_rollups.json data/cash_overshort_history.json data/ct_sales_summary_history.json data/safe_drawer_log.json data/cm_results_source.html data/cm_page_text.txt data/team_notes.json data/forecast_by_day.json data/forecast_history.json data/fgu_training.json data/fgu_reconciliation.json data/fgu_overdue_history.json data/active_roster.json data/shop_performance.json; do
             git add -- "$f" 2>/dev/null || true
           done
           git add briefs/ || true

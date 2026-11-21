@@ -1241,6 +1241,41 @@ def build_shift_huddle_plan(today: date, categorized: dict[str, list[dict]] | No
     return "\n".join(lines)
 
 
+def _norm_tokens(name: str) -> list[str]:
+    return [t for t in re.sub(r"[^a-z ]", " ", name.lower()).split() if t not in ("jr", "sr", "ii", "iii")]
+
+
+def _name_in(name: str, team: set) -> bool:
+    """True if `name` matches a team member (first + last token match)."""
+    t = _norm_tokens(name)
+    if not t:
+        return False
+    for m in team:
+        mt = _norm_tokens(m)
+        if mt and t[0] == mt[0] and (len(t) == 1 or len(mt) == 1 or t[-1] == mt[-1] or t[-1] in mt or mt[-1] in t):
+            return True
+    return False
+
+
+def _active_team_names() -> set:
+    """Who works at 2065 right now: CrunchTime punch roster + 'Starting' hires.
+    Empty set (= don't filter) if the roster file is missing or older than 10 days."""
+    path = REPO_ROOT / "data" / "active_roster.json"
+    try:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        if (date.today() - date.fromisoformat(doc["generated"][:10])).days > 10:
+            return set()
+        names = {e["name"] for e in doc.get("employees", [])}
+    except Exception:
+        return set()
+    try:
+        src = (REPO_ROOT / "scripts" / "build_employee_directory.py").read_text(encoding="utf-8")
+        names |= set(re.findall(r'\("([^"]+)",\s*"[^"]*",\s*"Starting"\)', src))
+    except Exception:
+        pass
+    return names
+
+
 def _build_fgu_section(today: date) -> list[str]:
     """Five Guys University (Schoox) training section for the daily brief.
 
@@ -1278,6 +1313,22 @@ def _build_fgu_section(today: date) -> list[str]:
     if not learners:
         return out
 
+    # Only people who actually work here (CrunchTime punches, data/active_roster.json,
+    # plus "Starting" hires in the directory). Added 2026-11-21: the list was showing
+    # people who left 5-7+ months ago. Schoox still carries them; list them separately
+    # so a manager removes them from KY2065 in FGU.
+    team = _active_team_names()
+    not_here: list[str] = []
+    if team:
+        keep = []
+        for l in learners:
+            nm = l.get("full_name") or l.get("name") or ""
+            if _name_in(nm, team):
+                keep.append(l)
+            elif nm != "Robert Cline":
+                not_here.append(nm)
+        learners = keep
+
     hire_dates: dict = {}
     if hire_path.exists():
         try:
@@ -1296,17 +1347,36 @@ def _build_fgu_section(today: date) -> list[str]:
 
     out.append("## 🎓 Five Guys University — Team Training")
     out.append("")
-    comp = stats.get("coursesCompletionRate")
-    overdue = stats.get("coursesOverdueRate")
-    comp_str = f"{comp:.0f}%" if isinstance(comp, (int, float)) else "—"
-    overdue_str = f"{overdue:.0f}%" if isinstance(overdue, (int, float)) else "—"
     behind = [l for l in learners if (l.get("completion_rate") or 0) < 100]
+    rates = [l.get("completion_rate") or 0 for l in learners]
+    team_avg = f"{sum(rates) / len(rates):.0f}%" if rates else "—"
     out.append(
-        f"**Store completion: {comp_str}** &nbsp;|&nbsp; "
-        f"Overdue rate: {overdue_str} &nbsp;|&nbsp; "
-        f"{len(behind)} of {len(learners)} crew below 100%"
+        f"**Current team average completion: {team_avg}** &nbsp;|&nbsp; "
+        f"{len(behind)} of {len(learners)} current team members below 100%"
     )
     out.append("")
+    if team:
+        fgu_names = [l.get("full_name") or l.get("name") or "" for l in learners]
+        missing = sorted(n for n in team if n != "Robert Cline"
+                         and not any(_name_in(n, {f}) for f in fgu_names))
+        if missing:
+            out.append(
+                f"**➕ On our team but NOT on the KY2065 FGU roster ({len(missing)}) — get them "
+                f"added/transferred so their training counts for us:** " + ", ".join(missing))
+            out.append("")
+    try:
+        age = (today - date.fromisoformat(str(fgu.get("pulled_at", ""))[:10])).days
+    except Exception:
+        age = None
+    if age is not None and age > 3:
+        out.append(f"⚠️ **FGU data is {age} days old** (last pull {str(fgu.get('pulled_at'))[:10]}). "
+                   f"The FGU login token expired: sign in to FGU in Chrome so the agent can refresh it.")
+        out.append("")
+    if not_here:
+        out.append(
+            f"**🧹 Still on our FGU roster but NOT working here ({len(not_here)}) — remove from KY2065 in FGU "
+            f"(they drag the store %):** " + ", ".join(sorted(not_here)))
+        out.append("")
 
     # ── Preventive flags: approaching onboarding deadline / already past it ──
     approaching: list[str] = []

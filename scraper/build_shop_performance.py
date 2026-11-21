@@ -75,7 +75,37 @@ def separated_keys() -> set:
     return {_key(e["name"]) for e in doc.get("separated", [])}
 
 
+ACTIVE_ROSTER = DATA / "active_roster.json"
+
+
+def active_roster():
+    """(managers, everyone) full-name sets from CrunchTime punches, or None if the
+    roster is missing/stale. Source of truth for who works here (added 2026-11-21:
+    people who left months ago were still on the scoreboard)."""
+    if not ACTIVE_ROSTER.exists():
+        return None
+    doc = json.loads(ACTIVE_ROSTER.read_text(encoding="utf-8"))
+    try:
+        if (date.today() - date.fromisoformat(doc["generated"][:10])).days > 10:
+            return None
+    except Exception:
+        return None
+    emps = doc.get("employees", [])
+    mgrs = {e["name"] for e in emps if e.get("role") == "Manager"
+            and not any("general" in p.lower() for p in e.get("positions", []))}
+    all_mgrs = {e["name"] for e in emps if e.get("role") == "Manager"}  # incl. GM
+    return mgrs, {e["name"] for e in emps}, all_mgrs
+
+
 def current_managers(known_full_names: set) -> list:
+    """Active shift leaders. CrunchTime punch roster first; Teamworx fallback."""
+    ar = active_roster()
+    if ar:
+        return sorted(ar[0])
+    return _teamworx_managers(known_full_names)
+
+
+def _teamworx_managers(known_full_names: set) -> list:
     """Shift Leads on the Teamworx roster in the last 7 days who are still active.
 
     Teamworx gives "First L." — resolve to a full name from CT names we've seen.
@@ -150,8 +180,9 @@ def main():
     mgr_names = current_managers(set(per_emp_ytd.keys()))
     managers = [emp_record(m) for m in mgr_names]
     gone = separated_keys()
+    ar = active_roster()
     crew_names = sorted(n for n in set(per_emp_ytd.keys()) - set(mgr_names)
-                        if _key(n) not in gone)
+                        if _key(n) not in gone and (ar is None or (n in ar[1] and n not in ar[2])))
     crew = [emp_record(c) for c in crew_names]
     crew = [c for c in crew if c["ytd_n"] > 0]
     crew.sort(key=lambda c: (c["ytd_avg"] is None, -(c["ytd_avg"] or 0)))

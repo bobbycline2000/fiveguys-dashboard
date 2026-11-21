@@ -32,12 +32,28 @@
       "ytd_n": 8
     },
     {
+      "first": "Madelynn",
+      "name": "Madelynn Smith",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 95.9,
+      "ytd_n": 11
+    },
+    {
       "first": "Madison",
       "name": "Madison Cureton",
       "month_avg": 93.3,
       "month_n": 3,
       "ytd_avg": 83.2,
       "ytd_n": 39
+    },
+    {
+      "first": "Rusul",
+      "name": "Rusul Kadhim",
+      "month_avg": null,
+      "month_n": 0,
+      "ytd_avg": 88.2,
+      "ytd_n": 6
     },
     {
       "first": "Vicki",
@@ -58,100 +74,12 @@
       "ytd_n": 3
     },
     {
-      "first": "Kelly",
-      "name": "Kelly Hamilton",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 100.0,
-      "ytd_n": 1
-    },
-    {
-      "first": "Heather",
-      "name": "Heather Uebelacker-Maddox",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 98.0,
-      "ytd_n": 5
-    },
-    {
-      "first": "Kable",
-      "name": "Kable Hunt Jr",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 97.5,
-      "ytd_n": 2
-    },
-    {
-      "first": "Madelynn",
-      "name": "Madelynn Smith",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 95.9,
-      "ytd_n": 11
-    },
-    {
-      "first": "Nathan",
-      "name": "Nathan Roberts",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 95.1,
-      "ytd_n": 7
-    },
-    {
       "first": "Rodolfo",
       "name": "Rodolfo Trujillo",
       "month_avg": 96.0,
       "month_n": 2,
       "ytd_avg": 94.7,
       "ytd_n": 3
-    },
-    {
-      "first": "DaKayla",
-      "name": "DaKayla Dorsey",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 93.5,
-      "ytd_n": 2
-    },
-    {
-      "first": "Akur",
-      "name": "Akur Alier",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 92.5,
-      "ytd_n": 2
-    },
-    {
-      "first": "Elizabeth",
-      "name": "Elizabeth Brazell",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 90.2,
-      "ytd_n": 9
-    },
-    {
-      "first": "Kaisha",
-      "name": "Kaisha Brewer",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 90.1,
-      "ytd_n": 12
-    },
-    {
-      "first": "DJuan",
-      "name": "DJuan Johnson",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 89.2,
-      "ytd_n": 12
-    },
-    {
-      "first": "Rusul",
-      "name": "Rusul Kadhim",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 88.2,
-      "ytd_n": 6
     },
     {
       "first": "Mykenize",
@@ -162,28 +90,12 @@
       "ytd_n": 11
     },
     {
-      "first": "Robert",
-      "name": "Robert Cline",
-      "month_avg": 96.0,
-      "month_n": 2,
-      "ytd_avg": 87.4,
-      "ytd_n": 38
-    },
-    {
       "first": "Lidy",
       "name": "Lidy Henry",
       "month_avg": 80.0,
       "month_n": 1,
       "ytd_avg": 87.2,
       "ytd_n": 31
-    },
-    {
-      "first": "Noel",
-      "name": "Noel Belisle",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 87.0,
-      "ytd_n": 2
     },
     {
       "first": "Zack",
@@ -199,46 +111,6 @@
       "month_avg": 90.0,
       "month_n": 2,
       "ytd_avg": 86.8,
-      "ytd_n": 21
-    },
-    {
-      "first": "Autumn",
-      "name": "Autumn Hearn",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 86.7,
-      "ytd_n": 9
-    },
-    {
-      "first": "Ashton",
-      "name": "Ashton Seadler-Wathen",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 86.0,
-      "ytd_n": 4
-    },
-    {
-      "first": "Michael",
-      "name": "Michael Ruth",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 85.9,
-      "ytd_n": 9
-    },
-    {
-      "first": "Serina",
-      "name": "Serina Gaskins",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 84.7,
-      "ytd_n": 9
-    },
-    {
-      "first": "Jeremiah",
-      "name": "Jeremiah Matthews",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 83.9,
       "ytd_n": 21
     },
     {
@@ -274,76 +146,12 @@
       "ytd_n": 37
     },
     {
-      "first": "Brianna",
-      "name": "Brianna Gatewood",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 81.7,
-      "ytd_n": 7
-    },
-    {
       "first": "Emanuela",
       "name": "Emanuela Kamara",
       "month_avg": 93.3,
       "month_n": 3,
       "ytd_avg": 81.5,
       "ytd_n": 20
-    },
-    {
-      "first": "Kasey",
-      "name": "Kasey Wilson",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 80.9,
-      "ytd_n": 11
-    },
-    {
-      "first": "Richard",
-      "name": "Richard Gibbs",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 78.4,
-      "ytd_n": 9
-    },
-    {
-      "first": "Samuel",
-      "name": "Samuel Galban Rocha",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 77.6,
-      "ytd_n": 8
-    },
-    {
-      "first": "Jada",
-      "name": "Jada Cox",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 75.6,
-      "ytd_n": 9
-    },
-    {
-      "first": "Christopher",
-      "name": "Christopher Conder",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 65.0,
-      "ytd_n": 3
-    },
-    {
-      "first": "Bec",
-      "name": "Bec Cahoe",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 43.0,
-      "ytd_n": 1
-    },
-    {
-      "first": "Alissa",
-      "name": "Alissa Baungardner",
-      "month_avg": null,
-      "month_n": 0,
-      "ytd_avg": 0.0,
-      "ytd_n": 1
     }
   ],
   "latest_shops": [

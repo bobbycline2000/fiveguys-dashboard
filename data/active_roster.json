@@ -1,0 +1,238 @@
+{
+  "generated": "2026-11-21T15:39:32",
+  "window_start": "2026-10-19",
+  "window_end": "2026-11-21",
+  "employees": [
+    {
+      "name": "Alexandra Campbell",
+      "ct_name": "Campbell, Alexandra",
+      "positions": [
+        "Shift Leader-Hourly"
+      ],
+      "last_worked": "2026-11-21",
+      "first_seen_in_window": "2026-10-20",
+      "hours_window": 150.5,
+      "role": "Manager"
+    },
+    {
+      "name": "Anthony Pirtle",
+      "ct_name": "Pirtle, Anthony",
+      "positions": [
+        "Shift Leader-Hourly"
+      ],
+      "last_worked": "2026-11-21",
+      "first_seen_in_window": "2026-10-19",
+      "hours_window": 153.5,
+      "role": "Manager"
+    },
+    {
+      "name": "Cortez Brown",
+      "ct_name": "Brown, Cortez",
+      "positions": [
+        "Shift Leader-Hourly"
+      ],
+      "last_worked": "2026-11-21",
+      "first_seen_in_window": "2026-10-20",
+      "hours_window": 168.9,
+      "role": "Manager"
+    },
+    {
+      "name": "Madelynn Smith",
+      "ct_name": "Smith, Madelynn",
+      "positions": [
+        "Shift Leader-Hourly"
+      ],
+      "last_worked": "2026-10-30",
+      "first_seen_in_window": "2026-10-20",
+      "hours_window": 57.0,
+      "role": "Manager"
+    },
+    {
+      "name": "Madison Cureton",
+      "ct_name": "Cureton, Madison",
+      "positions": [
+        "Shift Leader-Hourly"
+      ],
+      "last_worked": "2026-11-20",
+      "first_seen_in_window": "2026-10-19",
+      "hours_window": 193.5,
+      "role": "Manager"
+    },
+    {
+      "name": "Robert Cline",
+      "ct_name": "Cline, Robert",
+      "positions": [
+        "General Manager-Salary"
+      ],
+      "last_worked": "2026-11-19",
+      "first_seen_in_window": "2026-10-19",
+      "hours_window": 233.0,
+      "role": "Manager"
+    },
+    {
+      "name": "Rusul Kadhim",
+      "ct_name": "Kadhim, Rusul",
+      "positions": [
+        "Shift Leader-Hourly"
+      ],
+      "last_worked": "2026-11-03",
+      "first_seen_in_window": "2026-10-21",
+      "hours_window": 43.6,
+      "role": "Manager"
+    },
+    {
+      "name": "Vicki Lucey",
+      "ct_name": "Lucey, Vicki",
+      "positions": [
+        "Shift Leader-Hourly"
+      ],
+      "last_worked": "2026-11-21",
+      "first_seen_in_window": "2026-10-20",
+      "hours_window": 188.6,
+      "role": "Manager"
+    },
+    {
+      "name": "Ailen Gonzalez Cardero",
+      "ct_name": "Gonzalez Cardero, Ailen",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-20",
+      "first_seen_in_window": "2026-10-19",
+      "hours_window": 82.2,
+      "role": "Crew"
+    },
+    {
+      "name": "Daiden Gray",
+      "ct_name": "Gray, Daiden",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-21",
+      "first_seen_in_window": "2026-11-21",
+      "hours_window": 7.0,
+      "role": "Crew"
+    },
+    {
+      "name": "Emanuela Kamara",
+      "ct_name": "Kamara, Emanuela",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-19",
+      "first_seen_in_window": "2026-10-19",
+      "hours_window": 143.6,
+      "role": "Crew"
+    },
+    {
+      "name": "Francisco Llorente Mejias",
+      "ct_name": "Llorente Mejias, Francisco",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-20",
+      "first_seen_in_window": "2026-10-19",
+      "hours_window": 197.6,
+      "role": "Crew"
+    },
+    {
+      "name": "Javeh Goodman",
+      "ct_name": "Goodman, Javeh",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-20",
+      "first_seen_in_window": "2026-10-23",
+      "hours_window": 38.9,
+      "role": "Crew"
+    },
+    {
+      "name": "Katherine Valentin",
+      "ct_name": "Valentin, Katherine",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-21",
+      "first_seen_in_window": "2026-10-20",
+      "hours_window": 120.6,
+      "role": "Crew"
+    },
+    {
+      "name": "Lidy Henry",
+      "ct_name": "Henry, Lidy",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-21",
+      "first_seen_in_window": "2026-10-20",
+      "hours_window": 186.7,
+      "role": "Crew"
+    },
+    {
+      "name": "Maylin Hernandez Rodriguez",
+      "ct_name": "Hernandez Rodriguez, Maylin",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-21",
+      "first_seen_in_window": "2026-11-18",
+      "hours_window": 14.4,
+      "role": "Crew"
+    },
+    {
+      "name": "Mykenize Milledge",
+      "ct_name": "Milledge, Mykenize",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-18",
+      "first_seen_in_window": "2026-10-19",
+      "hours_window": 52.6,
+      "role": "Crew"
+    },
+    {
+      "name": "Robert Muncy Jr",
+      "ct_name": "Muncy Jr, Robert",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-17",
+      "first_seen_in_window": "2026-10-19",
+      "hours_window": 30.2,
+      "role": "Crew"
+    },
+    {
+      "name": "Rodolfo Trujillo",
+      "ct_name": "Trujillo, Rodolfo",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-20",
+      "first_seen_in_window": "2026-10-26",
+      "hours_window": 94.8,
+      "role": "Crew"
+    },
+    {
+      "name": "Samuel Muradas",
+      "ct_name": "Muradas, Samuel",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-20",
+      "first_seen_in_window": "2026-11-19",
+      "hours_window": 13.1,
+      "role": "Crew"
+    },
+    {
+      "name": "Zack Whitten",
+      "ct_name": "Whitten, Zack",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-15",
+      "first_seen_in_window": "2026-10-19",
+      "hours_window": 103.2,
+      "role": "Crew"
+    }
+  ]
+}

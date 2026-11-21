@@ -10,31 +10,31 @@ from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 
 EMPLOYEES = [
-    ("Alen",         "(407) 334-3088", "Active"),
-    ("Alexander",    "(PHONE PENDING)", "Active"),
-    ("Anthony",      "(502) 938-5182", "Active"),
-    ("Cortez",       "(PHONE PENDING)", "Active"),
-    ("Elizabeth",    "(PHONE PENDING)", "Active"),
-    ("Emanuela",     "(PHONE PENDING)", "Active"),
-    ("Francisco",    "(407) 456-1445", "Active"),
-    ("Francisco R.", "(PHONE PENDING)", "Active"),
-    ("Hannah",       "(PHONE PENDING)", "Active"),
-    ("Javeh",        "(502) 216-4460", "Active"),
-    ("Jeanie",       "(PHONE PENDING)", "Active"),
-    ("Justice",      "(502) 936-5610", "Active"),
-    ("Kenzie",       "(502) 650-2273", "Active"),
-    ("Laura",        "(PHONE PENDING)", "Active"),
-    ("Lidy",         "(502) 381-0680", "Active"),
-    ("Madelynn",     "(502) 938-3999", "Active"),
-    ("Madison",      "(502) 938-9208", "Active"),
-    ("Maylin",       "(PHONE PENDING)", "Active"),
-    ("Octavious",    "(502) 649-6790", "Active"),
-    ("Robert Muncy", "(PHONE PENDING)", "Active"),
-    ("Rodolfo",      "(PHONE PENDING)", "Active"),
-    ("Rusul",        "(502) 656-9660", "Active"),
-    ("Samuel",       "(PHONE PENDING)", "Active"),
-    ("Vicki",        "(502) 701-9597", "Active"),
-    ("Zach",         "(502) 422-9066", "Active"),
+    # Rebuilt 2026-11-21 from CrunchTime punches (everyone who clocked in during
+    # the last 5 weeks — scraper/build_active_roster.py) + AllianceHCM new-hire
+    # phones. Status: Shift Leader / Crew / Starting (hired, not on the clock yet).
+    ("Alexandra Campbell",         "(502) 926-9757", "Shift Leader"),
+    ("Anthony Pirtle",             "(502) 938-5182", "Shift Leader"),
+    ("Cortez Brown",               "(502) 599-4837", "Shift Leader"),
+    ("Madelynn Smith",             "(502) 938-3999", "Shift Leader"),
+    ("Madison Cureton",            "(502) 938-9208", "Shift Leader"),
+    ("Rusul Kadhim",               "(502) 656-9660", "Shift Leader"),
+    ("Vicki Lucey",                "(502) 701-9597", "Shift Leader"),
+    ("Ailen Gonzalez Cardero",     "(407) 334-3088", "Crew"),
+    ("Daiden Gray",                "(502) 910-0842", "Crew"),
+    ("Emanuela Kamara",            "(502) 527-4717", "Crew"),
+    ("Francisco Llorente Mejias",  "(407) 456-1445", "Crew"),
+    ("Javeh Goodman",              "(502) 216-4460", "Crew"),
+    ("Katherine Valentin",         "(502) 249-4632", "Crew"),
+    ("Lidy Henry",                 "(502) 381-0680", "Crew"),
+    ("Maylin Hernandez Rodriguez", "(PHONE PENDING)", "Crew"),
+    ("Mykenize Milledge",          "(502) 650-2273", "Crew"),
+    ("Robert Muncy Jr",            "(PHONE PENDING)", "Crew"),
+    ("Rodolfo Trujillo",           "(786) 494-9911", "Crew"),
+    ("Samuel Muradas",             "(305) 458-0475", "Crew"),
+    ("Zack Whitten",               "(502) 422-9088", "Crew"),
+    ("Hannah Dorilas",             "(PHONE PENDING)", "Starting"),
+    ("Laura Logan",                "(PHONE PENDING)", "Starting"),
 ]
 
 
@@ -114,11 +114,11 @@ def build_pdf(path: str) -> None:
         Paragraph("Five Guys — Store 2065, Dixie Highway, Louisville KY", subtitle_style),
     ]
 
-    data = [["Name", "Phone Number"]]
-    for name, phone, _status in EMPLOYEES:
-        data.append([name, phone])
+    data = [["Name", "Phone Number", "Role"]]
+    for name, phone, status in EMPLOYEES:
+        data.append([name, phone, status])
 
-    table = Table(data, colWidths=[2.0 * inch, 2.5 * inch], repeatRows=1)
+    table = Table(data, colWidths=[2.6 * inch, 1.8 * inch, 1.4 * inch], repeatRows=1)
     table.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#C8102E")),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
