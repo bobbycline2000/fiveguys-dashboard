@@ -18,6 +18,8 @@ Discovered 2026-07-05 via Chrome MCP network capture while Bobby was logged in.
 
 > **2026-11-19 ROUTE CHANGE:** `/team-dashboard/learners` and `/team-dashboard/learners/statistics` now return **404**. The live UI calls `/api/v2/academies/1177/team-dashboard/training/learners` and `.../training/learners/statistics` (same filters; a direct replay with `trainingFilterSet=teamDashboardLearners` returned 422, so the filter-set name likely changed too — capture it from the UI before rewiring `scrape_fgu.py`). Per-learner course list UI: `/academy/fiveguys/team/dashboard/learners/<userId>/training/courses/overview`.
 
+> **2026-11-21 (Bobby): FGU completion reports MUST be filtered to North American courses only.** Unfiltered course lists include non-NA items (e.g. Docuseries Crew Incentive, Five Guys Docuseries, Shake Hacks) that make a crew member look <100% when they are actually 100%. Always apply the North American filter before reporting completion.
+
 ## Endpoints (all GET, academyId=1177)
 
 ### Roster + per-employee completion — THE main pull
