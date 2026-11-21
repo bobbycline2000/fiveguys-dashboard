@@ -27,14 +27,14 @@ EMPLOYEES = [
     ("Javeh Goodman",              "(502) 216-4460", "Crew"),
     ("Katherine Valentin",         "(502) 249-4632", "Crew"),
     ("Lidy Henry",                 "(502) 381-0680", "Crew"),
-    ("Maylin Hernandez Rodriguez", "(PHONE PENDING)", "Crew"),
+    ("Maylin Hernandez Rodriguez", "(502) 803-7973", "Crew"),
     ("Mykenize Milledge",          "(502) 650-2273", "Crew"),
     ("Robert Muncy Jr",            "(PHONE PENDING)", "Crew"),
     ("Rodolfo Trujillo",           "(786) 494-9911", "Crew"),
     ("Samuel Muradas",             "(305) 458-0475", "Crew"),
     ("Zack Whitten",               "(502) 422-9088", "Crew"),
-    ("Hannah Dorilas",             "(PHONE PENDING)", "Starting"),
-    ("Laura Logan",                "(PHONE PENDING)", "Starting"),
+    ("Hannah Dorilas",             "(502) 658-0951", "Starting"),
+    ("Laura Logan",                "(502) 379-2480", "Starting"),
 ]
 
 
