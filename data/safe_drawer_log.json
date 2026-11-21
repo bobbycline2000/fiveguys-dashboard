@@ -2214,7 +2214,7 @@
     "mgr": "bc",
     "deposit": 0,
     "safe_open": 644,
-    "d1_open": 0,
+    "d1_open": 200,
     "d2_open": 0,
     "safe_mid": 0,
     "d1_mid": 0,
@@ -2224,7 +2224,7 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-11-21T14:52:18.397Z"
+    "submitted_at": "2026-11-21T14:52:24.462Z"
   },
   {
     "date": "2099-01-01",
