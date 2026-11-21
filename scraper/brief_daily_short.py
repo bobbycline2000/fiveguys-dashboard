@@ -73,7 +73,7 @@ def _section_yesterday(today: date) -> list[str]:
         lab = row.get("labor_pct")
         lab_flag = "🟢" if isinstance(lab, (int, float)) and lab <= 20 else "🔴"
         os_ = row.get("cash_os")
-        os_txt = "EVEN" if not os_ else (f"🔴 {_money(os_)} {'OVER' if os_ > 0 else 'SHORT'}")
+        os_txt = "EVEN" if not os_ or abs(os_) < 1 else f"🔴 {_money(abs(os_))} OFF"
         out.append(f"**Sales {_money(row.get('net_sales'))}** · **Labor {lab_flag} {lab}%** (goal 20%) · "
                    f"Guests {row.get('guests', '—')} · Cash O/S {os_txt}")
     else:
@@ -152,7 +152,7 @@ def _section_cash(today: date) -> list[str]:
     misses = [h for h in hist[-7:] if abs(h.get("over_short") or 0) >= 1]
     if misses:
         out.append("- 🔴 Cash off in the last 7 days: " + ", ".join(
-            f"{h['business_date'][5:]} {_money(abs(h['over_short']))} {'OVER' if h['over_short'] > 0 else 'SHORT'}"
+            f"{h['business_date'][5:]} {_money(abs(h['over_short']))} off"
             for h in misses) + ". Recount, find it, log it.")
     out.append("")
     return out
@@ -265,8 +265,7 @@ def _section_action(categorized: dict) -> list[str]:
 
 def build_short_brief(categorized: dict, today: date) -> str:
     L = [f"# Daily Brief — {today.strftime('%A %m/%d')}", "",
-         "_Short version. The full brief with everything comes Monday. "
-         f"[Live dashboard]({SITE}/dashboard.html)_", "", "---", ""]
+         f"Short version. The full brief comes Monday. [Live dashboard]({SITE}/dashboard.html)", "", "---", ""]
     for part in (_section_action(categorized), _section_yesterday(today), _section_today_schedule(today),
                  _section_cash(today), _section_shops(), _section_steritech(today),
                  ["## 🏛️ The Four Pillars", ""] + [f"- {p}" for p in PILLARS] + [""],
