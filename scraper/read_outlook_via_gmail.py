@@ -1636,7 +1636,17 @@ def _build_signoff_block() -> list[str]:
 
 
 def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
-    """Builds the daily brief markdown string."""
+    """Builds the daily brief markdown string.
+
+    Tue-Sun: short brief (scraper/brief_daily_short.py). Monday: this full brief.
+    BRIEF_FORCE_FULL=1 forces the long version on any day.
+    """
+    if today.weekday() != 0 and os.environ.get("BRIEF_FORCE_FULL") != "1":
+        try:
+            from brief_daily_short import build_short_brief
+            return build_short_brief(categorized, today)
+        except Exception as exc:  # never lose the brief: fall back to the full one
+            log(f"short brief failed, sending full brief: {exc}")
     lines: list[str] = []
     pull_time = datetime.now().strftime("%Y-%m-%d %H:%M ET")
 

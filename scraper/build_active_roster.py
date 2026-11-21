@@ -37,6 +37,8 @@ def main() -> int:
     this_mon = today - dt.timedelta(days=today.weekday())
     jar = A.ensure_session()
     people: dict = {}
+    yday = (today - dt.timedelta(days=1)).isoformat()
+    yesterday: dict = {}
     for w in range(a.weeks):
         mon = this_mon - dt.timedelta(weeks=w)
         for row in pull_week(jar, mon):
@@ -53,6 +55,10 @@ def main() -> int:
             if pos:
                 p["positions"].add(pos)
             p["hours_window"] += hrs
+            if day == yday:
+                y = yesterday.setdefault(ct, {"name": display(ct), "position": pos, "shifts": [], "hours": 0.0})
+                y["shifts"].append(f"{row.get('timeIn') or '?'}-{row.get('timeOut') or 'on'}")
+                y["hours"] = round(y["hours"] + hrs, 2)
             if day:
                 p["last_worked"] = max(p["last_worked"], day)
                 p["first_seen_in_window"] = min(p["first_seen_in_window"], day)
@@ -68,7 +74,9 @@ def main() -> int:
         "generated": dt.datetime.now().isoformat(timespec="seconds"),
         "window_start": (this_mon - dt.timedelta(weeks=a.weeks - 1)).isoformat(),
         "window_end": today.isoformat(),
-        "employees": emps}, indent=2), encoding="utf-8")
+        "employees": emps,
+        "yesterday_date": yday,
+        "yesterday": sorted(yesterday.values(), key=lambda x: x["shifts"][0])}, indent=2), encoding="utf-8")
     print(f"{len(emps)} active ({sum(e['role'] == 'Manager' for e in emps)} managers) -> {OUT}")
     return 0
 

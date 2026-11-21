@@ -1,0 +1,5 @@
+- **Thu 11/26 Thanksgiving: CLOSED.** Performance's Thursday truck comes **Wed 11/25**. Enter the holiday-week bread orders in BOSS by hand before the deadline.
+- **Black Friday weekend:** online-only BOGO burger code (doesn't work on the POS, so send guests to the app). $10 Bonus Card with $50 in gift cards bought online, Nov 27–Dec 1.
+- **Sun 12/7 Shake Hacks starts.** Don't put the signs up before then.
+- **Christmas Eve: close 4 PM. Christmas Day: closed.**
+- **2027 sales calendar** (it comes in the holiday signage package): keep it posted and current in the office.
