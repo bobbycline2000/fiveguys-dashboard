@@ -75,13 +75,29 @@ SKIP_SUBJECT_PATTERNS = [
     r"adobe acrobat",
     r"unsubscribe",
     r"microsoft account security",
+    # Noise found in the 2026-11-21 brief audit — these filled the brief with
+    # truncated dumps managers can't act on.
+    r"^recall:",
+    r"share your feedback with us",
+    r"^daily brief",
+    r"^store opening:",
+    r"^store refresh:",
+    r"^canceled:",
+    r"has been received$",
+    r"^ticket (closed|solved)$",
 ]
 
 PRIORITY_SENDERS = {
     "bdavis@estep-co.com": "Director's Corner",
+    "jreiss@estep-co.com": "District Manager — Jeff Reiss",
     "chess@estep-co.com": "Crystal Hess (DM)",
     "acampbell@estep-co.com": "District Manager",
 }
+
+# Living list of standing manager orders (holidays, promos, open items, Patty
+# Press highlights). Rendered near the top of EVERY brief until removed. Kept
+# current by the daily brief audit. Added 2026-11-21.
+STANDING_ORDERS_FILE = REPO_ROOT / "data" / "brief_standing_orders.md"
 
 CATEGORY_RULES = [
     # (pattern_type, pattern, category)
@@ -1607,6 +1623,17 @@ def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
         lines.append("---")
         lines.append("")
 
+    # ── Standing Orders (every brief until removed from the file) ────────────
+    try:
+        standing = STANDING_ORDERS_FILE.read_text(encoding="utf-8").strip()
+    except Exception:
+        standing = ""
+    if standing:
+        lines.append(standing)
+        lines.append("")
+        lines.append("---")
+        lines.append("")
+
     # ── Deposits & Cash Counts ───────────────────────────────────────────────
     lines.extend(_build_cash_section(today))
 
@@ -1626,6 +1653,25 @@ def build_brief(categorized: dict[str, list[dict]], today: date) -> str:
                 lines.append(body[:1500])
                 if len(body) > 1500:
                     lines.append("*[body truncated — see original email for full text]*")
+            lines.append("")
+        lines.append("---")
+        lines.append("")
+
+    # ── District Managers (Jeff Reiss = 737 DM; Andrew Campbell) ─────────────
+    # Before 2026-11-21 these labels had no renderer, so every DM email was
+    # silently dropped from the brief.
+    for dm_label in ("District Manager — Jeff Reiss", "District Manager"):
+        dm_emails = categorized.get(dm_label, [])
+        if not dm_emails:
+            continue
+        title = dm_label if "Jeff" in dm_label else "District Manager — Andrew Campbell"
+        lines.append(f"## {title}")
+        lines.append("")
+        for em in dm_emails:
+            lines.append(f"### {em.get('sent', '')} — \"{em.get('subject', '')}\"")
+            body = re.split(r"\n\s*(Jeff Reiss|Andrew Campbell|Get Outlook for)\b", em.get("body", ""))[0].strip()
+            if body:
+                lines.append(body[:1500])
             lines.append("")
         lines.append("---")
         lines.append("")
@@ -2096,6 +2142,12 @@ def main() -> int:
 
         if category == "New Hire / Onboarding":
             entry["_hire_info"] = extract_new_hire_info(entry["body"], subject)
+
+        # Drop duplicate subjects within a category (same announcement sent twice).
+        norm_subj = subject.strip().lower()
+        if any(e["subject"].strip().lower() == norm_subj
+               for e in categorized.get(category, [])):
+            continue
 
         categorized.setdefault(category, []).append(entry)
 
