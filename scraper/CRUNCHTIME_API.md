@@ -673,3 +673,39 @@ Discovery path (no direct hash route exists — `hasHandler:false` on this menui
 - Per-day `registerSales/summary` rows for Mon–Sun sum to exactly $644.91 (49.04+95.84+94.02+96.14+92.74+120.31+96.82) — self-consistent with the report, just not with $693.38.
 
 None of the 6+ date/report variants tried land on $693.38. Two most likely explanations, neither confirmable without a human back in the live UI: (1) CT data for this week changed between the DM's Monday-morning pull and this 2026-08-03 session (a manager correction, void, or late-settling register batch lowered the total) — this system does have known EOD-batch lag elsewhere (Bank Deposits, Section 1.5), or (2) the $693.38 figure was mis-transcribed/misremembered. **Before wiring this into `api_enter_tips.py`, re-pull close to next Monday's tip-entry cutoff and diff against what the DM sees live on screen that morning — if it still disagrees, this needs Bobby/DM eyes-on, not more endpoint guessing.**
+
+## Section 1.7 — P&L, Actual-vs-Theoretical (found 2026-11-21 by reading CT's own JS bundles)
+
+Closes the long-standing "P&L COGS% returns None" gap. Found by fetching the ExtJS package
+`.../javascript/extjs6/ces/phoenix/resources/ProfitAndLoss/ProfitAndLoss.js` (P&L lives in
+`/ncext/next.ct#ProfitAndLoss`) and the legacy `.../extjs/ces/netchef/netChefExt.min.js`.
+Pure cookie-replay; no clicks needed.
+
+**P&L summary**
+```
+GET  /resource/nc/inventory/profitandloss/startpostdates   -> contentMap.data[{value:"MM/DD/YYYY"}]
+GET  /resource/nc/inventory/profitandloss/endpostdates
+POST /resource/nc/inventory/profitandloss/summary
+     {"pagingInfo":{"page":1,"start":0,"limit":99999},
+      "extraCriteriaMap":{"startDate":"11/09/2026","endDate":"11/15/2026"}}
+```
+`contentMap.gridList[]` rows: plGrouping / plSubstructure / glDescriptionCode / actualValue / actualPercent.
+Keys used: `TOTAL NET SALES`, `TOTAL COST OF GOODS SOLD`, `TOTAL SUPPLIES` (Supplies+Janitorial+Handling),
+`6000 - Payroll - Salaries and Wages - Hourly` (includes posted charged tips). Post periods are Mon–Sun weeks
+split at month boundaries (e.g. 10/01, 11/01); any valid start/end pair works for QTD/quarters.
+Consolidated variant: `/resource/nc/inventory/profitandloss/consolidated/summary` {startDate,endDate,locationId,hierarchyId,grandTotalMode}.
+
+**Actual vs Theoretical (per GL, per location)**
+```
+POST /resource/actualvstheoretical/location/details/availabledates {"extraCriteriaMap":{"locationIdFilter":13969}}
+POST /resource/actualvstheoretical/location/details
+     {"pagingInfo":{"page":1,"start":0,"limit":1000000},
+      "extraCriteriaMap":{"startDate":"11/09/2026","endDate":"11/15/2026",
+                          "locationIdFilter":13969,"hierarchyIdFilter":null,"isConsolidated":false}}
+```
+`rows[]`: glSubstructure, glDescription, actualCost, theoreticalCost, valueVariance, divisorValue(=net sales).
+Σ valueVariance ÷ net = the Weekly Synopsis "Variances" row. Using `locationId` instead of `locationIdFilter` → HTTP 500.
+
+**OT hours:** `/resource/nc/employee/timedetail/summary` `contentMap.totalSummary[0].overtimeHours` (also `totalWages` = P&L hourly).
+
+Owner script: `scraper/fill_weekly_synopsis.py`.
