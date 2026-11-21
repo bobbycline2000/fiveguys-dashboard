@@ -18,6 +18,7 @@ EMPLOYEES = [
     ("Emanuela",     "(PHONE PENDING)", "Active"),
     ("Francisco",    "(407) 456-1445", "Active"),
     ("Francisco R.", "(PHONE PENDING)", "Active"),
+    ("Hannah",       "(PHONE PENDING)", "Active"),
     ("Javeh",        "(502) 216-4460", "Active"),
     ("Jeanie",       "(PHONE PENDING)", "Active"),
     ("Justice",      "(502) 936-5610", "Active"),

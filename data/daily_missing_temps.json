@@ -1,16 +1,16 @@
 {
   "store": "2065",
-  "date": "2026-11-19",
-  "day_of_week": "Thursday",
-  "generated_at": "2026-11-20T10:04:35.843720-04:00",
+  "date": "2026-11-20",
+  "day_of_week": "Friday",
+  "generated_at": "2026-11-21T06:12:00.068304-04:00",
   "schedule": {
-    "date": "2026-11-19",
-    "day_of_week": "Thursday",
+    "date": "2026-11-20",
+    "day_of_week": "Friday",
     "am_manager": "Robert Cline",
-    "pm_manager": "Madison Cureton",
-    "shift_change_manager": "Vicki Lucey & Alexandra Campbell"
+    "pm_manager": "Cortez Brown",
+    "shift_change_manager": "Vicki Lucey & Anthony Pirtle & Alexandra Campbell & Madison Cureton"
   },
   "missing_count": 0,
   "missing_items": [],
-  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Thursday 2026-11-19\n\u2705 All temps and checklists complete. Clean day.\n"
+  "markdown": "### \ud83c\udf21\ufe0f Missing Time & Temps & Checklists \u2014 Friday 2026-11-20\n\u2705 All temps and checklists complete. Clean day.\n"
 }
