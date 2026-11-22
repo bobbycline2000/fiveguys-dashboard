@@ -69,7 +69,12 @@ def _section_yesterday(today: date) -> list[str]:
     out = [f"## 📊 Yesterday ({y.strftime('%a %m/%d')})", ""]
     dn = _load("daily_numbers.json") or {}
     row = next((r for r in dn.get("rows", []) if r.get("date") == y.isoformat() and not r.get("empty")), None)
-    if row:
+    if row and row.get("net_sales") is None:
+        # Partial row (cash posted, DSR not yet): never print "None%" (audit 2026-11-22).
+        os_ = row.get("cash_os")
+        os_txt = "" if os_ is None else (" Cash O/S so far: EVEN." if abs(os_) < 1 else f" Cash O/S so far: 🔴 {_money(abs(os_))} OFF.")
+        out.append("_Sales/labor for yesterday not posted yet. Check CrunchTime before the lunch rush._" + os_txt)
+    elif row:
         lab = row.get("labor_pct")
         lab_flag = "🟢" if isinstance(lab, (int, float)) and lab <= 20 else "🔴"
         os_ = row.get("cash_os")
@@ -253,11 +258,26 @@ def _section_action(categorized: dict) -> list[str]:
         for em in categorized.get(label, []):
             body = re.sub(r"\s+", " ", em.get("body", "")).strip()
             body = re.split(r"(Brad Davis|Jeff Reiss|Andrew Campbell|Crystal Hess) ", body)[0]
+            body = re.sub(r"\[(image|cid:)[^\]]*\]", "", body).strip()
+            if not body:
+                body = "sent as a picture only. Open the email in fg2065 and read it (post KPI rankings in the office)."
             items.append(f"**{who} — {em.get('subject', '')}:** {body[:220]}{'…' if len(body) > 220 else ''}")
     for em in categorized.get("Finance / Deposits", []):
         items.append(f"💵 **Deposits:** {em.get('subject', '')}")
     for em in categorized.get("Secret Shop", []):
         items.append(f"🛒 {em.get('subject', '')}")
+    # FoodLogiQ / Steritech land in other categories; managers must see them (audit 2026-11-22).
+    for cat, ems in categorized.items():
+        if cat.startswith("_"):
+            continue
+        for em in ems:
+            who = (em.get("from") or em.get("sender") or "").lower()
+            subj = em.get("subject", "")
+            if re.search(r"foodlogiq|steritech", who + " " + subj.lower()):
+                inc = re.search(r"#\s?\d{2}-\d{4,6}", em.get("body", "") + " " + subj)
+                items.append(f"🧾 **{'FoodLogiQ' if 'foodlogiq' in who + subj.lower() else 'Steritech'}"
+                             f"{' ' + inc.group(0).replace(' ', '') if inc else ''}:** {subj[:140]}. "
+                             "Log in and answer it today so it doesn't close against us.")
     if not items:
         return []
     return ["## ✅ Action Needed Today", ""] + [f"- {i}" for i in items] + [""]
@@ -266,7 +286,11 @@ def _section_action(categorized: dict) -> list[str]:
 def build_short_brief(categorized: dict, today: date) -> str:
     L = [f"# Daily Brief — {today.strftime('%A %m/%d')}", "",
          f"Short version. The full brief comes Monday. [Live dashboard]({SITE}/dashboard.html)", "", "---", ""]
-    for part in (_section_action(categorized), _section_yesterday(today), _section_today_schedule(today),
+    try:
+        standing = (DATA / "brief_standing_orders.md").read_text(encoding="utf-8").strip()
+    except Exception:
+        standing = ""
+    for part in (_section_action(categorized), [standing, ""] if standing else [], _section_yesterday(today), _section_today_schedule(today),
                  _section_cash(today), _section_shops(), _section_steritech(today),
                  ["## 🏛️ The Four Pillars", ""] + [f"- {p}" for p in PILLARS] + [""],
                  _section_new_hires(today), _section_coming_up(today)):

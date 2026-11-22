@@ -1,7 +1,7 @@
 {
-  "generated": "2026-11-21T16:28:02",
+  "generated": "2026-11-22T06:15:12",
   "window_start": "2026-10-19",
-  "window_end": "2026-11-21",
+  "window_end": "2026-11-22",
   "employees": [
     {
       "name": "Alexandra Campbell",
@@ -22,7 +22,7 @@
       ],
       "last_worked": "2026-11-21",
       "first_seen_in_window": "2026-10-19",
-      "hours_window": 154.2,
+      "hours_window": 161.3,
       "role": "Manager"
     },
     {
@@ -33,7 +33,7 @@
       ],
       "last_worked": "2026-11-21",
       "first_seen_in_window": "2026-10-20",
-      "hours_window": 169.6,
+      "hours_window": 170.1,
       "role": "Manager"
     },
     {
@@ -110,7 +110,7 @@
       ],
       "last_worked": "2026-11-21",
       "first_seen_in_window": "2026-11-21",
-      "hours_window": 7.7,
+      "hours_window": 7.5,
       "role": "Crew"
     },
     {
@@ -119,9 +119,9 @@
       "positions": [
         "2. Crew"
       ],
-      "last_worked": "2026-11-19",
+      "last_worked": "2026-11-21",
       "first_seen_in_window": "2026-10-19",
-      "hours_window": 143.6,
+      "hours_window": 150.2,
       "role": "Crew"
     },
     {
@@ -141,9 +141,9 @@
       "positions": [
         "2. Crew"
       ],
-      "last_worked": "2026-11-20",
+      "last_worked": "2026-11-21",
       "first_seen_in_window": "2026-10-23",
-      "hours_window": 38.9,
+      "hours_window": 44.4,
       "role": "Crew"
     },
     {
@@ -154,7 +154,7 @@
       ],
       "last_worked": "2026-11-21",
       "first_seen_in_window": "2026-10-20",
-      "hours_window": 120.9,
+      "hours_window": 123.8,
       "role": "Crew"
     },
     {
@@ -176,7 +176,7 @@
       ],
       "last_worked": "2026-11-21",
       "first_seen_in_window": "2026-11-18",
-      "hours_window": 15.2,
+      "hours_window": 21.9,
       "role": "Crew"
     },
     {
@@ -207,9 +207,9 @@
       "positions": [
         "2. Crew"
       ],
-      "last_worked": "2026-11-20",
+      "last_worked": "2026-11-21",
       "first_seen_in_window": "2026-10-26",
-      "hours_window": 94.8,
+      "hours_window": 100.6,
       "role": "Crew"
     },
     {
@@ -235,114 +235,105 @@
       "role": "Crew"
     }
   ],
-  "yesterday_date": "2026-11-20",
+  "yesterday_date": "2026-11-21",
   "yesterday": [
-    {
-      "name": "Alexandra Campbell",
-      "position": "Shift Leader-Hourly",
-      "shifts": [
-        "07:00-10:31",
-        "07:13-10:31",
-        "10:58-14:03"
-      ],
-      "hours": 9.9
-    },
-    {
-      "name": "Vicki Lucey",
-      "position": "Shift Leader-Hourly",
-      "shifts": [
-        "07:12-10:40",
-        "10:59-15:31"
-      ],
-      "hours": 8.0
-    },
     {
       "name": "Lidy Henry",
       "position": "2. Crew",
       "shifts": [
-        "07:51-10:32",
-        "10:57-15:56"
+        "07:03-10:37",
+        "10:55-15:03"
       ],
-      "hours": 7.66
+      "hours": 7.7
     },
     {
       "name": "Cortez Brown",
       "position": "Shift Leader-Hourly",
       "shifts": [
-        "13:01-16:33",
-        "17:09-19:17"
+        "07:08-10:33",
+        "10:58-16:43"
       ],
-      "hours": 5.66
+      "hours": 9.17
     },
     {
-      "name": "Madison Cureton",
+      "name": "Vicki Lucey",
       "position": "Shift Leader-Hourly",
       "shifts": [
-        "14:57-22:59"
+        "08:00-09:46"
       ],
-      "hours": 8.03
+      "hours": 1.77
     },
     {
-      "name": "Maylin Hernandez Rodriguez",
+      "name": "Daiden Gray",
       "position": "2. Crew",
       "shifts": [
-        "14:58-18:43",
-        "19:10-22:58"
+        "08:00-10:25",
+        "10:55-16:03"
       ],
       "hours": 7.55
     },
     {
-      "name": "Francisco Llorente Mejias",
+      "name": "Alexandra Campbell",
+      "position": "Shift Leader-Hourly",
+      "shifts": [
+        "08:03-10:31",
+        "10:55-11:39"
+      ],
+      "hours": 3.2
+    },
+    {
+      "name": "Katherine Valentin",
       "position": "2. Crew",
       "shifts": [
-        "14:59-17:17",
-        "17:29-22:58"
+        "10:58-15:20",
+        "15:50-19:06"
       ],
-      "hours": 7.78
+      "hours": 7.64
     },
     {
       "name": "Anthony Pirtle",
       "position": "Shift Leader-Hourly",
       "shifts": [
-        "15:46-22:58"
+        "11:34-14:15",
+        "14:41-23:17"
       ],
-      "hours": 7.2
+      "hours": 11.28
     },
     {
-      "name": "Samuel Muradas",
+      "name": "Maylin Hernandez Rodriguez",
       "position": "2. Crew",
       "shifts": [
-        "15:51-17:44",
-        "18:15-22:54"
+        "15:04-18:01",
+        "18:17-23:16"
       ],
-      "hours": 6.53
+      "hours": 7.93
+    },
+    {
+      "name": "Emanuela Kamara",
+      "position": "2. Crew",
+      "shifts": [
+        "16:31-18:40",
+        "18:55-23:17"
+      ],
+      "hours": 6.52
     },
     {
       "name": "Rodolfo Trujillo",
       "position": "2. Crew",
       "shifts": [
-        "16:50-18:04",
-        "18:37-20:34"
+        "16:53-19:14",
+        "19:45-23:16"
       ],
-      "hours": 3.18
+      "hours": 5.87
     },
     {
       "name": "Javeh Goodman",
       "position": "2. Crew",
       "shifts": [
-        "17:06-18:47",
-        "19:19-20:25"
+        "17:08-20:12",
+        "20:44-23:12"
       ],
-      "hours": 2.78
-    },
-    {
-      "name": "Ailen Gonzalez Cardero",
-      "position": "2. Crew",
-      "shifts": [
-        "18:03-18:46",
-        "19:05-22:58"
-      ],
-      "hours": 4.6
+      "hours": 5.54
     }
   ]
 }

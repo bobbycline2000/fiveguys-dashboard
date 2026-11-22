@@ -1,9 +1,10 @@
 ## 📌 Standing Orders — Every Manager, Every Shift
 
-*These stay in the brief every day until they're done or expire. Last updated 2026-11-21 by the daily brief audit.*
+*These stay in the brief every day until they're done or expire. Last updated 2026-11-22 by the daily brief audit.*
 
 **Holidays & Deliveries**
 - **Thanksgiving Thu 11/26: CLOSED.** Performance's Thursday truck moves to **Wednesday 11/25**. Bread holiday routes are changed in BOSS, so **enter the whole week's bread orders by hand before the deadline.**
+- **Performance (PFG) holiday week:** Mon/Tue/Wed/Fri trucks unchanged. **Order for Friday 11/27 by Wednesday 11/25 at 11 AM.**
 - **Christmas Eve: close at 4 PM. Christmas Day: closed. New Year's Eve and Day: regular hours.**
 
 **Promotions**
@@ -20,7 +21,9 @@
 - **Steritech 100%, MMCCA under 10.** Every bread bag dated in 2 spots, date labels on the **side** of containers, no unapproved chemicals in the building.
 
 **Open Items at Dixie**
-- **FoodLogiQ #26-30509 (bun, 11/19):** upload clear product, case-label and invoice photos before it closes on its own.
+- **FoodLogiQ #26-30509 (bun, 11/19):** returned to us again. **Upload clear photos of the bun, the supplier case label and the distributor label** (label gone? photo of the bag front + the full invoice showing bread). Closes on its own ~11/28.
+- **FoodLogiQ #26-30633 (lettuce, 2 cases, 11/20):** returned to us. **Upload clear photos of the distributor label.** Closes on its own ~11/28.
+- **KPI (rolling quarter thru 11/12):** Dixie is **#2 of 12 in the district** (overall rank 305). Weak spots: **Secret shop 84.9 and ticket times 80%.** Strong: CC/100K 12.7, FSA 99, CSAT 4.4.
 - **One probe is out for repair. Use the backup probe.** If the tablet or internet goes down, **do paper temp logs every hour.**
 - **Secret shop names:** answer the office's request the **same day**, or the crew's payout gets held.
 
