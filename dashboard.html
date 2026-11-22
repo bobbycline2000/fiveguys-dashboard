@@ -829,10 +829,10 @@ body.sidebar-open .sidebar-backdrop { display: block; }
     <!-- Page header -->
     <div class="page-hdr">
       <div>
-        <div class="page-title">Good morning, Bobby.</div>
+        <div class="page-title">Good evening, Bobby.</div>
         <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>5:11 AM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>5:44 PM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -877,7 +877,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="period-lbl">Food Cost % Week</div>
           </div>
           <div class="period-box">
-            <div class="period-val">23.6%</div>
+            <div class="period-val">22.3%</div>
             <div class="period-lbl">Food Cost % Month</div>
           </div>
           <div class="period-box">
@@ -930,7 +930,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="period-lbl">WTD Labor $</div>
           </div>
           <div class="period-box">
-            <div class="period-val">1006.0</div>
+            <div class="period-val">422.7</div>
             <div class="period-lbl">WTD Hours</div>
           </div>
         </div>
@@ -1378,7 +1378,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>5:11 AM</span> &nbsp;&middot;&nbsp; November 22 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>5:44 PM</span> &nbsp;&middot;&nbsp; November 22 2026</span>
   </div>
 
 </div><!-- /main -->
@@ -1468,18 +1468,8 @@ function showShift(shift, btn) {
 // ── Labor % mini bars (11 AM – 10 PM, goal 18.5%) ──
 const LABOR_GOAL = 18.5;
 const laborData = [
-  { hr: '11A', pct: 36.3 },
-  { hr: '12P', pct: 12.7 },
-  { hr: '1P', pct: 13.0 },
-  { hr: '2P', pct: 18.0 },
-  { hr: '3P', pct: 14.2 },
-  { hr: '4P', pct: 9.0 },
-  { hr: '5P', pct: 8.2 },
-  { hr: '6P', pct: 7.3 },
-  { hr: '7P', pct: 11.8 },
-  { hr: '8P', pct: 8.6 },
-  { hr: '9P', pct: 34.6 },
-  { hr: '10P', pct: 100.0 }
+  { hr: '11A', pct: 14.8 },
+  { hr: '12P', pct: 24.6 }
 ];
 const realPcts = laborData.filter(d => d.pct !== null).map(d => d.pct);
 const maxPct = Math.max(...realPcts, LABOR_GOAL) * 1.1;

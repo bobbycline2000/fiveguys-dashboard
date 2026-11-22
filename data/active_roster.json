@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-22T06:15:12",
+  "generated": "2026-11-22T17:44:03",
   "window_start": "2026-10-19",
   "window_end": "2026-11-22",
   "employees": [
@@ -20,9 +20,9 @@
       "positions": [
         "Shift Leader-Hourly"
       ],
-      "last_worked": "2026-11-21",
+      "last_worked": "2026-11-22",
       "first_seen_in_window": "2026-10-19",
-      "hours_window": 161.3,
+      "hours_window": 162.1,
       "role": "Manager"
     },
     {
@@ -86,9 +86,9 @@
       "positions": [
         "Shift Leader-Hourly"
       ],
-      "last_worked": "2026-11-21",
+      "last_worked": "2026-11-22",
       "first_seen_in_window": "2026-10-20",
-      "hours_window": 188.6,
+      "hours_window": 194.1,
       "role": "Manager"
     },
     {
@@ -108,9 +108,9 @@
       "positions": [
         "2. Crew"
       ],
-      "last_worked": "2026-11-21",
+      "last_worked": "2026-11-22",
       "first_seen_in_window": "2026-11-21",
-      "hours_window": 7.5,
+      "hours_window": 11.7,
       "role": "Crew"
     },
     {
@@ -119,9 +119,9 @@
       "positions": [
         "2. Crew"
       ],
-      "last_worked": "2026-11-21",
+      "last_worked": "2026-11-22",
       "first_seen_in_window": "2026-10-19",
-      "hours_window": 150.2,
+      "hours_window": 154.3,
       "role": "Crew"
     },
     {
@@ -163,9 +163,9 @@
       "positions": [
         "2. Crew"
       ],
-      "last_worked": "2026-11-21",
+      "last_worked": "2026-11-22",
       "first_seen_in_window": "2026-10-20",
-      "hours_window": 186.7,
+      "hours_window": 191.2,
       "role": "Crew"
     },
     {
