@@ -2227,6 +2227,23 @@
     "submitted_at": "2026-11-21T14:52:30.248Z"
   },
   {
+    "date": "2026-11-23",
+    "mgr": "cb",
+    "deposit": 0,
+    "safe_open": 0,
+    "d1_open": 0,
+    "d2_open": 0,
+    "safe_mid": 0,
+    "d1_mid": 0,
+    "d2_mid": 0,
+    "safe_close": 0,
+    "d1_close": 0,
+    "d2_close": 0,
+    "ct_os": 0,
+    "notes": "",
+    "submitted_at": "2026-11-23T15:19:31.309Z"
+  },
+  {
     "date": "2099-01-01",
     "mgr": "TEST",
     "deposit": 0,
