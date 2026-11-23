@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "report_date": "2026-11-22",
+    "report_display": "Sunday, November 22, 2026",
+    "generated": "11/23/2026 at 5:54 PM"
+  },
+  "sales": {
+    "net": 4902.36,
+    "net_week": 33736.39,
+    "ly": null,
+    "ly_week": null,
+    "forecast": 4849.0,
+    "forecast_week": 30756.0,
+    "vs_ly": null,
+    "vs_ly_week": null,
+    "vs_forecast": 53.35999999999967,
+    "per_guest": null,
+    "per_guest_week": null
+  },
+  "labor": {
+    "cost": null,
+    "cost_week": null,
+    "pct": null,
+    "pct_week": null,
+    "actual_hours": null,
+    "actual_hours_week": null,
+    "sched_hours": null,
+    "sched_hours_week": null,
+    "hours_variance": null,
+    "productivity": null,
+    "productivity_week": null,
+    "hours_var": null
+  },
+  "cash": {
+    "over_short": null
+  },
+  "comps": [],
+  "raw": {
+    "Actual Net Sales": {
+      "day": "$4,902.36",
+      "week": "$33,736.39"
+    },
+    "Forecasted Sales": {
+      "day": "$4,849.00",
+      "week": "$30,756.00"
+    }
+  }
+}

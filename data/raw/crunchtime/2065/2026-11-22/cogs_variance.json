@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "source": "CrunchTime Net Chef \u2014 purchasesbygl/location/details + registerSales/summary (GL/purchase basis; see cogs_basis)",
+    "cogs_basis": "Purchase/delivery-date basis, NOT P&L COGS-sold basis. Can swing +/-2-4pts week-to-week on delivery timing; month/quarter track closer.",
+    "item_source": "api_ingredient_level",
+    "category": "Food",
+    "store": "2065",
+    "week_start": "2026-11-16",
+    "week_end": "2026-11-22",
+    "variance_week_start": "2026-11-09",
+    "variance_week_end": "2026-11-15",
+    "month_start": "2026-11-01",
+    "last_month_start": "2026-10-01",
+    "last_month_end": "2026-10-31",
+    "through": "2026-11-22",
+    "pulled": "2026-11-23 17:57 ET",
+    "method": "api+playwright (GL-based, 2026-08-03)"
+  },
+  "cogs_goal_pct": 27.5,
+  "cogs_pct_week": 22.4,
+  "cogs_pct_month": 21.3,
+  "cogs_pct_last_month": 22.8,
+  "variance_to_goal_week": -5.1,
+  "variance_to_goal_month": -6.2,
+  "variance_to_goal_last_mo": -4.7,
+  "items": [
+    {
+      "name": "Lettuce",
+      "actual": 234.99,
+      "theoretical": 127.47,
+      "over_dollars": 107.52,
+      "variance_pct": -84.4,
+      "rank": 1
+    },
+    {
+      "name": "Shake Mix",
+      "actual": 314.95,
+      "theoretical": 283.92,
+      "over_dollars": 31.03,
+      "variance_pct": -10.9,
+      "rank": 2
+    },
+    {
+      "name": "Ground Beef",
+      "actual": 2629.75,
+      "theoretical": 2599.38,
+      "over_dollars": 30.37,
+      "variance_pct": -1.2,
+      "rank": 3
+    },
+    {
+      "name": "Cup, Shake",
+      "actual": 60.83,
+      "theoretical": 43.58,
+      "over_dollars": 17.25,
+      "variance_pct": -39.6,
+      "rank": 4
+    },
+    {
+      "name": "Cajun Season",
+      "actual": 75.92,
+      "theoretical": 97.17,
+      "over_dollars": -21.25,
+      "variance_pct": 21.9,
+      "rank": 5
+    },
+    {
+      "name": "Bun, Burger",
+      "actual": 886.14,
+      "theoretical": 907.85,
+      "over_dollars": -21.71,
+      "variance_pct": 2.4,
+      "rank": 6
+    },
+    {
+      "name": "Topping, Peanut Butter Cup",
+      "actual": 11.09,
+      "theoretical": 35.64,
+      "over_dollars": -24.55,
+      "variance_pct": 68.9,
+      "rank": 7
+    },
+    {
+      "name": "Potato, Idaho",
+      "actual": 882.28,
+      "theoretical": 908.65,
+      "over_dollars": -26.37,
+      "variance_pct": 2.9,
+      "rank": 8
+    },
+    {
+      "name": "Cheese",
+      "actual": 299.67,
+      "theoretical": 340.18,
+      "over_dollars": -40.51,
+      "variance_pct": 11.9,
+      "rank": 9
+    },
+    {
+      "name": "Bacon, Raw Sliced",
+      "actual": 332.49,
+      "theoretical": 390.73,
+      "over_dollars": -58.24,
+      "variance_pct": 14.9,
+      "rank": 10
+    }
+  ],
+  "ranking": "over_dollars_desc"
+}
