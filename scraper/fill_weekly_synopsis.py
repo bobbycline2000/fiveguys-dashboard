@@ -242,7 +242,8 @@ def main():
         label = cur["values"][row - 1][0]
         have = cur["values"][row - 1][ci] if ci is not None else ""
         fx = str(cur["formulas"][row - 1][ci]) if ci is not None else ""
-        flag = "  (FORMULA — skip)" if fx.startswith("=") else ""
+        flag = ("  (broken =X20*1.11 — OVERWRITE)" if row == 22 and fx.replace(" ", "").upper() == f"={col}20*1.11"
+                else "  (FORMULA — skip)" if fx.startswith("=") else "")
         match = "" if have in ("", None) else ("  ✓ matches" if abs(float(have or 0) - float(vals[row] or 0)) < 0.00051 else f"  ≠ sheet has {have}")
         print(f"  {col}{row:<3} {str(label).strip():<24} {vals[row]!s:<12}{match}{flag}")
     if problems:
@@ -253,7 +254,11 @@ def main():
         return 0
     wrote = 0
     for row in sorted(INPUT_ROWS):
-        if str(cur["formulas"][row - 1][ci]).startswith("="):
+        fx = str(cur["formulas"][row - 1][ci]).replace(" ", "").upper()
+        # Row 22 in cols D/E ships with a broken "=D20*1.11" (labor $ x 1.11, no ÷ net) that renders
+        # as ~940000%. Weeks 1-2 hold typed percentages, so overwrite that one formula. (2026-11-23)
+        broken_22 = row == 22 and fx == f"={col}20*1.11"
+        if fx.startswith("=") and not broken_22:
             continue
         r = UX.graph_call("PATCH", f"{base}/range(address='{col}{row}')", H,
                           json={"values": [[vals[row]]]})
