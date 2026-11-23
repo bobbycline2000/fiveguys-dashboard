@@ -2230,7 +2230,7 @@
     "date": "2026-11-23",
     "mgr": "cb",
     "deposit": 0,
-    "safe_open": 0,
+    "safe_open": 639,
     "d1_open": 0,
     "d2_open": 0,
     "safe_mid": 0,
@@ -2241,7 +2241,7 @@
     "d2_close": 0,
     "ct_os": 0,
     "notes": "",
-    "submitted_at": "2026-11-23T15:19:31.309Z"
+    "submitted_at": "2026-11-23T15:21:43.187Z"
   },
   {
     "date": "2099-01-01",
