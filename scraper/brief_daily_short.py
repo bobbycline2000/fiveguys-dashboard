@@ -154,6 +154,15 @@ def _section_cash(today: date) -> list[str]:
     else:
         out.append(f"- 🔴 **No counts logged for {y}.** Closing manager: log them today.")
     hist = _load("cash_overshort_history.json") or []
+    # Prefer newer full-day recaptures (5 AM capture can predate late deposit
+    # entry -- 11/20 read $646.86 over, later $0.00). 2026-11-23 audit.
+    _ss = {r.get("business_date"): r for r in (_load("ct_sales_summary_history.json") or [])
+           if (r.get("captured_at") or "")[:10] > (r.get("business_date") or "")}
+    for h in hist:
+        s = _ss.get(h.get("business_date"))
+        if s and (s.get("captured_at") or "") > (h.get("captured_at") or "") \
+                and s.get("over_short") is not None:
+            h["over_short"] = s["over_short"]
     misses = [h for h in hist[-7:] if abs(h.get("over_short") or 0) >= 1]
     if misses:
         out.append("- 🔴 Cash off in the last 7 days: " + ", ".join(

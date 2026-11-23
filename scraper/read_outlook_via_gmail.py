@@ -80,6 +80,7 @@ SKIP_SUBJECT_PATTERNS = [
     r"^recall:",
     r"share your feedback with us",
     r"^daily brief",
+    r"^brief addendum",  # our own audit addendum (2026-11-23 audit)
     r"^store opening:",
     r"^store refresh:",
     r"^canceled:",
@@ -673,8 +674,12 @@ def build_secret_shop_corner() -> str:
     lines.append("**Where we stand right now:**")
     lines.append("")
     lines.append(f"- **Latest shop:** {latest.get('date','?')} {latest.get('meal_period','?')} — **{latest.get('score','?')}%**")
-    lines.append(f"  - Service {latest.get('service','?')}% · Quality {latest.get('quality','?')}% · "
-                 f"Cleanliness {latest.get('cleanliness','?')}% · CSAT {latest.get('customer_satisfaction','?')}%")
+    _kpi_parts = [f"{lbl} {latest.get(k)}%" for lbl, k in
+                  (("Service", "service"), ("Quality", "quality"),
+                   ("Cleanliness", "cleanliness"), ("CSAT", "customer_satisfaction"))
+                  if latest.get(k) is not None]
+    if _kpi_parts:
+        lines.append("  - " + " · ".join(_kpi_parts))
     if avg.get("month", {}).get("score") is not None:
         lines.append(f"- **Month average:** {avg['month']['score']}% (n={avg['month']['n']})")
     if avg.get("quarter", {}).get("score") is not None:
@@ -822,6 +827,11 @@ def _huddle_data_snapshot(today: date) -> dict:
             rows_sorted = sorted(rows, key=lambda r: r.get("business_date", ""))
             streak = 0
             for r in reversed(rows_sorted):
+                # Skip partial-day captures (captured on/before the business date,
+                # e.g. a 3 PM hourly pull before deposits are in) -- they read
+                # as false shorts. 2026-11-23 audit.
+                if (r.get("captured_at") or "")[:10] <= (r.get("business_date") or ""):
+                    continue
                 v = r.get("over_short", 0.0) or 0.0
                 if abs(v) < 1.0:
                     streak += 1
@@ -1453,6 +1463,22 @@ def _build_cash_section(today: date) -> list[str]:
         except Exception:
             ct_rows = []
 
+    # The 5 AM O/S capture can predate late deposit entry (11/20 read $646.86
+    # over, later recaptured $0.00). Prefer the newer full-day value from
+    # ct_sales_summary_history.json when it exists. 2026-11-23 audit.
+    _ss_path = repo / "data" / "ct_sales_summary_history.json"
+    if ct_rows and _ss_path.exists():
+        try:
+            _ss = {r.get("business_date"): r for r in _json.loads(_ss_path.read_text(encoding="utf-8"))
+                   if (r.get("captured_at") or "")[:10] > (r.get("business_date") or "")}
+            for r in ct_rows:
+                s = _ss.get(r.get("business_date"))
+                if s and (s.get("captured_at") or "") > (r.get("captured_at") or "") \
+                        and s.get("over_short") is not None:
+                    r["over_short"] = s["over_short"]
+        except Exception:
+            pass
+
     mgr_rows: list[dict] = []
     if mgr_path.exists():
         try:
@@ -1478,7 +1504,7 @@ def _build_cash_section(today: date) -> list[str]:
         val = latest.get("over_short", 0.0)
         bd = latest.get("business_date", "?")
         label = "OVER" if val > 0.005 else "SHORT" if val < -0.005 else "EVEN"
-        out.append(f"**Yesterday ({bd}) — CrunchTime Total Cash Over/Short:** ${val:,.2f} ({label})")
+        out.append(f"**Last closed day ({bd}) — CrunchTime Total Cash Over/Short:** ${val:,.2f} ({label})")
         out.append("")
 
     if mgr_yesterday:
@@ -1509,7 +1535,7 @@ def _build_cash_section(today: date) -> list[str]:
         out.append("|---|---|")
         for r in last7:
             v = r.get("over_short", 0.0)
-            tag = "🟢" if v >= -0.005 else "🔴"
+            tag = "🟢" if abs(v) < 1.0 else ("🔴" if v < 0 else "🟡")
             out.append(f"| {r.get('business_date','?')} | {tag} ${v:,.2f} |")
         out.append("")
 

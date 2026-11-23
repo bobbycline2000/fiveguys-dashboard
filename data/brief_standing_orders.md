@@ -1,6 +1,6 @@
 ## 📌 Standing Orders — Every Manager, Every Shift
 
-*These stay in the brief every day until they're done or expire. Last updated 2026-11-22 by the daily brief audit.*
+*These stay in the brief every day until they're done or expire. Last updated 2026-11-23 by the daily brief audit.*
 
 **Holidays & Deliveries**
 - **Thanksgiving Thu 11/26: CLOSED.** Performance's Thursday truck moves to **Wednesday 11/25**. Bread holiday routes are changed in BOSS, so **enter the whole week's bread orders by hand before the deadline.**
