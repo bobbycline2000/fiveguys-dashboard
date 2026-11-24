@@ -2,7 +2,7 @@
   "meta": {
     "report_date": "2026-11-23",
     "report_display": "Monday, November 23, 2026",
-    "generated": "11/24/2026 at 6:09 AM"
+    "generated": "11/24/2026 at 4:30 PM"
   },
   "sales": {
     "net": 4194.0,
@@ -32,13 +32,13 @@
     "hours_var": null
   },
   "cash": {
-    "over_short": 957.28
+    "over_short": 0.0
   },
   "comps": [
     {
       "name": "Comps and Discounts",
-      "day": "$24.88",
-      "week": "$24.88"
+      "day": "$19.38",
+      "week": "$19.38"
     }
   ],
   "raw": {
@@ -71,12 +71,12 @@
       "week": "21.55%"
     },
     "Total Cash Over/Short": {
-      "day": "$957.28",
+      "day": "$0.00",
       "week": "$957.28"
     },
     "Comps and Discounts": {
-      "day": "$24.88",
-      "week": "$24.88"
+      "day": "$19.38",
+      "week": "$19.38"
     },
     "Sales / Guest": {
       "day": "$5.47",

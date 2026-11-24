@@ -2,21 +2,34 @@
   "store": "2065",
   "week_start": "2026-11-16",
   "week_end": "2026-11-22",
-  "variance_week_start": "2026-11-09",
-  "variance_week_end": "2026-11-15",
+  "variance_week_start": "2026-11-16",
+  "variance_week_end": "2026-11-22",
   "cogs_pct_week": 22.4,
   "cogs_pct_week_label": "2026-11-22",
   "cogs_goal_pct": 27.5,
-  "total_over": 168.92,
-  "generated": "2026-11-23 21:59 ET",
+  "total_over": 251.26,
+  "generated": "2026-11-24 20:34 ET",
   "items": [
     {
       "rank": 1,
+      "name": "Cheese",
+      "over_dollars": 111.54,
+      "actual": 427.57,
+      "theoretical": 316.03,
+      "variance_pct": -35.3,
+      "big_six": true,
+      "actions": [
+        "Big Six item \u2014 watch it. Count cheese slices per build; verify receiving count vs invoice.",
+        "Recount on-hand \u2014 a miscount is the usual cause of a big swing."
+      ]
+    },
+    {
+      "rank": 2,
       "name": "Lettuce",
-      "over_dollars": 107.52,
-      "actual": 234.99,
-      "theoretical": 127.47,
-      "variance_pct": -84.4,
+      "over_dollars": 88.88,
+      "actual": 210.49,
+      "theoretical": 121.61,
+      "variance_pct": -73.1,
       "big_six": false,
       "actions": [
         "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning.",
@@ -26,26 +39,12 @@
       ]
     },
     {
-      "rank": 2,
-      "name": "Shake Mix",
-      "over_dollars": 31.03,
-      "actual": 314.95,
-      "theoretical": 283.92,
-      "variance_pct": -10.9,
-      "big_six": false,
-      "actions": [
-        "Watch portioning and confirm the build/prep spec.",
-        "Verify employee meals are being rung and review waste.",
-        "Recount on-hand \u2014 check for a miscount or receiving error."
-      ]
-    },
-    {
       "rank": 3,
-      "name": "Ground Beef",
-      "over_dollars": 30.37,
-      "actual": 2629.75,
-      "theoretical": 2599.38,
-      "variance_pct": -1.2,
+      "name": "Bun, Burger",
+      "over_dollars": 50.84,
+      "actual": 919.24,
+      "theoretical": 868.4,
+      "variance_pct": -5.9,
       "big_six": true,
       "actions": [
         "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz.",
