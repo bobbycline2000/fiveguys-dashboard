@@ -1,17 +1,20 @@
 ## 📌 Standing Orders — Every Manager, Every Shift
 
-*These stay in the brief every day until they're done or expire. Last updated 2026-11-23 by the daily brief audit.*
+*These stay in the brief every day until they're done or expire. Last updated 2026-11-24 by the daily brief audit.*
 
 **Holidays & Deliveries**
-- **Thanksgiving Thu 11/26: CLOSED.** Performance's Thursday truck moves to **Wednesday 11/25**. Bread holiday routes are changed in BOSS, so **enter the whole week's bread orders by hand before the deadline.**
+- **Thanksgiving Thu 11/26: CLOSED.** Performance's Thursday truck moves to **Wednesday 11/25**. Bread holiday routes are changed in BOSS, so **enter the whole week's bread orders by hand before the deadline.** After the bakery's deadline, orders can't be changed. Olo and delivery apps are set to closed Thursday automatically.
 - **Performance (PFG) holiday week:** Mon/Tue/Wed/Fri trucks unchanged. **Order for Friday 11/27 by Wednesday 11/25 at 11 AM.**
 - **Christmas Eve: close at 4 PM. Christmas Day: closed. New Year's Eve and Day: regular hours.**
 
 **Promotions**
 - **Black Friday weekend: online-only BOGO burger code** (the corporate email lists Nov 28–30). **The code does not work on the POS**, so send guests to the app or website.
 - **$10 Bonus Card** (gift cards bought online, Nov 27–Dec 1): it's digital, so key it in. **1 per transaction.** It doesn't work on 3rd-party orders, tips, gift cards or with other discounts. Good through Feb 28.
-- **Shake Hacks starts Dec 7.** Signs arrive the week of 11/23 or 11/30. **Do not put them up before Dec 7.** Goal: **5 more shakes a day.**
+- **Shake Hacks starts Mon Dec 7.** The first register board panel was defective, so a **replacement panel is shipping. Hold all Shake Hacks materials until it arrives**, then peel off the old panel, put on the new one, add the strips and make sure they stick. **No new panel by 12/7? Don't put the board up; tell Bobby.** Goal: **5 more shakes a day.**
 - **3rd-party promos through Dec 31:** dollars off orders over $30, plus a free shake or regular fry.
+
+**HR**
+- **Open enrollment closes Mon 11/30 at 5 PM.** Everyone on Jeni's list (including Vicki and Kayla) must **log in and elect or waive**, or they have no 2027 coverage. Jeni is out Wed–Fri, so **questions go to her today.**
 
 **Brad & Jeff's Standards**
 - **Crew labor 20% or under.** Schedules out **Monday by 5 PM**, built from CrunchTime forecasts. **Keep the Daily Report current every day, forecasts included.**
@@ -19,6 +22,10 @@
 - **"No ticket, no taco":** every employee meal gets rung in. Crew can't have shakes with burgers.
 - **FGU 0% overdue.** Bonuses depend on it.
 - **Steritech 100%, MMCCA under 10.** Every bread bag dated in 2 spots, date labels on the **side** of containers, no unapproved chemicals in the building.
+
+**Kitchen (Patty Press 11/23)**
+- **Cut potatoes: shake off the extra water before they go in the white buckets.** Use the perforated tub so water drains out. Less water = better fries, less oil used.
+- **Gift card display racks are on backorder.** Keep ordering through The Howard Company in OnTrack.
 
 **Open Items at Dixie**
 - **FoodLogiQ #26-30509 (bun, 11/19):** returned to us again. **Upload clear photos of the bun, the supplier case label and the distributor label** (label gone? photo of the bag front + the full invoice showing bread). Closes on its own ~11/28.

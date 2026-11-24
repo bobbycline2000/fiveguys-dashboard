@@ -69,7 +69,18 @@ def _section_yesterday(today: date) -> list[str]:
     out = [f"## 📊 Yesterday ({y.strftime('%a %m/%d')})", ""]
     dn = _load("daily_numbers.json") or {}
     row = next((r for r in dn.get("rows", []) if r.get("date") == y.isoformat() and not r.get("empty")), None)
-    if row and row.get("net_sales") is None:
+    # daily_numbers.json is rebuilt at 8 AM, after this brief; its row for yesterday is a mid-day
+    # snapshot (cash O/S taken before deposits). Use the overnight Par Brink Sales Summary instead,
+    # and never print the mid-day cash O/S as a final number (audit 2026-11-24, 2nd occurrence).
+    brink = _load(f"raw/parbrink/2065/{y.isoformat()}/sales_summary.json") or {}
+    if (not row or row.get("net_sales") is None) and brink.get("net_sales") is not None:
+        lab = brink.get("labor_percent")
+        lab_flag = "🟢" if isinstance(lab, (int, float)) and lab <= 20 else "🔴"
+        out.append(f"**Sales {_money(brink.get('net_sales'))}** · **Labor {lab_flag} {lab}%** (goal 20%) · "
+                   f"Guests {brink.get('guest_count', '—')} · Cash O/S: not final yet, "
+                   "**confirm yesterday's deposit is entered in CrunchTime.**")
+        row = None
+    elif row and row.get("net_sales") is None:
         # Partial row (cash posted, DSR not yet): never print "None%" (audit 2026-11-22).
         os_ = row.get("cash_os")
         os_txt = "" if os_ is None else (" Cash O/S so far: EVEN." if abs(os_) < 1 else f" Cash O/S so far: 🔴 {_money(abs(os_))} OFF.")
@@ -271,6 +282,15 @@ def _section_action(categorized: dict) -> list[str]:
             if not body:
                 body = "sent as a picture only. Open the email in fg2065 and read it (post KPI rankings in the office)."
             items.append(f"**{who} — {em.get('subject', '')}:** {body[:220]}{'…' if len(body) > 220 else ''}")
+    # HR (Jeni Moffatt / payroll / onboarding) lands in "Estep Corporate / Admin" — deadlines
+    # like open enrollment were being dropped from the short brief (audit 2026-11-24).
+    for em in categorized.get("Estep Corporate / Admin", []):
+        who = (em.get("sender") or em.get("from") or "").lower()
+        if not re.search(r"jmoffatt|hrassistant|onboarding|payroll", who):
+            continue
+        body = re.sub(r"\s+", " ", em.get("body") or em.get("snippet") or "").strip()
+        body = re.split(r"\b(Thanks,|Thank you,|From: )", body)[0].strip()
+        items.append(f"🧑‍💼 **HR — {em.get('subject', '')}:** {body[:400]}{'…' if len(body) > 400 else ''}")
     for em in categorized.get("Finance / Deposits", []):
         items.append(f"💵 **Deposits:** {em.get('subject', '')}")
     for em in categorized.get("Secret Shop", []):
