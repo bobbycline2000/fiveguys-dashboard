@@ -1,7 +1,7 @@
 {
   "store_id": "2065",
   "month": "November 2026",
-  "generated": "2026-11-25 16:16 ET",
+  "generated": "2026-11-25 19:50 ET",
   "rows": [
     {
       "day": 1,
@@ -294,7 +294,14 @@
     {
       "day": 25,
       "date": "2026-11-25",
-      "empty": true
+      "empty": false,
+      "net_sales": null,
+      "labor_pct": null,
+      "labor_hours": null,
+      "guests": null,
+      "sales_guest": null,
+      "discounts": null,
+      "cash_os": -311.01
     },
     {
       "day": 26,

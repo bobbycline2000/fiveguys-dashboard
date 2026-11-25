@@ -12,12 +12,27 @@
     {
       "label": "11A",
       "hour_24": 11,
-      "labor_percent": 0.0
+      "labor_percent": 8.5
+    },
+    {
+      "label": "12P",
+      "hour_24": 12,
+      "labor_percent": 13.4
+    },
+    {
+      "label": "1P",
+      "hour_24": 13,
+      "labor_percent": 18.0
+    },
+    {
+      "label": "2P",
+      "hour_24": 14,
+      "labor_percent": 31.1
     }
   ],
   "meta": {
     "source": "crunchtime_api",
-    "pulled_at": "2026-11-25T16:13:23",
+    "pulled_at": "2026-11-25T19:47:55",
     "calc_id_yesterday": 3
   }
 }
