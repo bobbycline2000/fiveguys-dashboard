@@ -133,11 +133,42 @@ def _section_yesterday(today: date) -> list[str]:
 
 def _section_today_schedule(today: date) -> list[str]:
     files = sorted((DATA / "raw" / "parbrink" / "2065").glob("*/weekly_schedule.json"))
+    days = []
     for f in reversed(files):
         try:
-            day = json.loads(f.read_text(encoding="utf-8")).get("schedule", {}).get(today.isoformat())
+            days.append(json.loads(f.read_text(encoding="utf-8")).get("schedule", {}).get(today.isoformat()))
         except Exception:
-            day = None
+            pass
+    # Teamworx roster scrape overwrites the Par Brink-parsed weekly_schedule.json in the same
+    # folder with a 1-day file, so fall back to the Weekly Labor Schedule PDFs (audit 2026-11-25).
+    try:
+        import parbrink_parse_weekly_schedule as P
+        pdfs = sorted((DATA / "raw" / "parbrink" / "2065").glob("*/Weekly Labor Schedule.pdf"),
+                      key=lambda p: p.stat().st_mtime)
+        for pdf in reversed(pdfs[-3:]):
+            pages = P.extract_pages(pdf)
+            rdt = P.parse_report_date("\n".join(pages))
+            if not rdt:
+                continue
+            idx = (today - (rdt.date() - timedelta(days=rdt.weekday()))).days
+            if not 0 <= idx < 7:
+                continue
+            shifts, totals = [], {}
+            for pg in pages:
+                by_day, tot = P.parse_shifts_from_page(pg, rdt.weekday())
+                shifts += by_day.get(P.DAY_NAMES[idx], [])
+                totals = totals or tot
+            # The PDF parser tags everyone "Crew"; take leads from the active roster.
+            mgrs = {f"{e['name'].split()[0]} {e['name'].split()[-1][0]}." for e in
+                    (_load("active_roster.json") or {}).get("employees", []) if e.get("role") == "Manager"}
+            for s in shifts:
+                if s["name"] in mgrs or s["name"].startswith("Robert C"):
+                    s["role"] = "Shift Lead"
+            days.append({"shifts": shifts, "scheduled_hours": totals.get(f"_idx_{idx}", "—")})
+            break
+    except Exception:
+        pass
+    for day in days:
         if day and day.get("shifts"):
             shifts = sorted(day["shifts"], key=lambda s: datetime.strptime(s["start"], "%I:%M %p"))
             lead = [s for s in shifts if "lead" in s["role"].lower() or "manager" in s["role"].lower()]
@@ -276,12 +307,17 @@ def _section_action(categorized: dict) -> list[str]:
     for label, who in (("Director's Corner", "Brad"), ("District Manager — Jeff Reiss", "Jeff"),
                        ("District Manager", "Andrew"), ("Crystal Hess (DM)", "Crystal")):
         for em in categorized.get(label, []):
+            # Skip reply-all banter with no subject (e.g. "Re: :" games chatter) — audit 2026-11-25.
+            if not re.sub(r"\b(re|fw|fwd)\b|[:\s]", "", em.get("subject", ""), flags=re.I):
+                continue
             body = re.sub(r"\s+", " ", em.get("body", "")).strip()
             body = re.split(r"(Brad Davis|Jeff Reiss|Andrew Campbell|Crystal Hess) ", body)[0]
             body = re.sub(r"\[(image|cid:)[^\]]*\]", "", body).strip()
             if not body:
                 body = "sent as a picture only. Open the email in fg2065 and read it (post KPI rankings in the office)."
-            items.append(f"**{who} — {em.get('subject', '')}:** {body[:220]}{'…' if len(body) > 220 else ''}")
+            # Directives (checklists) must come through whole — Brad's Thanksgiving list was
+            # cut at 220 chars (audit 2026-11-25).
+            items.append(f"**{who} — {em.get('subject', '')}:** {body[:2000]}{'…' if len(body) > 2000 else ''}")
     # HR (Jeni Moffatt / payroll / onboarding) lands in "Estep Corporate / Admin" — deadlines
     # like open enrollment were being dropped from the short brief (audit 2026-11-24).
     for em in categorized.get("Estep Corporate / Admin", []):

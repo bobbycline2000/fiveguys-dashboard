@@ -1,10 +1,14 @@
 ## 📌 Standing Orders — Every Manager, Every Shift
 
-*These stay in the brief every day until they're done or expire. Last updated 2026-11-24 by the daily brief audit.*
+*These stay in the brief every day until they're done or expire. Last updated 2026-11-25 by the daily brief audit.*
+
+**Thanksgiving (Brad's list, 11/24)**
+- **Wed 11/25: prep the bare minimum**, prep more only as needed. Anything expiring 11/25–11/26 gets tossed at close (bread too).
+- **Wed 11/25 close:** all trash emptied and out of the building · heated equipment off and cleaned · **shake machine cleaned and left apart until 11/27** · all coolers running and reporting in ComplianceMate · **Olo off for 11/26 until 10 AM 11/27** · doors locked, **alarm set** · **closing checklist sent to Bobby and Jeff** · product-level concerns to Bobby/Jeff.
+- **Thu 11/26: CLOSED.** ComplianceMate alerts are paused Thu 7 AM–Fri 6 AM.
+- **Fri 11/27: open with no prep**, so the opening crew must be strong. Keep an **on-call list** in case it's busy. Trucks are ordered with 2 extra days of product; keep extra bottled drinks for the Uber deal. Store **100% FSA ready.**
 
 **Holidays & Deliveries**
-- **Thanksgiving Thu 11/26: CLOSED.** Performance's Thursday truck moves to **Wednesday 11/25**. Bread holiday routes are changed in BOSS, so **enter the whole week's bread orders by hand before the deadline.** After the bakery's deadline, orders can't be changed. Olo and delivery apps are set to closed Thursday automatically.
-- **Performance (PFG) holiday week:** Mon/Tue/Wed/Fri trucks unchanged. **Order for Friday 11/27 by Wednesday 11/25 at 11 AM.**
 - **Christmas Eve: close at 4 PM. Christmas Day: closed. New Year's Eve and Day: regular hours.**
 
 **Promotions**
