@@ -15,7 +15,6 @@ The following employees were on shift during that time and should receive recogn
   - Katherine Valentin
   - Madison Cureton
   - Rodolfo Trujillo
-  - Vicki Lucey
 
 Please process the payout per the standard 100% shop recognition program.
 
