@@ -1,0 +1,101 @@
+{
+ "2026-11-22": {
+  "red": [
+   "QTD Labor",
+   "OT Hours",
+   "Labor all in with tax",
+   "Shops previous Q"
+  ],
+  "rows": [
+   [
+    "COST OF GOODS",
+    "Actual COGS %: 24.35%  | Target: 27.5%  | Variance: -0.49% (goal -0.50% or better)  | Supplies 1.26%  | QTD COGS 26.61%",
+    "COGS at/under target. Keep daily Big Six counts and portion checks on every shift.",
+    "Bobby Cline",
+    "11/29/2026",
+    "On Track \u2014 maintain"
+   ],
+   [
+    "COGS \u2014 TOP VARIANCE ITEM #1",
+    "Item: Cheese  | Variance: $111.54 over (-35.3%)  | Actual $427.57 vs theo $316.03",
+    "Big Six item \u2014 watch it. Count cheese slices per build; verify receiving count vs invoice. Recount on-hand \u2014 a miscount is the usual cause of a big swing. Re-check variance on the 11/29/2026 count.",
+    "Bobby Cline",
+    "11/29/2026",
+    "Not Started"
+   ],
+   [
+    "COGS \u2014 TOP VARIANCE ITEM #2",
+    "Item: Lettuce  | Variance: $88.88 over (-73.1%)  | Actual $210.49 vs theo $121.61",
+    "Employee meals aren't being rung right and product is being over-portioned \u2014 watch portioning. Confirm prep specs are correct. Submit a Product Issue form for yield loss from bad quality off the truck. Account for waste. Re-check variance on the 11/29/2026 count.",
+    "Bobby Cline",
+    "11/29/2026",
+    "Not Started"
+   ],
+   [
+    "COGS \u2014 TOP VARIANCE ITEM #3",
+    "Item: Bun, Burger  | Variance: $50.84 over (-5.9%)  | Actual $919.24 vs theo $868.40",
+    "Spot-check patty weight \u2014 patties must be rolled at 3.5 oz. Reduce waste \u2014 drop patties off the register callbacks, don't pre-drop. Audit comps & employee meals \u2014 every free build has to be rung. Re-check variance on the 11/29/2026 count.",
+    "Bobby Cline",
+    "11/29/2026",
+    "Not Started"
+   ],
+   [
+    "LABOR",
+    "Actual labor %: all-in 25.78% | hourly 19.24% | QTD 26.01%  | Budget / target: all-in 24%, hourly 19-20%, QTD 22%  | Variance: 1.78% (~$601)",
+    "Red: QTD Labor 26.01% vs 22%, Labor all in with tax 25.78% vs 24%. Cut ~$601 (~43 crew hrs at ~$14/hr) from next week's Teamworx schedule against forecast. MOD sends early cuts in slow hours (2-4 PM, after 8 PM). GM checks labor vs sales daily in CT.",
+    "Bobby Cline",
+    "11/29/2026",
+    "Not Started"
+   ],
+   [
+    "OVERTIME",
+    "Hours / team members affected: 3.7 hrs total \u2014 Lidy Henry 1.86 hrs, Vicki Lucey 1.84 hrs",
+    "Schedule Lidy Henry, Vicki Lucey at or under 38 hrs. GM checks Time Detail on Thursday and sends anyone near 40 home early. Target ZERO OT.",
+    "Bobby Cline",
+    "11/26/2026",
+    "Not Started"
+   ],
+   [
+    "COMPLIANCE MATE",
+    "Completion / outstanding items: Cmate 100.0%, short completions 0, milkshake pics 100%, Steritech 99, criticals 0",
+    "All CM tasks complete. GM spot-checks CM each morning.",
+    "Bobby Cline",
+    "11/29/2026",
+    "On Track \u2014 maintain"
+   ],
+   [
+    "SHOPPER / SECRET SHOP",
+    "Latest score: 11/16 Lunch 92%  | Opportunities: While you were ordering, did the crew member offer fries, drink, AND a milkshake with your order? (0 / 8)  | Week 92%, QTD 95.10%, prev Q 77.13%",
+    "Coach every shift on the missed point(s): While you were ordering, did the crew member offer fries, drink, AND a milkshake with your order? (0 / 8). Cashier: Cortez B. MOD covers it in every pre-shift huddle this week. Previous quarter shops 77.13% vs 87% \u2014 closed quarter; hold QTD above 87% to recover.",
+    "Bobby Cline",
+    "11/29/2026",
+    "Not Started"
+   ],
+   [
+    "AMM CHECKLIST",
+    "Completion: AM/PM 100%, Midshift 100%  | Open items: none",
+    "AMM complete. Opening manager keeps it done before open.",
+    "Bobby Cline",
+    "11/29/2026",
+    "On Track \u2014 maintain"
+   ],
+   [
+    "STAFFING / TEAM READINESS",
+    "Open positions / attendance concerns: roster 22 (2 new hires not on the clock yet); FGU overdue 0%; CSP 0",
+    "Confirm weekend coverage Friday; keep FGU at 0 overdue.",
+    "Bobby Cline",
+    "11/27/2026",
+    "On Track \u2014 maintain"
+   ],
+   [
+    "FOLLOW-UP / WEEK-END REVIEW",
+    "Results vs. plan: First week of the plan \u2014 baseline set.",
+    "Review this plan with Jeff Reiss on the Monday call; carry anything still red into next week with a new owner/date.",
+    "Bobby Cline",
+    "11/30/2026",
+    "Not Started"
+   ]
+  ],
+  "written": "2026-11-25T13:34"
+ }
+}

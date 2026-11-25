@@ -267,6 +267,12 @@ def main():
     after = UX.read_range(H, base, f"{col}8:{col}24")
     print(f"\nWROTE {wrote} cells to FG2065!{col}. Re-read:",
           [x[0] for x in after["values"]])
+    # Bobby 2026-11-25: every Monday after the synopsis is filled, build the
+    # "2065 Dixie Hwy" Weekly GM Action Plan tab (red items -> actions).
+    import subprocess
+    rc = subprocess.run([sys.executable, str(ROOT / "scraper" / "fill_synopsis_action_plan.py"),
+                         f(sun), "--write"], cwd=ROOT).returncode
+    print(f"\nACTION PLAN {'written' if rc == 0 else f'FAILED (exit {rc}) — run scraper/fill_synopsis_action_plan.py'}")
     return 0
 
 
