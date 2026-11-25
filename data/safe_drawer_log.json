@@ -2255,10 +2255,10 @@
     "d2_mid": 200,
     "safe_close": 643,
     "d1_close": 200,
-    "d2_close": 0,
+    "d2_close": 200,
     "ct_os": -197.95,
     "notes": "",
-    "submitted_at": "2026-11-25T03:29:22.460Z"
+    "submitted_at": "2026-11-25T03:29:25.746Z"
   },
   {
     "date": "2099-01-01",
