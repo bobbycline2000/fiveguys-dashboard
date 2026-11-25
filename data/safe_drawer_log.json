@@ -2254,11 +2254,11 @@
     "d1_mid": 200,
     "d2_mid": 200,
     "safe_close": 643,
-    "d1_close": 0,
+    "d1_close": 200,
     "d2_close": 0,
     "ct_os": -197.95,
     "notes": "",
-    "submitted_at": "2026-11-25T03:29:19.940Z"
+    "submitted_at": "2026-11-25T03:29:22.460Z"
   },
   {
     "date": "2099-01-01",
