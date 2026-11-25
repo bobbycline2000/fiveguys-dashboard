@@ -2250,15 +2250,15 @@
     "safe_open": 643,
     "d1_open": 200,
     "d2_open": 200,
-    "safe_mid": 0,
+    "safe_mid": 643,
     "d1_mid": 0,
     "d2_mid": 0,
     "safe_close": 0,
     "d1_close": 0,
     "d2_close": 0,
-    "ct_os": 0,
+    "ct_os": -197.95,
     "notes": "",
-    "submitted_at": "2026-11-24T15:22:03.127Z"
+    "submitted_at": "2026-11-25T03:29:11.558Z"
   },
   {
     "date": "2099-01-01",
