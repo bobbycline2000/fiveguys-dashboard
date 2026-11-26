@@ -1,12 +1,11 @@
 ## 📌 Standing Orders — Every Manager, Every Shift
 
-*These stay in the brief every day until they're done or expire. Last updated 2026-11-25 by the daily brief audit.*
+*These stay in the brief every day until they're done or expire. Last updated 2026-11-26 by the daily brief audit.*
 
 **Thanksgiving (Brad's list, 11/24)**
-- **Wed 11/25: prep the bare minimum**, prep more only as needed. Anything expiring 11/25–11/26 gets tossed at close (bread too).
-- **Wed 11/25 close:** all trash emptied and out of the building · heated equipment off and cleaned · **shake machine cleaned and left apart until 11/27** · all coolers running and reporting in ComplianceMate · **Olo off for 11/26 until 10 AM 11/27** · doors locked, **alarm set** · **closing checklist sent to Bobby and Jeff** · product-level concerns to Bobby/Jeff.
 - **Thu 11/26: CLOSED.** ComplianceMate alerts are paused Thu 7 AM–Fri 6 AM.
-- **Fri 11/27: open with no prep**, so the opening crew must be strong. Keep an **on-call list** in case it's busy. Trucks are ordered with 2 extra days of product; keep extra bottled drinks for the Uber deal. Store **100% FSA ready.**
+- **Fri 11/27: open with no prep**, so the opening crew must be strong. **Put the shake machine back together.** Olo comes back on at 10 AM. Keep an **on-call list** in case it's busy. Trucks are ordered with 2 extra days of product; keep extra bottled drinks for the Uber deal. Store **100% FSA ready.**
+- **Fri 11/27 PFG truck (84 of 85 cases):** **mayo is out of stock** and **peanut oil may be short** (no sub). Ketchup packets come as a sub. **Check the truck against the invoice and count mayo + oil on hand at open;** short? Tell Bobby right away.
 
 **Holidays & Deliveries**
 - **Christmas Eve: close at 4 PM. Christmas Day: closed. New Year's Eve and Day: regular hours.**
@@ -18,7 +17,7 @@
 - **3rd-party promos through Dec 31:** dollars off orders over $30, plus a free shake or regular fry.
 
 **HR**
-- **Open enrollment closes Mon 11/30 at 5 PM.** Everyone on Jeni's list (including Vicki and Kayla) must **log in and elect or waive**, or they have no 2027 coverage. Jeni is out Wed–Fri, so **questions go to her today.**
+- **Open enrollment closes Mon 11/30 at 5 PM.** Everyone on Jeni's list (including Kayla) must **log in and elect or waive**, or they have no 2027 coverage. **Vicki is handled:** Jeni will waive her benefits for her Fri or Mon.
 
 **Brad & Jeff's Standards**
 - **Crew labor 20% or under.** Schedules out **Monday by 5 PM**, built from CrunchTime forecasts. **Keep the Daily Report current every day, forecasts included.**
@@ -32,8 +31,8 @@
 - **Gift card display racks are on backorder.** Keep ordering through The Howard Company in OnTrack.
 
 **Open Items at Dixie**
-- **FoodLogiQ #26-30509 (bun, 11/19):** returned to us again. **Upload clear photos of the bun, the supplier case label and the distributor label** (label gone? photo of the bag front + the full invoice showing bread). Closes on its own ~11/28.
 - **FoodLogiQ #26-30633 (lettuce, 2 cases, 11/20):** returned to us. **Upload clear photos of the distributor label.** Closes on its own ~11/28.
+- **11/19 Dinner secret shop scored 52%.** **Debrief everyone who was on shift** (names in the Secret Shops section) before Friday's dinner rush.
 - **KPI (rolling quarter thru 11/12):** Dixie is **#2 of 12 in the district** (overall rank 305). Weak spots: **Secret shop 84.9 and ticket times 80%.** Strong: CC/100K 12.7, FSA 99, CSAT 4.4.
 - **One probe is out for repair. Use the backup probe.** If the tablet or internet goes down, **do paper temp logs every hour.**
 - **Secret shop names:** answer the office's request the **same day**, or the crew's payout gets held.

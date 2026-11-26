@@ -222,6 +222,15 @@ def _section_shops() -> list[str]:
         out.append(f"Latest: **{ls['date'][5:]} {ls['meal_period']} — {ls['score']:.0f}%** · "
                    f"Month avg **{sp.get('store_avg_month', '—')}%** ({sp.get('shop_count_month', 0)}) · "
                    f"YTD **{sp.get('store_avg_ytd', '—')}%**")
+        # Every shop lists who was on shift, any score (shop-names-in-brief rule; audit 2026-11-26).
+        names = [o.get("name") for o in ls.get("on_shift") or [] if o.get("name")]
+        if not names:
+            for rec in (_load("raw/marketforce/2065/shop_onshift_2026.json") or {}).values():
+                if rec.get("date") == ls.get("date") and rec.get("meal_period") == ls.get("meal_period"):
+                    names = [o.get("name") for o in rec.get("on_shift") or [] if o.get("name")]
+        names = ["Bobby Cline" if n == "Robert Cline" else n for n in names]
+        out.append("On shift: " + (", ".join(names) if names else
+                                   "NAMES UNAVAILABLE — pull from CrunchTime Employee Time Detail"))
         out.append("")
     mg = [m for m in sp.get("managers", []) if m.get("ytd_n")]
     if mg:
@@ -342,7 +351,8 @@ def _section_action(categorized: dict) -> list[str]:
                 inc = re.search(r"#\s?\d{2}-\d{4,6}", em.get("body", "") + " " + subj)
                 items.append(f"🧾 **{'FoodLogiQ' if 'foodlogiq' in who + subj.lower() else 'Steritech'}"
                              f"{' ' + inc.group(0).replace(' ', '') if inc else ''}:** {subj[:140]}. "
-                             "Log in and answer it today so it doesn't close against us.")
+                             + ("Closed, no action needed." if re.search(r"resolved|closed", subj.lower())
+                                else "Log in and answer it today so it doesn't close against us."))
     if not items:
         return []
     return ["## ✅ Action Needed Today", ""] + [f"- {i}" for i in items] + [""]
