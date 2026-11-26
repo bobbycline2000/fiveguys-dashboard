@@ -166,6 +166,20 @@ def main():
         print(f"Job {job_id} scored 100% — use shop-payout-draft instead.", file=sys.stderr)
         sys.exit(1)
 
+    # CrunchTime Employee Time Detail is the source of truth for on-shift names
+    # (shop-names-from-crunchtime rule); participation.json is fallback only.
+    ct_path = MF / "shop_onshift_2026.json"
+    if ct_path.exists():
+        rec = json.loads(ct_path.read_text(encoding="utf-8")).get(job_id, {})
+        ct_names = sorted({e["name"] for e in rec.get("on_shift", []) if e.get("name")})
+        if ct_names:
+            body = build_body(shop, ct_names, job_id)
+            audit = DRAFTS / f"shop-action-plan-{job_id}.md"
+            audit.write_text(body, encoding="utf-8")
+            print(body)
+            print(f"\n# Audit copy saved to: {audit} (names from CrunchTime)", file=sys.stderr)
+            return
+
     firsts = part.get(job_id, [])
     if not firsts:
         print(f"NO_PARTICIPATION {job_id}", file=sys.stderr)
