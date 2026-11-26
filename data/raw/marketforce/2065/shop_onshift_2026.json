@@ -7522,5 +7522,177 @@
     ]
    }
   ]
+ },
+ "20999845": {
+  "date": "2026-11-19",
+  "meal_period": "Dinner",
+  "score": 52.0,
+  "window": [
+   15.0,
+   22.0
+  ],
+  "window_source": "meal-default",
+  "on_shift": [
+   {
+    "name": "Alexandra Campbell",
+    "ct_name": "Campbell, Alexandra",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.08,
+      10.55
+     ],
+     [
+      10.98,
+      16.1
+     ]
+    ]
+   },
+   {
+    "name": "Madison Cureton",
+    "ct_name": "Cureton, Madison",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      15.02,
+      23.13
+     ]
+    ]
+   },
+   {
+    "name": "Robert Cline",
+    "ct_name": "Cline, Robert",
+    "position": "General Manager-Salary",
+    "role": "Manager",
+    "intervals": [
+     [
+      7.0,
+      17.35
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.88,
+      10.57
+     ],
+     [
+      10.97,
+      15.58
+     ]
+    ]
+   },
+   {
+    "name": "Ailen Gonzalez Cardero",
+    "ct_name": "Gonzalez Cardero, Ailen",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      17.98,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Emanuela Kamara",
+    "ct_name": "Kamara, Emanuela",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.22,
+      17.97
+     ],
+     [
+      18.27,
+      22.08
+     ]
+    ]
+   },
+   {
+    "name": "Francisco Llorente Mejias",
+    "ct_name": "Llorente Mejias, Francisco",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.0,
+      18.03
+     ],
+     [
+      18.2,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Katherine Valentin",
+    "ct_name": "Valentin, Katherine",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.95,
+      18.97
+     ],
+     [
+      19.5,
+      22.8
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.83,
+      15.58
+     ]
+    ]
+   },
+   {
+    "name": "Rodolfo Trujillo",
+    "ct_name": "Trujillo, Rodolfo",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.8,
+      18.4
+     ],
+     [
+      18.83,
+      23.1
+     ]
+    ]
+   },
+   {
+    "name": "Samuel Muradas",
+    "ct_name": "Muradas, Samuel",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      16.03,
+      19.33
+     ],
+     [
+      19.83,
+      23.1
+     ]
+    ]
+   }
+  ]
  }
 }

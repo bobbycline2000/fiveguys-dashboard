@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-11-25",
+  "as_of": "2026-11-26",
   "current_month": "2026-11",
   "current_month_label": "November 2026",
-  "store_avg_month": 93.0,
-  "store_avg_ytd": 84.8,
-  "shop_count_month": 4,
-  "shop_count_ytd": 63,
+  "store_avg_month": 84.8,
+  "store_avg_ytd": 84.3,
+  "shop_count_month": 5,
+  "shop_count_ytd": 64,
   "managers": [
     {
       "first": "Alexandra",
@@ -156,6 +156,12 @@
   ],
   "latest_shops": [
     {
+      "date": "2026-11-19",
+      "score": 52.0,
+      "meal_period": "Dinner",
+      "on_shift": []
+    },
+    {
       "date": "2026-11-16",
       "score": 92.0,
       "meal_period": "Lunch",
@@ -206,18 +212,6 @@
         "Ailen Gonzalez Cardero",
         "Emanuela Kamara",
         "Mykenize Milledge"
-      ]
-    },
-    {
-      "date": "2026-10-28",
-      "score": 100.0,
-      "meal_period": "Lunch",
-      "on_shift": [
-        "Cortez Brown",
-        "Madelynn Smith",
-        "Robert Cline",
-        "Vicki Lucey",
-        "Lidy Henry"
       ]
     }
   ]
