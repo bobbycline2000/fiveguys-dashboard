@@ -73,7 +73,11 @@ def _section_yesterday(today: date) -> list[str]:
     # snapshot (cash O/S taken before deposits). Use the overnight Par Brink Sales Summary instead,
     # and never print the mid-day cash O/S as a final number (audit 2026-11-24, 2nd occurrence).
     brink = _load(f"raw/parbrink/2065/{y.isoformat()}/sales_summary.json") or {}
-    if (not row or row.get("net_sales") is None) and brink.get("net_sales") is not None:
+    if brink.get("net_sales") == 0 and not (row and row.get("net_sales")):
+        # Closed day (holiday): don't print "$0 · Labor 🟢 0.0%" (audit 2026-11-27).
+        out.append("_Store closed. No sales or labor._")
+        row = None
+    elif (not row or row.get("net_sales") is None) and brink.get("net_sales") is not None:
         lab = brink.get("labor_percent")
         lab_flag = "🟢" if isinstance(lab, (int, float)) and lab <= 20 else "🔴"
         out.append(f"**Sales {_money(brink.get('net_sales'))}** · **Labor {lab_flag} {lab}%** (goal 20%) · "
@@ -193,6 +197,8 @@ def _section_cash(today: date) -> list[str]:
         out.append(f"- Yesterday's counts logged by **{ent.get('mgr', '?')}**. Safe {_money(safe)}"
                    + ("" if safe in (700, None) else " 🔴 (should be $700)")
                    + (f". Note: {ent['notes']}" if ent.get("notes") else ""))
+    elif (_load(f"raw/parbrink/2065/{y}/sales_summary.json") or {}).get("net_sales") == 0:
+        pass  # store closed yesterday (holiday): no counts expected (audit 2026-11-27)
     else:
         out.append(f"- 🔴 **No counts logged for {y}.** Closing manager: log them today.")
     hist = _load("cash_overshort_history.json") or []

@@ -1,9 +1,8 @@
 ## 📌 Standing Orders — Every Manager, Every Shift
 
-*These stay in the brief every day until they're done or expire. Last updated 2026-11-26 by the daily brief audit.*
+*These stay in the brief every day until they're done or expire. Last updated 2026-11-27 by the daily brief audit.*
 
-**Thanksgiving (Brad's list, 11/24)**
-- **Thu 11/26: CLOSED.** ComplianceMate alerts are paused Thu 7 AM–Fri 6 AM.
+**Day after Thanksgiving (Brad's list, 11/24)**
 - **Fri 11/27: open with no prep**, so the opening crew must be strong. **Put the shake machine back together.** Olo comes back on at 10 AM. Keep an **on-call list** in case it's busy. Trucks are ordered with 2 extra days of product; keep extra bottled drinks for the Uber deal. Store **100% FSA ready.**
 - **Fri 11/27 PFG truck (84 of 85 cases):** **mayo is out of stock** and **peanut oil may be short** (no sub). Ketchup packets come as a sub. **Check the truck against the invoice and count mayo + oil on hand at open;** short? Tell Bobby right away.
 
