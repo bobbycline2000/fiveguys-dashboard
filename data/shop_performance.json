@@ -1,19 +1,19 @@
 {
-  "as_of": "2026-11-26",
+  "as_of": "2026-11-27",
   "current_month": "2026-11",
   "current_month_label": "November 2026",
-  "store_avg_month": 84.8,
-  "store_avg_ytd": 84.3,
-  "shop_count_month": 5,
-  "shop_count_ytd": 64,
+  "store_avg_month": 74.0,
+  "store_avg_ytd": 83.3,
+  "shop_count_month": 6,
+  "shop_count_ytd": 65,
   "managers": [
     {
       "first": "Alexandra",
       "name": "Alexandra Campbell",
-      "month_avg": 76.0,
-      "month_n": 2,
-      "ytd_avg": 84.0,
-      "ytd_n": 3
+      "month_avg": 57.3,
+      "month_n": 3,
+      "ytd_avg": 68.0,
+      "ytd_n": 4
     },
     {
       "first": "Anthony",
@@ -58,9 +58,9 @@
     {
       "first": "Vicki",
       "name": "Vicki Lucey",
-      "month_avg": 77.3,
+      "month_avg": 66.7,
       "month_n": 3,
-      "ytd_avg": 83.5,
+      "ytd_avg": 82.1,
       "ytd_n": 23
     }
   ],
@@ -90,14 +90,6 @@
       "ytd_n": 19
     },
     {
-      "first": "Lidy",
-      "name": "Lidy Henry",
-      "month_avg": 66.0,
-      "month_n": 2,
-      "ytd_avg": 86.1,
-      "ytd_n": 32
-    },
-    {
       "first": "Ailen",
       "name": "Ailen Gonzalez Cardero",
       "month_avg": 77.3,
@@ -106,12 +98,12 @@
       "ytd_n": 22
     },
     {
-      "first": "Rodolfo",
-      "name": "Rodolfo Trujillo",
-      "month_avg": 81.3,
-      "month_n": 3,
-      "ytd_avg": 84.0,
-      "ytd_n": 4
+      "first": "Lidy",
+      "name": "Lidy Henry",
+      "month_avg": 50.0,
+      "month_n": 2,
+      "ytd_avg": 85.1,
+      "ytd_n": 32
     },
     {
       "first": "Javeh",
@@ -154,6 +146,14 @@
       "ytd_n": 21
     },
     {
+      "first": "Rodolfo",
+      "name": "Rodolfo Trujillo",
+      "month_avg": 66.0,
+      "month_n": 4,
+      "ytd_avg": 71.2,
+      "ytd_n": 5
+    },
+    {
       "first": "Samuel",
       "name": "Samuel Muradas",
       "month_avg": 52.0,
@@ -164,6 +164,17 @@
   ],
   "latest_shops": [
     {
+      "date": "2026-11-25",
+      "score": 20.0,
+      "meal_period": "Lunch",
+      "on_shift": [
+        "Alexandra Campbell",
+        "Vicki Lucey",
+        "Lidy Henry",
+        "Rodolfo Trujillo"
+      ]
+    },
+    {
       "date": "2026-11-19",
       "score": 52.0,
       "meal_period": "Dinner",
@@ -171,12 +182,10 @@
         "Alexandra Campbell",
         "Madison Cureton",
         "Robert Cline",
-        "Vicki Lucey",
         "Ailen Gonzalez Cardero",
         "Emanuela Kamara",
         "Francisco Llorente Mejias",
         "Katherine Valentin",
-        "Lidy Henry",
         "Rodolfo Trujillo",
         "Samuel Muradas"
       ]
@@ -219,19 +228,6 @@
         "Lidy Henry",
         "Mykenize Milledge",
         "Robert Muncy Jr"
-      ]
-    },
-    {
-      "date": "2026-11-02",
-      "score": 100.0,
-      "meal_period": "Dinner",
-      "on_shift": [
-        "Anthony Pirtle",
-        "Madison Cureton",
-        "Robert Cline",
-        "Ailen Gonzalez Cardero",
-        "Emanuela Kamara",
-        "Mykenize Milledge"
       ]
     }
   ]

@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "store_id": "2065",
+    "report_date": "2026-11-26",
+    "generated": "2026-11-27T19:21:31",
+    "source_pdf": "data/raw/parbrink/2065/2026-11-26/Sales Summary.pdf"
+  },
+  "gross_sales": 0.0,
+  "net_sales": 0.0,
+  "order_count": 0,
+  "guest_count": 0,
+  "order_average": 0.0,
+  "labor_cost": 0.0,
+  "labor_hours": 0.0,
+  "labor_percent": 0.0
+}

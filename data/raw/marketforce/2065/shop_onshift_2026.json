@@ -7528,10 +7528,10 @@
   "meal_period": "Dinner",
   "score": 52.0,
   "window": [
-   15.0,
-   22.0
+   16.0,
+   19.0
   ],
-  "window_source": "meal-default",
+  "window_source": "knowledgeforce",
   "on_shift": [
    {
     "name": "Alexandra Campbell",
@@ -7570,22 +7570,6 @@
      [
       7.0,
       17.35
-     ]
-    ]
-   },
-   {
-    "name": "Vicki Lucey",
-    "ct_name": "Lucey, Vicki",
-    "position": "Shift Leader-Hourly",
-    "role": "Manager",
-    "intervals": [
-     [
-      6.88,
-      10.57
-     ],
-     [
-      10.97,
-      15.58
      ]
     ]
    },
@@ -7650,18 +7634,6 @@
     ]
    },
    {
-    "name": "Lidy Henry",
-    "ct_name": "Henry, Lidy",
-    "position": "2. Crew",
-    "role": "Crew",
-    "intervals": [
-     [
-      7.83,
-      15.58
-     ]
-    ]
-   },
-   {
     "name": "Rodolfo Trujillo",
     "ct_name": "Trujillo, Rodolfo",
     "position": "2. Crew",
@@ -7690,6 +7662,78 @@
      [
       19.83,
       23.1
+     ]
+    ]
+   }
+  ]
+ },
+ "21007460": {
+  "date": "2026-11-25",
+  "meal_period": "Lunch",
+  "score": 20.0,
+  "window": [
+   11.0,
+   13.483333333333333
+  ],
+  "window_source": "knowledgeforce",
+  "on_shift": [
+   {
+    "name": "Alexandra Campbell",
+    "ct_name": "Campbell, Alexandra",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      12.17,
+      17.1
+     ],
+     [
+      17.65,
+      20.17
+     ]
+    ]
+   },
+   {
+    "name": "Vicki Lucey",
+    "ct_name": "Lucey, Vicki",
+    "position": "Shift Leader-Hourly",
+    "role": "Manager",
+    "intervals": [
+     [
+      6.67,
+      16.5
+     ]
+    ]
+   },
+   {
+    "name": "Lidy Henry",
+    "ct_name": "Henry, Lidy",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      7.87,
+      10.45
+     ],
+     [
+      10.92,
+      15.98
+     ]
+    ]
+   },
+   {
+    "name": "Rodolfo Trujillo",
+    "ct_name": "Trujillo, Rodolfo",
+    "position": "2. Crew",
+    "role": "Crew",
+    "intervals": [
+     [
+      11.03,
+      14.55
+     ],
+     [
+      15.18,
+      17.02
      ]
     ]
    }
