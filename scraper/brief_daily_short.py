@@ -223,11 +223,12 @@ def _section_shops() -> list[str]:
                    f"Month avg **{sp.get('store_avg_month', '—')}%** ({sp.get('shop_count_month', 0)}) · "
                    f"YTD **{sp.get('store_avg_ytd', '—')}%**")
         # Every shop lists who was on shift, any score (shop-names-in-brief rule; audit 2026-11-26).
-        names = [o.get("name") for o in ls.get("on_shift") or [] if o.get("name")]
+        names = [(o.get("name") if isinstance(o, dict) else o) for o in ls.get("on_shift") or []]
+        names = [n for n in names if n]
         if not names:
             for rec in (_load("raw/marketforce/2065/shop_onshift_2026.json") or {}).values():
                 if rec.get("date") == ls.get("date") and rec.get("meal_period") == ls.get("meal_period"):
-                    names = [o.get("name") for o in rec.get("on_shift") or [] if o.get("name")]
+                    names = [n for n in ((o.get("name") if isinstance(o, dict) else o) for o in rec.get("on_shift") or []) if n]
         names = ["Bobby Cline" if n == "Robert Cline" else n for n in names]
         out.append("On shift: " + (", ".join(names) if names else
                                    "NAMES UNAVAILABLE — pull from CrunchTime Employee Time Detail"))
