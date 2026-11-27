@@ -40,11 +40,21 @@ def _folder_effective_date(p):
     m = _re.match(r'^(?:week-ending-)?(\d{4}-\d{2}-\d{2})$', p.name)
     return m.group(1) if m else "0000-00-00"
 
-def load_latest(source, report):
+def _closed_day(d):
+    # Closed day (e.g. Thanksgiving): Par Brink sales_summary shows $0 net.
+    try:
+        ss_ = json.loads((d / "sales_summary.json").read_text(encoding="utf-8"))
+        return float(ss_.get("net_sales") or 0) == 0.0
+    except Exception:
+        return False
+
+def load_latest(source, report, skip_closed=False):
     base = RAW / source / STORE_ID
     if base.exists():
         dirs = [x for x in base.iterdir() if x.is_dir()]
         for d in sorted(dirs, key=_folder_effective_date, reverse=True):
+            if skip_closed and _closed_day(d):
+                continue
             cand = d / report
             if cand.exists():
                 return json.loads(cand.read_text(encoding="utf-8")), cand
@@ -64,6 +74,24 @@ if latest is not None and str(latest.get("meta", {}).get("generated", "")).strip
           f"{latest.get('meta', {}).get('report_date')} is a stale (cached) fallback "
           f"— using data/latest.json instead")
     latest = None
+# Closed-day / wrong-week guard (2026-11-27, Thanksgiving): CT's grid showed the
+# period-to-date total ($13,572) as the daily value for a day Par Brink reports at
+# $0 (store closed). If the CT daily net disagrees wildly with Par Brink's net for
+# the same report_date, the CT number is a period total - discard it and fall back
+# to data/latest.json (last real operating day).
+if latest is not None:
+    try:
+        _rd = latest.get("meta", {}).get("report_date")
+        _ctn = (latest.get("sales") or {}).get("net")
+        _bp = ROOT / "data" / "raw" / "parbrink" / "2065" / str(_rd) / "sales_summary.json"
+        if _rd and _ctn is not None and _bp.exists():
+            _bn = json.loads(_bp.read_text(encoding="utf-8")).get("net_sales")
+            if _bn is not None and abs(float(_ctn) - float(_bn)) > max(500.0, 0.5 * float(_bn)):
+                print(f"  [CT-MISMATCH-SKIP] CT net ${_ctn} vs Par Brink ${_bn} for {_rd} "
+                      f"- CT value is a period total; using data/latest.json")
+                latest = None
+    except Exception as _e:
+        print(f"  [CT-MISMATCH-WARN] {_e}")
 if latest is None:
     latest = load("data/latest.json")
 
@@ -100,10 +128,10 @@ if _fcp_path.exists():
     except Exception:
         pass
 
-discounts, _ = load_latest("parbrink", "discount_summary.json")
-sales_summary, _ = load_latest("parbrink", "sales_summary.json")
+discounts, _ = load_latest("parbrink", "discount_summary.json", skip_closed=True)
+sales_summary, _ = load_latest("parbrink", "sales_summary.json", skip_closed=True)
 # Par Brink hourly PDF — kept as fallback only; CT API is now the primary labor source
-hourly_labor, _ = load_latest("parbrink", "hourly_sales_labor.json")
+hourly_labor, _ = load_latest("parbrink", "hourly_sales_labor.json", skip_closed=True)
 
 # ── CrunchTime Labor API (primary labor source, replaces Par Brink hourly PDF) ──
 # scrape_labor_ct.py writes data/labor_today.json with the same day's business data
