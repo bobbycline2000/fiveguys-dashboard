@@ -1,5 +1,5 @@
-- **Fri 11/27:** opens with no prep; Olo back on at 10 AM. Black Friday crowd, so staff strong.
 - **Black Friday weekend:** online-only BOGO burger code (doesn't work on the POS, so send guests to the app). $10 Bonus Card with $50 in gift cards bought online, Nov 27–Dec 1.
+- **Mon 11/30, 5 PM:** open enrollment closes. Everyone on Jeni's list elects or waives.
 - **Thu 12/3, 11 AM:** Market Force webinar on secret shops + guest surveys (Q3 results).
 - **Mon 12/7 Shake Hacks starts.** Hold the signs until the replacement register panel arrives. Potato freight up 12% and ground beef down slightly from Dec 1.
 - **Christmas Eve: close 4 PM. Christmas Day: closed.**

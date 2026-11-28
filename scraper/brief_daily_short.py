@@ -211,7 +211,12 @@ def _section_cash(today: date) -> list[str]:
         if s and (s.get("captured_at") or "") > (h.get("captured_at") or "") \
                 and s.get("over_short") is not None:
             h["over_short"] = s["over_short"]
-    misses = [h for h in hist[-7:] if abs(h.get("over_short") or 0) >= 1]
+    # Closed days (net sales $0) can't be cash-off: a late 11/27 capture stamped today's
+    # running total onto closed Thanksgiving 11/26 (audit 2026-11-28).
+    _closed = {r.get("date") for r in (_load("daily_numbers.json") or {}).get("rows", [])
+               if r.get("net_sales") == 0}
+    misses = [h for h in hist[-7:] if abs(h.get("over_short") or 0) >= 1
+              and h.get("business_date") not in _closed]
     if misses:
         out.append("- 🔴 Cash off in the last 7 days: " + ", ".join(
             f"{h['business_date'][5:]} {_money(abs(h['over_short']))} off"
@@ -333,15 +338,19 @@ def _section_action(categorized: dict) -> list[str]:
                 body = "sent as a picture only. Open the email in fg2065 and read it (post KPI rankings in the office)."
             # Directives (checklists) must come through whole — Brad's Thanksgiving list was
             # cut at 220 chars (audit 2026-11-25).
-            items.append(f"**{who} — {em.get('subject', '')}:** {body[:2000]}{'…' if len(body) > 2000 else ''}")
+            # Jeff's 11/27 site-visit report (~3k chars) was cut mid-sentence at 2000 (audit 2026-11-28).
+            items.append(f"**{who} — {em.get('subject', '')}:** {body[:4000]}{'…' if len(body) > 4000 else ''}")
     # HR (Jeni Moffatt / payroll / onboarding) lands in "Estep Corporate / Admin" — deadlines
     # like open enrollment were being dropped from the short brief (audit 2026-11-24).
     for em in categorized.get("Estep Corporate / Admin", []):
         who = (em.get("sender") or em.get("from") or "").lower()
-        if not re.search(r"jmoffatt|hrassistant|onboarding|payroll", who):
+        # Payroll (v.barkhimer) pay-card requests were dropped (audit 2026-11-28).
+        if not re.search(r"jmoffatt|hrassistant|onboarding|payroll|barkhimer|pay card",
+                         who + " " + em.get("subject", "").lower()):
             continue
         body = re.sub(r"\s+", " ", em.get("body") or em.get("snippet") or "").strip()
-        body = re.split(r"\b(Thanks,|Thank you,|From: )", body)[0].strip()
+        body = re.split(r"\b(Thanks,|Thank you,|Thank You,|From: |HR Generalist)", body)[0].strip()
+        body = re.sub(r"\[(image|cid:)[^\]]*\]", "", body).strip()
         items.append(f"🧑‍💼 **HR — {em.get('subject', '')}:** {body[:400]}{'…' if len(body) > 400 else ''}")
     for em in categorized.get("Finance / Deposits", []):
         items.append(f"💵 **Deposits:** {em.get('subject', '')}")
@@ -359,6 +368,9 @@ def _section_action(categorized: dict) -> list[str]:
                 items.append(f"🧾 **{'FoodLogiQ' if 'foodlogiq' in who + subj.lower() else 'Steritech'}"
                              f"{' ' + inc.group(0).replace(' ', '') if inc else ''}:** {subj[:140]}. "
                              + ("Closed, no action needed." if re.search(r"resolved|closed", subj.lower())
+                                # Self-assessment is a finished score, not a request (audit 2026-11-28).
+                                else "Done. Pull the report and fix the non-critical items it found."
+                                if "self assessment" in subj.lower()
                                 else "Log in and answer it today so it doesn't close against us."))
     if not items:
         return []

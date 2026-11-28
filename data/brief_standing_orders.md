@@ -1,10 +1,11 @@
 ## 📌 Standing Orders — Every Manager, Every Shift
 
-*These stay in the brief every day until they're done or expire. Last updated 2026-11-27 by the daily brief audit.*
+*These stay in the brief every day until they're done or expire. Last updated 2026-11-28 by the daily brief audit.*
 
-**Day after Thanksgiving (Brad's list, 11/24)**
-- **Fri 11/27: open with no prep**, so the opening crew must be strong. **Put the shake machine back together.** Olo comes back on at 10 AM. Keep an **on-call list** in case it's busy. Trucks are ordered with 2 extra days of product; keep extra bottled drinks for the Uber deal. Store **100% FSA ready.**
-- **Fri 11/27 PFG truck (84 of 85 cases):** **mayo is out of stock** and **peanut oil may be short** (no sub). Ketchup packets come as a sub. **Check the truck against the invoice and count mayo + oil on hand at open;** short? Tell Bobby right away.
+**Jeff's site visit (11/27): "very good visit." Fix these this weekend:**
+- **Clean:** splatter on the BOH wall above the ice machine; sweep under the BOH racks; inside of BOH + line trash cans; chef base gaskets; shake cooler filter; peeling sticker inside the fryer hood.
+- **Organize:** shake brushes in the gray tote, under the shake cabinet. Pull loose strings off the lobby potato bags. **Delivery date on every Oreo bag.** Keep mushroom/onion water at the right level. Replace the bent-tip BOH knife.
+- **Post an "ICE OUT OF ORDER" sign on the Coke machine** and **post the Shop Tracker on the info board.**
 
 **Holidays & Deliveries**
 - **Christmas Eve: close at 4 PM. Christmas Day: closed. New Year's Eve and Day: regular hours.**
@@ -30,8 +31,11 @@
 - **Gift card display racks are on backorder.** Keep ordering through The Howard Company in OnTrack.
 
 **Open Items at Dixie**
-- **FoodLogiQ #26-30633 (lettuce, 2 cases, 11/20):** returned to us. **Upload clear photos of the distributor label.** Closes on its own ~11/28.
-- **11/19 Dinner secret shop scored 52%.** **Debrief everyone who was on shift** (names in the Secret Shops section) before Friday's dinner rush.
+- **11/25 Lunch secret shop scored 20%** (month avg now 74%). **Debrief Alexandra, Vicki, Lidy and Rodolfo this weekend.** Greet, upsell fries/drink/shake, tickets under 6 minutes.
+- **Payroll needs a pay card for Daiden Gray.** Send it to Victoria Barkhimer (payroll) right away.
+- **Laura Logan is cleared to schedule.** Get her on the board and added to FGU.
+- **Alex's certification paperwork went to Jeff 11/27** (videos 100%). Waiting on Jeff.
+- **Steritech self-assessment 11/27: 96, 0 critical, 2 non-critical.** Pull the report and fix the 2 items.
 - **KPI (rolling quarter thru 11/12):** Dixie is **#2 of 12 in the district** (overall rank 305). Weak spots: **Secret shop 84.9 and ticket times 80%.** Strong: CC/100K 12.7, FSA 99, CSAT 4.4.
 - **One probe is out for repair. Use the backup probe.** If the tablet or internet goes down, **do paper temp logs every hour.**
 - **Secret shop names:** answer the office's request the **same day**, or the crew's payout gets held.
