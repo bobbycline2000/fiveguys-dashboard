@@ -10,10 +10,10 @@
     {
       "first": "Alexandra",
       "name": "Alexandra Campbell",
-      "month_avg": 57.3,
-      "month_n": 3,
-      "ytd_avg": 68.0,
-      "ytd_n": 4
+      "month_avg": 60.0,
+      "month_n": 2,
+      "ytd_avg": 73.3,
+      "ytd_n": 3
     },
     {
       "first": "Anthony",
@@ -179,7 +179,6 @@
       "score": 52.0,
       "meal_period": "Dinner",
       "on_shift": [
-        "Alexandra Campbell",
         "Madison Cureton",
         "Ailen Gonzalez Cardero",
         "Emanuela Kamara",

@@ -1,4 +1,7 @@
 {
   "_comment": "Manual on-shift corrections from Bobby. CrunchTime shows a punch but the person was NOT in the building during the shop. build_shop_onshift.py drops these names on every rebuild. {job_id: [\"First Last\", ...]}",
-  "20999845": ["Robert Cline"]
+  "20999845": [
+    "Robert Cline",
+    "Alexandra Campbell"
+  ]
 }

@@ -7534,22 +7534,6 @@
   "window_source": "knowledgeforce",
   "on_shift": [
    {
-    "name": "Alexandra Campbell",
-    "ct_name": "Campbell, Alexandra",
-    "position": "Shift Leader-Hourly",
-    "role": "Manager",
-    "intervals": [
-     [
-      7.08,
-      10.55
-     ],
-     [
-      10.98,
-      16.1
-     ]
-    ]
-   },
-   {
     "name": "Madison Cureton",
     "ct_name": "Cureton, Madison",
     "position": "Shift Leader-Hourly",
