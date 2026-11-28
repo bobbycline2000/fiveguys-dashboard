@@ -2271,11 +2271,11 @@
     "d1_mid": 200,
     "d2_mid": 200,
     "safe_close": 643,
-    "d1_close": 0,
+    "d1_close": 200,
     "d2_close": 0,
     "ct_os": -287.6,
     "notes": "",
-    "submitted_at": "2026-11-28T03:50:54.642Z"
+    "submitted_at": "2026-11-28T03:50:57.679Z"
   },
   {
     "date": "2099-01-01",
