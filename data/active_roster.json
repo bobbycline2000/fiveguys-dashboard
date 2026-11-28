@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-28T13:19:00",
+  "generated": "2026-11-28T18:04:35",
   "window_start": "2026-10-26",
   "window_end": "2026-11-28",
   "employees": [
@@ -9,9 +9,9 @@
       "positions": [
         "Shift Leader-Hourly"
       ],
-      "last_worked": "2026-11-27",
+      "last_worked": "2026-11-28",
       "first_seen_in_window": "2026-10-27",
-      "hours_window": 134.0,
+      "hours_window": 134.9,
       "role": "Manager"
     },
     {
@@ -33,7 +33,7 @@
       ],
       "last_worked": "2026-11-28",
       "first_seen_in_window": "2026-10-27",
-      "hours_window": 172.7,
+      "hours_window": 176.4,
       "role": "Manager"
     },
     {
@@ -64,9 +64,9 @@
       "positions": [
         "General Manager-Salary"
       ],
-      "last_worked": "2026-11-27",
+      "last_worked": "2026-11-28",
       "first_seen_in_window": "2026-10-26",
-      "hours_window": 226.7,
+      "hours_window": 229.2,
       "role": "Manager"
     },
     {
@@ -152,9 +152,20 @@
       "positions": [
         "2. Crew"
       ],
-      "last_worked": "2026-11-27",
+      "last_worked": "2026-11-28",
       "first_seen_in_window": "2026-10-27",
-      "hours_window": 100.3,
+      "hours_window": 102.2,
+      "role": "Crew"
+    },
+    {
+      "name": "Laura Logan",
+      "ct_name": "Logan, Laura",
+      "positions": [
+        "2. Crew"
+      ],
+      "last_worked": "2026-11-28",
+      "first_seen_in_window": "2026-11-28",
+      "hours_window": 5.0,
       "role": "Crew"
     },
     {
@@ -165,7 +176,7 @@
       ],
       "last_worked": "2026-11-28",
       "first_seen_in_window": "2026-10-27",
-      "hours_window": 183.3,
+      "hours_window": 187.7,
       "role": "Crew"
     },
     {

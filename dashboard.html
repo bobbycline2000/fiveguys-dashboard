@@ -829,10 +829,10 @@ body.sidebar-open .sidebar-backdrop { display: block; }
     <!-- Page header -->
     <div class="page-hdr">
       <div>
-        <div class="page-title">Good afternoon, Bobby.</div>
+        <div class="page-title">Good evening, Bobby.</div>
         <div class="page-sub">Store 2065 &nbsp;&middot;&nbsp; Dixie Highway, Louisville KY</div>
       </div>
-      <div class="last-updated">Last updated <b>1:19 PM</b><br>Source: CrunchTime Net Chef</div>
+      <div class="last-updated">Last updated <b>6:04 PM</b><br>Source: CrunchTime Net Chef</div>
     </div>
 
     <!-- ══ THE CONTROLLABLES ══ -->
@@ -985,9 +985,9 @@ body.sidebar-open .sidebar-backdrop { display: block; }
           <div class="kpi-ico"><i data-lucide="tag"></i></div>
           <div class="kpi-delta d-up"><i data-lucide="arrow-up"></i>&nbsp;$0.60</div>
         </div>
-        <div class="kpi-val data-swap" data-today="$5.51" data-week="$5.51" data-month="$5.60" data-quarter="$5.47">$5.51</div>
+        <div class="kpi-val data-swap" data-today="$5.50" data-week="$5.51" data-month="$5.60" data-quarter="$5.47">$5.50</div>
         <div class="kpi-lbl data-swap" data-today="Sales / Guest" data-week="Sales / Guest (WTD)" data-month="Sales / Guest (MTD)" data-quarter="Sales / Guest (QTD)">Sales / Guest</div>
-        <div class="kpi-sub data-swap" data-today="Week avg $5.51" data-week="Day avg $5.51" data-month="29d avg" data-quarter="89d avg">Week avg $5.51</div>
+        <div class="kpi-sub data-swap" data-today="Week avg $5.51" data-week="Day avg $5.50" data-month="29d avg" data-quarter="89d avg">Week avg $5.51</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-top">
@@ -1395,7 +1395,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   <!-- Footer -->
   <div class="footer-bar">
     <span>Five Guys Operations &mdash; Store 2065 &mdash; Dixie Highway, Louisville KY</span>
-    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>1:19 PM</span> &nbsp;&middot;&nbsp; November 28 2026</span>
+    <span>CrunchTime Net Chef &nbsp;&middot;&nbsp; Updated <span>6:04 PM</span> &nbsp;&middot;&nbsp; November 28 2026</span>
   </div>
 
 </div><!-- /main -->
@@ -1485,18 +1485,8 @@ function showShift(shift, btn) {
 // ── Labor % mini bars (11 AM – 10 PM, goal 18.5%) ──
 const LABOR_GOAL = 18.5;
 const laborData = [
-  { hr: '11A', pct: 24.1 },
-  { hr: '12P', pct: 21.5 },
-  { hr: '1P', pct: 12.2 },
-  { hr: '2P', pct: 28.1 },
-  { hr: '3P', pct: 22.6 },
-  { hr: '4P', pct: 21.7 },
-  { hr: '5P', pct: 22.2 },
-  { hr: '6P', pct: 14.2 },
-  { hr: '7P', pct: 14.8 },
-  { hr: '8P', pct: 19.1 },
-  { hr: '9P', pct: 55.0 },
-  { hr: '10P', pct: 100.0 }
+  { hr: '11A', pct: 29.2 },
+  { hr: '12P', pct: 64.0 }
 ];
 const realPcts = laborData.filter(d => d.pct !== null).map(d => d.pct);
 const maxPct = Math.max(...realPcts, LABOR_GOAL) * 1.1;
