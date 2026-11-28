@@ -31,6 +31,7 @@ import api_enter_tips as A  # noqa: E402  (session + headers)
 ROOT = Path(__file__).resolve().parent.parent
 MF = ROOT / "data" / "raw" / "marketforce" / "2065"
 OUT = MF / "shop_onshift_2026.json"
+EXCLUSIONS = MF / "onshift_exclusions.json"   # Bobby's manual "wasn't there" corrections
 
 # Same defaults as scrape_shop_participation.DEFAULT_WIN
 DEFAULT_WIN = {"breakfast": (5.0, 11.0), "lunch": (11.0, 15.0),
@@ -87,6 +88,7 @@ def main() -> int:
     jar = A.ensure_session()
     weeks: dict = {}
     out: dict = {}
+    excl = json.loads(EXCLUSIONS.read_text(encoding="utf-8")) if EXCLUSIONS.exists() else {}
     for s in sorted(shops, key=lambda x: x["date"]):
         d = dt.date.fromisoformat(s["date"])
         mon = d - dt.timedelta(days=d.weekday())
@@ -107,7 +109,10 @@ def main() -> int:
             p = people.setdefault(name, {"intervals": [], "position": row.get("positionName") or ""})
             p["intervals"].append([round(t_in, 2), round(t_out, 2)])
         on = []
+        drop = set(excl.get(s["job_id"], []))
         for name, p in people.items():
+            if display(name) in drop:
+                continue
             if any(min(b, we) > max(a, ws) for a, b in p["intervals"]):
                 pos = p["position"]
                 role = "Manager" if (any(w in pos.lower() for w in MGR_WORDS)
