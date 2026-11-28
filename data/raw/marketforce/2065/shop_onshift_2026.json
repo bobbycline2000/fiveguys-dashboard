@@ -118,18 +118,6 @@
     ]
    },
    {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      8.17,
-      16.5
-     ]
-    ]
-   },
-   {
     "name": "Francisco Llorente Mejias",
     "ct_name": "Llorente Mejias, Francisco",
     "position": "2. Crew",
@@ -230,22 +218,6 @@
      [
       7.08,
       17.98
-     ]
-    ]
-   },
-   {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      8.75,
-      14.0
-     ],
-     [
-      17.98,
-      23.15
      ]
     ]
    },
@@ -354,18 +326,6 @@
      [
       14.92,
       23.38
-     ]
-    ]
-   },
-   {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      7.0,
-      17.3
      ]
     ]
    },
@@ -822,18 +782,6 @@
     ]
    },
    {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      7.58,
-      17.5
-     ]
-    ]
-   },
-   {
     "name": "Akur Alier",
     "ct_name": "Alier, Akur",
     "position": "2. Crew",
@@ -1194,18 +1142,6 @@
      [
       11.83,
       18.1
-     ]
-    ]
-   },
-   {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      10.5,
-      22.98
      ]
     ]
    },
@@ -1670,18 +1606,6 @@
     ]
    },
    {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      9.42,
-      19.15
-     ]
-    ]
-   },
-   {
     "name": "Ailen Gonzalez Cardero",
     "ct_name": "Gonzalez Cardero, Ailen",
     "position": "2. Crew",
@@ -1777,18 +1701,6 @@
   ],
   "window_source": "knowledgeforce",
   "on_shift": [
-   {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      5.75,
-      17.08
-     ]
-    ]
-   },
    {
     "name": "Francisco Llorente Mejias",
     "ct_name": "Llorente Mejias, Francisco",
@@ -2390,18 +2302,6 @@
     ]
    },
    {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      10.55,
-      21.57
-     ]
-    ]
-   },
-   {
     "name": "Vicki Lucey",
     "ct_name": "Lucey, Vicki",
     "position": "Shift Leader-Hourly",
@@ -2589,18 +2489,6 @@
   ],
   "window_source": "knowledgeforce",
   "on_shift": [
-   {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      12.5,
-      19.77
-     ]
-    ]
-   },
    {
     "name": "Vicki Lucey",
     "ct_name": "Lucey, Vicki",
@@ -2822,18 +2710,6 @@
      [
       10.83,
       17.05
-     ]
-    ]
-   },
-   {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      6.07,
-      16.95
      ]
     ]
    },
@@ -3406,18 +3282,6 @@
      [
       15.07,
       22.92
-     ]
-    ]
-   },
-   {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      9.67,
-      17.82
      ]
     ]
    },
@@ -4370,18 +4234,6 @@
      [
       11.27,
       14.93
-     ]
-    ]
-   },
-   {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      9.75,
-      16.75
      ]
     ]
    },
@@ -6458,18 +6310,6 @@
      [
       15.22,
       23.17
-     ]
-    ]
-   },
-   {
-    "name": "Robert Cline",
-    "ct_name": "Cline, Robert",
-    "position": "General Manager-Salary",
-    "role": "Manager",
-    "intervals": [
-     [
-      15.18,
-      19.92
      ]
     ]
    },

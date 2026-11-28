@@ -32,6 +32,8 @@ ROOT = Path(__file__).resolve().parent.parent
 MF = ROOT / "data" / "raw" / "marketforce" / "2065"
 OUT = MF / "shop_onshift_2026.json"
 EXCLUSIONS = MF / "onshift_exclusions.json"   # Bobby's manual "wasn't there" corrections
+# Bobby's standing rule (2026-11-28): he is never credited on a shop scoring 90% or below.
+GM_NAME, GM_MIN_SCORE = "Robert Cline", 90.0
 
 # Same defaults as scrape_shop_participation.DEFAULT_WIN
 DEFAULT_WIN = {"breakfast": (5.0, 11.0), "lunch": (11.0, 15.0),
@@ -110,6 +112,8 @@ def main() -> int:
             p["intervals"].append([round(t_in, 2), round(t_out, 2)])
         on = []
         drop = set(excl.get(s["job_id"], []))
+        if s.get("score") is not None and s["score"] <= GM_MIN_SCORE:
+            drop.add(GM_NAME)
         for name, p in people.items():
             if display(name) in drop:
                 continue

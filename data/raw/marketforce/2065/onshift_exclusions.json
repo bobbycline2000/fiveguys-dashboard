@@ -3,5 +3,9 @@
   "20999845": [
     "Robert Cline",
     "Alexandra Campbell"
-  ]
+  ],
+  "_notes": {
+    "20999845": "Camera review by Bobby: visit at 6:23 PM, 12-min ticket time. Heavy delivery volume; Madison off the line ~5-8 min (restroom). Bobby and Alex had left."
+  },
+  "_rule": "Robert Cline is auto-dropped from any shop scoring <= 90% (build_shop_onshift.py GM_MIN_SCORE)."
 }
